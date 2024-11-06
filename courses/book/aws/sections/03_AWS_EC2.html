@@ -1,0 +1,366 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Les Instances EC2 - Formation AWS Jenkins &amp; Ansible</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../aws/introduction.html"><strong aria-hidden="true">1.</strong> Présentation générale d'AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../aws/sections/01_introduction.html"><strong aria-hidden="true">1.1.</strong> Introduction sur AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/02_AWS_overview.html"><strong aria-hidden="true">1.2.</strong> Les Bases d'AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/03_AWS_EC2.html" class="active"><strong aria-hidden="true">1.3.</strong> Les Instances EC2</a></li><li class="chapter-item expanded "><a href="../../aws/sections/04_AWS_S3.html"><strong aria-hidden="true">1.4.</strong> Les Buckets S3</a></li></ol></li><li class="chapter-item expanded "><a href="../../jenkins/introduction.html"><strong aria-hidden="true">2.</strong> Présentation générale de Jenkins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../jenkins/sections/01_Introduction.html"><strong aria-hidden="true">2.1.</strong> Introduction sur Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/02_First_Steps.html"><strong aria-hidden="true">2.2.</strong> Premiers pas avec Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/03_Pipelines.html"><strong aria-hidden="true">2.3.</strong> Les bases des Pipelines</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/04_Pipelines_Advanced.html"><strong aria-hidden="true">2.4.</strong> Plus de pipelines!</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/05_modules_libraries.html"><strong aria-hidden="true">2.5.</strong> Modules et librairies dans Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/06_AWS_automation.html"><strong aria-hidden="true">2.6.</strong> Automatisation dans AWS</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/07_Real_Life_Example.html"><strong aria-hidden="true">2.7.</strong> Application concrète</a></li></ol></li><li class="chapter-item expanded "><a href="../../ansible/introduction.html"><strong aria-hidden="true">3.</strong> Présentation générale d'Ansible</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ansible/sections/01_Introduction.html"><strong aria-hidden="true">3.1.</strong> Introduction à Ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/02_Basics.html"><strong aria-hidden="true">3.2.</strong> Bases d'ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/03_Automation.html"><strong aria-hidden="true">3.3.</strong> Automatisation avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/04_S3_management.html"><strong aria-hidden="true">3.4.</strong> Gestion de S3 avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/05_Jenkins_AWS_Pipeline.html"><strong aria-hidden="true">3.5.</strong> Ansible dans une pipeline Jenkins</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/06_Best_Practices.html"><strong aria-hidden="true">3.6.</strong> Meilleures pratiques pour Ansible</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Formation AWS Jenkins &amp; Ansible</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="3-amazon-ec2-elastic-compute-cloud"><a class="header" href="#3-amazon-ec2-elastic-compute-cloud">3. <strong>Amazon EC2 (Elastic Compute Cloud)</strong></a></h2>
+<h3 id="31-introduction-à-ec2"><a class="header" href="#31-introduction-à-ec2">3.1 <strong>Introduction à EC2</strong></a></h3>
+<h4 id="définition-et-utilité"><a class="header" href="#définition-et-utilité">Définition et utilité</a></h4>
+<p>Amazon EC2 (Elastic Compute Cloud) est un service qui fournit des instances de calcul virtualisées dans le cloud. Il permet aux utilisateurs de louer des serveurs virtuels pour exécuter des applications, facilitant la scalabilité et la flexibilité tout en réduisant le coût de possession d'infrastructure.</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html">AWS EC2 Documentation - Qu'est-ce qu'Amazon EC2 ?</a> [<a href="https://docs.aws.amazon.com/fr_fr/AWSEC2/latest/UserGuide/concepts.html"><em>fr</em></a>]</li>
+</ul>
+<h4 id="principales-fonctionnalités-et-cas-dutilisation"><a class="header" href="#principales-fonctionnalités-et-cas-dutilisation">Principales fonctionnalités et cas d’utilisation</a></h4>
+<p>Les principales fonctionnalités incluent :</p>
+<ul>
+<li><strong>Scalabilité élastique</strong> : permet d’ajouter ou de supprimer des instances en fonction de la charge.</li>
+<li><strong>Types d'instances variés</strong> : choix d'instances adaptées aux besoins de calcul, de mémoire, ou de stockage spécifiques.</li>
+<li><strong>Facturation à la demande</strong> : paiement pour le temps utilisé, avec des options d'instances réservées et spot pour des économies supplémentaires.</li>
+</ul>
+<p><strong>Cas d’utilisation</strong> :</p>
+<ul>
+<li>Hébergement de sites web et d'applications.</li>
+<li>Exécution d'analyses de données.</li>
+<li>Hébergement de serveurs de développement/test.</li>
+</ul>
+<h4 id="image-suggestion"><a class="header" href="#image-suggestion">Image Suggestion:</a></h4>
+<ul>
+<li><strong>Image 1</strong>: Diagramme montrant une instance EC2 connectée à d'autres services AWS (par exemple, une base de données RDS ou un stockage S3) pour illustrer l'intégration et l'interconnectivité d'EC2 dans une infrastructure cloud.</li>
+</ul>
+<hr />
+<h3 id="32-prise-en-main-dec2"><a class="header" href="#32-prise-en-main-dec2">3.2 <strong>Prise en main d'EC2</strong></a></h3>
+<h4 id="création-dun-compte-aws"><a class="header" href="#création-dun-compte-aws">Création d'un compte AWS</a></h4>
+<p>Pour utiliser EC2, il faut d'abord créer un compte AWS. Le processus d’inscription demande des informations de base et un moyen de paiement.</p>
+<ul>
+<li><a href="https://repost.aws/knowledge-center/create-and-activate-aws-account">Guide de création de compte AWS</a> [<a href="https://repost.aws/fr/knowledge-center/create-and-activate-aws-account"><em>fr</em></a>]</li>
+</ul>
+<h4 id="navigation-dans-le-tableau-de-bord-ec2"><a class="header" href="#navigation-dans-le-tableau-de-bord-ec2">Navigation dans le tableau de bord EC2</a></h4>
+<p>Une fois connecté, le <strong>tableau de bord EC2</strong> présente les différentes options d’instances, le suivi des volumes EBS, la gestion des IP élastiques, et d'autres outils.</p>
+<h4 id="lancement-et-connexion-à-une-instance-ec2"><a class="header" href="#lancement-et-connexion-à-une-instance-ec2">Lancement et connexion à une instance EC2</a></h4>
+<ol>
+<li><strong>Lancer une instance</strong> : choisir le type d'instance, le système d'exploitation, et les options de configuration de sécurité.</li>
+<li><strong>Connexion</strong> : une fois l’instance lancée, vous pouvez vous connecter via SSH.</li>
+</ol>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html">Guide de démarrage avec Amazon EC2</a> [<a href="https://docs.aws.amazon.com/fr_fr/AWSEC2/latest/UserGuide/EC2_GetStarted.html"><em>fr</em></a>]</li>
+</ul>
+<h4 id="image-suggestion-1"><a class="header" href="#image-suggestion-1">Image Suggestion:</a></h4>
+<ul>
+<li><strong>Image 2</strong>: Capture d'écran du tableau de bord EC2 montrant le processus de lancement d'une nouvelle instance. Cette image devrait inclure l'interface de sélection du type d’instance pour guider les nouveaux utilisateurs.</li>
+</ul>
+<hr />
+<h3 id="33-types-dinstances"><a class="header" href="#33-types-dinstances">3.3 <strong>Types d'instances</strong></a></h3>
+<h4 id="présentation-des-familles-dinstances-ec2"><a class="header" href="#présentation-des-familles-dinstances-ec2">Présentation des familles d'instances EC2</a></h4>
+<p>Amazon EC2 propose plusieurs familles d'instances adaptées à différents besoins :</p>
+<ul>
+<li>
+<p><strong>Généraliste</strong> : Instances de type "t2", "t3" (ex. t3.micro) pour des charges de travail équilibrées.</p>
+</li>
+<li>
+<p><strong>Optimisé pour le calcul</strong> : Instances de type "c5" pour les calculs intensifs.</p>
+</li>
+<li>
+<p><strong>Optimisé pour la mémoire</strong> : Instances "r5" pour des applications nécessitant beaucoup de mémoire.</p>
+</li>
+<li>
+<p><strong>Optimisé pour le stockage</strong> : Instances "i3" pour des applications nécessitant des performances de stockage élevées.</p>
+</li>
+<li>
+<p><a href="https://aws.amazon.com/ec2/instance-types/">Documentation sur les types d'instances Amazon EC2</a> [<a href="https://aws.amazon.com/fr/ec2/instance-types/"><em>fr</em></a>]</p>
+</li>
+</ul>
+<h4 id="choix-du-type-dinstance-adapté-aux-besoins"><a class="header" href="#choix-du-type-dinstance-adapté-aux-besoins">Choix du type d'instance adapté aux besoins</a></h4>
+<p>Le choix du type d'instance dépend des besoins de l’application. Pour un site web simple, un t2.micro suffira, tandis qu'une application d'apprentissage automatique pourrait nécessiter une instance GPU comme p3.</p>
+<h4 id="image-suggestion-2"><a class="header" href="#image-suggestion-2">Image Suggestion:</a></h4>
+<ul>
+<li><strong>Image 3</strong>: Tableau comparatif des types d’instances EC2 avec leurs caractéristiques principales (vCPU, RAM, EBS, etc.). Ce tableau aidera les utilisateurs à comprendre les différences entre les familles d’instances.</li>
+</ul>
+<hr />
+<h3 id="34-réseau-et-sécurité"><a class="header" href="#34-réseau-et-sécurité">3.4 <strong>Réseau et sécurité</strong></a></h3>
+<h4 id="groupes-de-sécurité-et-pare-feu"><a class="header" href="#groupes-de-sécurité-et-pare-feu">Groupes de sécurité et pare-feu</a></h4>
+<p>Les <strong>groupes de sécurité</strong> contrôlent le trafic entrant et sortant des instances EC2. Chaque instance peut avoir plusieurs groupes de sécurité associés.</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html">Guide sur les groupes de sécurité EC2</a> [<a href="https://docs.aws.amazon.com/fr_fr/AWSEC2/latest/UserGuide/ec2-security-groups.html"><em>fr</em></a>]</li>
+</ul>
+<h4 id="ip-élastiques-et-accès-ssh"><a class="header" href="#ip-élastiques-et-accès-ssh">IP élastiques et accès SSH</a></h4>
+<p>Les <strong>IP élastiques</strong> permettent d’avoir une adresse IP fixe associée à une instance EC2. La connexion SSH permet d'accéder aux instances Linux.</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Documentation sur les IP élastiques et l'accès SSH</a> [<a href="https://docs.aws.amazon.com/fr_fr/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html"><em>fr</em></a>]</li>
+</ul>
+<h4 id="gestion-des-clés-de-sécurité"><a class="header" href="#gestion-des-clés-de-sécurité">Gestion des clés de sécurité</a></h4>
+<p>Les <strong>paires de clés</strong> sont utilisées pour l’authentification lors de la connexion aux instances. AWS génère une clé privée qui doit être conservée en sécurité par l’utilisateur.</p>
+<h4 id="image-suggestion-3"><a class="header" href="#image-suggestion-3">Image Suggestion:</a></h4>
+<ul>
+<li><strong>Image 4</strong>: Capture d’écran de la configuration d’un groupe de sécurité dans la console AWS, montrant comment définir les règles de trafic entrant pour autoriser le SSH (port 22).</li>
+</ul>
+<hr />
+<h3 id="35-options-de-stockage"><a class="header" href="#35-options-de-stockage">3.5 <strong>Options de stockage</strong></a></h3>
+<h4 id="ebs-elastic-block-store"><a class="header" href="#ebs-elastic-block-store">EBS (Elastic Block Store)</a></h4>
+<p><strong>EBS</strong> est un stockage persistant qui peut être attaché à une instance EC2. Les volumes EBS sont idéaux pour stocker des données nécessitant une haute disponibilité et des sauvegardes fréquentes.</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html">Guide d'utilisation d'Amazon EBS</a> [<a href="https://docs.aws.amazon.com/fr_fr/AWSEC2/latest/UserGuide/AmazonEBS.html"><em>fr</em></a>]</li>
+</ul>
+<h4 id="instance-store"><a class="header" href="#instance-store">Instance Store</a></h4>
+<p>Le <strong>Instance Store</strong> offre un stockage temporaire qui n'est disponible que pendant la durée de vie de l'instance. Il convient aux applications nécessitant un stockage local rapide, mais non persistant.</p>
+<h4 id="création-et-attachement-des-volumes-ebs"><a class="header" href="#création-et-attachement-des-volumes-ebs">Création et attachement des volumes EBS</a></h4>
+<p>Les volumes EBS peuvent être créés et attachés facilement via la console EC2. Une fois attachés, ils apparaissent comme des disques locaux sur l’instance.</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html">Attachement de volumes EBS</a> [<a href="https://docs.aws.amazon.com/fr_fr/AWSEC2/latest/UserGuide/ebs-attaching-volume.html"><em>fr</em></a>]</li>
+</ul>
+<h4 id="image-suggestion-4"><a class="header" href="#image-suggestion-4">Image Suggestion:</a></h4>
+<ul>
+<li><strong>Image 5</strong>: Capture d'écran montrant la création d'un volume EBS dans la console EC2. Cela devrait inclure la sélection de la taille et du type de volume pour guider les utilisateurs.</li>
+</ul>
+<hr />
+<h3 id="36-concepts-avancés-dec2"><a class="header" href="#36-concepts-avancés-dec2">3.6 <strong>Concepts avancés d'EC2</strong></a></h3>
+<h4 id="auto-scaling-et-équilibrage-de-charge"><a class="header" href="#auto-scaling-et-équilibrage-de-charge">Auto-scaling et équilibrage de charge</a></h4>
+<p><strong>Auto Scaling</strong> ajuste automatiquement le nombre d’instances en fonction de la demande. <strong>Elastic Load Balancing (ELB)</strong> répartit le trafic entre les instances pour assurer une haute disponibilité et une tolérance aux pannes.</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">Documentation sur Auto Scaling</a> [<a href="https://docs.aws.amazon.com/fr_fr/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html"><em>fr</em></a>]</li>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/what-is-load-balancing.html">Documentation sur Elastic Load Balancing</a> [<a href="https://docs.aws.amazon.com/fr_fr/elasticloadbalancing/latest/userguide/what-is-load-balancing.html"><em>fr</em></a>]</li>
+</ul>
+<h4 id="instances-spot-et-réservées"><a class="header" href="#instances-spot-et-réservées">Instances Spot et réservées</a></h4>
+<ul>
+<li>
+<p><strong>Instances Spot</strong> : accès à des instances à tarif réduit, idéal pour les charges de travail flexibles.</p>
+</li>
+<li>
+<p><strong>Instances réservées</strong> : engagement sur un ou trois ans pour obtenir une réduction de coût.</p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-pricing.html">Guide des Instances Spot et Réservées</a> [<a href="https://docs.aws.amazon.com/fr_fr/AWSEC2/latest/UserGuide/ec2-pricing.html"><em>fr</em></a>]</p>
+</li>
+</ul>
+<h4 id="groupes-de-placement-ec2"><a class="header" href="#groupes-de-placement-ec2">Groupes de placement EC2</a></h4>
+<p>Les <strong>Groupes de placement</strong> permettent de contrôler la disposition des instances pour des charges de travail nécessitant une faible latence ou une bande passante élevée.</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Documentation sur les Groupes de placement</a> [<a href="https://docs.aws.amazon.com/fr_fr/AWSEC2/latest/UserGuide/placement-groups.html"><em>fr</em></a>]</li>
+</ul>
+<h4 id="image-suggestion-5"><a class="header" href="#image-suggestion-5">Image Suggestion:</a></h4>
+<ul>
+<li><strong>Image 6</strong>: Diagramme montrant le fonctionnement d'un groupe Auto Scaling avec un ELB distribuant le trafic. Cela permet de visualiser l’évolutivité automatique d’EC2.</li>
+</ul>
+<hr />
+<p>Cette section maintenant enrichie de liens multilingues devrait être claire et exhaustive pour les utilisateurs cherchant à explorer Amazon EC2.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../aws/sections/02_AWS_overview.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../aws/sections/04_AWS_S3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../aws/sections/02_AWS_overview.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../aws/sections/04_AWS_S3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

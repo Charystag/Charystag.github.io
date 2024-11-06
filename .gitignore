@@ -1,0 +1,8 @@
+# Vim Swap Files #
+*.swp
+
+# MacOS DS_Store Folder #
+.DS_Store
+
+# VS Code Folder #
+.vscode

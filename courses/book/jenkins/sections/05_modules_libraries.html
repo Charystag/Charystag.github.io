@@ -1,0 +1,452 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Modules et librairies dans Jenkins - Formation AWS Jenkins &amp; Ansible</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../aws/introduction.html"><strong aria-hidden="true">1.</strong> Présentation générale d'AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../aws/sections/01_introduction.html"><strong aria-hidden="true">1.1.</strong> Introduction sur AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/02_AWS_overview.html"><strong aria-hidden="true">1.2.</strong> Les Bases d'AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/03_AWS_EC2.html"><strong aria-hidden="true">1.3.</strong> Les Instances EC2</a></li><li class="chapter-item expanded "><a href="../../aws/sections/04_AWS_S3.html"><strong aria-hidden="true">1.4.</strong> Les Buckets S3</a></li></ol></li><li class="chapter-item expanded "><a href="../../jenkins/introduction.html"><strong aria-hidden="true">2.</strong> Présentation générale de Jenkins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../jenkins/sections/01_Introduction.html"><strong aria-hidden="true">2.1.</strong> Introduction sur Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/02_First_Steps.html"><strong aria-hidden="true">2.2.</strong> Premiers pas avec Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/03_Pipelines.html"><strong aria-hidden="true">2.3.</strong> Les bases des Pipelines</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/04_Pipelines_Advanced.html"><strong aria-hidden="true">2.4.</strong> Plus de pipelines!</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/05_modules_libraries.html" class="active"><strong aria-hidden="true">2.5.</strong> Modules et librairies dans Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/06_AWS_automation.html"><strong aria-hidden="true">2.6.</strong> Automatisation dans AWS</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/07_Real_Life_Example.html"><strong aria-hidden="true">2.7.</strong> Application concrète</a></li></ol></li><li class="chapter-item expanded "><a href="../../ansible/introduction.html"><strong aria-hidden="true">3.</strong> Présentation générale d'Ansible</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ansible/sections/01_Introduction.html"><strong aria-hidden="true">3.1.</strong> Introduction à Ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/02_Basics.html"><strong aria-hidden="true">3.2.</strong> Bases d'ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/03_Automation.html"><strong aria-hidden="true">3.3.</strong> Automatisation avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/04_S3_management.html"><strong aria-hidden="true">3.4.</strong> Gestion de S3 avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/05_Jenkins_AWS_Pipeline.html"><strong aria-hidden="true">3.5.</strong> Ansible dans une pipeline Jenkins</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/06_Best_Practices.html"><strong aria-hidden="true">3.6.</strong> Meilleures pratiques pour Ansible</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Formation AWS Jenkins &amp; Ansible</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="partie-5--utilisation-de-plugins-et-bibliothèques-partagées-dans-jenkins"><a class="header" href="#partie-5--utilisation-de-plugins-et-bibliothèques-partagées-dans-jenkins">Partie 5 : Utilisation de Plugins et Bibliothèques Partagées dans Jenkins</a></h2>
+<h3 id="objectifs"><a class="header" href="#objectifs">Objectifs</a></h3>
+<p>Dans cette partie, vous allez :</p>
+<ul>
+<li><strong>Comprendre l’importance des plugins dans Jenkins</strong> et installer les plugins essentiels pour les pipelines CI/CD.</li>
+<li><strong>Découvrir les bibliothèques partagées</strong> pour créer des pipelines réutilisables et modulaires.</li>
+</ul>
+<hr />
+<h3 id="51-installation-et-gestion-des-plugins"><a class="header" href="#51-installation-et-gestion-des-plugins">5.1 Installation et gestion des plugins</a></h3>
+<h4 id="introduction-aux-plugins-et-leur-utilité"><a class="header" href="#introduction-aux-plugins-et-leur-utilité">Introduction aux plugins et leur utilité</a></h4>
+<p>Les plugins Jenkins permettent d’étendre les fonctionnalités de base en ajoutant des outils et des intégrations indispensables aux pipelines CI/CD. Ils permettent, entre autres :</p>
+<ul>
+<li><strong>D’intégrer des outils externes</strong> (comme Git, Docker) dans Jenkins.</li>
+<li><strong>D’améliorer l’interface utilisateur</strong> avec des options de visualisation, comme le plugin <strong>Blue Ocean</strong>.</li>
+<li><strong>D’automatiser des tâches</strong> pour accélérer les workflows et ajouter des fonctionnalités avancées (par exemple, intégration de Slack pour les notifications).</li>
+</ul>
+<h4 id="installation-des-plugins-essentiels-pour-cicd"><a class="header" href="#installation-des-plugins-essentiels-pour-cicd">Installation des plugins essentiels pour CI/CD</a></h4>
+<ol>
+<li><strong>Accéder à la gestion des plugins</strong> : Allez dans <strong>Manage Jenkins &gt; Manage Plugins</strong>.</li>
+<li><strong>Plugins recommandés</strong> :
+<ul>
+<li><strong>Git Plugin</strong> : Intègre les dépôts Git dans les pipelines Jenkins.</li>
+<li><strong>Pipeline Plugin</strong> : Permet de créer des pipelines en tant que code dans un Jenkinsfile.</li>
+<li><strong>Docker Pipeline</strong> : Intègre Docker dans Jenkins pour exécuter des étapes du pipeline dans des conteneurs.</li>
+<li><strong>Blue Ocean</strong> : Fournit une interface utilisateur moderne pour visualiser et suivre les pipelines.</li>
+<li><strong>Credentials Binding Plugin</strong> : Gère et utilise en sécurité les informations d’identification.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="52-création-et-utilisation-de-bibliothèques-partagées"><a class="header" href="#52-création-et-utilisation-de-bibliothèques-partagées">5.2 Création et utilisation de bibliothèques partagées</a></h3>
+<h4 id="quest-ce-quune-bibliothèque-partagée-"><a class="header" href="#quest-ce-quune-bibliothèque-partagée-">Qu’est-ce qu’une bibliothèque partagée ?</a></h4>
+<p>Une <strong>bibliothèque partagée</strong> est un ensemble de scripts et de fonctions centralisés que vous pouvez réutiliser dans différents pipelines Jenkins, réduisant ainsi la redondance et facilitant la maintenance. Les bibliothèques partagées permettent :</p>
+<ul>
+<li><strong>D’organiser des étapes courantes</strong> (ex. : vérification de code, configuration d’environnement).</li>
+<li><strong>De créer des pipelines modulaires</strong> en encapsulant des étapes récurrentes.</li>
+</ul>
+<h4 id="structuration-dune-bibliothèque-partagée"><a class="header" href="#structuration-dune-bibliothèque-partagée">Structuration d'une bibliothèque partagée</a></h4>
+<ol>
+<li><strong>Créer un dépôt Git pour la bibliothèque</strong> : Définissez un dépôt Git pour stocker le code de la bibliothèque partagée.</li>
+<li><strong>Organisation des dossiers dans la bibliothèque</strong> :
+<ul>
+<li><strong>vars/</strong> : Contient des scripts Groovy de fonctions réutilisables.</li>
+<li><strong>src/</strong> : Contient des classes Groovy organisées en packages.</li>
+<li><strong>resources/</strong> : Contient des fichiers de configuration statiques.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Exemple de structure de répertoire</strong> :</p>
+<pre><code>my-shared-library/
+├── vars/
+│   └── helloWorld.groovy
+├── src/
+│   └── org/
+│       └── example/
+│           └── utils/
+│               └── Helper.groovy
+└── resources/
+    └── config/
+        └── default-config.yaml
+</code></pre>
+<p><strong>Exemple de script dans <code>vars/helloWorld.groovy</code></strong> :</p>
+<pre><code class="language-groovy">def call(String name = 'World') {
+    echo "Hello, ${name}!"
+}
+</code></pre>
+<p><img src="../images/05_Libraries/libraries.png" alt="Structure d&#39;une bibliothèque partagée dans Jenkins" /></p>
+<blockquote>
+<p>Source: https://www.jenkins.io/doc/book/pipeline/shared-libraries/</p>
+</blockquote>
+<h4 id="utiliser-une-bibliothèque-partagée-dans-un-jenkinsfile"><a class="header" href="#utiliser-une-bibliothèque-partagée-dans-un-jenkinsfile">Utiliser une bibliothèque partagée dans un Jenkinsfile</a></h4>
+<ol>
+<li>
+<p><strong>Déclarer la bibliothèque partagée</strong> :</p>
+<ul>
+<li>Allez dans <strong>Manage Jenkins &gt; Configure System</strong> et ajoutez la bibliothèque partagée dans <strong>Global Pipeline Libraries</strong> en spécifiant son nom et le dépôt Git associé.</li>
+</ul>
+</li>
+<li>
+<p><strong>Appeler des fonctions de la bibliothèque dans un Jenkinsfile</strong> :</p>
+<ul>
+<li>Dans un Jenkinsfile, utilisez l’annotation <strong>@Library</strong> pour importer la bibliothèque.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Exemple de Jenkinsfile utilisant une bibliothèque partagée</strong> :</p>
+<pre><code class="language-groovy">@Library('my-shared-library') _
+
+pipeline {
+    agent any
+    stages {
+        stage('Greeting') {
+            steps {
+                helloWorld('Jenkins User') // Appel de la fonction définie dans vars/helloWorld.groovy
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+                // Autres étapes de build
+            }
+        }
+    }
+}
+</code></pre>
+<hr />
+<h3 id="exercice--installer-le-plugin-git-et-configurer-un-pipeline-pour-cloner-et-exécuter-un-projet-github"><a class="header" href="#exercice--installer-le-plugin-git-et-configurer-un-pipeline-pour-cloner-et-exécuter-un-projet-github">Exercice : Installer le plugin Git et configurer un pipeline pour cloner et exécuter un projet GitHub</a></h3>
+<p><strong>Objectif de l'exercice</strong> : Installer le plugin Git, puis configurer un pipeline Jenkins pour cloner un projet depuis GitHub et exécuter une commande sur le code récupéré.</p>
+<p><strong>Étapes de l’exercice</strong> :</p>
+<ol>
+<li>
+<p><strong>Installer le plugin Git</strong> :</p>
+<ul>
+<li>Accédez à <strong>Manage Jenkins &gt; Manage Plugins &gt; Available</strong> et recherchez <strong>Git Plugin</strong>.</li>
+<li>Installez le plugin et redémarrez Jenkins si nécessaire.</li>
+</ul>
+</li>
+<li>
+<p><strong>Créer un nouveau job Pipeline</strong> :</p>
+<ul>
+<li>Depuis le tableau de bord Jenkins, créez un job de type <strong>Pipeline</strong> et nommez-le (par exemple, "GitHub Clone and Build").</li>
+</ul>
+</li>
+<li>
+<p><strong>Configurer le Jenkinsfile pour cloner un dépôt GitHub</strong> :</p>
+<ul>
+<li>Dans le dépôt Git associé au job, créez un fichier nommé <code>Jenkinsfile</code>.</li>
+<li>Ajoutez le code suivant au Jenkinsfile pour cloner un projet et exécuter un build.</li>
+</ul>
+<pre><code class="language-groovy">pipeline {
+    agent any
+    stages {
+        stage('Clone Repository') {
+            steps {
+                // Remplacez 'https://github.com/username/repository.git' par l’URL de votre dépôt
+                git 'https://github.com/username/repository.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+                // Ajoutez ici la commande pour compiler ou exécuter le projet, ex. : sh 'make build'
+            }
+        }
+    }
+}
+</code></pre>
+</li>
+<li>
+<p><strong>Exécuter le pipeline</strong> :</p>
+<ul>
+<li>Allez dans votre job Jenkins et cliquez sur <strong>Build Now</strong> pour exécuter le pipeline.</li>
+<li>Surveillez les logs pour vérifier que le dépôt a été cloné et que la commande de build s’est exécutée.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="liens-vers-la-documentation"><a class="header" href="#liens-vers-la-documentation">Liens vers la documentation</a></h3>
+<ul>
+<li><a href="https://plugins.jenkins.io/">Documentation officielle des plugins Jenkins</a></li>
+<li><a href="https://www.jenkins.io/doc/book/pipeline/shared-libraries/">Guide des bibliothèques partagées dans Jenkins</a></li>
+</ul>
+<hr />
+<h3 id="questions-de-révision"><a class="header" href="#questions-de-révision">Questions de Révision</a></h3>
+<details>
+<summary><h3 style="display:inline-block">Questions de Révision</h3></summary>
+<details>
+<summary>Pourquoi utiliser des plugins dans Jenkins ?</summary>
+<details>
+<summary>Solution</summary>
+Les plugins permettent d’étendre les fonctionnalités de Jenkins en intégrant des outils tiers (ex. : Git, Docker) et en ajoutant des fonctionnalités spécifiques pour les pipelines CI/CD.
+</details>
+</details>
+<details>
+<summary>Quels sont les plugins essentiels pour les pipelines CI/CD ?</summary>
+<details>
+<summary>Solution</summary>
+Les plugins essentiels incluent le **Git Plugin** pour le contrôle de version, le **Pipeline Plugin** pour la gestion des pipelines, le **Docker Pipeline** pour l’intégration de Docker, et **Blue Ocean** pour la visualisation.
+</details>
+</details>
+<details>
+<summary>Comment déclarer une bibliothèque partagée dans Jenkins ?</summary>
+<details>
+<summary>Solution</summary>
+Déclarez la bibliothèque partagée dans **Manage Jenkins > Configure System > Global Pipeline Libraries**, en précisant son nom et le dépôt Git associé.
+</details>
+</details>
+<details>
+<summary>Pourquoi utiliser des bibliothèques partagées dans Jenkins ?</summary>
+<details>
+<summary>Solution</summary>
+Les bibliothèques partagées permettent de centraliser et réutiliser du code dans plusieurs pipelines, réduisant ainsi la duplication de code et facilitant la maintenance.
+</details>
+</details>
+</details>
+<hr />
+<h3 id="conseils-pratiques"><a class="header" href="#conseils-pratiques">Conseils Pratiques</a></h3>
+<ol>
+<li><strong>Planifiez les mises à jour de plugins régulièrement</strong> pour bénéficier des améliorations de sécurité et de performance.</li>
+<li><strong>Utilisez des bibliothèques partagées</strong> pour standardiser les étapes fréquentes des pipelines et faciliter leur maintenance.</li>
+<li><strong>Sauvegardez votre configuration Jenkins</strong> (y compris les plugins) pour assurer une reprise rapide en cas de problème.
+<a href="https://www.jenkins.io/doc/book/system-administration/backing-up/">Documentation sur les sauvegardes Jenkins</a></li>
+</ol>
+<hr />
+<h3 id="défi-intermédiaire"><a class="header" href="#défi-intermédiaire">Défi Intermédiaire</a></h3>
+<details>
+<summary><h3 style="display:inline-block">Défi Intermédiaire</h3></summary>
+**Objectif** : Configurer un pipeline Jenkins pour utiliser une bibliothèque partagée et un plugin de notification.
+<p><strong>Contexte</strong> : Vous avez un pipeline complexe nécessitant des étapes standardisées de vérification de code et de tests, que vous souhaitez appeler depuis une bibliothèque partagée. Ajoutez également une étape de notification en fin de pipeline.</p>
+<details>
+<summary><b>Étapes principales</b></summary>
+1. Créez une bibliothèque partagée avec une fonction `codeQualityCheck` dans le dossier `vars`.
+2. Déclarez la bibliothèque dans Jenkins, sous **Global Pipeline Libraries**.
+3. Configurez un pipeline pour exécuter la fonction `codeQualityCheck` et utilisez un plugin de notification (Slack ou email) pour notifier en fin de pipeline.
+</details>
+<p><strong>Compétences renforcées</strong> :</p>
+<ul>
+<li>Gestion des bibliothèques partagées</li>
+<li>Utilisation de plugins de notification</li>
+</ul>
+<details>
+<summary><b>Solution suggérée</b></summary>
+Définissez `codeQualityCheck` dans `vars/codeQualityCheck.groovy` pour qu’elle effectue des tests ou des vérifications. Dans le Jenkinsfile, appelez cette fonction et configurez le plugin de notification pour envoyer une alerte en fin de pipeline.
+</details>
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../jenkins/sections/04_Pipelines_Advanced.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../jenkins/sections/06_AWS_automation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../jenkins/sections/04_Pipelines_Advanced.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../jenkins/sections/06_AWS_automation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Automatisation avec ansible - Formation AWS Jenkins &amp; Ansible</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../aws/introduction.html"><strong aria-hidden="true">1.</strong> Présentation générale d'AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../aws/sections/01_introduction.html"><strong aria-hidden="true">1.1.</strong> Introduction sur AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/02_AWS_overview.html"><strong aria-hidden="true">1.2.</strong> Les Bases d'AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/03_AWS_EC2.html"><strong aria-hidden="true">1.3.</strong> Les Instances EC2</a></li><li class="chapter-item expanded "><a href="../../aws/sections/04_AWS_S3.html"><strong aria-hidden="true">1.4.</strong> Les Buckets S3</a></li></ol></li><li class="chapter-item expanded "><a href="../../jenkins/introduction.html"><strong aria-hidden="true">2.</strong> Présentation générale de Jenkins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../jenkins/sections/01_Introduction.html"><strong aria-hidden="true">2.1.</strong> Introduction sur Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/02_First_Steps.html"><strong aria-hidden="true">2.2.</strong> Premiers pas avec Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/03_Pipelines.html"><strong aria-hidden="true">2.3.</strong> Les bases des Pipelines</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/04_Pipelines_Advanced.html"><strong aria-hidden="true">2.4.</strong> Plus de pipelines!</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/05_modules_libraries.html"><strong aria-hidden="true">2.5.</strong> Modules et librairies dans Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/06_AWS_automation.html"><strong aria-hidden="true">2.6.</strong> Automatisation dans AWS</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/07_Real_Life_Example.html"><strong aria-hidden="true">2.7.</strong> Application concrète</a></li></ol></li><li class="chapter-item expanded "><a href="../../ansible/introduction.html"><strong aria-hidden="true">3.</strong> Présentation générale d'Ansible</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ansible/sections/01_Introduction.html"><strong aria-hidden="true">3.1.</strong> Introduction à Ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/02_Basics.html"><strong aria-hidden="true">3.2.</strong> Bases d'ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/03_Automation.html" class="active"><strong aria-hidden="true">3.3.</strong> Automatisation avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/04_S3_management.html"><strong aria-hidden="true">3.4.</strong> Gestion de S3 avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/05_Jenkins_AWS_Pipeline.html"><strong aria-hidden="true">3.5.</strong> Ansible dans une pipeline Jenkins</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/06_Best_Practices.html"><strong aria-hidden="true">3.6.</strong> Meilleures pratiques pour Ansible</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Formation AWS Jenkins &amp; Ansible</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="partie-3--automatisation-avec-ansible-et-aws"><a class="header" href="#partie-3--automatisation-avec-ansible-et-aws">Partie 3 : Automatisation avec Ansible et AWS</a></h2>
+<h3 id="objectifs"><a class="header" href="#objectifs">Objectifs</a></h3>
+<p>Dans cette partie, vous allez :</p>
+<ul>
+<li>Découvrir comment Ansible peut être utilisé pour gérer des ressources AWS.</li>
+<li>Apprendre à configurer Ansible pour AWS avec un rôle IAM.</li>
+<li>Créer et gérer des ressources AWS, notamment des instances EC2 et des buckets S3.</li>
+</ul>
+<hr />
+<h3 id="31-introduction-aux-modules-aws-dans-ansible"><a class="header" href="#31-introduction-aux-modules-aws-dans-ansible">3.1 Introduction aux Modules AWS dans Ansible</a></h3>
+<p>Ansible propose des modules spécifiques pour gérer les services AWS, permettant de créer et de configurer des ressources comme EC2, S3, RDS, et ELB de manière automatisée.</p>
+<h4 id="présentation-des-modules-aws"><a class="header" href="#présentation-des-modules-aws">Présentation des modules AWS</a></h4>
+<ul>
+<li><a href="https://docs.ansible.com/ansible/latest/collections/amazon/aws/ec2_instance_module.html#ansible-collections-amazon-aws-ec2-instance-module"><strong>ec2</strong></a> : Pour lancer, arrêter et gérer des instances EC2.</li>
+<li><a href="https://docs.ansible.com/ansible/latest/collections/amazon/aws/s3_bucket_module.html#ansible-collections-amazon-aws-s3-bucket-module"><strong>aws_s3</strong></a> : Pour créer et gérer des buckets S3, ainsi que pour uploader ou télécharger des fichiers.</li>
+<li><a href="https://docs.ansible.com/ansible/latest/collections/amazon/aws/rds_instance_module.html#ansible-collections-amazon-aws-rds-instance-module"><strong>rds</strong></a> : Pour provisionner et configurer des bases de données RDS.</li>
+<li><a href="https://docs.ansible.com/ansible/latest/collections/amazon/aws/elb_application_lb_module.html#ansible-collections-amazon-aws-elb-application-lb-module"><strong>elb</strong></a> : Pour créer et gérer des load balancers dans AWS.</li>
+</ul>
+<blockquote>
+<p>Voir aussi le <a href="https://docs.ansible.com/ansible/latest/collections/amazon/aws/docsite/guide_aws.html">guide aws</a> d'ansible et la <a href="https://docs.ansible.com/ansible/latest/collections/amazon/aws/index.html">liste complète</a> des modules aws</p>
+</blockquote>
+<h4 id="configuration-dansible-pour-aws-avec-un-rôle-iam"><a class="header" href="#configuration-dansible-pour-aws-avec-un-rôle-iam">Configuration d'Ansible pour AWS avec un Rôle IAM</a></h4>
+<p>Pour que Ansible puisse interagir avec AWS, configurez-le pour utiliser un rôle IAM attaché à l’instance de gestion. Ce rôle doit avoir les permissions nécessaires pour accéder aux services AWS (EC2, S3, etc.).</p>
+<ol>
+<li>
+<p><strong>Créer un rôle IAM avec des permissions AWS</strong> :</p>
+<ul>
+<li>Dans la console IAM, créez un rôle avec les permissions nécessaires pour EC2 et S3.</li>
+<li>Associez ce rôle à l'instance de gestion Ansible.</li>
+</ul>
+</li>
+<li>
+<p><strong>Configurer les informations d’identification dans Ansible</strong> :</p>
+<ul>
+<li>Ansible utilisera le rôle IAM de l’instance de gestion pour accéder aux services AWS. Aucune clé d'accès n'est nécessaire dans le fichier de configuration.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Exercice</strong> : Configurer Ansible pour AWS en utilisant un rôle IAM sur une instance de gestion</p>
+<ol>
+<li><strong>Objectif</strong> : Configurer Ansible pour gérer les ressources AWS depuis une instance EC2 avec un rôle IAM attaché.</li>
+<li><strong>Étapes</strong> :
+<ul>
+<li>Créez un rôle IAM avec des permissions de gestion pour EC2 et S3.</li>
+<li>Associez ce rôle à l'instance de gestion Ansible.</li>
+<li>Vérifiez l'accès en exécutant une commande Ansible pour interagir avec AWS.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="32-provisionner-des-instances-ec2"><a class="header" href="#32-provisionner-des-instances-ec2">3.2 Provisionner des Instances EC2</a></h3>
+<p>Le module <code>ec2</code> dans Ansible permet de créer, configurer et gérer des instances EC2. Cela facilite le provisionnement d’infrastructures dynamiques en automatisant le lancement d’instances, la gestion de la configuration réseau, et bien plus encore.</p>
+<h4 id="utilisation-du-module-ec2-pour-lancer-et-arrêter-des-instances"><a class="header" href="#utilisation-du-module-ec2-pour-lancer-et-arrêter-des-instances">Utilisation du module <code>ec2</code> pour lancer et arrêter des instances</a></h4>
+<ol>
+<li><strong>Paramètres clés</strong> :
+<ul>
+<li><code>instance_type</code> : Type d'instance à lancer (ex. : <code>t2.micro</code>).</li>
+<li><code>ami</code> : Identifiant de l’image AMI à utiliser.</li>
+<li><code>key_name</code> : Clé SSH pour l’accès à l’instance.</li>
+<li><code>security_groups</code> : Groupes de sécurité associés à l’instance.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Exemple de playbook pour lancer une instance EC2</strong> :</p>
+<pre><code class="language-yaml">- name: Lancer une instance EC2
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Lancer une instance EC2
+      ec2:
+        key_name: "my-key"
+        instance_type: "t2.micro"
+        image: "ami-0abcdef1234567890"
+        wait: yes
+        region: "us-west-2"
+        security_group: "my-security-group"
+        count: 1
+      register: ec2_info
+
+    - name: Afficher l'IP publique de l'instance
+      debug:
+        msg: "Instance IP: {{ ec2_info.instances[0].public_ip }}"
+</code></pre>
+<h4 id="exercice--Écrire-un-playbook-pour-lancer-une-instance-ec2-et-y-appliquer-une-configuration-de-base"><a class="header" href="#exercice--Écrire-un-playbook-pour-lancer-une-instance-ec2-et-y-appliquer-une-configuration-de-base">Exercice : Écrire un playbook pour lancer une instance EC2 et y appliquer une configuration de base</a></h4>
+<p><strong>Objectif</strong> : Créer un playbook pour lancer une instance EC2 et configurer un service de base (comme Apache).</p>
+<p><strong>Étapes</strong> :</p>
+<ol>
+<li>Créez un playbook nommé <code>launch_ec2.yml</code>.</li>
+<li>Utilisez le module <code>ec2</code> pour lancer une instance EC2.</li>
+<li>Ajoutez des tâches pour installer Apache et démarrer le service sur l’instance.</li>
+</ol>
+<hr />
+<h3 id="33-gestion-du-stockage-avec-s3"><a class="header" href="#33-gestion-du-stockage-avec-s3">3.3 Gestion du Stockage avec S3</a></h3>
+<p>S3 est un service de stockage d'objets dans AWS, utile pour conserver des artefacts de builds, des logs, ou des fichiers de configuration. Le module <code>aws_s3</code> permet de créer et gérer des buckets S3, ainsi que d'uploader ou de télécharger des fichiers.</p>
+<h4 id="utilisation-du-module-aws_s3-pour-gérer-le-stockage-des-artefacts-et-des-logs"><a class="header" href="#utilisation-du-module-aws_s3-pour-gérer-le-stockage-des-artefacts-et-des-logs">Utilisation du module <code>aws_s3</code> pour gérer le stockage des artefacts et des logs</a></h4>
+<ol>
+<li><strong>Tâches courantes</strong> :
+<ul>
+<li><strong>Création de buckets</strong> : Créer des espaces de stockage pour organiser les artefacts et les logs.</li>
+<li><strong>Upload et gestion des fichiers</strong> : Transférer des fichiers dans des buckets pour les rendre disponibles ou archivés.</li>
+<li><strong>Configuration des permissions</strong> : Définir les permissions d'accès aux fichiers et aux buckets.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Exemple de playbook pour créer un bucket S3 et y uploader un fichier</strong> :</p>
+<pre><code class="language-yaml">- name: Gestion d'un bucket S3
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Créer un bucket S3
+      aws_s3:
+        bucket: "my-ansible-bucket"
+        mode: create
+        region: "us-west-2"
+
+    - name: Uploader un fichier dans le bucket S3
+      aws_s3:
+        bucket: "my-ansible-bucket"
+        object: "config/config.txt"
+        src: "/path/to/local/config.txt"
+        mode: put
+</code></pre>
+<p><img src="../images/02_Basics/s3_bucket.png" alt="Gestion d&#39;un bucket S3 avec Ansible" /></p>
+<h4 id="exercice--créer-un-playbook-pour-créer-un-bucket-s3-et-y-stocker-des-fichiers-de-configuration-ou-des-artefacts"><a class="header" href="#exercice--créer-un-playbook-pour-créer-un-bucket-s3-et-y-stocker-des-fichiers-de-configuration-ou-des-artefacts">Exercice : Créer un playbook pour créer un bucket S3 et y stocker des fichiers de configuration ou des artefacts</a></h4>
+<p><strong>Objectif</strong> : Écrire un playbook pour créer un bucket S3 et y uploader un fichier de configuration ou un artefact.</p>
+<p><strong>Étapes</strong> :</p>
+<ol>
+<li>Créez un fichier <code>s3_storage.yml</code>.</li>
+<li>Utilisez le module <code>aws_s3</code> pour créer un bucket S3.</li>
+<li>Ajoutez une tâche pour uploader un fichier de configuration dans le bucket.</li>
+</ol>
+<hr />
+<h3 id="liens-vers-la-documentation"><a class="header" href="#liens-vers-la-documentation">Liens vers la Documentation</a></h3>
+<ul>
+<li><a href="https://docs.ansible.com/ansible/latest/collections/amazon/aws/ec2_instance_module.html">Documentation du module <code>ec2</code> dans Ansible</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/collections/amazon/aws/aws_s3_module.html">Documentation du module <code>aws_s3</code></a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/scenario_guides/guide_aws.html">Configuration d’Ansible avec AWS</a></li>
+</ul>
+<hr />
+<h3 id="questions-de-révision"><a class="header" href="#questions-de-révision">Questions de Révision</a></h3>
+<details>
+<summary><h3 style="display:inline-block">Questions de Révision</h3></summary>
+<details>
+<summary>Quel module Ansible permet de lancer et de gérer des instances EC2 ?</summary>
+<details>
+<summary>Solution</summary>
+Le module `ec2` permet de lancer, arrêter et gérer des instances EC2.
+</details>
+</details>
+<details>
+<summary>Quelles permissions IAM sont nécessaires pour qu'Ansible gère les ressources AWS ?</summary>
+<details>
+<summary>Solution</summary>
+Les permissions nécessaires dépendent des services utilisés, comme `ec2:RunInstances` pour EC2 et `s3:PutObject` pour S3, configurées dans un rôle IAM.
+</details>
+</details>
+<details>
+<summary>Comment Ansible interagit-il avec S3 pour gérer les artefacts ?</summary>
+<details>
+<summary>Solution</summary>
+Ansible utilise le module `aws_s3` pour créer des buckets, uploader des fichiers, et gérer les permissions de manière automatisée.
+</details>
+</details>
+</details>
+<hr />
+<h3 id="conseils-pratiques"><a class="header" href="#conseils-pratiques">Conseils Pratiques</a></h3>
+<ol>
+<li><strong>Utilisez des noms uniques pour les buckets S3</strong> : Les noms de buckets doivent être uniques globalement.</li>
+<li><strong>Configurez le rôle IAM avec le principe de moindre privilège</strong> : Assurez-vous que le rôle IAM de l’instance de gestion a uniquement les permissions nécessaires pour éviter les risques de sécurité.</li>
+<li><strong>Testez les modules AWS en mode débogage</strong> : Utilisez l'option <code>check_mode</code> pour tester les modifications sans les appliquer réellement.
+<a href="https://docs.ansible.com/ansible/latest/scenario_guides/guide_aws.html">Plus de détails sur la configuration AWS</a></li>
+</ol>
+<hr />
+<h3 id="défi-intermédiaire"><a class="header" href="#défi-intermédiaire">Défi Intermédiaire</a></h3>
+<details>
+<summary><h3 style="display:inline-block">Défi Intermédiaire</h3></summary>
+**Objectif** : Automatiser la gestion d'une infrastructure AWS incluant le provisionnement d'instances EC2 et la gestion des artefacts dans S3.
+<p><strong>Contexte</strong> : Vous devez créer un playbook Ansible pour lancer une instance EC2, configurer le serveur avec un fichier de configuration spécifique, et sauvegarder ce fichier dans un bucket S3.</p>
+<details>
+<summary><b>Étapes principales</b></summary>
+1. Créez un playbook nommé `aws_infra.yml`.
+2. Utilisez le module `ec2` pour lancer une instance EC2.
+3. Configurez le serveur avec un fichier de configuration.
+4. Uploadez le fichier de configuration dans un bucket S3.
+</details>
+<p><strong>Compétences renforcées</strong> :</p>
+<ul>
+<li>Provisionnement d'instances EC2</li>
+<li>Gestion de fichiers dans S3</li>
+</ul>
+<details>
+<summary><b>Solution suggérée</b></summary>
+Utilisez un playbook semblable à ceci :
+<pre><code class="language-yaml">- name: Gestion de l'infrastructure AWS
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Lancer une instance EC2
+      ec2:
+        key_name: "my-key"
+        instance_type: "t2.micro"
+        image: "ami-0abcdef1234567890"
+        wait: yes
+        region: "us-west-2"
+        security_group: "my-security-group"
+      register: ec2_info
+
+    - name: Uploader le fichier de configuration dans S3
+      aws_s3:
+        bucket: "my-ansible-bucket"
+        object: "config/config.txt"
+        src: "/path/to/local/config.txt"
+        mode: put
+</code></pre>
+</details>
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../ansible/sections/02_Basics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../ansible/sections/04_S3_management.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../ansible/sections/02_Basics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../ansible/sections/04_S3_management.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

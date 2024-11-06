@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Présentation générale d&#x27;Ansible - Formation AWS Jenkins &amp; Ansible</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../aws/introduction.html"><strong aria-hidden="true">1.</strong> Présentation générale d'AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../aws/sections/01_introduction.html"><strong aria-hidden="true">1.1.</strong> Introduction sur AWS</a></li><li class="chapter-item expanded "><a href="../aws/sections/02_AWS_overview.html"><strong aria-hidden="true">1.2.</strong> Les Bases d'AWS</a></li><li class="chapter-item expanded "><a href="../aws/sections/03_AWS_EC2.html"><strong aria-hidden="true">1.3.</strong> Les Instances EC2</a></li><li class="chapter-item expanded "><a href="../aws/sections/04_AWS_S3.html"><strong aria-hidden="true">1.4.</strong> Les Buckets S3</a></li></ol></li><li class="chapter-item expanded "><a href="../jenkins/introduction.html"><strong aria-hidden="true">2.</strong> Présentation générale de Jenkins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../jenkins/sections/01_Introduction.html"><strong aria-hidden="true">2.1.</strong> Introduction sur Jenkins</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/02_First_Steps.html"><strong aria-hidden="true">2.2.</strong> Premiers pas avec Jenkins</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/03_Pipelines.html"><strong aria-hidden="true">2.3.</strong> Les bases des Pipelines</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/04_Pipelines_Advanced.html"><strong aria-hidden="true">2.4.</strong> Plus de pipelines!</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/05_modules_libraries.html"><strong aria-hidden="true">2.5.</strong> Modules et librairies dans Jenkins</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/06_AWS_automation.html"><strong aria-hidden="true">2.6.</strong> Automatisation dans AWS</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/07_Real_Life_Example.html"><strong aria-hidden="true">2.7.</strong> Application concrète</a></li></ol></li><li class="chapter-item expanded "><a href="../ansible/introduction.html" class="active"><strong aria-hidden="true">3.</strong> Présentation générale d'Ansible</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ansible/sections/01_Introduction.html"><strong aria-hidden="true">3.1.</strong> Introduction à Ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/02_Basics.html"><strong aria-hidden="true">3.2.</strong> Bases d'ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/03_Automation.html"><strong aria-hidden="true">3.3.</strong> Automatisation avec ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/04_S3_management.html"><strong aria-hidden="true">3.4.</strong> Gestion de S3 avec ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/05_Jenkins_AWS_Pipeline.html"><strong aria-hidden="true">3.5.</strong> Ansible dans une pipeline Jenkins</a></li><li class="chapter-item expanded "><a href="../ansible/sections/06_Best_Practices.html"><strong aria-hidden="true">3.6.</strong> Meilleures pratiques pour Ansible</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Formation AWS Jenkins &amp; Ansible</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p><strong>Présentation Générale d'Ansible</strong></p>
+<hr />
+<h3 id="introduction"><a class="header" href="#introduction">Introduction</a></h3>
+<p><strong>Ansible</strong> est un outil open-source d’automatisation IT permettant de gérer la configuration, le déploiement, et l’orchestration des applications et des infrastructures. Développé par Red Hat, Ansible est largement utilisé par les équipes DevOps et les administrateurs système pour sa simplicité, sa flexibilité, et son modèle d'exécution sans agent. Grâce à Ansible, les tâches complexes et répétitives peuvent être automatisées, rendant les processus plus rapides, standardisés et sans erreurs.</p>
+<hr />
+<h3 id="principales-fonctionnalités-dansible"><a class="header" href="#principales-fonctionnalités-dansible">Principales Fonctionnalités d'Ansible</a></h3>
+<ol>
+<li>
+<p><strong>Gestion de la Configuration</strong> : Ansible permet de définir des configurations pour les serveurs et applications, garantissant que chaque déploiement est cohérent.</p>
+</li>
+<li>
+<p><strong>Automatisation des Tâches Répétitives</strong> : Ansible simplifie des tâches telles que l'installation de logiciels, la configuration des réseaux, et le déploiement d'applications en les automatisant.</p>
+</li>
+<li>
+<p><strong>Déploiement d'Applications</strong> : Les playbooks Ansible peuvent être utilisés pour déployer des applications sur des serveurs et orchestrer des processus complexes de CI/CD.</p>
+</li>
+<li>
+<p><strong>Orchestration Multinœuds</strong> : Ansible peut coordonner des actions sur plusieurs serveurs simultanément, pratique pour des infrastructures importantes nécessitant des mises à jour synchronisées ou des déploiements en parallèle.</p>
+</li>
+<li>
+<p><strong>Infrastructure-as-Code (IaC)</strong> : Avec Ansible, les configurations d'infrastructure sont définies sous forme de code, ce qui permet un contrôle de version, une documentation claire et la réutilisation des configurations.</p>
+</li>
+</ol>
+<hr />
+<h3 id="fonctionnement-et-architecture-dansible"><a class="header" href="#fonctionnement-et-architecture-dansible">Fonctionnement et Architecture d'Ansible</a></h3>
+<p>Ansible utilise un modèle "push" sans agent : les instructions de configuration sont "poussées" depuis le serveur de gestion vers les hôtes cibles, sans qu'aucun agent ne soit requis sur les machines distantes.</p>
+<ol>
+<li><strong>Serveur de Gestion (Control Node)</strong> : Le serveur à partir duquel les administrateurs exécutent les commandes et les playbooks Ansible pour configurer et gérer les hôtes.</li>
+<li><strong>Hôtes (Managed Nodes)</strong> : Les machines sur lesquelles Ansible effectue des actions. L’accès se fait principalement via SSH, sans installation de logiciel spécifique sur les hôtes.</li>
+<li><strong>Inventaire</strong> : Fichier qui liste les hôtes et groupes d'hôtes que l’on souhaite gérer avec Ansible. Les hôtes peuvent être classés en groupes pour appliquer des configurations spécifiques.</li>
+<li><strong>Modules</strong> : Des modules sont les unités d’action d’Ansible ; chaque module exécute une tâche (par exemple, installation de logiciels, gestion de services, copie de fichiers).</li>
+<li><strong>Playbooks</strong> : Les playbooks sont des fichiers YAML décrivant les séquences de tâches. Ils spécifient les actions à effectuer sur les hôtes, avec une syntaxe lisible et facilement maintenable.</li>
+</ol>
+<hr />
+<h3 id="les-playbooks-ansible"><a class="header" href="#les-playbooks-ansible">Les Playbooks Ansible</a></h3>
+<p>Les <strong>playbooks</strong> sont le cœur de la configuration dans Ansible. Ils décrivent des processus d’automatisation sous forme de code, rendant chaque étape de configuration répétable et prévisible.</p>
+<ul>
+<li><strong>Syntaxe YAML</strong> : Les playbooks utilisent YAML, un format lisible et intuitif.</li>
+<li><strong>Blocs de tâches</strong> : Un playbook est structuré en <strong>tâches</strong> successives (steps) appliquées aux hôtes spécifiés.</li>
+<li><strong>Variables et Rôles</strong> : Ansible permet d'utiliser des variables pour rendre les playbooks flexibles et des rôles pour organiser les tâches de manière modulaire.</li>
+</ul>
+<p><strong>Exemple de playbook pour installer un serveur web</strong> :</p>
+<pre><code class="language-yaml">- name: Installer et configurer un serveur web
+  hosts: webservers
+  tasks:
+    - name: Installer Apache
+      apt:
+        name: apache2
+        state: present
+    - name: Démarrer le service Apache
+      service:
+        name: apache2
+        state: started
+</code></pre>
+<hr />
+<h3 id="principaux-avantages-dansible"><a class="header" href="#principaux-avantages-dansible">Principaux Avantages d'Ansible</a></h3>
+<ol>
+<li><strong>Simplicité et Facilité d'Utilisation</strong> : Ansible est conçu pour être intuitif et facile à apprendre, grâce à sa syntaxe en YAML et son modèle sans agent.</li>
+<li><strong>Sans Agent</strong> : Contrairement à de nombreux outils de gestion de configuration, Ansible ne nécessite pas d’agent installé sur les hôtes, réduisant ainsi la charge administrative et les besoins en ressources.</li>
+<li><strong>Flexibilité et Évolutivité</strong> : Ansible peut gérer un petit nombre de serveurs comme des centaines, et fonctionne sur des environnements hybrides (sur site, cloud, multicloud).</li>
+<li><strong>Approche Declarative</strong> : Ansible utilise une approche déclarative, où l’administrateur spécifie l’état désiré plutôt que les étapes précises pour l’atteindre. Cela rend les configurations plus robustes et moins sujettes aux erreurs.</li>
+<li><strong>Écosystème de Modules</strong> : Ansible possède une bibliothèque de modules étendue pour interagir avec divers systèmes (bases de données, réseaux, clouds, conteneurs), ce qui permet de gérer pratiquement tous les aspects d'une infrastructure.</li>
+</ol>
+<hr />
+<h3 id="cas-dusage-courants"><a class="header" href="#cas-dusage-courants">Cas d'Usage Courants</a></h3>
+<ol>
+<li><strong>Provisionnement de Serveurs</strong> : Ansible configure automatiquement les serveurs en fonction des besoins (installation des logiciels, configuration réseau, sécurité).</li>
+<li><strong>Déploiement d'Applications</strong> : Grâce aux playbooks, Ansible permet de déployer des applications sur plusieurs serveurs de manière uniforme.</li>
+<li><strong>Automatisation DevOps et CI/CD</strong> : Intégré dans des pipelines CI/CD, Ansible automatise les déploiements et assure la cohérence entre les environnements de test, préproduction et production.</li>
+<li><strong>Gestion Multi-Cloud</strong> : Ansible supporte des environnements hybrides et peut être utilisé pour provisionner des ressources dans des clouds tels qu’AWS, Azure, Google Cloud, et des environnements sur site.</li>
+<li><strong>Maintenance et Mise à Jour des Serveurs</strong> : En gérant l’installation de mises à jour, Ansible assure la sécurité et le bon fonctionnement des serveurs sur une base régulière.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../jenkins/sections/07_Real_Life_Example.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ansible/sections/01_Introduction.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../jenkins/sections/07_Real_Life_Example.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ansible/sections/01_Introduction.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

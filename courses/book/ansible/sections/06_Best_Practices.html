@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Meilleures pratiques pour Ansible - Formation AWS Jenkins &amp; Ansible</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../aws/introduction.html"><strong aria-hidden="true">1.</strong> Présentation générale d'AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../aws/sections/01_introduction.html"><strong aria-hidden="true">1.1.</strong> Introduction sur AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/02_AWS_overview.html"><strong aria-hidden="true">1.2.</strong> Les Bases d'AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/03_AWS_EC2.html"><strong aria-hidden="true">1.3.</strong> Les Instances EC2</a></li><li class="chapter-item expanded "><a href="../../aws/sections/04_AWS_S3.html"><strong aria-hidden="true">1.4.</strong> Les Buckets S3</a></li></ol></li><li class="chapter-item expanded "><a href="../../jenkins/introduction.html"><strong aria-hidden="true">2.</strong> Présentation générale de Jenkins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../jenkins/sections/01_Introduction.html"><strong aria-hidden="true">2.1.</strong> Introduction sur Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/02_First_Steps.html"><strong aria-hidden="true">2.2.</strong> Premiers pas avec Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/03_Pipelines.html"><strong aria-hidden="true">2.3.</strong> Les bases des Pipelines</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/04_Pipelines_Advanced.html"><strong aria-hidden="true">2.4.</strong> Plus de pipelines!</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/05_modules_libraries.html"><strong aria-hidden="true">2.5.</strong> Modules et librairies dans Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/06_AWS_automation.html"><strong aria-hidden="true">2.6.</strong> Automatisation dans AWS</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/07_Real_Life_Example.html"><strong aria-hidden="true">2.7.</strong> Application concrète</a></li></ol></li><li class="chapter-item expanded "><a href="../../ansible/introduction.html"><strong aria-hidden="true">3.</strong> Présentation générale d'Ansible</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ansible/sections/01_Introduction.html"><strong aria-hidden="true">3.1.</strong> Introduction à Ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/02_Basics.html"><strong aria-hidden="true">3.2.</strong> Bases d'ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/03_Automation.html"><strong aria-hidden="true">3.3.</strong> Automatisation avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/04_S3_management.html"><strong aria-hidden="true">3.4.</strong> Gestion de S3 avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/05_Jenkins_AWS_Pipeline.html"><strong aria-hidden="true">3.5.</strong> Ansible dans une pipeline Jenkins</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/06_Best_Practices.html" class="active"><strong aria-hidden="true">3.6.</strong> Meilleures pratiques pour Ansible</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Formation AWS Jenkins &amp; Ansible</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="partie-6--bonnes-pratiques-et-gestion-des-erreurs"><a class="header" href="#partie-6--bonnes-pratiques-et-gestion-des-erreurs">Partie 6 : Bonnes Pratiques et Gestion des Erreurs</a></h2>
+<h3 id="objectifs"><a class="header" href="#objectifs">Objectifs</a></h3>
+<p>Dans cette partie, vous allez :</p>
+<ul>
+<li>Apprendre les bonnes pratiques pour structurer des playbooks lisibles et maintenables.</li>
+<li>Découvrir des techniques pour déboguer et gérer les erreurs dans Ansible.</li>
+<li>Optimiser les playbooks pour une exécution plus rapide et plus efficace dans des environnements cloud AWS.</li>
+</ul>
+<hr />
+<h3 id="61-bonnes-pratiques-pour-Écrire-des-playbooks-ansible"><a class="header" href="#61-bonnes-pratiques-pour-Écrire-des-playbooks-ansible">6.1 Bonnes Pratiques pour Écrire des Playbooks Ansible</a></h3>
+<p>Un playbook bien structuré est essentiel pour faciliter la maintenance et la compréhension. Voici quelques bonnes pratiques pour écrire des playbooks clairs et efficaces.</p>
+<h4 id="conseils-pour-structurer-les-playbooks"><a class="header" href="#conseils-pour-structurer-les-playbooks">Conseils pour structurer les playbooks</a></h4>
+<ul>
+<li><strong>Utilisez des noms explicites pour chaque tâche</strong> : Les noms de tâche permettent de comprendre rapidement l’action effectuée. Un nom clair facilite le suivi et le débogage.</li>
+<li><strong>Documentez les variables</strong> : En ajoutant des commentaires, vous facilitez la compréhension et l’utilisation des variables par d’autres utilisateurs.</li>
+<li><strong>Organisez les tâches par rôles ou blocs logiques</strong> : Structurez les playbooks en blocs logiques pour des sections de configuration ou de déploiement.</li>
+<li><strong>Utilisez des fichiers d’inventaire et de configuration distincts</strong> : Gardez les inventaires séparés du code pour une meilleure organisation et sécurité.</li>
+</ul>
+<pre><code class="language-yaml">- name: Installer et configurer un serveur web
+  hosts: webservers
+  vars:
+    package_name: "apache2"
+  tasks:
+    - name: Installer le package "{{ package_name }}"
+      package:
+        name: "{{ package_name }}"
+        state: present
+    - name: Démarrer le service "{{ package_name }}"
+      service:
+        name: "{{ package_name }}"
+        state: started
+</code></pre>
+<blockquote>
+<p>Les liens suivant regroupent les bonnes pratiques pour structurer un playbook ansible</p>
+<ul>
+<li>https://docs.ansible.com/ansible/2.8/user_guide/playbooks_best_practices.html</li>
+<li>https://spacelift.io/blog/ansible-best-practices</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="62-débogage-et-gestion-des-erreurs"><a class="header" href="#62-débogage-et-gestion-des-erreurs">6.2 Débogage et Gestion des Erreurs</a></h3>
+<p>Déboguer les playbooks est une compétence cruciale pour identifier et corriger rapidement les problèmes d’exécution.</p>
+<h4 id="techniques-de-débogage"><a class="header" href="#techniques-de-débogage">Techniques de débogage</a></h4>
+<ul>
+<li><strong>Utilisez le mode verbeux (-v, -vv, -vvv)</strong> : Augmentez la verbosité pour obtenir des informations détaillées sur chaque étape d’un playbook.</li>
+<li><strong>Utilisez le module <code>debug</code></strong> : Affichez des informations ou valeurs de variables à des étapes spécifiques pour mieux comprendre le comportement des tâches.</li>
+<li><strong>Check mode (<code>--check</code>)</strong> : Simulez l’exécution sans appliquer de changements pour voir ce que le playbook ferait.</li>
+</ul>
+<h4 id="gestion-des-erreurs"><a class="header" href="#gestion-des-erreurs">Gestion des erreurs</a></h4>
+<ul>
+<li><strong>ignore_errors</strong> : Utilisez ce paramètre pour ignorer les erreurs d'une tâche spécifique, utile lorsque certaines erreurs peuvent être tolérées sans affecter le reste du processus.</li>
+<li><strong>failed_when</strong> : Configurez des conditions personnalisées pour définir des erreurs, en fonction de l’état d’une variable ou du résultat d’une tâche.</li>
+</ul>
+<p><strong>Exemple de gestion des erreurs</strong> :</p>
+<pre><code class="language-yaml">- name: Vérifier si Apache est installé
+  command: "dpkg -l | grep apache2"
+  register: apache_check
+  ignore_errors: true
+
+- name: Redémarrer Apache si installé
+  service:
+    name: apache2
+    state: restarted
+  when: apache_check.rc == 0
+</code></pre>
+<p><strong>Exercice</strong> : Créer un playbook avec des erreurs intentionnelles et utiliser les techniques de débogage pour les corriger</p>
+<ol>
+<li>Écrivez un playbook avec des erreurs intentionnelles (ex. : tâche de démarrage d'un service non installé).</li>
+<li>Utilisez le mode verbeux et le module <code>debug</code> pour identifier et corriger les erreurs.</li>
+</ol>
+<hr />
+<h3 id="63-optimisation-de-lexécution-ansible-sur-des-infrastructures-aws"><a class="header" href="#63-optimisation-de-lexécution-ansible-sur-des-infrastructures-aws">6.3 Optimisation de l’Exécution Ansible sur des Infrastructures AWS</a></h3>
+<p>L’optimisation des playbooks est cruciale pour exécuter efficacement des tâches sur des infrastructures de grande envergure comme celles sur AWS.</p>
+<h4 id="techniques-doptimisation"><a class="header" href="#techniques-doptimisation">Techniques d’optimisation</a></h4>
+<ul>
+<li><strong>Connexions parallèles</strong> : Configurez Ansible pour exécuter plusieurs tâches en parallèle en ajustant le paramètre <code>forks</code> dans <code>ansible.cfg</code>.</li>
+<li><strong>Modules adaptés à AWS</strong> : Utilisez les modules AWS (<code>ec2</code>, <code>aws_s3</code>, etc.) pour des actions spécifiques, car ils sont optimisés pour les API AWS et réduisent les latences.</li>
+<li><strong>Utilisez des rôles et des filtres de cible</strong> : Limitez le nombre de machines ou services impactés en utilisant des filtres précis dans l’inventaire ou le playbook.</li>
+</ul>
+<p><strong>Exemple d’optimisation avec le paramètre forks</strong> :</p>
+<pre><code class="language-ini"># dans ansible.cfg
+[defaults]
+forks = 10
+</code></pre>
+<p><strong>Exercice</strong> : Optimiser un playbook existant pour le rendre plus rapide et plus résilient</p>
+<ol>
+<li>Prenez un playbook existant avec plusieurs tâches de provisioning AWS.</li>
+<li>Augmentez la parallélisation en configurant le paramètre <code>forks</code>.</li>
+<li>Exécutez le playbook optimisé et comparez le temps d'exécution.</li>
+</ol>
+<hr />
+<h3 id="liens-vers-la-documentation"><a class="header" href="#liens-vers-la-documentation">Liens vers la Documentation</a></h3>
+<ul>
+<li><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_debugger.html">Documentation officielle de débogage dans Ansible</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html">Guide de gestion des erreurs dans Ansible</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html#scaling-out-with-ansible">Optimisation des performances d’Ansible</a></li>
+</ul>
+<hr />
+<h3 id="questions-de-révision"><a class="header" href="#questions-de-révision">Questions de Révision</a></h3>
+<details>
+<summary><h3 style="display:inline-block">Questions de Révision</h3></summary>
+<details>
+<summary>Pourquoi est-il important de nommer explicitement chaque tâche dans un playbook ?</summary>
+<details>
+<summary>Solution</summary>
+Un nom explicite facilite le suivi de l'exécution et le débogage, permettant de comprendre rapidement ce que fait chaque tâche.
+</details>
+</details>
+<details>
+<summary>Quels sont les niveaux de verbosité disponibles dans Ansible pour le débogage ?</summary>
+<details>
+<summary>Solution</summary>
+Ansible propose différents niveaux de verbosité : `-v`, `-vv`, `-vvv`, et `-vvvv`, avec un niveau plus élevé affichant plus de détails.
+</details>
+</details>
+<details>
+<summary>Comment optimiser l'exécution d'Ansible sur des infrastructures AWS étendues ?</summary>
+<details>
+<summary>Solution</summary>
+En utilisant des connexions parallèles (via `forks`), en optimisant les modules AWS, et en ciblant précisément les hôtes et services nécessaires.
+</details>
+</details>
+</details>
+<hr />
+<h3 id="conseils-pratiques"><a class="header" href="#conseils-pratiques">Conseils Pratiques</a></h3>
+<ol>
+<li><strong>Utilisez des niveaux de verbosité appropriés pour chaque étape de débogage</strong> : Cela vous aide à obtenir les informations nécessaires sans encombrer les logs.</li>
+<li><strong>Commentez et documentez les playbooks</strong> : Les playbooks bien documentés sont plus faciles à lire et à maintenir par les équipes.</li>
+<li><strong>Utilisez des fichiers d’inventaire dynamiques pour les infrastructures de grande envergure</strong> : Cela permet de gérer facilement des infrastructures cloud comme AWS.
+<a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html">Guide des bonnes pratiques Ansible</a></li>
+</ol>
+<hr />
+<h3 id="défi-intermédiaire"><a class="header" href="#défi-intermédiaire">Défi Intermédiaire</a></h3>
+<details>
+<summary><h3 style="display:inline-block">Défi Intermédiaire</h3></summary>
+**Objectif** : Optimiser et déboguer un playbook Ansible pour gérer une infrastructure AWS étendue avec un déploiement rapide et résilient.
+<p><strong>Contexte</strong> : Vous avez un playbook qui configure une infrastructure sur AWS avec plusieurs tâches. Le but est d’optimiser l’exécution et de gérer les erreurs efficacement pour un déploiement en production.</p>
+<details>
+<summary><b>Étapes principales</b></summary>
+1. Modifiez `ansible.cfg` pour augmenter le paramètre `forks`.
+2. Ajoutez des commandes de débogage avec le module `debug` pour afficher les variables clés.
+3. Utilisez `ignore_errors` et `failed_when` pour gérer les erreurs de manière ciblée.
+</details>
+<p><strong>Compétences renforcées</strong> :</p>
+<ul>
+<li>Optimisation de la performance et de la résilience des playbooks Ansible</li>
+<li>Gestion avancée des erreurs et débogage</li>
+</ul>
+<details>
+<summary><b>Solution suggérée</b></summary>
+Utilisez un playbook comme suit :
+<pre><code class="language-yaml">- name: Déploiement optimisé sur AWS
+  hosts: aws_instances
+  tasks:
+    - name: Provisionner une instance EC2
+      ec2:
+        instance_type: "t2.micro"
+        image: "ami-0abcdef1234567890"
+      register: ec2_info
+
+    - name: Vérification du service après provisionnement
+      service:
+        name: "httpd"
+        state: started
+      ignore_errors: true
+      when: ec2_info.changed
+</code></pre>
+<p>Dans <code>ansible.cfg</code>, définissez :</p>
+<pre><code class="language-ini">[defaults]
+forks = 10
+</code></pre>
+</details>
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../ansible/sections/05_Jenkins_AWS_Pipeline.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../ansible/sections/05_Jenkins_AWS_Pipeline.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

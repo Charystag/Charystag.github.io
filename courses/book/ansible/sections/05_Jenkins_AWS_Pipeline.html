@@ -1,0 +1,423 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ansible dans une pipeline Jenkins - Formation AWS Jenkins &amp; Ansible</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../aws/introduction.html"><strong aria-hidden="true">1.</strong> Présentation générale d'AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../aws/sections/01_introduction.html"><strong aria-hidden="true">1.1.</strong> Introduction sur AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/02_AWS_overview.html"><strong aria-hidden="true">1.2.</strong> Les Bases d'AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/03_AWS_EC2.html"><strong aria-hidden="true">1.3.</strong> Les Instances EC2</a></li><li class="chapter-item expanded "><a href="../../aws/sections/04_AWS_S3.html"><strong aria-hidden="true">1.4.</strong> Les Buckets S3</a></li></ol></li><li class="chapter-item expanded "><a href="../../jenkins/introduction.html"><strong aria-hidden="true">2.</strong> Présentation générale de Jenkins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../jenkins/sections/01_Introduction.html"><strong aria-hidden="true">2.1.</strong> Introduction sur Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/02_First_Steps.html"><strong aria-hidden="true">2.2.</strong> Premiers pas avec Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/03_Pipelines.html"><strong aria-hidden="true">2.3.</strong> Les bases des Pipelines</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/04_Pipelines_Advanced.html"><strong aria-hidden="true">2.4.</strong> Plus de pipelines!</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/05_modules_libraries.html"><strong aria-hidden="true">2.5.</strong> Modules et librairies dans Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/06_AWS_automation.html"><strong aria-hidden="true">2.6.</strong> Automatisation dans AWS</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/07_Real_Life_Example.html"><strong aria-hidden="true">2.7.</strong> Application concrète</a></li></ol></li><li class="chapter-item expanded "><a href="../../ansible/introduction.html"><strong aria-hidden="true">3.</strong> Présentation générale d'Ansible</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ansible/sections/01_Introduction.html"><strong aria-hidden="true">3.1.</strong> Introduction à Ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/02_Basics.html"><strong aria-hidden="true">3.2.</strong> Bases d'ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/03_Automation.html"><strong aria-hidden="true">3.3.</strong> Automatisation avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/04_S3_management.html"><strong aria-hidden="true">3.4.</strong> Gestion de S3 avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/05_Jenkins_AWS_Pipeline.html" class="active"><strong aria-hidden="true">3.5.</strong> Ansible dans une pipeline Jenkins</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/06_Best_Practices.html"><strong aria-hidden="true">3.6.</strong> Meilleures pratiques pour Ansible</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Formation AWS Jenkins &amp; Ansible</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="partie-5--intégration-dansible-dans-un-pipeline-cicd-avec-jenkins-et-aws"><a class="header" href="#partie-5--intégration-dansible-dans-un-pipeline-cicd-avec-jenkins-et-aws">Partie 5 : Intégration d'Ansible dans un Pipeline CI/CD avec Jenkins et AWS</a></h2>
+<h3 id="objectifs"><a class="header" href="#objectifs">Objectifs</a></h3>
+<p>Dans cette partie, vous allez :</p>
+<ul>
+<li>Comprendre l’intégration d’Ansible dans un pipeline CI/CD avec Jenkins pour des déploiements automatisés.</li>
+<li>Créer un pipeline Jenkins qui exécute des playbooks Ansible pour provisionner une infrastructure AWS.</li>
+<li>Automatiser le déploiement d’une application et la gestion des artefacts dans un environnement cloud.</li>
+</ul>
+<hr />
+<h3 id="51-introduction-à-lintégration-cicd-avec-jenkins-et-ansible"><a class="header" href="#51-introduction-à-lintégration-cicd-avec-jenkins-et-ansible">5.1 Introduction à l'Intégration CI/CD avec Jenkins et Ansible</a></h3>
+<p>Jenkins est un outil d’intégration et de déploiement continus (CI/CD) qui permet d'automatiser les tâches de construction, de test, et de déploiement d'applications. En intégrant Ansible dans Jenkins, il devient possible d’automatiser le déploiement sur AWS en exécutant des playbooks Ansible directement depuis le pipeline Jenkins.</p>
+<h4 id="avantages-de-lintégration-dansible-dans-un-pipeline-cicd"><a class="header" href="#avantages-de-lintégration-dansible-dans-un-pipeline-cicd">Avantages de l’intégration d’Ansible dans un pipeline CI/CD</a></h4>
+<ul>
+<li><strong>Automatisation du déploiement</strong> : Les playbooks Ansible peuvent être exécutés automatiquement à chaque changement de code ou de configuration, garantissant un déploiement rapide et cohérent.</li>
+<li><strong>Standardisation des configurations</strong> : Grâce à Ansible, les configurations d’infrastructure et d’applications peuvent être uniformisées, limitant les erreurs de déploiement.</li>
+<li><strong>Gestion centralisée des artefacts</strong> : Jenkins permet de suivre et stocker les logs ou artefacts de déploiement, tandis qu’Ansible gère l’infrastructure sous forme de code.</li>
+</ul>
+<hr />
+<h3 id="52-création-dun-pipeline-jenkins-pour-lautomatisation-ansible"><a class="header" href="#52-création-dun-pipeline-jenkins-pour-lautomatisation-ansible">5.2 Création d’un Pipeline Jenkins pour l’Automatisation Ansible</a></h3>
+<h4 id="Écriture-dun-jenkinsfile-pour-orchestrer-lexécution-de-playbooks-ansible"><a class="header" href="#Écriture-dun-jenkinsfile-pour-orchestrer-lexécution-de-playbooks-ansible">Écriture d’un Jenkinsfile pour orchestrer l'exécution de playbooks Ansible</a></h4>
+<p>Le <strong>Jenkinsfile</strong> définit le pipeline CI/CD de Jenkins. Pour intégrer Ansible, nous définissons des étapes pour exécuter les playbooks, comme le provisioning de serveurs ou le déploiement d’applications.</p>
+<p><strong>Exemple de Jenkinsfile pour exécuter un playbook Ansible</strong> :</p>
+<pre><code class="language-groovy">pipeline {
+    agent any
+    stages {
+        stage('Provision Infrastructure') {
+            steps {
+                ansiblePlaybook inventory: 'hosts',
+                                playbook: 'provision_infra.yml'
+            }
+        }
+    }
+}
+</code></pre>
+<h4 id="exécution-dansible-dans-jenkins-avec-le-plugin-ansible"><a class="header" href="#exécution-dansible-dans-jenkins-avec-le-plugin-ansible">Exécution d’Ansible dans Jenkins avec le plugin Ansible</a></h4>
+<ol>
+<li><strong>Installation du plugin Ansible</strong> : Installez le plugin <strong>Ansible</strong> dans Jenkins pour exécuter des playbooks directement.</li>
+<li><strong>Configuration des informations d’identification</strong> : Ajoutez les informations d’identification AWS dans Jenkins pour qu’il puisse accéder aux ressources cloud de manière sécurisée.</li>
+<li><strong>Définition de l’inventaire</strong> : Spécifiez l’inventaire d’Ansible dans Jenkins pour exécuter les tâches sur les hôtes cibles.</li>
+</ol>
+<p><img src="../images/05_Jenkins_AWS_Pipeline/ansible_plugin.png" alt="Intégration d&#39;Ansible dans Jenkins" /></p>
+<blockquote>
+<p>Source: https://plugins.jenkins.io/ansible/</p>
+</blockquote>
+<p><strong>Exercice</strong> : Créer un job Jenkins pour exécuter un playbook Ansible qui provisionne une infrastructure de test sur AWS</p>
+<ol>
+<li>Créez un Jenkinsfile avec une étape pour exécuter un playbook Ansible nommé <code>provision_infra.yml</code>.</li>
+<li>Configurez Jenkins pour exécuter ce job avec le plugin Ansible, en spécifiant l’inventaire et les informations d’identification AWS.</li>
+</ol>
+<hr />
+<h3 id="53-déploiement-automatisé-dune-application-sur-ec2-avec-ansible-et-jenkins"><a class="header" href="#53-déploiement-automatisé-dune-application-sur-ec2-avec-ansible-et-jenkins">5.3 Déploiement Automatisé d'une Application sur EC2 avec Ansible et Jenkins</a></h3>
+<p>Dans cette étape, nous allons mettre en place un pipeline complet pour déployer une application sur une instance EC2 en utilisant Ansible et Jenkins. Le pipeline inclura le provisioning d’instances EC2, le déploiement de l’application, et la sauvegarde des artefacts dans S3.</p>
+<h4 id="mise-en-place-dun-pipeline-complet-pour-le-déploiement-dune-application"><a class="header" href="#mise-en-place-dun-pipeline-complet-pour-le-déploiement-dune-application">Mise en place d’un pipeline complet pour le déploiement d’une application</a></h4>
+<ol>
+<li><strong>Création et configuration des instances EC2</strong> : Utilisez un playbook pour provisionner une ou plusieurs instances EC2 et configurer les paramètres de base.</li>
+<li><strong>Déploiement de l’application et configuration de base</strong> : Ajoutez une étape pour installer l’application, configurer le serveur et les services nécessaires.</li>
+<li><strong>Stockage des logs ou des artefacts dans S3</strong> : Automatisez le transfert des artefacts générés (logs, fichiers de configuration) vers S3 pour archivage.</li>
+</ol>
+<p><strong>Exemple de Jenkinsfile pour un pipeline de déploiement avec Ansible</strong> :</p>
+<pre><code class="language-groovy">pipeline {
+    agent any
+   stages {
+        stage('Provision EC2 Instances') {
+            steps {
+                ansiblePlaybook playbook: 'provision_ec2.yml'
+            }
+        }
+        stage('Deploy Application') {
+            steps {
+                ansiblePlaybook playbook: 'deploy_application.yml'
+            }
+        }
+        stage('Store Logs in S3') {
+            steps {
+                ansiblePlaybook playbook: 'upload_logs_s3.yml'
+            }
+        }
+    }
+}
+</code></pre>
+<p><img src="../images/05_Jenkins_AWS_Pipeline/pipeline_flow.png" alt="Pipeline CI/CD complet avec Jenkins et Ansible" /></p>
+<blockquote>
+<p>Source: https://www.redhat.com/en/blog/integrating-ansible-jenkins-cicd-process</p>
+</blockquote>
+<hr />
+<h3 id="projet-final--créer-un-pipeline-jenkins-avec-ansible-pour-provisionner-des-instances-ec2-configurer-lapplication-et-sauvegarder-les-logs-dans-s3"><a class="header" href="#projet-final--créer-un-pipeline-jenkins-avec-ansible-pour-provisionner-des-instances-ec2-configurer-lapplication-et-sauvegarder-les-logs-dans-s3">Projet final : Créer un pipeline Jenkins avec Ansible pour provisionner des instances EC2, configurer l’application, et sauvegarder les logs dans S3</a></h3>
+<p><strong>Objectif du projet</strong> : Automatiser l’ensemble du processus de déploiement d’une application sur AWS en intégrant Ansible dans un pipeline CI/CD Jenkins.</p>
+<p><strong>Étapes du projet</strong> :</p>
+<ol>
+<li>
+<p><strong>Préparer les playbooks Ansible</strong> :</p>
+<ul>
+<li><code>provision_ec2.yml</code> : Provisionner une instance EC2 avec les paramètres nécessaires (type d’instance, sécurité, etc.).</li>
+<li><code>deploy_application.yml</code> : Déployer l’application sur l’instance EC2, en installant les dépendances nécessaires.</li>
+<li><code>upload_logs_s3.yml</code> : Sauvegarder les logs de déploiement dans un bucket S3.</li>
+</ul>
+</li>
+<li>
+<p><strong>Configurer le pipeline Jenkins</strong> :</p>
+<ul>
+<li>Créez un Jenkinsfile avec des étapes pour exécuter chaque playbook.</li>
+<li>Utilisez le plugin Ansible pour exécuter les playbooks dans chaque étape du pipeline.</li>
+</ul>
+</li>
+<li>
+<p><strong>Exécuter le pipeline et vérifier les résultats</strong> :</p>
+<ul>
+<li>Exécutez le pipeline dans Jenkins pour provisionner, déployer, et stocker les artefacts.</li>
+<li>Vérifiez que les logs sont correctement sauvegardés dans S3 et que l’application est accessible sur l’instance EC2.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="liens-vers-la-documentation"><a class="header" href="#liens-vers-la-documentation">Liens vers la Documentation</a></h3>
+<ul>
+<li><a href="https://www.jenkins.io/doc/">Documentation officielle de Jenkins</a></li>
+<li><a href="https://plugins.jenkins.io/ansible/">Documentation du plugin Ansible pour Jenkins</a></li>
+<li><a href="https://www.jenkins.io/doc/book/pipeline/jenkinsfile/">Exemples de Jenkinsfile pour CI/CD</a></li>
+</ul>
+<hr />
+<h3 id="questions-de-révision"><a class="header" href="#questions-de-révision">Questions de Révision</a></h3>
+<details>
+<summary><h3 style="display:inline-block">Questions de Révision</h3></summary>
+<details>
+<summary>Pourquoi est-il avantageux d'intégrer Ansible dans un pipeline CI/CD Jenkins ?</summary>
+<details>
+<summary>Solution</summary>
+L'intégration d'Ansible permet l'automatisation complète des déploiements, la standardisation des configurations, et facilite la gestion des ressources cloud de manière récurrente.
+</details>
+</details>
+<details>
+<summary>Quel est le rôle du Jenkinsfile dans un pipeline Jenkins ?</summary>
+<details>
+<summary>Solution</summary>
+Le Jenkinsfile définit les étapes du pipeline CI/CD, permettant d’orchestrer les différentes étapes de construction, test, et déploiement de manière codifiée.
+</details>
+</details>
+<details>
+<summary>Comment Jenkins exécute-t-il des playbooks Ansible ?</summary>
+<details>
+<summary>Solution</summary>
+Jenkins exécute des playbooks Ansible en utilisant le plugin Ansible, configuré avec les informations d’identification nécessaires et le fichier d’inventaire.
+</details>
+</details>
+</details>
+<hr />
+<h3 id="conseils-pratiques"><a class="header" href="#conseils-pratiques">Conseils Pratiques</a></h3>
+<ol>
+<li><strong>Utilisez des noms explicites pour chaque étape du pipeline</strong> dans le Jenkinsfile pour une meilleure lisibilité des logs.</li>
+<li><strong>Stockez les informations d’identification de manière sécurisée dans Jenkins</strong> : utilisez les <strong>Credentials</strong> de Jenkins pour stocker les informations AWS nécessaires.</li>
+<li><strong>Vérifiez l'intégration Ansible-Jenkins avec des tests de validation de configuration</strong> avant de déployer en production.
+<a href="https://www.jenkins.io/doc/book/pipeline/jenkinsfile/">Guide d'intégration Ansible et Jenkins</a></li>
+</ol>
+<hr />
+<h3 id="défi-intermédiaire"><a class="header" href="#défi-intermédiaire">Défi Intermédiaire</a></h3>
+<details>
+<summary><h3 style="display:inline-block">Défi Intermédiaire</h3></summary>
+**Objectif** : Créer un pipeline CI/CD complet pour provisionner des instances EC2, déployer une application, et sauvegarder les logs dans S3.
+<p><strong>Contexte</strong> : Vous devez configurer un pipeline Jenkins avec Ansible pour automatiser le déploiement d’une application. Les étapes incluront le provisioning d’instances EC2, l'installation de l'application, et le transfert des artefacts dans S3.</p>
+<details>
+<summary><b>Étapes principales</b></summary>
+1. Créez les playbooks nécessaires (`provision_ec2.yml`, `deploy_application.yml`, `upload_logs_s3.yml`).
+2. Configurez un Jenkinsfile pour orchestrer ces playbooks en étapes.
+3. Ajoutez les informations d’identification AWS dans Jenkins et testez le pipeline.
+</details>
+<p><strong>Compétences renforcées</strong> :</p>
+<ul>
+<li>Intégration de Jenkins et Ansible pour des tâches d’automatisation</li>
+<li>Création d’un pipeline CI/CD complet</li>
+</ul>
+<details>
+<summary><b>Solution suggérée</b></summary>
+Utilisez un Jenkinsfile comme suit :
+<pre><code class="language-groovy">pipeline {
+    agent any
+    stages {
+        stage('Provision EC2 Instances') {
+            steps {
+                ansiblePlaybook playbook: 'provision_ec2.yml'
+            }
+        }
+        stage('Deploy Application') {
+            steps {
+                ansiblePlaybook playbook: 'deploy_application.yml'
+            }
+        }
+        stage('Store Logs in S3') {
+            steps {
+                ansiblePlaybook playbook: 'upload_logs_s3.yml'
+            }
+        }
+    }
+}
+</code></pre>
+</details>
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../ansible/sections/04_S3_management.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../ansible/sections/06_Best_Practices.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../ansible/sections/04_S3_management.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../ansible/sections/06_Best_Practices.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

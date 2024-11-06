@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Présentation générale d&#x27;AWS - Formation AWS Jenkins &amp; Ansible</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../aws/introduction.html" class="active"><strong aria-hidden="true">1.</strong> Présentation générale d'AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../aws/sections/01_introduction.html"><strong aria-hidden="true">1.1.</strong> Introduction sur AWS</a></li><li class="chapter-item expanded "><a href="../aws/sections/02_AWS_overview.html"><strong aria-hidden="true">1.2.</strong> Les Bases d'AWS</a></li><li class="chapter-item expanded "><a href="../aws/sections/03_AWS_EC2.html"><strong aria-hidden="true">1.3.</strong> Les Instances EC2</a></li><li class="chapter-item expanded "><a href="../aws/sections/04_AWS_S3.html"><strong aria-hidden="true">1.4.</strong> Les Buckets S3</a></li></ol></li><li class="chapter-item expanded "><a href="../jenkins/introduction.html"><strong aria-hidden="true">2.</strong> Présentation générale de Jenkins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../jenkins/sections/01_Introduction.html"><strong aria-hidden="true">2.1.</strong> Introduction sur Jenkins</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/02_First_Steps.html"><strong aria-hidden="true">2.2.</strong> Premiers pas avec Jenkins</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/03_Pipelines.html"><strong aria-hidden="true">2.3.</strong> Les bases des Pipelines</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/04_Pipelines_Advanced.html"><strong aria-hidden="true">2.4.</strong> Plus de pipelines!</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/05_modules_libraries.html"><strong aria-hidden="true">2.5.</strong> Modules et librairies dans Jenkins</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/06_AWS_automation.html"><strong aria-hidden="true">2.6.</strong> Automatisation dans AWS</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/07_Real_Life_Example.html"><strong aria-hidden="true">2.7.</strong> Application concrète</a></li></ol></li><li class="chapter-item expanded "><a href="../ansible/introduction.html"><strong aria-hidden="true">3.</strong> Présentation générale d'Ansible</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ansible/sections/01_Introduction.html"><strong aria-hidden="true">3.1.</strong> Introduction à Ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/02_Basics.html"><strong aria-hidden="true">3.2.</strong> Bases d'ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/03_Automation.html"><strong aria-hidden="true">3.3.</strong> Automatisation avec ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/04_S3_management.html"><strong aria-hidden="true">3.4.</strong> Gestion de S3 avec ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/05_Jenkins_AWS_Pipeline.html"><strong aria-hidden="true">3.5.</strong> Ansible dans une pipeline Jenkins</a></li><li class="chapter-item expanded "><a href="../ansible/sections/06_Best_Practices.html"><strong aria-hidden="true">3.6.</strong> Meilleures pratiques pour Ansible</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Formation AWS Jenkins &amp; Ansible</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p><strong>Présentation Générale d'AWS (Amazon Web Services)</strong></p>
+<hr />
+<h3 id="introduction"><a class="header" href="#introduction">Introduction</a></h3>
+<p>Amazon Web Services (AWS) est une plateforme de services cloud créée par Amazon. Lancée en 2006, elle propose des solutions de calcul, de stockage, de bases de données, d'intelligence artificielle, et bien plus, pour des entreprises de toutes tailles. AWS permet de construire des infrastructures évolutives et flexibles, de façon sécurisée, et avec des coûts ajustés à la consommation.</p>
+<hr />
+<h3 id="les-principaux-services-aws"><a class="header" href="#les-principaux-services-aws">Les Principaux Services AWS</a></h3>
+<p>AWS compte plus de 200 services répartis en plusieurs catégories :</p>
+<ol>
+<li>
+<p><strong>Calcul (Compute)</strong> : Ces services permettent d'héberger et d'exécuter des applications, de provisionner des serveurs, ou de gérer des conteneurs et des fonctions sans serveur.</p>
+<ul>
+<li><strong>EC2 (Elastic Compute Cloud)</strong> : Service de machines virtuelles pour exécuter des applications sur des serveurs configurables.</li>
+<li><strong>Lambda</strong> : Service de calcul sans serveur pour exécuter du code en réponse à des événements sans provisionner de serveurs.</li>
+<li><strong>ECS (Elastic Container Service)</strong> et <strong>EKS (Elastic Kubernetes Service)</strong> : Services pour l'orchestration de conteneurs Docker.</li>
+</ul>
+</li>
+<li>
+<p><strong>Stockage (Storage)</strong> : AWS propose plusieurs solutions de stockage pour répondre aux besoins de performance, de sécurité et d'évolutivité des données.</p>
+<ul>
+<li><strong>S3 (Simple Storage Service)</strong> : Stockage d'objets haute disponibilité pour les données de tout type, avec des options de gestion du cycle de vie.</li>
+<li><strong>EBS (Elastic Block Store)</strong> : Stockage de type bloc pour les instances EC2, destiné aux applications exigeant une faible latence.</li>
+<li><strong>Glacier</strong> : Service de stockage à faible coût pour l'archivage et la sauvegarde des données.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bases de Données</strong> : AWS offre des bases de données relationnelles, non relationnelles et des bases de données spécialisées.</p>
+<ul>
+<li><strong>RDS (Relational Database Service)</strong> : Service géré pour les bases de données relationnelles comme MySQL, PostgreSQL et Oracle.</li>
+<li><strong>DynamoDB</strong> : Base de données NoSQL rapide et entièrement gérée.</li>
+<li><strong>Redshift</strong> : Service de data warehouse pour l'analyse de données à grande échelle.</li>
+</ul>
+</li>
+<li>
+<p><strong>Mise en Réseau (Networking)</strong> : Les services de réseau d'AWS permettent de gérer les connexions et la sécurité des infrastructures cloud.</p>
+<ul>
+<li><strong>VPC (Virtual Private Cloud)</strong> : Service permettant de créer un réseau privé dans le cloud.</li>
+<li><strong>Route 53</strong> : Service DNS pour la gestion des noms de domaine et du routage des requêtes.</li>
+<li><strong>CloudFront</strong> : Réseau de distribution de contenu (CDN) pour la diffusion de contenu avec faible latence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sécurité et Identité</strong> : AWS propose des outils de gestion des identités, des accès et des contrôles de sécurité.</p>
+<ul>
+<li><strong>IAM (Identity and Access Management)</strong> : Gestion des utilisateurs et des permissions pour contrôler l'accès aux ressources AWS.</li>
+<li><strong>KMS (Key Management Service)</strong> : Service de gestion des clés de chiffrement pour sécuriser les données.</li>
+<li><strong>GuardDuty</strong> et <strong>Inspector</strong> : Services de détection des menaces et d'analyse de sécurité.</li>
+</ul>
+</li>
+<li>
+<p><strong>Outils d’Analyse et de Big Data</strong> : AWS propose des outils pour l’analyse de données, le traitement des big data et l’apprentissage automatique.</p>
+<ul>
+<li><strong>EMR (Elastic MapReduce)</strong> : Service de traitement de big data compatible avec Hadoop et Spark.</li>
+<li><strong>Athena</strong> : Service d’interrogation de données stockées dans S3 avec SQL.</li>
+<li><strong>SageMaker</strong> : Plateforme pour développer, entraîner et déployer des modèles de machine learning.</li>
+</ul>
+</li>
+<li>
+<p><strong>Outils DevOps et CI/CD</strong> : AWS offre des outils pour automatiser le déploiement, la surveillance et la gestion des applications.</p>
+<ul>
+<li><strong>CodePipeline</strong> : Orchestration des étapes de CI/CD pour automatiser le déploiement de logiciels.</li>
+<li><strong>CloudFormation</strong> : Infrastructure-as-code pour définir et provisionner l’infrastructure.</li>
+<li><strong>CloudWatch</strong> : Surveillance des ressources et applications AWS.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="avantages-daws"><a class="header" href="#avantages-daws">Avantages d’AWS</a></h3>
+<ol>
+<li><strong>Évolutivité</strong> : AWS permet de démarrer avec de petites ressources et de les augmenter en fonction de la demande.</li>
+<li><strong>Tarification à la consommation</strong> : AWS facture uniquement les ressources utilisées, avec des options de réduction des coûts grâce aux instances réservées et à l'optimisation des ressources.</li>
+<li><strong>Sécurité et conformité</strong> : AWS propose des services de sécurité avancés et répond à de nombreuses normes de conformité, notamment SOC, PCI-DSS, et GDPR.</li>
+<li><strong>Disponibilité mondiale</strong> : AWS est réparti sur plusieurs régions géographiques dans le monde, offrant une disponibilité et une tolérance aux pannes accrues.</li>
+<li><strong>Flexibilité et choix</strong> : Avec des centaines de services disponibles, AWS permet de choisir les outils et solutions les plus adaptés à chaque besoin technique.</li>
+</ol>
+<hr />
+<h3 id="cas-dusage-courants"><a class="header" href="#cas-dusage-courants">Cas d'Usage Courants</a></h3>
+<ol>
+<li><strong>Hébergement de Sites Web et Applications</strong> : AWS est utilisé pour héberger des sites web et des applications web évolutifs grâce à EC2, S3, et CloudFront.</li>
+<li><strong>Big Data et Analyse</strong> : Les entreprises utilisent AWS pour collecter, stocker et analyser des données en temps réel avec EMR, Redshift, et Athena.</li>
+<li><strong>Applications Serverless</strong> : Grâce à AWS Lambda et aux API Gateway, il est possible de créer des applications sans infrastructure de serveur.</li>
+<li><strong>Machine Learning et IA</strong> : AWS SageMaker permet aux développeurs et data scientists de créer et déployer des modèles d’intelligence artificielle rapidement.</li>
+<li><strong>Disaster Recovery et Sauvegarde</strong> : AWS offre des options de sauvegarde et de récupération de données pour garantir la résilience des infrastructures, avec des services comme S3 et Glacier.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+                            <a rel="next prefetch" href="../aws/sections/01_introduction.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+                    <a rel="next prefetch" href="../aws/sections/01_introduction.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

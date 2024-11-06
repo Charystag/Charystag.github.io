@@ -1,0 +1,447 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Les bases des Pipelines - Formation AWS Jenkins &amp; Ansible</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../aws/introduction.html"><strong aria-hidden="true">1.</strong> Présentation générale d'AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../aws/sections/01_introduction.html"><strong aria-hidden="true">1.1.</strong> Introduction sur AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/02_AWS_overview.html"><strong aria-hidden="true">1.2.</strong> Les Bases d'AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/03_AWS_EC2.html"><strong aria-hidden="true">1.3.</strong> Les Instances EC2</a></li><li class="chapter-item expanded "><a href="../../aws/sections/04_AWS_S3.html"><strong aria-hidden="true">1.4.</strong> Les Buckets S3</a></li></ol></li><li class="chapter-item expanded "><a href="../../jenkins/introduction.html"><strong aria-hidden="true">2.</strong> Présentation générale de Jenkins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../jenkins/sections/01_Introduction.html"><strong aria-hidden="true">2.1.</strong> Introduction sur Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/02_First_Steps.html"><strong aria-hidden="true">2.2.</strong> Premiers pas avec Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/03_Pipelines.html" class="active"><strong aria-hidden="true">2.3.</strong> Les bases des Pipelines</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/04_Pipelines_Advanced.html"><strong aria-hidden="true">2.4.</strong> Plus de pipelines!</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/05_modules_libraries.html"><strong aria-hidden="true">2.5.</strong> Modules et librairies dans Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/06_AWS_automation.html"><strong aria-hidden="true">2.6.</strong> Automatisation dans AWS</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/07_Real_Life_Example.html"><strong aria-hidden="true">2.7.</strong> Application concrète</a></li></ol></li><li class="chapter-item expanded "><a href="../../ansible/introduction.html"><strong aria-hidden="true">3.</strong> Présentation générale d'Ansible</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ansible/sections/01_Introduction.html"><strong aria-hidden="true">3.1.</strong> Introduction à Ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/02_Basics.html"><strong aria-hidden="true">3.2.</strong> Bases d'ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/03_Automation.html"><strong aria-hidden="true">3.3.</strong> Automatisation avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/04_S3_management.html"><strong aria-hidden="true">3.4.</strong> Gestion de S3 avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/05_Jenkins_AWS_Pipeline.html"><strong aria-hidden="true">3.5.</strong> Ansible dans une pipeline Jenkins</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/06_Best_Practices.html"><strong aria-hidden="true">3.6.</strong> Meilleures pratiques pour Ansible</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Formation AWS Jenkins &amp; Ansible</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="partie-3--introduction-aux-pipelines-jenkins"><a class="header" href="#partie-3--introduction-aux-pipelines-jenkins">Partie 3 : Introduction aux Pipelines Jenkins</a></h2>
+<h3 id="objectifs"><a class="header" href="#objectifs">Objectifs</a></h3>
+<p>Dans cette partie, vous allez :</p>
+<ul>
+<li><strong>Découvrir les pipelines Jenkins</strong> et leur structure.</li>
+<li><strong>Créer un premier pipeline simple</strong> en utilisant la syntaxe déclarative avec un Jenkinsfile.</li>
+</ul>
+<hr />
+<h3 id="31-quest-ce-quun-pipeline-jenkins-"><a class="header" href="#31-quest-ce-quun-pipeline-jenkins-">3.1 Qu’est-ce qu’un pipeline Jenkins ?</a></h3>
+<h4 id="présentation-des-pipelines-jenkins"><a class="header" href="#présentation-des-pipelines-jenkins">Présentation des pipelines Jenkins</a></h4>
+<p>Un <strong>pipeline Jenkins</strong> est une suite d’étapes automatisées qui gère le cycle de vie complet d’un projet de développement, de la construction jusqu'au déploiement. Contrairement aux jobs Freestyle, les pipelines Jenkins sont codés dans des fichiers <strong>Jenkinsfile</strong>, ce qui permet de versionner et de partager facilement la configuration du pipeline.</p>
+<h4 id="différence-entre-pipelines-déclaratifs-et-pipelines-scriptés"><a class="header" href="#différence-entre-pipelines-déclaratifs-et-pipelines-scriptés">Différence entre pipelines déclaratifs et pipelines scriptés</a></h4>
+<ul>
+<li><strong>Pipeline déclaratif</strong> : Utilise une syntaxe claire et structurée. C'est le choix recommandé pour les utilisateurs débutants et pour les configurations simples.</li>
+<li><strong>Pipeline scripté</strong> : Basé sur le langage Groovy, il est plus flexible et complexe, permettant des scripts personnalisés.</li>
+</ul>
+<p>Dans ce cours, nous nous concentrerons sur la syntaxe <strong>déclarative</strong>, qui est plus facile à comprendre et à maintenir.</p>
+<hr />
+<h3 id="32-création-dun-pipeline-jenkins-avec-le-jenkinsfile"><a class="header" href="#32-création-dun-pipeline-jenkins-avec-le-jenkinsfile">3.2 Création d’un pipeline Jenkins avec le Jenkinsfile</a></h3>
+<p>Un pipeline dans Jenkins se compose de plusieurs <strong>blocs</strong>. Explorons chacun d’eux en détail.</p>
+<h4 id="structure-de-base-dun-jenkinsfile"><a class="header" href="#structure-de-base-dun-jenkinsfile">Structure de base d’un Jenkinsfile</a></h4>
+<p>Un Jenkinsfile contient un ensemble de blocs hiérarchisés qui définissent l’agent, les étapes, et les actions du pipeline. Voici les blocs principaux :</p>
+<pre><code class="language-groovy">pipeline {
+    agent any
+    stages {
+        stage('StageName') {
+            steps {
+                // steps to perform
+            }
+        }
+    }
+}
+</code></pre>
+<h4 id="les-blocs-principaux-dun-jenkinsfile"><a class="header" href="#les-blocs-principaux-dun-jenkinsfile">Les blocs principaux d’un Jenkinsfile</a></h4>
+<ol>
+<li>
+<p><strong>Bloc <code>pipeline</code></strong> : Le bloc racine qui encapsule tout le pipeline.</p>
+<ul>
+<li>Ce bloc est obligatoire dans un Jenkinsfile.</li>
+<li>Il contient les autres blocs comme <code>agent</code>, <code>stages</code>, et <code>post</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bloc <code>agent</code></strong> : Définit l’environnement dans lequel le pipeline s’exécutera.</p>
+<ul>
+<li>L’agent peut être défini au niveau global pour tout le pipeline, ou au niveau de chaque étape.</li>
+<li><strong>Exemples d’agents</strong> :
+<ul>
+<li><code>agent any</code> : Exécute le pipeline sur n'importe quel agent disponible.</li>
+<li><code>agent none</code> : Aucun agent par défaut ; utile si chaque étape définit son propre agent.</li>
+<li><code>agent { label 'docker' }</code> : Exécute le pipeline sur un agent spécifique nommé "docker".</li>
+<li><code>agent { docker { image 'maven:3.8.1' } }</code> : Exécute le pipeline dans un conteneur Docker basé sur l'image spécifiée (ex. Maven).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Bloc <code>stages</code></strong> : Contient toutes les étapes (stages) du pipeline.</p>
+<ul>
+<li>Un pipeline est structuré en plusieurs <strong>stages</strong> représentant les grandes phases, comme <code>Build</code>, <code>Test</code>, et <code>Deploy</code>.</li>
+<li>Ce bloc est obligatoire pour organiser le pipeline.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bloc <code>stage</code></strong> : Définit une étape particulière du pipeline.</p>
+<ul>
+<li>Chaque <strong>stage</strong> doit avoir un nom (par exemple, <code>Build</code> ou <code>Test</code>) et peut contenir un ou plusieurs <strong>steps</strong> (actions à réaliser).</li>
+<li>Des stages peuvent s’exécuter en parallèle en utilisant <code>parallel</code>, ce qui est utile pour exécuter plusieurs tests simultanément.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bloc <code>steps</code></strong> : Contient les actions (commands) à exécuter dans un stage.</p>
+<ul>
+<li><strong>Steps</strong> inclut des commandes comme <code>sh</code>, <code>bat</code> (pour Windows), ou encore <code>echo</code>.</li>
+<li><strong>Exemples de steps</strong> :
+<ul>
+<li><code>sh 'echo Hello World'</code> : Exécute une commande shell sur un système Unix.</li>
+<li><code>bat 'echo Hello World'</code> : Exécute une commande sur un système Windows.</li>
+<li><code>git 'https://github.com/example/repo.git'</code> : Clone un dépôt Git.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Bloc <code>post</code></strong> : Contient les actions à effectuer après l’exécution des stages.</p>
+<ul>
+<li>Utilisé pour des étapes de nettoyage ou de notifications en cas de succès, d'échec, ou toujours.</li>
+<li><strong>Sous-blocs courants</strong> :
+<ul>
+<li><code>always</code> : Exécute les actions quels que soient les résultats du pipeline.</li>
+<li><code>success</code> : Exécute les actions uniquement si le pipeline réussit.</li>
+<li><code>failure</code> : Exécute les actions uniquement si le pipeline échoue.</li>
+</ul>
+</li>
+<li><strong>Exemple</strong> :
+<pre><code class="language-groovy">post {
+    success {
+        echo 'Pipeline completed successfully.'
+    }
+    failure {
+        echo 'Pipeline failed.'
+    }
+}
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h4 id="exemple-de-jenkinsfile-détaillé"><a class="header" href="#exemple-de-jenkinsfile-détaillé">Exemple de Jenkinsfile détaillé</a></h4>
+<p>Voici un Jenkinsfile de base illustrant les blocs <code>pipeline</code>, <code>agent</code>, <code>stages</code>, <code>steps</code>, et <code>post</code>.</p>
+<pre><code class="language-groovy">pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                // Add build steps here, e.g., sh 'mvn clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                // Add test steps here, e.g., sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                // Add deployment steps here, e.g., sh 'scp target/*.jar user@server:/path'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
+}
+</code></pre>
+<p>Dans cet exemple :</p>
+<ul>
+<li><strong>Stage Build</strong> : Simule l’étape de compilation. On pourrait y ajouter des commandes pour compiler le projet, comme <code>mvn clean package</code>.</li>
+<li><strong>Stage Test</strong> : Simule l’étape de test. On pourrait y ajouter une commande de test, comme <code>mvn test</code>.</li>
+<li><strong>Stage Deploy</strong> : Simule l’étape de déploiement. Cette étape peut inclure des commandes pour copier les fichiers sur un serveur distant.</li>
+<li><strong>Bloc post</strong> : Envoie un message de réussite ou d’échec dans les logs.</li>
+</ul>
+<hr />
+<h3 id="exercice--créer-un-jenkinsfile-pour-un-pipeline-simple-avec-les-étapes-build-test-et-deploy"><a class="header" href="#exercice--créer-un-jenkinsfile-pour-un-pipeline-simple-avec-les-étapes-build-test-et-deploy">Exercice : Créer un Jenkinsfile pour un pipeline simple avec les étapes "Build", "Test" et "Deploy"</a></h3>
+<p><strong>Objectif de l'exercice</strong> : Créer un Jenkinsfile pour configurer un pipeline simple avec trois étapes (Build, Test, Deploy) et exécuter ce pipeline dans Jenkins.</p>
+<p><strong>Étapes de l’exercice</strong> :</p>
+<ol>
+<li><strong>Créer un nouveau job Pipeline</strong> : Depuis le tableau de bord Jenkins, créez un job de type <strong>Pipeline</strong> et donnez-lui un nom (par exemple, "Pipeline Hello World").</li>
+<li><strong>Créer le fichier Jenkinsfile</strong> :
+<ul>
+<li>Dans votre dépôt de code, créez un fichier nommé <code>Jenkinsfile</code>.</li>
+<li>Ajoutez le code suivant :
+<pre><code class="language-groovy">pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
+}
+</code></pre>
+</li>
+<li>Enregistrez le fichier et assurez-vous qu’il est accessible depuis Jenkins.</li>
+</ul>
+</li>
+<li><strong>Lancer le pipeline</strong> : Accédez à votre job pipeline dans Jenkins et cliquez sur <strong>Build Now</strong> pour exécuter le pipeline.</li>
+<li><strong>Vérifier les logs</strong> : Après exécution, vérifiez les logs pour voir les messages "Building...", "Testing...", et "Deploying...".</li>
+<li>**</li>
+</ol>
+<p>Visualiser avec Blue Ocean** : Si Blue Ocean est installé, visualisez le pipeline pour suivre chaque étape graphiquement.</p>
+<hr />
+<h4 id="ressources-supplémentaires"><a class="header" href="#ressources-supplémentaires">Ressources supplémentaires</a></h4>
+<ul>
+<li><a href="https://www.jenkins.io/doc/book/pipeline/">Documentation officielle des pipelines Jenkins</a></li>
+</ul>
+<hr />
+<h4 id="questions-de-révision"><a class="header" href="#questions-de-révision">Questions de Révision</a></h4>
+<details>
+<summary><h3 style="display:inline-block">Questions de Révision</h3></summary>
+<details>
+<summary>Qu'est-ce qu'un pipeline Jenkins ?</summary>
+Un pipeline Jenkins est un workflow codé qui définit les étapes de construction, de test et de déploiement d’un projet.
+</details>
+<details>
+<summary>À quoi sert le bloc `agent` dans un Jenkinsfile ?</summary>
+Le bloc `agent` définit l’environnement où le pipeline va s’exécuter (par exemple, sur un serveur Docker ou un agent spécifique).
+</details>
+<details>
+<summary>Comment fonctionne le bloc `post` dans un Jenkinsfile ?</summary>
+Le bloc `post` permet d’exécuter des actions après les étapes du pipeline, en fonction de son statut (succès, échec, etc.).
+</details>
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../jenkins/sections/02_First_Steps.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../jenkins/sections/04_Pipelines_Advanced.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../jenkins/sections/02_First_Steps.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../jenkins/sections/04_Pipelines_Advanced.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

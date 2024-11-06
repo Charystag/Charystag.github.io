@@ -1,0 +1,462 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Automatisation dans AWS - Formation AWS Jenkins &amp; Ansible</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../aws/introduction.html"><strong aria-hidden="true">1.</strong> Présentation générale d'AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../aws/sections/01_introduction.html"><strong aria-hidden="true">1.1.</strong> Introduction sur AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/02_AWS_overview.html"><strong aria-hidden="true">1.2.</strong> Les Bases d'AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/03_AWS_EC2.html"><strong aria-hidden="true">1.3.</strong> Les Instances EC2</a></li><li class="chapter-item expanded "><a href="../../aws/sections/04_AWS_S3.html"><strong aria-hidden="true">1.4.</strong> Les Buckets S3</a></li></ol></li><li class="chapter-item expanded "><a href="../../jenkins/introduction.html"><strong aria-hidden="true">2.</strong> Présentation générale de Jenkins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../jenkins/sections/01_Introduction.html"><strong aria-hidden="true">2.1.</strong> Introduction sur Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/02_First_Steps.html"><strong aria-hidden="true">2.2.</strong> Premiers pas avec Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/03_Pipelines.html"><strong aria-hidden="true">2.3.</strong> Les bases des Pipelines</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/04_Pipelines_Advanced.html"><strong aria-hidden="true">2.4.</strong> Plus de pipelines!</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/05_modules_libraries.html"><strong aria-hidden="true">2.5.</strong> Modules et librairies dans Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/06_AWS_automation.html" class="active"><strong aria-hidden="true">2.6.</strong> Automatisation dans AWS</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/07_Real_Life_Example.html"><strong aria-hidden="true">2.7.</strong> Application concrète</a></li></ol></li><li class="chapter-item expanded "><a href="../../ansible/introduction.html"><strong aria-hidden="true">3.</strong> Présentation générale d'Ansible</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ansible/sections/01_Introduction.html"><strong aria-hidden="true">3.1.</strong> Introduction à Ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/02_Basics.html"><strong aria-hidden="true">3.2.</strong> Bases d'ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/03_Automation.html"><strong aria-hidden="true">3.3.</strong> Automatisation avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/04_S3_management.html"><strong aria-hidden="true">3.4.</strong> Gestion de S3 avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/05_Jenkins_AWS_Pipeline.html"><strong aria-hidden="true">3.5.</strong> Ansible dans une pipeline Jenkins</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/06_Best_Practices.html"><strong aria-hidden="true">3.6.</strong> Meilleures pratiques pour Ansible</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Formation AWS Jenkins &amp; Ansible</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="partie-6--automatisation-avancée-avec-jenkins-et-aws"><a class="header" href="#partie-6--automatisation-avancée-avec-jenkins-et-aws">Partie 6 : Automatisation Avancée avec Jenkins et AWS</a></h2>
+<h3 id="objectifs"><a class="header" href="#objectifs">Objectifs</a></h3>
+<p>Dans cette partie, vous allez :</p>
+<ul>
+<li><strong>Intégrer Jenkins avec des services AWS</strong> (EC2 et S3) en utilisant les rôles IAM pour une sécurité renforcée.</li>
+<li><strong>Automatiser le provisionnement et la configuration des agents Jenkins</strong> sur EC2 en utilisant des clés SSH.</li>
+</ul>
+<hr />
+<h3 id="61-introduction-à-lintégration-jenkins-et-aws"><a class="header" href="#61-introduction-à-lintégration-jenkins-et-aws">6.1 Introduction à l’intégration Jenkins et AWS</a></h3>
+<h4 id="vue-densemble-des-possibilités-dintégration-de-jenkins-avec-aws"><a class="header" href="#vue-densemble-des-possibilités-dintégration-de-jenkins-avec-aws">Vue d’ensemble des possibilités d’intégration de Jenkins avec AWS</a></h4>
+<p>Grâce à AWS, Jenkins peut :</p>
+<ul>
+<li><strong>Créer et gérer des instances EC2</strong> pour automatiser le déploiement et les tests d'applications.</li>
+<li><strong>Stocker et gérer des artefacts</strong> dans S3, comme les logs et les résultats des tests.</li>
+<li><strong>Assurer la sécurité des accès AWS</strong> en utilisant des rôles IAM, ce qui permet d’accorder les permissions nécessaires sans stocker de clés d’accès dans Jenkins.</li>
+</ul>
+<h4 id="configuration-des-rôles-iam-pour-jenkins"><a class="header" href="#configuration-des-rôles-iam-pour-jenkins">Configuration des rôles IAM pour Jenkins</a></h4>
+<p>Pour permettre à Jenkins d'interagir en toute sécurité avec AWS, vous pouvez associer un <strong>rôle IAM</strong> aux instances EC2 de Jenkins plutôt que de stocker des informations d'identification dans Jenkins.</p>
+<ol>
+<li>
+<p><strong>Créer un rôle IAM pour les instances EC2 de Jenkins</strong> :</p>
+<ul>
+<li>Dans la console IAM d’AWS, créez un rôle avec les permissions nécessaires (ex. : accès S3 pour stockage des artefacts, accès EC2 pour le lancement et la gestion des instances).</li>
+<li>Assignez ce rôle aux instances EC2 sur lesquelles Jenkins s’exécute.</li>
+</ul>
+</li>
+<li>
+<p><strong>Configurer Jenkins pour utiliser le rôle IAM</strong> :</p>
+<ul>
+<li>Le rôle IAM attaché à l’instance EC2 sur laquelle Jenkins est exécuté fournit automatiquement les permissions AWS nécessaires. Aucune configuration supplémentaire d'informations d'identification n'est requise dans Jenkins.</li>
+</ul>
+</li>
+</ol>
+<p><img src="../images/06_AWS_Automation/IAM_Console.png" alt="Configuration d&#39;un rôle IAM pour Jenkins" /></p>
+<hr />
+<h3 id="62-provisionnement-de-linfrastructure-avec-ec2-et-configuration-dagents-jenkins"><a class="header" href="#62-provisionnement-de-linfrastructure-avec-ec2-et-configuration-dagents-jenkins">6.2 Provisionnement de l’infrastructure avec EC2 et configuration d’agents Jenkins</a></h3>
+<h4 id="création-dinstances-ec2-via-jenkins"><a class="header" href="#création-dinstances-ec2-via-jenkins">Création d’instances EC2 via Jenkins</a></h4>
+<p>Avec AWS CLI et les rôles IAM, vous pouvez automatiser la création d’instances EC2 directement depuis Jenkins.</p>
+<ol>
+<li>
+<p><strong>Installer AWS CLI sur Jenkins</strong> :</p>
+<ul>
+<li>Sur l'instance Jenkins, installez AWS CLI pour permettre à Jenkins d’exécuter des commandes AWS directement.</li>
+<li>Le rôle IAM associé à l'instance Jenkins donne accès aux services AWS nécessaires sans stockage de clés d’accès.</li>
+</ul>
+</li>
+<li>
+<p><strong>Exemple de script pour lancer une instance EC2 depuis un Jenkinsfile</strong> :</p>
+<ul>
+<li>Utilisez la commande <code>aws ec2 run-instances</code> pour lancer une instance EC2 avec les paramètres requis (image AMI, type d'instance, groupe de sécurité, et clé SSH).</li>
+</ul>
+</li>
+</ol>
+<p><strong>Exemple de Jenkinsfile pour lancer une instance EC2</strong> :</p>
+<pre><code class="language-groovy">pipeline {
+    agent any
+    stages {
+        stage('Launch EC2 Instance') {
+            steps {
+                sh '''
+                aws ec2 run-instances --image-id ami-0abcdef1234567890 --instance-type t2.micro --key-name my-key --security-groups my-security-group
+                '''
+            }
+        }
+    }
+}
+</code></pre>
+<p>Dans cet exemple :</p>
+<ul>
+<li><strong>Rôle IAM</strong> : L'instance Jenkins utilise les permissions de son rôle IAM pour exécuter <code>aws ec2 run-instances</code> sans informations d'identification explicites.</li>
+<li><strong>Clé SSH</strong> : La clé SSH <code>my-key</code> est utilisée pour la connexion SSH à l'instance EC2 après son lancement.</li>
+</ul>
+<h4 id="configuration-dagents-jenkins-avec-ssh"><a class="header" href="#configuration-dagents-jenkins-avec-ssh">Configuration d’agents Jenkins avec SSH</a></h4>
+<p>Une fois l’instance EC2 lancée, vous pouvez configurer cette instance comme agent Jenkins en utilisant une clé SSH.</p>
+<ol>
+<li>
+<p><strong>Récupérer l’adresse IP de l’instance EC2</strong> :</p>
+<ul>
+<li>Après avoir lancé l’instance EC2, utilisez AWS CLI pour obtenir son adresse IP publique.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ajouter un agent Jenkins avec la clé SSH</strong> :</p>
+<ul>
+<li>Dans Jenkins, accédez à <strong>Manage Jenkins &gt; Manage Nodes and Clouds &gt; New Node</strong>.</li>
+<li>Donnez un nom à l’agent (ex. : <code>ec2-agent</code>) et sélectionnez <strong>Permanent Agent</strong>.</li>
+<li>Configurez les paramètres de l'agent :
+<ul>
+<li><strong>Remote root directory</strong> : Spécifiez le répertoire de travail sur l’instance EC2 (ex. : <code>/home/ubuntu/jenkins</code>).</li>
+<li><strong>Launch method</strong> : Choisissez <strong>Launch agent via SSH</strong> et configurez les informations d’accès SSH.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Configurer l’authentification SSH avec la clé privée</strong> :</p>
+<ul>
+<li><strong>Host</strong> : Entrez l’adresse IP publique de l’instance EC2.</li>
+<li><strong>Credentials</strong> : Sélectionnez une clé SSH existante dans Jenkins ou ajoutez une nouvelle clé privée pour vous connecter à l’instance EC2.</li>
+<li><strong>Host Key Verification Strategy</strong> : Choisissez <strong>Non verifying Verification Strategy</strong> ou configurez l’empreinte de clé pour plus de sécurité.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="63-stockage-et-gestion-des-artefacts-avec-s3"><a class="header" href="#63-stockage-et-gestion-des-artefacts-avec-s3">6.3 Stockage et gestion des artefacts avec S3</a></h3>
+<h4 id="utilisation-de-s3-pour-stocker-les-logs-et-artefacts"><a class="header" href="#utilisation-de-s3-pour-stocker-les-logs-et-artefacts">Utilisation de S3 pour stocker les logs et artefacts</a></h4>
+<p>S3 est un excellent choix pour stocker les artefacts de builds, les logs, et les résultats des tests, notamment pour les projets de grande envergure.</p>
+<ol>
+<li>
+<p><strong>Créer un bucket S3 pour les artefacts Jenkins</strong> :</p>
+<ul>
+<li>Dans la console S3, créez un bucket dédié aux artefacts Jenkins.</li>
+<li>Configurez des dossiers pour organiser les artefacts, comme <code>logs</code>, <code>builds</code>, ou <code>reports</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Script pour transférer les artefacts vers S3</strong> :</p>
+<ul>
+<li>Dans un Jenkinsfile, utilisez AWS CLI pour copier les fichiers de build ou logs depuis Jenkins vers le bucket S3.</li>
+<li>La commande <code>aws s3 cp</code> permet de copier des fichiers et dossiers vers un bucket S3.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Exemple de Jenkinsfile pour transférer les artefacts dans S3</strong> :</p>
+<pre><code class="language-groovy">pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+                sh 'make build' // Exemple de commande de build
+            }
+        }
+        stage('Upload to S3') {
+            steps {
+                sh '''
+                aws s3 cp build/output.zip s3://my-jenkins-artifacts/builds/output.zip
+                aws s3 cp logs/test.log s3://my-jenkins-artifacts/logs/test.log
+                '''
+            }
+        }
+    }
+}
+</code></pre>
+<p>Dans cet exemple :</p>
+<ul>
+<li><strong>Rôle IAM</strong> : Le rôle IAM associé à l'instance Jenkins doit disposer des permissions nécessaires pour écrire dans le bucket S3.</li>
+<li><strong>Upload vers S3</strong> : Les artefacts <code>output.zip</code> et <code>test.log</code> sont transférés vers des dossiers spécifiques dans le bucket S3.</li>
+</ul>
+<h4 id="configuration-des-permissions-pour-sécuriser-laccès-à-s3"><a class="header" href="#configuration-des-permissions-pour-sécuriser-laccès-à-s3">Configuration des permissions pour sécuriser l’accès à S3</a></h4>
+<ol>
+<li><strong>Configurer les permissions S3 dans le rôle IAM</strong> :
+<ul>
+<li>Dans la console IAM, modifiez le rôle associé à Jenkins pour accorder uniquement les permissions <code>s3:PutObject</code> et <code>s3:GetObject</code> pour le bucket S3 de Jenkins.</li>
+</ul>
+</li>
+<li><strong>Contrôler l'accès aux artefacts S3</strong> :
+<ul>
+<li>Configurez le bucket S3 pour qu'il soit privé, limitant ainsi l’accès aux artefacts aux seules entités ayant les bonnes permissions IAM.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="exercice--automatisation-avec-jenkins-ec2-et-s3"><a class="header" href="#exercice--automatisation-avec-jenkins-ec2-et-s3">Exercice : Automatisation avec Jenkins, EC2, et S3</a></h3>
+<p><strong>Objectif de l'exercice</strong> : Créer un job Jenkins pour lancer une instance EC2, configurer cette instance comme agent Jenkins avec SSH, déployer une application, et stocker les logs et artefacts dans S3.</p>
+<p><strong>Étapes de l’exercice</strong> :</p>
+<ol>
+<li><strong>Lancer une instance EC2 avec AWS CLI</strong> : Configurez un pipeline Jenkins pour lancer une instance EC2 avec les paramètres d'AMI, de groupe de sécurité, et de clé SSH.</li>
+<li><strong>Configurer l’instance comme agent Jenkins</strong> : Utilisez l’adresse IP publique de l’instance EC2 et configurez l’agent dans <strong>Manage Nodes</strong> en utilisant une connexion SSH et une clé privée.</li>
+<li><strong>Déployer une application</strong> : Ajoutez un script pour déployer une application sur l’instance EC2 (par exemple, copie de fichiers ou exécution d’un serveur).</li>
+<li><strong>Transférer les logs et artefacts dans S3</strong> : Configurez une étape pour copier les fichiers générés vers un bucket S3 dédié.</li>
+</ol>
+<hr />
+<h3 id="liens-vers-la-documentation"><a class="header" href="#liens-vers-la-documentation">Liens vers la documentation</a></h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html">Documentation AWS IAM pour les rôles EC2</a> [<a href="https://docs.aws.amazon.com/fr_fr/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html"> <em>fr</em></a>]</li>
+<li><a href="https://aws.amazon.com/cli/">Documentation AWS CLI</a> [<a href="https://aws.amazon.com/fr/cli/"><em>fr</em></a>]</li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html">Tutoriel AWS S3 pour le stockage d’artefacts</a> [<a href="https://docs.aws.amazon.com/fr_fr/AmazonS3/latest/userguide/GetStartedWithS3.html"><em>fr</em></a>]</li>
+</ul>
+<hr />
+<h3 id="questions-de-révision"><a class="header" href="#questions-de-révision">Questions de Révision</a></h3>
+<details>
+<summary><h3 style="display:inline-block">Questions de Révision</h3></summary>
+<details>
+<summary>Comment Jenkins utilise-t-il les rôles IAM pour interagir avec AWS ?</summary>
+<details>
+<summary>Solution</summary>
+Les rôles IAM, associés aux instances EC2, fournissent les permissions nécessaires pour accéder aux services AWS sans utiliser de clés d’accès dans Jenkins.
+</details>
+</details>
+<details>
+<summary>Pourquoi utiliser SSH pour configurer un agent Jenkins sur EC2 ?</summary>
+<details>
+<summary>Solution</summary>
+SSH permet une connexion sécurisée entre Jenkins et l'instance EC2, facilitant la gestion des agents sans stockage de mots de passe dans Jenkins.
+</details>
+</details>
+<details>
+<summary>Quels types d'artefacts pouvez-vous stocker dans S3 depuis Jenkins ?</summary>
+<details>
+<summary>Solution</summary>
+Les artefacts incluent les logs de build, les résultats des tests, les fichiers de configuration, et les packages de déploiement (ex. : `.zip`, `.jar`).
+</details>
+</details>
+</details>
+<hr />
+<h3 id="conseils-pratiques"><a class="header" href="#conseils-pratiques">Conseils Pratiques</a></h3>
+<ol>
+<li><strong>Vérifiez les permissions du rôle IAM</strong> : Assurez-vous que le rôle IAM dispose des permissions minimales nécessaires pour accéder aux services EC2 et S3.</li>
+<li><strong>Utilisez des clés SSH dédiées pour chaque agent</strong> : Pour une meilleure sécurité, utilisez une clé SSH spécifique à chaque agent EC2.</li>
+<li><strong>Automatisez les étapes de nettoyage</strong> : Configurez une tâche pour arrêter ou supprimer les instances EC2 une fois les tests ou déploiements terminés, réduisant ainsi les coûts.
+<a href="https://aws.amazon.com/blogs/devops/">Guide d’automatisation AWS pour Jenkins</a></li>
+</ol>
+<hr />
+<h3 id="défi-intermédiaire"><a class="header" href="#défi-intermédiaire">Défi Intermédiaire</a></h3>
+<details>
+<summary><h3 style="display:inline-block">Défi Intermédiaire</h3></summary>
+**Objectif** : Configurer un pipeline Jenkins avancé qui utilise EC2 comme agent, exécute un déploiement, et envoie les artefacts vers S3.
+<p><strong>Contexte</strong> : Vous devez automatiser le déploiement d'une application sur une instance EC2 et stocker les logs de déploiement dans S3 pour archivage.</p>
+<details>
+<summary><b>Étapes principales</b></summary>
+1. Créez un pipeline pour lancer une instance EC2 et configurer cette instance comme agent Jenkins avec SSH.
+2. Déployez une application en utilisant une commande de build.
+3. Configurez le pipeline pour copier les logs dans un bucket S3.
+</details>
+<p><strong>Compétences renforcées</strong> :</p>
+<ul>
+<li>Utilisation d'EC2 et S3 dans Jenkins</li>
+<li>Configuration d'agents Jenkins dynamiques</li>
+</ul>
+<details>
+<summary><b>Solution suggérée</b></summary>
+Configurez le pipeline pour appeler AWS CLI avec le rôle IAM. Utilisez `aws s3 cp` pour transférer les artefacts et logs dans S3 après le déploiement.
+</details>
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../jenkins/sections/05_modules_libraries.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../jenkins/sections/07_Real_Life_Example.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../jenkins/sections/05_modules_libraries.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../jenkins/sections/07_Real_Life_Example.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

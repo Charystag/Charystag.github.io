@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Présentation générale de Jenkins - Formation AWS Jenkins &amp; Ansible</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../aws/introduction.html"><strong aria-hidden="true">1.</strong> Présentation générale d'AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../aws/sections/01_introduction.html"><strong aria-hidden="true">1.1.</strong> Introduction sur AWS</a></li><li class="chapter-item expanded "><a href="../aws/sections/02_AWS_overview.html"><strong aria-hidden="true">1.2.</strong> Les Bases d'AWS</a></li><li class="chapter-item expanded "><a href="../aws/sections/03_AWS_EC2.html"><strong aria-hidden="true">1.3.</strong> Les Instances EC2</a></li><li class="chapter-item expanded "><a href="../aws/sections/04_AWS_S3.html"><strong aria-hidden="true">1.4.</strong> Les Buckets S3</a></li></ol></li><li class="chapter-item expanded "><a href="../jenkins/introduction.html" class="active"><strong aria-hidden="true">2.</strong> Présentation générale de Jenkins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../jenkins/sections/01_Introduction.html"><strong aria-hidden="true">2.1.</strong> Introduction sur Jenkins</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/02_First_Steps.html"><strong aria-hidden="true">2.2.</strong> Premiers pas avec Jenkins</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/03_Pipelines.html"><strong aria-hidden="true">2.3.</strong> Les bases des Pipelines</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/04_Pipelines_Advanced.html"><strong aria-hidden="true">2.4.</strong> Plus de pipelines!</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/05_modules_libraries.html"><strong aria-hidden="true">2.5.</strong> Modules et librairies dans Jenkins</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/06_AWS_automation.html"><strong aria-hidden="true">2.6.</strong> Automatisation dans AWS</a></li><li class="chapter-item expanded "><a href="../jenkins/sections/07_Real_Life_Example.html"><strong aria-hidden="true">2.7.</strong> Application concrète</a></li></ol></li><li class="chapter-item expanded "><a href="../ansible/introduction.html"><strong aria-hidden="true">3.</strong> Présentation générale d'Ansible</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ansible/sections/01_Introduction.html"><strong aria-hidden="true">3.1.</strong> Introduction à Ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/02_Basics.html"><strong aria-hidden="true">3.2.</strong> Bases d'ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/03_Automation.html"><strong aria-hidden="true">3.3.</strong> Automatisation avec ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/04_S3_management.html"><strong aria-hidden="true">3.4.</strong> Gestion de S3 avec ansible</a></li><li class="chapter-item expanded "><a href="../ansible/sections/05_Jenkins_AWS_Pipeline.html"><strong aria-hidden="true">3.5.</strong> Ansible dans une pipeline Jenkins</a></li><li class="chapter-item expanded "><a href="../ansible/sections/06_Best_Practices.html"><strong aria-hidden="true">3.6.</strong> Meilleures pratiques pour Ansible</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Formation AWS Jenkins &amp; Ansible</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p><strong>Présentation Générale de Jenkins</strong></p>
+<hr />
+<h3 id="introduction"><a class="header" href="#introduction">Introduction</a></h3>
+<p><strong>Jenkins</strong> est un outil open-source d'intégration et de livraison continues (CI/CD), principalement utilisé pour automatiser les processus de développement, de test et de déploiement des applications. Créé en 2011 comme une évolution de Hudson, Jenkins est devenu une référence dans le domaine DevOps et CI/CD grâce à sa flexibilité, son large écosystème de plugins, et sa grande communauté de contributeurs.</p>
+<hr />
+<h3 id="principales-fonctionnalités-de-jenkins"><a class="header" href="#principales-fonctionnalités-de-jenkins">Principales Fonctionnalités de Jenkins</a></h3>
+<ol>
+<li>
+<p><strong>Intégration Continue (CI)</strong> : Jenkins permet aux équipes de développement de construire, tester et intégrer du code fréquemment et automatiquement, garantissant que les nouvelles modifications n’introduisent pas de régressions.</p>
+</li>
+<li>
+<p><strong>Livraison Continue (CD)</strong> : En plus de l’intégration continue, Jenkins automatise les étapes de déploiement vers les environnements de test, de préproduction, et de production, réduisant le délai de mise en production.</p>
+</li>
+<li>
+<p><strong>Pipeline as Code</strong> : Avec <strong>Jenkinsfile</strong>, Jenkins permet de définir les pipelines CI/CD sous forme de code, facilitant la gestion, le versioning, et la standardisation des pipelines.</p>
+</li>
+<li>
+<p><strong>Écosystème de Plugins</strong> : Jenkins propose plus de 1 500 plugins pour étendre ses fonctionnalités. Ces plugins permettent d’intégrer Jenkins avec des outils de contrôle de version (Git, SVN), de gestion des conteneurs (Docker), de cloud (AWS, Azure, GCP), de tests, de surveillance, et bien d’autres.</p>
+</li>
+<li>
+<p><strong>Gestion des Notifications et Reporting</strong> : Jenkins envoie des notifications (par e-mail, Slack, etc.) sur les résultats des builds et les étapes de pipeline, permettant aux équipes de suivre et d’agir en temps réel. Il génère également des rapports pour aider à analyser les performances et les résultats des tests.</p>
+</li>
+<li>
+<p><strong>Extensibilité et Scalabilité</strong> : Jenkins peut être configuré pour distribuer des tâches sur plusieurs machines grâce à une architecture <strong>maître-agent</strong>, permettant d’exécuter des builds en parallèle et de répondre aux besoins croissants des équipes.</p>
+</li>
+</ol>
+<hr />
+<h3 id="architecture-de-jenkins"><a class="header" href="#architecture-de-jenkins">Architecture de Jenkins</a></h3>
+<ol>
+<li>
+<p><strong>Jenkins Master</strong> : Le serveur principal gère l’interface utilisateur, les configurations de jobs, la planification des builds, et le déclenchement des tâches. Il coordonne aussi les agents et collecte les résultats des exécutions.</p>
+</li>
+<li>
+<p><strong>Jenkins Agent</strong> : Les agents (ou "nœuds") sont des machines qui exécutent les tâches de build et de test. Cela permet de décharger le serveur principal et de répartir les tâches, ce qui est essentiel pour les grandes équipes ou les projets nécessitant des ressources importantes.</p>
+</li>
+<li>
+<p><strong>Pipeline Jenkins</strong> : Le pipeline est un ensemble d’étapes qui représentent le workflow de CI/CD. Avec <strong>Declarative Pipeline</strong> (plus simple et structuré) ou <strong>Scripted Pipeline</strong> (plus flexible), Jenkins offre la possibilité de définir des pipelines complexes, incluant des étapes de build, de test, de déploiement, et de reporting.</p>
+</li>
+</ol>
+<p><img src="../jenkins/images/jenkins_architecture.png" alt="Architecture Jenkins" /></p>
+<hr />
+<h3 id="les-pipelines-jenkins"><a class="header" href="#les-pipelines-jenkins">Les Pipelines Jenkins</a></h3>
+<p>Les pipelines permettent d’automatiser et d’orchestrer les étapes CI/CD sous forme de code.</p>
+<ul>
+<li><strong>Jenkinsfile</strong> : Un fichier qui décrit le pipeline en utilisant soit une syntaxe déclarative, soit une syntaxe scriptée. Le Jenkinsfile permet d’intégrer le pipeline dans le contrôle de version.</li>
+<li><strong>Stages et Steps</strong> : Un pipeline est structuré en <strong>stages</strong> (phases du workflow) et <strong>steps</strong> (actions spécifiques). Par exemple, un pipeline typique inclura des étapes de build, de tests, et de déploiement.</li>
+<li><strong>Multibranch Pipeline</strong> : Jenkins peut automatiquement détecter et exécuter des pipelines pour chaque branche d’un dépôt Git, permettant ainsi de tester et déployer le code de manière indépendante par branche.</li>
+</ul>
+<p><strong>Exemple de Jenkinsfile (Déclaratif)</strong> :</p>
+<pre><code class="language-groovy">pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                sh 'make build'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh 'make test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                sh 'make deploy'
+            }
+        }
+    }
+}
+</code></pre>
+<hr />
+<h3 id="avantages-de-jenkins"><a class="header" href="#avantages-de-jenkins">Avantages de Jenkins</a></h3>
+<ol>
+<li><strong>Automatisation et Productivité</strong> : En automatisant les builds et les tests, Jenkins réduit le besoin d’interventions manuelles, permettant aux équipes de se concentrer sur le développement.</li>
+<li><strong>Flexibilité et Extensibilité</strong> : Grâce à son écosystème de plugins, Jenkins peut être intégré avec presque tous les outils DevOps.</li>
+<li><strong>Scalabilité</strong> : L’architecture maître-agent permet d’exécuter des centaines de builds en parallèle, ce qui est essentiel pour les projets complexes.</li>
+<li><strong>Transparence et Collaboration</strong> : Jenkins génère des rapports et notifications, offrant une visibilité complète sur l’état du code et facilitant la collaboration entre les équipes.</li>
+</ol>
+<hr />
+<h3 id="cas-dusage-courants"><a class="header" href="#cas-dusage-courants">Cas d'Usage Courants</a></h3>
+<ol>
+<li>
+<p><strong>Développement et Build Automatisé</strong> : Jenkins automatise la compilation, les tests unitaires et la vérification de qualité du code à chaque commit.</p>
+</li>
+<li>
+<p><strong>Déploiement Automatisé et Livraison Continue</strong> : Les équipes DevOps peuvent configurer Jenkins pour déployer des applications dans divers environnements (test, préproduction, production) de manière automatique.</p>
+</li>
+<li>
+<p><strong>Orchestration Multibranche</strong> : Avec le Multibranch Pipeline, Jenkins détecte automatiquement les branches d’un dépôt et y associe des pipelines dédiés, permettant un contrôle indépendant pour chaque branche.</p>
+</li>
+<li>
+<p><strong>Intégration avec les Conteneurs et le Cloud</strong> : Jenkins s'intègre facilement avec Docker, Kubernetes, et des services cloud comme AWS, Azure, et Google Cloud, facilitant le déploiement d’applications conteneurisées.</p>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../aws/sections/04_AWS_S3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../jenkins/sections/01_Introduction.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../aws/sections/04_AWS_S3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../jenkins/sections/01_Introduction.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

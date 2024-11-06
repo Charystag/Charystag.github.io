@@ -1,0 +1,404 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Premiers pas avec Jenkins - Formation AWS Jenkins &amp; Ansible</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../aws/introduction.html"><strong aria-hidden="true">1.</strong> Présentation générale d'AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../aws/sections/01_introduction.html"><strong aria-hidden="true">1.1.</strong> Introduction sur AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/02_AWS_overview.html"><strong aria-hidden="true">1.2.</strong> Les Bases d'AWS</a></li><li class="chapter-item expanded "><a href="../../aws/sections/03_AWS_EC2.html"><strong aria-hidden="true">1.3.</strong> Les Instances EC2</a></li><li class="chapter-item expanded "><a href="../../aws/sections/04_AWS_S3.html"><strong aria-hidden="true">1.4.</strong> Les Buckets S3</a></li></ol></li><li class="chapter-item expanded "><a href="../../jenkins/introduction.html"><strong aria-hidden="true">2.</strong> Présentation générale de Jenkins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../jenkins/sections/01_Introduction.html"><strong aria-hidden="true">2.1.</strong> Introduction sur Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/02_First_Steps.html" class="active"><strong aria-hidden="true">2.2.</strong> Premiers pas avec Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/03_Pipelines.html"><strong aria-hidden="true">2.3.</strong> Les bases des Pipelines</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/04_Pipelines_Advanced.html"><strong aria-hidden="true">2.4.</strong> Plus de pipelines!</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/05_modules_libraries.html"><strong aria-hidden="true">2.5.</strong> Modules et librairies dans Jenkins</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/06_AWS_automation.html"><strong aria-hidden="true">2.6.</strong> Automatisation dans AWS</a></li><li class="chapter-item expanded "><a href="../../jenkins/sections/07_Real_Life_Example.html"><strong aria-hidden="true">2.7.</strong> Application concrète</a></li></ol></li><li class="chapter-item expanded "><a href="../../ansible/introduction.html"><strong aria-hidden="true">3.</strong> Présentation générale d'Ansible</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ansible/sections/01_Introduction.html"><strong aria-hidden="true">3.1.</strong> Introduction à Ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/02_Basics.html"><strong aria-hidden="true">3.2.</strong> Bases d'ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/03_Automation.html"><strong aria-hidden="true">3.3.</strong> Automatisation avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/04_S3_management.html"><strong aria-hidden="true">3.4.</strong> Gestion de S3 avec ansible</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/05_Jenkins_AWS_Pipeline.html"><strong aria-hidden="true">3.5.</strong> Ansible dans une pipeline Jenkins</a></li><li class="chapter-item expanded "><a href="../../ansible/sections/06_Best_Practices.html"><strong aria-hidden="true">3.6.</strong> Meilleures pratiques pour Ansible</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Formation AWS Jenkins &amp; Ansible</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="partie-2--premiers-pas-avec-jenkins"><a class="header" href="#partie-2--premiers-pas-avec-jenkins">Partie 2 : Premiers Pas avec Jenkins</a></h2>
+<h3 id="objectifs"><a class="header" href="#objectifs">Objectifs</a></h3>
+<p>Dans cette deuxième partie, vous allez apprendre à :</p>
+<ul>
+<li><strong>Créer et exécuter des jobs simples et paramétrés</strong> dans Jenkins.</li>
+<li><strong>Comprendre la structure d’un job</strong> et ses étapes.</li>
+<li><strong>Planifier et déclencher des builds automatiquement</strong> avec différentes méthodes, y compris les webhooks.</li>
+</ul>
+<hr />
+<h3 id="21-création-dun-job-jenkins-basique"><a class="header" href="#21-création-dun-job-jenkins-basique">2.1 Création d’un job Jenkins basique</a></h3>
+<h4 id="présentation-des-types-de-jobs-dans-jenkins"><a class="header" href="#présentation-des-types-de-jobs-dans-jenkins">Présentation des types de jobs dans Jenkins</a></h4>
+<p>Jenkins propose plusieurs types de jobs, chacun adapté à des besoins variés :</p>
+<ul>
+<li><strong>Freestyle</strong> : Un job flexible pour des tâches simples comme exécuter des scripts ou déployer des fichiers. Idéal pour commencer et tester des configurations de base.</li>
+<li><strong>Pipeline</strong> : Un job basé sur un script Jenkinsfile, permettant de créer des workflows complexes en tant que code.</li>
+<li><strong>Multibranch Pipeline</strong> : Spécialement conçu pour les projets gérant plusieurs branches, chaque branche déclenche automatiquement un pipeline dédié.</li>
+<li><strong>Folder</strong> : Permet de regrouper plusieurs jobs dans un dossier, utile pour organiser des projets de grande envergure.</li>
+</ul>
+<p>Dans cette partie, nous allons commencer avec un <strong>job Freestyle</strong>, qui convient bien aux démonstrations et aux configurations de base.</p>
+<h4 id="création-dun-job-freestyle"><a class="header" href="#création-dun-job-freestyle">Création d’un job Freestyle</a></h4>
+<ol>
+<li><strong>Accédez au tableau de bord Jenkins</strong> et cliquez sur <strong>New Item</strong> (Nouvel élément).</li>
+<li><strong>Nommez votre job</strong> (par exemple, “Job de test”) et sélectionnez <strong>Freestyle project</strong> (Projet Freestyle).</li>
+<li>Cliquez sur <strong>OK</strong> pour créer le job.</li>
+</ol>
+<h4 id="exécution-dun-script-shell-ou-de-commande-windows-simple"><a class="header" href="#exécution-dun-script-shell-ou-de-commande-windows-simple">Exécution d'un script Shell ou de commande Windows simple</a></h4>
+<p>Pour ce premier job, nous allons configurer un script simple qui affiche "Hello, World!" :</p>
+<ol>
+<li>Dans les paramètres du job, allez à la section <strong>Build</strong> (Construire) et choisissez <strong>Execute shell</strong> (ou <strong>Exécuter une commande sous Windows</strong> sur un système Windows).</li>
+<li>Dans la zone de texte, entrez la commande suivante :
+<pre><code class="language-bash">echo "Hello, World!"
+</code></pre>
+</li>
+<li>Cliquez sur <strong>Save</strong> (Sauvegarder) pour enregistrer le job.</li>
+</ol>
+<p><img src="../images/02_Basics/freestyle.jpg" alt="Configuration d&#39;un job freestyle Jenkins" /></p>
+<blockquote>
+<p>Source: https://www.geeksforgeeks.org/creating-and-configuring-freestyle-projects-in-jenkins/</p>
+</blockquote>
+<hr />
+<h3 id="création-de-jobs-paramétrés"><a class="header" href="#création-de-jobs-paramétrés">Création de jobs paramétrés</a></h3>
+<p>Les <strong>jobs paramétrés</strong> permettent de personnaliser l’exécution d’un job avec des valeurs dynamiques, comme le choix d’une branche spécifique ou l’ajout d’un nom de version.</p>
+<p>Pour configurer un job paramétré :</p>
+<ol>
+<li>Ouvrez un job existant ou créez-en un nouveau.</li>
+<li>Cochez l'option <strong>This project is parameterized</strong> (Ce projet est paramétré) dans les paramètres du job.</li>
+<li>Cliquez sur <strong>Add Parameter</strong> (Ajouter un paramètre) pour choisir le type de paramètre :
+<ul>
+<li><strong>String Parameter</strong> : Pour entrer du texte (ex. : nom de branche).</li>
+<li><strong>Boolean Parameter</strong> : Pour activer ou désactiver certaines étapes.</li>
+<li><strong>Choice Parameter</strong> : Sélectionner parmi plusieurs options prédéfinies.</li>
+<li><strong>File Parameter</strong> : Téléverser un fichier à utiliser dans le job.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Exemple : Créer un job avec un paramètre de branche</strong></p>
+<ol>
+<li>Ajoutez un <strong>String Parameter</strong> nommé <code>BRANCH_NAME</code>.</li>
+<li>Dans la section <strong>Build</strong>, configurez une commande Shell pour utiliser le paramètre :
+<pre><code class="language-bash">echo "Building branch: $BRANCH_NAME"
+</code></pre>
+</li>
+<li>Lors de l’exécution du job, Jenkins vous demandera la valeur de <code>BRANCH_NAME</code>, qui sera utilisée dans le script.</li>
+</ol>
+<p><img src="../images/02_Basics/parametrized.jpg" alt="Configuration d&#39;un job paramétré dans Jenkins" /></p>
+<blockquote>
+<p>Source: https://www.baeldung.com/ops/jenkins-parameterized-builds</p>
+</blockquote>
+<hr />
+<h3 id="22-gestion-des-builds"><a class="header" href="#22-gestion-des-builds">2.2 Gestion des Builds</a></h3>
+<h4 id="déclencher-un-build-manuellement"><a class="header" href="#déclencher-un-build-manuellement">Déclencher un build manuellement</a></h4>
+<p>Pour lancer un job manuellement :</p>
+<ol>
+<li>Accédez à la page du job et cliquez sur <strong>Build Now</strong> (Construire maintenant).</li>
+<li>Jenkins exécute la commande définie, et un numéro de build apparaît dans l’historique des builds.</li>
+</ol>
+<h4 id="visualisation-des-logs-et-des-résultats-du-build"><a class="header" href="#visualisation-des-logs-et-des-résultats-du-build">Visualisation des logs et des résultats du build</a></h4>
+<p>Pour examiner le résultat :</p>
+<ol>
+<li>Cliquez sur le numéro du build (par exemple, <strong>#1</strong>) dans la section <strong>Build History</strong>.</li>
+<li>Accédez aux <strong>Console Output</strong> (Sortie de console) pour voir les détails de l’exécution du job. Vous devriez y voir la sortie de votre script, par exemple, "Hello, World!".</li>
+</ol>
+<h4 id="rebuild-copie-et-suppression-des-builds"><a class="header" href="#rebuild-copie-et-suppression-des-builds">Rebuild, copie et suppression des builds</a></h4>
+<ul>
+<li><strong>Rebuild</strong> : Cliquez sur <strong>Rebuild</strong> dans la page de détails pour relancer le job avec les mêmes paramètres.</li>
+<li><strong>Copie</strong> : Pour cloner un job, choisissez <strong>Copy</strong> dans les paramètres et donnez un nouveau nom.</li>
+<li><strong>Suppression</strong> : Dans les paramètres du job, choisissez <strong>Delete</strong> pour supprimer un job dont vous n’avez plus besoin.</li>
+</ul>
+<p><img src="../images/02_Basics/logs.png" alt="Visualisation des logs Jenkins" /></p>
+<hr />
+<h3 id="23-planification-des-builds"><a class="header" href="#23-planification-des-builds">2.3 Planification des Builds</a></h3>
+<h4 id="exécutions-périodiques--cron-et-triggers"><a class="header" href="#exécutions-périodiques--cron-et-triggers">Exécutions périodiques : cron et triggers</a></h4>
+<p>Jenkins permet d’automatiser les builds à des intervalles réguliers grâce à des expressions cron :</p>
+<ol>
+<li>Dans la configuration du job, cochez <strong>Build periodically</strong> (Construire périodiquement).</li>
+<li>Entrez une expression cron. Par exemple, pour exécuter le job chaque jour à minuit :
+<pre><code>H 0 * * *
+</code></pre>
+Cette syntaxe permet de planifier un build quotidien à minuit tout en optimisant la répartition des ressources.</li>
+</ol>
+<h4 id="triggers-de-build--scm-polling"><a class="header" href="#triggers-de-build--scm-polling">Triggers de build : SCM polling</a></h4>
+<p>Le <strong>SCM polling</strong> (surveillance du dépôt) permet à Jenkins de surveiller un dépôt de code (comme Git) et de déclencher un build lorsque des modifications sont détectées.</p>
+<ol>
+<li>Cochez <strong>Poll SCM</strong> dans les paramètres du job.</li>
+<li>Définissez une expression cron pour la fréquence de surveillance. Par exemple :
+<pre><code>H/5 * * * *
+</code></pre>
+Ce cron vérifie les modifications toutes les 5 minutes.</li>
+</ol>
+<h4 id="triggers-de-build--webhooks"><a class="header" href="#triggers-de-build--webhooks">Triggers de build : Webhooks</a></h4>
+<p>Les <strong>webhooks</strong> permettent à des services externes (comme GitHub) de déclencher des jobs Jenkins lorsqu’il y a des mises à jour. Pour configurer un webhook :</p>
+<ol>
+<li>Dans Jenkins, copiez l’URL du job que vous souhaitez déclencher.</li>
+<li>Dans les paramètres de votre dépôt (par exemple, sur GitHub), configurez un webhook en collant l’URL du job Jenkins.</li>
+<li>Désormais, chaque fois qu’un commit ou une PR est créée, Jenkins recevra une notification et déclenchera le build.</li>
+</ol>
+<blockquote>
+<p><strong>Remarque</strong> : Les webhooks sont utiles pour des projets où des modifications sont apportées fréquemment et où un build doit être déclenché instantanément.</p>
+</blockquote>
+<p><img src="../images/02_Basics/webhook.jpg" alt="Planification de builds Jenkins avec webhooks" /></p>
+<blockquote>
+<p>Tutoriels pour le setup d'un webhook Github avec Jenkins :</p>
+<ul>
+<li>https://medium.com/@sangeetv09/how-to-configure-webhook-in-github-and-jenkins-for-automatic-trigger-with-cicd-pipeline-34133e9de0ea</li>
+<li>https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="exercice--créer-un-job-jenkins-pour-exécuter-un-script-hello-world-et-planifier-un-build-quotidien"><a class="header" href="#exercice--créer-un-job-jenkins-pour-exécuter-un-script-hello-world-et-planifier-un-build-quotidien">Exercice : Créer un job Jenkins pour exécuter un script “Hello, World!” et planifier un build quotidien</a></h3>
+<p><strong>Objectif de l'exercice</strong> : Créer et planifier un job Jenkins qui exécute une commande de type “Hello, World!” et configurez-le pour s’exécuter automatiquement.</p>
+<p><strong>Étapes de l’exercice</strong> :</p>
+<ol>
+<li><strong>Créer un nouveau job</strong> : Depuis le tableau de bord Jenkins, créez un job <strong>Freestyle</strong> nommé “Hello World”.</li>
+<li><strong>Configurer le build</strong> :
+<ul>
+<li>Ajoutez une étape <strong>Execute shell</strong> (ou <strong>Commande Windows</strong>) avec la commande :
+<pre><code class="language-bash">echo "Hello, World!"
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Déclencher manuellement le build</strong> : Une fois le job sauvegardé, lancez-le en utilisant <strong>Build Now</strong> et vérifiez la sortie de console.</li>
+<li><strong>Planifier un build quotidien</strong> : Dans la configuration du job, activez <strong>Build periodically</strong> et entrez l’expression cron suivante pour un build quotidien à 8h00 :
+<pre><code>H 8 * * *
+</code></pre>
+</li>
+<li><strong>(Optionnel) Ajouter un paramètre de branche</strong> : Configurez le job pour inclure un <strong>String Parameter</strong> nommé <code>BRANCH_NAME</code>, et modifiez le script pour afficher cette valeur.</li>
+</ol>
+<hr />
+<h4 id="ressources-supplémentaires"><a class="header" href="#ressources-supplémentaires">Ressources supplémentaires</a></h4>
+<ul>
+<li><a href="https://www.jenkins.io/doc/pipeline/steps/">Documentation de Jenkins - Types de Jobs</a></li>
+<li><a href="https://www.jenkins.io/doc/book/pipeline/syntax/#cron-syntax">Syntaxe cron de Jenkins</a></li>
+<li><a href="https://www.jenkins.io/blog/2019/01/07/webhook-firewalls/">Configurer un webhook avec GitHub et Jenkins</a></li>
+</ul>
+<hr />
+<h4 id="questions-de-révision"><a class="header" href="#questions-de-révision">Questions de Révision</a></h4>
+<details>
+<summary><h3 style="display:inline-block">Questions de Révision</h3></summary>
+<details>
+<summary>Quels types de jobs
+<p>peut-on créer dans Jenkins ?</summary>
+Les principaux types de jobs sont : Freestyle, Pipeline, Multibranch Pipeline, et Folder.</p>
+</details>
+<details>
+<summary>Comment peut-on visualiser les logs d’un build ?</summary>
+Dans la page du build, cliquez sur **Console Output** pour voir les logs détaillés.
+</details>
+<details>
+<summary>Comment configurer un job pour s’exécuter automatiquement tous les jours à 8h00 ?</summary>
+Activez **Build periodically** dans la configuration du job et entrez l’expression cron `H 8 * * *`.
+</details>
+<details>
+<summary>Comment un webhook déclenche-t-il un build Jenkins ?</summary>
+En configurant le webhook dans les paramètres d’un dépôt (par exemple, GitHub), chaque mise à jour du dépôt envoie une notification à Jenkins pour déclencher le build.
+</details>
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../jenkins/sections/01_Introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../jenkins/sections/03_Pipelines.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../jenkins/sections/01_Introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../jenkins/sections/03_Pipelines.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
