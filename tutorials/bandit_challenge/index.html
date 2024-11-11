@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Challenge Overview - Bandit Challenge</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html" class="active"><strong aria-hidden="true">1.</strong> Challenge Overview</a></li><li class="chapter-item expanded "><a href="bandit00.html"><strong aria-hidden="true">2.</strong> Login to first Challenge</a></li><li class="chapter-item expanded "><a href="bandit0.html"><strong aria-hidden="true">3.</strong> Bandit0-&gt;1</a></li><li class="chapter-item expanded "><a href="bandit1.html"><strong aria-hidden="true">4.</strong> Bandit1-&gt;2</a></li><li class="chapter-item expanded "><a href="bandit2.html"><strong aria-hidden="true">5.</strong> Bandit2-&gt;3</a></li><li class="chapter-item expanded "><a href="bandit3.html"><strong aria-hidden="true">6.</strong> Bandit3-&gt;4</a></li><li class="chapter-item expanded "><a href="bandit4.html"><strong aria-hidden="true">7.</strong> Bandit4-&gt;5</a></li><li class="chapter-item expanded "><a href="bandit5.html"><strong aria-hidden="true">8.</strong> Bandit5-&gt;6</a></li><li class="chapter-item expanded "><a href="bandit6.html"><strong aria-hidden="true">9.</strong> Bandit6-&gt;7</a></li><li class="chapter-item expanded "><a href="bandit7.html"><strong aria-hidden="true">10.</strong> Bandit7-&gt;8</a></li><li class="chapter-item expanded "><a href="bandit8.html"><strong aria-hidden="true">11.</strong> Bandit8-&gt;9</a></li><li class="chapter-item expanded "><a href="bandit9.html"><strong aria-hidden="true">12.</strong> Bandit9-&gt;10</a></li><li class="chapter-item expanded "><a href="bandit10.html"><strong aria-hidden="true">13.</strong> Bandit10-&gt;11</a></li><li class="chapter-item expanded "><a href="bandit11.html"><strong aria-hidden="true">14.</strong> Bandit11-&gt;12</a></li><li class="chapter-item expanded "><a href="bandit12.html"><strong aria-hidden="true">15.</strong> Bandit12-&gt;13</a></li><li class="chapter-item expanded "><a href="bandit13.html"><strong aria-hidden="true">16.</strong> Bandit13-&gt;14</a></li><li class="chapter-item expanded "><a href="bandit14.html"><strong aria-hidden="true">17.</strong> Bandit14-&gt;15</a></li><li class="chapter-item expanded "><a href="bandit15.html"><strong aria-hidden="true">18.</strong> Bandit15-&gt;16</a></li><li class="chapter-item expanded "><a href="bandit16.html"><strong aria-hidden="true">19.</strong> Bandit16-&gt;17</a></li><li class="chapter-item expanded "><a href="bandit17.html"><strong aria-hidden="true">20.</strong> Bandit17-&gt;18</a></li><li class="chapter-item expanded "><a href="bandit18.html"><strong aria-hidden="true">21.</strong> Bandit18-&gt;19</a></li><li class="chapter-item expanded "><a href="bandit19.html"><strong aria-hidden="true">22.</strong> Bandit19-&gt;20</a></li><li class="chapter-item expanded "><a href="bandit20.html"><strong aria-hidden="true">23.</strong> Bandit20-&gt;21</a></li><li class="chapter-item expanded "><a href="bandit21.html"><strong aria-hidden="true">24.</strong> Bandit21-&gt;22</a></li><li class="chapter-item expanded "><a href="bandit22.html"><strong aria-hidden="true">25.</strong> Bandit22-&gt;23</a></li><li class="chapter-item expanded "><a href="bandit23.html"><strong aria-hidden="true">26.</strong> Bandit23-&gt;24</a></li><li class="chapter-item expanded "><a href="bandit24.html"><strong aria-hidden="true">27.</strong> Bandit24-&gt;25</a></li><li class="chapter-item expanded "><a href="bandit25.html"><strong aria-hidden="true">28.</strong> Bandit25-&gt;26</a></li><li class="chapter-item expanded "><a href="bandit26.html"><strong aria-hidden="true">29.</strong> Bandit26-&gt;27</a></li><li class="chapter-item expanded "><a href="bandit27.html"><strong aria-hidden="true">30.</strong> Bandit27-&gt;28</a></li><li class="chapter-item expanded "><a href="bandit28.html"><strong aria-hidden="true">31.</strong> Bandit28-&gt;29</a></li><li class="chapter-item expanded "><a href="bandit29.html"><strong aria-hidden="true">32.</strong> Bandit29-&gt;30</a></li><li class="chapter-item expanded "><a href="bandit30.html"><strong aria-hidden="true">33.</strong> Bandit30-&gt;31</a></li><li class="chapter-item expanded "><a href="bandit31.html"><strong aria-hidden="true">34.</strong> Bandit31-&gt;32</a></li><li class="chapter-item expanded "><a href="bandit32.html"><strong aria-hidden="true">35.</strong> Bandit32-&gt;33</a></li><li class="chapter-item expanded "><a href="bandit33.html"><strong aria-hidden="true">36.</strong> Bandit33-&gt;34</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Bandit Challenge</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="bandit-challenge"><a class="header" href="#bandit-challenge"><a href="https://overthewire.org/wargames/bandit/">Bandit Challenge</a></a></h1>
+<p align="center">
+<img src="assets/bandit.png" width="500" height="500" alt="bandit picture" />
+</p>
+<h2 id="overview-of-the-bandit-challenge"><a class="header" href="#overview-of-the-bandit-challenge">Overview of the Bandit Challenge</a></h2>
+<h3 id="bandit-challenge-description"><a class="header" href="#bandit-challenge-description">Bandit Challenge Description</a></h3>
+<p><strong>Bandit</strong> is the entry-level wargame on OverTheWire designed to teach beginners the basics of using the Linux command line. It focuses on fundamental skills such as file navigation, file manipulation, and simple scripting. The game is structured into multiple levels, each presenting a unique challenge that requires players to use various Linux commands and techniques to retrieve a password needed to access the next level. Bandit is an excellent starting point for anyone new to the command line or looking to solidify their basic skills.</p>
+<h4 id="general-structure"><a class="header" href="#general-structure">General Structure</a></h4>
+<ol>
+<li><strong>Levels</strong>: The Bandit wargame consists of over 30 levels. Each level is accessible via SSH, and players must solve the current level's challenge to obtain the password for the next level.</li>
+<li><strong>Challenges</strong>: Each level's challenge is designed to teach a specific command or concept related to Linux. Challenges range from locating hidden files to manipulating text, understanding file permissions, and using basic scripting.</li>
+<li><strong>Tools and Commands</strong>: Players will become familiar with a variety of essential Linux commands and tools, including but not limited to:
+<ul>
+<li><code>ls</code>, <code>cd</code>, <code>cat</code>, <code>file</code>, <code>find</code>, <code>grep</code>, <code>sort</code>, <code>uniq</code>, <code>strings</code>, <code>chmod</code>, <code>ssh</code>, <code>scp</code>, and simple bash scripting.</li>
+</ul>
+</li>
+</ol>
+<h4 id="learning-outcomes"><a class="header" href="#learning-outcomes">Learning Outcomes</a></h4>
+<ul>
+<li><strong>Command Line Proficiency</strong>: Gain confidence and proficiency with the Linux command line, essential for any cybersecurity or IT professional.</li>
+<li><strong>Problem-Solving Skills</strong>: Develop logical thinking and problem-solving skills by tackling progressively more difficult challenges.</li>
+<li><strong>Practical Knowledge</strong>: Learn how to navigate the file system, manipulate files, and understand file permissions, all fundamental skills for any computer user.</li>
+<li><strong>Preparation for Advanced Challenges</strong>: Build a solid foundation that prepares players for more advanced wargames on OverTheWire and other cybersecurity challenges.</li>
+</ul>
+<p>Bandit is an ideal starting point for beginners and serves as a gateway to more complex challenges in the world of cybersecurity. It provides a hands-on, practical approach to learning that is both engaging and educational.</p>
+<h2 id="where-to-start"><a class="header" href="#where-to-start">Where to start?</a></h2>
+<p>You can go <a href="bandit00.html">there</a> for the solution to the first challenge</p>
+<h2 id="acknowledgments"><a class="header" href="#acknowledgments">Acknowledgments</a></h2>
+<p>To prepare that walkthrough I decided to use another solution to keep me focused and to ensure I wasn't missing any important information, so <a href="https://rednet.io/2020-09-12-overthewire-bandit-0-8.html">here</a> it is if by any mean you speak french and you'd like to check it out.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+                            <a rel="next prefetch" href="bandit00.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+                    <a rel="next prefetch" href="bandit00.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

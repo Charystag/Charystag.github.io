@@ -1,0 +1,376 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bandit16-&gt;17 - Bandit Challenge</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Challenge Overview</a></li><li class="chapter-item expanded "><a href="bandit00.html"><strong aria-hidden="true">2.</strong> Login to first Challenge</a></li><li class="chapter-item expanded "><a href="bandit0.html"><strong aria-hidden="true">3.</strong> Bandit0-&gt;1</a></li><li class="chapter-item expanded "><a href="bandit1.html"><strong aria-hidden="true">4.</strong> Bandit1-&gt;2</a></li><li class="chapter-item expanded "><a href="bandit2.html"><strong aria-hidden="true">5.</strong> Bandit2-&gt;3</a></li><li class="chapter-item expanded "><a href="bandit3.html"><strong aria-hidden="true">6.</strong> Bandit3-&gt;4</a></li><li class="chapter-item expanded "><a href="bandit4.html"><strong aria-hidden="true">7.</strong> Bandit4-&gt;5</a></li><li class="chapter-item expanded "><a href="bandit5.html"><strong aria-hidden="true">8.</strong> Bandit5-&gt;6</a></li><li class="chapter-item expanded "><a href="bandit6.html"><strong aria-hidden="true">9.</strong> Bandit6-&gt;7</a></li><li class="chapter-item expanded "><a href="bandit7.html"><strong aria-hidden="true">10.</strong> Bandit7-&gt;8</a></li><li class="chapter-item expanded "><a href="bandit8.html"><strong aria-hidden="true">11.</strong> Bandit8-&gt;9</a></li><li class="chapter-item expanded "><a href="bandit9.html"><strong aria-hidden="true">12.</strong> Bandit9-&gt;10</a></li><li class="chapter-item expanded "><a href="bandit10.html"><strong aria-hidden="true">13.</strong> Bandit10-&gt;11</a></li><li class="chapter-item expanded "><a href="bandit11.html"><strong aria-hidden="true">14.</strong> Bandit11-&gt;12</a></li><li class="chapter-item expanded "><a href="bandit12.html"><strong aria-hidden="true">15.</strong> Bandit12-&gt;13</a></li><li class="chapter-item expanded "><a href="bandit13.html"><strong aria-hidden="true">16.</strong> Bandit13-&gt;14</a></li><li class="chapter-item expanded "><a href="bandit14.html"><strong aria-hidden="true">17.</strong> Bandit14-&gt;15</a></li><li class="chapter-item expanded "><a href="bandit15.html"><strong aria-hidden="true">18.</strong> Bandit15-&gt;16</a></li><li class="chapter-item expanded "><a href="bandit16.html" class="active"><strong aria-hidden="true">19.</strong> Bandit16-&gt;17</a></li><li class="chapter-item expanded "><a href="bandit17.html"><strong aria-hidden="true">20.</strong> Bandit17-&gt;18</a></li><li class="chapter-item expanded "><a href="bandit18.html"><strong aria-hidden="true">21.</strong> Bandit18-&gt;19</a></li><li class="chapter-item expanded "><a href="bandit19.html"><strong aria-hidden="true">22.</strong> Bandit19-&gt;20</a></li><li class="chapter-item expanded "><a href="bandit20.html"><strong aria-hidden="true">23.</strong> Bandit20-&gt;21</a></li><li class="chapter-item expanded "><a href="bandit21.html"><strong aria-hidden="true">24.</strong> Bandit21-&gt;22</a></li><li class="chapter-item expanded "><a href="bandit22.html"><strong aria-hidden="true">25.</strong> Bandit22-&gt;23</a></li><li class="chapter-item expanded "><a href="bandit23.html"><strong aria-hidden="true">26.</strong> Bandit23-&gt;24</a></li><li class="chapter-item expanded "><a href="bandit24.html"><strong aria-hidden="true">27.</strong> Bandit24-&gt;25</a></li><li class="chapter-item expanded "><a href="bandit25.html"><strong aria-hidden="true">28.</strong> Bandit25-&gt;26</a></li><li class="chapter-item expanded "><a href="bandit26.html"><strong aria-hidden="true">29.</strong> Bandit26-&gt;27</a></li><li class="chapter-item expanded "><a href="bandit27.html"><strong aria-hidden="true">30.</strong> Bandit27-&gt;28</a></li><li class="chapter-item expanded "><a href="bandit28.html"><strong aria-hidden="true">31.</strong> Bandit28-&gt;29</a></li><li class="chapter-item expanded "><a href="bandit29.html"><strong aria-hidden="true">32.</strong> Bandit29-&gt;30</a></li><li class="chapter-item expanded "><a href="bandit30.html"><strong aria-hidden="true">33.</strong> Bandit30-&gt;31</a></li><li class="chapter-item expanded "><a href="bandit31.html"><strong aria-hidden="true">34.</strong> Bandit31-&gt;32</a></li><li class="chapter-item expanded "><a href="bandit32.html"><strong aria-hidden="true">35.</strong> Bandit32-&gt;33</a></li><li class="chapter-item expanded "><a href="bandit33.html"><strong aria-hidden="true">36.</strong> Bandit33-&gt;34</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Bandit Challenge</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="bandit16-17"><a class="header" href="#bandit16-17"><a href="https://overthewire.org/wargames/bandit/bandit17.html">Bandit16-&gt;17</a></a></h1>
+<h2 id="level-goal"><a class="header" href="#level-goal">Level Goal</a></h2>
+<p>The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range <strong>31000 to 32000</strong>.
+First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t.
+There is only <strong>1 server</strong> that will give the next credentials, the others will simply send back to you whatever you send to it.</p>
+<h2 id="commands-useful-to-solve-the-level"><a class="header" href="#commands-useful-to-solve-the-level">Commands useful to solve the level</a></h2>
+<ul>
+<li><a href="https://nmap.org/book/man.html">nmap</a></li>
+<li><a href="https://linux.die.net/man/1/nc">nc</a> <em>Optionnal</em></li>
+</ul>
+<h2 id="helpful-reading-material"><a class="header" href="#helpful-reading-material">Helpful Reading Material</a></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Port_scanner">Port Scanner</a></li>
+<li><a href="https://www.varonis.com/blog/nmap-commands">Nmap commands</a></li>
+</ul>
+<h2 id="where-to-start"><a class="header" href="#where-to-start">Where to start?</a></h2>
+<p>What we need to do here is to find a way to scan the network so we know on which port the server we need to talk to resides. First, let's
+scan the network between the port 31000 and 32000. To do so, we can use two utilities, <code>nmap</code> and <code>nc</code></p>
+<details>
+<summary><h3 style="display:inline-block">Part 1 : Basic Port Scanning with nc</h3></summary>
+<details>
+<summary>Hint</summary>
+<p>By lookint at the <strong>PORT SCANNING</strong> section of the <a href="https://linux.die.net/man/1/nc">nc</a> man page, can you figure out a way to perform a
+basic scan of the ports between 31000 and 32000 with <code>nc</code>?</p>
+</details>
+<details>
+<summary>Solution</summary>
+<p>With <code>nc</code>, we can use the following command :</p>
+<pre><code class="language-bash">nc -zv localhost 31000-32000 |&amp; grep -v -E '^nc'
+</code></pre>
+<p>Let's break down how it works :</p>
+<ol>
+<li><code>nc -zv localhost 31000-32000</code> tells nc to report the open ports between the port 31000 and 32000, writing verbose output to stderr</li>
+<li><code>|&amp;</code> is a metacharacter that is equivalent to <code>2 &gt;&amp; 1 |</code> which means to redirect stdout and stderr through a pipe (see <a href="https://www.gnu.org/software/bash/manual/bash.html#Pipelines">pipelines</a>
+in the gnu bash manual for more information)</li>
+<li><code>grep -v -E '^nc'</code> uses the <a href="https://man7.org/linux/man-pages/man7/regex.7.html">regular expression</a> <code>^nc</code> to mach lines beginning by 'nc' and the <code>-v</code> option uses the inverted match to match
+only the lines that don't begin with nc (meaning the only lines that didn't report an error).</li>
+</ol>
+<p>Here is the output from this command :</p>
+<pre><code class="language-bash">bandit16@bandit:~$ nc -zv localhost 31000-32000 |&amp; grep -v -E '^nc'
+Connection to localhost (127.0.0.1) 31046 port [tcp/*] succeeded!
+Connection to localhost (127.0.0.1) 31518 port [tcp/*] succeeded!
+Connection to localhost (127.0.0.1) 31691 port [tcp/*] succeeded!
+Connection to localhost (127.0.0.1) 31790 port [tcp/*] succeeded!
+Connection to localhost (127.0.0.1) 31960 port [tcp/*] succeeded!
+bandit16@bandit:~$
+</code></pre>
+</details>
+</details>
+<details>
+<summary><h3 style="display:inline-block">Part 2 : Basic Port Scanning with nmap</h3></summary>
+<details>
+<summary>Hint</summary>
+<p>By using the <strong>PORT SPECIFICATION AND SCAN ORDER</strong> section of the <a href="https://linux.die.net/man/1/nmap">nmap</a> man page, can
+you figure out a way to perform a basic scan of the ports between 31000 and 32000 with <code>nmap</code>?</p>
+</details>
+<details>
+<summary>Solution</summary>
+<p>With <code>nmap</code>, it is even more simple. We just need to provide the range of ports to scan as nmap is already a port scanner.</p>
+<p>Here is the command we're looking for :</p>
+<pre><code class="language-bash">nmap localhost -p 31000-32000
+</code></pre>
+<p>Here is the output from this command :</p>
+<pre><code class="language-bash">Starting Nmap 7.80 ( https://nmap.org ) at 2024-06-04 14:27 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00013s latency).
+Not shown: 996 closed ports
+PORT      STATE SERVICE
+31046/tcp open  unknown
+31518/tcp open  unknown
+31691/tcp open  unknown
+31790/tcp open  unknown
+31960/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 0.05 seconds
+</code></pre>
+</details>
+</details>
+<details>
+<summary><h3 style="display:inline-block">Part 3 : Service detection with nmap</h3></summary>
+<p>Now that we have a little more info about the open ports, we can now run a more advance scan using <code>nmap</code> on the open ports we found.</p>
+<details>
+<summary>Hint</summary>
+<p>By taking a look at the <strong>SERVICE AND VERSION DETECTION</strong> section of the <a href="https://linux.die.net/man/1/nmap">nmap</a> man page, can you figure out
+how to know on which port resides the service we want to communicate with ?</p>
+</details>
+<details>
+<summary>Solution</summary>
+<p>The <code>-sV</code> option is the option we're looking for, it will allow us to identify the service that lies on each port that we're scanning.
+As the scan doesn't need to be full (as 4 out of 5 of these services will echo back to the sender all the information they receive), we will
+enable the option <code>--version-light</code> so that the scan takes less time.</p>
+<p>The command we're looking for is the following :</p>
+<pre><code class="language-bash">nmap -sV --version-light -p 31046,31518,31691,31790,31960 localhost
+</code></pre>
+<p>We could of course, also run this command on the whole set of ports between the range 31000 and 32000 with <code>nmap -sV --version-light -p 31000-32000</code>.</p>
+<p>Here is the output from this command (<code>--version-light</code> is an alias for <code>--version-intensity 2</code>):</p>
+<pre><code class="language-bash">bandit16@bandit:~$ nmap -sV --version-intensity 2 localhost -p 31046,31518,31691,31790,31960
+Starting Nmap 7.80 ( https://nmap.org ) at 2024-06-04 14:38 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00013s latency).
+
+PORT      STATE SERVICE     VERSION
+31046/tcp open  echo
+31518/tcp open  ssl/echo
+31691/tcp open  echo
+31790/tcp open  ssl/unknown
+31960/tcp open  echo
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port31790-TCP:V=7.80%T=SSL%I=2%D=6/4%Time=665F2708%P=x86_64-pc-linux-gn
+SF:u%r(GenericLines,31,"Wrong!\x20Please\x20enter\x20the\x20correct\x20cur
+SF:rent\x20password\n")%r(GetRequest,31,"Wrong!\x20Please\x20enter\x20the\
+SF:x20correct\x20current\x20password\n")%r(SSLSessionReq,31,"Wrong!\x20Ple
+SF:ase\x20enter\x20the\x20correct\x20current\x20password\n")%r(TLSSessionR
+SF:eq,31,"Wrong!\x20Please\x20enter\x20the\x20correct\x20current\x20passwo
+SF:rd\n");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 32.61 seconds
+bandit16@bandit:~$
+</code></pre>
+<p>We know now that we can use the <code>s_client</code> command to send the password to the server listening at 31790 and retrieve the ssh key to connect to bandit 17.</p>
+</details>
+</details>
+<details>
+<summary><h3 style="display:inline-block">Full Solution</h3></summary>
+<ol>
+<li><code>nmap -sV --version-light -p 31000-32000</code> to retrieve the server that is listening for our password</li>
+<li><code>openssl s_client -ign_eof localhost:31790 &lt; /etc/bandit_pass/bandit16</code> to retrieve the private ssh key needed to connect to bandit 17.</li>
+</ol>
+</details>
+<details>
+<summary><h3 style="display:inline-block">Bonus : Writting the ssh key directly to a file</h3></summary>
+<p>Wouldn't it be way more suitable to output our ssh key directly to a file? Fortunately, there is an easy way to do so.</p>
+<details>
+<summary>Hint</summary>
+<p>Searching again into the <code>s_client</code> man page, can you figure out a way to output the <code>ssh_key</code> directly to a file ?</p>
+</details>
+<details>
+<summary>Solution</summary>
+<p>First, we need to create a file to store the private ssh key, we'll create it using the <a href="https://www.gnu.org/software/coreutils/manual/coreutils.html#mktemp-invocation">mktemp</a> utility.
+Then, using the <code>-sess_out</code> option we will be able to output our ssl session (which is the ssh key) directly to the file.</p>
+<p>This is what our set of commands look like :</p>
+<pre><code class="language-bash">PRIVATE_KEY="$(mktemp)"
+openssl s_client -ign_eof -sess_out "$PRIVATE_KEY" localhost:31790 &lt; /etc/bandit_pass/bandit16`
+</code></pre>
+<p>Then we can run <code>echo "$PRIVATE_KEY"</code> to get the name of the file and use the <a href="https://man7.org/linux/man-pages/man1/scp.1.html">scp</a> command to retrieve the file on our machine.</p>
+</details>
+</details>
+<p>You can now jump to the <a href="bandit17.html">next level</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="bandit15.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="bandit17.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="bandit15.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="bandit17.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

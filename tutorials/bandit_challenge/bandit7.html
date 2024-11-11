@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bandit7-&gt;8 - Bandit Challenge</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Challenge Overview</a></li><li class="chapter-item expanded "><a href="bandit00.html"><strong aria-hidden="true">2.</strong> Login to first Challenge</a></li><li class="chapter-item expanded "><a href="bandit0.html"><strong aria-hidden="true">3.</strong> Bandit0-&gt;1</a></li><li class="chapter-item expanded "><a href="bandit1.html"><strong aria-hidden="true">4.</strong> Bandit1-&gt;2</a></li><li class="chapter-item expanded "><a href="bandit2.html"><strong aria-hidden="true">5.</strong> Bandit2-&gt;3</a></li><li class="chapter-item expanded "><a href="bandit3.html"><strong aria-hidden="true">6.</strong> Bandit3-&gt;4</a></li><li class="chapter-item expanded "><a href="bandit4.html"><strong aria-hidden="true">7.</strong> Bandit4-&gt;5</a></li><li class="chapter-item expanded "><a href="bandit5.html"><strong aria-hidden="true">8.</strong> Bandit5-&gt;6</a></li><li class="chapter-item expanded "><a href="bandit6.html"><strong aria-hidden="true">9.</strong> Bandit6-&gt;7</a></li><li class="chapter-item expanded "><a href="bandit7.html" class="active"><strong aria-hidden="true">10.</strong> Bandit7-&gt;8</a></li><li class="chapter-item expanded "><a href="bandit8.html"><strong aria-hidden="true">11.</strong> Bandit8-&gt;9</a></li><li class="chapter-item expanded "><a href="bandit9.html"><strong aria-hidden="true">12.</strong> Bandit9-&gt;10</a></li><li class="chapter-item expanded "><a href="bandit10.html"><strong aria-hidden="true">13.</strong> Bandit10-&gt;11</a></li><li class="chapter-item expanded "><a href="bandit11.html"><strong aria-hidden="true">14.</strong> Bandit11-&gt;12</a></li><li class="chapter-item expanded "><a href="bandit12.html"><strong aria-hidden="true">15.</strong> Bandit12-&gt;13</a></li><li class="chapter-item expanded "><a href="bandit13.html"><strong aria-hidden="true">16.</strong> Bandit13-&gt;14</a></li><li class="chapter-item expanded "><a href="bandit14.html"><strong aria-hidden="true">17.</strong> Bandit14-&gt;15</a></li><li class="chapter-item expanded "><a href="bandit15.html"><strong aria-hidden="true">18.</strong> Bandit15-&gt;16</a></li><li class="chapter-item expanded "><a href="bandit16.html"><strong aria-hidden="true">19.</strong> Bandit16-&gt;17</a></li><li class="chapter-item expanded "><a href="bandit17.html"><strong aria-hidden="true">20.</strong> Bandit17-&gt;18</a></li><li class="chapter-item expanded "><a href="bandit18.html"><strong aria-hidden="true">21.</strong> Bandit18-&gt;19</a></li><li class="chapter-item expanded "><a href="bandit19.html"><strong aria-hidden="true">22.</strong> Bandit19-&gt;20</a></li><li class="chapter-item expanded "><a href="bandit20.html"><strong aria-hidden="true">23.</strong> Bandit20-&gt;21</a></li><li class="chapter-item expanded "><a href="bandit21.html"><strong aria-hidden="true">24.</strong> Bandit21-&gt;22</a></li><li class="chapter-item expanded "><a href="bandit22.html"><strong aria-hidden="true">25.</strong> Bandit22-&gt;23</a></li><li class="chapter-item expanded "><a href="bandit23.html"><strong aria-hidden="true">26.</strong> Bandit23-&gt;24</a></li><li class="chapter-item expanded "><a href="bandit24.html"><strong aria-hidden="true">27.</strong> Bandit24-&gt;25</a></li><li class="chapter-item expanded "><a href="bandit25.html"><strong aria-hidden="true">28.</strong> Bandit25-&gt;26</a></li><li class="chapter-item expanded "><a href="bandit26.html"><strong aria-hidden="true">29.</strong> Bandit26-&gt;27</a></li><li class="chapter-item expanded "><a href="bandit27.html"><strong aria-hidden="true">30.</strong> Bandit27-&gt;28</a></li><li class="chapter-item expanded "><a href="bandit28.html"><strong aria-hidden="true">31.</strong> Bandit28-&gt;29</a></li><li class="chapter-item expanded "><a href="bandit29.html"><strong aria-hidden="true">32.</strong> Bandit29-&gt;30</a></li><li class="chapter-item expanded "><a href="bandit30.html"><strong aria-hidden="true">33.</strong> Bandit30-&gt;31</a></li><li class="chapter-item expanded "><a href="bandit31.html"><strong aria-hidden="true">34.</strong> Bandit31-&gt;32</a></li><li class="chapter-item expanded "><a href="bandit32.html"><strong aria-hidden="true">35.</strong> Bandit32-&gt;33</a></li><li class="chapter-item expanded "><a href="bandit33.html"><strong aria-hidden="true">36.</strong> Bandit33-&gt;34</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Bandit Challenge</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="bandit7-8"><a class="header" href="#bandit7-8"><a href="https://overthewire.org/wargames/bandit/bandit8.html">Bandit7-&gt;8</a></a></h1>
+<h2 id="level-goal"><a class="header" href="#level-goal">Level Goal</a></h2>
+<p>The password for the next level is stored in the file <strong>data.txt</strong> next to the word <strong>millionth</strong>.</p>
+<h2 id="commands-useful-to-solve-the-level"><a class="header" href="#commands-useful-to-solve-the-level">Commands useful to solve the level</a></h2>
+<ul>
+<li><a href="https://www.gnu.org/software/grep/manual/grep.html">grep</a></li>
+<li><a href="https://linux.die.net/man/1/file">file</a> <em>optionnal</em></li>
+<li><a href="https://www.gnu.org/software/coreutils/manual/coreutils.html#head-invocation">head</a> <em>optionnal</em></li>
+<li><a href="https://www.gnu.org/software/coreutils/manual/coreutils.html#wc-invocation">wc</a> <em>optionnal</em></li>
+<li><a href="https://www.gnu.org/software/coreutils/manual/coreutils.html#cut-invocation">cut</a> <em>optionnal</em></li>
+</ul>
+<h2 id="helpful-reading-material"><a class="header" href="#helpful-reading-material">Helpful Reading Material</a></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Grep">Grep Wikipedia Page</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cut_(Unix)">Cut Wikipedia Page</a></li>
+</ul>
+<h2 id="where-to-start"><a class="header" href="#where-to-start">Where to start?</a></h2>
+<p>This Level is actually pretty easy and straightforward. We'll start by analysing the file and then we'll
+look for the command we need to complete our goal.</p>
+<details>
+<summary><h3 style="display:inline-block">Part 1 : File Analysis</h3></summary>
+<p>Let's first run the <code>file</code> utility on our <strong>data.txt</strong> file to know the type of content we have to deal with
+and to ensure that the file is not a malicious file that an attacker may have put in the directory to our intention.<br/>
+Here is the output from the <code>file</code> command :</p>
+<pre><code class="language-bash">bandit7@bandit:~$ file data.txt 
+data.txt: Unicode text, UTF-8 text
+bandit7@bandit:~$
+</code></pre>
+<p>Now that we know that it is safe to run <code>cat</code> or any other utility that operates on <strong>text</strong> files on <strong>data.txt</strong>, let's try to run the
+<a href="https://man7.org/linux/man-pages/man1/head.1.html">head</a> utility on this file.</p>
+<blockquote>
+<p>Note : The <code>head</code> utility allows us to print only the few first lines (10 by default) of a file.</p>
+</blockquote>
+<p>Here is the output from the <code>head</code> utility :</p>
+<pre><code class="language-bash">bandit7@bandit:~$ head data.txt
+gallop	hu3ZhCrGRvfaO5jsY6ttvApzVCA2Hjvs
+Aurelia's	ikl4F3cK5m6Cl6HAxva6zUAVJhI2Cvc6
+stoicism	JiW9ts44udf20bJHe8H5dS1c99Muwz42
+embodies	vWheZcAsQHZNnerI3ViW8wqOKIx0kbgR
+Plato	dW2U8E5FfuAvNLdGDupP8GAxr922ZV0x
+cultivation	A90E75jvWbEKrijFxM4GxqHEw8c8U2Bf
+stable	omR4PHolFwbI0IEJsanveA21yWvFy8a7
+bedspread	VlBFxuEDi3phEpljbKbahRJvJxfh3k9M
+oppressing	hQTiEm5XF3cUQSEiBjh7sekemLOKBrcJ
+darnedest	9O2zdCLKVoW5u34P9T7EKTZXcMRE6xh5
+bandit7@bandit:~$ 
+</code></pre>
+<p>Now we can get a better feel of how our file is built. We can run a last test on the file in order to get an idea of how many data we'll have to search
+in order to retrieve the information we're looking for.<br/>
+Let's try to run the <a href="https://man7.org/linux/man-pages/man1/wc.1.html">wc</a> utility on the file to count how many lines there are in it. We'll give it the <code>-l</code>
+option to ensure that only the line count gets printed.<br/></p>
+<p>Here is the output from the <code>wc</code> utility :</p>
+<pre><code class="language-bash">bandit7@bandit:~$ wc -l data.txt 
+98567 data.txt
+bandit7@bandit:~$
+</code></pre>
+<p>We now know that there are close to 100k lines in the data.txt file. This analysis is not always useful but it can give valuable insight. Let's now move on
+to the actual challenge, the password retrieval</p>
+</details>
+<details>
+<summary><h3 style="display:inline-block">Part 2 : Password retrieval</h3></summary>
+<p>After learning more about the file structure, we can get a feel of which command will be useful to retrieve our password string. Let's take a look at the
+<code>grep</code> utility to know if we can use it to retrieve our password.<br></p>
+<details>
+<summary>Hint</summary>
+<p>Looking into the <a href="https://www.gnu.org/software/grep/manual/grep.html">grep man page</a>, figure out how we can retrieve any line containing the word <strong>millionth</strong>
+in the file <strong>data.txt</strong></p>
+</details>
+<details>
+<summary>Solution</summary>
+<p>By running the command <code>grep millionth data.txt</code> we can retrieve any line containing the word millionth in the file <code>data.txt</code>. The password string will be the
+second column of that file</p>
+</details>
+</details>
+<details>
+<summary><h3 style="display:inline-block">Full Solution</h3></summary>
+<ol>
+<li><code>grep millionth data.txt</code> to retrieve the only line containing the world millionth which also contains the password string, we can now copy and paste this
+password to go to the next level</li>
+</ol>
+</details>
+<details>
+<summary><h3 style="display:inline-block">Bonus : Cutting the output</h3></summary>
+<p>Once we ran grep on our file, we get the following output :</p>
+<pre><code class="language-bash">bandit7@bandit:~$ grep millionth data.txt
+millionth	password_string
+bandit7@bandit:~$
+</code></pre>
+<p>We can now use the <code>cut(1)</code> utility to split the line we got into fields and only retrieve
+the field we need.</p>
+<details>
+<summary>Hint</summary>
+<p>To know how to properly use the <code>cut</code> utility, look into the <a href="https://www.gnu.org/software/coreutils/manual/coreutils.html#cut-invocation">cut</a> documentation page.</p>
+</details>
+<details>
+<summary>Solution</summary>
+<p>By running the line we got through a pipe and transferring its data to <code>cut</code> we can retrieve only the second field.<br/>
+Here is the full command :</p>
+<pre><code class="language-bash">grep millionth data.txt | cut -f 2
+</code></pre>
+</details>
+</details>
+<p>You can now jump to the <a href="bandit8.html">next level</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="bandit6.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="bandit8.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="bandit6.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="bandit8.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bandit4-&gt;5 - Bandit Challenge</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Challenge Overview</a></li><li class="chapter-item expanded "><a href="bandit00.html"><strong aria-hidden="true">2.</strong> Login to first Challenge</a></li><li class="chapter-item expanded "><a href="bandit0.html"><strong aria-hidden="true">3.</strong> Bandit0-&gt;1</a></li><li class="chapter-item expanded "><a href="bandit1.html"><strong aria-hidden="true">4.</strong> Bandit1-&gt;2</a></li><li class="chapter-item expanded "><a href="bandit2.html"><strong aria-hidden="true">5.</strong> Bandit2-&gt;3</a></li><li class="chapter-item expanded "><a href="bandit3.html"><strong aria-hidden="true">6.</strong> Bandit3-&gt;4</a></li><li class="chapter-item expanded "><a href="bandit4.html" class="active"><strong aria-hidden="true">7.</strong> Bandit4-&gt;5</a></li><li class="chapter-item expanded "><a href="bandit5.html"><strong aria-hidden="true">8.</strong> Bandit5-&gt;6</a></li><li class="chapter-item expanded "><a href="bandit6.html"><strong aria-hidden="true">9.</strong> Bandit6-&gt;7</a></li><li class="chapter-item expanded "><a href="bandit7.html"><strong aria-hidden="true">10.</strong> Bandit7-&gt;8</a></li><li class="chapter-item expanded "><a href="bandit8.html"><strong aria-hidden="true">11.</strong> Bandit8-&gt;9</a></li><li class="chapter-item expanded "><a href="bandit9.html"><strong aria-hidden="true">12.</strong> Bandit9-&gt;10</a></li><li class="chapter-item expanded "><a href="bandit10.html"><strong aria-hidden="true">13.</strong> Bandit10-&gt;11</a></li><li class="chapter-item expanded "><a href="bandit11.html"><strong aria-hidden="true">14.</strong> Bandit11-&gt;12</a></li><li class="chapter-item expanded "><a href="bandit12.html"><strong aria-hidden="true">15.</strong> Bandit12-&gt;13</a></li><li class="chapter-item expanded "><a href="bandit13.html"><strong aria-hidden="true">16.</strong> Bandit13-&gt;14</a></li><li class="chapter-item expanded "><a href="bandit14.html"><strong aria-hidden="true">17.</strong> Bandit14-&gt;15</a></li><li class="chapter-item expanded "><a href="bandit15.html"><strong aria-hidden="true">18.</strong> Bandit15-&gt;16</a></li><li class="chapter-item expanded "><a href="bandit16.html"><strong aria-hidden="true">19.</strong> Bandit16-&gt;17</a></li><li class="chapter-item expanded "><a href="bandit17.html"><strong aria-hidden="true">20.</strong> Bandit17-&gt;18</a></li><li class="chapter-item expanded "><a href="bandit18.html"><strong aria-hidden="true">21.</strong> Bandit18-&gt;19</a></li><li class="chapter-item expanded "><a href="bandit19.html"><strong aria-hidden="true">22.</strong> Bandit19-&gt;20</a></li><li class="chapter-item expanded "><a href="bandit20.html"><strong aria-hidden="true">23.</strong> Bandit20-&gt;21</a></li><li class="chapter-item expanded "><a href="bandit21.html"><strong aria-hidden="true">24.</strong> Bandit21-&gt;22</a></li><li class="chapter-item expanded "><a href="bandit22.html"><strong aria-hidden="true">25.</strong> Bandit22-&gt;23</a></li><li class="chapter-item expanded "><a href="bandit23.html"><strong aria-hidden="true">26.</strong> Bandit23-&gt;24</a></li><li class="chapter-item expanded "><a href="bandit24.html"><strong aria-hidden="true">27.</strong> Bandit24-&gt;25</a></li><li class="chapter-item expanded "><a href="bandit25.html"><strong aria-hidden="true">28.</strong> Bandit25-&gt;26</a></li><li class="chapter-item expanded "><a href="bandit26.html"><strong aria-hidden="true">29.</strong> Bandit26-&gt;27</a></li><li class="chapter-item expanded "><a href="bandit27.html"><strong aria-hidden="true">30.</strong> Bandit27-&gt;28</a></li><li class="chapter-item expanded "><a href="bandit28.html"><strong aria-hidden="true">31.</strong> Bandit28-&gt;29</a></li><li class="chapter-item expanded "><a href="bandit29.html"><strong aria-hidden="true">32.</strong> Bandit29-&gt;30</a></li><li class="chapter-item expanded "><a href="bandit30.html"><strong aria-hidden="true">33.</strong> Bandit30-&gt;31</a></li><li class="chapter-item expanded "><a href="bandit31.html"><strong aria-hidden="true">34.</strong> Bandit31-&gt;32</a></li><li class="chapter-item expanded "><a href="bandit32.html"><strong aria-hidden="true">35.</strong> Bandit32-&gt;33</a></li><li class="chapter-item expanded "><a href="bandit33.html"><strong aria-hidden="true">36.</strong> Bandit33-&gt;34</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Bandit Challenge</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="bandit4-5"><a class="header" href="#bandit4-5"><a href="https://overthewire.org/wargames/bandit/bandit5.html">Bandit4-&gt;5</a></a></h1>
+<h2 id="level-goal"><a class="header" href="#level-goal">Level Goal</a></h2>
+<p>The password for the next level is stored in the only <strong>human-readable file</strong> in the inhere directory.<br/>
+Tip: if your terminal is messed up, try the “reset” command.</p>
+<h2 id="commands-useful-to-solve-the-level"><a class="header" href="#commands-useful-to-solve-the-level">Commands useful to solve the level</a></h2>
+<ul>
+<li><a href="https://www.gnu.org/software/findutils/manual/html_mono/find.html">find</a></li>
+<li><a href="https://www.gnu.org/software/coreutils/manual/coreutils.html#cat-invocation">cat</a></li>
+<li><a href="https://man7.org/linux/man-pages/man1/file.1.html">file</a></li>
+</ul>
+<h2 id="helpful-reading-material"><a class="header" href="#helpful-reading-material">Helpful Reading Material</a></h2>
+<ul>
+<li><a href="https://www.ibm.com/docs/en/aix/7.3?topic=files-types">Regular File</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Human-readable_medium_and_data">Human Readable File</a></li>
+<li><a href="https://www.gnu.org/software/findutils/manual/html_mono/find.html">GNU findutils documentation</a></li>
+</ul>
+<h2 id="where-to-start"><a class="header" href="#where-to-start">Where to start?</a></h2>
+<p>As there isn't a lot of helpful reading material (because the material is already very complete), we <strong>must</strong> start by opening
+the <a href="https://www.gnu.org/software/findutils/manual/html_mono/find.html">find(1)</a> documentation</p>
+<p>Now that we got an idea of what the find utility does we need to know exactly what characteristics the file we are looking for has.</p>
+<ul>
+<li>it is <strong>human-readable</strong>.</li>
+<li>it is a <strong>file</strong></li>
+</ul>
+<p>We need to find a way to only for human readable files in a given directory</p>
+<details>
+<summary><h3 style="display:inline-block">Part 1 : Finding directory files</h3></summary>
+<p>During all this level, we are only going to use the <code>find(1)</code> utility. In fact, our solution to this level will consist in one unique
+call to the <code>find(1)</code> utility. First things first, we need to know how to run the <code>find</code> command to list the directory files</p>
+<details>
+<summary>Hint</summary>
+<p>Look at the <a href="https://www.gnu.org/software/findutils/manual/html_mono/find.html#Starting-points">starting points</a>
+section of the <code>find(1)</code> man page.</p>
+</details>
+<details>
+<summary>Solution</summary>
+<p>When looking in the starting points section of the <code>find(1)</code> man page, we see an optional argument named <strong>starting-point</strong>. This argument
+allows the user to specify a starting directory when running the <code>find</code> utility. By default, the starting point is <code>.</code> which is the
+current directory.
+So, running <code>find inhere</code> allows us to list the contents of the <strong>inhere</strong> directory</p>
+</details>
+</details>
+<details>
+<summary><h3 style="display:inline-block">Part 2 : Listing only the files</h3></summary>
+<p>Before delving deeper into the <code>find(1)</code> man page to know how we can use <code>find</code> to retrieve the only human-readable file in the inhere directory
+let's take a closer look at the output we got from running <code>find</code> alone :</p>
+<pre><code class="language-bash">bandit4@bandit:~$ find
+.
+./inhere
+./inhere/-file01
+./inhere/-file02
+./inhere/-file08
+./inhere/-file06
+./inhere/-file00
+./inhere/-file04
+./inhere/-file05
+./inhere/-file07
+./inhere/-file03
+./inhere/-file09
+./.profile
+./.bashrc
+./.bash_logout
+bandit4@bandit:~$
+</code></pre>
+<p>From that output, we can notice that find lists all the file in the directories and subdirectories, without ignoring hidden files by default.
+We can notice that it lists all the files and directories contained in the starting point, along with the starting point.</p>
+<p>Let's now try to list only the regular files within the inhere directory</p>
+<details>
+<summary>Hint</summary>
+<p>By looking at the section 2 of the <a href="https://www.gnu.org/software/findutils/manual/html_mono/find.html">gnu findutils documentation</a>
+can you retrieve a test that tests for regular files?</p>
+</details>
+<details>
+<summary>Solution</summary>
+<p>The option we're looking for is <code>-type</code>, which allows us to test for the type of file we're looking for. We'll give the <code>-type</code> option the <code>f</code> argument
+to only look for <strong>regular files</strong>.<br/>
+The command we're looking for is <code>find inhere -type f</code>.</p>
+</details>
+</details>
+<details>
+<summary><h3 style="display:inline-block">Part 3 : Finding the only human readable file</h3></summary>
+<p>Here is the output from the command <code>find inhere -type f</code> :</p>
+<pre><code class="language-bash">bandit4@bandit:~$ find inhere/ -type f
+inhere/-file01
+inhere/-file02
+inhere/-file08
+inhere/-file06
+inhere/-file00
+inhere/-file04
+inhere/-file05
+inhere/-file07
+inhere/-file03
+inhere/-file09
+bandit4@bandit:~$
+</code></pre>
+<p>We could try to manually run <code>cat</code> on each file but besides being an ugly as hell solution, it presents a
+<a href="https://security.stackexchange.com/questions/56307/can-cat-ing-a-file-be-a-potential-security-risk">security risk</a>.
+Thankfully, there is a solution which stands in the <code>file(1)</code> utility
+We now need to find in the <code>file(1)</code> man page how to find the only human readable file within the inhere directory.</p>
+<details>
+<summary>Hint</summary>
+<p>Look into the <a href="https://man7.org/linux/man-pages/man1/file.1.html">file(1)</a> and the <a href="https://www.gnu.org/software/findutils/manual/html_mono/find.html">section 3</a> of the gnu
+findutils documentation, see if there is an <strong>ACTION</strong> in the <code>find(1)</code> page that could let you execute the <code>file</code> command on the file you retrieved</p>
+</details>
+<details>
+<summary>Solution</summary>
+<p>The <strong>ACTION</strong> we're looking for is <code>-execdir</code>. We will use the form <code>-execdir command ;</code> as it is safer than the <code>-exec command ;</code>
+form (see <a href="https://www.gnu.org/software/findutils/manual/html_mono/find.html#Security-Considerations">security considerations</a>.
+As the <code>;</code> is a <a href="https://www.gnu.org/software/bash/manual/html_node/Definitions.html">metacharacter</a>, we will need to escape it with a <code>\</code> to pass it to the <code>find</code> command.
+For the same reason, we'll have to enclose the brackets <code>{}</code> within simple or double quotes<br/></p>
+<p>The command we're looking for is : <code>find inhere -type f -execdir file '{}' \;</code><br/>
+Here is an output you could get by running this command :</p>
+<pre><code class="language-bash">bandit4@bandit:~$ find inhere/ -type f -execdir file "{}" \;
+./-file01: data
+./-file02: data
+./-file08: data
+./-file06: data
+./-file00: data
+./-file04: data
+./-file05: data
+./-file07: ASCII text
+./-file03: data
+./-file09: data
+bandit4@bandit:~$
+</code></pre>
+<p>We can now run the command <code>cat inhere/-file07</code> to get the password string</p>
+</details>
+</details>
+<details>
+<summary><h3 style="display:inline-block">Full Solution</h3></summary>
+<ol>
+<li><code>find inhere/ -type f -execdir file "{}" \;</code> to find all the regular files in the inhere directory and run the <code>file</code> utility on them</li>
+<li><code>cat inhere/-file07</code> to print the contents of the retrieved file</li>
+</ol>
+</details>
+<details>
+<summary><h3 style="display:inline-block">Bonus : One-liner command</h3></summary>
+<p><strong>Useful commands</strong>:</p>
+<ul>
+<li>bash (or any shell)</li>
+<li>find</li>
+<li>file</li>
+<li>grep</li>
+<li>cat</li>
+</ul>
+<details>
+<summary>Hint</summary>
+<p>To get you started, if you want to find (no pun intended) by yourself, here are a few informations to
+get you on the right track.</p>
+<p>Here are the <code>find</code> options we'll use to achieve our goal :</p>
+<ul>
+<li>type</li>
+<li>execdir (x2)</li>
+<li>quit (optionnal)</li>
+</ul>
+</details>
+<details>
+<summary>Solution</summary>
+<p>The command is the following :</p>
+<pre><code class="language-bash">find inhere/ -type f -execdir bash -c 'file {} | grep text &gt; /dev/null' \; -execdir cat '{}' \; -quit
+</code></pre>
+<p>Here is a step-by-step overview of the command :</p>
+<ol>
+<li>The first execdir calls execute the command <code>file {} | grep text &gt; /dev/null</code> on each retrieved file in the inhere directory.</li>
+</ol>
+<blockquote>
+<p>The redirection to <code>/dev/null</code> is to ensure that nothing gets printed on stdout, but the important thing here is actually the
+<a href="https://www.gnu.org/software/grep/manual/grep.html#Exit-Status">exit status</a> of the <code>grep command</code>.
+See <a href="https://www.gnu.org/software/bash/manual/html_node/Invoking-Bash.html">bash invocation</a> for informations about the <code>-c</code> option.</p>
+</blockquote>
+<ol start="2">
+<li>The second execdir calls cat on the only <strong>human-readable</strong> file in the inhere directory</li>
+<li>The quit option allows us to stop the <code>find</code> utility once we found what we're looking for. To understand what it does, you can
+replace <code>grep</code> by <code>grep -v</code> in the previous command</li>
+</ol>
+</details>
+</details>
+<p>You can now jump to the <a href="bandit5.html">next level</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="bandit3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="bandit5.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="bandit3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="bandit5.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
