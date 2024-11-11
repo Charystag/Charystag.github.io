@@ -1,0 +1,553 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Learning Resources</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Learning Resources</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Learning Resources</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="learning-material"><a class="header" href="#learning-material">Learning Material</a></h1>
+<h2 id="books"><a class="header" href="#books">Books</a></h2>
+<h3 id="algorithms"><a class="header" href="#algorithms">Algorithms</a></h3>
+<ul>
+<li><a href="https://mega.nz/file/45gAjZDJ#S_ls8bLBcaU97vIC6lZGceF9TWfSCQGQfUYAet494hM">Introduction to Algorithms</a>
+<ul>
+<li><a href="https://mega.nz/folder/ckZHmRhT#tH1OP0VkzRV-vs6IBwCfVw">Exercises Solutions</a></li>
+</ul>
+</li>
+<li><a href="https://mega.nz/file/w0Z2CL4T#P1gflkFsDsdwDjvGbIm9cjglyPXCaYtFWpzwrEhYNRU">Introduction to the Design and Analysis of Algorithms</a></li>
+<li><a href="https://mega.nz/file/A9oXGTgb#Y1KlMy_RkwohMNzhn2x4z-dPfLV1VgJtNu0jT2u5R_Q">Artificial Intelligence, A Modern Approach</a></li>
+</ul>
+<h3 id="c-and-c"><a class="header" href="#c-and-c">C and C++</a></h3>
+<ul>
+<li><a href="https://mega.nz/file/l8A0VbKZ#fBBbNVFXu_g8iTCPjelBbDhHT9M5QIph0-QCdtmcIyo">Test Driven Development for Embedded C</a></li>
+<li><a href="https://mega.nz/file/cgJnRKrS#Gs5hDVU1ZJEjURq6P-CWOEHQ2c7-b-lRNHYCc4ljQfM">The ANSI C Programming Language</a></li>
+<li><a href="https://mega.nz/file/pxQzSZZL#GrXF9vdjL8sEEZ3Xx807ozz9yZWAPtBHPbe1rpdv8Gs">The C++ Programming Language</a></li>
+<li><a href="https://mega.nz/file/55ZjlQ6R#_l6O3HIIerq1dPtZ5gQECTJ1V41dk0lyUIXa9wS-tbY">Secure Coding in C and C++</a></li>
+<li><a href="https://mega.nz/file/hl41UJjA#R5Xr6wdAQrwd31n-PPEdxELebMirC6sezo-2D65T9JE">The C Programming Language</a></li>
+<li><a href="https://mega.nz/file/hsxg0TjZ#DamVuJYoj0qet24w2vNfcljz59dlSWfC3GJ4sK6AWXs">Understanding and Using C Pointers</a></li>
+<li><a href="https://mega.nz/file/VtIRXADa#MuCZZjcv07808VUautLNqx-lWFSKUwM2ewdMdGAa6K4">C++ primer</a></li>
+<li><a href="https://mega.nz/file/IgpClBSa#mGpBgGcLH__L6QHJ6oP1lfiPer85GRQO701M2TNaxq8">C in a Nutshell</a></li>
+</ul>
+<h3 id="shell"><a class="header" href="#shell">Shell</a></h3>
+<ul>
+<li><a href="https://mega.nz/file/wtoEWDyA#1dtiWRHpZE62VOVUrmliiIkqbOoA3QyxHxbTnNnQwuQ">Learning the Bash Shell</a></li>
+<li><a href="https://freefr.dl.sourceforge.net/project/linuxcommand/TLCL/19.01/TLCL-19.01.pdf?viasf=1">The Linux Command Line</a></li>
+</ul>
+<h3 id="machinelearning-and-deeplearning"><a class="header" href="#machinelearning-and-deeplearning">MachineLearning and DeepLearning</a></h3>
+<ul>
+<li><a href="https://mega.nz/file/8khmkZzR#wo89EHHJ6ewDoc-0z44urIs9FwD29IL0LpMrXTYSl28">Understanding Machine Learning Theory</a></li>
+<li><a href="https://mega.nz/file/Vo5jmSiY#yJBb4O6mmMSM6rQf_aGfPNhGcd5EBIobm8FiR3OBhr4">Apprendre le Machine Learning en une semaine</a> <em>In french</em></li>
+<li><a href="https://mega.nz/file/044xCCiI#L1mjVkQfnjOBnRb827UMvxv3eFRxc9XNW4aWdj938k8">Deep Learning</a></li>
+</ul>
+<h3 id="sysadmin"><a class="header" href="#sysadmin">SysAdmin</a></h3>
+<ul>
+<li><a href="https://www.feistyduck.com/library/openssl-cookbook/online/">OpenSSL Cookbook</a></li>
+<li><a href="https://mega.nz/file/B0pVGCwL#t7x7hbk128C14yxshpmELyXIEhO-w7umoQRGFIgUOfs">Unix and Linux System Administration Handbook</a></li>
+</ul>
+<h3 id="devops"><a class="header" href="#devops">DevOps</a></h3>
+<ul>
+<li><a href="https://mega.nz/file/c8J2WAoL#26cL721ZIl-X2gFtdtqcFY4HxhKhLojErESfWMfMemQ">Kubernetes: Up and Running</a></li>
+<li><a href="https://mega.nz/file/toZnnSIY#HxX4bM8y-NHH6GWWgVSe17FaFF2hb8wtOaVJCnOy2MA">Docker Deep Dive</a></li>
+<li><a href="https://github.com/google/building-secure-and-reliable-systems/">Building Secure and Reliable Systems</a></li>
+<li><a href="https://mega.nz/file/AtA1SJZQ#KoGbLqaqdkMs-6Xsf0bsmUjavpsNtbnOVvzOYSEh3VI">Hand-On Security in DevOps</a></li>
+<li><a href="https://mega.nz/file/90wlTIxQ#CUyJ1YTdMud-J253JRDg6O7Lfs9mAZ9TgXTaHBcXUBI">Learning DevSecOps</a></li>
+</ul>
+<h3 id="security"><a class="header" href="#security">Security</a></h3>
+<ul>
+<li><a href="https://mega.nz/file/QtYEGQjK#TyWXSSa1cXRNlw-kRck-hIRdvvLdLAsDILGaOZxs0JI">Securite informatique - Ethical Hacking</a> <em>In french</em></li>
+<li><a href="https://mega.nz/file/ktB2QQyL#AQkwkRbnp703j0D0bsWkSU0PM8cnTyCmsDaenoyfLgU">SSH Mastery</a></li>
+<li><a href="https://mega.nz/file/Z9ZnFKCa#8YArEzVyo1sruK9YZurNiD_vJTG34Hvut2HCk0aXl3g">Hacking: The Art of Exploitation</a></li>
+<li><a href="https://mega.nz/file/w15lXa5D#KG46EP26ABgV71mOHrMyB0Ddz-nPfRoSeNv9Jn3Nm6I">The Shellcoder's Handbook</a></li>
+<li><a href="https://mega.nz/file/NhBkwIAT#7BQwe-leIEpAqXs-QKSru0u7ZbhT0aIDJcHDjWU8brg">Gray Hat Hacking</a></li>
+<li>Black Hat Rust
+<ul>
+<li><a href="https://mega.nz/file/9gRHkSaJ#66bexk9ZzLLwN0OG_NzfJWNpYdbAXCL1SYxF2WAbml4">Book</a></li>
+<li><a href="https://github.com/skerkour/black-hat-rust">GitHub Repository</a></li>
+</ul>
+</li>
+<li>Learning Linux Binary Analysis
+<ul>
+<li><a href="https://mega.nz/file/l8wwFKqL#GclCn8LPLKKzc-y68NB4XMZ76U8TLJDAA7_bF1yaMZ0">Book</a></li>
+<li><a href="https://github.com/PacktPublishing/Learning-Linux-Binary-Analysis/">Github Repository</a></li>
+</ul>
+</li>
+<li><a href="https://mega.nz/file/JpIQHICa#wf8WhWsmlrFqwhUQ3nt6THN-4O90eoVZJ1qoZniaJFo">Black Hat Python</a></li>
+<li><a href="https://mega.nz/file/V4hnnJaA#9HmTtgZfZxBc97rt9KzJ77hyreIJAx91-iGDFX7VGNg">Penetration Testing: A Hands-On Introduction to Hacking</a></li>
+<li><a href="https://mega.nz/file/9hZWzY5b#pywD3bL-DkmvXJ7_lYCpwaT_QnXrZnd4hSpsPY_KvuY">Game Hacking</a></li>
+<li><a href="https://mega.nz/file/90JmySZa#Smmu-z1vfgljjxCqTq3QUAyHzWkSE92TnZyQOR7g6ZM">Serious Cryptography</a></li>
+<li>Reverse Engineering for Beginners
+<ul>
+<li><a href="https://mega.nz/file/RkIBFYDL#XQ0EXohGgAy-UvfNZRkxwUhoIXxKqYBRS6JKjanJ3Kk">Book</a></li>
+<li><a href="https://challenges.re/">Exercises</a></li>
+</ul>
+</li>
+<li><a href="https://mega.nz/file/d4wm2YhC#tNxfV2vCPBBIq14WKlTl1L4n9uhO-W8WzikhsrhLhG8">Nmap Network Scanning</a></li>
+<li><a href="https://mega.nz/file/AkQh1TgQ#4dzGsEMI3zR-AXuTr-K2QYzohRAagSmGaj8sT1ioT0Y">Black Hat Go</a></li>
+<li><a href="https://mega.nz/file/YoZ0wYAQ#rjeRl2RPo3CKTpP-1y7qBnQp0SpUrRvvfE25bx4Adkw">The Ghidra Book</a></li>
+<li><a href="https://mega.nz/file/1hpngA6T#dV_mjNpCRqoDHawvfZtIdWeLDbFNpx0R3Bp7u3eFbcI">Practical Binary Analysis</a></li>
+</ul>
+<h3 id="design-patterns"><a class="header" href="#design-patterns">Design Patterns</a></h3>
+<ul>
+<li>Game programming patterns
+<ul>
+<li><a href="https://mega.nz/file/sxg2jQbC#PKTFgrHlFx6P7fQZZMBSAjaPOwmUCgDIKBRP60ePT78">Pdf version</a></li>
+<li><a href="https://gameprogrammingpatterns.com/contents.html">Website</a></li>
+</ul>
+</li>
+<li><a href="https://mega.nz/file/kkYTFCYI#RPkQMW-uH2e3-LiYRKSrRmsd2RMPRDzj5WMIvanClzg">Language Implementation Patterns</a></li>
+</ul>
+<h3 id="python"><a class="header" href="#python">Python</a></h3>
+<ul>
+<li><a href="https://mega.nz/file/IxYyTIAb#MWA2hmatNAuE1V_9kYoNcSk1pOPIyUl9-kAphq5LfVA">Learning Python</a></li>
+<li><a href="https://mega.nz/file/9w5CkJJR#q-H-LiWg9YPo6YJFJOogd-23TRnjSSfNI71NdwMmBGg">Byte of Python</a></li>
+<li><a href="https://mega.nz/file/Z5wmgCKK#u8rpnTTTiCah9MBMKLORl3EMpxwCfpxXiWLXtOU7C0U">Django for Beginners 3.1</a></li>
+<li><a href="https://mega.nz/file/VoowDJpQ#0yHfFjavW7VhIATDbzZOHbGbMAiynthZydyTDrv2FSI">Flask Web Development</a></li>
+<li>Python Data Science Hanbook
+<ul>
+<li><a href="https://jakevdp.github.io/PythonDataScienceHandbook/">Web verion</a></li>
+<li><a href="https://mega.nz/file/094TSRAJ#EXgkqHq8vMLyNCqsl9q5ycXW3DjhgXekrn5vGQnYnrQ">Pdf version</a></li>
+</ul>
+</li>
+<li><a href="https://mega.nz/file/xshQ0B7S#VoURPvbKVz6n2FpOQOpA-HnR2PsEhGxunY_2KHMknnc">Hands-on Machine Learning with Scikit-Learn, Kerasm and TensorFlow</a></li>
+<li><a href="https://automatetheboringstuff.com/#toc">Automate the boring stuff with Python</a></li>
+<li><a href="https://mega.nz/file/Uphy0QKC#UbFZADwaGeQCVie5N34No8Zb0zMeVfnyX7En9te5Vx8">Python Basics : A practical introduction to Python 3</a></li>
+</ul>
+<h3 id="assembly"><a class="header" href="#assembly">Assembly</a></h3>
+<ul>
+<li><a href="https://mega.nz/file/l4Ay3CyL#18BKxTvkjKlvyGopyPNcXE0dmIKOnaMQ8QJt4a3F2Ew">Programming from the Ground Up</a> <em>A good book to learn the core concepts of x86 Assembly for 32 bits machines</em></li>
+<li><a href="https://mega.nz/file/gowiQIZT#DODbcpJlqbjO7YHi-KEp68kj_bomiW9bR5lc3OBtSOo">Learn to Program with Assembly</a> <em>A book from the same author to learn x86-64 Assembly</em></li>
+<li><a href="https://mega.nz/file/4tw2wR7T#vyIV4mT96n8raUHwVpkpXig7q1c5AIebUfYupmAd990">Modern x86 Assembly Language</a></li>
+</ul>
+<h3 id="miscellaneous"><a class="header" href="#miscellaneous">Miscellaneous</a></h3>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2">Pro Git</a></li>
+<li><a href="https://mega.nz/file/Yp4j3BhB#ZXo2yrcfNopEeo-BNISloKOzCPIqEuURCHeazZ5F8pQ">Learning Perl</a></li>
+<li><a href="https://mega.nz/file/d9BXlTDY#pxRlQxPwpTtDINIYIgHffooKqpAdBex6_ukAk5Iz3rA">Learning the vi and Vim Editors</a></li>
+<li><a href="https://mega.nz/file/F4ZQGbqR#Ki61xkWadV-g-UFQpWKE2ng8qoV_SnTFkIudxN2Ilhc">Mastering Regular Expressions</a></li>
+<li><a href="https://mega.nz/file/NghlnADb#OQ_46ISPoBCGFYH84eINcTaVxdCC-oN2QRLu5sCcnLA">Crafting Interpreters</a></li>
+<li><a href="https://mega.nz/file/J4gwTRYJ#wRigZbah44FoOltqThGTuz1QGMmz89Dcx0EwS8RvL1k">Effective Typescript</a></li>
+<li><a href="https://mega.nz/file/J9hTFaoJ#0voHIs5fhrxLwlqwqny3bXbJn_uQQK0JqeduVxUGWZQ">Efficient R Programming</a></li>
+<li><a href="https://mega.nz/file/gkBDxKpa#guuKp92TOUGrMUfwVZ8SQjrrBaf0i6exsMQzcye0GOo">Operating Systems: Design and Implementation</a></li>
+<li><a href="https://mega.nz/file/sxphlRKL#oxw53WUn1i8cyLL_B9tuKlcuUkJ4Wrpt6y4Xsjhxdy0">Architecture des ordinateurs</a> <em>In french</em></li>
+<li><a href="https://www.gnu.org/software/make/manual/make.html">GNU Make Manual</a></li>
+<li>Mastering CMake
+<ul>
+<li><a href="https://mega.nz/file/JoQxWTBT#Nify4BpUMwwQ0qf_gKNlb7-5XPSjEVJTZGYDz723k5w">Pdf version</a></li>
+<li><a href="https://cmake.org/cmake/help/book/mastering-cmake/">Website</a></li>
+</ul>
+</li>
+<li><a href="https://everything.curl.dev/">Everything Curl</a></li>
+<li><a href="https://mega.nz/file/VgwzlQoK#KquGTzDAPZcTIBT0B3VHFhXicdvBBqfzCj0B9PddUx8">100 fiches pour organiser sa veille technologique</a> <em>In french</em></li>
+<li><a href="https://mega.nz/file/k0ICma4L#TEyhs5aAPZG-D9eMETV_un6GwWHt-YmrYZpkqY_r05Q">Scala by Example</a></li>
+<li><a href="https://mega.nz/file/IswnATpZ#szXTMfe4Q7GOcrpFGTRc46y5jbEdwHjAKbk2FP6GDXk">Parsing Techniques</a></li>
+<li><a href="https://mega.nz/file/V44D1RwL#D4PVUjeazXmW6P1YyX4Z1KMyKk73Z0Fc34S1s5CHK7U">Practical Vim</a></li>
+</ul>
+<h2 id="github-repositories"><a class="header" href="#github-repositories">Github Repositories</a></h2>
+<h3 id="security-1"><a class="header" href="#security-1">Security</a></h3>
+<ul>
+<li><a href="https://github.com/moul/awesome-ssh">Awesome SSH</a> <em>Collection of SSH Tools</em></li>
+<li><a href="https://github.com/ticarpi/jwt_tool/wiki/Attack-Methodology">Attack Methodology for JWT Tokens</a></li>
+<li><a href="https://github.com/apt-42/resources">APT-42 Ressources</a></li>
+</ul>
+<h3 id="miscellaneous-1"><a class="header" href="#miscellaneous-1">Miscellaneous</a></h3>
+<ul>
+<li><a href="https://github.com/compilepeace/BINARY_DISSECTION_COURSE">Binary Dissection Course</a></li>
+<li><a href="https://github.com/trimstray/the-book-of-secret-knowledge">The Book of Secret Knowledge</a></li>
+<li><a href="https://github.com/practical-tutorials/project-based-learning">Project-Based Learning</a></li>
+<li><a href="https://github.com/mschwartz/assembly-tutorial">Assembly Tutorial</a></li>
+<li><a href="https://github.com/6mile/DevSecOps-Playbook">DevSecOps-Playbook</a></li>
+<li><a href="https://github.com/videolan/dav1d">Dav1d project by VLC</a> <em>Lightweight av1 cross-platform decoder</em></li>
+<li><a href="https://github.com/learnbyexample/vim_reference">Vim Reference</a> <em>Vim guide to learn by example</em></li>
+<li><a href="https://github.com/mikeroyal/Self-Hosting-Guide">Self-Hosting Guide</a></li>
+</ul>
+<h2 id="youtube-channels"><a class="header" href="#youtube-channels">Youtube Channels</a></h2>
+<h3 id="algorithms-1"><a class="header" href="#algorithms-1">Algorithms</a></h3>
+<ul>
+<li><a href="https://youtube.com/@spanningtree?si=knV7yWSC6YG--6r6">Spanning Tree</a></li>
+</ul>
+<h3 id="js"><a class="header" href="#js">Js</a></h3>
+<ul>
+<li><a href="https://youtube.com/@thecodingtrain?si=TeXM2AH3QhTIWzZE">The Coding Train</a></li>
+</ul>
+<h3 id="machine-learning"><a class="header" href="#machine-learning">Machine Learning</a></h3>
+<ul>
+<li><a href="https://youtube.com/@machinelearnia?si=TxOyu1T1r8eiaLID">Machine Learnia</a></li>
+</ul>
+<h3 id="python-1"><a class="header" href="#python-1">Python</a></h3>
+<ul>
+<li><a href="https://youtube.com/@coreyms?si=pklAoJFlzhQxM82n">Corey Schafer</a></li>
+</ul>
+<h3 id="miscellaneous-2"><a class="header" href="#miscellaneous-2">Miscellaneous</a></h3>
+<ul>
+<li><a href="https://youtube.com/@tsodingdaily?si=FyFryvGzES9DSTVc">Tsoding Daily</a></li>
+<li><a href="https://youtube.com/@github?si=L3GBcVx2n9odD1Qw">Github</a></li>
+<li><a href="https://youtube.com/@vercidium?si=upPdEfnD_HMzxPKo">Vercidium</a> <em>Game Engine Developer</em></li>
+<li><a href="https://youtube.com/@techworldwithnana?si=X3R_WK4ZE4r9t97Q">TechWorld with Nana</a> <em>DevOps Engineer</em></li>
+<li><a href="https://youtube.com/@tedbendixson?si=CqQ9GxlKpuD2M0K2">Theodore Bendixson</a> <em>Game Engine Developer</em></li>
+<li><a href="https://youtube.com/@beneater?si=oSa4qWDheVugI87Z">Ben Eater</a> <em>Assembly Videos</em></li>
+<li><a href="https://youtube.com/@lowlevellearning?si=xHxFwps01yu3byPv">Low Level Learning</a></li>
+<li><a href="https://youtube.com/@hackersploit?si=h-WgCo3k8nR6Qk2-">HackerSploit</a> <em>Leading provider of free infosec and cybersecurity training</em></li>
+</ul>
+<h2 id="useful-links"><a class="header" href="#useful-links">Useful Links</a></h2>
+<h3 id="devops-1"><a class="header" href="#devops-1">DevOps</a></h3>
+<ul>
+<li><a href="https://roadmap.sh/devops">DevOps RoadMap</a></li>
+<li><a href="https://www.devsecops.org/">DevSecOps blog</a></li>
+<li><a href="https://escape.tech/blog/the-ultimate-devsecops-checklist/">DevSecOps best practices</a></li>
+</ul>
+<h3 id="security-2"><a class="header" href="#security-2">Security</a></h3>
+<ul>
+<li><a href="https://opensecuritytraining.info/">OpenSecurity Training</a></li>
+<li><a href="https://ishaqmohammed.me/posts/application-security-knowledgebase/">Application Security Knowledgebase</a></li>
+<li><a href="https://github.com/Hacking-Notes/Hacker-Roadmap">Hacker-Roadmap</a> <em>Different from the one in roadmap.sh</em></li>
+<li><a href="https://www.exploit-db.com/">Exploit Database</a></li>
+<li><a href="https://reverse.zip/categories/introduction-au-reverse/">Introduction au reverse</a> <em>In french</em></li>
+<li><a href="https://cryptopals.com/">The cryptopals crypto challenges</a></li>
+<li><a href="https://dwheeler.com/secure-programs/Secure-Programs-HOWTO/">Secure Programming HOWTO</a> <em>A set of implementation guidelines to write secure programs</em></li>
+<li><a href="https://csea-iitb.github.io/IITBreachers-wiki/2020/08/01/Hacking-Sites.html">CTF-Wiki</a> <em>An extensive list of CTF websites (more than 20) where one
+can learn about cybersecurity</em></li>
+<li><a href="https://cheatsheetseries.owasp.org/">OWASP Cheat Sheet Series</a> <em>A collection of OWASP ressources
+about application security</em></li>
+</ul>
+<h3 id="miscellaneous-3"><a class="header" href="#miscellaneous-3">Miscellaneous</a></h3>
+<ul>
+<li><a href="https://www.markdownguide.org/">Markdown Guide</a></li>
+<li><a href="https://andreasbm.github.io/web-skills/">Web Skills MindMap</a></li>
+<li><a href="https://roadmap.sh/">RoadMap Website</a> <em>Contains a lot of great community-made roadmaps</em></li>
+<li><a href="https://aomedia.org/av1-features/get-started/">Alliance for Open Media</a> <em>Lots of ressources from AOM</em></li>
+<li><a href="https://projecteuler.net/">Project Euler</a> <em>Mathematics/Computer Programming Problems</em></li>
+<li><a href="http://sdz.tdct.org/">Archive site du zéro</a> <em>In frech</em></li>
+<li><a href="https://imagemagick.org/">Imagemagick Package</a></li>
+<li><a href="https://www.agner.org/optimize/#manuals">Optimization resources</a></li>
+</ul>
+<h3 id="linters"><a class="header" href="#linters">Linters</a></h3>
+<ul>
+<li><a href="https://www.shellcheck.net/">Shellcheck</a> <em>Shell scripts linter</em></li>
+<li><a href="https://google.github.io/styleguide/">Google Style Guide</a> <em>Google guidelines for formatting code</em></li>
+</ul>
+<h3 id="linux"><a class="header" href="#linux">Linux</a></h3>
+<ul>
+<li><a href="https://linuxjourney.com/">Linux Journey</a></li>
+<li><a href="https://linuxsurvival.com/">Linux Survival</a></li>
+<li><a href="https://www.learnshell.org/">Learn Shell</a></li>
+</ul>
+<h2 id="free-courses"><a class="header" href="#free-courses">Free Courses</a></h2>
+<h3 id="security-3"><a class="header" href="#security-3">Security</a></h3>
+<ul>
+<li><a href="https://overthewire.org/wargames/">Overthewire</a></li>
+<li><a href="https://www.root-me.org/">Root-me</a></li>
+<li><a href="https://tryhackme.com/">TryHackMe</a></li>
+<li><a href="https://www.hackthebox.com/">HackTheBox</a></li>
+<li><a href="https://picoctf.org/">picoCTF</a></li>
+<li><a href="https://dwheeler.com/secure-programs/">Secure Programing Blog</a></li>
+</ul>
+<h3 id="miscellaneous-4"><a class="header" href="#miscellaneous-4">Miscellaneous</a></h3>
+<ul>
+<li><a href="https://ocw.mit.edu/">MIT OpenCourseWare</a></li>
+<li><a href="https://www.edx.org/">edX</a></li>
+<li><a href="https://www.fun-mooc.fr/">FUN-MOOC</a> <em>Also available in french</em></li>
+<li><a href="https://www.codecademy.com">codecademy</a></li>
+</ul>
+<h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
+<h3 id="python-2"><a class="header" href="#python-2">Python</a></h3>
+<ul>
+<li><a href="https://docs.djangoproject.com/en/5.0/">Django Documentation</a></li>
+<li><a href="https://flask.palletsprojects.com/en/3.0.x/">Flask Documentation</a></li>
+<li><a href="https://scikit-learn.org/stable/getting_started.html">Scikit-Learn Documentation</a></li>
+<li><a href="https://numpy.org/doc/1.26/">Numpy Documentation</a></li>
+<li><a href="https://pandas.pydata.org/docs/">Pandas Documentation</a></li>
+<li><a href="https://matplotlib.org/stable/index.html">Matplotlib Documentation</a></li>
+<li><a href="https://tedboy.github.io/bs4_doc/">BeautifulSoup Documentation</a></li>
+</ul>
+<h3 id="c"><a class="header" href="#c">C</a></h3>
+<ul>
+<li>Xlib
+<ul>
+<li><a href="https://www.x.org/releases/X11R7.7/doc/">Official Documentation</a></li>
+<li><a href="https://tronche.com/gui/x/xlib/">Tronche Documentation</a></li>
+</ul>
+</li>
+<li><a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html">GNU C Manual</a></li>
+</ul>
+<h3 id="miscellaneous-5"><a class="header" href="#miscellaneous-5">Miscellaneous</a></h3>
+<ul>
+<li><a href="https://www.gnu.org/software/make/manual/make.html">GNU Make Manual</a></li>
+<li><a href="https://www.nasm.us/xdoc/2.16.03/html/nasmdoc0.html">NASM Documentation</a></li>
+<li><a href="https://docs.metasploit.com/">Metasploit Documentation</a></li>
+<li><a href="https://www.kali.org/docs/">Kali Linux Documentation</a></li>
+<li><a href="https://wiki.videolan.org/Hacker_Guide/">VLC Documentation</a></li>
+<li><a href="https://tldp.org/">The Linux Documentation Project</a></li>
+<li><a href="https://vimdoc.sourceforge.net/">Vim Documentation</a></li>
+<li><a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html">Intel Developers Documentation</a></li>
+<li><a href="https://go.dev/">Go documentation</a></li>
+<li><a href="https://docs.github.com/en/actions">Github Actions Documentation</a></li>
+<li><a href="https://www.rust-lang.org/learn">Rust Documentation</a></li>
+</ul>
+<h2 id="tutorials"><a class="header" href="#tutorials">Tutorials</a></h2>
+<p><em>The tutorials will mainly be from the documentation of the mentioned entities. However it will be explicitely mentionned
+when they aren't</em></p>
+<h3 id="web"><a class="header" href="#web">Web</a></h3>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML">HTML</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS">CSS</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript">JavsScript</a></li>
+</ul>
+<h3 id="python-3"><a class="header" href="#python-3">Python</a></h3>
+<ul>
+<li><a href="https://docs.python.org/3/tutorial/index.html">Python Documentation Tutorial</a></li>
+<li><a href="https://python.doctor/">Tutoriel Python</a> <em>In french</em> <em>non official</em></li>
+</ul>
+<h3 id="c-1"><a class="header" href="#c-1">C</a></h3>
+<ul>
+<li>Xlib
+<ul>
+<li><a href="https://tronche.com/gui/x/xlib-tutorial/">Tronche Tutorial</a> <em>non official</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="miscellaneous-6"><a class="header" href="#miscellaneous-6">Miscellaneous</a></h3>
+<ul>
+<li><a href="https://cmake.org/cmake/help/latest/guide/tutorial/index.html">CMake Tutorial</a></li>
+</ul>
+<h2 id="source-code"><a class="header" href="#source-code">Source Code</a></h2>
+<h3 id="python-4"><a class="header" href="#python-4">Python</a></h3>
+<ul>
+<li><a href="https://github.com/scikit-learn/scikit-learn">Scikit-Learn</a></li>
+<li><a href="https://github.com/numpy/numpy">numpy</a></li>
+<li><a href="https://github.com/pandas-dev/pandas">pandas</a></li>
+<li><a href="https://github.com/matplotlib/matplotlib">matplotlib</a> <em>The source code is written in C and C++</em></li>
+</ul>
+<h3 id="c-2"><a class="header" href="#c-2">C</a></h3>
+<ul>
+<li><a href="https://github.com/mirror/libX11">X11</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
