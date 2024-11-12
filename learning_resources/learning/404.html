@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Learning Resources</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="books.html"><strong aria-hidden="true">1.1.</strong> Books</a></li><li class="chapter-item expanded "><a href="repositories.html"><strong aria-hidden="true">1.2.</strong> Github Repositories</a></li><li class="chapter-item expanded "><a href="youtube.html"><strong aria-hidden="true">1.3.</strong> Youtube Channels</a></li><li class="chapter-item expanded "><a href="links.html"><strong aria-hidden="true">1.4.</strong> Useful Links</a></li><li class="chapter-item expanded "><a href="courses.html"><strong aria-hidden="true">1.5.</strong> Free Courses</a></li><li class="chapter-item expanded "><a href="tutorials.html"><strong aria-hidden="true">1.6.</strong> Tutorials</a></li><li class="chapter-item expanded "><a href="source_code.html"><strong aria-hidden="true">1.7.</strong> Source Code</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -194,22 +194,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
