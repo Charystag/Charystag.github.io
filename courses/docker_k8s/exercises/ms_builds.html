@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Concepts Avancés de Docker - Docker-K8s</title>
+        <title>Exercices - Docker-K8s</title>
 
 
         <!-- Custom HTML head -->
@@ -12,21 +12,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="../../favicon.svg">
-        <link rel="shortcut icon" href="../../favicon.png">
-        <link rel="stylesheet" href="../../css/variables.css">
-        <link rel="stylesheet" href="../../css/general.css">
-        <link rel="stylesheet" href="../../css/chrome.css">
-        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../../highlight.css">
-        <link rel="stylesheet" href="../../tomorrow-night.css">
-        <link rel="stylesheet" href="../../ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -35,7 +35,7 @@
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
-            var path_to_root = "../../";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="../../course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="../../course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="../../course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="../../course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="../../course/part2/intro.html" class="active"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="../../course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/ms_builds.html"><strong aria-hidden="true">3.</strong> Exercices</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="../course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="../course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="../course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="../course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="../course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="../course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/ms_builds.html" class="active"><strong aria-hidden="true">3.</strong> Exercices</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -144,7 +144,7 @@
                     <h1 class="menu-title">Docker-K8s</h1>
 
                     <div class="right-buttons">
-                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -173,46 +173,67 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h3 id="concepts-avancés-de-docker"><a class="header" href="#concepts-avancés-de-docker"><strong>Concepts Avancés de Docker</strong></a></h3>
-<p>Docker ne se limite pas à la création et à l’exécution de conteneurs. Une fois les bases maîtrisées, il est essentiel de comprendre les concepts avancés pour concevoir des applications complexes et sécurisées. <strong>Partie 2 : Concepts avancés de Docker</strong> approfondit ces notions clés et vous prépare à des déploiements en production et à la gestion d’applications conteneurisées à grande échelle.</p>
-<hr />
-<h4 id="pourquoi-ces-concepts-sont-importants-"><a class="header" href="#pourquoi-ces-concepts-sont-importants-"><strong>Pourquoi ces concepts sont importants ?</strong></a></h4>
+                        <h1 id="exercice"><a class="header" href="#exercice">Exercice</a></h1>
+<p><strong>Contenerization using multistages builds</strong></p>
+<p>Here is a sampe C++ program:</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+
+int main(void){
+    std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
+    return (0);
+}
+</code></pre>
+<p>Here is the sequence of instructions that you should follow :</p>
+<details>
+<summary>Part 1: Project files retrieval</summary>
 <ol>
-<li>
-<p><strong>Mise en réseau (Networking in Docker)</strong><br />
-Les applications modernes, notamment celles basées sur des microservices, nécessitent une communication fluide entre conteneurs et avec l’extérieur. Apprendre à configurer et gérer des réseaux Docker est essentiel pour permettre cette interaction.</p>
-</li>
-<li>
-<p><strong>Docker Compose pour les applications multi-conteneurs</strong><br />
-À mesure que les projets grandissent, gérer plusieurs conteneurs manuellement devient complexe. Docker Compose simplifie cette orchestration en permettant de définir et de gérer plusieurs services dans un seul fichier de configuration.</p>
-</li>
-<li>
-<p><strong>Meilleures pratiques de sécurité</strong><br />
-Les conteneurs isolent les applications, mais cela ne garantit pas une sécurité parfaite. Suivre les meilleures pratiques pour sécuriser les images et les conteneurs est crucial pour éviter des vulnérabilités en production.</p>
-</li>
+<li>Run a container interactively using the base image alpine and <strong>bind</strong> a volume called <code>project_files</code> to the folder <code>/project</code> on your container.</li>
+<li>Create the <code>hello_word.cpp</code> file <strong>within</strong> the container in the <code>/project</code> directory and commit the result as a new image called <code>project_files</code></li>
 </ol>
-<hr />
-<h4 id="objectifs-de-cette-partie-"><a class="header" href="#objectifs-de-cette-partie-"><strong>Objectifs de cette partie :</strong></a></h4>
-<ul>
-<li>Développer des compétences pour connecter des conteneurs entre eux et au monde extérieur via le réseau Docker.</li>
-<li>Découvrir comment orchestrer facilement plusieurs conteneurs avec Docker Compose.</li>
-<li>Apprendre à sécuriser les applications conteneurisées grâce à des techniques et outils avancés.</li>
-</ul>
-<hr />
-<h4 id="comment-ces-notions-sintègrent-elles-"><a class="header" href="#comment-ces-notions-sintègrent-elles-"><strong>Comment ces notions s’intègrent-elles ?</strong></a></h4>
-<p>Ces concepts sont des étapes naturelles pour évoluer vers des environnements de production et des architectures complexes basées sur Docker. Ils préparent également le terrain pour des outils d'orchestration à grande échelle comme Kubernetes.</p>
+</details>
+<details>
+<summary>Part 2: Project building</summary>
+<p>At this point in the exercise you should have a new base image containing only alpine and the <code>hello_world.cpp</code> file in the <code>/project</code> folder.</p>
+<ol start="3">
+<li>Run another container interactively based on the image  <code>project_files</code></li>
+<li>Install the tools needed in order to build the sample c++ program.</li>
+<li>Build the sample program and move the executable to <code>/project/bin</code>, creating the directory if needed</li>
+<li>Commit the result as a new layer, calling it : <code>executable</code></li>
+</ol>
+</details>
+<details>
+<summary>Part 3: Writting the Dockerfile</summary>
+<p>At this point, you should be able to run : <code>docker run executable /project/bin/hello_world</code> and everything should be working</p>
+<ol start="7">
+<li>Now that you know how to do this from the command line, this step is pretty straightforward, you should put all the previous steps but in your Dockerfile. It has to start with the instruction <code>FROM project_files</code></li>
+</ol>
+</details>
+<details>
+<summary>Part 4: Multistage Build</summary>
+<p>Running <code>docker build -t dockerfile_executable . &amp;&amp; docker run dockerfile_executable</code> should print <code>Hello World!</code> to <code>stdout</code></p>
+<ol start="8">
+<li>Split the build into multiple stages, the final image should contain only the executable.</li>
+</ol>
+</details>
+<details>
+<summary>Part 5: Comparison between both types of build</summary>
+<p>Here is an example of what you may see when running <code>docker image history multistage_image</code> for the image generated during the multistages build</p>
+<pre><code class="language-bash">IMAGE          CREATED       CREATED BY                            SIZE      COMMENT
+df5a49f5c822   2 hours ago   ENTRYPOINT ["./hello_world"]          0B        buildkit.dockerfile.v0
+&lt;missing&gt;      2 hours ago   COPY /test/hello_world . # buildkit   72.9kB    buildkit.dockerfile.v0
+&lt;missing&gt;      2 hours ago   WORKDIR /RUN                          0B        buildkit.dockerfile.v0
+</code></pre>
+<p>Find a way to compare the size of the two generated images and explain briefly why splitting builds into multiple stages affects the size of the resulting image</p>
+</details>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../course/part1/wrap_up.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../course/part2/compose.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../course/part2/networking.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -220,13 +241,10 @@ Les conteneurs isolent les applications, mais cela ne garantit pas une sécurit�
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../course/part1/wrap_up.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../course/part2/compose.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../course/part2/networking.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
@@ -239,13 +257,13 @@ Les conteneurs isolent les applications, mais cela ne garantit pas une sécurit�
         </script>
 
 
-        <script src="../../elasticlunr.min.js"></script>
-        <script src="../../mark.min.js"></script>
-        <script src="../../searcher.js"></script>
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="../../clipboard.min.js"></script>
-        <script src="../../highlight.js"></script>
-        <script src="../../book.js"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
 

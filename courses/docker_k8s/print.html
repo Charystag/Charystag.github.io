@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/ms_builds.html"><strong aria-hidden="true">3.</strong> Exercices</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -2309,7 +2309,59 @@ docker-compose up -d
 </details>
 <h2 id="quiz-3"><a class="header" href="#quiz-3"><strong>Quiz</strong></a></h2>
 <div class="quiz-placeholder" data-quiz-name="&quot;compose&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;La commande `docker compose down` arrête tous les conteneurs et supprime également les réseaux et volumes définis dans le fichier Compose.\n&quot;,&quot;id&quot;:&quot;22025d3c-592a-4954-9116-3acf93e652ac&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose down&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quelle commande est utilisée pour arrêter et supprimer tous les services définis dans un fichier Compose ?&quot;}},{&quot;context&quot;:&quot;Docker Compose est utilisé pour définir et exécuter des applications comprenant plusieurs conteneurs via un fichier de configuration unique.\n&quot;,&quot;id&quot;:&quot;074fc5fe-ad5b-4be5-986d-98c41934054c&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Gérer les applications multi-conteneurs.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Construire des images Docker.&quot;,&quot;Optimiser les performances des conteneurs.&quot;,&quot;Résoudre les problèmes de réseau des conteneurs.&quot;],&quot;prompt&quot;:&quot;Quel est le rôle de Docker Compose ?&quot;}},{&quot;context&quot;:&quot;Docker Compose utilise le format YAML pour décrire les services, réseaux et volumes dans une application multi-conteneurs.\n&quot;,&quot;id&quot;:&quot;c2c1a02d-759a-4010-b3d8-cbb9cbc40ed6&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;YAML&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quel format de fichier est utilisé pour définir les configurations Docker Compose ?&quot;}},{&quot;context&quot;:&quot;Le fichier `docker-compose.yml` est le format standard utilisé pour décrire les services, réseaux et volumes dans Docker Compose.\n&quot;,&quot;id&quot;:&quot;c3bdf7d6-f766-4d8d-b736-40597fb7dc71&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker-compose.yml&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker-compose.config&quot;,&quot;docker.multi.yml&quot;,&quot;docker-compose.json&quot;],&quot;prompt&quot;:&quot;Quel fichier définit une configuration multi-conteneurs dans Docker Compose ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose logs &lt;nom-service&gt;` permet de consulter les journaux générés par un service spécifique.\n&quot;,&quot;id&quot;:&quot;e9fa4d52-d27a-4aea-b5be-f87bd33cd126&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose logs &lt;nom-service&gt;&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Comment affichez-vous les journaux d’un service spécifique dans Docker Compose ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose up --scale &lt;nom-service&gt;=3` permet de définir le nombre d’instances pour un service donné.\n&quot;,&quot;id&quot;:&quot;a9435bb4-a5e3-45d8-95f4-940c1764b4d4&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose up --scale &lt;nom-service&gt;=3&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose scale --replicas=3&quot;,&quot;docker compose up --instances=3&quot;,&quot;docker compose up --scale=3&quot;],&quot;prompt&quot;:&quot;Quelle commande est utilisée pour mettre à l’échelle un service à 3 instances avec Docker Compose ?&quot;}},{&quot;context&quot;:&quot;La section `environment` permet de définir des variables d’environnement accessibles dans un conteneur.\n&quot;,&quot;id&quot;:&quot;d36007be-bdb1-4500-9b44-b70ef3f06040&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;environment&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;env&quot;,&quot;config&quot;,&quot;variables&quot;],&quot;prompt&quot;:&quot;Quelle section dans le fichier `docker-compose.yml` est utilisée pour configurer des variables d’environnement ?&quot;}},{&quot;context&quot;:&quot;La propriété `depends_on` détermine l’ordre dans lequel les services sont démarrés, mais ne garantit pas qu’un service soit prêt avant de lancer un autre.\n&quot;,&quot;id&quot;:&quot;af7877d4-6ad9-46b5-81f4-e74afa8c6e41&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Spécifie l’ordre de démarrage des services.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Configure un service pour attendre qu’un autre soit en bonne santé avant de démarrer.&quot;,&quot;Crée des liens réseau entre les services.&quot;,&quot;Redémarre automatiquement les services dépendants en cas d’échec.&quot;],&quot;prompt&quot;:&quot;Que fait la propriété `depends_on` dans un fichier Compose ?&quot;}},{&quot;context&quot;:&quot;La propriété `ports` permet de définir le mapping entre un port interne au conteneur et un port externe sur l’hôte.\n&quot;,&quot;id&quot;:&quot;c6b83a07-31f1-488e-865b-14164365ce3f&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;ports&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quelle propriété dans un fichier Compose est utilisée pour mapper un port du conteneur à un port de l’hôte ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose up` lit le fichier Compose et démarre tous les services définis.\n&quot;,&quot;id&quot;:&quot;2411074b-d9ce-4ff9-9616-5b9a4abc9eca&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose up&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quelle commande démarre une application multi-conteneurs définie dans un fichier Compose ?&quot;}}]}" data-quiz-fullscreen="true"></div>
-<script type="text/javascript" src="../../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../../quiz/style.css">
+<script type="text/javascript" src="../../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="exercice"><a class="header" href="#exercice">Exercice</a></h1>
+<p><strong>Contenerization using multistages builds</strong></p>
+<p>Here is a sampe C++ program:</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+
+int main(void){
+    std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
+    return (0);
+}
+</code></pre>
+<p>Here is the sequence of instructions that you should follow :</p>
+<details>
+<summary>Part 1: Project files retrieval</summary>
+<ol>
+<li>Run a container interactively using the base image alpine and <strong>bind</strong> a volume called <code>project_files</code> to the folder <code>/project</code> on your container.</li>
+<li>Create the <code>hello_word.cpp</code> file <strong>within</strong> the container in the <code>/project</code> directory and commit the result as a new image called <code>project_files</code></li>
+</ol>
+</details>
+<details>
+<summary>Part 2: Project building</summary>
+<p>At this point in the exercise you should have a new base image containing only alpine and the <code>hello_world.cpp</code> file in the <code>/project</code> folder.</p>
+<ol start="3">
+<li>Run another container interactively based on the image  <code>project_files</code></li>
+<li>Install the tools needed in order to build the sample c++ program.</li>
+<li>Build the sample program and move the executable to <code>/project/bin</code>, creating the directory if needed</li>
+<li>Commit the result as a new layer, calling it : <code>executable</code></li>
+</ol>
+</details>
+<details>
+<summary>Part 3: Writting the Dockerfile</summary>
+<p>At this point, you should be able to run : <code>docker run executable /project/bin/hello_world</code> and everything should be working</p>
+<ol start="7">
+<li>Now that you know how to do this from the command line, this step is pretty straightforward, you should put all the previous steps but in your Dockerfile. It has to start with the instruction <code>FROM project_files</code></li>
+</ol>
+</details>
+<details>
+<summary>Part 4: Multistage Build</summary>
+<p>Running <code>docker build -t dockerfile_executable . &amp;&amp; docker run dockerfile_executable</code> should print <code>Hello World!</code> to <code>stdout</code></p>
+<ol start="8">
+<li>Split the build into multiple stages, the final image should contain only the executable.</li>
+</ol>
+</details>
+<details>
+<summary>Part 5: Comparison between both types of build</summary>
+<p>Here is an example of what you may see when running <code>docker image history multistage_image</code> for the image generated during the multistages build</p>
+<pre><code class="language-bash">IMAGE          CREATED       CREATED BY                            SIZE      COMMENT
+df5a49f5c822   2 hours ago   ENTRYPOINT ["./hello_world"]          0B        buildkit.dockerfile.v0
+&lt;missing&gt;      2 hours ago   COPY /test/hello_world . # buildkit   72.9kB    buildkit.dockerfile.v0
+&lt;missing&gt;      2 hours ago   WORKDIR /RUN                          0B        buildkit.dockerfile.v0
+</code></pre>
+<p>Find a way to compare the size of the two generated images and explain briefly why splitting builds into multiple stages affects the size of the resulting image</p>
+</details>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
