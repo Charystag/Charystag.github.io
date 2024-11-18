@@ -173,11 +173,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h3 id="ii1-networking-avec-docker"><a class="header" href="#ii1-networking-avec-docker"><strong>II.1 Networking avec Docker</strong></a></h3>
+                        <h1 id="ii1-networking-avec-docker"><a class="header" href="#ii1-networking-avec-docker"><strong>II.1 Networking avec Docker</strong></a></h1>
 <hr />
 <p>Le réseau est un élément fondamental dans les environnements conteneurisés, permettant aux applications de communiquer entre elles et avec le monde extérieur. Docker offre des options réseau robustes, flexibles et faciles à configurer, adaptées aux besoins variés des applications. Cette section explore les différents modes réseau de Docker, les réseaux personnalisés, et les techniques pour gérer la communication et l’isolation des conteneurs.</p>
 <hr />
-<h4 id="ii1a-modes-réseau-par-défaut-dans-docker"><a class="header" href="#ii1a-modes-réseau-par-défaut-dans-docker"><strong>II.1.a Modes réseau par défaut dans Docker</strong></a></h4>
+<h2 id="ii1a-modes-réseau-par-défaut-dans-docker"><a class="header" href="#ii1a-modes-réseau-par-défaut-dans-docker"><strong>II.1.a Modes réseau par défaut dans Docker</strong></a></h2>
 <p>Docker fournit trois modes réseau par défaut, chacun ayant des usages spécifiques :</p>
 <ol>
 <li>
@@ -217,7 +217,7 @@ Cela connecte le port 80 du conteneur au port 8080 de l’hôte.</li>
 </li>
 </ol>
 <hr />
-<h4 id="ii1b-réseaux-personnalisés-dans-docker"><a class="header" href="#ii1b-réseaux-personnalisés-dans-docker"><strong>II.1.b Réseaux personnalisés dans Docker</strong></a></h4>
+<h2 id="ii1b-réseaux-personnalisés-dans-docker"><a class="header" href="#ii1b-réseaux-personnalisés-dans-docker"><strong>II.1.b Réseaux personnalisés dans Docker</strong></a></h2>
 <p>Les réseaux personnalisés permettent un contrôle accru sur la communication inter-conteneurs et la résolution DNS. Ces réseaux sont souvent basés sur le mode bridge.</p>
 <p><strong>Créer un réseau personnalisé :</strong></p>
 <pre><code class="language-bash">docker network create my_custom_network
@@ -235,7 +235,7 @@ Cela connecte le port 80 du conteneur au port 8080 de l’hôte.</li>
 </code></pre>
 <p>En savoir plus : <a href="https://docs.docker.com/network/">Documentation sur les réseaux personnalisés</a>.</p>
 <hr />
-<h4 id="ii1c-exposer-des-ports"><a class="header" href="#ii1c-exposer-des-ports"><strong>II.1.c Exposer des ports</strong></a></h4>
+<h2 id="ii1c-exposer-des-ports"><a class="header" href="#ii1c-exposer-des-ports"><strong>II.1.c Exposer des ports</strong></a></h2>
 <p>Pour permettre un accès extérieur à un conteneur, Docker utilise des mappages de ports entre le conteneur et l’hôte.</p>
 <p><strong>Exemple :</strong><br />
 Pour exécuter un serveur web Nginx accessible via le port 8080 de l’hôte :</p>
@@ -250,7 +250,7 @@ Pour exécuter un serveur web Nginx accessible via le port 8080 de l’hôte :</
 </code></pre>
 <p>En savoir plus : <a href="https://docs.docker.com/config/containers/container-networking/#published-ports">Documentation sur les ports Docker</a>.</p>
 <hr />
-<h4 id="ii1d-communication-entre-conteneurs"><a class="header" href="#ii1d-communication-entre-conteneurs"><strong>II.1.d Communication entre conteneurs</strong></a></h4>
+<h2 id="ii1d-communication-entre-conteneurs"><a class="header" href="#ii1d-communication-entre-conteneurs"><strong>II.1.d Communication entre conteneurs</strong></a></h2>
 <p>Lorsque plusieurs conteneurs appartiennent au même réseau personnalisé, ils peuvent communiquer directement en utilisant leurs noms comme hostnames.</p>
 <p><strong>Exemple :</strong></p>
 <ol>
@@ -268,7 +268,7 @@ docker run --network my_app_network --name app2 busybox ping app1
 </ol>
 <p>Dans cet exemple, <code>app2</code> peut pinger <code>app1</code> grâce à la résolution DNS intégrée, sans nécessiter d’adresses IP explicites.</p>
 <hr />
-<h4 id="ii1e-isolation-et-contrôle-du-trafic-réseau"><a class="header" href="#ii1e-isolation-et-contrôle-du-trafic-réseau"><strong>II.1.e Isolation et contrôle du trafic réseau</strong></a></h4>
+<h2 id="ii1e-isolation-et-contrôle-du-trafic-réseau"><a class="header" href="#ii1e-isolation-et-contrôle-du-trafic-réseau"><strong>II.1.e Isolation et contrôle du trafic réseau</strong></a></h2>
 <p>Pour améliorer la sécurité ou tester la connectivité, Docker permet de limiter l’accès réseau des conteneurs.</p>
 <ul>
 <li>

@@ -173,19 +173,19 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h3 id="22-docker-compose-pour-des-applications-multi-container"><a class="header" href="#22-docker-compose-pour-des-applications-multi-container"><strong>2.2 Docker Compose pour des Applications Multi-Container</strong></a></h3>
+                        <h1 id="ii2-docker-compose-pour-des-applications-multi-container"><a class="header" href="#ii2-docker-compose-pour-des-applications-multi-container"><strong>II.2 Docker Compose pour des Applications Multi-Container</strong></a></h1>
 <hr />
 <p>Les applications modernes impliquent souvent plusieurs services qui doivent fonctionner ensemble, comme un serveur web, une base de données, et un cache. <strong>Docker Compose</strong> simplifie la gestion de ces applications multi-conteneurs en permettant de les définir, configurer, et exécuter via un fichier unique (<code>docker-compose.yml</code>). Cette section explore les concepts essentiels de Docker Compose, de la configuration des services à leur mise à l'échelle et leur débogage.</p>
 <hr />
-<h4 id="221-introduction-à-docker-compose"><a class="header" href="#221-introduction-à-docker-compose"><strong>2.2.1 Introduction à Docker Compose</strong></a></h4>
-<h5 id="quest-ce-que-docker-compose-"><a class="header" href="#quest-ce-que-docker-compose-"><strong>Qu’est-ce que Docker Compose ?</strong></a></h5>
+<h2 id="ii2a-introduction-à-docker-compose"><a class="header" href="#ii2a-introduction-à-docker-compose"><strong>II.2.a Introduction à Docker Compose</strong></a></h2>
+<h3 id="quest-ce-que-docker-compose-"><a class="header" href="#quest-ce-que-docker-compose-"><strong>Qu’est-ce que Docker Compose ?</strong></a></h3>
 <p>Docker Compose est un outil qui permet de définir et de gérer des applications conteneurisées composées de plusieurs services dans un fichier YAML. Il est particulièrement utile pour :</p>
 <ul>
 <li>Décrire les dépendances d’une application dans un fichier <code>docker-compose.yml</code>.</li>
 <li>Lancer ou arrêter tous les services associés avec une seule commande.</li>
 <li>Simplifier la gestion des réseaux, volumes, et configurations pour des applications complexes.</li>
 </ul>
-<h5 id="structure-clé-dun-fichier-docker-composeyml"><a class="header" href="#structure-clé-dun-fichier-docker-composeyml"><strong>Structure clé d’un fichier docker-compose.yml</strong></a></h5>
+<h3 id="structure-clé-dun-fichier-docker-composeyml"><a class="header" href="#structure-clé-dun-fichier-docker-composeyml"><strong>Structure clé d’un fichier docker-compose.yml</strong></a></h3>
 <p>Un fichier <code>docker-compose.yml</code> est structuré autour des éléments suivants :</p>
 <ol>
 <li><strong>Version :</strong> Définit la version du fichier Compose.</li>
@@ -212,8 +212,8 @@ services:
 </ul>
 <p>Pour plus de détails : <a href="https://docs.docker.com/compose/">Documentation officielle Docker Compose</a>.</p>
 <hr />
-<h4 id="222-définir-et-exécuter-des-services"><a class="header" href="#222-définir-et-exécuter-des-services"><strong>2.2.2 Définir et exécuter des services</strong></a></h4>
-<h5 id="créer-plusieurs-services-dans-un-seul-fichier"><a class="header" href="#créer-plusieurs-services-dans-un-seul-fichier"><strong>Créer plusieurs services dans un seul fichier</strong></a></h5>
+<h2 id="ii2b-définir-et-exécuter-des-services"><a class="header" href="#ii2b-définir-et-exécuter-des-services"><strong>II.2.b Définir et exécuter des services</strong></a></h2>
+<h4 id="créer-plusieurs-services-dans-un-seul-fichier"><a class="header" href="#créer-plusieurs-services-dans-un-seul-fichier"><strong>Créer plusieurs services dans un seul fichier</strong></a></h4>
 <p>Docker Compose permet de définir plusieurs services et leurs dépendances dans un fichier YAML.</p>
 <p><strong>Exemple : Application avec un backend et une base de données</strong></p>
 <pre><code class="language-yaml">version: "3.9"
@@ -230,7 +230,7 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
 </code></pre>
-<h5 id="lancer-et-arrêter-les-services-avec-docker-compose"><a class="header" href="#lancer-et-arrêter-les-services-avec-docker-compose"><strong>Lancer et arrêter les services avec Docker Compose</strong></a></h5>
+<h3 id="lancer-et-arrêter-les-services-avec-docker-compose"><a class="header" href="#lancer-et-arrêter-les-services-avec-docker-compose"><strong>Lancer et arrêter les services avec Docker Compose</strong></a></h3>
 <ul>
 <li>
 <p><strong>Lancer les services :</strong></p>
@@ -245,8 +245,8 @@ services:
 </ul>
 <p>Compose gère automatiquement la création des conteneurs, des réseaux et des volumes nécessaires.</p>
 <hr />
-<h4 id="223-configuration-des-services"><a class="header" href="#223-configuration-des-services"><strong>2.2.3 Configuration des services</strong></a></h4>
-<h5 id="variables-denvironnement"><a class="header" href="#variables-denvironnement"><strong>Variables d’environnement</strong></a></h5>
+<h2 id="ii2c-configuration-des-services"><a class="header" href="#ii2c-configuration-des-services"><strong>II.2.c Configuration des services</strong></a></h2>
+<h3 id="variables-denvironnement"><a class="header" href="#variables-denvironnement"><strong>Variables d’environnement</strong></a></h3>
 <p>Les variables d’environnement permettent de passer des configurations dynamiques aux services.</p>
 <p><strong>Exemple avec un fichier <code>.env</code> :</strong>
 <code>.env</code> :</p>
@@ -263,7 +263,7 @@ services:
 </code></pre>
 <p>Compose charge automatiquement les variables d’un fichier <code>.env</code> s’il est présent.</p>
 <hr />
-<h5 id="mapping-des-ports-et-gestion-des-volumes"><a class="header" href="#mapping-des-ports-et-gestion-des-volumes"><strong>Mapping des ports et gestion des volumes</strong></a></h5>
+<h3 id="mapping-des-ports-et-gestion-des-volumes"><a class="header" href="#mapping-des-ports-et-gestion-des-volumes"><strong>Mapping des ports et gestion des volumes</strong></a></h3>
 <ul>
 <li>
 <p><strong>Ports :</strong> Connectent les ports de l’hôte à ceux du conteneur.<br />
@@ -281,7 +281,7 @@ Exemple :</p>
 </li>
 </ul>
 <hr />
-<h5 id="gérer-les-dépendances-entre-services"><a class="header" href="#gérer-les-dépendances-entre-services"><strong>Gérer les dépendances entre services</strong></a></h5>
+<h3 id="gérer-les-dépendances-entre-services"><a class="header" href="#gérer-les-dépendances-entre-services"><strong>Gérer les dépendances entre services</strong></a></h3>
 <p>Vous pouvez définir l’ordre de démarrage des services à l’aide de <code>depends_on</code> :</p>
 <pre><code class="language-yaml">version: "3.9"
 services:
@@ -294,18 +294,18 @@ services:
 </code></pre>
 <p>Dans cet exemple, Docker Compose s’assure que le service <code>database</code> démarre avant <code>web</code>.</p>
 <hr />
-<h4 id="224-scalabilité-des-services"><a class="header" href="#224-scalabilité-des-services"><strong>2.2.4 Scalabilité des services</strong></a></h4>
-<h5 id="mise-à-léchelle-horizontale"><a class="header" href="#mise-à-léchelle-horizontale"><strong>Mise à l’échelle horizontale</strong></a></h5>
+<h2 id="ii2d-scalabilité-des-services"><a class="header" href="#ii2d-scalabilité-des-services"><strong>II.2.d Scalabilité des services</strong></a></h2>
+<h3 id="mise-à-léchelle-horizontale"><a class="header" href="#mise-à-léchelle-horizontale"><strong>Mise à l’échelle horizontale</strong></a></h3>
 <p>Docker Compose permet de scaler un service pour exécuter plusieurs instances. Cela est particulièrement utile pour les services stateless comme les serveurs web.</p>
 <p><strong>Exemple : Scaler un service</strong></p>
 <pre><code class="language-bash">docker compose up --scale web=3
 </code></pre>
 <p>Cela démarre 3 instances du service <code>web</code>.</p>
 <hr />
-<h5 id="test-de-léquilibrage-de-charge"><a class="header" href="#test-de-léquilibrage-de-charge"><strong>Test de l’équilibrage de charge</strong></a></h5>
+<h3 id="test-de-léquilibrage-de-charge"><a class="header" href="#test-de-léquilibrage-de-charge"><strong>Test de l’équilibrage de charge</strong></a></h3>
 <p>Avec plusieurs instances d’un service, Compose utilise des réseaux Docker pour équilibrer automatiquement les connexions entrantes. Vous pouvez tester ce comportement en envoyant des requêtes répétées à un service scaled.</p>
 <hr />
-<h4 id="225-logs-et-débogage-avec-docker-compose"><a class="header" href="#225-logs-et-débogage-avec-docker-compose"><strong>2.2.5 Logs et débogage avec Docker Compose</strong></a></h4>
+<h2 id="ii2e-logs-et-débogage-avec-docker-compose"><a class="header" href="#ii2e-logs-et-débogage-avec-docker-compose"><strong>II.2.e Logs et débogage avec Docker Compose</strong></a></h2>
 <ul>
 <li>
 <p><strong>Afficher les logs d’un service spécifique :</strong></p>

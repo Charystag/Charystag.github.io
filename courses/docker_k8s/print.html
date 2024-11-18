@@ -1396,11 +1396,11 @@ Les conteneurs isolent les applications, mais cela ne garantit pas une sécurit�
 <hr />
 <h4 id="comment-ces-notions-sintègrent-elles-"><a class="header" href="#comment-ces-notions-sintègrent-elles-"><strong>Comment ces notions s’intègrent-elles ?</strong></a></h4>
 <p>Ces concepts sont des étapes naturelles pour évoluer vers des environnements de production et des architectures complexes basées sur Docker. Ils préparent également le terrain pour des outils d'orchestration à grande échelle comme Kubernetes.</p>
-<div style="break-before: page; page-break-before: always;"></div><h3 id="ii1-networking-avec-docker"><a class="header" href="#ii1-networking-avec-docker"><strong>II.1 Networking avec Docker</strong></a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ii1-networking-avec-docker"><a class="header" href="#ii1-networking-avec-docker"><strong>II.1 Networking avec Docker</strong></a></h1>
 <hr />
 <p>Le réseau est un élément fondamental dans les environnements conteneurisés, permettant aux applications de communiquer entre elles et avec le monde extérieur. Docker offre des options réseau robustes, flexibles et faciles à configurer, adaptées aux besoins variés des applications. Cette section explore les différents modes réseau de Docker, les réseaux personnalisés, et les techniques pour gérer la communication et l’isolation des conteneurs.</p>
 <hr />
-<h4 id="ii1a-modes-réseau-par-défaut-dans-docker"><a class="header" href="#ii1a-modes-réseau-par-défaut-dans-docker"><strong>II.1.a Modes réseau par défaut dans Docker</strong></a></h4>
+<h2 id="ii1a-modes-réseau-par-défaut-dans-docker"><a class="header" href="#ii1a-modes-réseau-par-défaut-dans-docker"><strong>II.1.a Modes réseau par défaut dans Docker</strong></a></h2>
 <p>Docker fournit trois modes réseau par défaut, chacun ayant des usages spécifiques :</p>
 <ol>
 <li>
@@ -1440,7 +1440,7 @@ Cela connecte le port 80 du conteneur au port 8080 de l’hôte.</li>
 </li>
 </ol>
 <hr />
-<h4 id="ii1b-réseaux-personnalisés-dans-docker"><a class="header" href="#ii1b-réseaux-personnalisés-dans-docker"><strong>II.1.b Réseaux personnalisés dans Docker</strong></a></h4>
+<h2 id="ii1b-réseaux-personnalisés-dans-docker"><a class="header" href="#ii1b-réseaux-personnalisés-dans-docker"><strong>II.1.b Réseaux personnalisés dans Docker</strong></a></h2>
 <p>Les réseaux personnalisés permettent un contrôle accru sur la communication inter-conteneurs et la résolution DNS. Ces réseaux sont souvent basés sur le mode bridge.</p>
 <p><strong>Créer un réseau personnalisé :</strong></p>
 <pre><code class="language-bash">docker network create my_custom_network
@@ -1458,7 +1458,7 @@ Cela connecte le port 80 du conteneur au port 8080 de l’hôte.</li>
 </code></pre>
 <p>En savoir plus : <a href="https://docs.docker.com/network/">Documentation sur les réseaux personnalisés</a>.</p>
 <hr />
-<h4 id="ii1c-exposer-des-ports"><a class="header" href="#ii1c-exposer-des-ports"><strong>II.1.c Exposer des ports</strong></a></h4>
+<h2 id="ii1c-exposer-des-ports"><a class="header" href="#ii1c-exposer-des-ports"><strong>II.1.c Exposer des ports</strong></a></h2>
 <p>Pour permettre un accès extérieur à un conteneur, Docker utilise des mappages de ports entre le conteneur et l’hôte.</p>
 <p><strong>Exemple :</strong><br />
 Pour exécuter un serveur web Nginx accessible via le port 8080 de l’hôte :</p>
@@ -1473,7 +1473,7 @@ Pour exécuter un serveur web Nginx accessible via le port 8080 de l’hôte :</
 </code></pre>
 <p>En savoir plus : <a href="https://docs.docker.com/config/containers/container-networking/#published-ports">Documentation sur les ports Docker</a>.</p>
 <hr />
-<h4 id="ii1d-communication-entre-conteneurs"><a class="header" href="#ii1d-communication-entre-conteneurs"><strong>II.1.d Communication entre conteneurs</strong></a></h4>
+<h2 id="ii1d-communication-entre-conteneurs"><a class="header" href="#ii1d-communication-entre-conteneurs"><strong>II.1.d Communication entre conteneurs</strong></a></h2>
 <p>Lorsque plusieurs conteneurs appartiennent au même réseau personnalisé, ils peuvent communiquer directement en utilisant leurs noms comme hostnames.</p>
 <p><strong>Exemple :</strong></p>
 <ol>
@@ -1491,7 +1491,7 @@ docker run --network my_app_network --name app2 busybox ping app1
 </ol>
 <p>Dans cet exemple, <code>app2</code> peut pinger <code>app1</code> grâce à la résolution DNS intégrée, sans nécessiter d’adresses IP explicites.</p>
 <hr />
-<h4 id="ii1e-isolation-et-contrôle-du-trafic-réseau"><a class="header" href="#ii1e-isolation-et-contrôle-du-trafic-réseau"><strong>II.1.e Isolation et contrôle du trafic réseau</strong></a></h4>
+<h2 id="ii1e-isolation-et-contrôle-du-trafic-réseau"><a class="header" href="#ii1e-isolation-et-contrôle-du-trafic-réseau"><strong>II.1.e Isolation et contrôle du trafic réseau</strong></a></h2>
 <p>Pour améliorer la sécurité ou tester la connectivité, Docker permet de limiter l’accès réseau des conteneurs.</p>
 <ul>
 <li>
@@ -1785,19 +1785,19 @@ docker run -d --name named-container2 --network custom-bridge busybox sleep 3600
 </details>
 <h2 id="quiz-2"><a class="header" href="#quiz-2"><strong>Quiz</strong></a></h2>
 <div class="quiz-placeholder" data-quiz-name="&quot;networking&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Le mode réseau `None` désactive complètement la connectivité réseau pour un conteneur, offrant une isolation totale.\n&quot;,&quot;id&quot;:&quot;44499283-5bbd-4dc8-9125-d079777d90a5&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;None&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Bridge&quot;,&quot;Host&quot;,&quot;Overlay&quot;],&quot;prompt&quot;:&quot;Quel mode réseau Docker offre une isolation réseau complète ?&quot;}},{&quot;context&quot;:&quot;Le mode réseau `bridge` est utilisé par défaut, permettant aux conteneurs de communiquer avec l’hôte et entre eux via un pont réseau.\n&quot;,&quot;id&quot;:&quot;1f3b6fe9-dd15-44f9-a504-8f6fd7a0c926&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;bridge&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quel est le mode réseau par défaut pour les conteneurs autonomes Docker ?&quot;}},{&quot;context&quot;:&quot;Un réseau Docker personnalisé permet aux conteneurs de se découvrir et de communiquer entre eux grâce à des noms DNS.\n&quot;,&quot;id&quot;:&quot;f26566fa-9913-431e-bac9-55ebf900c718&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Permettre la communication entre conteneurs via DNS.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Limiter l'accès réseau aux ressources externes.&quot;,&quot;Exécuter des conteneurs sans accès à Internet.&quot;,&quot;Exposer les ports des conteneurs à l'hôte.&quot;],&quot;prompt&quot;:&quot;Quel est le but d’un réseau Docker personnalisé ?&quot;}},{&quot;context&quot;:&quot;La commande `docker network disconnect` supprime la connexion d’un conteneur à un réseau sans arrêter le conteneur.\n&quot;,&quot;id&quot;:&quot;dfe4c1cb-77bf-4783-ab9e-d2871cd179d8&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker network disconnect&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quelle commande permet de déconnecter un conteneur d’un réseau Docker ?&quot;}},{&quot;context&quot;:&quot;La commande `docker network create` permet de définir un réseau personnalisé avec des options spécifiques comme le driver ou le sous-réseau.\n&quot;,&quot;id&quot;:&quot;8ff76ee4-feb6-412a-813c-d9e5be484ba7&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker network create&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker create network&quot;,&quot;docker net init&quot;,&quot;docker init --network&quot;],&quot;prompt&quot;:&quot;Quelle commande permet de créer un réseau Docker personnalisé ?&quot;}},{&quot;context&quot;:&quot;La commande `docker inspect` fournit des détails complets sur un conteneur, y compris ses configurations réseau.\n&quot;,&quot;id&quot;:&quot;8e76669b-8515-427a-ade7-01b153cd58ed&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker inspect&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker network inspect&quot;,&quot;docker net status&quot;,&quot;docker ps&quot;],&quot;prompt&quot;:&quot;Quelle commande inspecte la configuration réseau d’un conteneur ?&quot;}},{&quot;context&quot;:&quot;Le flag `--network` permet de spécifier le réseau auquel le conteneur sera connecté lors de son démarrage.\n&quot;,&quot;id&quot;:&quot;39ace6f6-0dd3-4598-b0fa-a9287dd9501f&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;--network&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quel flag est utilisé dans la commande `docker run` pour spécifier un réseau ?&quot;}},{&quot;context&quot;:&quot;Docker n'autorise pas deux conteneurs à exposer le même port sur l’hôte sans configuration explicite des ports externes.\n&quot;,&quot;id&quot;:&quot;3483eda4-3b44-4900-a373-4d928d2f0512&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Docker affichera une erreur pour ports en conflit.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Les deux conteneurs fonctionneront sans problème.&quot;,&quot;Docker attribuera automatiquement un port externe unique à chaque conteneur.&quot;,&quot;Les conteneurs partageront dynamiquement le port.&quot;],&quot;prompt&quot;:&quot;Que se passe-t-il si vous exécutez deux conteneurs avec le même port exposé sur l’hôte sans spécifier de ports externes ?&quot;}},{&quot;context&quot;:&quot;Le driver `bridge` est utilisé par défaut pour les réseaux personnalisés, offrant une isolation et une connectivité de base.\n&quot;,&quot;id&quot;:&quot;51bc3ffe-ee7f-4516-85db-1140eea90388&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;bridge&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quel est le driver par défaut utilisé lors de la création d’un réseau personnalisé ?&quot;}},{&quot;context&quot;:&quot;Dans les réseaux personnalisés, Docker utilise un serveur DNS intégré pour permettre aux conteneurs de se découvrir via leurs noms.\n&quot;,&quot;id&quot;:&quot;160ce730-11a4-408e-9996-1bf92b868a76&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;DNS&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Qu’est-ce que Docker utilise pour la découverte de services dans les réseaux personnalisés ?&quot;}}]}" data-quiz-fullscreen="true"></div>
-<script type="text/javascript" src="../../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h3 id="22-docker-compose-pour-des-applications-multi-container"><a class="header" href="#22-docker-compose-pour-des-applications-multi-container"><strong>2.2 Docker Compose pour des Applications Multi-Container</strong></a></h3>
+<script type="text/javascript" src="../../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="ii2-docker-compose-pour-des-applications-multi-container"><a class="header" href="#ii2-docker-compose-pour-des-applications-multi-container"><strong>II.2 Docker Compose pour des Applications Multi-Container</strong></a></h1>
 <hr />
 <p>Les applications modernes impliquent souvent plusieurs services qui doivent fonctionner ensemble, comme un serveur web, une base de données, et un cache. <strong>Docker Compose</strong> simplifie la gestion de ces applications multi-conteneurs en permettant de les définir, configurer, et exécuter via un fichier unique (<code>docker-compose.yml</code>). Cette section explore les concepts essentiels de Docker Compose, de la configuration des services à leur mise à l'échelle et leur débogage.</p>
 <hr />
-<h4 id="221-introduction-à-docker-compose"><a class="header" href="#221-introduction-à-docker-compose"><strong>2.2.1 Introduction à Docker Compose</strong></a></h4>
-<h5 id="quest-ce-que-docker-compose-"><a class="header" href="#quest-ce-que-docker-compose-"><strong>Qu’est-ce que Docker Compose ?</strong></a></h5>
+<h2 id="ii2a-introduction-à-docker-compose"><a class="header" href="#ii2a-introduction-à-docker-compose"><strong>II.2.a Introduction à Docker Compose</strong></a></h2>
+<h3 id="quest-ce-que-docker-compose-"><a class="header" href="#quest-ce-que-docker-compose-"><strong>Qu’est-ce que Docker Compose ?</strong></a></h3>
 <p>Docker Compose est un outil qui permet de définir et de gérer des applications conteneurisées composées de plusieurs services dans un fichier YAML. Il est particulièrement utile pour :</p>
 <ul>
 <li>Décrire les dépendances d’une application dans un fichier <code>docker-compose.yml</code>.</li>
 <li>Lancer ou arrêter tous les services associés avec une seule commande.</li>
 <li>Simplifier la gestion des réseaux, volumes, et configurations pour des applications complexes.</li>
 </ul>
-<h5 id="structure-clé-dun-fichier-docker-composeyml"><a class="header" href="#structure-clé-dun-fichier-docker-composeyml"><strong>Structure clé d’un fichier docker-compose.yml</strong></a></h5>
+<h3 id="structure-clé-dun-fichier-docker-composeyml"><a class="header" href="#structure-clé-dun-fichier-docker-composeyml"><strong>Structure clé d’un fichier docker-compose.yml</strong></a></h3>
 <p>Un fichier <code>docker-compose.yml</code> est structuré autour des éléments suivants :</p>
 <ol>
 <li><strong>Version :</strong> Définit la version du fichier Compose.</li>
@@ -1824,8 +1824,8 @@ services:
 </ul>
 <p>Pour plus de détails : <a href="https://docs.docker.com/compose/">Documentation officielle Docker Compose</a>.</p>
 <hr />
-<h4 id="222-définir-et-exécuter-des-services"><a class="header" href="#222-définir-et-exécuter-des-services"><strong>2.2.2 Définir et exécuter des services</strong></a></h4>
-<h5 id="créer-plusieurs-services-dans-un-seul-fichier"><a class="header" href="#créer-plusieurs-services-dans-un-seul-fichier"><strong>Créer plusieurs services dans un seul fichier</strong></a></h5>
+<h2 id="ii2b-définir-et-exécuter-des-services"><a class="header" href="#ii2b-définir-et-exécuter-des-services"><strong>II.2.b Définir et exécuter des services</strong></a></h2>
+<h4 id="créer-plusieurs-services-dans-un-seul-fichier"><a class="header" href="#créer-plusieurs-services-dans-un-seul-fichier"><strong>Créer plusieurs services dans un seul fichier</strong></a></h4>
 <p>Docker Compose permet de définir plusieurs services et leurs dépendances dans un fichier YAML.</p>
 <p><strong>Exemple : Application avec un backend et une base de données</strong></p>
 <pre><code class="language-yaml">version: "3.9"
@@ -1842,7 +1842,7 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
 </code></pre>
-<h5 id="lancer-et-arrêter-les-services-avec-docker-compose"><a class="header" href="#lancer-et-arrêter-les-services-avec-docker-compose"><strong>Lancer et arrêter les services avec Docker Compose</strong></a></h5>
+<h3 id="lancer-et-arrêter-les-services-avec-docker-compose"><a class="header" href="#lancer-et-arrêter-les-services-avec-docker-compose"><strong>Lancer et arrêter les services avec Docker Compose</strong></a></h3>
 <ul>
 <li>
 <p><strong>Lancer les services :</strong></p>
@@ -1857,8 +1857,8 @@ services:
 </ul>
 <p>Compose gère automatiquement la création des conteneurs, des réseaux et des volumes nécessaires.</p>
 <hr />
-<h4 id="223-configuration-des-services"><a class="header" href="#223-configuration-des-services"><strong>2.2.3 Configuration des services</strong></a></h4>
-<h5 id="variables-denvironnement"><a class="header" href="#variables-denvironnement"><strong>Variables d’environnement</strong></a></h5>
+<h2 id="ii2c-configuration-des-services"><a class="header" href="#ii2c-configuration-des-services"><strong>II.2.c Configuration des services</strong></a></h2>
+<h3 id="variables-denvironnement"><a class="header" href="#variables-denvironnement"><strong>Variables d’environnement</strong></a></h3>
 <p>Les variables d’environnement permettent de passer des configurations dynamiques aux services.</p>
 <p><strong>Exemple avec un fichier <code>.env</code> :</strong>
 <code>.env</code> :</p>
@@ -1875,7 +1875,7 @@ services:
 </code></pre>
 <p>Compose charge automatiquement les variables d’un fichier <code>.env</code> s’il est présent.</p>
 <hr />
-<h5 id="mapping-des-ports-et-gestion-des-volumes"><a class="header" href="#mapping-des-ports-et-gestion-des-volumes"><strong>Mapping des ports et gestion des volumes</strong></a></h5>
+<h3 id="mapping-des-ports-et-gestion-des-volumes"><a class="header" href="#mapping-des-ports-et-gestion-des-volumes"><strong>Mapping des ports et gestion des volumes</strong></a></h3>
 <ul>
 <li>
 <p><strong>Ports :</strong> Connectent les ports de l’hôte à ceux du conteneur.<br />
@@ -1893,7 +1893,7 @@ Exemple :</p>
 </li>
 </ul>
 <hr />
-<h5 id="gérer-les-dépendances-entre-services"><a class="header" href="#gérer-les-dépendances-entre-services"><strong>Gérer les dépendances entre services</strong></a></h5>
+<h3 id="gérer-les-dépendances-entre-services"><a class="header" href="#gérer-les-dépendances-entre-services"><strong>Gérer les dépendances entre services</strong></a></h3>
 <p>Vous pouvez définir l’ordre de démarrage des services à l’aide de <code>depends_on</code> :</p>
 <pre><code class="language-yaml">version: "3.9"
 services:
@@ -1906,18 +1906,18 @@ services:
 </code></pre>
 <p>Dans cet exemple, Docker Compose s’assure que le service <code>database</code> démarre avant <code>web</code>.</p>
 <hr />
-<h4 id="224-scalabilité-des-services"><a class="header" href="#224-scalabilité-des-services"><strong>2.2.4 Scalabilité des services</strong></a></h4>
-<h5 id="mise-à-léchelle-horizontale"><a class="header" href="#mise-à-léchelle-horizontale"><strong>Mise à l’échelle horizontale</strong></a></h5>
+<h2 id="ii2d-scalabilité-des-services"><a class="header" href="#ii2d-scalabilité-des-services"><strong>II.2.d Scalabilité des services</strong></a></h2>
+<h3 id="mise-à-léchelle-horizontale"><a class="header" href="#mise-à-léchelle-horizontale"><strong>Mise à l’échelle horizontale</strong></a></h3>
 <p>Docker Compose permet de scaler un service pour exécuter plusieurs instances. Cela est particulièrement utile pour les services stateless comme les serveurs web.</p>
 <p><strong>Exemple : Scaler un service</strong></p>
 <pre><code class="language-bash">docker compose up --scale web=3
 </code></pre>
 <p>Cela démarre 3 instances du service <code>web</code>.</p>
 <hr />
-<h5 id="test-de-léquilibrage-de-charge"><a class="header" href="#test-de-léquilibrage-de-charge"><strong>Test de l’équilibrage de charge</strong></a></h5>
+<h3 id="test-de-léquilibrage-de-charge"><a class="header" href="#test-de-léquilibrage-de-charge"><strong>Test de l’équilibrage de charge</strong></a></h3>
 <p>Avec plusieurs instances d’un service, Compose utilise des réseaux Docker pour équilibrer automatiquement les connexions entrantes. Vous pouvez tester ce comportement en envoyant des requêtes répétées à un service scaled.</p>
 <hr />
-<h4 id="225-logs-et-débogage-avec-docker-compose"><a class="header" href="#225-logs-et-débogage-avec-docker-compose"><strong>2.2.5 Logs et débogage avec Docker Compose</strong></a></h4>
+<h2 id="ii2e-logs-et-débogage-avec-docker-compose"><a class="header" href="#ii2e-logs-et-débogage-avec-docker-compose"><strong>II.2.e Logs et débogage avec Docker Compose</strong></a></h2>
 <ul>
 <li>
 <p><strong>Afficher les logs d’un service spécifique :</strong></p>
