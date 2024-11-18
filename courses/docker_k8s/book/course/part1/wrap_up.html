@@ -1,0 +1,474 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Résumé - Docker-K8s</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="../../course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="../../course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="../../course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="../../course/part1/wrap_up.html" class="active"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="../../course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="../../course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Docker-K8s</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="exercices-résumés-de-la-partie-1"><a class="header" href="#exercices-résumés-de-la-partie-1"><strong>Exercices résumés de la partie 1</strong></a></h2>
+<details>
+  <summary>End-to-End Container Workflow</summary>
+<h3 id="objectif"><a class="header" href="#objectif">Objectif</a></h3>
+<p>Mettez en œuvre un flux de travail complet : téléchargez une image, créez un conteneur, persistez des données à l’aide d’un volume et analysez les métadonnées du conteneur.</p>
+<hr />
+<h3 id="Étapes"><a class="header" href="#Étapes">Étapes</a></h3>
+<ol>
+<li>
+<p><strong>Télécharger une image</strong></p>
+<ul>
+<li>Téléchargez l'image <code>httpd</code> (Apache Web Server) depuis Docker Hub :
+<pre><code class="language-bash">docker pull httpd
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Créer et lancer un conteneur</strong></p>
+<ul>
+<li>Lancez un conteneur avec un volume nommé <code>web-data</code> pour stocker les fichiers web et exposez le port 8080 :
+<pre><code class="language-bash">docker run -d --name apache-container -v web-data:/usr/local/apache2/htdocs -p 8080:80 httpd
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Ajouter des données au volume</strong></p>
+<ul>
+<li>Ajoutez un fichier HTML dans le volume via le conteneur :
+<pre><code class="language-bash">docker exec apache-container sh -c "echo '&lt;h1&gt;Hello, End-to-End Workflow!&lt;/h1&gt;' &gt; /usr/local/apache2/htdocs/index.html"
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Analyser les métadonnées</strong></p>
+<ul>
+<li>Inspectez les métadonnées du conteneur :
+<pre><code class="language-bash">docker inspect apache-container
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Vérifier la persistance</strong></p>
+<ul>
+<li>Arrêtez et supprimez le conteneur, puis relancez un nouveau conteneur avec le même volume :
+<pre><code class="language-bash">docker stop apache-container
+docker rm apache-container
+docker run -d --name apache-container -v web-data:/usr/local/apache2/htdocs -p 8080:80 httpd
+</code></pre>
+</li>
+<li>Vérifiez que les données sont toujours accessibles à <code>http://localhost:8080</code>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="résultat-attendu"><a class="header" href="#résultat-attendu">Résultat attendu</a></h3>
+<p>Vous avez un conteneur opérationnel avec des données persistantes accessibles via un navigateur.</p>
+</details>
+<details>
+  <summary>Custom Application Deployment</summary>
+<h3 id="objectif-1"><a class="header" href="#objectif-1">Objectif</a></h3>
+<p>Créer une image Docker personnalisée pour une application de base, avec un volume pour les journaux.</p>
+<hr />
+<h3 id="Étapes-1"><a class="header" href="#Étapes-1">Étapes</a></h3>
+<ol>
+<li>
+<p><strong>Créer une application simple</strong></p>
+<ul>
+<li>Créez un fichier <code>app.py</code> contenant un script Python simple :
+<pre><code class="language-python">from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Hello, Custom Application Deployment!"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Créer un Dockerfile</strong></p>
+<ul>
+<li>Créez un fichier <code>Dockerfile</code> :
+<pre><code class="language-Dockerfile">FROM python:3.9
+WORKDIR /app
+COPY app.py .
+RUN pip install flask
+CMD ["python", "app.py"]
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Construire l'image</strong></p>
+<ul>
+<li>Construisez l'image avec un tag approprié :
+<pre><code class="language-bash">docker build -t custom-app .
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Lancer le conteneur avec un volume</strong></p>
+<ul>
+<li>Lancez un conteneur en mappant un volume pour les journaux d'application :
+<pre><code class="language-bash">docker run -d --name custom-app-container -v app-logs:/app/logs -p 5000:5000 custom-app
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Tester l'application</strong></p>
+<ul>
+<li>Accédez à l’application à <code>http://localhost:5000</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Vérifier les journaux</strong></p>
+<ul>
+<li>Ajoutez des logs dans le script (modifiez <code>app.py</code> pour écrire dans un fichier) et vérifiez leur présence dans le volume.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="résultat-attendu-1"><a class="header" href="#résultat-attendu-1">Résultat attendu</a></h3>
+<p>Une application Python conteneurisée fonctionnant avec des journaux persistants.</p>
+</details>
+<details>
+  <summary>Multi-Container Setup</summary>
+<h3 id="objectif-2"><a class="header" href="#objectif-2">Objectif</a></h3>
+<p>Déployer une pile web simple avec plusieurs conteneurs Docker et partager des données à l’aide de volumes.</p>
+<hr />
+<h3 id="Étapes-2"><a class="header" href="#Étapes-2">Étapes</a></h3>
+<ol>
+<li>
+<p><strong>Créer un réseau Docker</strong></p>
+<ul>
+<li>Créez un réseau Docker pour connecter les conteneurs :
+<pre><code class="language-bash">docker network create web-stack
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Lancer un conteneur MySQL</strong></p>
+<ul>
+<li>Créez un volume pour stocker les données MySQL :
+<pre><code class="language-bash">docker volume create mysql-data
+</code></pre>
+</li>
+<li>Lancez un conteneur MySQL sur le réseau :
+<pre><code class="language-bash">docker run -d --name mysql-container --network web-stack -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=webapp mysql:5.7
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Lancer un conteneur Nginx</strong></p>
+<ul>
+<li>Créez un fichier HTML statique dans un volume :
+<pre><code class="language-bash">mkdir ~/web-content
+echo "&lt;h1&gt;Welcome to the Web Stack!&lt;/h1&gt;" &gt; ~/web-content/index.html
+</code></pre>
+</li>
+<li>Lancez le conteneur Nginx avec le contenu partagé :
+<pre><code class="language-bash">docker run -d --name nginx-container --network web-stack -v ~/web-content:/usr/share/nginx/html:ro -p 8080:80 nginx
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Tester la pile</strong></p>
+<ul>
+<li>Accédez à <code>http://localhost:8080</code> pour vérifier que la pile fonctionne.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="résultat-attendu-2"><a class="header" href="#résultat-attendu-2">Résultat attendu</a></h3>
+<p>Une pile web avec une base de données persistante et un serveur web Nginx.</p>
+</details>
+<details>
+  <summary>CLI Troubleshooting</summary>
+<h3 id="objectif-3"><a class="header" href="#objectif-3">Objectif</a></h3>
+<p>Simuler des problèmes courants liés aux volumes et aux ports, puis les résoudre.</p>
+<hr />
+<h3 id="Étapes-3"><a class="header" href="#Étapes-3">Étapes</a></h3>
+<ol>
+<li>
+<p><strong>Simuler une erreur de volume</strong></p>
+<ul>
+<li>Lancez un conteneur avec un chemin local inexistant :
+<pre><code class="language-bash">docker run -d --name broken-volume -v /nonexistent:/data busybox
+</code></pre>
+</li>
+<li>Vérifiez l'erreur :
+<pre><code class="language-bash">docker logs broken-volume
+</code></pre>
+</li>
+<li>Corrigez l'erreur en créant le chemin et en relançant le conteneur :
+<pre><code class="language-bash">mkdir /nonexistent
+docker run -d --name fixed-volume -v /nonexistent:/data busybox
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Simuler une erreur de port</strong></p>
+<ul>
+<li>Lancez un conteneur Nginx avec un port déjà utilisé (ex. : <code>80</code>) :
+<pre><code class="language-bash">docker run -d --name broken-port -p 80:80 nginx
+</code></pre>
+</li>
+<li>Identifiez l'erreur en utilisant :
+<pre><code class="language-bash">docker logs broken-port
+</code></pre>
+</li>
+<li>Relancez avec un port différent :
+<pre><code class="language-bash">docker run -d --name fixed-port -p 8080:80 nginx
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Résoudre un conflit réseau</strong></p>
+<ul>
+<li>Essayez de connecter deux conteneurs non liés et corrigez en créant un réseau commun :
+<pre><code class="language-bash">docker network create troubleshooting-net
+docker network connect troubleshooting-net container1
+docker network connect troubleshooting-net container2
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="résultat-attendu-3"><a class="header" href="#résultat-attendu-3">Résultat attendu</a></h3>
+<p>Vous avez simulé et corrigé des erreurs liées aux volumes, aux ports et au réseau.</p>
+</details>
+<h2 id="quiz"><a class="header" href="#quiz"><strong>Quiz</strong></a></h2>
+<div class="quiz-placeholder" data-quiz-name="&quot;wrap_up&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;La commande `docker run -it` combine les flags `-i` (mode interactif) et `-t` (pseudo-terminal) pour permettre une interaction directe avec le conteneur.\n&quot;,&quot;id&quot;:&quot;470b59b5-52b7-4482-81c4-8b7d4a769fc0&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker run -it&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker start&quot;,&quot;docker exec&quot;,&quot;docker attach&quot;],&quot;prompt&quot;:&quot;Quelle commande est utilisée pour exécuter un conteneur de manière interactive ?&quot;}},{&quot;context&quot;:&quot;La commande `docker ps` affiche uniquement les conteneurs en cours d’exécution. Avec l’option `-a`, tous les conteneurs sont affichés, peu importe leur état.\n&quot;,&quot;id&quot;:&quot;2264b4c5-1bf0-432d-a167-db2a01a00b71&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker ps -a&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quelle commande Docker liste tous les conteneurs, y compris ceux qui sont arrêtés ?&quot;}},{&quot;context&quot;:&quot;Le démon Docker (dockerd) est responsable de la gestion des conteneurs, des images, des réseaux et des volumes.\n&quot;,&quot;id&quot;:&quot;c53e7334-03f0-420f-b83a-f180ee664918&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Il gère les conteneurs et les services Docker.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Il construit des images Docker.&quot;,&quot;Il fournit une interface pour les commandes utilisateur.&quot;,&quot;Il garantit l'isolation des conteneurs sur le système hôte.&quot;],&quot;prompt&quot;:&quot;Quel est le rôle du démon Docker ?&quot;}},{&quot;context&quot;:&quot;Le flag `-v` (ou `--volume`) est utilisé pour spécifier un volume à monter dans un conteneur.\n&quot;,&quot;id&quot;:&quot;e2d32aa2-c7f4-4fbe-8676-1acc1c96fbb4&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;-v&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quel flag est utilisé pour monter un volume dans un conteneur Docker ?&quot;}},{&quot;context&quot;:&quot;Les volumes Docker sont conçus pour être indépendants des conteneurs. Ils ne sont pas supprimés automatiquement, sauf si vous le spécifiez.\n&quot;,&quot;id&quot;:&quot;b2bbc1db-e9ca-4060-97c3-9f57d2cc2077&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Le volume persiste sur le système hôte.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Le volume est automatiquement supprimé.&quot;,&quot;Le volume est déplacé dans un répertoire de sauvegarde.&quot;,&quot;Le volume est renommé et archivé.&quot;],&quot;prompt&quot;:&quot;Que se passe-t-il avec un volume lorsqu'un conteneur associé est supprimé sans utiliser le flag `--rm` ?&quot;}},{&quot;context&quot;:&quot;La commande `docker pull` télécharge une image Docker depuis un registre, tel que Docker Hub.\n&quot;,&quot;id&quot;:&quot;52b0cd18-af50-49b1-9273-04f2876f2aaa&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker pull&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quelle commande est utilisée pour récupérer une image depuis Docker Hub ?&quot;}},{&quot;context&quot;:&quot;Contrairement aux machines virtuelles, les conteneurs utilisent directement le noyau de l'OS hôte, ce qui les rend plus légers et plus rapides.\n&quot;,&quot;id&quot;:&quot;2ebdb9af-8009-4e76-abad-44994b92788d&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Les conteneurs partagent le noyau du système d’exploitation hôte.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Les conteneurs nécessitent leur propre noyau d’OS.&quot;,&quot;Les conteneurs sont plus lourds que les machines virtuelles.&quot;,&quot;Les conteneurs nécessitent des hyperviseurs pour fonctionner.&quot;],&quot;prompt&quot;:&quot;Quelle caractéristique distingue les conteneurs des machines virtuelles ?&quot;}},{&quot;context&quot;:&quot;La commande `docker volume inspect` fournit des détails sur un volume, comme son emplacement ou les conteneurs qui l’utilisent.\n&quot;,&quot;id&quot;:&quot;bb800d38-cc66-4155-80eb-33fe238ed8b6&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker volume inspect&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quelle commande Docker est utilisée pour inspecter les métadonnées d’un volume ?&quot;}},{&quot;context&quot;:&quot;Les bind mounts permettent d’accéder directement aux répertoires de l’hôte depuis un conteneur, ce qui est utile pour le développement.\n&quot;,&quot;id&quot;:&quot;59a177e4-f984-41cb-a680-2b4190276496&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Ils mappent directement un répertoire de l’hôte au système de fichiers du conteneur.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Ils permettent l'accès au stockage géré par Docker sur l'hôte.&quot;,&quot;Ils persistent automatiquement après plusieurs redémarrages du conteneur.&quot;,&quot;Ils ne peuvent pas être utilisés pour des mises à jour de fichiers en direct.&quot;],&quot;prompt&quot;:&quot;Comment décririez-vous au mieux les bind mounts ?&quot;}},{&quot;context&quot;:&quot;Les données sur un stockage éphémère (non persistantes) sont perdues lorsqu’un conteneur est arrêté ou supprimé.\n&quot;,&quot;id&quot;:&quot;3b166cb7-64a9-437d-8364-d2bd0e7e324d&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;perdues&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Que se passe-t-il avec les données stockées sur un stockage éphémère lorsque le conteneur est arrêté ?&quot;}},{&quot;context&quot;:&quot;La commande `docker build` crée une nouvelle image à partir d’un fichier Dockerfile et d’un contexte de construction.\n&quot;,&quot;id&quot;:&quot;49c69174-58e7-4434-b582-a2996d7eccfe&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker build&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker run&quot;,&quot;docker pull&quot;,&quot;docker image create&quot;],&quot;prompt&quot;:&quot;Laquelle de ces commandes Docker crée une nouvelle image personnalisée ?&quot;}},{&quot;context&quot;:&quot;La commande `docker logs` est utilisée pour afficher les journaux d’un conteneur, facilitant le débogage des applications.\n&quot;,&quot;id&quot;:&quot;51c9f3ad-6987-4655-ab9e-4619241be2d0&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;débogage&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quel est le but principal de la commande `docker logs` ?&quot;}},{&quot;context&quot;:&quot;Les volumes sont conçus pour être utilisés en production grâce à leur gestion simplifiée, leur sécurité et leurs performances optimisées.\n&quot;,&quot;id&quot;:&quot;035e9d02-e4ea-4299-b628-876581041f11&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Lors du déploiement d’une base de données conteneurisée en production.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Lorsque vous avez besoin d’un accès direct au système de fichiers hôte pour le développement.&quot;,&quot;Lors du déploiement d’une base de données conteneurisée en production.&quot;,&quot;Lors de la gestion d’un environnement de développement local.&quot;,&quot;Lors du transfert de données entre deux conteneurs.&quot;],&quot;prompt&quot;:&quot;Dans quelle situation préféreriez-vous un volume à un bind mount ?&quot;}},{&quot;context&quot;:&quot;Docker prend en charge deux types de stockage persistant : les volumes, gérés par Docker, et les bind mounts, qui utilisent les répertoires de l’hôte.\n&quot;,&quot;id&quot;:&quot;c2a0ce39-c05a-45f9-bf1d-b45a51aea727&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;volumes, bind mounts&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Nommez les deux principaux types de stockage persistant dans Docker.&quot;}},{&quot;context&quot;:&quot;`docker system prune` est une commande puissante qui nettoie le système en supprimant tout ce qui est inutilisé, y compris les volumes anonymes.\n&quot;,&quot;id&quot;:&quot;ff642f30-d1b1-4631-9daf-217eec1e6905&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Elle supprime tous les conteneurs, images et volumes inutilisés.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Elle supprime tous les conteneurs en cours d’exécution.&quot;,&quot;Elle arrête tous les conteneurs en cours d’exécution.&quot;,&quot;Elle supprime Docker du système.&quot;],&quot;prompt&quot;:&quot;Que fait la commande `docker system prune` ?&quot;}}]}" data-quiz-fullscreen="true"></div>
+<script type="text/javascript" src="../../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../../quiz/style.css">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../course/part1/volumes.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../course/part2/intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../course/part1/volumes.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../course/part2/intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

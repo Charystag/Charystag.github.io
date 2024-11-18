@@ -1,0 +1,175 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande est utilisée pour exécuter un conteneur de manière interactive ?"
+prompt.distractors = [
+  "docker start",
+  "docker exec",
+  "docker attach"
+]
+answer.answer = "docker run -it"
+context = """
+La commande `docker run -it` combine les flags `-i` (mode interactif) et `-t` (pseudo-terminal) pour permettre une interaction directe avec le conteneur.
+"""
+id = "470b59b5-52b7-4482-81c4-8b7d4a769fc0"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quelle commande Docker liste tous les conteneurs, y compris ceux qui sont arrêtés ?"
+answer.answer = "docker ps -a"
+context = """
+La commande `docker ps` affiche uniquement les conteneurs en cours d’exécution. Avec l’option `-a`, tous les conteneurs sont affichés, peu importe leur état.
+"""
+id = "2264b4c5-1bf0-432d-a167-db2a01a00b71"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle du démon Docker ?"
+prompt.distractors = [
+  "Il construit des images Docker.",
+  "Il fournit une interface pour les commandes utilisateur.",
+  "Il garantit l'isolation des conteneurs sur le système hôte."
+]
+answer.answer = "Il gère les conteneurs et les services Docker."
+context = """
+Le démon Docker (dockerd) est responsable de la gestion des conteneurs, des images, des réseaux et des volumes.
+"""
+id = "c53e7334-03f0-420f-b83a-f180ee664918"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quel flag est utilisé pour monter un volume dans un conteneur Docker ?"
+answer.answer = "-v"
+context = """
+Le flag `-v` (ou `--volume`) est utilisé pour spécifier un volume à monter dans un conteneur.
+"""
+id = "e2d32aa2-c7f4-4fbe-8676-1acc1c96fbb4"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que se passe-t-il avec un volume lorsqu'un conteneur associé est supprimé sans utiliser le flag `--rm` ?"
+prompt.distractors = [
+  "Le volume est automatiquement supprimé.",
+  "Le volume est déplacé dans un répertoire de sauvegarde.",
+  "Le volume est renommé et archivé."
+]
+answer.answer = "Le volume persiste sur le système hôte."
+context = """
+Les volumes Docker sont conçus pour être indépendants des conteneurs. Ils ne sont pas supprimés automatiquement, sauf si vous le spécifiez.
+"""
+id = "b2bbc1db-e9ca-4060-97c3-9f57d2cc2077"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quelle commande est utilisée pour récupérer une image depuis Docker Hub ?"
+answer.answer = "docker pull"
+context = """
+La commande `docker pull` télécharge une image Docker depuis un registre, tel que Docker Hub.
+"""
+id = "52b0cd18-af50-49b1-9273-04f2876f2aaa"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle caractéristique distingue les conteneurs des machines virtuelles ?"
+prompt.distractors = [
+  "Les conteneurs nécessitent leur propre noyau d’OS.",
+  "Les conteneurs sont plus lourds que les machines virtuelles.",
+  "Les conteneurs nécessitent des hyperviseurs pour fonctionner."
+]
+answer.answer = "Les conteneurs partagent le noyau du système d’exploitation hôte."
+context = """
+Contrairement aux machines virtuelles, les conteneurs utilisent directement le noyau de l'OS hôte, ce qui les rend plus légers et plus rapides.
+"""
+id = "2ebdb9af-8009-4e76-abad-44994b92788d"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quelle commande Docker est utilisée pour inspecter les métadonnées d’un volume ?"
+answer.answer = "docker volume inspect"
+context = """
+La commande `docker volume inspect` fournit des détails sur un volume, comme son emplacement ou les conteneurs qui l’utilisent.
+"""
+id = "bb800d38-cc66-4155-80eb-33fe238ed8b6"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment décririez-vous au mieux les bind mounts ?"
+prompt.distractors = [
+  "Ils permettent l'accès au stockage géré par Docker sur l'hôte.",
+  "Ils persistent automatiquement après plusieurs redémarrages du conteneur.",
+  "Ils ne peuvent pas être utilisés pour des mises à jour de fichiers en direct."
+]
+answer.answer = "Ils mappent directement un répertoire de l’hôte au système de fichiers du conteneur."
+context = """
+Les bind mounts permettent d’accéder directement aux répertoires de l’hôte depuis un conteneur, ce qui est utile pour le développement.
+"""
+id = "59a177e4-f984-41cb-a680-2b4190276496"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Que se passe-t-il avec les données stockées sur un stockage éphémère lorsque le conteneur est arrêté ?"
+answer.answer = "perdues"
+context = """
+Les données sur un stockage éphémère (non persistantes) sont perdues lorsqu’un conteneur est arrêté ou supprimé.
+"""
+id = "3b166cb7-64a9-437d-8364-d2bd0e7e324d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Laquelle de ces commandes Docker crée une nouvelle image personnalisée ?"
+prompt.distractors = [
+  "docker run",
+  "docker pull",
+  "docker image create"
+]
+answer.answer = "docker build"
+context = """
+La commande `docker build` crée une nouvelle image à partir d’un fichier Dockerfile et d’un contexte de construction.
+"""
+id = "49c69174-58e7-4434-b582-a2996d7eccfe"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quel est le but principal de la commande `docker logs` ?"
+answer.answer = "débogage"
+context = """
+La commande `docker logs` est utilisée pour afficher les journaux d’un conteneur, facilitant le débogage des applications.
+"""
+id = "51c9f3ad-6987-4655-ab9e-4619241be2d0"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quelle situation préféreriez-vous un volume à un bind mount ?"
+prompt.distractors = [
+  "Lorsque vous avez besoin d’un accès direct au système de fichiers hôte pour le développement.",
+  "Lors du déploiement d’une base de données conteneurisée en production.",
+  "Lors de la gestion d’un environnement de développement local.",
+  "Lors du transfert de données entre deux conteneurs."
+]
+answer.answer = "Lors du déploiement d’une base de données conteneurisée en production."
+context = """
+Les volumes sont conçus pour être utilisés en production grâce à leur gestion simplifiée, leur sécurité et leurs performances optimisées.
+"""
+id = "035e9d02-e4ea-4299-b628-876581041f11"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Nommez les deux principaux types de stockage persistant dans Docker."
+answer.answer = "volumes, bind mounts"
+context = """
+Docker prend en charge deux types de stockage persistant : les volumes, gérés par Docker, et les bind mounts, qui utilisent les répertoires de l’hôte.
+"""
+id = "c2a0ce39-c05a-45f9-bf1d-b45a51aea727"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que fait la commande `docker system prune` ?"
+prompt.distractors = [
+  "Elle supprime tous les conteneurs en cours d’exécution.",
+  "Elle arrête tous les conteneurs en cours d’exécution.",
+  "Elle supprime Docker du système."
+]
+answer.answer = "Elle supprime tous les conteneurs, images et volumes inutilisés."
+context = """
+`docker system prune` est une commande puissante qui nettoie le système en supprimant tout ce qui est inutilisé, y compris les volumes anonymes.
+"""
+id = "ff642f30-d1b1-4631-9daf-217eec1e6905"

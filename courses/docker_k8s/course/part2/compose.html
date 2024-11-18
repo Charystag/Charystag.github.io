@@ -1,0 +1,745 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Docker Compose - Docker-K8s</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="../../course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="../../course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="../../course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="../../course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="../../course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="../../course/part2/compose.html" class="active"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Docker-K8s</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h3 id="22-docker-compose-pour-des-applications-multi-container"><a class="header" href="#22-docker-compose-pour-des-applications-multi-container"><strong>2.2 Docker Compose pour des Applications Multi-Container</strong></a></h3>
+<hr />
+<p>Les applications modernes impliquent souvent plusieurs services qui doivent fonctionner ensemble, comme un serveur web, une base de données, et un cache. <strong>Docker Compose</strong> simplifie la gestion de ces applications multi-conteneurs en permettant de les définir, configurer, et exécuter via un fichier unique (<code>docker-compose.yml</code>). Cette section explore les concepts essentiels de Docker Compose, de la configuration des services à leur mise à l'échelle et leur débogage.</p>
+<hr />
+<h4 id="221-introduction-à-docker-compose"><a class="header" href="#221-introduction-à-docker-compose"><strong>2.2.1 Introduction à Docker Compose</strong></a></h4>
+<h5 id="quest-ce-que-docker-compose-"><a class="header" href="#quest-ce-que-docker-compose-"><strong>Qu’est-ce que Docker Compose ?</strong></a></h5>
+<p>Docker Compose est un outil qui permet de définir et de gérer des applications conteneurisées composées de plusieurs services dans un fichier YAML. Il est particulièrement utile pour :</p>
+<ul>
+<li>Décrire les dépendances d’une application dans un fichier <code>docker-compose.yml</code>.</li>
+<li>Lancer ou arrêter tous les services associés avec une seule commande.</li>
+<li>Simplifier la gestion des réseaux, volumes, et configurations pour des applications complexes.</li>
+</ul>
+<h5 id="structure-clé-dun-fichier-docker-composeyml"><a class="header" href="#structure-clé-dun-fichier-docker-composeyml"><strong>Structure clé d’un fichier docker-compose.yml</strong></a></h5>
+<p>Un fichier <code>docker-compose.yml</code> est structuré autour des éléments suivants :</p>
+<ol>
+<li><strong>Version :</strong> Définit la version du fichier Compose.</li>
+<li><strong>Services :</strong> Liste les conteneurs qui composent l’application, avec leurs configurations respectives.</li>
+<li><strong>Réseaux :</strong> Définit comment les conteneurs communiquent entre eux.</li>
+<li><strong>Volumes :</strong> Permet de gérer les données persistantes.</li>
+</ol>
+<p><strong>Exemple minimaliste :</strong></p>
+<pre><code class="language-yaml">version: "3.9"
+services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+  database:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+</code></pre>
+<p>Dans cet exemple :</p>
+<ul>
+<li><code>web</code> exécute un serveur Nginx accessible sur le port 8080.</li>
+<li><code>database</code> exécute une base MySQL avec une variable d’environnement.</li>
+</ul>
+<p>Pour plus de détails : <a href="https://docs.docker.com/compose/">Documentation officielle Docker Compose</a>.</p>
+<hr />
+<h4 id="222-définir-et-exécuter-des-services"><a class="header" href="#222-définir-et-exécuter-des-services"><strong>2.2.2 Définir et exécuter des services</strong></a></h4>
+<h5 id="créer-plusieurs-services-dans-un-seul-fichier"><a class="header" href="#créer-plusieurs-services-dans-un-seul-fichier"><strong>Créer plusieurs services dans un seul fichier</strong></a></h5>
+<p>Docker Compose permet de définir plusieurs services et leurs dépendances dans un fichier YAML.</p>
+<p><strong>Exemple : Application avec un backend et une base de données</strong></p>
+<pre><code class="language-yaml">version: "3.9"
+services:
+  backend:
+    image: python:3.9
+    volumes:
+      - "./app:/usr/src/app"
+    working_dir: /usr/src/app
+    command: python app.py
+  database:
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+</code></pre>
+<h5 id="lancer-et-arrêter-les-services-avec-docker-compose"><a class="header" href="#lancer-et-arrêter-les-services-avec-docker-compose"><strong>Lancer et arrêter les services avec Docker Compose</strong></a></h5>
+<ul>
+<li>
+<p><strong>Lancer les services :</strong></p>
+<pre><code class="language-bash">docker compose up
+</code></pre>
+</li>
+<li>
+<p><strong>Arrêter les services :</strong></p>
+<pre><code class="language-bash">docker compose down
+</code></pre>
+</li>
+</ul>
+<p>Compose gère automatiquement la création des conteneurs, des réseaux et des volumes nécessaires.</p>
+<hr />
+<h4 id="223-configuration-des-services"><a class="header" href="#223-configuration-des-services"><strong>2.2.3 Configuration des services</strong></a></h4>
+<h5 id="variables-denvironnement"><a class="header" href="#variables-denvironnement"><strong>Variables d’environnement</strong></a></h5>
+<p>Les variables d’environnement permettent de passer des configurations dynamiques aux services.</p>
+<p><strong>Exemple avec un fichier <code>.env</code> :</strong>
+<code>.env</code> :</p>
+<pre><code>MYSQL_USER=root
+MYSQL_PASSWORD=example
+</code></pre>
+<p><code>docker-compose.yml</code> :</p>
+<pre><code class="language-yaml">version: "3.9"
+services:
+  database:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+</code></pre>
+<p>Compose charge automatiquement les variables d’un fichier <code>.env</code> s’il est présent.</p>
+<hr />
+<h5 id="mapping-des-ports-et-gestion-des-volumes"><a class="header" href="#mapping-des-ports-et-gestion-des-volumes"><strong>Mapping des ports et gestion des volumes</strong></a></h5>
+<ul>
+<li>
+<p><strong>Ports :</strong> Connectent les ports de l’hôte à ceux du conteneur.<br />
+Exemple :</p>
+<pre><code class="language-yaml">ports:
+  - "8080:80"
+</code></pre>
+</li>
+<li>
+<p><strong>Volumes :</strong> Gèrent les données persistantes.<br />
+Exemple :</p>
+<pre><code class="language-yaml">volumes:
+  - "./data:/var/lib/mysql"
+</code></pre>
+</li>
+</ul>
+<hr />
+<h5 id="gérer-les-dépendances-entre-services"><a class="header" href="#gérer-les-dépendances-entre-services"><strong>Gérer les dépendances entre services</strong></a></h5>
+<p>Vous pouvez définir l’ordre de démarrage des services à l’aide de <code>depends_on</code> :</p>
+<pre><code class="language-yaml">version: "3.9"
+services:
+  web:
+    image: nginx
+    depends_on:
+      - database
+  database:
+    image: mysql
+</code></pre>
+<p>Dans cet exemple, Docker Compose s’assure que le service <code>database</code> démarre avant <code>web</code>.</p>
+<hr />
+<h4 id="224-scalabilité-des-services"><a class="header" href="#224-scalabilité-des-services"><strong>2.2.4 Scalabilité des services</strong></a></h4>
+<h5 id="mise-à-léchelle-horizontale"><a class="header" href="#mise-à-léchelle-horizontale"><strong>Mise à l’échelle horizontale</strong></a></h5>
+<p>Docker Compose permet de scaler un service pour exécuter plusieurs instances. Cela est particulièrement utile pour les services stateless comme les serveurs web.</p>
+<p><strong>Exemple : Scaler un service</strong></p>
+<pre><code class="language-bash">docker compose up --scale web=3
+</code></pre>
+<p>Cela démarre 3 instances du service <code>web</code>.</p>
+<hr />
+<h5 id="test-de-léquilibrage-de-charge"><a class="header" href="#test-de-léquilibrage-de-charge"><strong>Test de l’équilibrage de charge</strong></a></h5>
+<p>Avec plusieurs instances d’un service, Compose utilise des réseaux Docker pour équilibrer automatiquement les connexions entrantes. Vous pouvez tester ce comportement en envoyant des requêtes répétées à un service scaled.</p>
+<hr />
+<h4 id="225-logs-et-débogage-avec-docker-compose"><a class="header" href="#225-logs-et-débogage-avec-docker-compose"><strong>2.2.5 Logs et débogage avec Docker Compose</strong></a></h4>
+<ul>
+<li>
+<p><strong>Afficher les logs d’un service spécifique :</strong></p>
+<pre><code class="language-bash">docker compose logs &lt;service_name&gt;
+</code></pre>
+<p>Exemple :</p>
+<pre><code class="language-bash">docker compose logs web
+</code></pre>
+</li>
+<li>
+<p><strong>Déboguer les erreurs dans le fichier docker-compose.yml :</strong></p>
+<ul>
+<li>Vérifiez les erreurs de syntaxe avec :
+<pre><code class="language-bash">docker compose config
+</code></pre>
+</li>
+<li>Assurez-vous que toutes les variables d’environnement sont définies correctement.</li>
+</ul>
+</li>
+</ul>
+<h2 id="exercices"><a class="header" href="#exercices"><strong>Exercices</strong></a></h2>
+<hr />
+<h3 id="1-creating-a-basic-docker-composeyml-file"><a class="header" href="#1-creating-a-basic-docker-composeyml-file"><strong>1. Creating a Basic <code>docker-compose.yml</code> File</strong></a></h3>
+<details>
+  <summary>Exercise 1: Define a Web App and Database</summary>
+<h3 id="goal"><a class="header" href="#goal">Goal</a></h3>
+<p>Create a <code>docker-compose.yml</code> file for a web app (e.g., Flask) and a database (e.g., MySQL) and test connectivity between the containers.</p>
+<hr />
+<h3 id="steps"><a class="header" href="#steps">Steps</a></h3>
+<ol>
+<li>
+<p><strong>Create the Compose file</strong>:</p>
+<ul>
+<li>Define the following services in <code>docker-compose.yml</code>:
+<pre><code class="language-yaml">version: "3.8"
+services:
+  web:
+    image: python:3.9
+    command: &gt;
+      sh -c "pip install flask &amp;&amp; python -m flask run --host=0.0.0.0"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Start the services</strong>:</p>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+</li>
+<li>
+<p><strong>Test connectivity</strong>:</p>
+<ul>
+<li>Connect to the <code>web</code> container and check if it can access the <code>db</code> service using its hostname <code>db</code>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="expected-result"><a class="header" href="#expected-result">Expected Result</a></h3>
+<p>The web app connects successfully to the MySQL database using the hostname <code>db</code>.</p>
+</details>
+<details>
+  <summary>Exercise 2: Add Port Mapping</summary>
+<h3 id="goal-1"><a class="header" href="#goal-1">Goal</a></h3>
+<p>Add port mapping to the web app and verify external access.</p>
+<hr />
+<h3 id="steps-1"><a class="header" href="#steps-1">Steps</a></h3>
+<ol>
+<li>
+<p><strong>Modify <code>docker-compose.yml</code></strong>:</p>
+<ul>
+<li>Ensure the web app’s service includes:
+<pre><code class="language-yaml">ports:
+  - "5000:5000"
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Restart the Compose stack</strong>:</p>
+<pre><code class="language-bash">docker-compose down
+docker-compose up -d
+</code></pre>
+</li>
+<li>
+<p><strong>Verify external access</strong>:</p>
+<ul>
+<li>Open your browser and navigate to <code>http://localhost:5000</code>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="expected-result-1"><a class="header" href="#expected-result-1">Expected Result</a></h3>
+<p>The web app is accessible externally via the host browser.</p>
+</details>
+<details>
+  <summary>Exercise 3: Add Environment Variables</summary>
+<h3 id="goal-2"><a class="header" href="#goal-2">Goal</a></h3>
+<p>Configure the database connection in the web app using environment variables.</p>
+<hr />
+<h3 id="steps-2"><a class="header" href="#steps-2">Steps</a></h3>
+<ol>
+<li>
+<p><strong>Update <code>docker-compose.yml</code></strong>:</p>
+<ul>
+<li>Add environment variables to the <code>web</code> service:
+<pre><code class="language-yaml">environment:
+  DB_HOST: db
+  DB_NAME: testdb
+  DB_USER: root
+  DB_PASSWORD: root
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Modify the web app to use these variables</strong>:</p>
+<ul>
+<li>Update the Flask app to read database credentials from environment variables using Python’s <code>os.environ</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Restart the Compose stack</strong>:</p>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+</li>
+<li>
+<p><strong>Verify the connection</strong>:</p>
+<ul>
+<li>Test that the web app successfully connects to the database using the environment variables.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="expected-result-2"><a class="header" href="#expected-result-2">Expected Result</a></h3>
+<p>The web app connects to the database using the configured environment variables.</p>
+</details>
+<hr />
+<h3 id="2-managing-multi-container-applications"><a class="header" href="#2-managing-multi-container-applications"><strong>2. Managing Multi-Container Applications</strong></a></h3>
+<details>
+  <summary>Exercise 4: Start and Stop Services</summary>
+<h3 id="goal-3"><a class="header" href="#goal-3">Goal</a></h3>
+<p>Learn to start and stop a multi-container setup using Docker Compose.</p>
+<hr />
+<h3 id="steps-3"><a class="header" href="#steps-3">Steps</a></h3>
+<ol>
+<li>
+<p><strong>Start the services</strong>:</p>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+</li>
+<li>
+<p><strong>Stop the services and clean up resources</strong>:</p>
+<pre><code class="language-bash">docker-compose down
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="expected-result-3"><a class="header" href="#expected-result-3">Expected Result</a></h3>
+<p>The multi-container setup starts and stops cleanly with no leftover resources.</p>
+</details>
+<details>
+  <summary>Exercise 5: Restart Specific Services</summary>
+<h3 id="goal-4"><a class="header" href="#goal-4">Goal</a></h3>
+<p>Restart a specific service using Docker Compose.</p>
+<hr />
+<h3 id="steps-4"><a class="header" href="#steps-4">Steps</a></h3>
+<ol>
+<li>
+<p><strong>Start the services</strong>:</p>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+</li>
+<li>
+<p><strong>Restart the database service</strong>:</p>
+<pre><code class="language-bash">docker-compose restart db
+</code></pre>
+</li>
+<li>
+<p><strong>Observe the behavior</strong>:</p>
+<ul>
+<li>Check logs for the restarted service to confirm its behavior.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="expected-result-4"><a class="header" href="#expected-result-4">Expected Result</a></h3>
+<p>Only the specified service restarts, while others continue running.</p>
+</details>
+<hr />
+<h3 id="3-scaling-services"><a class="header" href="#3-scaling-services"><strong>3. Scaling Services</strong></a></h3>
+<details>
+  <summary>Exercise 6: Scale a Stateless Service</summary>
+<h3 id="goal-5"><a class="header" href="#goal-5">Goal</a></h3>
+<p>Scale a stateless web application to multiple instances using Docker Compose.</p>
+<hr />
+<h3 id="steps-5"><a class="header" href="#steps-5">Steps</a></h3>
+<ol>
+<li>
+<p><strong>Update the Compose file</strong>:</p>
+<ul>
+<li>Use an nginx image for the web service.</li>
+</ul>
+</li>
+<li>
+<p><strong>Scale the web service</strong>:</p>
+<pre><code class="language-bash">docker-compose up -d --scale web=3
+</code></pre>
+</li>
+<li>
+<p><strong>Verify the scaling</strong>:</p>
+<ul>
+<li>Use <code>docker-compose ps</code> to see the scaled instances.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="expected-result-5"><a class="header" href="#expected-result-5">Expected Result</a></h3>
+<p>Three instances of the web service are running.</p>
+</details>
+<details>
+  <summary>Exercise 7: Test Scaled Services</summary>
+<h3 id="goal-6"><a class="header" href="#goal-6">Goal</a></h3>
+<p>Test the behavior of scaled services by sending multiple requests.</p>
+<hr />
+<h3 id="steps-6"><a class="header" href="#steps-6">Steps</a></h3>
+<ol>
+<li>
+<p><strong>Send multiple requests</strong>:</p>
+<pre><code class="language-bash">for i in {1..10}; do curl http://localhost:5000; done
+</code></pre>
+</li>
+<li>
+<p><strong>Observe load balancing</strong>:</p>
+<ul>
+<li>Note if the requests are distributed across different instances (requires a load balancer).</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="expected-result-6"><a class="header" href="#expected-result-6">Expected Result</a></h3>
+<p>Requests are distributed across multiple instances.</p>
+</details>
+<hr />
+<h3 id="4-advanced-configuration"><a class="header" href="#4-advanced-configuration"><strong>4. Advanced Configuration</strong></a></h3>
+<details>
+  <summary>Exercise 8: Shared Volume</summary>
+<h3 id="goal-7"><a class="header" href="#goal-7">Goal</a></h3>
+<p>Define a shared volume in the Compose file and test data persistence.</p>
+<hr />
+<h3 id="steps-7"><a class="header" href="#steps-7">Steps</a></h3>
+<ol>
+<li>
+<p><strong>Update the Compose file</strong>:</p>
+<ul>
+<li>Add a shared volume for the services:
+<pre><code class="language-yaml">volumes:
+  shared-data:
+services:
+  web:
+    ...
+    volumes:
+      - shared-data:/app/data
+  db:
+    ...
+    volumes:
+      - shared-data:/var/lib/mysql
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Restart the services</strong>:</p>
+<pre><code class="language-bash">docker-compose down
+docker-compose up -d
+</code></pre>
+</li>
+<li>
+<p><strong>Test persistence</strong>:</p>
+<ul>
+<li>Add files or data and restart the services to verify persistence.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="expected-result-7"><a class="header" href="#expected-result-7">Expected Result</a></h3>
+<p>Data persists across service restarts.</p>
+</details>
+<details>
+  <summary>Exercise 9: Service Dependencies</summary>
+<h3 id="goal-8"><a class="header" href="#goal-8">Goal</a></h3>
+<p>Set dependencies between services using the <code>depends_on</code> property.</p>
+<hr />
+<h3 id="steps-8"><a class="header" href="#steps-8">Steps</a></h3>
+<ol>
+<li>
+<p><strong>Update <code>docker-compose.yml</code></strong>:</p>
+<ul>
+<li>Add <code>depends_on</code> to ensure the database starts before the web app:
+<pre><code class="language-yaml">web:
+  ...
+  depends_on:
+    - db
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Restart the services</strong>:</p>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+</li>
+<li>
+<p><strong>Verify behavior</strong>:</p>
+<ul>
+<li>Confirm that the web app only starts after the database.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="expected-result-8"><a class="header" href="#expected-result-8">Expected Result</a></h3>
+<p>Services respect the specified startup order.</p>
+</details>
+<hr />
+<h3 id="5-logs-and-debugging"><a class="header" href="#5-logs-and-debugging"><strong>5. Logs and Debugging</strong></a></h3>
+<details>
+  <summary>Exercise 10: View Service Logs</summary>
+<h3 id="goal-9"><a class="header" href="#goal-9">Goal</a></h3>
+<p>Use <code>docker-compose logs</code> to view logs for individual services.</p>
+<hr />
+<h3 id="steps-9"><a class="header" href="#steps-9">Steps</a></h3>
+<ol>
+<li>
+<p><strong>Start the services</strong>:</p>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+</li>
+<li>
+<p><strong>View logs for a specific service</strong>:</p>
+<pre><code class="language-bash">docker-compose logs web
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="expected-result-9"><a class="header" href="#expected-result-9">Expected Result</a></h3>
+<p>Logs for the web service are displayed.</p>
+</details>
+<details>
+  <summary>Exercise 11: Troubleshooting Syntax Errors</summary>
+<h3 id="goal-10"><a class="header" href="#goal-10">Goal</a></h3>
+<p>Identify and fix syntax errors in a <code>docker-compose.yml</code> file.</p>
+<hr />
+<h3 id="steps-10"><a class="header" href="#steps-10">Steps</a></h3>
+<ol>
+<li>
+<p><strong>Introduce an error</strong>:</p>
+<ul>
+<li>Modify the Compose file with a syntax error (e.g., remove a colon).</li>
+</ul>
+</li>
+<li>
+<p><strong>Try starting the services</strong>:</p>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+</li>
+<li>
+<p><strong>Analyze the error</strong>:</p>
+<ul>
+<li>Read the error message and locate the issue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fix the error</strong> and retry:</p>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="expected-result-10"><a class="header" href="#expected-result-10">Expected Result</a></h3>
+<p>The syntax error is identified and resolved.</p>
+</details>
+<h2 id="quiz"><a class="header" href="#quiz"><strong>Quiz</strong></a></h2>
+<div class="quiz-placeholder" data-quiz-name="&quot;compose&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;La commande `docker compose down` arrête tous les conteneurs et supprime également les réseaux et volumes définis dans le fichier Compose.\n&quot;,&quot;id&quot;:&quot;22025d3c-592a-4954-9116-3acf93e652ac&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose down&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quelle commande est utilisée pour arrêter et supprimer tous les services définis dans un fichier Compose ?&quot;}},{&quot;context&quot;:&quot;Docker Compose est utilisé pour définir et exécuter des applications comprenant plusieurs conteneurs via un fichier de configuration unique.\n&quot;,&quot;id&quot;:&quot;074fc5fe-ad5b-4be5-986d-98c41934054c&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Gérer les applications multi-conteneurs.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Construire des images Docker.&quot;,&quot;Optimiser les performances des conteneurs.&quot;,&quot;Résoudre les problèmes de réseau des conteneurs.&quot;],&quot;prompt&quot;:&quot;Quel est le rôle de Docker Compose ?&quot;}},{&quot;context&quot;:&quot;Docker Compose utilise le format YAML pour décrire les services, réseaux et volumes dans une application multi-conteneurs.\n&quot;,&quot;id&quot;:&quot;c2c1a02d-759a-4010-b3d8-cbb9cbc40ed6&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;YAML&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quel format de fichier est utilisé pour définir les configurations Docker Compose ?&quot;}},{&quot;context&quot;:&quot;Le fichier `docker-compose.yml` est le format standard utilisé pour décrire les services, réseaux et volumes dans Docker Compose.\n&quot;,&quot;id&quot;:&quot;c3bdf7d6-f766-4d8d-b736-40597fb7dc71&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker-compose.yml&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker-compose.config&quot;,&quot;docker.multi.yml&quot;,&quot;docker-compose.json&quot;],&quot;prompt&quot;:&quot;Quel fichier définit une configuration multi-conteneurs dans Docker Compose ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose logs &lt;nom-service&gt;` permet de consulter les journaux générés par un service spécifique.\n&quot;,&quot;id&quot;:&quot;e9fa4d52-d27a-4aea-b5be-f87bd33cd126&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose logs &lt;nom-service&gt;&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Comment affichez-vous les journaux d’un service spécifique dans Docker Compose ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose up --scale &lt;nom-service&gt;=3` permet de définir le nombre d’instances pour un service donné.\n&quot;,&quot;id&quot;:&quot;a9435bb4-a5e3-45d8-95f4-940c1764b4d4&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose up --scale &lt;nom-service&gt;=3&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose scale --replicas=3&quot;,&quot;docker compose up --instances=3&quot;,&quot;docker compose up --scale=3&quot;],&quot;prompt&quot;:&quot;Quelle commande est utilisée pour mettre à l’échelle un service à 3 instances avec Docker Compose ?&quot;}},{&quot;context&quot;:&quot;La section `environment` permet de définir des variables d’environnement accessibles dans un conteneur.\n&quot;,&quot;id&quot;:&quot;d36007be-bdb1-4500-9b44-b70ef3f06040&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;environment&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;env&quot;,&quot;config&quot;,&quot;variables&quot;],&quot;prompt&quot;:&quot;Quelle section dans le fichier `docker-compose.yml` est utilisée pour configurer des variables d’environnement ?&quot;}},{&quot;context&quot;:&quot;La propriété `depends_on` détermine l’ordre dans lequel les services sont démarrés, mais ne garantit pas qu’un service soit prêt avant de lancer un autre.\n&quot;,&quot;id&quot;:&quot;af7877d4-6ad9-46b5-81f4-e74afa8c6e41&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Spécifie l’ordre de démarrage des services.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Configure un service pour attendre qu’un autre soit en bonne santé avant de démarrer.&quot;,&quot;Crée des liens réseau entre les services.&quot;,&quot;Redémarre automatiquement les services dépendants en cas d’échec.&quot;],&quot;prompt&quot;:&quot;Que fait la propriété `depends_on` dans un fichier Compose ?&quot;}},{&quot;context&quot;:&quot;La propriété `ports` permet de définir le mapping entre un port interne au conteneur et un port externe sur l’hôte.\n&quot;,&quot;id&quot;:&quot;c6b83a07-31f1-488e-865b-14164365ce3f&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;ports&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quelle propriété dans un fichier Compose est utilisée pour mapper un port du conteneur à un port de l’hôte ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose up` lit le fichier Compose et démarre tous les services définis.\n&quot;,&quot;id&quot;:&quot;2411074b-d9ce-4ff9-9616-5b9a4abc9eca&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose up&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Quelle commande démarre une application multi-conteneurs définie dans un fichier Compose ?&quot;}}]}" data-quiz-fullscreen="true"></div>
+<script type="text/javascript" src="../../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../../quiz/style.css">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../course/part2/networking.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../course/part2/networking.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

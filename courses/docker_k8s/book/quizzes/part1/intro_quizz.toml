@@ -1,0 +1,101 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Les conteneurs partagent-ils le noyau du système d’exploitation de l’hôte ?"
+prompt.distractors = [
+  "Non, les conteneurs possèdent leur propre noyau.",
+  "Seulement s'ils fonctionnent sur Linux."
+]
+answer.answer = "Oui, les conteneurs partagent le noyau du système d’exploitation de l’hôte."
+context = """
+Les conteneurs sont légers car ils n'ont pas besoin d'une instance séparée de système d'exploitation. Ils partagent le noyau de l'hôte.
+"""
+id = "f9d735c0-50dc-483f-8c10-822a08289b52"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est la principale différence entre les conteneurs et les machines virtuelles ?"
+prompt.distractors = [
+  "Les conteneurs sont plus lourds que les machines virtuelles.",
+  "Les machines virtuelles n'ont pas besoin de système d'exploitation.",
+  "Les conteneurs nécessitent un hyperviseur supplémentaire pour fonctionner."
+]
+answer.answer = "Les conteneurs partagent le noyau du système d’exploitation de l’hôte, tandis que les machines virtuelles émulent un système complet."
+context = """
+Les machines virtuelles utilisent un hyperviseur pour émuler un système d'exploitation complet, tandis que les conteneurs s'appuient sur le système de l'hôte, ce qui les rend plus légers et rapides.
+"""
+id = "35c26965-2496-4582-9387-0c35b4e88683"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Un conteneur est une unité légère et portable d'___ et de ses ___."
+answer.answer = "application, dépendances"
+context = """
+Un conteneur encapsule tout ce dont une application a besoin pour fonctionner : son code, ses dépendances, et ses configurations, garantissant une cohérence totale entre les environnements.
+"""
+id = "55e1ea81-626a-4249-87d2-61dbb395a33a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quels scénarios bénéficient le plus de la conteneurisation ? (Choisissez deux)"
+prompt.distractors = [
+  "Exécution d'une seule application sur un matériel dédié.",
+  "Déploiement d’une application monolithique sans mises à jour fréquentes.",
+  "Traitement par lots sur des serveurs bare-metal."
+]
+answer.answer = [
+  "Une architecture basée sur les microservices.",
+  "Des pipelines d'intégration et de déploiement continus (CI/CD)."
+]
+context = """
+Les conteneurs sont idéaux pour des scénarios nécessitant une scalabilité, une portabilité et une cohérence, comme les microservices ou les pipelines CI/CD.
+"""
+id = "ec577900-6ec8-4305-946f-3d0850e74b8e"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Associez les technologies suivantes à leurs caractéristiques : serveurs physiques, machines virtuelles, conteneurs."
+prompt.distractors = [
+  "Conteneurs : Lourds, émulation complète d'OS.",
+  "Serveurs physiques : Partage des ressources, processus isolés.",
+  "Machines virtuelles : Partagent le noyau de l'hôte."
+]
+answer.answer = [
+  "Serveurs physiques : Application unique, non virtualisée.",
+  "Machines virtuelles : Lourd, émulation complète d'OS.",
+  "Conteneurs : Léger, partage le noyau de l'hôte."
+]
+context = """
+Les serveurs physiques exécutent directement les applications sur le matériel. Les VMs émulent des environnements OS complets. Les conteneurs partagent le noyau de l’hôte.
+"""
+id = "f532170e-dd96-46a6-91c0-e7bdd59dfc1c"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans une architecture conteneurisée, quel est le rôle des namespaces ?"
+prompt.distractors = [
+  "Contrôler la quantité de ressources (CPU, RAM) qu’un conteneur peut utiliser.",
+  "Gérer les dépendances logicielles à l’intérieur d’un conteneur."
+]
+answer.answer = "Isoler les processus, systèmes de fichiers et interfaces réseau."
+context = """
+Les namespaces permettent d'assurer une isolation au sein des conteneurs, séparant les processus et ressources de l'hôte et des autres conteneurs.
+"""
+id = "6c07415e-b848-499f-8bc1-806143d72bd1"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Dans une architecture conteneurisée, les namespaces servent à isoler ___, ___ et ___."
+answer.answer = "processus, systèmes de fichiers, interfaces réseau"
+context = """
+Les namespaces permettent d'isoler les processus, les systèmes de fichiers, et les interfaces réseau des conteneurs, garantissant une séparation totale entre les conteneurs et l'hôte.
+"""
+id = "cfb52846-c478-4a66-a918-28241abf55ee"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Un conteneur est plus ___ et démarre plus ___ qu'une machine virtuelle."
+answer.answer = "léger, rapidement"
+context = """
+Les conteneurs sont conçus pour être plus légers et démarrer plus rapidement que les machines virtuelles, car ils n'ont pas besoin d'inclure un système d'exploitation complet.
+"""
+id = "56d269f9-466c-4526-ad36-b7fd5c06b5ba"

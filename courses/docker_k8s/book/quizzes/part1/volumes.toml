@@ -1,0 +1,195 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le but principal des volumes Docker ?"
+prompt.distractors = [
+  "Exécuter plusieurs conteneurs en parallèle.",
+  "Créer des images à partir de données persistantes.",
+  "Améliorer les performances réseau."
+]
+answer.answer = "Fournir un mécanisme de stockage persistant pour les conteneurs."
+context = """
+Les volumes Docker sont utilisés pour stocker des données qui doivent persister même après la suppression ou le redémarrage d'un conteneur.
+"""
+id = "e2dcaccf-3243-46fc-a87e-e6232f79fdf4"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quelle commande Docker est utilisée pour créer un nouveau volume ?"
+answer.answer = "docker volume create"
+context = "Cette commande crée un volume que vous pouvez utiliser avec un conteneur."
+id = "cfb88232-9149-49ec-83bc-c20a21a0f355"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande est utilisée pour créer un nouveau volume ?"
+prompt.distractors = [
+  "docker volume add",
+  "docker volume init",
+  "docker volume new"
+]
+answer.answer = "docker volume create"
+context = """
+La commande `docker volume create` crée un volume que les conteneurs peuvent utiliser pour stocker des données persistantes.
+"""
+id = "9264f6cd-5f01-4371-830a-903b70d37cce"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quel flag est utilisé dans la commande `docker run` pour spécifier un volume ?"
+answer.answer = "-v"
+context = "Le flag `-v` ou `--volume` permet de monter un volume dans un conteneur."
+id = "c077556c-3c62-41d0-bcac-5473100322f5"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que se passe-t-il lorsqu’un conteneur utilisant un volume est supprimé avec le flag `--rm` ?"
+prompt.distractors = [
+  "Le volume est supprimé.",
+  "Le volume est sauvegardé sous un autre nom.",
+  "Le volume est converti en bind mount."
+]
+answer.answer = "Le volume reste intact et disponible pour d'autres conteneurs."
+context = """
+Les volumes Docker ne sont pas supprimés automatiquement, même si le conteneur qui les utilise est supprimé avec `--rm`.
+"""
+id = "253794bb-c24b-4658-9d3e-4d0f1ba2f997"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quelle commande Docker liste tous les volumes sur l'hôte ?"
+answer.answer = "docker volume ls"
+context = "Cette commande affiche tous les volumes, qu'ils soient utilisés ou non."
+id = "57b3ea20-8dff-4e58-ba0c-6cc9a290e2b7"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel flag est utilisé pour spécifier un volume dans la commande `docker run` ?"
+prompt.distractors = [
+  "--volume",
+  "--mount",
+  "-m"
+]
+answer.answer = "-v"
+context = """
+Le flag `-v` ou son équivalent plus explicite `--volume` est utilisé pour attacher des volumes à un conteneur.
+"""
+id = "c167ef50-b3eb-4c02-b4c9-f3eea8ad32a8"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quelle commande Docker inspecte les métadonnées d’un volume spécifique ?"
+answer.answer = "docker volume inspect"
+context = "Cette commande fournit des informations détaillées sur un volume spécifique."
+id = "9e795487-f57f-406d-b075-267e45b3dbd6"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est la différence entre les volumes anonymes et nommés ?"
+prompt.distractors = [
+  "Les volumes anonymes sont limités en taille.",
+  "Les volumes nommés ne peuvent pas être partagés entre conteneurs.",
+  "Les volumes anonymes sont automatiquement supprimés après l'arrêt d'un conteneur."
+]
+answer.answer = "Les volumes anonymes n'ont pas de nom et ne peuvent pas être facilement réutilisés."
+context = """
+Les volumes anonymes sont créés sans nom explicite, ce qui les rend difficiles à gérer et à réutiliser.
+"""
+id = "f69bee2a-644c-48c6-a8cd-ba9119b54725"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quelle commande permet de supprimer les volumes inutilisés dans Docker ?"
+answer.answer = "docker volume prune"
+context = "Cette commande supprime tous les volumes inutilisés pour libérer de l’espace disque."
+id = "efec88c6-7710-4dba-ba10-3607275952e7"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est un inconvénient d'utiliser les bind mounts en production ?"
+prompt.distractors = [
+  "Ils ne peuvent pas être utilisés avec des conteneurs en réseau.",
+  "Ils nécessitent un démon Docker dédié.",
+  "Ils peuvent compromettre la sécurité en exposant des fichiers du système hôte."
+]
+answer.answer = "Ils peuvent compromettre la sécurité en exposant des fichiers du système hôte."
+context = """
+Les bind mounts mappent directement des répertoires du système hôte, ce qui peut poser des problèmes de sécurité en cas de mauvaise configuration.
+"""
+id = "b4a0e1d7-a743-46dc-aee8-bc0bcec41729"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quel type de montage mappe directement un répertoire hôte à un conteneur ?"
+answer.answer = "bind"
+context = "Les bind mounts permettent d’utiliser un répertoire du système hôte comme volume."
+id = "bc357b9f-2767-4fea-98e0-2c24d5eac973"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que se passe-t-il si vous essayez de binder un répertoire inexistant de l’hôte à un conteneur ?"
+prompt.distractors = [
+  "Le conteneur échoue à démarrer.",
+  "Le répertoire est ignoré par le conteneur.",
+  "Un message d’erreur est affiché et le conteneur continue de fonctionner."
+]
+answer.answer = "Un nouveau répertoire est automatiquement créé sur l’hôte."
+context = """
+Docker crée automatiquement le répertoire manquant sur l’hôte pour éviter les erreurs lors de l’exécution du conteneur.
+"""
+id = "3a52da89-18bd-496b-924e-7e4ce6c91b76"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quel est le principal mécanisme de gestion du stockage dans Docker pour les données persistantes ?"
+answer.answer = "volumes"
+context = "Les volumes sont conçus pour stocker des données durables et partagées entre les conteneurs."
+id = "67b497c8-3261-4683-a442-c972b454f7b6"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment garantir qu’un volume soit accessible uniquement par un conteneur spécifique ?"
+prompt.distractors = [
+  "En utilisant des volumes anonymes.",
+  "En configurant des permissions de conteneur.",
+  "En utilisant des bind mounts."
+]
+answer.answer = "En attachant explicitement le volume uniquement au conteneur concerné."
+context = """
+Pour restreindre l’accès, ne partagez pas le volume avec d’autres conteneurs et utilisez des volumes nommés associés explicitement.
+"""
+id = "639271ba-bab1-461e-be33-7c913e954cc8"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande permet de supprimer les volumes non utilisés sur un hôte Docker ?"
+prompt.distractors = [
+  "docker volume rm",
+  "docker prune volumes",
+  "docker volume gc"
+]
+answer.answer = "docker volume prune"
+context = """
+`docker volume prune` supprime tous les volumes non utilisés pour libérer de l'espace sur le système hôte.
+"""
+id = "227315f8-7c1c-4be1-a77e-6d1546ee1cc1"
+
+[[questions]]
+type = "ShortAnswer"
+prompt.prompt = "Quelle méthode est préférée pour stocker les données d'application en production : volumes ou bind mounts ?"
+answer.answer = "volumes"
+context = "Les volumes sont mieux adaptés à la production grâce à leur sécurité et leur gestion simplifiée."
+id = "6a35ce5e-8eb5-4b19-a134-7c73eb53cdfa"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est l'effet de la commande `docker system prune` sur les volumes ?"
+prompt.distractors = [
+  "Les volumes sont sauvegardés.",
+  "Les volumes utilisés par des conteneurs sont supprimés.",
+  "Les volumes anonymes non utilisés sont supprimés uniquement."
+]
+answer.answer = "Les volumes anonymes non utilisés sont supprimés uniquement."
+context = """
+`docker system prune` supprime les volumes anonymes non utilisés mais laisse intacts les volumes nommés.
+"""
+id = "9cdfcc46-6ea3-4ed9-b328-ac283ad583c9"
