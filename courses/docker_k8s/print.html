@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/index.html"><strong aria-hidden="true">3.</strong> Exercices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/ms_builds.html"><strong aria-hidden="true">3.1.</strong> Multistage Builds</a></li><li class="chapter-item expanded "><a href="exercises/nginx_server_setup.html"><strong aria-hidden="true">3.2.</strong> Nginx Server Setup</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/index.html"><strong aria-hidden="true">3.</strong> Exercices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/ms_builds.html"><strong aria-hidden="true">3.1.</strong> Multistage Builds</a></li><li class="chapter-item expanded "><a href="exercises/nginx_server_setup.html"><strong aria-hidden="true">3.2.</strong> Nginx Server Setup</a></li><li class="chapter-item expanded "><a href="exercises/nginx_reverse_proxy.html"><strong aria-hidden="true">3.3.</strong> Nginx Reverse Proxy</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -2314,6 +2314,7 @@ docker-compose up -d
 <ul>
 <li><a href="exercises/./ms_builds.html">Multistage Builds</a></li>
 <li><a href="exercises/./nginx_server_setup.html">Nginx Server Setup</a></li>
+<li><a href="exercises/./nginx_reverse_proxy.html">Nginx Reverse Proxy</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="exercice"><a class="header" href="#exercice">Exercice</a></h1>
 <p><strong>Contenerization using multistages builds</strong></p>
@@ -2489,14 +2490,14 @@ The docker image should be named <code>nginx-exercise-image</code></li>
 <p><strong>Run the container on the custom network:</strong></p>
 <ul>
 <li>Stop the container.</li>
-<li>Start it again  the <code>nginx-network</code> network.</li>
+<li>Start it again  the <code>nginx-net</code> network.</li>
 </ul>
 </li>
 <li>
 <p><strong>Inspect the network:</strong></p>
 <ul>
 <li>Verify the container is connected to the network:
-<pre><code class="language-bash">docker network inspect nginx-network
+<pre><code class="language-bash">docker network inspect nginx-net
 </code></pre>
 </li>
 </ul>
@@ -2538,6 +2539,167 @@ The docker image should be named <code>nginx-exercise-image</code></li>
 <ul>
 <li>Rerun the container but this time using the <code>site-volume</code> has a source for the site files instead of the <code>site_files</code> folder</li>
 </ul>
+</li>
+</ol>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exercise-setting-up-an-nginx-reverse-proxy-with-a-backend-service"><a class="header" href="#exercise-setting-up-an-nginx-reverse-proxy-with-a-backend-service"><strong>Exercise: Setting Up an Nginx Reverse Proxy with a Backend Service</strong></a></h1>
+<h2 id="scenario-1"><a class="header" href="#scenario-1"><strong>Scenario:</strong></a></h2>
+<p>You are tasked with deploying a Dockerized setup where an Nginx server acts as a <strong>reverse proxy</strong>, routing requests to a backend Flask service. Both services must communicate over a custom Docker network.</p>
+<p>This setup will:</p>
+<ol>
+<li>Use a <strong>custom bridge network</strong> to enable communication between the services.</li>
+<li>Emphasize network configuration and communication troubleshooting.</li>
+<li>Avoid databases and focus purely on inter-service communication.</li>
+</ol>
+<details>
+<summary>
+<h2 id="part-1-writing-the-backend-service"><a class="header" href="#part-1-writing-the-backend-service"> <b>Part 1: Writing the Backend Service</b> </a></h2>
+</summary>
+<ol>
+<li>
+<p><strong>Create the project structure for the backend service:</strong></p>
+<pre><code>backend/
+├── app.py
+├── requirements.txt
+└── Dockerfile
+</code></pre>
+</li>
+<li>
+<p><strong>Write <code>app.py</code>:</strong></p>
+<pre><code class="language-python"> from flask import Flask
+
+ app = Flask(__name__)
+
+ @app.route("/")
+ def hello_world():
+     return "&lt;p&gt;Hello, World!&lt;/p&gt;"
+</code></pre>
+</li>
+</ol>
+<blockquote>
+<p>💡 You will have to run the app with the command <code>flask run --host="0.0.0.0"</code></p>
+</blockquote>
+<ol start="3">
+<li>
+<p><strong>Write <code>requirements.txt</code>:</strong></p>
+<pre><code class="language-plaintext">Flask
+</code></pre>
+</li>
+<li>
+<p><strong>Write the <code>Dockerfile</code>:</strong></p>
+<ul>
+<li>The resulting image should copy the application and its dependencies to the container and run the app listening on <code>127.0.0.1:5000</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Test the backend locally:</strong></p>
+<ul>
+<li>Run the container with the good arguments so that you can access your backend by visiting <code>http://localhost:5000</code> in your favorite web browser.</li>
+</ul>
+</li>
+</ol>
+</details>
+<details>
+<summary>
+<h2 id="part-2-writing-the-nginx-reverse-proxy"><a class="header" href="#part-2-writing-the-nginx-reverse-proxy"> <b>Part 2: Writing the Nginx Reverse Proxy</b> </a></h2>
+</summary>
+<ol>
+<li>
+<p><strong>Create the project structure for the Nginx service:</strong></p>
+<pre><code>nginx/
+├── nginx.conf
+└── Dockerfile
+</code></pre>
+</li>
+<li>
+<p><strong>Write <code>nginx.conf</code>:</strong></p>
+<pre><code class="language-nginx"> server {
+     listen 80;
+
+     location / {
+         proxy_pass http://flask-container:5000;
+     }
+ }
+</code></pre>
+</li>
+<li>
+<p><strong>Write the <code>Dockerfile</code>:</strong></p>
+<ul>
+<li>The resulting image has to be called <code>nginx-proxy</code></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>💡 This time you have to replace the <code>default.conf</code> file's contents
+in the <code>/etc/nginx/conf.d</code> directory with the contents of the <code>nginx.conf</code>
+file above</p>
+</blockquote>
+<p><strong>Note:</strong> At this point, Nginx cannot connect to the backend because they are not yet on the same network. Thus, running a container should result in <code>nginx</code> exiting due to an <em>emerg</em> because it can't find the server it is supposed to send requests to.</p>
+</details>
+<details>
+<summary>
+<h2 id="part-3-setting-up-the-custom-network"><a class="header" href="#part-3-setting-up-the-custom-network"> <b>Part 3: Setting Up the Custom Network</b> </a></h2>
+</summary>
+<ol>
+<li>
+<p><strong>Create a custom network:</strong></p>
+<ul>
+<li>This network should be called <code>app-network</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Run the backend container on the custom network:</strong></p>
+<ul>
+<li>The backend container has to be called <code>flask-container</code> <strong>on the network</strong>.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>💡 If you're stuck at this stage, visit the <a href="https://docs.docker.com/reference/cli/docker/container/run/#network">network</a> option of the <code>docker container run</code> command.</p>
+</blockquote>
+<ol start="3">
+<li>
+<p><strong>Run the Nginx container on the same network:</strong></p>
+</li>
+<li>
+<p><strong>Test communication:</strong></p>
+<ul>
+<li>Visit <code>http://localhost:8080</code> in your browser. You should see the response <code>"Hello from the Flask backend!"</code> from the backend service, routed through Nginx.</li>
+</ul>
+</li>
+<li>
+<p><strong>Challenge:</strong></p>
+<ul>
+<li>Use an <code>alpine</code> container to manually test communication. At the end,
+you should have 3 containers connected to the same network and should be able to run a <code>curl</code> command to retrieve the contents from the site but only communicating with the <code>nginx</code> container.</li>
+</ul>
+</li>
+</ol>
+</details>
+<details>
+<summary>
+<h2 id="part-4-dependancies-between-containers"><a class="header" href="#part-4-dependancies-between-containers"> <b>Part 4: Dependancies between containers</b> </a></h2>
+</summary>
+<ol>
+<li><strong>Stop one container and observe what happens</strong>
+Try visiting <code>http://localhost:8080</code>. What error do you see?</li>
+</ol>
+<blockquote>
+<p>Remember to gracefully stop the backend container</p>
+</blockquote>
+<ol start="2">
+<li>
+<p><strong>Restart the backend container and ensure Nginx reconnects</strong>
+Verify the response is back online.</p>
+</li>
+<li>
+<p><strong>Add a healthcheck to the nginx docker image</strong>
+In your <a href="https://docs.docker.com/reference/dockerfile/#healthcheck">healthcheck</a> you should ensure that if the back end container goes down.
+The nginx container reports an unhealthy state.</p>
+</li>
+<li>
+<p><strong>Repeat the steps above</strong>
+This time, you should see that when you disconnect the container, the nginx container should be reported as unhealthy after a short while.</p>
 </li>
 </ol>
 </details>

@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="../course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="../course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="../course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="../course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="../course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="../course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/index.html"><strong aria-hidden="true">3.</strong> Exercices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../exercises/ms_builds.html"><strong aria-hidden="true">3.1.</strong> Multistage Builds</a></li><li class="chapter-item expanded "><a href="../exercises/nginx_server_setup.html" class="active"><strong aria-hidden="true">3.2.</strong> Nginx Server Setup</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="../course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="../course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="../course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="../course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="../course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="../course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/index.html"><strong aria-hidden="true">3.</strong> Exercices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../exercises/ms_builds.html"><strong aria-hidden="true">3.1.</strong> Multistage Builds</a></li><li class="chapter-item expanded "><a href="../exercises/nginx_server_setup.html" class="active"><strong aria-hidden="true">3.2.</strong> Nginx Server Setup</a></li><li class="chapter-item expanded "><a href="../exercises/nginx_reverse_proxy.html"><strong aria-hidden="true">3.3.</strong> Nginx Reverse Proxy</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -295,14 +295,14 @@ The docker image should be named <code>nginx-exercise-image</code></li>
 <p><strong>Run the container on the custom network:</strong></p>
 <ul>
 <li>Stop the container.</li>
-<li>Start it again  the <code>nginx-network</code> network.</li>
+<li>Start it again  the <code>nginx-net</code> network.</li>
 </ul>
 </li>
 <li>
 <p><strong>Inspect the network:</strong></p>
 <ul>
 <li>Verify the container is connected to the network:
-<pre><code class="language-bash">docker network inspect nginx-network
+<pre><code class="language-bash">docker network inspect nginx-net
 </code></pre>
 </li>
 </ul>
@@ -356,6 +356,9 @@ The docker image should be named <code>nginx-exercise-image</code></li>
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="../exercises/nginx_reverse_proxy.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -367,6 +370,9 @@ The docker image should be named <code>nginx-exercise-image</code></li>
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="../exercises/nginx_reverse_proxy.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
