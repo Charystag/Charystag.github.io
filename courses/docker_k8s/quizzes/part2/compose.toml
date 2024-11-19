@@ -1,75 +1,76 @@
 [[questions]]
-type = "ShortAnswer"
-prompt.prompt = "Quelle commande est utilisée pour arrêter et supprimer tous les services définis dans un fichier Compose ?"
-answer.answer = "docker compose down"
-context = """
-La commande `docker compose down` arrête tous les conteneurs et supprime également les réseaux et volumes définis dans le fichier Compose.
-"""
-id = "22025d3c-592a-4954-9116-3acf93e652ac"
-
-[[questions]]
 type = "MultipleChoice"
-prompt.prompt = "Quel est le rôle de Docker Compose ?"
+prompt.prompt = "Quel est l'objectif principal de Docker Compose ?"
 prompt.distractors = [
-  "Construire des images Docker.",
+  "Créer des images Docker.",
   "Optimiser les performances des conteneurs.",
-  "Résoudre les problèmes de réseau des conteneurs."
+  "Résoudre les problèmes réseau entre conteneurs."
 ]
-answer.answer = "Gérer les applications multi-conteneurs."
+answer.answer = "Gérer et orchestrer des applications multi-conteneurs."
 context = """
-Docker Compose est utilisé pour définir et exécuter des applications comprenant plusieurs conteneurs via un fichier de configuration unique.
+Docker Compose permet de configurer et gérer plusieurs conteneurs qui forment une application à l'aide d'un fichier YAML.
 """
-id = "074fc5fe-ad5b-4be5-986d-98c41934054c"
-
-[[questions]]
-type = "ShortAnswer"
-prompt.prompt = "Quel format de fichier est utilisé pour définir les configurations Docker Compose ?"
-answer.answer = "YAML"
-context = """
-Docker Compose utilise le format YAML pour décrire les services, réseaux et volumes dans une application multi-conteneurs.
-"""
-id = "c2c1a02d-759a-4010-b3d8-cbb9cbc40ed6"
+id = "567fa239-fe33-4fdf-89cd-5b214bacbeb8"
 
 [[questions]]
 type = "MultipleChoice"
-prompt.prompt = "Quel fichier définit une configuration multi-conteneurs dans Docker Compose ?"
+prompt.prompt = "Quel fichier est utilisé pour configurer une application multi-conteneurs ?"
 prompt.distractors = [
   "docker-compose.config",
-  "docker.multi.yml",
-  "docker-compose.json"
+  "docker.json",
+  "docker-compose.yaml"
 ]
 answer.answer = "docker-compose.yml"
 context = """
-Le fichier `docker-compose.yml` est le format standard utilisé pour décrire les services, réseaux et volumes dans Docker Compose.
+Le fichier `docker-compose.yml` est le fichier standard utilisé par Docker Compose pour configurer des services, des réseaux et des volumes.
 """
-id = "c3bdf7d6-f766-4d8d-b736-40597fb7dc71"
-
-[[questions]]
-type = "ShortAnswer"
-prompt.prompt = "Comment affichez-vous les journaux d’un service spécifique dans Docker Compose ?"
-answer.answer = "docker compose logs <nom-service>"
-context = """
-La commande `docker compose logs <nom-service>` permet de consulter les journaux générés par un service spécifique.
-"""
-id = "e9fa4d52-d27a-4aea-b5be-f87bd33cd126"
+id = "ae4e536e-63cb-460f-8cd9-e9a112f602b5"
 
 [[questions]]
 type = "MultipleChoice"
-prompt.prompt = "Quelle commande est utilisée pour mettre à l’échelle un service à 3 instances avec Docker Compose ?"
+prompt.prompt = "Quelle commande démarre une application multi-conteneurs définie par Docker Compose ?"
 prompt.distractors = [
-  "docker compose scale --replicas=3",
-  "docker compose up --instances=3",
-  "docker compose up --scale=3"
+  "docker compose start",
+  "docker compose init",
+  "docker compose create"
 ]
-answer.answer = "docker compose up --scale <nom-service>=3"
+answer.answer = "docker compose up"
 context = """
-La commande `docker compose up --scale <nom-service>=3` permet de définir le nombre d’instances pour un service donné.
+La commande `docker compose up` démarre tous les services définis dans le fichier `docker-compose.yml`.
 """
-id = "a9435bb4-a5e3-45d8-95f4-940c1764b4d4"
+id = "467a6be2-a964-499e-8fe0-c8997ab8028a"
 
 [[questions]]
 type = "MultipleChoice"
-prompt.prompt = "Quelle section dans le fichier `docker-compose.yml` est utilisée pour configurer des variables d’environnement ?"
+prompt.prompt = "Quelle commande arrête et supprime les services Docker Compose ainsi que leurs réseaux associés ?"
+prompt.distractors = [
+  "docker compose stop",
+  "docker compose kill",
+  "docker compose down --remove-all"
+]
+answer.answer = "docker compose down"
+context = """
+La commande `docker compose down` arrête tous les services, supprime les conteneurs, réseaux et volumes créés par Docker Compose.
+"""
+id = "c639b6f3-71d0-4508-905a-a7438c4772ce"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande est utilisée pour mettre à l'échelle un service défini dans un fichier Compose ?"
+prompt.distractors = [
+  "docker compose scale",
+  "docker compose resize",
+  "docker compose expand"
+]
+answer.answer = "docker compose up --scale <nom-service>=<nombre>"
+context = """
+La commande `docker compose up --scale <nom-service>=<nombre>` permet d'augmenter ou de réduire le nombre d'instances d'un service.
+"""
+id = "889b1fea-ad21-4cb9-9671-6a9e235f8b9f"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle section du fichier Compose est utilisée pour définir des variables d'environnement ?"
 prompt.distractors = [
   "env",
   "config",
@@ -77,13 +78,13 @@ prompt.distractors = [
 ]
 answer.answer = "environment"
 context = """
-La section `environment` permet de définir des variables d’environnement accessibles dans un conteneur.
+La section `environment` permet de définir des variables d'environnement accessibles dans un conteneur.
 """
-id = "d36007be-bdb1-4500-9b44-b70ef3f06040"
+id = "cb5412b3-0ac8-438c-bf48-3304c710b1d8"
 
 [[questions]]
 type = "MultipleChoice"
-prompt.prompt = "Que fait la propriété `depends_on` dans un fichier Compose ?"
+prompt.prompt = "Que fait la propriété `depends_on` dans un fichier `docker-compose.yml` ?"
 prompt.distractors = [
   "Configure un service pour attendre qu’un autre soit en bonne santé avant de démarrer.",
   "Crée des liens réseau entre les services.",
@@ -91,24 +92,244 @@ prompt.distractors = [
 ]
 answer.answer = "Spécifie l’ordre de démarrage des services."
 context = """
-La propriété `depends_on` détermine l’ordre dans lequel les services sont démarrés, mais ne garantit pas qu’un service soit prêt avant de lancer un autre.
+La propriété `depends_on` détermine l'ordre dans lequel les services sont démarrés, mais elle ne garantit pas qu'un service soit prêt avant d'en lancer un autre.
 """
-id = "af7877d4-6ad9-46b5-81f4-e74afa8c6e41"
+id = "3837d605-4742-4f92-851d-28e4dea8dcc3"
 
 [[questions]]
-type = "ShortAnswer"
-prompt.prompt = "Quelle propriété dans un fichier Compose est utilisée pour mapper un port du conteneur à un port de l’hôte ?"
+type = "MultipleChoice"
+prompt.prompt = "Comment afficher les journaux d’un service spécifique géré avec Docker Compose ?"
+prompt.distractors = [
+  "docker compose logs --all",
+  "docker compose logs <nom-service> --follow",
+  "docker compose logs --tail"
+]
+answer.answer = "docker compose logs <nom-service>"
+context = """
+La commande `docker compose logs <nom-service>` affiche les journaux du service spécifié. Ajoutez `--follow` pour un affichage en temps réel.
+"""
+id = "09bb67f9-efda-45d2-84fd-3467d276f6ce"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle propriété dans un fichier Compose est utilisée pour mapper un port conteneur à un port hôte ?"
+prompt.distractors = [
+  "expose",
+  "ports",
+  "publish"
+]
 answer.answer = "ports"
 context = """
 La propriété `ports` permet de définir le mapping entre un port interne au conteneur et un port externe sur l’hôte.
 """
-id = "c6b83a07-31f1-488e-865b-14164365ce3f"
+id = "aa7f0d22-a5f0-4fbb-a687-69353165ea5e"
 
 [[questions]]
-type = "ShortAnswer"
-prompt.prompt = "Quelle commande démarre une application multi-conteneurs définie dans un fichier Compose ?"
-answer.answer = "docker compose up"
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande est utilisée pour vérifier la configuration d’un fichier Compose ?"
+prompt.distractors = [
+  "docker compose verify",
+  "docker compose check",
+  "docker compose inspect"
+]
+answer.answer = "docker compose config"
 context = """
-La commande `docker compose up` lit le fichier Compose et démarre tous les services définis.
+La commande `docker compose config` valide et affiche la configuration résultante du fichier `docker-compose.yml`.
 """
-id = "2411074b-d9ce-4ff9-9616-5b9a4abc9eca"
+id = "f3e6abbe-a0f6-4319-8c7c-19dfb9facfb2"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que fait la commande `docker compose stop` ?"
+prompt.distractors = [
+  "Arrête et supprime tous les conteneurs.",
+  "Redémarre tous les conteneurs arrêtés.",
+  "Supprime les réseaux associés aux services."
+]
+answer.answer = "Arrête les conteneurs sans les supprimer."
+context = """
+La commande `docker compose stop` arrête tous les conteneurs définis sans les supprimer, permettant de les redémarrer rapidement.
+"""
+id = "027e544d-29cd-4d05-b099-c30cc050aca9"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande est utilisée pour afficher l'état des services dans Docker Compose ?"
+prompt.distractors = [
+  "docker compose ps --all",
+  "docker compose inspect",
+  "docker compose status"
+]
+answer.answer = "docker compose ps"
+context = """
+La commande `docker compose ps` affiche une liste des conteneurs gérés par Docker Compose ainsi que leur état.
+"""
+id = "52d3454d-56b7-42c9-a5c5-17334c11c7f3"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que se passe-t-il lorsque vous exécutez `docker compose up` sur une application déjà en cours d'exécution ?"
+prompt.distractors = [
+  "Les conteneurs en cours d'exécution sont arrêtés et recréés.",
+  "De nouveaux conteneurs sont créés sans arrêter les anciens.",
+  "La commande ne fait rien car les conteneurs sont déjà en cours d'exécution."
+]
+answer.answer = "Les conteneurs en cours d'exécution sont utilisés tels quels."
+context = """
+Lorsque vous exécutez `docker compose up`, Docker Compose vérifie si les conteneurs existent déjà et les utilise sans les recréer.
+"""
+id = "143e7a23-1f31-41fc-b13b-d3dda2b695b7"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle section est utilisée pour monter un volume dans un service Docker Compose ?"
+prompt.distractors = [
+  "binds",
+  "mounts",
+  "storage"
+]
+answer.answer = "volumes"
+context = """
+La section `volumes` permet de définir et d'attacher des volumes pour la persistance des données dans les services.
+"""
+id = "3231a39f-84eb-42b4-812c-0a69baccc0d7"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel driver réseau est utilisé par défaut dans Docker Compose ?"
+prompt.distractors = [
+  "host",
+  "bridge",
+  "overlay"
+]
+answer.answer = "bridge"
+context = """
+Docker Compose utilise le driver `bridge` par défaut pour connecter les conteneurs d'une application.
+"""
+id = "b88a9537-0c21-43cf-9887-66baedc01789"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande est utilisée pour afficher les informations réseau des services ?"
+prompt.distractors = [
+  "docker compose inspect network",
+  "docker compose net-info",
+  "docker compose network status"
+]
+answer.answer = "docker compose network ls"
+context = """
+La commande `docker compose network ls` liste les réseaux définis pour une application Docker Compose.
+"""
+id = "9f457b3b-f49d-4dda-8e5f-1b13d6aa4146"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande Docker Compose est utilisée pour recréer uniquement des conteneurs modifiés ?"
+prompt.distractors = [
+  "docker compose restart",
+  "docker compose reload",
+  "docker compose recreate"
+]
+answer.answer = "docker compose up --force-recreate"
+context = """
+La commande `docker compose up --force-recreate` recrée uniquement les conteneurs affectés par des modifications.
+"""
+id = "f890d59a-4e43-49ec-91a4-73f9c90638e2"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que fait la commande `docker compose build` ?"
+prompt.distractors = [
+  "Elle télécharge des images Docker.",
+  "Elle démarre tous les services d’une application.",
+  "Elle crée des réseaux pour l'application."
+]
+answer.answer = "Elle construit les images définies dans le fichier Compose."
+context = """
+La commande `docker compose build` compile les images définies dans la section `build` du fichier `docker-compose.yml`.
+"""
+id = "fee59a64-184d-40e1-b8d6-66e8539d5efd"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande est utilisée pour supprimer tous les volumes, conteneurs et réseaux inutilisés dans une application Docker Compose ?"
+prompt.distractors = [
+  "docker compose clean",
+  "docker compose prune",
+  "docker compose remove --all"
+]
+answer.answer = "docker compose down --volumes"
+context = """
+La commande `docker compose down --volumes` supprime non seulement les conteneurs et réseaux, mais aussi les volumes associés à une application Docker Compose.
+"""
+id = "3241b53f-a343-4a06-9f07-6f9996abef15"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que fait la propriété `build` dans un fichier `docker-compose.yml` ?"
+prompt.distractors = [
+  "Elle spécifie une image Docker pré-construite.",
+  "Elle configure les réseaux à utiliser pour le service.",
+  "Elle définit les volumes pour stocker les données."
+]
+answer.answer = "Elle indique le chemin ou contexte pour construire une image Docker."
+context = """
+La propriété `build` est utilisée dans un fichier Compose pour spécifier un contexte ou un Dockerfile permettant de construire une image personnalisée.
+"""
+id = "560a4290-15c9-4328-ad54-1581ba935fa1"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande permet de vérifier si Docker Compose est installé et connaître sa version ?"
+prompt.distractors = [
+  "docker compose check",
+  "docker compose version",
+  "docker compose info"
+]
+answer.answer = "docker compose version"
+context = """
+La commande `docker compose version` affiche la version actuellement installée de Docker Compose.
+"""
+id = "ffd0e128-5020-4101-9f70-d249f0b99447"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que fait la commande `docker compose restart <service>` ?"
+prompt.distractors = [
+  "Elle supprime et recrée le conteneur du service.",
+  "Elle redémarre le service sans le recréer.",
+  "Elle reconstruit l’image associée au service."
+]
+answer.answer = "Elle redémarre le service sans le recréer."
+context = """
+`docker compose restart` redémarre le conteneur d'un service sans en modifier la configuration ou recréer l'image.
+"""
+id = "713cf681-c52c-4a1c-ba97-dd1035504f94"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que se passe-t-il si deux services dans un fichier `docker-compose.yml` ont des ports identiques exposés ?"
+prompt.distractors = [
+  "Les conteneurs partageront les ports.",
+  "Un conflit se produira et l’application ne démarrera pas.",
+  "Docker attribuera des ports dynamiques."
+]
+answer.answer = "Un conflit se produira et l’application ne démarrera pas."
+context = """
+Deux services ne peuvent pas exposer les mêmes ports sur l’hôte sans configuration explicite. Cela génère une erreur.
+"""
+id = "ed781dd7-7718-411c-8652-e8754f0acf51"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment Docker Compose gère-t-il les volumes si vous relancez une application sans les supprimer ?"
+prompt.distractors = [
+  "Les volumes sont recréés à chaque fois.",
+  "Les volumes existants sont réutilisés.",
+  "Les données dans les volumes sont remplacées."
+]
+answer.answer = "Les volumes existants sont réutilisés."
+context = """
+Docker Compose réutilise les volumes existants pour éviter de perdre les données persistantes stockées dans les conteneurs.
+"""
+id = "810d9d87-efb3-4e19-b566-f052b5a1e9c4"
