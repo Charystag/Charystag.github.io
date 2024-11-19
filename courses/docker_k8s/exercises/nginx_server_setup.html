@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Multistage Builds - Docker-K8s</title>
+        <title>Nginx Server Setup - Docker-K8s</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="../course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="../course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="../course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="../course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="../course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="../course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/index.html"><strong aria-hidden="true">3.</strong> Exercices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../exercises/ms_builds.html" class="active"><strong aria-hidden="true">3.1.</strong> Multistage Builds</a></li><li class="chapter-item expanded "><a href="../exercises/nginx_server_setup.html"><strong aria-hidden="true">3.2.</strong> Nginx Server Setup</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="../course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="../course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="../course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="../course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="../course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="../course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/index.html"><strong aria-hidden="true">3.</strong> Exercices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../exercises/ms_builds.html"><strong aria-hidden="true">3.1.</strong> Multistage Builds</a></li><li class="chapter-item expanded "><a href="../exercises/nginx_server_setup.html" class="active"><strong aria-hidden="true">3.2.</strong> Nginx Server Setup</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,70 +173,189 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="exercice"><a class="header" href="#exercice">Exercice</a></h1>
-<p><strong>Contenerization using multistages builds</strong></p>
-<p>Here is a sampe C++ program:</p>
-<pre><code class="language-c++">#include &lt;iostream&gt;
+                        <h1 id="exercise-setting-up-an-nginx-server-with-dynamic-content"><a class="header" href="#exercise-setting-up-an-nginx-server-with-dynamic-content"><strong>Exercise: Setting Up an Nginx Server with Dynamic Content</strong></a></h1>
+<h2 id="scenario"><a class="header" href="#scenario"><strong>Scenario:</strong></a></h2>
+<p>You are tasked with deploying a Dockerized Nginx server to host a static website. The server must:</p>
+<ol>
+<li>Serve files stored in a host directory (bind mount).</li>
+<li>Be accessible via a custom Docker network.</li>
+<li>Use a custom configuration for the server.</li>
+</ol>
+<p>You will write a Dockerfile to build the Nginx image and manually create the necessary volumes and networks.</p>
+<hr />
+<h2 id="part-1-project-setup"><a class="header" href="#part-1-project-setup"><strong>Part 1: Project Setup</strong></a></h2>
+<details>
+<summary>Tasks</summary>
+<ol>
+<li>
+<p><strong>Create the following project structure:</strong></p>
+<pre><code>nginx-exercise/
+├─- server_conf
+  └── nginx.conf
+├── site_files
+   └── index.html
+└── Dockerfile
+</code></pre>
+</li>
+<li>
+<p><strong>Write <code>index.html</code>:</strong></p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Welcome to Nginx&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello from Nginx!&lt;/h1&gt;
+    &lt;p&gt;This content is served dynamically from a bind mount.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</li>
+<li>
+<p><strong>Write <code>nginx.conf</code>:</strong></p>
+<pre><code class="language-nginx">server {
+    listen 80;
+    server_name localhost;
 
-int main(void){
-    std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
-    return (0);
+    location / {
+        root /usr/share/nginx/html;
+        index index.html;
+    }
 }
 </code></pre>
-<p>Here is the sequence of instructions that you should follow :</p>
+</li>
+</ol>
+</details>
+<hr />
+<h2 id="part-2-writing-the-dockerfile"><a class="header" href="#part-2-writing-the-dockerfile"><strong>Part 2: Writing the Dockerfile</strong></a></h2>
 <details>
-<summary>Part 1: Project files retrieval</summary>
+<summary>Tasks</summary>
 <ol>
-<li>Run a container interactively using the base image alpine and <strong>bind</strong> a volume called <code>project_files</code> to the folder <code>/project</code> on your container.</li>
-<li>Create the <code>hello_word.cpp</code> file <strong>within</strong> the container in the <code>/project</code> directory and commit the result as a new image called <code>project_files</code></li>
+<li><strong>Write a <code>Dockerfile</code>:</strong>
+<ul>
+<li>Use the <code>nginx:alpine</code> base image.</li>
+<li>Copy the custom <code>nginx.conf</code> into the container's <code>/etc/nginx/conf.d/</code> directory.</li>
+<li>Expose port <code>80</code> for the server.</li>
+</ul>
+</li>
 </ol>
+<details>
+<summary>First Hint</summary>
+<p>If stuck, you can run <code>docker image history nginx:alpine</code> in order to understand the different layers of the image</p>
 </details>
 <details>
-<summary>Part 2: Project building</summary>
-<p>At this point in the exercise you should have a new base image containing only alpine and the <code>hello_world.cpp</code> file in the <code>/project</code> folder.</p>
-<ol start="3">
-<li>Run another container interactively based on the image  <code>project_files</code></li>
-<li>Install the tools needed in order to build the sample c++ program.</li>
-<li>Build the sample program and move the executable to <code>/project/bin</code>, creating the directory if needed</li>
-<li>Commit the result as a new layer, calling it : <code>executable</code></li>
+<summary>Second Hint</summary>
+<p>If you don't specify any CMD nor ENTRYPOINT in your Dockerfile, it is the first one set that is used.</p>
+</details>
+<ol start="2">
+<li><strong>Build the Docker image:</strong>
+The docker image should be named <code>nginx-exercise-image</code></li>
 </ol>
 </details>
+<hr />
+<h2 id="part-3-creating-and-using-volumes"><a class="header" href="#part-3-creating-and-using-volumes"><strong>Part 3: Creating and Using Volumes</strong></a></h2>
 <details>
-<summary>Part 3: Writting the Dockerfile</summary>
-<p>At this point, you should be able to run : <code>docker run executable /project/bin/hello_world</code> and everything should be working</p>
-<ol start="7">
-<li>Now that you know how to do this from the command line, this step is pretty straightforward, you should put all the previous steps but in your Dockerfile. It has to start with the instruction <code>FROM project_files</code></li>
+<summary>Tasks</summary>
+<ol>
+<li>
+<p><strong>Create a bind mount volume:</strong></p>
+<ul>
+<li>Use the <code>nginx-exercise/site_files</code> directory as a bind mount to serve dynamic content.</li>
+<li>Run the container mounting the directory on the correct location in the container.</li>
+</ul>
+</li>
+<li>
+<p><strong>Test the server:</strong></p>
+<ul>
+<li>Visit <code>http://localhost:8080</code> in your browser and confirm that the content from <code>index.html</code> is displayed. Everything should work great at this stage. If not, think about what you need to add to the command you used to make it work.</li>
+</ul>
+</li>
+<li>
+<p><strong>Challenge:</strong></p>
+<ul>
+<li>Modify <code>index.html</code> on the host machine and reload the webpage. Observe how the changes are reflected dynamically.</li>
+</ul>
+</li>
 </ol>
 </details>
+<hr />
+<h2 id="part-4-networking"><a class="header" href="#part-4-networking"><strong>Part 4: Networking</strong></a></h2>
 <details>
-<summary>Part 4: Multistage Build</summary>
-<p>Running <code>docker build -t dockerfile_executable . &amp;&amp; docker run dockerfile_executable</code> should print <code>Hello World!</code> to <code>stdout</code></p>
-<ol start="8">
-<li>Split the build into multiple stages, the final image should contain only the executable.</li>
-</ol>
-</details>
-<details>
-<summary>Part 5: Comparison between both types of build</summary>
-<p>Here is an example of what you may see when running <code>docker image history multistage_image</code> for the image generated during the multistages build</p>
-<pre><code class="language-bash">IMAGE          CREATED       CREATED BY                            SIZE      COMMENT
-df5a49f5c822   2 hours ago   ENTRYPOINT ["./hello_world"]          0B        buildkit.dockerfile.v0
-&lt;missing&gt;      2 hours ago   COPY /test/hello_world . # buildkit   72.9kB    buildkit.dockerfile.v0
-&lt;missing&gt;      2 hours ago   WORKDIR /RUN                          0B        buildkit.dockerfile.v0
+<summary>Tasks</summary>
+<ol>
+<li>
+<p><strong>Create a custom Docker network:</strong></p>
+<ul>
+<li>create a docker network named <code>nginx-net</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Run the container on the custom network:</strong></p>
+<ul>
+<li>Stop the container.</li>
+<li>Start it again  the <code>nginx-network</code> network.</li>
+</ul>
+</li>
+<li>
+<p><strong>Inspect the network:</strong></p>
+<ul>
+<li>Verify the container is connected to the network:
+<pre><code class="language-bash">docker network inspect nginx-network
 </code></pre>
-<p>Find a way to compare the size of the two generated images and explain briefly why splitting builds into multiple stages affects the size of the resulting image</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Challenge:</strong></p>
+<ul>
+<li>Run another container on the same network (e.g., <code>alpine</code>), install <code>curl</code>, and test the Nginx server:</li>
+</ul>
+</li>
+</ol>
+</details>
+<hr />
+<h2 id="part-5-data-persistence-with-a-volume"><a class="header" href="#part-5-data-persistence-with-a-volume"><strong>Part 5: Data Persistence with a volume</strong></a></h2>
+<details>
+<summary>Tasks</summary>
+<ol>
+<li>
+<p><strong>Create a <code>site_save</code> volume</strong></p>
+</li>
+<li>
+<p><strong>Stop the alpine container</strong></p>
+</li>
+<li>
+<p><strong>Mount the volume on the container and connect it back to the network</strong></p>
+<ul>
+<li>The volume has to be named <code>site-volume</code></li>
+<li>The volume has to be mounted on the location: <code>/site/backup</code> in the container</li>
+</ul>
+</li>
+<li>
+<p><strong>Retrieve the site index page</strong></p>
+<ul>
+<li>Run another curl request from the container but this time redirect the output to <code>/site/backup/index.html</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Challenge:</strong></p>
+<ul>
+<li>Rerun the container but this time using the <code>site-volume</code> has a source for the site files instead of the <code>site_files</code> folder</li>
+</ul>
+</li>
+</ol>
 </details>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../exercises/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../exercises/ms_builds.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../exercises/nginx_server_setup.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -244,13 +363,10 @@ df5a49f5c822   2 hours ago   ENTRYPOINT ["./hello_world"]          0B        bui
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../exercises/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../exercises/ms_builds.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../exercises/nginx_server_setup.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

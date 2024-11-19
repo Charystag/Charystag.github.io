@@ -23,7 +23,7 @@ id = "2264b4c5-1bf0-432d-a167-db2a01a00b71"
 
 [[questions]]
 type = "MultipleChoice"
-prompt.prompt = "Quel est le rôle du démon Docker ?"
+prompt.prompt = "Quel est le rôle du daemon Docker ?"
 prompt.distractors = [
   "Il construit des images Docker.",
   "Il fournit une interface pour les commandes utilisateur.",
