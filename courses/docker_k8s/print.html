@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/index.html"><strong aria-hidden="true">3.</strong> Exercices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/ms_builds.html"><strong aria-hidden="true">3.1.</strong> Multistage Builds</a></li><li class="chapter-item expanded "><a href="exercises/nginx_server_setup.html"><strong aria-hidden="true">3.2.</strong> Nginx Server Setup</a></li><li class="chapter-item expanded "><a href="exercises/nginx_reverse_proxy.html"><strong aria-hidden="true">3.3.</strong> Nginx Reverse Proxy</a></li></ol></li><li class="chapter-item expanded "><a href="assessments/docker_project.html"><strong aria-hidden="true">4.</strong> Docker Project</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/index.html"><strong aria-hidden="true">3.</strong> Exercices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/ms_builds.html"><strong aria-hidden="true">3.1.</strong> Multistage Builds</a></li><li class="chapter-item expanded "><a href="exercises/nginx_server_setup.html"><strong aria-hidden="true">3.2.</strong> Nginx Server Setup</a></li><li class="chapter-item expanded "><a href="exercises/nginx_reverse_proxy.html"><strong aria-hidden="true">3.3.</strong> Nginx Reverse Proxy</a></li><li class="chapter-item expanded "><a href="exercises/hello-minikube.html"><strong aria-hidden="true">3.4.</strong> Hello Minikube</a></li><li class="chapter-item expanded "><a href="exercises/first-deployment.html"><strong aria-hidden="true">3.5.</strong> First Deployment</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -2309,12 +2309,17 @@ docker-compose up -d
 </details>
 <h2 id="quiz-3"><a class="header" href="#quiz-3"><strong>Quiz</strong></a></h2>
 <div class="quiz-placeholder" data-quiz-name="&quot;compose&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Docker Compose permet de configurer et gérer plusieurs conteneurs qui forment une application à l'aide d'un fichier YAML.\n&quot;,&quot;id&quot;:&quot;567fa239-fe33-4fdf-89cd-5b214bacbeb8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Gérer et orchestrer des applications multi-conteneurs.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Créer des images Docker.&quot;,&quot;Optimiser les performances des conteneurs.&quot;,&quot;Résoudre les problèmes réseau entre conteneurs.&quot;],&quot;prompt&quot;:&quot;Quel est l'objectif principal de Docker Compose ?&quot;}},{&quot;context&quot;:&quot;Le fichier `docker-compose.yml` est le fichier standard utilisé par Docker Compose pour configurer des services, des réseaux et des volumes.\n&quot;,&quot;id&quot;:&quot;ae4e536e-63cb-460f-8cd9-e9a112f602b5&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker-compose.yml&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker-compose.config&quot;,&quot;docker.json&quot;,&quot;docker-compose.yaml&quot;],&quot;prompt&quot;:&quot;Quel fichier est utilisé pour configurer une application multi-conteneurs ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose up` démarre tous les services définis dans le fichier `docker-compose.yml`.\n&quot;,&quot;id&quot;:&quot;467a6be2-a964-499e-8fe0-c8997ab8028a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose up&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose start&quot;,&quot;docker compose init&quot;,&quot;docker compose create&quot;],&quot;prompt&quot;:&quot;Quelle commande démarre une application multi-conteneurs définie par Docker Compose ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose down` arrête tous les services, supprime les conteneurs, réseaux et volumes créés par Docker Compose.\n&quot;,&quot;id&quot;:&quot;c639b6f3-71d0-4508-905a-a7438c4772ce&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose down&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose stop&quot;,&quot;docker compose kill&quot;,&quot;docker compose down --remove-all&quot;],&quot;prompt&quot;:&quot;Quelle commande arrête et supprime les services Docker Compose ainsi que leurs réseaux associés ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose up --scale &lt;nom-service&gt;=&lt;nombre&gt;` permet d'augmenter ou de réduire le nombre d'instances d'un service.\n&quot;,&quot;id&quot;:&quot;889b1fea-ad21-4cb9-9671-6a9e235f8b9f&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose up --scale &lt;nom-service&gt;=&lt;nombre&gt;&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose scale&quot;,&quot;docker compose resize&quot;,&quot;docker compose expand&quot;],&quot;prompt&quot;:&quot;Quelle commande est utilisée pour mettre à l'échelle un service défini dans un fichier Compose ?&quot;}},{&quot;context&quot;:&quot;La section `environment` permet de définir des variables d'environnement accessibles dans un conteneur.\n&quot;,&quot;id&quot;:&quot;cb5412b3-0ac8-438c-bf48-3304c710b1d8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;environment&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;env&quot;,&quot;config&quot;,&quot;variables&quot;],&quot;prompt&quot;:&quot;Quelle section du fichier Compose est utilisée pour définir des variables d'environnement ?&quot;}},{&quot;context&quot;:&quot;La propriété `depends_on` détermine l'ordre dans lequel les services sont démarrés, mais elle ne garantit pas qu'un service soit prêt avant d'en lancer un autre.\n&quot;,&quot;id&quot;:&quot;3837d605-4742-4f92-851d-28e4dea8dcc3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Spécifie l’ordre de démarrage des services.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Configure un service pour attendre qu’un autre soit en bonne santé avant de démarrer.&quot;,&quot;Crée des liens réseau entre les services.&quot;,&quot;Redémarre automatiquement les services dépendants en cas d’échec.&quot;],&quot;prompt&quot;:&quot;Que fait la propriété `depends_on` dans un fichier `docker-compose.yml` ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose logs &lt;nom-service&gt;` affiche les journaux du service spécifié. Ajoutez `--follow` pour un affichage en temps réel.\n&quot;,&quot;id&quot;:&quot;09bb67f9-efda-45d2-84fd-3467d276f6ce&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose logs &lt;nom-service&gt;&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose logs --all&quot;,&quot;docker compose logs &lt;nom-service&gt; --follow&quot;,&quot;docker compose logs --tail&quot;],&quot;prompt&quot;:&quot;Comment afficher les journaux d’un service spécifique géré avec Docker Compose ?&quot;}},{&quot;context&quot;:&quot;La propriété `ports` permet de définir le mapping entre un port interne au conteneur et un port externe sur l’hôte.\n&quot;,&quot;id&quot;:&quot;aa7f0d22-a5f0-4fbb-a687-69353165ea5e&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;ports&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;expose&quot;,&quot;ports&quot;,&quot;publish&quot;],&quot;prompt&quot;:&quot;Quelle propriété dans un fichier Compose est utilisée pour mapper un port conteneur à un port hôte ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose config` valide et affiche la configuration résultante du fichier `docker-compose.yml`.\n&quot;,&quot;id&quot;:&quot;f3e6abbe-a0f6-4319-8c7c-19dfb9facfb2&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose config&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose verify&quot;,&quot;docker compose check&quot;,&quot;docker compose inspect&quot;],&quot;prompt&quot;:&quot;Quelle commande est utilisée pour vérifier la configuration d’un fichier Compose ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose stop` arrête tous les conteneurs définis sans les supprimer, permettant de les redémarrer rapidement.\n&quot;,&quot;id&quot;:&quot;027e544d-29cd-4d05-b099-c30cc050aca9&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Arrête les conteneurs sans les supprimer.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Arrête et supprime tous les conteneurs.&quot;,&quot;Redémarre tous les conteneurs arrêtés.&quot;,&quot;Supprime les réseaux associés aux services.&quot;],&quot;prompt&quot;:&quot;Que fait la commande `docker compose stop` ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose ps` affiche une liste des conteneurs gérés par Docker Compose ainsi que leur état.\n&quot;,&quot;id&quot;:&quot;52d3454d-56b7-42c9-a5c5-17334c11c7f3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose ps&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose ps --all&quot;,&quot;docker compose inspect&quot;,&quot;docker compose status&quot;],&quot;prompt&quot;:&quot;Quelle commande est utilisée pour afficher l'état des services dans Docker Compose ?&quot;}},{&quot;context&quot;:&quot;Lorsque vous exécutez `docker compose up`, Docker Compose vérifie si les conteneurs existent déjà et les utilise sans les recréer.\n&quot;,&quot;id&quot;:&quot;143e7a23-1f31-41fc-b13b-d3dda2b695b7&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Les conteneurs en cours d'exécution sont utilisés tels quels.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Les conteneurs en cours d'exécution sont arrêtés et recréés.&quot;,&quot;De nouveaux conteneurs sont créés sans arrêter les anciens.&quot;,&quot;La commande ne fait rien car les conteneurs sont déjà en cours d'exécution.&quot;],&quot;prompt&quot;:&quot;Que se passe-t-il lorsque vous exécutez `docker compose up` sur une application déjà en cours d'exécution ?&quot;}},{&quot;context&quot;:&quot;La section `volumes` permet de définir et d'attacher des volumes pour la persistance des données dans les services.\n&quot;,&quot;id&quot;:&quot;3231a39f-84eb-42b4-812c-0a69baccc0d7&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;volumes&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;binds&quot;,&quot;mounts&quot;,&quot;storage&quot;],&quot;prompt&quot;:&quot;Quelle section est utilisée pour monter un volume dans un service Docker Compose ?&quot;}},{&quot;context&quot;:&quot;Docker Compose utilise le driver `bridge` par défaut pour connecter les conteneurs d'une application.\n&quot;,&quot;id&quot;:&quot;b88a9537-0c21-43cf-9887-66baedc01789&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;bridge&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;host&quot;,&quot;bridge&quot;,&quot;overlay&quot;],&quot;prompt&quot;:&quot;Quel driver réseau est utilisé par défaut dans Docker Compose ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose network ls` liste les réseaux définis pour une application Docker Compose.\n&quot;,&quot;id&quot;:&quot;9f457b3b-f49d-4dda-8e5f-1b13d6aa4146&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose network ls&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose inspect network&quot;,&quot;docker compose net-info&quot;,&quot;docker compose network status&quot;],&quot;prompt&quot;:&quot;Quelle commande est utilisée pour afficher les informations réseau des services ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose up --force-recreate` recrée uniquement les conteneurs affectés par des modifications.\n&quot;,&quot;id&quot;:&quot;f890d59a-4e43-49ec-91a4-73f9c90638e2&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose up --force-recreate&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose restart&quot;,&quot;docker compose reload&quot;,&quot;docker compose recreate&quot;],&quot;prompt&quot;:&quot;Quelle commande Docker Compose est utilisée pour recréer uniquement des conteneurs modifiés ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose build` compile les images définies dans la section `build` du fichier `docker-compose.yml`.\n&quot;,&quot;id&quot;:&quot;fee59a64-184d-40e1-b8d6-66e8539d5efd&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Elle construit les images définies dans le fichier Compose.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Elle télécharge des images Docker.&quot;,&quot;Elle démarre tous les services d’une application.&quot;,&quot;Elle crée des réseaux pour l'application.&quot;],&quot;prompt&quot;:&quot;Que fait la commande `docker compose build` ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose down --volumes` supprime non seulement les conteneurs et réseaux, mais aussi les volumes associés à une application Docker Compose.\n&quot;,&quot;id&quot;:&quot;3241b53f-a343-4a06-9f07-6f9996abef15&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose down --volumes&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose clean&quot;,&quot;docker compose prune&quot;,&quot;docker compose remove --all&quot;],&quot;prompt&quot;:&quot;Quelle commande est utilisée pour supprimer tous les volumes, conteneurs et réseaux inutilisés dans une application Docker Compose ?&quot;}},{&quot;context&quot;:&quot;La propriété `build` est utilisée dans un fichier Compose pour spécifier un contexte ou un Dockerfile permettant de construire une image personnalisée.\n&quot;,&quot;id&quot;:&quot;560a4290-15c9-4328-ad54-1581ba935fa1&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Elle indique le chemin ou contexte pour construire une image Docker.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Elle spécifie une image Docker pré-construite.&quot;,&quot;Elle configure les réseaux à utiliser pour le service.&quot;,&quot;Elle définit les volumes pour stocker les données.&quot;],&quot;prompt&quot;:&quot;Que fait la propriété `build` dans un fichier `docker-compose.yml` ?&quot;}},{&quot;context&quot;:&quot;La commande `docker compose version` affiche la version actuellement installée de Docker Compose.\n&quot;,&quot;id&quot;:&quot;ffd0e128-5020-4101-9f70-d249f0b99447&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;docker compose version&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;docker compose check&quot;,&quot;docker compose version&quot;,&quot;docker compose info&quot;],&quot;prompt&quot;:&quot;Quelle commande permet de vérifier si Docker Compose est installé et connaître sa version ?&quot;}},{&quot;context&quot;:&quot;`docker compose restart` redémarre le conteneur d'un service sans en modifier la configuration ou recréer l'image.\n&quot;,&quot;id&quot;:&quot;713cf681-c52c-4a1c-ba97-dd1035504f94&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Elle redémarre le service sans le recréer.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Elle supprime et recrée le conteneur du service.&quot;,&quot;Elle redémarre le service sans le recréer.&quot;,&quot;Elle reconstruit l’image associée au service.&quot;],&quot;prompt&quot;:&quot;Que fait la commande `docker compose restart &lt;service&gt;` ?&quot;}},{&quot;context&quot;:&quot;Deux services ne peuvent pas exposer les mêmes ports sur l’hôte sans configuration explicite. Cela génère une erreur.\n&quot;,&quot;id&quot;:&quot;ed781dd7-7718-411c-8652-e8754f0acf51&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Un conflit se produira et l’application ne démarrera pas.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Les conteneurs partageront les ports.&quot;,&quot;Un conflit se produira et l’application ne démarrera pas.&quot;,&quot;Docker attribuera des ports dynamiques.&quot;],&quot;prompt&quot;:&quot;Que se passe-t-il si deux services dans un fichier `docker-compose.yml` ont des ports identiques exposés ?&quot;}},{&quot;context&quot;:&quot;Docker Compose réutilise les volumes existants pour éviter de perdre les données persistantes stockées dans les conteneurs.\n&quot;,&quot;id&quot;:&quot;810d9d87-efb3-4e19-b566-f052b5a1e9c4&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Les volumes existants sont réutilisés.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Les volumes sont recréés à chaque fois.&quot;,&quot;Les volumes existants sont réutilisés.&quot;,&quot;Les données dans les volumes sont remplacées.&quot;],&quot;prompt&quot;:&quot;Comment Docker Compose gère-t-il les volumes si vous relancez une application sans les supprimer ?&quot;}}]}" data-quiz-fullscreen="true"></div>
-<script type="text/javascript" src="../../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="exercices-dapprofondissement"><a class="header" href="#exercices-dapprofondissement">Exercices d'approfondissement</a></h1>
+<script type="text/javascript" src="../../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="exercices-4"><a class="header" href="#exercices-4">Exercices</a></h1>
 <h2 id="notions-fondamentales-de-docker"><a class="header" href="#notions-fondamentales-de-docker">Notions fondamentales de Docker</a></h2>
 <ul>
 <li><a href="exercises/./ms_builds.html">Multistage Builds</a></li>
 <li><a href="exercises/./nginx_server_setup.html">Nginx Server Setup</a></li>
 <li><a href="exercises/./nginx_reverse_proxy.html">Nginx Reverse Proxy</a></li>
+</ul>
+<h2 id="introduction-à-kubernetes"><a class="header" href="#introduction-à-kubernetes">Introduction à Kubernetes</a></h2>
+<ul>
+<li><a href="exercises/./hello-minikube.html">Hello Minikube</a></li>
+<li><a href="exercises/./first-deployment.html">First Deployment</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="exercice"><a class="header" href="#exercice">Exercice</a></h1>
 <p><strong>Contenerization using multistages builds</strong></p>
@@ -2725,145 +2730,371 @@ This time, you should see that when you disconnect the container, the nginx cont
 <li>Your <code>flask</code> docker image <strong>must</strong> be named <code>flask</code></li>
 </ul>
 </details>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="assessment-dockerize-a-simple-web-application-with-docker-compose"><a class="header" href="#assessment-dockerize-a-simple-web-application-with-docker-compose"><strong>Assessment: Dockerize a Simple Web Application with Docker Compose</strong></a></h1>
-<h2 id="goal-11"><a class="header" href="#goal-11">Goal:</a></h2>
-<p>Build and deploy a 3-container architecture using Docker and Docker Compose for a web application that handles incoming requests, communicates with a MySQL database, and serves responses through an <code>nginx</code> reverse proxy.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hello-minikube-tutorial"><a class="header" href="#hello-minikube-tutorial">Hello Minikube Tutorial</a></h1>
+<p>This guide demonstrates how to deploy a simple application on Minikube and monitor its performance using built-in Kubernetes tools.</p>
 <hr />
-<h2 id="instructions"><a class="header" href="#instructions">Instructions:</a></h2>
-<ol>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<ul>
+<li>Minikube and Kubectl installed.</li>
+<li>Ensure Minikube is running: <code>minikube start</code>.</li>
+</ul>
+<hr />
+<h2 id="step-1-deploy-and-expose-an-application"><a class="header" href="#step-1-deploy-and-expose-an-application">Step 1: Deploy and Expose an Application</a></h2>
+<p>Deploy an application and expose it as a service:</p>
+<pre><code class="language-bash">kubectl create deployment hello-minikube --image=nginx
+kubectl expose deployment hello-minikube --type=NodePort --port=80
+</code></pre>
+<p>Verify resources:</p>
+<pre><code class="language-bash">kubectl get deployments
+kubectl get services
+</code></pre>
+<hr />
+<h2 id="step-2-access-the-application"><a class="header" href="#step-2-access-the-application">Step 2: Access the Application</a></h2>
+<p>Get the service URL:</p>
+<pre><code class="language-bash">minikube service hello-minikube --url
+</code></pre>
+<p>Access it in your browser to verify it's working.</p>
+<hr />
+<h2 id="step-3-monitor-the-application"><a class="header" href="#step-3-monitor-the-application">Step 3: Monitor the Application</a></h2>
+<h3 id="1-view-logs"><a class="header" href="#1-view-logs">1. View Logs</a></h3>
+<p>Inspect logs for the application's pods:</p>
+<pre><code class="language-bash">kubectl logs -l app=hello-minikube
+</code></pre>
+<h3 id="2-describe-resources"><a class="header" href="#2-describe-resources">2. Describe Resources</a></h3>
+<p>Get detailed information about the deployment and pods:</p>
+<ul>
 <li>
-<p><strong>Web Application:</strong></p>
-<ul>
-<li>Develop a simple web application in a language of your choice (e.g., Python Flask, Node.js, or others).</li>
-<li>Implement at least two routes:
-<ul>
-<li><code>/health</code>: returns <code>200 OK</code> with a simple JSON response (e.g., <code>{"status": "healthy"}</code>).</li>
-<li><code>/data</code>: fetches and displays some test data from the MySQL database.</li>
-</ul>
-</li>
-<li>The application server must listen for requests on port <code>4743</code> <strong>only</strong>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Containers:</strong></p>
-<ul>
-<li>
-<p><strong>Nginx Container:</strong></p>
-<ul>
-<li>Use the official <code>nginx</code> image.</li>
-<li>Configure it as a reverse proxy:
-<ul>
-<li>All HTTP traffic from port <code>5423</code> on the host must route to port <code>824</code> inside the container.</li>
-<li>It has to forward all requests at <code>/health</code> and <code>/data</code> to the app container</li>
-</ul>
-</li>
-<li>Connect to the <code>app</code> service on the <code>site_network</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Application Container:</strong></p>
-<ul>
-<li>Build your own image from the app's <code>Dockerfile</code> (name: <code>app</code>).</li>
-<li>Ensure it connects to:
-<ul>
-<li>The <code>mysql</code> service via <code>db_network</code>.</li>
-<li>The <code>nginx</code> service via <code>site_network</code>.</li>
-</ul>
-</li>
-</ul>
+<p><strong>Deployment:</strong></p>
+<pre><code class="language-bash">kubectl describe deployment hello-minikube
+</code></pre>
 </li>
 <li>
-<p><strong>MySQL Container:</strong></p>
-<ul>
-<li>Build your own image from a <code>Dockerfile</code> (name: <code>mysql</code>).</li>
-<li>Configure the database to listen on port <code>5655</code>.</li>
-<li>Persist data in the <code>db_volume</code> volume.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Volumes and Networks:</strong></p>
-<ul>
-<li>Create:
-<ul>
-<li>A <code>db_volume</code> volume for the database container.</li>
-<li>Two networks:
-<ul>
-<li><code>db_network</code>: links <code>mysql</code> and <code>app</code>.</li>
-<li><code>site_network</code>: links <code>nginx</code> and <code>app</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Dependencies and Healthchecks:</strong></p>
-<ul>
-<li>Add healthchecks to ensure services start in the correct order:
-<ul>
-<li><strong>Database:</strong> Include a healthcheck in its <code>Dockerfile</code></li>
-<li><strong>App:</strong> Add a healthcheck in <code>docker-compose.yaml</code> that waits for the database to be ready.</li>
-<li><strong>Nginx:</strong> Depend on the app's health in <code>docker-compose.yaml</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Naming Conventions:</strong></p>
-<ul>
-<li>Name your images and containers as follows:
-<ul>
-<li>Image for <code>nginx</code>: <code>nginx</code>.</li>
-<li>Image for the app: <code>app</code>.</li>
-<li>Image for MySQL: <code>mysql</code>.</li>
-<li>MySQL container: <code>mysql_container</code> with alias <code>mysql</code> on <code>db_network</code>.</li>
-<li>App container: Alias <code>app</code> on <code>site_network</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Directory Structure:</strong></p>
-<ul>
-<li>Organize your project as follows:
-<pre><code>./
-├── app/
-│   ├── Dockerfile 
-│   ├── conf/ 
-│   └── src/ 
-├── compose.yaml 
-├── mysql/
-│   ├── Dockerfile 
-│   └── conf/ 
-└── nginx/
-    ├── Dockerfile 
-    └── conf/ 
+<p><strong>Pods:</strong></p>
+<pre><code class="language-bash">kubectl describe pod &lt;pod-name&gt;
 </code></pre>
 </li>
 </ul>
+<h3 id="3-check-resource-usage-with-kubectl-top"><a class="header" href="#3-check-resource-usage-with-kubectl-top">3. Check Resource Usage with <code>kubectl top</code></a></h3>
+<p>Ensure your cluster has metrics-server installed. If not, install it:</p>
+<pre><code class="language-bash">minikube addons enable metrics-server
+</code></pre>
+<p>Then, check resource usage:</p>
+<ul>
+<li>
+<p><strong>Pods:</strong></p>
+<pre><code class="language-bash">kubectl top pod
+</code></pre>
 </li>
 <li>
-<p><strong>Deliverables:</strong></p>
-<ul>
-<li>A functioning <code>docker-compose.yaml</code> file.</li>
-<li>Working <code>Dockerfile</code>s for all images.</li>
-<li>Config files for <code>nginx</code> and MySQL (if applicable).</li>
-<li>The source code for the application.</li>
-<li>Ensure the project builds and runs successfully with <code>docker compose up --build</code></li>
+<p><strong>Nodes:</strong></p>
+<pre><code class="language-bash">kubectl top nodes
+</code></pre>
+</li>
 </ul>
+<h3 id="4-access-the-kubernetes-dashboard"><a class="header" href="#4-access-the-kubernetes-dashboard">4. Access the Kubernetes Dashboard</a></h3>
+<p>Enable and access the Kubernetes Dashboard for a graphical interface:</p>
+<pre><code class="language-bash">minikube dashboard
+</code></pre>
+<p>This provides an overview of resource usage, workloads, and logs.</p>
+<hr />
+<h2 id="step-4-clean-up-resources"><a class="header" href="#step-4-clean-up-resources">Step 4: Clean Up Resources</a></h2>
+<p>Once you're done, clean up:</p>
+<ol>
+<li>
+<p><strong>Delete Resources:</strong></p>
+<pre><code class="language-bash">kubectl delete service hello-minikube
+kubectl delete deployment hello-minikube
+</code></pre>
+</li>
+<li>
+<p><strong>Stop Minikube:</strong></p>
+<pre><code class="language-bash">minikube stop
+</code></pre>
+</li>
+<li>
+<p><strong>(Optional) Delete Minikube Cluster:</strong></p>
+<pre><code class="language-bash">minikube delete
+</code></pre>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exercise-deploy-your-first-flask-app-with-kubernetes"><a class="header" href="#exercise-deploy-your-first-flask-app-with-kubernetes">Exercise: Deploy Your First Flask App with Kubernetes</a></h1>
+<p><strong>Objective:</strong> Deploy a simple Flask web application on Kubernetes and make it accessible on port 8080 of your host machine.</p>
+<hr />
+<h2 id="setup-and-default-docker-compose-file"><a class="header" href="#setup-and-default-docker-compose-file"><strong>Setup and Default Docker-Compose File</strong></a></h2>
+<p>You are provided a <code>docker-compose.yml</code> file for a simple Flask app:</p>
+<pre><code class="language-yaml">version: '3.9'
+services:
+    app:
+        image: myapp
+        pull_policy: build
+        build: ./myapp
+        container_name: app_container
+        ports:
+          - "8080:80"
+</code></pre>
+<h3 id="flask-application-myappapppy"><a class="header" href="#flask-application-myappapppy">Flask Application (<code>myapp/app.py</code>)</a></h3>
+<p>Here is the Python script for the Flask app:</p>
+<pre><code class="language-python">from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Hello, Kubernetes!"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=80)
+</code></pre>
+<h3 id="dockerfile-myappdockerfile"><a class="header" href="#dockerfile-myappdockerfile">Dockerfile (<code>myapp/Dockerfile</code>)</a></h3>
+<p>Here is the Dockerfile for building the Flask app:</p>
+<pre><code class="language-dockerfile"># Use an official Python runtime as a parent image
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the current directory contents into the container
+COPY . /app
+
+# Install the required packages
+RUN pip install flask
+
+# Make port 80 available to the world outside the container
+EXPOSE 80
+
+# Define environment variable
+ENV FLASK_APP=app.py
+
+# Run the application
+CMD ["python", "app.py"]
+</code></pre>
+<hr />
+<h2 id="your-task-deploy-the-flask-app-to-kubernetes"><a class="header" href="#your-task-deploy-the-flask-app-to-kubernetes"><strong>Your Task: Deploy the Flask App to Kubernetes</strong></a></h2>
+<h3 id="step-1-create-kubernetes-deployment-and-service-manifests"><a class="header" href="#step-1-create-kubernetes-deployment-and-service-manifests">Step 1: Create Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> and <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> Manifests</a></h3>
+<ol>
+<li>
+<p>Create a <code>deployment.yaml</code> file for the app deployment:</p>
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: myapp:latest
+        ports:
+        - containerPort: 80
+</code></pre>
+</li>
+<li>
+<p>Create a <code>service.yaml</code> file to expose the deployment:</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service
+spec:
+  selector:
+    app: flask-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: NodePort
+</code></pre>
 </li>
 </ol>
 <hr />
-<h2 id="evaluation-criteria"><a class="header" href="#evaluation-criteria">Evaluation Criteria:</a></h2>
+<h4 id="step-2-build-and-push-the-docker-image"><a class="header" href="#step-2-build-and-push-the-docker-image">Step 2: Build and Push the Docker Image</a></h4>
 <ol>
-<li>All services are functional and meet the port and network requirements.</li>
-<li>Routes in the app are accessible and functional.</li>
-<li>Proper volume and network configuration.</li>
-<li>Correct implementation of healthchecks and dependencies.</li>
-<li>Adherence to naming conventions and directory structure.</li>
+<li>
+<p>Build the Docker image:</p>
+<pre><code class="language-bash">docker build -t myapp:latest ./myapp
+</code></pre>
+</li>
+<li>
+<p>Load the image into your local Kubernetes cluster (e.g., Minikube or Docker Desktop):</p>
+<pre><code class="language-bash"># For Minikube
+minikube image load myapp:latest
+</code></pre>
+</li>
 </ol>
+<hr />
+<h4 id="step-3-apply-the-kubernetes-manifests"><a class="header" href="#step-3-apply-the-kubernetes-manifests">Step 3: Apply the Kubernetes Manifests</a></h4>
+<ol>
+<li>
+<p>Apply the deployment manifest:</p>
+<pre><code class="language-bash">kubectl apply -f deployment.yaml
+</code></pre>
+</li>
+<li>
+<p>Apply the service manifest:</p>
+<pre><code class="language-bash">kubectl apply -f service.yaml
+</code></pre>
+</li>
+</ol>
+<hr />
+<h4 id="step-4-access-your-application"><a class="header" href="#step-4-access-your-application">Step 4: Access Your Application</a></h4>
+<ol>
+<li>
+<p>Get the NodePort assigned by Kubernetes:</p>
+<pre><code class="language-bash">kubectl get service flask-service
+</code></pre>
+<p>Look for the <code>NodePort</code> in the output.</p>
+</li>
+<li>
+<p>Access the application in your browser:</p>
+<pre><code>http://&lt;your-cluster-ip&gt;:&lt;nodeport&gt;
+</code></pre>
+<p>If you're using Minikube, get the cluster IP:</p>
+<pre><code class="language-bash">minikube ip
+</code></pre>
+<p>Combine the Minikube IP and the NodePort to access the app.</p>
+</li>
+</ol>
+<h2 id="explanation-of-kubernetes-deployment-files"><a class="header" href="#explanation-of-kubernetes-deployment-files"><strong>Explanation of Kubernetes Deployment Files</strong></a></h2>
+<p>The <code>deployment.yaml</code> and <code>service.yaml</code> files are the Kubernetes equivalents of the <code>docker-compose.yaml</code> file. They define how the application should be deployed and exposed in the Kubernetes cluster. Let's break them down.</p>
+<hr />
+<h3 id="1-docker-compose-vs-kubernetes-deployment"><a class="header" href="#1-docker-compose-vs-kubernetes-deployment"><strong>1. Docker-Compose vs. Kubernetes Deployment</strong></a></h3>
+<h4 id="docker-compose-composeyaml"><a class="header" href="#docker-compose-composeyaml">Docker-Compose (<code>compose.yaml</code>):</a></h4>
+<pre><code class="language-yaml">version: '3.9'
+services:
+    app:
+        image: myapp
+        pull_policy: build
+        build: ./myapp
+        container_name: app_container
+        ports:
+          - "8080:80"
+</code></pre>
+<ul>
+<li><strong><code>services</code></strong>: Defines a single service (<code>app</code>) to be run.</li>
+<li><strong><code>image</code></strong>: Specifies the Docker image (<code>myapp</code>) to use for the service.</li>
+<li><strong><code>build</code></strong>: Specifies the context for building the Docker image.</li>
+<li><strong><code>ports</code></strong>: Maps the container's internal port (80) to the host's port (8080).</li>
+</ul>
+<p>In Kubernetes, similar functionality is split across <strong>Deployment</strong> (defining the application) and <strong>Service</strong> (exposing it to the network).</p>
+<hr />
+<h3 id="2-kubernetes-deployment-file"><a class="header" href="#2-kubernetes-deployment-file"><strong>2. Kubernetes Deployment File</strong></a></h3>
+<h4 id="deployment-deploymentyaml"><a class="header" href="#deployment-deploymentyaml">Deployment (<code>deployment.yaml</code>):</a></h4>
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: myapp:latest
+        ports:
+        - containerPort: 80
+</code></pre>
+<p><strong>Key Sections Explained:</strong></p>
+<ol>
+<li><strong><code>apiVersion</code></strong>: Specifies the API version of the resource (here, <code>apps/v1</code> for Deployments).</li>
+<li><strong><code>kind</code></strong>: Indicates the type of resource (a <code>Deployment</code> in this case).</li>
+<li><strong><code>metadata</code></strong>: Includes metadata like the name of the deployment (<code>flask-app</code>).</li>
+<li><strong><code>spec</code></strong>: Contains the desired state of the Deployment:
+<ul>
+<li><strong><code>replicas</code></strong>: Number of instances (pods) to run (equivalent to scaling in Compose).</li>
+<li><strong><code>selector</code></strong>: Identifies pods managed by the Deployment using labels.</li>
+<li><strong><code>template</code></strong>:
+<ul>
+<li><strong><code>metadata</code></strong>: Labels assigned to the pods created by this template.</li>
+<li><strong><code>spec</code></strong>:
+<ul>
+<li><strong><code>containers</code></strong>: Defines the container for the app:
+<ul>
+<li><strong><code>name</code></strong>: A name for the container.</li>
+<li><strong><code>image</code></strong>: Docker image to use (like the <code>image</code> key in Compose).</li>
+<li><strong><code>ports</code></strong>: Internal ports exposed by the container (like Compose's <code>ports</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Correspondence to Docker-Compose:</strong></p>
+<ul>
+<li><strong><code>image</code></strong>: Matches <code>image: myapp</code>.</li>
+<li><strong><code>ports.containerPort</code></strong>: Matches the container's internal port (80).</li>
+<li><strong>Scaling</strong>: The <code>replicas: 2</code> allows scaling, similar to defining multiple replicas in Compose's <code>deploy</code> section.</li>
+</ul>
+<hr />
+<h3 id="3-kubernetes-service-file"><a class="header" href="#3-kubernetes-service-file"><strong>3. Kubernetes Service File</strong></a></h3>
+<h4 id="service-serviceyaml"><a class="header" href="#service-serviceyaml">Service (<code>service.yaml</code>):</a></h4>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service
+spec:
+  selector:
+    app: flask-app
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 80
+  type: NodePort
+</code></pre>
+<p><strong>Key Sections Explained:</strong></p>
+<ol>
+<li><strong><code>apiVersion</code></strong>: Specifies the API version of the resource (here, <code>v1</code> for Services).</li>
+<li><strong><code>kind</code></strong>: Indicates the type of resource (a <code>Service</code> in this case).</li>
+<li><strong><code>metadata</code></strong>: Includes metadata like the name of the service (<code>flask-service</code>).</li>
+<li><strong><code>spec</code></strong>: Contains the configuration of the Service:
+<ul>
+<li><strong><code>selector</code></strong>: Links the service to the pods labeled with <code>app: flask-app</code> (defined in <code>deployment.yaml</code>).</li>
+<li><strong><code>ports</code></strong>: Defines the mapping between the service port and the target container port:
+<ul>
+<li><strong><code>port</code></strong>: Port exposed by the Service (8080).</li>
+<li><strong><code>targetPort</code></strong>: Port on the container (80).</li>
+</ul>
+</li>
+<li><strong><code>type</code></strong>: Specifies how the service is exposed. <code>NodePort</code> exposes it on a random high port on all nodes.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Correspondence to Docker-Compose:</strong></p>
+<ul>
+<li><strong><code>ports</code></strong>: The <code>NodePort</code> service type maps container port 80 to a port accessible on the host. In Compose, this is equivalent to <code>"8080:80"</code>.</li>
+<li><strong><code>selector</code></strong>: Ensures the Service targets only the pods associated with the Deployment.</li>
+</ul>
+<hr />
+<h3 id="mapping-between-compose-and-kubernetes"><a class="header" href="#mapping-between-compose-and-kubernetes"><strong>Mapping Between Compose and Kubernetes</strong></a></h3>
+<div class="table-wrapper"><table><thead><tr><th><strong>Compose Feature</strong></th><th><strong>Kubernetes Deployment</strong></th><th><strong>Kubernetes Service</strong></th></tr></thead><tbody>
+<tr><td><code>services.app.image</code></td><td><code>spec.template.spec.containers.image</code></td><td>Not needed in the Service.</td></tr>
+<tr><td><code>ports</code></td><td><code>spec.template.spec.containers.ports</code></td><td><code>spec.ports</code> for host-to-pod mapping</td></tr>
+<tr><td><code>container_name</code></td><td>Not directly used; pods get generated names.</td><td>Not applicable.</td></tr>
+<tr><td><code>build</code></td><td>Image must already be built; <code>docker build</code> step required beforehand.</td><td>Not applicable.</td></tr>
+<tr><td>Scaling (<code>replicas</code>)</td><td><code>spec.replicas</code> in Deployment.</td><td>Not applicable.</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h3 id="summary"><a class="header" href="#summary"><strong>Summary</strong></a></h3>
+<ul>
+<li><strong>Deployment</strong>: Defines the application container (like <code>services</code> in Compose).</li>
+<li><strong>Service</strong>: Exposes the application to the outside world (like <code>ports</code> in Compose).</li>
+<li>The <code>docker-compose.yml</code> is simpler but limited to single-host setups, whereas Kubernetes provides flexibility and scalability for production-grade deployments.</li>
+</ul>
 
                     </main>
 

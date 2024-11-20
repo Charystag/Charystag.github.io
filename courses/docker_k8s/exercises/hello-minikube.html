@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Docker Project - Docker-K8s</title>
+        <title>Hello Minikube - Docker-K8s</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="../course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="../course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="../course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="../course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="../course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="../course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/index.html"><strong aria-hidden="true">3.</strong> Exercices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../exercises/ms_builds.html"><strong aria-hidden="true">3.1.</strong> Multistage Builds</a></li><li class="chapter-item expanded "><a href="../exercises/nginx_server_setup.html"><strong aria-hidden="true">3.2.</strong> Nginx Server Setup</a></li><li class="chapter-item expanded "><a href="../exercises/nginx_reverse_proxy.html"><strong aria-hidden="true">3.3.</strong> Nginx Reverse Proxy</a></li></ol></li><li class="chapter-item expanded "><a href="../assessments/docker_project.html" class="active"><strong aria-hidden="true">4.</strong> Docker Project</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li><li class="chapter-item expanded "><a href="../course/part1/docker_basics.html"><strong aria-hidden="true">1.2.</strong> Bases de Docker</a></li><li class="chapter-item expanded "><a href="../course/part1/images_and_containers.html"><strong aria-hidden="true">1.3.</strong> Images et containers</a></li><li class="chapter-item expanded "><a href="../course/part1/volumes.html"><strong aria-hidden="true">1.4.</strong> Volumes et persistence des données</a></li><li class="chapter-item expanded "><a href="../course/part1/wrap_up.html"><strong aria-hidden="true">1.5.</strong> Résumé</a></li></ol></li><li class="chapter-item expanded "><a href="../course/part2/intro.html"><strong aria-hidden="true">2.</strong> Concepts Avancés de Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../course/part2/networking.html"><strong aria-hidden="true">2.1.</strong> Mise en Réseau avec Docker</a></li><li class="chapter-item expanded "><a href="../course/part2/compose.html"><strong aria-hidden="true">2.2.</strong> Docker Compose</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/index.html"><strong aria-hidden="true">3.</strong> Exercices</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../exercises/ms_builds.html"><strong aria-hidden="true">3.1.</strong> Multistage Builds</a></li><li class="chapter-item expanded "><a href="../exercises/nginx_server_setup.html"><strong aria-hidden="true">3.2.</strong> Nginx Server Setup</a></li><li class="chapter-item expanded "><a href="../exercises/nginx_reverse_proxy.html"><strong aria-hidden="true">3.3.</strong> Nginx Reverse Proxy</a></li><li class="chapter-item expanded "><a href="../exercises/hello-minikube.html" class="active"><strong aria-hidden="true">3.4.</strong> Hello Minikube</a></li><li class="chapter-item expanded "><a href="../exercises/first-deployment.html"><strong aria-hidden="true">3.5.</strong> First Deployment</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,144 +173,92 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="assessment-dockerize-a-simple-web-application-with-docker-compose"><a class="header" href="#assessment-dockerize-a-simple-web-application-with-docker-compose"><strong>Assessment: Dockerize a Simple Web Application with Docker Compose</strong></a></h1>
-<h2 id="goal"><a class="header" href="#goal">Goal:</a></h2>
-<p>Build and deploy a 3-container architecture using Docker and Docker Compose for a web application that handles incoming requests, communicates with a MySQL database, and serves responses through an <code>nginx</code> reverse proxy.</p>
+                        <h1 id="hello-minikube-tutorial"><a class="header" href="#hello-minikube-tutorial">Hello Minikube Tutorial</a></h1>
+<p>This guide demonstrates how to deploy a simple application on Minikube and monitor its performance using built-in Kubernetes tools.</p>
 <hr />
-<h2 id="instructions"><a class="header" href="#instructions">Instructions:</a></h2>
-<ol>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<ul>
+<li>Minikube and Kubectl installed.</li>
+<li>Ensure Minikube is running: <code>minikube start</code>.</li>
+</ul>
+<hr />
+<h2 id="step-1-deploy-and-expose-an-application"><a class="header" href="#step-1-deploy-and-expose-an-application">Step 1: Deploy and Expose an Application</a></h2>
+<p>Deploy an application and expose it as a service:</p>
+<pre><code class="language-bash">kubectl create deployment hello-minikube --image=nginx
+kubectl expose deployment hello-minikube --type=NodePort --port=80
+</code></pre>
+<p>Verify resources:</p>
+<pre><code class="language-bash">kubectl get deployments
+kubectl get services
+</code></pre>
+<hr />
+<h2 id="step-2-access-the-application"><a class="header" href="#step-2-access-the-application">Step 2: Access the Application</a></h2>
+<p>Get the service URL:</p>
+<pre><code class="language-bash">minikube service hello-minikube --url
+</code></pre>
+<p>Access it in your browser to verify it's working.</p>
+<hr />
+<h2 id="step-3-monitor-the-application"><a class="header" href="#step-3-monitor-the-application">Step 3: Monitor the Application</a></h2>
+<h3 id="1-view-logs"><a class="header" href="#1-view-logs">1. View Logs</a></h3>
+<p>Inspect logs for the application's pods:</p>
+<pre><code class="language-bash">kubectl logs -l app=hello-minikube
+</code></pre>
+<h3 id="2-describe-resources"><a class="header" href="#2-describe-resources">2. Describe Resources</a></h3>
+<p>Get detailed information about the deployment and pods:</p>
+<ul>
 <li>
-<p><strong>Web Application:</strong></p>
-<ul>
-<li>Develop a simple web application in a language of your choice (e.g., Python Flask, Node.js, or others).</li>
-<li>Implement at least two routes:
-<ul>
-<li><code>/health</code>: returns <code>200 OK</code> with a simple JSON response (e.g., <code>{"status": "healthy"}</code>).</li>
-<li><code>/data</code>: fetches and displays some test data from the MySQL database.</li>
-</ul>
-</li>
-<li>The application server must listen for requests on port <code>4743</code> <strong>only</strong>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Containers:</strong></p>
-<ul>
-<li>
-<p><strong>Nginx Container:</strong></p>
-<ul>
-<li>Use the official <code>nginx</code> image.</li>
-<li>Configure it as a reverse proxy:
-<ul>
-<li>All HTTP traffic from port <code>5423</code> on the host must route to port <code>824</code> inside the container.</li>
-<li>It has to forward all requests at <code>/health</code> and <code>/data</code> to the app container</li>
-</ul>
-</li>
-<li>Connect to the <code>app</code> service on the <code>site_network</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Application Container:</strong></p>
-<ul>
-<li>Build your own image from the app's <code>Dockerfile</code> (name: <code>app</code>).</li>
-<li>Ensure it connects to:
-<ul>
-<li>The <code>mysql</code> service via <code>db_network</code>.</li>
-<li>The <code>nginx</code> service via <code>site_network</code>.</li>
-</ul>
-</li>
-</ul>
+<p><strong>Deployment:</strong></p>
+<pre><code class="language-bash">kubectl describe deployment hello-minikube
+</code></pre>
 </li>
 <li>
-<p><strong>MySQL Container:</strong></p>
-<ul>
-<li>Build your own image from a <code>Dockerfile</code> (name: <code>mysql</code>).</li>
-<li>Configure the database to listen on port <code>5655</code>.</li>
-<li>Persist data in the <code>db_volume</code> volume.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Volumes and Networks:</strong></p>
-<ul>
-<li>Create:
-<ul>
-<li>A <code>db_volume</code> volume for the database container.</li>
-<li>Two networks:
-<ul>
-<li><code>db_network</code>: links <code>mysql</code> and <code>app</code>.</li>
-<li><code>site_network</code>: links <code>nginx</code> and <code>app</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Dependencies and Healthchecks:</strong></p>
-<ul>
-<li>Add healthchecks to ensure services start in the correct order:
-<ul>
-<li><strong>Database:</strong> Include a healthcheck in its <code>Dockerfile</code></li>
-<li><strong>App:</strong> Add a healthcheck in <code>docker-compose.yaml</code> that waits for the database to be ready.</li>
-<li><strong>Nginx:</strong> Depend on the app's health in <code>docker-compose.yaml</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Naming Conventions:</strong></p>
-<ul>
-<li>Name your images and containers as follows:
-<ul>
-<li>Image for <code>nginx</code>: <code>nginx</code>.</li>
-<li>Image for the app: <code>app</code>.</li>
-<li>Image for MySQL: <code>mysql</code>.</li>
-<li>MySQL container: <code>mysql_container</code> with alias <code>mysql</code> on <code>db_network</code>.</li>
-<li>App container: Alias <code>app</code> on <code>site_network</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Directory Structure:</strong></p>
-<ul>
-<li>Organize your project as follows:
-<pre><code>./
-├── app/
-│   ├── Dockerfile 
-│   ├── conf/ 
-│   └── src/ 
-├── compose.yaml 
-├── mysql/
-│   ├── Dockerfile 
-│   └── conf/ 
-└── nginx/
-    ├── Dockerfile 
-    └── conf/ 
+<p><strong>Pods:</strong></p>
+<pre><code class="language-bash">kubectl describe pod &lt;pod-name&gt;
 </code></pre>
 </li>
 </ul>
+<h3 id="3-check-resource-usage-with-kubectl-top"><a class="header" href="#3-check-resource-usage-with-kubectl-top">3. Check Resource Usage with <code>kubectl top</code></a></h3>
+<p>Ensure your cluster has metrics-server installed. If not, install it:</p>
+<pre><code class="language-bash">minikube addons enable metrics-server
+</code></pre>
+<p>Then, check resource usage:</p>
+<ul>
+<li>
+<p><strong>Pods:</strong></p>
+<pre><code class="language-bash">kubectl top pod
+</code></pre>
 </li>
 <li>
-<p><strong>Deliverables:</strong></p>
-<ul>
-<li>A functioning <code>docker-compose.yaml</code> file.</li>
-<li>Working <code>Dockerfile</code>s for all images.</li>
-<li>Config files for <code>nginx</code> and MySQL (if applicable).</li>
-<li>The source code for the application.</li>
-<li>Ensure the project builds and runs successfully with <code>docker compose up --build</code></li>
-</ul>
+<p><strong>Nodes:</strong></p>
+<pre><code class="language-bash">kubectl top nodes
+</code></pre>
 </li>
-</ol>
+</ul>
+<h3 id="4-access-the-kubernetes-dashboard"><a class="header" href="#4-access-the-kubernetes-dashboard">4. Access the Kubernetes Dashboard</a></h3>
+<p>Enable and access the Kubernetes Dashboard for a graphical interface:</p>
+<pre><code class="language-bash">minikube dashboard
+</code></pre>
+<p>This provides an overview of resource usage, workloads, and logs.</p>
 <hr />
-<h2 id="evaluation-criteria"><a class="header" href="#evaluation-criteria">Evaluation Criteria:</a></h2>
+<h2 id="step-4-clean-up-resources"><a class="header" href="#step-4-clean-up-resources">Step 4: Clean Up Resources</a></h2>
+<p>Once you're done, clean up:</p>
 <ol>
-<li>All services are functional and meet the port and network requirements.</li>
-<li>Routes in the app are accessible and functional.</li>
-<li>Proper volume and network configuration.</li>
-<li>Correct implementation of healthchecks and dependencies.</li>
-<li>Adherence to naming conventions and directory structure.</li>
+<li>
+<p><strong>Delete Resources:</strong></p>
+<pre><code class="language-bash">kubectl delete service hello-minikube
+kubectl delete deployment hello-minikube
+</code></pre>
+</li>
+<li>
+<p><strong>Stop Minikube:</strong></p>
+<pre><code class="language-bash">minikube stop
+</code></pre>
+</li>
+<li>
+<p><strong>(Optional) Delete Minikube Cluster:</strong></p>
+<pre><code class="language-bash">minikube delete
+</code></pre>
+</li>
 </ol>
 
                     </main>
@@ -321,6 +269,9 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="../exercises/first-deployment.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -332,6 +283,9 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="../exercises/first-deployment.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
