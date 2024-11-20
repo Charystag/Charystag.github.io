@@ -1,23 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const toggleButton = document.createElement("button");
-    toggleButton.id = "dark-mode-toggle"; // Add an ID for styling
-    toggleButton.textContent = "Toggle Dark Mode";
+    const toggleButton = document.getElementById("dark-mode-toggle");
+    const themeStylesheet = document.querySelector("#theme-stylesheet");
 
-    document.body.appendChild(toggleButton);
+    // Get current theme from localStorage or default to "light"
+    let currentTheme = localStorage.getItem("charystag-theme");
+    console.log(currentTheme);
+    if (currentTheme === null || currentTheme == undefined) {
+        currentTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    console.log(currentTheme);
 
-    // Load the current mode from local storage (if available)
-    if (localStorage.getItem("dark-mode") === "enabled") {
-        document.body.classList.add("dark-mode");
+    // Function to replace the basename of the current href
+    function updateStylesheetFilename(newFilename) {
+        const currentHref = themeStylesheet.href;
+        const newHref = currentHref.substring(0, currentHref.lastIndexOf('/') + 1) + newFilename;
+        return newHref;
     }
 
-    toggleButton.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
+    // Function to switch themes
+    function switchTheme(theme) {
+        const newFilename = `${theme}-mode.css`;
+        themeStylesheet.href = updateStylesheetFilename(newFilename);
+        localStorage.setItem("charystag-theme", theme);
+    }
 
-        // Save the user's preference in local storage
-        if (document.body.classList.contains("dark-mode")) {
-            localStorage.setItem("dark-mode", "enabled");
-        } else {
-            localStorage.setItem("dark-mode", "disabled");
-        }
+    // Set initial theme
+    switchTheme(currentTheme);
+
+    // Add event listener to the toggle button
+    toggleButton.addEventListener("click", () => {
+        currentTheme = currentTheme === "light" ? "dark" : "light";
+        switchTheme(currentTheme);
     });
 });

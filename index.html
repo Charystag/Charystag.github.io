@@ -6,17 +6,19 @@
         <meta name="description" content="Index of my first website"/>
         <title>Welcome to Charystag's Home</title>
         <!-- Link to external CSS file -->
-        <link rel="stylesheet" href="styles/styles.css" />
+        <link rel="stylesheet" href="styles/common.css" />
+        <link rel="stylesheet" id="theme-stylesheet" href="styles/light-mode.css" />
+        <noscript>
+            <link rel="stylesheet" href="styles/light-mode.css">
+        </noscript>
     </head>
     <body>
         <header>
             <h1>Charystag's Main Page</h1>
-                <div id="toggle-button">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                </div>
+            <button type="button" id="dark-mode-toggle">
+                Toggle Dark Mode
+            </button>
+
         </header>
         <main>
             <h2>About Me</h2>
