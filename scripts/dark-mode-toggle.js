@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const newFilename = `${theme}-mode.css`;
         themeStylesheet.href = updateStylesheetFilename(newFilename);
         localStorage.setItem("charystag-theme", theme);
+        localStorage.setItem('mdbook-theme', theme === "light"?"rust":"ayu")
     }
 
     // Set initial theme
