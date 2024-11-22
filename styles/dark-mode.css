@@ -1,11 +1,11 @@
 /* Dark Mode */
 body {
-    background: #121212;
+    background-color: #121212;
     color: #e0e0e0;
 }
 
 header {
-    background: #1e1e1e;
+    background-color: #1e1e1e;
     color: #e0e0e0;
     border-bottom: 1px solid #444;
 }
@@ -16,7 +16,7 @@ header h1 {
 }
 
 main {
-    background: #1e1e1e;
+    background-color: #1e1e1e;
     border: 1px solid #444;
 }
 
@@ -26,7 +26,7 @@ main h2 {
 }
 
 footer {
-    background: #1e1e1e;
+    background-color: #1e1e1e;
     color: #aaa;
     border-top: 1px solid #444;
 }
@@ -42,11 +42,14 @@ a:hover {
 #dark-mode-toggle {
     background-color: #1f1c02;
     color: #fff;
+    border: 1px solid #1f1c02;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Hover effect previews light mode */
 #dark-mode-toggle:hover {
-    /*background-color: #222;*/
-    background: #ffffff;
-    background-color: #f8f9fa;
-    color: #fff;
+    background-color: hsl(60, 9%, 84%); /* Match light mode */
+    color: #262625; /* Match light mode */
+    border: 1px solid #b38f6b; /* Match light mode */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Light mode shadow */
 }

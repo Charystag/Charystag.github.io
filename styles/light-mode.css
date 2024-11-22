@@ -1,52 +1,55 @@
 /* Light Mode */
 body {
-    background: #f8f9fa;
-    color: #333;
+    background-color: hsl(60, 9%, 87%);
+    color: #262625;
 }
 
 header {
-    background: #ffffff;
-    color: #333;
-    border-bottom: 1px solid #e0e0e0;
+    background-color: hsl(60, 9%, 84%);
+    color: #262625;
+    border-bottom: 1px solid #b38f6b;
 }
 
 header h1 {
-    color: #222;
-    border-bottom: 3px solid #0056b3;
+    color: #262625;
+    border-bottom: 3px solid #e69f67;
 }
 
 main {
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
+    background-color: hsl(60, 9%, 84%);
+    border: 1px solid #b38f6b;
 }
 
 main h2 {
-    color: #444;
-    border-bottom: 2px solid #cccccc;
+    color: #6e6b5e;
+    border-bottom: 2px solid #b38f6b;
 }
 
 footer {
-    background: #ffffff;
-    color: #777;
-    border-top: 1px solid #e0e0e0;
+    background-color: hsl(60, 9%, 84%);
+    color: #737480;
+    border-top: 1px solid #b38f6b;
 }
 
 a {
-    color: #0056b3;
+    color: #2b79a2;
 }
 
 a:hover {
-    color: #003d80;
+    color: #e69f67;
 }
 
 #dark-mode-toggle {
-    /*background-color: #222;*/
-    background: #ffffff;
-    background-color: #f8f9fa;
-    color: #000;
+    background-color: hsl(60, 9%, 84%);
+    color: #262625;
+    border: 1px solid #b38f6b;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Hover effect previews dark mode */
 #dark-mode-toggle:hover {
-    background-color: #1f1c02;
-    color: #fff;
+    background-color: #1f1c02; /* Match dark mode */
+    color: #fff; /* Match dark mode */
+    border: 1px solid #1f1c02; /* Match dark mode */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* Slightly darker shadow for hover */
 }

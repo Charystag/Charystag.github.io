@@ -1,0 +1,52 @@
+/* Light Mode */
+body {
+    background: #f8f9fa;
+    color: #333;
+}
+
+header {
+    background: #ffffff;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+header h1 {
+    color: #222;
+    border-bottom: 3px solid #0056b3;
+}
+
+main {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+main h2 {
+    color: #444;
+    border-bottom: 2px solid #cccccc;
+}
+
+footer {
+    background: #ffffff;
+    color: #777;
+    border-top: 1px solid #e0e0e0;
+}
+
+a {
+    color: #0056b3;
+}
+
+a:hover {
+    color: #003d80;
+}
+
+#dark-mode-toggle {
+    /*background-color: #222;*/
+    background: #ffffff;
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+#dark-mode-toggle:hover {
+    background-color: #1f1c02;
+    color: #fff;
+}
