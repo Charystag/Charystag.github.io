@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Lambda - Django Book</title>
+        <title>Conditionals 1 - Django Book</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Non Guided Exercises</li><li class="chapter-item expanded affix "><li class="part-title">Python Basics</li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/conditions.html"><strong aria-hidden="true">1.</strong> Conditionals 1</a></li><li class="chapter-item expanded affix "><li class="part-title">Python Reminders</li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/lists.html"><strong aria-hidden="true">2.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/dictionnaries.html"><strong aria-hidden="true">3.</strong> Dictionnaries</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/lambda.html" class="active"><strong aria-hidden="true">4.</strong> Lambda</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/files_io.html"><strong aria-hidden="true">5.</strong> Files I/O</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/error_handling.html"><strong aria-hidden="true">6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/classes.html"><strong aria-hidden="true">7.</strong> Classes</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/decorators.html"><strong aria-hidden="true">8.</strong> Decorators</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/json.html"><strong aria-hidden="true">9.</strong> JSON Handling</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/generators.html"><strong aria-hidden="true">10.</strong> Generators</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/modules.html"><strong aria-hidden="true">11.</strong> Modules</a></li><li class="chapter-item expanded affix "><li class="part-title">Projects</li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Non Guided Exercises</li><li class="chapter-item expanded affix "><li class="part-title">Python Basics</li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/conditions.html" class="active"><strong aria-hidden="true">1.</strong> Conditionals 1</a></li><li class="chapter-item expanded affix "><li class="part-title">Python Reminders</li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/lists.html"><strong aria-hidden="true">2.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/dictionnaries.html"><strong aria-hidden="true">3.</strong> Dictionnaries</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/lambda.html"><strong aria-hidden="true">4.</strong> Lambda</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/files_io.html"><strong aria-hidden="true">5.</strong> Files I/O</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/error_handling.html"><strong aria-hidden="true">6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/classes.html"><strong aria-hidden="true">7.</strong> Classes</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/decorators.html"><strong aria-hidden="true">8.</strong> Decorators</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/json.html"><strong aria-hidden="true">9.</strong> JSON Handling</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/generators.html"><strong aria-hidden="true">10.</strong> Generators</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/modules.html"><strong aria-hidden="true">11.</strong> Modules</a></li><li class="chapter-item expanded affix "><li class="part-title">Projects</li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,39 +173,61 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="exploring-lambda-functions-with-map-and-filter"><a class="header" href="#exploring-lambda-functions-with-map-and-filter"><strong>Exploring Lambda Functions with Map and Filter</strong></a></h1>
-<h2 id="objective"><a class="header" href="#objective">Objective:</a></h2>
-<p>Apply functional programming techniques in Python by using lambda functions, <code>map</code>, and <code>filter</code> to process and transform data.</p>
-<h2 id="description-of-the-challenge"><a class="header" href="#description-of-the-challenge">Description of the Challenge:</a></h2>
-<p>You are provided with a list of words:</p>
-<pre><code class="language-python">words = ["apple", "banana", "cherry", "date"]
-</code></pre>
-<p>Your task is to use lambda functions with <code>map</code> and <code>filter</code> to perform the following:</p>
+                        <h3 id="travail-pratique--les-instructions-conditionnelles"><a class="header" href="#travail-pratique--les-instructions-conditionnelles">Travail Pratique : Les Instructions Conditionnelles</a></h3>
+<p><strong>Objectif :</strong>
+Ce TP a pour objectif de vous familiariser avec les instructions conditionnelles en Python. Vous allez créer un programme qui simule un système de recommandation de films basé sur l'âge de l'utilisateur.</p>
+<p><strong>Énoncé de l'exercice :</strong></p>
+<p>Vous allez écrire un script Python qui demande à l'utilisateur de saisir son âge et qui, en fonction de cet âge, recommande un type de film. Le programme doit gérer les conditions suivantes :</p>
 <ol>
-<li><strong>Word Lengths</strong>: Use <code>map</code> to create a list of the lengths of each word in the <code>words</code> list.</li>
-<li><strong>Words with 'a'</strong>: Use <code>filter</code> to create a list of words that contain the letter <code>"a"</code>.</li>
-<li><strong>Uppercase Long Words</strong>: Combine <code>map</code> and <code>filter</code> to create a list of words longer than 5 characters, transformed to uppercase.</li>
+<li>Si l'utilisateur a moins de 13 ans, recommandez un film d'animation.</li>
+<li>Si l'utilisateur a entre 13 et 17 ans, recommandez un film d'aventure.</li>
+<li>Si l'utilisateur a entre 18 et 64 ans, recommandez un film d'action.</li>
+<li>Si l'utilisateur a 65 ans ou plus, recommandez un film classique.</li>
 </ol>
-<details>
-<summary>Hints</summary>
+<p><strong>Contraintes :</strong></p>
 <ul>
-<li>Lambda functions are anonymous functions defined using the syntax <code>lambda x: &lt;expression&gt;</code>.</li>
-<li>The <code>map()</code> function applies a transformation to each element of an iterable.</li>
-<li>The <code>filter()</code> function selects elements of an iterable based on a condition.</li>
-<li>Combining <code>map</code> and <code>filter</code> involves nesting them or chaining operations.</li>
+<li>Utilisez les instructions conditionnelles <code>if</code>, <code>elif</code> et <code>else</code>.</li>
+<li>Gérez les entrées incorrectes (par exemple, si l'utilisateur saisit un âge non numérique ou un âge négatif).</li>
+<li>Affichez un message d'erreur approprié en cas d'entrée incorrecte et demandez à l'utilisateur de saisir à nouveau son âge.</li>
 </ul>
-<p>Refer to the <a href="https://docs.python.org/3/library/functions.html#map">Python map documentation</a> and <a href="https://docs.python.org/3/library/functions.html#filter">filter documentation</a> for more details.</p>
-</details>
+<p><strong>Instructions détaillées :</strong></p>
+<ol>
+<li>Demandez à l'utilisateur de saisir son âge en utilisant la fonction <code>input()</code>.</li>
+<li>Utilisez une instruction conditionnelle pour vérifier si l'âge saisi est un nombre valide (c'est-à-dire un entier positif).</li>
+<li>Utilisez des instructions <code>if</code>, <code>elif</code> et <code>else</code> pour déterminer le type de film à recommander en fonction de l'âge de l'utilisateur.</li>
+<li>Affichez la recommandation de film à l'utilisateur.</li>
+<li>Si l'utilisateur saisit une valeur incorrecte, affichez un message d'erreur et redemandez l'âge.</li>
+</ol>
+<p><strong>Exemple d'exécution :</strong></p>
+<pre><code>Veuillez entrer votre âge : 15
+Nous vous recommandons de regarder un film d'aventure.
+
+Veuillez entrer votre âge : 70
+Nous vous recommandons de regarder un film classique.
+
+Veuillez entrer votre âge : -5
+Erreur : l'âge doit être un nombre entier positif.
+Veuillez entrer votre âge : 8
+Nous vous recommandons de regarder un film d'animation.
+
+Veuillez entrer votre âge : abc
+Erreur : l'âge doit être un nombre entier positif.
+Veuillez entrer votre âge : 30
+Nous vous recommandons de regarder un film d'action.
+</code></pre>
+<p><strong>Conseils :</strong></p>
+<ul>
+<li>Utilisez la méthode <code>str.isdigit()</code> pour vérifier si l'entrée de l'utilisateur est un nombre.</li>
+<li>Utilisez une boucle <code>while</code> pour redemander l'âge si l'entrée est incorrecte.</li>
+</ul>
+<p>Bonne chance et amusez-vous bien avec cet exercice !</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../guided_exercises/python_basics/dictionnaries.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
 
-                            <a rel="next prefetch" href="../../guided_exercises/python_basics/files_io.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../guided_exercises/python_basics/lists.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -215,11 +237,8 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../guided_exercises/python_basics/dictionnaries.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
 
-                    <a rel="next prefetch" href="../../guided_exercises/python_basics/files_io.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../guided_exercises/python_basics/lists.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
