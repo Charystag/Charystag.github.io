@@ -1,0 +1,523 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Django Book</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Non Guided Exercises</li><li class="chapter-item expanded affix "><li class="part-title">Python Basics</li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/lists.html"><strong aria-hidden="true">1.</strong> Lists</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/dictionnaries.html"><strong aria-hidden="true">2.</strong> Dictionnaries</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/lambda.html"><strong aria-hidden="true">3.</strong> Lambda</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/files_io.html"><strong aria-hidden="true">4.</strong> Files I/O</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/error_handling.html"><strong aria-hidden="true">5.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/classes.html"><strong aria-hidden="true">6.</strong> Classes</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/decorators.html"><strong aria-hidden="true">7.</strong> Decorators</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/json.html"><strong aria-hidden="true">8.</strong> JSON Handling</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/generators.html"><strong aria-hidden="true">9.</strong> Generators</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/modules.html"><strong aria-hidden="true">10.</strong> Modules</a></li><li class="chapter-item expanded affix "><li class="part-title">Projects</li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Django Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="exploring-list-comprehensions-in-python"><a class="header" href="#exploring-list-comprehensions-in-python"><strong>Exploring List Comprehensions in Python</strong></a></h1>
+<h2 id="objective"><a class="header" href="#objective">Objective:</a></h2>
+<p>Harness the power of Python’s list comprehensions to filter and transform data in a concise and efficient way.</p>
+<h2 id="description-of-the-challenge"><a class="header" href="#description-of-the-challenge">Description of the Challenge:</a></h2>
+<p>You are provided with a list of integers:</p>
+<pre><code class="language-python">nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</code></pre>
+<p>Your goal is to apply your understanding of list comprehensions to create three new lists:</p>
+<ol>
+<li><strong>Even Numbers</strong>: Create a list containing only the even numbers from the <code>nums</code> list.</li>
+<li><strong>Squared Numbers</strong>: Create a list where each number in <code>nums</code> is squared.</li>
+<li><strong>"Big Numbers" Strings</strong>: Generate a list of strings for numbers greater than 5, formatted as: <code>["6 is big", "7 is big", ...]</code>.</li>
+</ol>
+<details>
+<summary>Hints</summary>
+<ul>
+<li>Review the syntax of list comprehensions in the <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">official Python documentation</a>.</li>
+<li>Use conditional expressions within a list comprehension to filter data.</li>
+<li>Think about how you can combine f-strings with list comprehensions to create custom string outputs.</li>
+</ul>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mastering-dictionary-manipulations-in-python"><a class="header" href="#mastering-dictionary-manipulations-in-python"><strong>Mastering Dictionary Manipulations in Python</strong></a></h1>
+<h2 id="objective-1"><a class="header" href="#objective-1">Objective:</a></h2>
+<p>Practice modifying and iterating over dictionaries to perform advanced data manipulations.</p>
+<h2 id="description-of-the-challenge-1"><a class="header" href="#description-of-the-challenge-1">Description of the Challenge:</a></h2>
+<p>You are provided with a dictionary of student grades:</p>
+<pre><code class="language-python">grades = {'Alice': 85, 'Bob': 92, 'Charlie': 88}
+</code></pre>
+<p>Your task is to perform the following operations on the dictionary:</p>
+<ol>
+<li><strong>Add a New Entry</strong>: Add a new student, "David," with a grade of 90.</li>
+<li><strong>Remove an Entry</strong>: Remove "Alice" and her grade from the dictionary.</li>
+<li><strong>Filter the Dictionary</strong>: Create a new dictionary that includes only students who scored above 90.</li>
+</ol>
+<details>
+<summary>Hints</summary>
+<ul>
+<li>Use the <code>dict.update()</code> method or direct key assignment to add a new entry.</li>
+<li>To remove a key-value pair, you can use the <code>del</code> statement or the <code>pop()</code> method.</li>
+<li>Dictionary comprehensions are helpful for filtering based on conditions.</li>
+</ul>
+<p>Refer to the <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">official Python documentation</a> for guidance.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exploring-lambda-functions-with-map-and-filter"><a class="header" href="#exploring-lambda-functions-with-map-and-filter"><strong>Exploring Lambda Functions with Map and Filter</strong></a></h1>
+<h2 id="objective-2"><a class="header" href="#objective-2">Objective:</a></h2>
+<p>Apply functional programming techniques in Python by using lambda functions, <code>map</code>, and <code>filter</code> to process and transform data.</p>
+<h2 id="description-of-the-challenge-2"><a class="header" href="#description-of-the-challenge-2">Description of the Challenge:</a></h2>
+<p>You are provided with a list of words:</p>
+<pre><code class="language-python">words = ["apple", "banana", "cherry", "date"]
+</code></pre>
+<p>Your task is to use lambda functions with <code>map</code> and <code>filter</code> to perform the following:</p>
+<ol>
+<li><strong>Word Lengths</strong>: Use <code>map</code> to create a list of the lengths of each word in the <code>words</code> list.</li>
+<li><strong>Words with 'a'</strong>: Use <code>filter</code> to create a list of words that contain the letter <code>"a"</code>.</li>
+<li><strong>Uppercase Long Words</strong>: Combine <code>map</code> and <code>filter</code> to create a list of words longer than 5 characters, transformed to uppercase.</li>
+</ol>
+<details>
+<summary>Hints</summary>
+<ul>
+<li>Lambda functions are anonymous functions defined using the syntax <code>lambda x: &lt;expression&gt;</code>.</li>
+<li>The <code>map()</code> function applies a transformation to each element of an iterable.</li>
+<li>The <code>filter()</code> function selects elements of an iterable based on a condition.</li>
+<li>Combining <code>map</code> and <code>filter</code> involves nesting them or chaining operations.</li>
+</ul>
+<p>Refer to the <a href="https://docs.python.org/3/library/functions.html#map">Python map documentation</a> and <a href="https://docs.python.org/3/library/functions.html#filter">filter documentation</a> for more details.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mastering-file-io-in-python"><a class="header" href="#mastering-file-io-in-python"><strong>Mastering File I/O in Python</strong></a></h1>
+<h2 id="objective-3"><a class="header" href="#objective-3">Objective:</a></h2>
+<p>Practice reading from and writing to text files for data storage and retrieval, using Python’s file handling capabilities.</p>
+<h2 id="description-of-the-challenge-3"><a class="header" href="#description-of-the-challenge-3">Description of the Challenge:</a></h2>
+<p>Write a script that performs the following operations on a text file:</p>
+<ol>
+<li><strong>Write Numbers to File</strong>: Write the numbers from 1 to 10 into a file, with each number on a new line.</li>
+<li><strong>Read and Filter Even Numbers</strong>: Read the file content and print only the even numbers.</li>
+<li><strong>Append and Display Content</strong>: Append the line <code>"The End"</code> to the file and print the entire file content.</li>
+</ol>
+<details>
+<summary>Hints</summary>
+<ul>
+<li>Use the <code>open()</code> function with the appropriate mode (<code>'w'</code>, <code>'r'</code>, <code>'a'</code>) for writing, reading, and appending.</li>
+<li>Use loops to iterate through file content or generate numbers.</li>
+<li>Remember to close the file or use a <code>with</code> statement to handle files safely.</li>
+<li>To filter even numbers, use the modulus operator (<code>%</code>).</li>
+</ul>
+<p>Refer to the <a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Python file handling documentation</a> for more guidance.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="building-robust-programs-with-error-handling"><a class="header" href="#building-robust-programs-with-error-handling"><strong>Building Robust Programs with Error Handling</strong></a></h1>
+<h2 id="objective-4"><a class="header" href="#objective-4">Objective:</a></h2>
+<p>Learn to write robust Python programs by using <code>try-except</code> blocks to handle exceptions gracefully.</p>
+<h2 id="description-of-the-challenge-4"><a class="header" href="#description-of-the-challenge-4">Description of the Challenge:</a></h2>
+<p>Write a script that prompts the user to input two numbers and performs a division operation. The script should:</p>
+<ol>
+<li><strong>Prompt and Divide</strong>: Ask the user to input two numbers and divide the first number by the second.</li>
+<li><strong>Handle Errors</strong>: Use exception handling to manage:
+<ul>
+<li>Invalid input (e.g., if the user enters letters or symbols instead of numbers).</li>
+<li>Division by zero.</li>
+</ul>
+</li>
+<li><strong>Final Message</strong>: Ensure that the script always prints <code>"Thank you"</code> at the end, regardless of errors.</li>
+</ol>
+<details>
+<summary>Hints</summary>
+<ul>
+<li>Use <code>try-except</code> blocks to catch specific exceptions like <code>ValueError</code> for invalid input and <code>ZeroDivisionError</code> for division by zero.</li>
+<li>Use the <code>input()</code> function to get user input and convert it to a number with <code>int()</code> or <code>float()</code>.</li>
+<li>Use the <code>finally</code> block to guarantee execution of the final message.</li>
+</ul>
+<p>Refer to the <a href="https://docs.python.org/3/tutorial/errors.html">Python exception handling documentation</a> for additional guidance.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exploring-classes-and-objects-in-python"><a class="header" href="#exploring-classes-and-objects-in-python"><strong>Exploring Classes and Objects in Python</strong></a></h1>
+<h2 id="objective-5"><a class="header" href="#objective-5">Objective:</a></h2>
+<p>Refresh and apply knowledge of object-oriented programming concepts, including defining classes, attributes, and methods.</p>
+<h2 id="description-of-the-challenge-5"><a class="header" href="#description-of-the-challenge-5">Description of the Challenge:</a></h2>
+<p>Create a <code>Car</code> class in Python and work with its attributes and methods as follows:</p>
+<ol>
+<li>
+<p><strong>Define the Class</strong>:</p>
+<ul>
+<li>Add attributes: <code>brand</code>, <code>model</code>, and <code>year</code>.</li>
+<li>Create a method <code>display_info()</code> that prints the car's details in the format: <code>"Brand: &lt;brand&gt;, Model: &lt;model&gt;, Year: &lt;year&gt;"</code>.</li>
+<li>Create a method <code>is_vintage()</code> that checks if the car is more than 25 years old (returning <code>True</code> or <code>False</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Instantiate and Test</strong>:</p>
+<ul>
+<li>Create two instances of the <code>Car</code> class with different attributes.</li>
+<li>Call <code>display_info()</code> and <code>is_vintage()</code> on both objects and verify the results.</li>
+</ul>
+</li>
+</ol>
+<details>
+<summary>Hints</summary>
+<ul>
+<li>Use the <code>__init__</code> method to initialize attributes.</li>
+<li>Use the <code>self</code> keyword to access attributes and methods within the class.</li>
+<li>Calculate whether a car is vintage by comparing its <code>year</code> to the current year. (You might need Python’s <code>datetime</code> module.)</li>
+</ul>
+<p>Refer to the <a href="https://docs.python.org/3/tutorial/classes.html">Python classes documentation</a> for additional details.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="enhancing-functions-with-decorators"><a class="header" href="#enhancing-functions-with-decorators"><strong>Enhancing Functions with Decorators</strong></a></h1>
+<h2 id="objective-6"><a class="header" href="#objective-6">Objective:</a></h2>
+<p>Understand how to create and use decorators to enhance the behavior of Python functions.</p>
+<h2 id="description-of-the-challenge-6"><a class="header" href="#description-of-the-challenge-6">Description of the Challenge:</a></h2>
+<p>Write a custom decorator <code>log_execution</code> that logs messages before and after a function executes. Follow these steps:</p>
+<ol>
+<li>
+<p><strong>Define the Decorator</strong>:</p>
+<ul>
+<li>Log the message: <code>"Function &lt;function_name&gt; is starting"</code> before the function is called.</li>
+<li>Log the message: <code>"Function &lt;function_name&gt; has ended"</code> after the function finishes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Apply the Decorator</strong>:</p>
+<ul>
+<li>Create a sample function <code>factorial(n)</code> that calculates the factorial of a given number recursively or iteratively.</li>
+<li>Apply the <code>log_execution</code> decorator to the <code>factorial</code> function.</li>
+</ul>
+</li>
+<li>
+<p><strong>Test the Decorator</strong>:</p>
+<ul>
+<li>Call the decorated <code>factorial</code> function with a few test cases and observe the logging output.</li>
+</ul>
+</li>
+</ol>
+<details>
+<summary>Hints</summary>
+<ul>
+<li>Use the <code>functools.wraps</code> decorator in your custom decorator to preserve the metadata of the wrapped function.</li>
+<li>To log messages, use <code>print()</code> or Python’s <code>logging</code> module.</li>
+<li>Recall the structure of a decorator: a function that takes a function as an argument and returns a new function.</li>
+</ul>
+<p>Refer to the <a href="https://docs.python.org/3/glossary.html#term-decorator">Python decorators documentation</a> for more information.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mastering-json-handling-in-python"><a class="header" href="#mastering-json-handling-in-python"><strong>Mastering JSON Handling in Python</strong></a></h1>
+<h2 id="objective-7"><a class="header" href="#objective-7">Objective:</a></h2>
+<p>Practice working with JSON data in Python by serializing dictionaries to JSON format, saving them to a file, and deserializing JSON data back into Python objects.</p>
+<h2 id="description-of-the-challenge-7"><a class="header" href="#description-of-the-challenge-7">Description of the Challenge:</a></h2>
+<p>Write a script that performs the following tasks:</p>
+<ol>
+<li>
+<p><strong>Serialize and Save</strong>:</p>
+<ul>
+<li>Create a dictionary representing user profile data, such as:
+<pre><code class="language-python">user_profile = {
+    "name": "John Doe",
+    "age": 30,
+    "email": "john.doe@example.com"
+}
+</code></pre>
+</li>
+<li>Convert the dictionary to a JSON string and save it to a file named <code>user_profile.json</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Read and Deserialize</strong>:</p>
+<ul>
+<li>Read the JSON data from <code>user_profile.json</code> and load it back into a Python dictionary.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update and Rewrite</strong>:</p>
+<ul>
+<li>Update the dictionary (e.g., change the email address to a new value).</li>
+<li>Serialize the updated dictionary and overwrite the original <code>user_profile.json</code> file.</li>
+</ul>
+</li>
+</ol>
+<details>
+<summary>Hints</summary>
+<ul>
+<li>Use the <code>json</code> module, specifically <code>json.dump()</code> and <code>json.load()</code> for working with files, and <code>json.dumps()</code> or <code>json.loads()</code> for in-memory operations.</li>
+<li>Use Python’s file handling (<code>with open()</code>) to ensure safe file operations.</li>
+<li>Refer to the <a href="https://docs.python.org/3/library/json.html">Python JSON documentation</a> for more details.</li>
+</ul>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exploring-generators-for-efficient-data-processing"><a class="header" href="#exploring-generators-for-efficient-data-processing"><strong>Exploring Generators for Efficient Data Processing</strong></a></h1>
+<h2 id="objective-8"><a class="header" href="#objective-8">Objective:</a></h2>
+<p>Learn to create and use Python generators for efficient computation, with added flexibility through parameters.</p>
+<h2 id="description-of-the-challenge-8"><a class="header" href="#description-of-the-challenge-8">Description of the Challenge:</a></h2>
+<p>Write a generator function <code>fibonacci()</code> that yields numbers from the Fibonacci sequence. Complete the following tasks:</p>
+<ol>
+<li>
+<p><strong>Basic Fibonacci Generator</strong>:</p>
+<ul>
+<li>Create a generator function <code>fibonacci()</code> that yields Fibonacci numbers up to a maximum value specified as a parameter.</li>
+</ul>
+</li>
+<li>
+<p><strong>Print Fibonacci Numbers</strong>:</p>
+<ul>
+<li>Use the generator to print all Fibonacci numbers below 100.</li>
+</ul>
+</li>
+<li>
+<p><strong>Enhanced Generator</strong>:</p>
+<ul>
+<li>Modify the generator to accept an optional parameter <code>skip_even=True</code>. If this parameter is <code>True</code>, the generator should yield only odd Fibonacci numbers.</li>
+</ul>
+</li>
+</ol>
+<details>
+<summary>Hints</summary>
+<ul>
+<li>A generator function uses the <code>yield</code> keyword to produce values one at a time.</li>
+<li>Fibonacci numbers are calculated using the relation <code>F(n) = F(n-1) + F(n-2)</code>, starting with <code>F(0) = 0</code> and <code>F(1) = 1</code>.</li>
+<li>Use an optional parameter in the generator function definition: <code>def fibonacci(max_value, skip_even=False):</code>.</li>
+<li>Use a <code>while</code> loop to yield Fibonacci numbers continuously until the maximum value is reached.</li>
+</ul>
+<p>Refer to the <a href="https://docs.python.org/3/howto/functional.html#generators">Python Generators documentation</a> for more details.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="organizing-code-with-modules-in-python"><a class="header" href="#organizing-code-with-modules-in-python"><strong>Organizing Code with Modules in Python</strong></a></h1>
+<h2 id="objective-9"><a class="header" href="#objective-9">Objective:</a></h2>
+<p>Learn how to organize code into modules, import them effectively, and use their functionality in a Python script.</p>
+<h2 id="description-of-the-challenge-9"><a class="header" href="#description-of-the-challenge-9">Description of the Challenge:</a></h2>
+<ol>
+<li>
+<p><strong>Create a Module</strong>:</p>
+<ul>
+<li>Create a file named <code>math_utils.py</code> with the following functions:
+<ul>
+<li><code>add(a, b)</code>: Returns the sum of two numbers.</li>
+<li><code>multiply(a, b)</code>: Returns the product of two numbers.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Use the Module</strong>:</p>
+<ul>
+<li>Write a separate script <code>main.py</code> to:
+<ul>
+<li>Import the <code>math_utils</code> module.</li>
+<li>Use the <code>add</code> and <code>multiply</code> functions in the script.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Explore Import Styles</strong>:</p>
+<ul>
+<li>Import the module in different ways:
+<ul>
+<li>Import the entire module and use the module name as a prefix.</li>
+<li>Import specific functions directly (<code>from math_utils import add</code>).</li>
+<li>Import with an alias (e.g., <code>import math_utils as mu</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<details>
+<summary>Hints</summary>
+<ul>
+<li>Ensure <code>math_utils.py</code> and <code>main.py</code> are in the same directory or adjust the <code>PYTHONPATH</code> if necessary.</li>
+<li>Use <code>import math_utils</code> to import the module or <code>from math_utils import function_name</code> for specific imports.</li>
+<li>Refer to the <a href="https://docs.python.org/3/tutorial/modules.html">Python Modules documentation</a> for more details.</li>
+</ul>
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
