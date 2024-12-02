@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Non Guided Exercises</li><li class="chapter-item expanded affix "><li class="part-title">Python Basics</li><li class="chapter-item expanded "><a href="guided_exercises/easy_python/conditions.html"><strong aria-hidden="true">1.</strong> Conditionals 1</a></li><li class="chapter-item expanded affix "><li class="part-title">Python Reminders</li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/lists.html"><strong aria-hidden="true">2.</strong> Lists</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/dictionnaries.html"><strong aria-hidden="true">3.</strong> Dictionnaries</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/lambda.html"><strong aria-hidden="true">4.</strong> Lambda</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/files_io.html"><strong aria-hidden="true">5.</strong> Files I/O</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/error_handling.html"><strong aria-hidden="true">6.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/classes.html"><strong aria-hidden="true">7.</strong> Classes</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/decorators.html"><strong aria-hidden="true">8.</strong> Decorators</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/json.html"><strong aria-hidden="true">9.</strong> JSON Handling</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/generators.html"><strong aria-hidden="true">10.</strong> Generators</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/modules.html"><strong aria-hidden="true">11.</strong> Modules</a></li><li class="chapter-item expanded affix "><li class="part-title">Projects</li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Non Guided Exercises</li><li class="chapter-item expanded affix "><li class="part-title">Python Basics</li><li class="chapter-item expanded "><a href="guided_exercises/easy_python/conditions.html"><strong aria-hidden="true">1.</strong> Conditionals 1</a></li><li class="chapter-item expanded "><a href="guided_exercises/easy_python/conditions2.html"><strong aria-hidden="true">2.</strong> Conditionals 2</a></li><li class="chapter-item expanded "><a href="guided_exercises/easy_python/lists.html"><strong aria-hidden="true">3.</strong> Lists</a></li><li class="chapter-item expanded "><a href="guided_exercises/easy_python/loops.html"><strong aria-hidden="true">4.</strong> Loops</a></li><li class="chapter-item expanded affix "><li class="part-title">Python Reminders</li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/lists.html"><strong aria-hidden="true">5.</strong> Lists</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/dictionnaries.html"><strong aria-hidden="true">6.</strong> Dictionnaries</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/lambda.html"><strong aria-hidden="true">7.</strong> Lambda</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/files_io.html"><strong aria-hidden="true">8.</strong> Files I/O</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/error_handling.html"><strong aria-hidden="true">9.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/classes.html"><strong aria-hidden="true">10.</strong> Classes</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/decorators.html"><strong aria-hidden="true">11.</strong> Decorators</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/json.html"><strong aria-hidden="true">12.</strong> JSON Handling</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/generators.html"><strong aria-hidden="true">13.</strong> Generators</a></li><li class="chapter-item expanded "><a href="guided_exercises/python_basics/modules.html"><strong aria-hidden="true">14.</strong> Modules</a></li><li class="chapter-item expanded affix "><li class="part-title">Projects</li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -222,6 +222,144 @@ Nous vous recommandons de regarder un film d'action.
 <li>Utilisez une boucle <code>while</code> pour redemander l'âge si l'entrée est incorrecte.</li>
 </ul>
 <p>Bonne chance et amusez-vous bien avec cet exercice !</p>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="travail-pratique--les-instructions-conditionnelles-1"><a class="header" href="#travail-pratique--les-instructions-conditionnelles-1">Travail Pratique : Les Instructions Conditionnelles</a></h3>
+<h4 id="objectif"><a class="header" href="#objectif">Objectif</a></h4>
+<p>L'objectif de ce TP est de vous familiariser avec les instructions conditionnelles en Python. Vous allez utiliser les structures <code>if</code>, <code>elif</code> et <code>else</code> pour prendre des décisions basées sur différentes conditions. Vous allez également utiliser des opérateurs de comparaison et logiques pour créer des conditions complexes.</p>
+<h4 id="Énoncé-de-lexercice"><a class="header" href="#Énoncé-de-lexercice">Énoncé de l'exercice</a></h4>
+<p>Vous allez créer un petit programme qui aide un utilisateur à déterminer quel type de billet de transport il doit acheter en fonction de son âge et de sa destination.</p>
+<h4 id="instructions"><a class="header" href="#instructions">Instructions</a></h4>
+<ol>
+<li>
+<p><strong>Créer un script Python nommé <code>billet_transport.py</code>.</strong></p>
+</li>
+<li>
+<p><strong>Demander à l'utilisateur d'entrer son âge.</strong></p>
+<ul>
+<li>Utilisez la fonction <code>input()</code> pour recueillir l'âge de l'utilisateur.</li>
+<li>Convertissez l'entrée en un entier.</li>
+</ul>
+</li>
+<li>
+<p><strong>Demander à l'utilisateur d'entrer sa destination.</strong></p>
+<ul>
+<li>Utilisez la fonction <code>input()</code> pour recueillir la destination de l'utilisateur.</li>
+<li>Les destinations possibles sont : "Paris", "Lyon", "Marseille".</li>
+</ul>
+</li>
+<li>
+<p><strong>Déterminer le type de billet de transport à acheter en fonction des règles suivantes :</strong></p>
+<ul>
+<li>Si l'utilisateur a moins de 4 ans, il voyage gratuitement.</li>
+<li>Si l'utilisateur a entre 4 et 12 ans (inclus), il doit acheter un "Billet Enfant".</li>
+<li>Si l'utilisateur a entre 13 et 59 ans (inclus), il doit acheter un "Billet Adulte".</li>
+<li>Si l'utilisateur a 60 ans ou plus, il doit acheter un "Billet Senior".</li>
+</ul>
+</li>
+<li>
+<p><strong>Afficher un message indiquant le type de billet de transport à acheter et la destination choisie.</strong></p>
+</li>
+</ol>
+<h4 id="exemple-de-sortie-attendue"><a class="header" href="#exemple-de-sortie-attendue">Exemple de sortie attendue</a></h4>
+<pre><code>Entrez votre âge : 25
+Entrez votre destination (Paris, Lyon, Marseille) : Paris
+Vous devez acheter un Billet Adulte pour Paris.
+</code></pre>
+<h4 id="conseils"><a class="header" href="#conseils">Conseils</a></h4>
+<ul>
+<li>Utilisez des instructions conditionnelles <code>if</code>, <code>elif</code> et <code>else</code> pour vérifier les différentes tranches d'âge.</li>
+<li>Assurez-vous de gérer correctement les entrées de l'utilisateur, notamment en vérifiant que la destination est valide.</li>
+<li>Utilisez des opérateurs de comparaison (<code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>) pour créer les conditions.</li>
+<li>Vous pouvez utiliser des opérateurs logiques (<code>and</code>, <code>or</code>) si nécessaire pour des conditions plus complexes.</li>
+</ul>
+<p>Bonne chance !</p>
+<div style="break-before: page; page-break-before: always;"></div><p>Exercice - Listes</p>
+<p>Exercice : Calculatrice de statistiques</p>
+<p>Écrivez un programme Python qui permet à un utilisateur d'entrer une liste de nombres, puis effectue les opérations suivantes :</p>
+<ol>
+<li>Calcule la somme de tous les nombres dans la liste.</li>
+<li>Calcule la moyenne des nombres.</li>
+<li>Trouve le nombre le plus grand et le nombre le plus petit dans la liste.</li>
+</ol>
+<p>Votre programme devrait d'abord demander à l'utilisateur de saisir les nombres un par un (en utilisant une boucle), puis afficher les résultats.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>Pour ce TP, vous allez devoir créer un programme Python qui génère et affiche une table de multiplication sous forme de grille.</p>
+<h3 id="objectifs-de-lexercice-"><a class="header" href="#objectifs-de-lexercice-">Objectifs de l'exercice :</a></h3>
+<ul>
+<li>Utiliser la boucle <code>for</code> pour générer des lignes et des colonnes.</li>
+<li>Utiliser la boucle <code>while</code> pour une interaction continue avec l'utilisateur.</li>
+<li>Utiliser les mots-clés <code>break</code> et <code>continue</code> pour le contrôle du flux dans les boucles.</li>
+</ul>
+<h3 id="Énoncé-de-lexercice-"><a class="header" href="#Énoncé-de-lexercice-">Énoncé de l'exercice :</a></h3>
+<p>Vous allez écrire un programme Python qui demande à l'utilisateur de saisir un nombre entier positif. Le programme doit ensuite afficher la table de multiplication de ce nombre jusqu'à 10.</p>
+<h4 id="Étapes-à-suivre-"><a class="header" href="#Étapes-à-suivre-">Étapes à suivre :</a></h4>
+<ol>
+<li>
+<p><strong>Demander un nombre à l'utilisateur</strong> :</p>
+<ul>
+<li>Utiliser une boucle <code>while</code> pour continuer à demander un nombre tant que l'utilisateur n'entre pas un entier positif.</li>
+<li>Si l'utilisateur entre un nombre négatif ou zéro, afficher un message d'erreur et continuer à demander un nombre.</li>
+</ul>
+</li>
+<li>
+<p><strong>Générer et afficher la table de multiplication</strong> :</p>
+<ul>
+<li>Utiliser une boucle <code>for</code> pour générer les lignes de la table de multiplication.</li>
+<li>Pour chaque ligne, utiliser une autre boucle <code>for</code> pour générer les colonnes (de 1 à 10).</li>
+<li>Afficher chaque ligne de la table de multiplication.</li>
+</ul>
+</li>
+<li>
+<p><strong>Option de recommencer ou de quitter</strong> :</p>
+<ul>
+<li>Après avoir affiché la table de multiplication, demander à l'utilisateur s'il souhaite entrer un autre nombre ou quitter le programme.</li>
+<li>Utiliser un mot-clé <code>break</code> pour sortir de la boucle principale si l'utilisateur choisit de quitter.</li>
+<li>Utiliser un mot-clé <code>continue</code> pour recommencer la boucle si l'utilisateur veut entrer un autre nombre.</li>
+</ul>
+</li>
+</ol>
+<h3 id="exemple-de-sortie-attendue-"><a class="header" href="#exemple-de-sortie-attendue-">Exemple de sortie attendue :</a></h3>
+<pre><code>Entrez un nombre entier positif : -5
+Erreur : Veuillez entrer un nombre entier positif.
+Entrez un nombre entier positif : 0
+Erreur : Veuillez entrer un nombre entier positif.
+Entrez un nombre entier positif : 5
+
+Table de multiplication de 5 :
+5 x 1 = 5
+5 x 2 = 10
+5 x 3 = 15
+5 x 4 = 20
+5 x 5 = 25
+5 x 6 = 30
+5 x 7 = 35
+5 x 8 = 40
+5 x 9 = 45
+5 x 10 = 50
+
+Voulez-vous entrer un autre nombre ? (oui/non) : oui
+Entrez un nombre entier positif : 3
+
+Table de multiplication de 3 :
+3 x 1 = 3
+3 x 2 = 6
+3 x 3 = 9
+3 x 4 = 12
+3 x 5 = 15
+3 x 6 = 18
+3 x 7 = 21
+3 x 8 = 24
+3 x 9 = 27
+3 x 10 = 30
+
+Voulez-vous entrer un autre nombre ? (oui/non) : non
+Au revoir !
+</code></pre>
+<h3 id="contraintes-"><a class="header" href="#contraintes-">Contraintes :</a></h3>
+<ul>
+<li>Vous devez utiliser au moins une boucle <code>for</code> et une boucle <code>while</code>.</li>
+<li>Vous devez utiliser les mots-clés <code>break</code> et <code>continue</code> au moins une fois dans votre programme.</li>
+<li>Gérez les entrées incorrectes de l'utilisateur de manière appropriée en affichant des messages d'erreur clairs.</li>
+</ul>
+<p>Bonne chance !</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="exploring-list-comprehensions-in-python"><a class="header" href="#exploring-list-comprehensions-in-python"><strong>Exploring List Comprehensions in Python</strong></a></h1>
 <h2 id="objective"><a class="header" href="#objective">Objective:</a></h2>
 <p>Harness the power of Python’s list comprehensions to filter and transform data in a concise and efficient way.</p>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Generators - Django Book</title>
+        <title>Conditionals 2 - Django Book</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Non Guided Exercises</li><li class="chapter-item expanded affix "><li class="part-title">Python Basics</li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/conditions.html"><strong aria-hidden="true">1.</strong> Conditionals 1</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/conditions2.html"><strong aria-hidden="true">2.</strong> Conditionals 2</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/lists.html"><strong aria-hidden="true">3.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/loops.html"><strong aria-hidden="true">4.</strong> Loops</a></li><li class="chapter-item expanded affix "><li class="part-title">Python Reminders</li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/lists.html"><strong aria-hidden="true">5.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/dictionnaries.html"><strong aria-hidden="true">6.</strong> Dictionnaries</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/lambda.html"><strong aria-hidden="true">7.</strong> Lambda</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/files_io.html"><strong aria-hidden="true">8.</strong> Files I/O</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/error_handling.html"><strong aria-hidden="true">9.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/classes.html"><strong aria-hidden="true">10.</strong> Classes</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/decorators.html"><strong aria-hidden="true">11.</strong> Decorators</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/json.html"><strong aria-hidden="true">12.</strong> JSON Handling</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/generators.html" class="active"><strong aria-hidden="true">13.</strong> Generators</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/modules.html"><strong aria-hidden="true">14.</strong> Modules</a></li><li class="chapter-item expanded affix "><li class="part-title">Projects</li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Non Guided Exercises</li><li class="chapter-item expanded affix "><li class="part-title">Python Basics</li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/conditions.html"><strong aria-hidden="true">1.</strong> Conditionals 1</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/conditions2.html" class="active"><strong aria-hidden="true">2.</strong> Conditionals 2</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/lists.html"><strong aria-hidden="true">3.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/loops.html"><strong aria-hidden="true">4.</strong> Loops</a></li><li class="chapter-item expanded affix "><li class="part-title">Python Reminders</li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/lists.html"><strong aria-hidden="true">5.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/dictionnaries.html"><strong aria-hidden="true">6.</strong> Dictionnaries</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/lambda.html"><strong aria-hidden="true">7.</strong> Lambda</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/files_io.html"><strong aria-hidden="true">8.</strong> Files I/O</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/error_handling.html"><strong aria-hidden="true">9.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/classes.html"><strong aria-hidden="true">10.</strong> Classes</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/decorators.html"><strong aria-hidden="true">11.</strong> Decorators</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/json.html"><strong aria-hidden="true">12.</strong> JSON Handling</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/generators.html"><strong aria-hidden="true">13.</strong> Generators</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/modules.html"><strong aria-hidden="true">14.</strong> Modules</a></li><li class="chapter-item expanded affix "><li class="part-title">Projects</li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,51 +173,66 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="exploring-generators-for-efficient-data-processing"><a class="header" href="#exploring-generators-for-efficient-data-processing"><strong>Exploring Generators for Efficient Data Processing</strong></a></h1>
-<h2 id="objective"><a class="header" href="#objective">Objective:</a></h2>
-<p>Learn to create and use Python generators for efficient computation, with added flexibility through parameters.</p>
-<h2 id="description-of-the-challenge"><a class="header" href="#description-of-the-challenge">Description of the Challenge:</a></h2>
-<p>Write a generator function <code>fibonacci()</code> that yields numbers from the Fibonacci sequence. Complete the following tasks:</p>
+                        <h3 id="travail-pratique--les-instructions-conditionnelles"><a class="header" href="#travail-pratique--les-instructions-conditionnelles">Travail Pratique : Les Instructions Conditionnelles</a></h3>
+<h4 id="objectif"><a class="header" href="#objectif">Objectif</a></h4>
+<p>L'objectif de ce TP est de vous familiariser avec les instructions conditionnelles en Python. Vous allez utiliser les structures <code>if</code>, <code>elif</code> et <code>else</code> pour prendre des décisions basées sur différentes conditions. Vous allez également utiliser des opérateurs de comparaison et logiques pour créer des conditions complexes.</p>
+<h4 id="Énoncé-de-lexercice"><a class="header" href="#Énoncé-de-lexercice">Énoncé de l'exercice</a></h4>
+<p>Vous allez créer un petit programme qui aide un utilisateur à déterminer quel type de billet de transport il doit acheter en fonction de son âge et de sa destination.</p>
+<h4 id="instructions"><a class="header" href="#instructions">Instructions</a></h4>
 <ol>
 <li>
-<p><strong>Basic Fibonacci Generator</strong>:</p>
+<p><strong>Créer un script Python nommé <code>billet_transport.py</code>.</strong></p>
+</li>
+<li>
+<p><strong>Demander à l'utilisateur d'entrer son âge.</strong></p>
 <ul>
-<li>Create a generator function <code>fibonacci()</code> that yields Fibonacci numbers up to a maximum value specified as a parameter.</li>
+<li>Utilisez la fonction <code>input()</code> pour recueillir l'âge de l'utilisateur.</li>
+<li>Convertissez l'entrée en un entier.</li>
 </ul>
 </li>
 <li>
-<p><strong>Print Fibonacci Numbers</strong>:</p>
+<p><strong>Demander à l'utilisateur d'entrer sa destination.</strong></p>
 <ul>
-<li>Use the generator to print all Fibonacci numbers below 100.</li>
+<li>Utilisez la fonction <code>input()</code> pour recueillir la destination de l'utilisateur.</li>
+<li>Les destinations possibles sont : "Paris", "Lyon", "Marseille".</li>
 </ul>
 </li>
 <li>
-<p><strong>Enhanced Generator</strong>:</p>
+<p><strong>Déterminer le type de billet de transport à acheter en fonction des règles suivantes :</strong></p>
 <ul>
-<li>Modify the generator to accept an optional parameter <code>skip_even=True</code>. If this parameter is <code>True</code>, the generator should yield only odd Fibonacci numbers.</li>
+<li>Si l'utilisateur a moins de 4 ans, il voyage gratuitement.</li>
+<li>Si l'utilisateur a entre 4 et 12 ans (inclus), il doit acheter un "Billet Enfant".</li>
+<li>Si l'utilisateur a entre 13 et 59 ans (inclus), il doit acheter un "Billet Adulte".</li>
+<li>Si l'utilisateur a 60 ans ou plus, il doit acheter un "Billet Senior".</li>
 </ul>
+</li>
+<li>
+<p><strong>Afficher un message indiquant le type de billet de transport à acheter et la destination choisie.</strong></p>
 </li>
 </ol>
-<details>
-<summary>Hints</summary>
+<h4 id="exemple-de-sortie-attendue"><a class="header" href="#exemple-de-sortie-attendue">Exemple de sortie attendue</a></h4>
+<pre><code>Entrez votre âge : 25
+Entrez votre destination (Paris, Lyon, Marseille) : Paris
+Vous devez acheter un Billet Adulte pour Paris.
+</code></pre>
+<h4 id="conseils"><a class="header" href="#conseils">Conseils</a></h4>
 <ul>
-<li>A generator function uses the <code>yield</code> keyword to produce values one at a time.</li>
-<li>Fibonacci numbers are calculated using the relation <code>F(n) = F(n-1) + F(n-2)</code>, starting with <code>F(0) = 0</code> and <code>F(1) = 1</code>.</li>
-<li>Use an optional parameter in the generator function definition: <code>def fibonacci(max_value, skip_even=False):</code>.</li>
-<li>Use a <code>while</code> loop to yield Fibonacci numbers continuously until the maximum value is reached.</li>
+<li>Utilisez des instructions conditionnelles <code>if</code>, <code>elif</code> et <code>else</code> pour vérifier les différentes tranches d'âge.</li>
+<li>Assurez-vous de gérer correctement les entrées de l'utilisateur, notamment en vérifiant que la destination est valide.</li>
+<li>Utilisez des opérateurs de comparaison (<code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>) pour créer les conditions.</li>
+<li>Vous pouvez utiliser des opérateurs logiques (<code>and</code>, <code>or</code>) si nécessaire pour des conditions plus complexes.</li>
 </ul>
-<p>Refer to the <a href="https://docs.python.org/3/howto/functional.html#generators">Python Generators documentation</a> for more details.</p>
-</details>
+<p>Bonne chance !</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../guided_exercises/python_basics/json.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../guided_exercises/easy_python/conditions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../guided_exercises/python_basics/modules.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../guided_exercises/easy_python/lists.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -227,11 +242,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../guided_exercises/python_basics/json.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../guided_exercises/easy_python/conditions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../guided_exercises/python_basics/modules.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../guided_exercises/easy_python/lists.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
