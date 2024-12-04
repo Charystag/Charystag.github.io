@@ -1,0 +1,348 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Part 7 - Django Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../guides/docker_sql.html"><strong aria-hidden="true">1.</strong> Running SQL Commands with Docker</a></li><li class="chapter-item expanded "><a href="../../guides/django_venv.html"><strong aria-hidden="true">2.</strong> Django setup with python and venv</a></li><li class="chapter-item expanded "><a href="../../guides/django_docs_tutorial/intro.html"><strong aria-hidden="true">3.</strong> Django documentation tutorials</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../guides/django_docs_tutorial/part1.html"><strong aria-hidden="true">3.1.</strong> Part 1</a></li><li class="chapter-item expanded "><a href="../../guides/django_docs_tutorial/part2.html"><strong aria-hidden="true">3.2.</strong> Part 2</a></li><li class="chapter-item expanded "><a href="../../guides/django_docs_tutorial/part3.html"><strong aria-hidden="true">3.3.</strong> Part 3</a></li><li class="chapter-item expanded "><a href="../../guides/django_docs_tutorial/part4.html"><strong aria-hidden="true">3.4.</strong> Part 4</a></li><li class="chapter-item expanded "><a href="../../guides/django_docs_tutorial/part5.html"><strong aria-hidden="true">3.5.</strong> Part 5</a></li><li class="chapter-item expanded "><a href="../../guides/django_docs_tutorial/part6.html"><strong aria-hidden="true">3.6.</strong> Part 6</a></li><li class="chapter-item expanded "><a href="../../guides/django_docs_tutorial/part7.html" class="active"><strong aria-hidden="true">3.7.</strong> Part 7</a></li><li class="chapter-item expanded "><a href="../../guides/django_docs_tutorial/part8.html"><strong aria-hidden="true">3.8.</strong> Part 8</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Python Basics</li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/conditions.html"><strong aria-hidden="true">4.</strong> Conditionals 1</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/conditions2.html"><strong aria-hidden="true">5.</strong> Conditionals 2</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/conditions3.html"><strong aria-hidden="true">6.</strong> Conditionals 3</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/user_input.html"><strong aria-hidden="true">7.</strong> User Input</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/lists2.html"><strong aria-hidden="true">8.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/lists.html"><strong aria-hidden="true">9.</strong> Lists 2</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/loops2.html"><strong aria-hidden="true">10.</strong> Loops</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/loops.html"><strong aria-hidden="true">11.</strong> Loops 2</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/functions.html"><strong aria-hidden="true">12.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/dictionaries.html"><strong aria-hidden="true">13.</strong> Dictionaries</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/files_io.html"><strong aria-hidden="true">14.</strong> Files I/O</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/error_handling.html"><strong aria-hidden="true">15.</strong> Error Handling</a></li><li class="chapter-item expanded affix "><li class="part-title">OOP</li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/oop/basics.html"><strong aria-hidden="true">16.</strong> Basics</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/oop/constructor.html"><strong aria-hidden="true">17.</strong> Constructor</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/oop/class_and_static.html"><strong aria-hidden="true">18.</strong> Class Decorators</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/oop/inheritance.html"><strong aria-hidden="true">19.</strong> Inheritance</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/oop/encapsulation.html"><strong aria-hidden="true">20.</strong> Encapsulation</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/oop/polymorphism.html"><strong aria-hidden="true">21.</strong> Polymorphism</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/easy_python/oop/overloading.html"><strong aria-hidden="true">22.</strong> Overloading</a></li><li class="chapter-item expanded affix "><li class="part-title">Python Reminders</li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/lists.html"><strong aria-hidden="true">23.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/dictionnaries.html"><strong aria-hidden="true">24.</strong> Dictionnaries</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/lambda.html"><strong aria-hidden="true">25.</strong> Lambda</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/files_io.html"><strong aria-hidden="true">26.</strong> Files I/O</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/error_handling.html"><strong aria-hidden="true">27.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/classes.html"><strong aria-hidden="true">28.</strong> Classes</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/decorators.html"><strong aria-hidden="true">29.</strong> Decorators</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/json.html"><strong aria-hidden="true">30.</strong> JSON Handling</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/generators.html"><strong aria-hidden="true">31.</strong> Generators</a></li><li class="chapter-item expanded "><a href="../../guided_exercises/python_basics/modules.html"><strong aria-hidden="true">32.</strong> Modules</a></li><li class="chapter-item expanded affix "><li class="part-title">SQL Basics</li><li class="chapter-item expanded "><a href="../../sql_exercises/setup.html"><strong aria-hidden="true">33.</strong> Creating and setting up a database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/setup.html"><strong aria-hidden="true">33.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/insertion.html"><strong aria-hidden="true">34.</strong> Inserting data into a database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/insertion.html"><strong aria-hidden="true">34.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/selection.html"><strong aria-hidden="true">35.</strong> Retrieving data from a database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/selection.html"><strong aria-hidden="true">35.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/update.html"><strong aria-hidden="true">36.</strong> Updating records in a database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/update.html"><strong aria-hidden="true">36.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/delete.html"><strong aria-hidden="true">37.</strong> Deleting records from a database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/delete.html"><strong aria-hidden="true">37.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/filtering.html"><strong aria-hidden="true">38.</strong> Filter information</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/filtering.html"><strong aria-hidden="true">38.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/sorting.html"><strong aria-hidden="true">39.</strong> Sorting Data</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/sorting.html"><strong aria-hidden="true">39.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/aggregating.html"><strong aria-hidden="true">40.</strong> Aggregating Data</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/aggregating.html"><strong aria-hidden="true">40.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/joining.html"><strong aria-hidden="true">41.</strong> Joining Data</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/joining.html"><strong aria-hidden="true">41.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/relationships.html"><strong aria-hidden="true">42.</strong> Creating Relationships</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/relationships.html"><strong aria-hidden="true">42.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/subqueries.html"><strong aria-hidden="true">43.</strong> Using Subqueries</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/subqueries.html"><strong aria-hidden="true">43.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">SQL Advanced</li><li class="chapter-item expanded "><a href="../../sql_exercises/advanced/library.html"><strong aria-hidden="true">44.</strong> Library Books Tracker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/library.html"><strong aria-hidden="true">44.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/advanced/students.html"><strong aria-hidden="true">45.</strong> Students Grades Manager</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/students.html"><strong aria-hidden="true">45.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/advanced/online_store.html"><strong aria-hidden="true">46.</strong> Online Store Database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/online_store.html"><strong aria-hidden="true">46.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../../sql_exercises/advanced/employees.html"><strong aria-hidden="true">47.</strong> Employees Work Tracking</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../sql_exercises/solutions/employees.html"><strong aria-hidden="true">47.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Projects</li><li class="chapter-item expanded "><a href="../../projects/python_basics/calculator.html"><strong aria-hidden="true">48.</strong> Calculator</a></li><li class="chapter-item expanded "><a href="../../projects/sql/mini_database.html"><strong aria-hidden="true">49.</strong> Mini Database</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Django Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="writing-your-first-django-app-part-7"><a class="header" href="#writing-your-first-django-app-part-7">Writing Your First Django App, Part 7</a></h1>
+<p>This tutorial focuses on customizing Django’s admin interface to improve the usability and efficiency of managing data. The Django admin is a powerful tool for interacting with the database through a user-friendly interface.</p>
+<hr />
+<h2 id="1-registering-models-in-the-admin-interface"><a class="header" href="#1-registering-models-in-the-admin-interface"><strong>1. Registering Models in the Admin Interface</strong></a></h2>
+<ul>
+<li>By default, only models explicitly registered in <code>admin.py</code> appear in the admin interface.</li>
+<li>Example:
+<pre><code class="language-python">from django.contrib import admin
+from .models import Question
+
+admin.site.register(Question)
+</code></pre>
+</li>
+</ul>
+<hr />
+<h2 id="2-customizing-the-admin-interface"><a class="header" href="#2-customizing-the-admin-interface"><strong>2. Customizing the Admin Interface</strong></a></h2>
+<ul>
+<li>Django allows you to customize how models are displayed and edited in the admin interface using <code>ModelAdmin</code> classes.</li>
+</ul>
+<h3 id="customizing-fields"><a class="header" href="#customizing-fields">Customizing Fields</a></h3>
+<ul>
+<li>Reorder or group fields using the <code>fields</code> or <code>fieldsets</code> attributes in a <code>ModelAdmin</code> class:
+<pre><code class="language-python">class QuestionAdmin(admin.ModelAdmin):
+    fields = ['pub_date', 'question_text']
+</code></pre>
+</li>
+</ul>
+<h3 id="grouping-fields-into-sections"><a class="header" href="#grouping-fields-into-sections">Grouping Fields into Sections</a></h3>
+<ul>
+<li>Use <code>fieldsets</code> to organize fields into collapsible sections:
+<pre><code class="language-python">class QuestionAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['question_text']}),
+        ('Date Information', {'fields': ['pub_date'], 'classes': ['collapse']}),
+    ]
+</code></pre>
+</li>
+</ul>
+<hr />
+<h2 id="3-adding-related-models-inline"><a class="header" href="#3-adding-related-models-inline"><strong>3. Adding Related Models Inline</strong></a></h2>
+<ul>
+<li>
+<p>Display related models (e.g., <code>Choice</code> objects for a <code>Question</code>) directly in the parent model’s admin page using <code>InlineModelAdmin</code>.</p>
+</li>
+<li>
+<p>Example:</p>
+<pre><code class="language-python">from .models import Choice
+
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+    extra = 3
+
+class QuestionAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['question_text']}),
+        ('Date Information', {'fields': ['pub_date'], 'classes': ['collapse']}),
+    ]
+    inlines = [ChoiceInline]
+
+admin.site.register(Question, QuestionAdmin)
+</code></pre>
+</li>
+<li>
+<p><code>TabularInline</code> displays choices in a compact table format, while <code>StackedInline</code> uses a stacked layout.</p>
+</li>
+</ul>
+<hr />
+<h2 id="4-customizing-list-display"><a class="header" href="#4-customizing-list-display"><strong>4. Customizing List Display</strong></a></h2>
+<ul>
+<li>Use the <code>list_display</code> attribute to control the columns displayed on the change list page for a model:
+<pre><code class="language-python">class QuestionAdmin(admin.ModelAdmin):
+    list_display = ('question_text', 'pub_date', 'was_published_recently')
+</code></pre>
+</li>
+</ul>
+<h3 id="adding-filtering-and-search"><a class="header" href="#adding-filtering-and-search">Adding Filtering and Search</a></h3>
+<ul>
+<li>
+<p>Enable filtering by date using <code>list_filter</code>:</p>
+<pre><code class="language-python">class QuestionAdmin(admin.ModelAdmin):
+    list_filter = ['pub_date']
+</code></pre>
+</li>
+<li>
+<p>Add a search bar for specific fields using <code>search_fields</code>:</p>
+<pre><code class="language-python">class QuestionAdmin(admin.ModelAdmin):
+    search_fields = ['question_text']
+</code></pre>
+</li>
+</ul>
+<hr />
+<h2 id="5-testing-the-admin-interface"><a class="header" href="#5-testing-the-admin-interface"><strong>5. Testing the Admin Interface</strong></a></h2>
+<ul>
+<li>Start the development server and log in to the admin interface at <code>http://127.0.0.1:8000/admin/</code>.</li>
+<li>Experiment with:
+<ul>
+<li>Adding and editing questions and choices.</li>
+<li>Using the list display, filters, and search bar.</li>
+<li>Inline editing of related models.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="6-enhancing-usability"><a class="header" href="#6-enhancing-usability"><strong>6. Enhancing Usability</strong></a></h2>
+<ul>
+<li>Customize admin titles and headers by modifying <code>admin.py</code>:
+<pre><code class="language-python">admin.site.site_header = "Polls Administration"
+admin.site.site_title = "Polls Admin"
+admin.site.index_title = "Welcome to the Polls Administration"
+</code></pre>
+</li>
+</ul>
+<hr />
+<h2 id="key-takeaways"><a class="header" href="#key-takeaways">Key Takeaways:</a></h2>
+<ul>
+<li>The Django admin interface is highly customizable and can be tailored to the needs of the application.</li>
+<li>Use <code>ModelAdmin</code> classes to adjust field organization, add related models inline, and enhance list views.</li>
+<li>Filtering and search features improve usability for managing large datasets.</li>
+<li>Customizing the admin interface allows for efficient data management while maintaining a polished user experience.</li>
+</ul>
+<p>This tutorial prepares you to create a streamlined and professional admin interface for your applications. Next, you’ll explore integrating third-party packages and tools to extend Django’s functionality.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../guides/django_docs_tutorial/part6.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../guides/django_docs_tutorial/part8.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../guides/django_docs_tutorial/part6.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../guides/django_docs_tutorial/part8.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
