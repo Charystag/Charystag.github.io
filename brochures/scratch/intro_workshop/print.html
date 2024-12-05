@@ -1,0 +1,465 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Stage d&#x27;introduction à Scratch</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">Présentation Générale</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded "><a href="overview.html"><strong aria-hidden="true">1.</strong> Programme du stage</a></li><li class="chapter-item expanded affix "><li class="part-title">Les Projets</li><li class="chapter-item expanded "><a href="projects/animated_character.html"><strong aria-hidden="true">2.</strong> Personnage Animé</a></li><li class="chapter-item expanded "><a href="projects/maze.html"><strong aria-hidden="true">3.</strong> Jeu de Labyrinthe</a></li><li class="chapter-item expanded "><a href="projects/interactive_story.html"><strong aria-hidden="true">4.</strong> Histoire Interactive</a></li><li class="chapter-item expanded "><a href="projects/race.html"><strong aria-hidden="true">5.</strong> Jeu de Course</a></li><li class="chapter-item expanded "><a href="projects/wish_card.html"><strong aria-hidden="true">6.</strong> Carte de Voeu</a></li><li class="chapter-item expanded affix "><a href="conclusion.html">Conclusion</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Stage d&#x27;introduction à Scratch</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="programme-de-stage-de-programmation-scratch-pour-débutants"><a class="header" href="#programme-de-stage-de-programmation-scratch-pour-débutants"><strong>Programme de Stage de Programmation Scratch pour Débutants</strong></a></h1>
+<h2 id="présentation-générale"><a class="header" href="#présentation-générale">Présentation Générale</a></h2>
+<h3 id="durée-du-stage"><a class="header" href="#durée-du-stage"><strong>Durée du stage</strong></a></h3>
+<ul>
+<li><strong>Une semaine</strong> : 3 heures par jour sur <strong>5 jours</strong>, totalisant <strong>15 heures</strong> d'apprentissage ludique.</li>
+</ul>
+<h3 id="public-cible"><a class="header" href="#public-cible"><strong>Public cible</strong></a></h3>
+<ul>
+<li><strong>Enfants âgés de 5 à 10 ans</strong>, même sans expérience préalable en programmation.</li>
+</ul>
+<h3 id="prérequis"><a class="header" href="#prérequis"><strong>Prérequis</strong></a></h3>
+<ul>
+<li><strong>Aucune expérience préalable requise</strong> : ce stage est accessible à tous.</li>
+<li>Intérêt pour :
+<ul>
+<li>Les <strong>jeux vidéo</strong>.</li>
+<li>Les <strong>histoires interactives</strong>.</li>
+<li>Les <strong>animations créatives</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="objectifs"><a class="header" href="#objectifs"><strong>Objectifs</strong></a></h3>
+<ul>
+<li><strong>Maîtriser les concepts de base</strong> de la programmation en utilisant Scratch.</li>
+<li>Apprendre à <strong>structurer et résoudre des problèmes</strong> grâce à la logique.</li>
+<li>Créer et personnaliser des <strong>projets interactifs et ludiques</strong> adaptés à l'âge des participants.</li>
+<li>Stimuler la <strong>créativité et l'expression personnelle</strong> à travers le code.</li>
+<li>Introduire des notions simples de <strong>débogage</strong> pour corriger les erreurs dans les projets.</li>
+</ul>
+<hr />
+<h2 id="lieu"><a class="header" href="#lieu"><strong>Lieu</strong></a></h2>
+<ul>
+<li>Ce stage est proposé :
+<ul>
+<li><strong>À distance</strong> (visioconférence interactive).</li>
+<li><strong>En présentiel</strong> : À Paris et ses alentours proches (domicile ou lieux définis).</li>
+</ul>
+</li>
+</ul>
+<h2 id="prix"><a class="header" href="#prix"><strong>Prix</strong></a></h2>
+<ul>
+<li><strong>Tarif horaire</strong> : 70€ de l’heure.</li>
+<li><strong>Prix total</strong> : 1 050€ pour les 15 heures du stage.</li>
+</ul>
+<h3 id="pourquoi-ce-tarif-"><a class="header" href="#pourquoi-ce-tarif-">Pourquoi ce tarif ?</a></h3>
+<p>Le tarif reflète :</p>
+<ul>
+<li><strong>Une approche pédagogique sur-mesure</strong> : Chaque enfant est accompagné selon son rythme.</li>
+<li><strong>Du matériel et des ressources inclus</strong> : Des guides pratiques et des fichiers Scratch adaptés aux projets.</li>
+<li><strong>Un encadrement professionnel</strong> : Un formateur expérimenté en programmation et en enseignement des jeunes. J'ai actuellement plus de 100 personnes formées à mon actif, allant de la 4e à la reconversion professionnelle.</li>
+<li><strong>Une expérience ludique et éducative</strong> : Vos enfants repartent avec des compétences concrètes et des projets qu’ils auront fièrement réalisés eux-mêmes.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="structure-du-stage"><a class="header" href="#structure-du-stage">Structure du Stage</a></h1>
+<h2 id="méthodes-denseignement"><a class="header" href="#méthodes-denseignement"><strong>Méthodes d'Enseignement</strong></a></h2>
+<p>Le stage repose sur des méthodes pédagogiques interactives et adaptées aux enfants, comprenant :</p>
+<ul>
+<li><strong>Apprentissage Ludique</strong> : Utilisation de jeux et de projets interactifs pour enseigner les concepts de programmation de manière engageante.</li>
+<li><strong>Exemples Visuels</strong> : Illustrations et animations pour faciliter la compréhension des notions abstraites.</li>
+<li><strong>Projets Pratiques</strong> : Création de projets concrets qui permettent aux enfants d’appliquer immédiatement les notions apprises.</li>
+<li><strong>Débogage Simple et Amusant</strong> : Introduction à la résolution de bugs comme une étape naturelle et ludique du processus de création.</li>
+</ul>
+<hr />
+<h2 id="table-des-matières-des-projets"><a class="header" href="#table-des-matières-des-projets"><strong>Table des Matières des Projets</strong></a></h2>
+<ol>
+<li>
+<p><a href="./projects/animated_character.html"><strong>Créer un Personnage Animé</strong></a><br />
+Apprendre les bases de la programmation visuelle en créant un personnage capable de se déplacer, parler et exécuter des actions simples.</p>
+</li>
+<li>
+<p><a href="./projects/maze.html"><strong>Créer un Jeu de Labyrinthe</strong></a><br />
+Développer un jeu interactif où un personnage doit naviguer dans un labyrinthe en évitant les obstacles pour atteindre un objectif.</p>
+</li>
+<li>
+<p><a href="./projects/interactive_story.html"><strong>Créer une Histoire Interactive</strong></a><br />
+Concevoir une histoire personnalisée avec plusieurs personnages et scènes interactives, accompagnée de dialogues et de transitions.</p>
+</li>
+<li>
+<p><a href="./projects/race.html"><strong>Créer un Jeu de Course</strong></a><br />
+Réaliser un jeu de course où les enfants contrôleront un personnage pour éviter des obstacles et atteindre la ligne d’arrivée.</p>
+</li>
+<li>
+<p><a href="./projects/wish_card.html"><strong>Créer une Carte de Vœux Animée</strong></a><br />
+Créer une carte personnalisée pour une occasion spéciale, avec des animations, des messages, et des sons festifs.</p>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="projet-1--créer-un-personnage-animé"><a class="header" href="#projet-1--créer-un-personnage-animé"><strong>Projet 1 : Créer un Personnage Animé</strong></a></h1>
+<h2 id="description"><a class="header" href="#description"><strong>Description</strong></a></h2>
+<p>Dans ce projet, les enfants apprendront à créer un personnage animé capable de :</p>
+<ul>
+<li><strong>Se déplacer</strong> sur l'écran.</li>
+<li><strong>Parler</strong> pour raconter une histoire ou interagir.</li>
+<li>Exécuter des <strong>actions simples</strong> pour donner vie à leur imagination.</li>
+</ul>
+<h2 id="notions-apprises"><a class="header" href="#notions-apprises"><strong>Notions Apprises</strong></a></h2>
+<p>Les participants découvriront et maîtriseront :</p>
+<ul>
+<li><strong>Blocs de Mouvement</strong> : Comment déplacer des objets de manière fluide.</li>
+<li><strong>Blocs d'Apparence</strong> : Modifier les costumes et ajouter des effets visuels.</li>
+<li><strong>Blocs d'Événements</strong> : Utiliser des déclencheurs comme "Quand le drapeau vert est cliqué" pour lancer l'animation.</li>
+</ul>
+<h2 id="objectifs-pédagogiques"><a class="header" href="#objectifs-pédagogiques"><strong>Objectifs Pédagogiques</strong></a></h2>
+<ul>
+<li><strong>Logique séquentielle</strong> : Comprendre comment ordonner des actions pour créer une animation fluide.</li>
+<li><strong>Créativité</strong> : Personnaliser les personnages et ajouter des éléments uniques pour rendre les animations captivantes.</li>
+<li><strong>Débogage de Base</strong> : Identifier et corriger des erreurs simples, comme des personnages qui ne se déplacent pas correctement.</li>
+</ul>
+<h3 id="durée-estimée--1-à-3-heures"><a class="header" href="#durée-estimée--1-à-3-heures"><strong>Durée estimée :</strong> 1 à 3 heures</a></h3>
+<p>Ce temps inclut la création, les tests, et la personnalisation du projet.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="projet-2--créer-un-jeu-de-labyrinthe"><a class="header" href="#projet-2--créer-un-jeu-de-labyrinthe"><strong>Projet 2 : Créer un Jeu de Labyrinthe</strong></a></h1>
+<h2 id="description-1"><a class="header" href="#description-1"><strong>Description</strong></a></h2>
+<p>Dans ce projet, les enfants développeront un jeu interactif où :</p>
+<ul>
+<li>Un <strong>personnage principal</strong> doit naviguer dans un labyrinthe.</li>
+<li>L’objectif est d’atteindre la <strong>fin du parcours</strong> tout en évitant les obstacles.</li>
+<li>Des éléments comme des scores ou des niveaux peuvent être ajoutés pour enrichir le jeu.</li>
+</ul>
+<h2 id="notions-apprises-1"><a class="header" href="#notions-apprises-1"><strong>Notions Apprises</strong></a></h2>
+<p>Les participants découvriront :</p>
+<ul>
+<li><strong>Blocs de Détection</strong> : Apprendre à utiliser les capteurs pour détecter les collisions avec les murs ou les obstacles.</li>
+<li><strong>Blocs de Contrôle</strong> : Utilisation de boucles pour permettre des déplacements fluides et continus.</li>
+<li><strong>Blocs de Variables</strong> : Introduction à la création de variables pour suivre des éléments comme le score ou les niveaux.</li>
+</ul>
+<h2 id="objectifs-pédagogiques-1"><a class="header" href="#objectifs-pédagogiques-1"><strong>Objectifs Pédagogiques</strong></a></h2>
+<ul>
+<li><strong>Résolution de Problème</strong> : Concevoir des stratégies pour naviguer efficacement dans le labyrinthe.</li>
+<li><strong>Pensée Logique</strong> : Comprendre et utiliser des conditions ("si... alors") et des boucles.</li>
+<li><strong>Débogage</strong> : Identifier et résoudre des problèmes, tels que :
+<ul>
+<li>Des collisions incorrectes avec les murs.</li>
+<li>Un score ou des variables qui ne s’incrémentent pas correctement.</li>
+</ul>
+</li>
+</ul>
+<h3 id="durée-estimée--2-à-5-heures"><a class="header" href="#durée-estimée--2-à-5-heures"><strong>Durée estimée :</strong> 2 à 5 heures</a></h3>
+<p>Le temps peut varier selon le niveau de personnalisation, comme la création d’un labyrinthe plus complexe ou l’ajout d’éléments de jeu avancés.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="projet-3--créer-une-histoire-interactive"><a class="header" href="#projet-3--créer-une-histoire-interactive"><strong>Projet 3 : Créer une Histoire Interactive</strong></a></h1>
+<h2 id="description-2"><a class="header" href="#description-2"><strong>Description</strong></a></h2>
+<p>Dans ce projet, les enfants donneront vie à une histoire interactive en utilisant :</p>
+<ul>
+<li><strong>Plusieurs personnages</strong> pour représenter les acteurs de leur histoire.</li>
+<li><strong>Différentes scènes</strong> pour illustrer les étapes ou les lieux clés de l’histoire.</li>
+<li><strong>Interactions dynamiques</strong> entre les personnages et les éléments de l’histoire.</li>
+</ul>
+<h2 id="notions-apprises-2"><a class="header" href="#notions-apprises-2"><strong>Notions Apprises</strong></a></h2>
+<p>Les participants découvriront :</p>
+<ul>
+<li><strong>Blocs de Sons</strong> : Ajouter des effets sonores et des dialogues pour enrichir l'expérience narrative.</li>
+<li><strong>Blocs de Scènes</strong> : Changer de scène pour avancer dans l’histoire ou marquer une transition.</li>
+<li><strong>Blocs de Communication</strong> : Utiliser des messages pour synchroniser les actions entre personnages et objets.</li>
+</ul>
+<h2 id="objectifs-pédagogiques-2"><a class="header" href="#objectifs-pédagogiques-2"><strong>Objectifs Pédagogiques</strong></a></h2>
+<ul>
+<li><strong>Narration Créative</strong> : Développer des compétences en storytelling et exprimer des idées à travers le code.</li>
+<li><strong>Coordination</strong> : Apprendre à synchroniser les actions et dialogues entre différents objets pour une histoire cohérente.</li>
+<li><strong>Débogage</strong> : Identifier et résoudre des problèmes comme :
+<ul>
+<li>Des actions mal synchronisées entre les personnages.</li>
+<li>Des transitions incorrectes entre les scènes.</li>
+</ul>
+</li>
+</ul>
+<h3 id="durée-estimée--2-à-5-heures-1"><a class="header" href="#durée-estimée--2-à-5-heures-1"><strong>Durée estimée :</strong> 2 à 5 heures</a></h3>
+<p>Le temps peut varier selon le nombre de scènes et de personnages, ainsi que le niveau de personnalisation souhaité.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="projet-4--créer-un-jeu-de-course"><a class="header" href="#projet-4--créer-un-jeu-de-course"><strong>Projet 4 : Créer un Jeu de Course</strong></a></h1>
+<h2 id="description-3"><a class="header" href="#description-3"><strong>Description</strong></a></h2>
+<p>Dans ce projet, les enfants créeront un jeu de course interactif où :</p>
+<ul>
+<li>Ils contrôleront un <strong>personnage principal</strong> en utilisant les touches du clavier.</li>
+<li>Ils devront <strong>éviter des obstacles</strong> pour atteindre la ligne d’arrivée.</li>
+<li>Des éléments comme un <strong>score</strong> ou un <strong>temps limite</strong> pourront être ajoutés pour rendre le jeu plus compétitif.</li>
+</ul>
+<h2 id="notions-apprises-3"><a class="header" href="#notions-apprises-3"><strong>Notions Apprises</strong></a></h2>
+<p>Les participants apprendront à :</p>
+<ul>
+<li><strong>Blocs de Mouvement</strong> : Utiliser les touches du clavier pour déplacer le personnage de manière fluide.</li>
+<li><strong>Blocs de Détection</strong> : Détecter les collisions avec des obstacles pour ajouter du défi au jeu.</li>
+<li><strong>Blocs de Variables</strong> : Créer et gérer des variables pour suivre des éléments comme le score ou le temps écoulé.</li>
+</ul>
+<h2 id="objectifs-pédagogiques-3"><a class="header" href="#objectifs-pédagogiques-3"><strong>Objectifs Pédagogiques</strong></a></h2>
+<ul>
+<li><strong>Réflexes et Coordination</strong> : Développer des compétences de réaction rapide pour gérer les obstacles en temps réel.</li>
+<li><strong>Résolution de Problème</strong> : Concevoir des solutions créatives pour éviter ou contourner les obstacles.</li>
+<li><strong>Débogage</strong> : Identifier et résoudre des problèmes tels que :
+<ul>
+<li>Des mouvements erratiques ou incohérents.</li>
+<li>Des collisions incorrectes avec les obstacles.</li>
+<li>Des scores ou minuteries qui ne fonctionnent pas correctement.</li>
+</ul>
+</li>
+</ul>
+<h3 id="durée-estimée--2-à-5-heures-2"><a class="header" href="#durée-estimée--2-à-5-heures-2"><strong>Durée estimée :</strong> 2 à 5 heures</a></h3>
+<p>La durée peut varier selon la complexité des obstacles, des mécanismes ajoutés (comme un chronomètre), et le niveau de personnalisation souhaité.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="projet-5--créer-une-carte-de-vœux-animée"><a class="header" href="#projet-5--créer-une-carte-de-vœux-animée"><strong>Projet 5 : Créer une Carte de Vœux Animée</strong></a></h1>
+<h2 id="description-4"><a class="header" href="#description-4"><strong>Description</strong></a></h2>
+<p>Dans ce projet, les enfants créeront une carte de vœux animée pour une occasion spéciale, comme :</p>
+<ul>
+<li>Un <strong>anniversaire</strong>.</li>
+<li>Une <strong>fête</strong>.</li>
+<li>Toute autre célébration personnalisée de leur choix.</li>
+</ul>
+<p>La carte inclura :</p>
+<ul>
+<li>Des <strong>animations uniques</strong> pour captiver l’attention.</li>
+<li>Des <strong>messages personnalisés</strong> pour transmettre leurs vœux.</li>
+<li>Des <strong>effets sonores festifs</strong> pour compléter l'expérience.</li>
+</ul>
+<h2 id="notions-apprises-4"><a class="header" href="#notions-apprises-4"><strong>Notions Apprises</strong></a></h2>
+<p>Les participants apprendront à :</p>
+<ul>
+<li><strong>Blocs d’Apparence</strong> : Utiliser des effets visuels pour rendre la carte attrayante et dynamique.</li>
+<li><strong>Blocs de Sons</strong> : Ajouter des musiques et des sons festifs pour enrichir l’ambiance.</li>
+<li><strong>Blocs de Contrôle</strong> : Synchroniser les animations et les sons pour créer un effet harmonieux et fluide.</li>
+</ul>
+<h2 id="objectifs-pédagogiques-4"><a class="header" href="#objectifs-pédagogiques-4"><strong>Objectifs Pédagogiques</strong></a></h2>
+<ul>
+<li><strong>Expression Créative</strong> : Encourager les enfants à personnaliser et à exprimer leur créativité à travers leur projet.</li>
+<li><strong>Coordination</strong> : Maîtriser la synchronisation entre les animations, les sons, et les messages pour un rendu cohérent.</li>
+<li><strong>Débogage</strong> : Identifier et résoudre des problèmes tels que :
+<ul>
+<li>Des animations qui ne s’affichent pas correctement.</li>
+<li>Une mauvaise synchronisation entre les éléments visuels et sonores.</li>
+</ul>
+</li>
+</ul>
+<h3 id="durée-estimée--2-à-5-heures-3"><a class="header" href="#durée-estimée--2-à-5-heures-3"><strong>Durée estimée :</strong> 2 à 5 heures</a></h3>
+<p>La durée peut varier selon le niveau de personnalisation et la complexité des animations et des messages créés.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="conclusion"><a class="header" href="#conclusion"><strong>Conclusion</strong></a></h1>
+<h2 id="résultats-attendus"><a class="header" href="#résultats-attendus"><strong>Résultats Attendus</strong></a></h2>
+<p>À la fin de ce stage, les enfants auront acquis une solide introduction à la programmation avec Scratch et seront capables de :</p>
+<ul>
+<li><strong>Comprendre les bases de la programmation visuelle</strong> : Maîtriser les concepts fondamentaux comme les blocs de mouvement, d’apparence, et d’événements.</li>
+<li><strong>Créer des projets interactifs</strong> : Réaliser des animations, des jeux simples, ou des histoires personnalisées.</li>
+<li><strong>Utiliser Scratch comme un outil d’expression</strong> : Donner vie à leurs idées grâce à leur créativité et à des outils numériques.</li>
+<li><strong>Identifier et corriger des bugs simples</strong> : Apprendre à analyser et résoudre des problèmes dans leurs projets de manière autonome.</li>
+<li><strong>Développer une pensée logique et séquentielle</strong> : Appliquer des concepts de programmation pour structurer leurs idées et résoudre des défis techniques.</li>
+</ul>
+<h2 id="au-delà-du-stage"><a class="header" href="#au-delà-du-stage"><strong>Au-delà du stage</strong></a></h2>
+<p>Ce stage ne marque que le début de leur aventure dans la programmation. En plus des compétences techniques, les enfants repartiront avec :</p>
+<ul>
+<li><strong>Une confiance renforcée</strong> : Ils auront appris que la programmation est accessible, ludique et gratifiante.</li>
+<li><strong>Une ouverture sur l’avenir</strong> : Une introduction aux compétences numériques essentielles pour le 21ᵉ siècle.</li>
+<li><strong>Des bases solides</strong> : Les concepts appris avec Scratch pourront être réutilisés dans d’autres outils de programmation et projets éducatifs.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
