@@ -1,0 +1,501 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Django - Django Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../guides/docker_sql.html"><strong aria-hidden="true">1.</strong> Running SQL Commands with Docker</a></li><li class="chapter-item expanded "><a href="../guides/django_venv.html"><strong aria-hidden="true">2.</strong> Django setup with python and venv</a></li><li class="chapter-item expanded "><a href="../guides/django_docs_tutorial/intro.html"><strong aria-hidden="true">3.</strong> Django documentation tutorials</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../guides/django_docs_tutorial/part1.html"><strong aria-hidden="true">3.1.</strong> Part 1</a></li><li class="chapter-item expanded "><a href="../guides/django_docs_tutorial/part2.html"><strong aria-hidden="true">3.2.</strong> Part 2</a></li><li class="chapter-item expanded "><a href="../guides/django_docs_tutorial/part3.html"><strong aria-hidden="true">3.3.</strong> Part 3</a></li><li class="chapter-item expanded "><a href="../guides/django_docs_tutorial/part4.html"><strong aria-hidden="true">3.4.</strong> Part 4</a></li><li class="chapter-item expanded "><a href="../guides/django_docs_tutorial/part5.html"><strong aria-hidden="true">3.5.</strong> Part 5</a></li><li class="chapter-item expanded "><a href="../guides/django_docs_tutorial/part6.html"><strong aria-hidden="true">3.6.</strong> Part 6</a></li><li class="chapter-item expanded "><a href="../guides/django_docs_tutorial/part7.html"><strong aria-hidden="true">3.7.</strong> Part 7</a></li><li class="chapter-item expanded "><a href="../guides/django_docs_tutorial/part8.html"><strong aria-hidden="true">3.8.</strong> Part 8</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Python Basics</li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/conditions.html"><strong aria-hidden="true">4.</strong> Conditionals 1</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/conditions2.html"><strong aria-hidden="true">5.</strong> Conditionals 2</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/conditions3.html"><strong aria-hidden="true">6.</strong> Conditionals 3</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/user_input.html"><strong aria-hidden="true">7.</strong> User Input</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/lists2.html"><strong aria-hidden="true">8.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/lists.html"><strong aria-hidden="true">9.</strong> Lists 2</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/loops2.html"><strong aria-hidden="true">10.</strong> Loops</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/loops.html"><strong aria-hidden="true">11.</strong> Loops 2</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/functions.html"><strong aria-hidden="true">12.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/dictionaries.html"><strong aria-hidden="true">13.</strong> Dictionaries</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/files_io.html"><strong aria-hidden="true">14.</strong> Files I/O</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/error_handling.html"><strong aria-hidden="true">15.</strong> Error Handling</a></li><li class="chapter-item expanded affix "><li class="part-title">OOP</li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/oop/basics.html"><strong aria-hidden="true">16.</strong> Basics</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/oop/constructor.html"><strong aria-hidden="true">17.</strong> Constructor</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/oop/class_and_static.html"><strong aria-hidden="true">18.</strong> Class Decorators</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/oop/inheritance.html"><strong aria-hidden="true">19.</strong> Inheritance</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/oop/encapsulation.html"><strong aria-hidden="true">20.</strong> Encapsulation</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/oop/polymorphism.html"><strong aria-hidden="true">21.</strong> Polymorphism</a></li><li class="chapter-item expanded "><a href="../guided_exercises/easy_python/oop/overloading.html"><strong aria-hidden="true">22.</strong> Overloading</a></li><li class="chapter-item expanded affix "><li class="part-title">Python Reminders</li><li class="chapter-item expanded "><a href="../guided_exercises/python_basics/lists.html"><strong aria-hidden="true">23.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../guided_exercises/python_basics/dictionnaries.html"><strong aria-hidden="true">24.</strong> Dictionnaries</a></li><li class="chapter-item expanded "><a href="../guided_exercises/python_basics/lambda.html"><strong aria-hidden="true">25.</strong> Lambda</a></li><li class="chapter-item expanded "><a href="../guided_exercises/python_basics/files_io.html"><strong aria-hidden="true">26.</strong> Files I/O</a></li><li class="chapter-item expanded "><a href="../guided_exercises/python_basics/error_handling.html"><strong aria-hidden="true">27.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../guided_exercises/python_basics/classes.html"><strong aria-hidden="true">28.</strong> Classes</a></li><li class="chapter-item expanded "><a href="../guided_exercises/python_basics/decorators.html"><strong aria-hidden="true">29.</strong> Decorators</a></li><li class="chapter-item expanded "><a href="../guided_exercises/python_basics/json.html"><strong aria-hidden="true">30.</strong> JSON Handling</a></li><li class="chapter-item expanded "><a href="../guided_exercises/python_basics/generators.html"><strong aria-hidden="true">31.</strong> Generators</a></li><li class="chapter-item expanded "><a href="../guided_exercises/python_basics/modules.html"><strong aria-hidden="true">32.</strong> Modules</a></li><li class="chapter-item expanded affix "><li class="part-title">SQL Basics</li><li class="chapter-item expanded "><a href="../sql_exercises/setup.html"><strong aria-hidden="true">33.</strong> Creating and setting up a database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/setup.html"><strong aria-hidden="true">33.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/insertion.html"><strong aria-hidden="true">34.</strong> Inserting data into a database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/insertion.html"><strong aria-hidden="true">34.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/selection.html"><strong aria-hidden="true">35.</strong> Retrieving data from a database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/selection.html"><strong aria-hidden="true">35.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/update.html"><strong aria-hidden="true">36.</strong> Updating records in a database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/update.html"><strong aria-hidden="true">36.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/delete.html"><strong aria-hidden="true">37.</strong> Deleting records from a database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/delete.html"><strong aria-hidden="true">37.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/filtering.html"><strong aria-hidden="true">38.</strong> Filter information</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/filtering.html"><strong aria-hidden="true">38.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/sorting.html"><strong aria-hidden="true">39.</strong> Sorting Data</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/sorting.html"><strong aria-hidden="true">39.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/aggregating.html"><strong aria-hidden="true">40.</strong> Aggregating Data</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/aggregating.html"><strong aria-hidden="true">40.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/joining.html"><strong aria-hidden="true">41.</strong> Joining Data</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/joining.html"><strong aria-hidden="true">41.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/relationships.html"><strong aria-hidden="true">42.</strong> Creating Relationships</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/relationships.html"><strong aria-hidden="true">42.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/subqueries.html"><strong aria-hidden="true">43.</strong> Using Subqueries</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/subqueries.html"><strong aria-hidden="true">43.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">SQL Advanced</li><li class="chapter-item expanded "><a href="../sql_exercises/advanced/library.html"><strong aria-hidden="true">44.</strong> Library Books Tracker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/library.html"><strong aria-hidden="true">44.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/advanced/students.html"><strong aria-hidden="true">45.</strong> Students Grades Manager</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/students.html"><strong aria-hidden="true">45.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/advanced/online_store.html"><strong aria-hidden="true">46.</strong> Online Store Database</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/online_store.html"><strong aria-hidden="true">46.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><a href="../sql_exercises/advanced/employees.html"><strong aria-hidden="true">47.</strong> Employees Work Tracking</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sql_exercises/solutions/employees.html"><strong aria-hidden="true">47.1.</strong> Solution</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Django Exercises</li><li class="chapter-item expanded "><a href="../django_exercises/basic_application.html"><strong aria-hidden="true">48.</strong> Basic books application</a></li><li class="chapter-item expanded affix "><li class="part-title">Projects</li><li class="chapter-item expanded "><a href="../projects/python_basics/calculator.html"><strong aria-hidden="true">49.</strong> Calculator</a></li><li class="chapter-item expanded "><a href="../projects/sql/mini_database.html"><strong aria-hidden="true">50.</strong> Mini Database</a></li><li class="chapter-item expanded affix "><li class="part-title">Assessments</li><li class="chapter-item expanded "><a href="../assessments/python.html"><strong aria-hidden="true">51.</strong> Python</a></li><li class="chapter-item expanded "><a href="../assessments/sql.html"><strong aria-hidden="true">52.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../assessments/django.html" class="active"><strong aria-hidden="true">53.</strong> Django</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Django Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="django-exercise-mini-blog-application"><a class="header" href="#django-exercise-mini-blog-application"><strong>Django Exercise: Mini Blog Application</strong></a></h1>
+<h2 id="objective"><a class="header" href="#objective"><strong>Objective</strong></a></h2>
+<p>This exercise will help you develop a Django application using the Model-View-Template (MVT) architecture. You will create a functional mini-blog application that includes multiple models, views, templates, and URL configurations. You will also implement redirections between views and templates and ensure good development practices such as excluding migrations and database files.</p>
+<hr />
+<h2 id="scenario"><a class="header" href="#scenario"><strong>Scenario</strong></a></h2>
+<p>You are tasked with building a <strong>Mini Blog Application</strong> that allows users to:</p>
+<ul>
+<li>Create, edit, view, and delete blog posts.</li>
+<li>Add, edit, and delete comments on blog posts.</li>
+<li>Redirect between views and use templates that extend a common base layout.</li>
+</ul>
+<p>Your application must have test coverage to ensure it functions as expected.</p>
+<hr />
+<h2 id="specifications"><a class="header" href="#specifications"><strong>Specifications</strong></a></h2>
+<h3 id="step-1-models"><a class="header" href="#step-1-models"><strong>Step 1: Models</strong></a></h3>
+<p>You will create two models:</p>
+<ol>
+<li>
+<p><strong>BlogPost</strong>:</p>
+<ul>
+<li>Fields:
+<ul>
+<li><code>title</code>: The title of the blog post (CharField, max length: 100).</li>
+<li><code>content</code>: The content of the blog post (TextField).</li>
+<li><code>created_at</code>: Timestamp for when the blog post was created (DateTimeField, auto_now_add=True).</li>
+</ul>
+</li>
+<li>Features:
+<ul>
+<li>A <code>__str__</code> method that returns the post title.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>Fields:
+<ul>
+<li><code>post</code>: ForeignKey to <code>BlogPost</code> (on_delete=models.CASCADE).</li>
+<li><code>author</code>: The name of the comment author (CharField, max length: 50).</li>
+<li><code>text</code>: The content of the comment (TextField).</li>
+<li><code>created_at</code>: Timestamp for when the comment was created (DateTimeField, auto_now_add=True).</li>
+</ul>
+</li>
+<li>Features:
+<ul>
+<li>A <code>__str__</code> method that returns a truncated version of the comment text.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="step-2-views"><a class="header" href="#step-2-views"><strong>Step 2: Views</strong></a></h3>
+<p>You will create the following views:</p>
+<ol>
+<li>
+<p><strong>List Blog Posts</strong>:</p>
+<ul>
+<li>Displays all blog posts.</li>
+<li>Template: <code>post_list.html</code>.</li>
+<li>Features:
+<ul>
+<li>Each blog post has "View," "Edit," and "Delete" links.</li>
+<li>Include a "Create New Post" button that redirects to the create post view.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>View Blog Post Details</strong>:</p>
+<ul>
+<li>Displays a blog post and its associated comments.</li>
+<li>Template: <code>post_detail.html</code>.</li>
+<li>Features:
+<ul>
+<li>Each comment has "Edit" and "Delete" links.</li>
+<li>Include a link to add a comment to the blog post.</li>
+<li>Include a "Back to Blog List" button.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Create Blog Post</strong>:</p>
+<ul>
+<li>Displays a form for creating a new blog post.</li>
+<li>Template: <code>create_post.html</code>.</li>
+<li>Features:
+<ul>
+<li>Redirect to the blog post list after successfully creating a post.</li>
+<li>Include a "Cancel" button that redirects to the blog post list.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Edit Blog Post</strong>:</p>
+<ul>
+<li>Displays a form for editing an existing blog post.</li>
+<li>Template: <code>edit_post.html</code>.</li>
+<li>Features:
+<ul>
+<li>Pre-fill the form with the existing blog post's data.</li>
+<li>Redirect to the blog post detail view after saving changes.</li>
+<li>Include a "Cancel" button.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Add Comment to Blog Post</strong>:</p>
+<ul>
+<li>Displays a form for adding a comment to a blog post.</li>
+<li>Template: <code>add_comment.html</code>.</li>
+<li>Features:
+<ul>
+<li>Redirect to the blog post detail view after adding a comment.</li>
+<li>Include a "Cancel" button.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Edit Comment</strong>:</p>
+<ul>
+<li>Displays a form for editing an existing comment.</li>
+<li>Template: <code>edit_comment.html</code>.</li>
+<li>Features:
+<ul>
+<li>Pre-fill the form with the existing comment's data.</li>
+<li>Redirect to the blog post detail view after saving changes.</li>
+<li>Include a "Cancel" button.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete Blog Post</strong>:</p>
+<ul>
+<li>Deletes a specific blog post.</li>
+<li>Redirects to the blog post list after deletion.</li>
+<li>Includes a confirmation prompt.</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete Comment</strong>:</p>
+<ul>
+<li>Deletes a specific comment.</li>
+<li>Redirects to the blog post detail view after deletion.</li>
+<li>Includes a confirmation prompt.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="step-3-templates"><a class="header" href="#step-3-templates"><strong>Step 3: Templates</strong></a></h3>
+<p>Templates should extend a common <code>base.html</code> template. Include a navigation bar with the following links:</p>
+<ul>
+<li><strong>Home</strong>: Redirects to the blog post list.</li>
+<li><strong>Create Post</strong>: Redirects to the create post view.</li>
+</ul>
+<p>Each page should have a consistent layout and include clear navigation. The templates should support the following outputs:</p>
+<h3 id="example-features"><a class="header" href="#example-features"><strong>Example Features</strong></a></h3>
+<ol>
+<li>
+<p><strong>Post List (<code>/</code>)</strong>:</p>
+<ul>
+<li>Blog Posts:
+<pre><code>1. Django Basics (View | Edit | Delete)
+2. Advanced Django Features (View | Edit | Delete)
+</code></pre>
+</li>
+<li>[Create New Post]</li>
+</ul>
+</li>
+<li>
+<p><strong>Post Detail (<code>/post/&lt;id&gt;/</code>)</strong>:</p>
+<ul>
+<li>Title: Django Basics</li>
+<li>Content: Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.</li>
+<li>Comments:
+<pre><code>- Author: Alice, Text: Great introduction to Django! (Edit | Delete)
+- Author: Bob, Text: Very helpful! (Edit | Delete)
+</code></pre>
+</li>
+<li>[Add Comment]</li>
+<li>[Back to Blog List]</li>
+</ul>
+</li>
+<li>
+<p><strong>Add Post (<code>/post/create/</code>)</strong>:</p>
+<ul>
+<li>Title: [Input Field]</li>
+<li>Content: [Text Area]</li>
+<li>[Save Post] [Cancel]</li>
+</ul>
+</li>
+<li>
+<p><strong>Add Comment (<code>/post/&lt;id&gt;/add_comment/</code>)</strong>:</p>
+<ul>
+<li>Author: [Input Field]</li>
+<li>Text: [Text Area]</li>
+<li>[Add Comment] [Cancel]</li>
+</ul>
+</li>
+<li>
+<p><strong>Edit Post (<code>/post/&lt;id&gt;/edit/</code>)</strong>:</p>
+<ul>
+<li>Title: Django Basics (Pre-filled in input field)</li>
+<li>Content: Django is a high-level Python web framework... (Pre-filled in text area)</li>
+<li>[Save Changes] [Cancel]</li>
+</ul>
+</li>
+<li>
+<p><strong>Edit Comment (<code>/comment/&lt;id&gt;/edit/</code>)</strong>:</p>
+<ul>
+<li>Text: Great introduction to Django! (Pre-filled in input field)</li>
+<li>[Save Changes] [Cancel]</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete Post Confirmation (<code>/post/&lt;id&gt;/delete/</code>)</strong>:</p>
+<ul>
+<li>Are you sure you want to delete "Django Basics"?</li>
+<li>[Yes, Delete] [Cancel]</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete Comment Confirmation (<code>/comment/&lt;id&gt;/delete/</code>)</strong>:</p>
+<ul>
+<li>Are you sure you want to delete the comment by Alice: "Great introduction to Django!"?</li>
+<li>[Yes, Delete] [Cancel]</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h4 id="step-4-urls"><a class="header" href="#step-4-urls"><strong>Step 4: URLs</strong></a></h4>
+<p>Configure the following URLs:</p>
+<ul>
+<li><code>/</code>: Blog post list (List view).</li>
+<li><code>/post/&lt;id&gt;/</code>: Blog post detail (Detail view).</li>
+<li><code>/post/create/</code>: Create a new blog post (Create view).</li>
+<li><code>/post/&lt;id&gt;/edit/</code>: Edit an existing blog post (Edit view).</li>
+<li><code>/post/&lt;id&gt;/add_comment/</code>: Add a comment to a blog post (Add Comment view).</li>
+<li><code>/comment/&lt;id&gt;/edit/</code>: Edit an existing comment (Edit Comment view).</li>
+<li><code>/post/&lt;id&gt;/delete/</code>: Delete a blog post (Delete Post view).</li>
+<li><code>/comment/&lt;id&gt;/delete/</code>: Delete a comment (Delete Comment view).</li>
+</ul>
+<hr />
+<h3 id="step-5-tests"><a class="header" href="#step-5-tests"><strong>Step 5: Tests</strong></a></h3>
+<p>Write 10 test cases to ensure:</p>
+<ol>
+<li>Blog posts are created, edited, and deleted correctly.</li>
+<li>Comments are added, edited, and deleted correctly.</li>
+<li>Views return expected HTTP responses.</li>
+<li>Templates render the correct data.</li>
+<li>Redirections occur as intended.</li>
+</ol>
+<hr />
+<h2 id="submission-modality"><a class="header" href="#submission-modality"><strong>Submission Modality</strong></a></h2>
+<ul>
+<li><strong>GitHub Repository</strong>:
+<ul>
+<li>Provide a link to a GitHub repository containing your Django project.</li>
+<li>The repository must include:
+<ul>
+<li>All project files (excluding migrations and database files).</li>
+<li>A <code>README.md</code> file with:
+<ul>
+<li>A description of the project.</li>
+<li>Instructions to set up and run the project locally.</li>
+</ul>
+</li>
+<li>A <code>requirements.txt</code> file specifying dependencies.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../assessments/sql.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../assessments/sql.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
