@@ -25,6 +25,20 @@ header {
     border-bottom: 1px solid #ccc;
 }
 
+/* Logo Styling */
+#logo {
+    width: 150px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+    vertical-align: middle; /* Align with the heading text */
+}
+
+#logo-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center-align logo and button */
+    width: fit-content; /* Container width adjusts to content */
+    margin: 0 auto; /* Center the container horizontally */
+}
 
 header h1 {
     margin: 0;
@@ -74,6 +88,7 @@ a:hover {
 #dark-mode-toggle {
     top: 1rem;
     right: 1rem;
+    max-width: 100px;
     padding: 0.5rem 1rem;
     border: 1px saddlebrown;
     border-radius: 5px;
