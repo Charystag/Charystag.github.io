@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="tutoriels/resources_group.html"><strong aria-hidden="true">1.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="tutoriels/tags.html"><strong aria-hidden="true">2.</strong> Déploiement et Gestion des balises</a></li><li class="chapter-item expanded "><a href="tutoriels/vm.html"><strong aria-hidden="true">3.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="tutoriels/ssh.html"><strong aria-hidden="true">4.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="tutoriels/scp.html"><strong aria-hidden="true">5.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="tutoriels/snapshots.html"><strong aria-hidden="true">6.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="tutoriels/storage.html"><strong aria-hidden="true">7.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="tutoriels/azure_blob_storage.html"><strong aria-hidden="true">8.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="notions/azure_monitor.html"><strong aria-hidden="true">9.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="notions/ssh.html"><strong aria-hidden="true">10.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="notions/rdp.html"><strong aria-hidden="true">11.</strong> protocole RDP</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="tutoriels/resources_group.html"><strong aria-hidden="true">1.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="tutoriels/tags.html"><strong aria-hidden="true">2.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="tutoriels/vm.html"><strong aria-hidden="true">3.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="tutoriels/ssh.html"><strong aria-hidden="true">4.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="tutoriels/scp.html"><strong aria-hidden="true">5.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="tutoriels/snapshots.html"><strong aria-hidden="true">6.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="tutoriels/storage.html"><strong aria-hidden="true">7.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="tutoriels/azure_blob_storage.html"><strong aria-hidden="true">8.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="notions/azure_monitor.html"><strong aria-hidden="true">9.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="notions/ssh.html"><strong aria-hidden="true">10.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="notions/rdp.html"><strong aria-hidden="true">11.</strong> protocole RDP</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -256,7 +256,7 @@
 <li>Ouvrez le groupe de ressources.</li>
 <li>Accédez à l'onglet <strong>Paramètres</strong> pour :
 <ul>
-<li>Ajouter des balises (tags) pour organiser vos ressources.</li>
+<li>Ajouter des étiquettes (tags) pour organiser vos ressources.</li>
 <li>Consulter les informations sur le groupe (région, abonnement, etc.).</li>
 </ul>
 </li>
@@ -306,9 +306,9 @@
 </ul>
 </li>
 <li>
-<p><strong>Utilisez des balises (Tags)</strong> :</p>
+<p><strong>Utilisez des étiquettes (Tags)</strong> :</p>
 <ul>
-<li>Les balises permettent d’ajouter des métadonnées personnalisées aux groupes et ressources (ex. : <code>Equipe:Marketing</code>, <code>Projet:SiteWeb</code>).</li>
+<li>Les étiquettes permettent d’ajouter des métadonnées personnalisées aux groupes et ressources (ex. : <code>Equipe:Marketing</code>, <code>Projet:SiteWeb</code>).</li>
 </ul>
 </li>
 <li>
@@ -324,33 +324,33 @@
 </ul>
 </li>
 </ol>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--déploiement-et-gestion-des-balises-tags-pour-une-meilleure-organisation-dans-azure"><a class="header" href="#tutoriel--déploiement-et-gestion-des-balises-tags-pour-une-meilleure-organisation-dans-azure"><strong>Tutoriel : Déploiement et gestion des balises (tags) pour une meilleure organisation dans Azure</strong></a></h1>
-<p>Les <strong>balises (tags)</strong> dans Microsoft Azure sont des paires clé-valeur que vous pouvez appliquer à des ressources, des groupes de ressources, et des abonnements pour améliorer leur organisation et leur gestion. Ce tutoriel vous guide à travers le déploiement et la gestion des balises dans Azure.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--déploiement-et-gestion-des-étiquettes-tags-pour-une-meilleure-organisation-dans-azure"><a class="header" href="#tutoriel--déploiement-et-gestion-des-étiquettes-tags-pour-une-meilleure-organisation-dans-azure"><strong>Tutoriel : Déploiement et gestion des étiquettes (tags) pour une meilleure organisation dans Azure</strong></a></h1>
+<p>Les <strong>étiquettes (tags)</strong> dans Microsoft Azure sont des paires clé-valeur que vous pouvez appliquer à des ressources, des groupes de ressources, et des abonnements pour améliorer leur organisation et leur gestion. Ce tutoriel vous guide à travers le déploiement et la gestion des étiquettes dans Azure.</p>
 <hr />
-<h2 id="pourquoi-utiliser-les-balises-dans-azure-"><a class="header" href="#pourquoi-utiliser-les-balises-dans-azure-"><strong>Pourquoi utiliser les balises dans Azure ?</strong></a></h2>
+<h2 id="pourquoi-utiliser-les-étiquettes-dans-azure-"><a class="header" href="#pourquoi-utiliser-les-étiquettes-dans-azure-"><strong>Pourquoi utiliser les étiquettes dans Azure ?</strong></a></h2>
 <ol>
 <li><strong>Organisation</strong> : Classez et identifiez les ressources par projet, équipe, environnement (prod/dev/test), ou toute autre catégorie.</li>
 <li><strong>Analyse des coûts</strong> : Attribuez des coûts à des projets ou départements spécifiques.</li>
-<li><strong>Automatisation</strong> : Simplifiez les opérations avec des scripts et des politiques basés sur les balises.</li>
+<li><strong>Automatisation</strong> : Simplifiez les opérations avec des scripts et des politiques basés sur les étiquettes.</li>
 <li><strong>Gestion centralisée</strong> : Filtrez et recherchez rapidement des ressources dans le portail Azure.</li>
 </ol>
 <hr />
-<h2 id="Étape-1--comprendre-les-balises"><a class="header" href="#Étape-1--comprendre-les-balises"><strong>Étape 1 : Comprendre les balises</strong></a></h2>
-<p>Une balise se compose de deux parties :</p>
+<h2 id="Étape-1--comprendre-les-étiquettes"><a class="header" href="#Étape-1--comprendre-les-étiquettes"><strong>Étape 1 : Comprendre les étiquettes</strong></a></h2>
+<p>Une étiquette se compose de deux parties :</p>
 <ul>
-<li><strong>Clé</strong> : Le nom ou la catégorie de la balise (ex. : <code>Projet</code>, <code>Environnement</code>, <code>Equipe</code>).</li>
+<li><strong>Clé</strong> : Le nom ou la catégorie de la étiquette (ex. : <code>Projet</code>, <code>Environnement</code>, <code>Equipe</code>).</li>
 <li><strong>Valeur</strong> : L’information associée à la clé (ex. : <code>SiteWeb</code>, <code>Production</code>, <code>Marketing</code>).</li>
 </ul>
 <p>Exemple :<br />
 <code>Clé : Projet</code> → <code>Valeur : SiteWeb</code></p>
 <hr />
-<h2 id="Étape-2--ajouter-des-balises-à-une-ressource"><a class="header" href="#Étape-2--ajouter-des-balises-à-une-ressource"><strong>Étape 2 : Ajouter des balises à une ressource</strong></a></h2>
+<h2 id="Étape-2--ajouter-des-étiquettes-à-une-ressource"><a class="header" href="#Étape-2--ajouter-des-étiquettes-à-une-ressource"><strong>Étape 2 : Ajouter des étiquettes à une ressource</strong></a></h2>
 <ol>
 <li>
 <p><strong>Depuis le Portail Azure</strong> :</p>
 <ul>
 <li>Accédez à une ressource (par exemple, une machine virtuelle ou un compte de stockage).</li>
-<li>Cliquez sur <strong>Balises</strong> dans le menu latéral.</li>
+<li>Cliquez sur <strong>Étiquettes</strong> dans le menu latéral.</li>
 <li>Ajoutez des paires clé-valeur :
 <ul>
 <li>Exemple : <code>Clé : Environnement</code> → <code>Valeur : Production</code></li>
@@ -362,27 +362,27 @@
 <li>
 <p><strong>Lors de la création d'une ressource</strong> :</p>
 <ul>
-<li>Lors de la configuration d’une nouvelle ressource, cherchez l’onglet ou la section <strong>Balises</strong>.</li>
-<li>Ajoutez les balises nécessaires avant de finaliser la création.</li>
+<li>Lors de la configuration d’une nouvelle ressource, cherchez l’onglet ou la section <strong>Étiquettes</strong>.</li>
+<li>Ajoutez les étiquettes nécessaires avant de finaliser la création.</li>
 </ul>
 </li>
 </ol>
 <hr />
-<h2 id="Étape-3--ajouter-des-balises-à-plusieurs-ressources-simultanément"><a class="header" href="#Étape-3--ajouter-des-balises-à-plusieurs-ressources-simultanément"><strong>Étape 3 : Ajouter des balises à plusieurs ressources simultanément</strong></a></h2>
+<h2 id="Étape-3--ajouter-des-étiquettes-à-plusieurs-ressources-simultanément"><a class="header" href="#Étape-3--ajouter-des-étiquettes-à-plusieurs-ressources-simultanément"><strong>Étape 3 : Ajouter des étiquettes à plusieurs ressources simultanément</strong></a></h2>
 <ol>
 <li>
 <p><strong>Utilisation du portail Azure</strong> :</p>
 <ul>
-<li>Dans la barre de recherche du portail, tapez <strong>Balises</strong> et sélectionnez l'option.</li>
-<li>Cliquez sur <strong>Ajouter une balise à des ressources</strong>.</li>
+<li>Dans la barre de recherche du portail, tapez <strong>Étiquettes</strong> et sélectionnez l'option.</li>
+<li>Cliquez sur <strong>Ajouter une étiquette à des ressources</strong>.</li>
 <li>Sélectionnez plusieurs ressources dans la liste.</li>
-<li>Ajoutez les balises souhaitées (Clé/valeur).</li>
+<li>Ajoutez les étiquettes souhaitées (Clé/valeur).</li>
 <li>Cliquez sur <strong>Appliquer</strong>.</li>
 </ul>
 </li>
 <li>
 <p><strong>Avec Azure PowerShell</strong> :
-Utilisez PowerShell pour automatiser l’application de balises :</p>
+Utilisez PowerShell pour automatiser l’application de étiquettes :</p>
 <pre><code class="language-powershell">Set-AzResource -ResourceId "/subscriptions/&lt;SubscriptionID&gt;/resourceGroups/&lt;ResourceGroupName&gt;/providers/&lt;ResourceType&gt;/&lt;ResourceName&gt;" `
 -Tag @{ "Projet" = "SiteWeb"; "Environnement" = "Production" }
 </code></pre>
@@ -396,35 +396,35 @@ Vous pouvez également utiliser Azure CLI :</p>
 </li>
 </ol>
 <hr />
-<h2 id="Étape-4--gérer-et-modifier-les-balises"><a class="header" href="#Étape-4--gérer-et-modifier-les-balises"><strong>Étape 4 : Gérer et modifier les balises</strong></a></h2>
+<h2 id="Étape-4--gérer-et-modifier-les-étiquettes"><a class="header" href="#Étape-4--gérer-et-modifier-les-étiquettes"><strong>Étape 4 : Gérer et modifier les étiquettes</strong></a></h2>
 <ol>
 <li>
-<p><strong>Modifier des balises</strong> :</p>
+<p><strong>Modifier des étiquettes</strong> :</p>
 <ul>
 <li>Accédez à une ressource ou un groupe de ressources.</li>
-<li>Cliquez sur <strong>Balises</strong>, modifiez les paires clé-valeur existantes ou ajoutez-en de nouvelles.</li>
+<li>Cliquez sur <strong>Étiquettes</strong>, modifiez les paires clé-valeur existantes ou ajoutez-en de nouvelles.</li>
 <li>Enregistrez vos modifications.</li>
 </ul>
 </li>
 <li>
-<p><strong>Supprimer des balises</strong> :</p>
+<p><strong>Supprimer des étiquettes</strong> :</p>
 <ul>
-<li>Supprimez une clé ou une valeur dans la section <strong>Balises</strong>.</li>
+<li>Supprimez une clé ou une valeur dans la section <strong>Étiquettes</strong>.</li>
 <li>Cliquez sur <strong>Enregistrer</strong> pour confirmer.</li>
 </ul>
 </li>
 </ol>
 <hr />
-<h2 id="Étape-5--utiliser-azure-policy-pour-appliquer-des-balises-automatiquement"><a class="header" href="#Étape-5--utiliser-azure-policy-pour-appliquer-des-balises-automatiquement"><strong>Étape 5 : Utiliser Azure Policy pour appliquer des balises automatiquement</strong></a></h2>
-<p><strong>Azure Policy</strong> permet de définir des règles pour garantir que toutes les ressources ont les balises nécessaires. Par exemple, vous pouvez exiger que toutes les ressources dans un groupe de ressources aient une balise <code>Environnement</code>.</p>
+<h2 id="Étape-5--utiliser-azure-policy-pour-appliquer-des-étiquettes-automatiquement"><a class="header" href="#Étape-5--utiliser-azure-policy-pour-appliquer-des-étiquettes-automatiquement"><strong>Étape 5 : Utiliser Azure Policy pour appliquer des étiquettes automatiquement</strong></a></h2>
+<p><strong>Azure Policy</strong> permet de définir des règles pour garantir que toutes les ressources ont les étiquettes nécessaires. Par exemple, vous pouvez exiger que toutes les ressources dans un groupe de ressources aient une étiquette <code>Environnement</code>.</p>
 <ol>
 <li>
-<p><strong>Créer une politique pour les balises</strong> :</p>
+<p><strong>Créer une politique pour les étiquettes</strong> :</p>
 <ul>
 <li>Accédez à <strong>Azure Policy</strong> dans le portail.</li>
 <li>Cliquez sur <strong>Définitions</strong> &gt; <strong>+ Ajouter une définition personnalisée</strong>.</li>
 <li>Utilisez une définition intégrée ou personnalisez une règle.
-Exemple d'une définition intégrée : <strong>Ajouter une balise à une ressource lors de son création</strong>.</li>
+Exemple d'une définition intégrée : <strong>Ajouter une étiquette à une ressource lors de son création</strong>.</li>
 <li>Spécifiez les détails de la politique (clé/valeur).</li>
 </ul>
 </li>
@@ -438,35 +438,35 @@ Exemple d'une définition intégrée : <strong>Ajouter une balise à une ressour
 <li>
 <p><strong>Automatiser les corrections</strong> :</p>
 <ul>
-<li>Configurez la politique pour appliquer automatiquement les balises manquantes.</li>
+<li>Configurez la politique pour appliquer automatiquement les étiquettes manquantes.</li>
 </ul>
 </li>
 </ol>
 <hr />
-<h2 id="Étape-6--surveiller-les-ressources-par-balises"><a class="header" href="#Étape-6--surveiller-les-ressources-par-balises"><strong>Étape 6 : Surveiller les ressources par balises</strong></a></h2>
+<h2 id="Étape-6--surveiller-les-ressources-par-étiquettes"><a class="header" href="#Étape-6--surveiller-les-ressources-par-étiquettes"><strong>Étape 6 : Surveiller les ressources par étiquettes</strong></a></h2>
 <ol>
 <li>
-<p><strong>Filtrer les ressources par balises</strong> :</p>
+<p><strong>Filtrer les ressources par étiquettes</strong> :</p>
 <ul>
 <li>Accédez à la section <strong>Tous les services</strong> &gt; <strong>Ressources</strong>.</li>
-<li>Cliquez sur <strong>Filtrer</strong> et choisissez une balise (ex. : <code>Projet=SiteWeb</code>).</li>
+<li>Cliquez sur <strong>Filtrer</strong> et choisissez une étiquette (ex. : <code>Projet=SiteWeb</code>).</li>
 </ul>
 </li>
 <li>
-<p><strong>Analyse des coûts par balises</strong> :</p>
+<p><strong>Analyse des coûts par étiquettes</strong> :</p>
 <ul>
 <li>Accédez à <strong>Analyse des coûts</strong>.</li>
-<li>Configurez un rapport de coût basé sur les balises (ex. : afficher les coûts par environnement).</li>
+<li>Configurez un rapport de coût basé sur les étiquettes (ex. : afficher les coûts par environnement).</li>
 </ul>
 </li>
 </ol>
 <hr />
-<h2 id="bonnes-pratiques-pour-les-balises"><a class="header" href="#bonnes-pratiques-pour-les-balises"><strong>Bonnes pratiques pour les balises</strong></a></h2>
+<h2 id="bonnes-pratiques-pour-les-étiquettes"><a class="header" href="#bonnes-pratiques-pour-les-étiquettes"><strong>Bonnes pratiques pour les étiquettes</strong></a></h2>
 <ol>
 <li><strong>Standardisez les clés</strong> : Utilisez des noms cohérents et explicites (<code>Projet</code>, <code>Environnement</code>, <code>Equipe</code>) pour éviter les doublons.</li>
 <li><strong>Automatisez l’application</strong> : Utilisez Azure Policy pour éviter les oublis.</li>
 <li><strong>Limitez les clés personnalisées</strong> : Utilisez des clés communes pour simplifier la gestion.</li>
-<li><strong>Surveillez et nettoyez régulièrement</strong> : Vérifiez les ressources avec des balises incomplètes ou incorrectes.</li>
+<li><strong>Surveillez et nettoyez régulièrement</strong> : Vérifiez les ressources avec des étiquettes incomplètes ou incorrectes.</li>
 </ol>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--déployer-une-machine-virtuelle-windowslinux-sur-azure"><a class="header" href="#tutoriel--déployer-une-machine-virtuelle-windowslinux-sur-azure"><strong>Tutoriel : Déployer une machine virtuelle Windows/Linux sur Azure</strong></a></h1>
 <p>Les machines virtuelles (VM) dans Azure permettent de créer et de gérer des serveurs virtuels exécutant Windows ou Linux. Ce tutoriel vous guidera à travers les étapes de déploiement d'une VM depuis le portail Azure.</p>
