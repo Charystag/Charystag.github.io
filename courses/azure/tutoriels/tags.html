@@ -180,7 +180,7 @@
 <ol>
 <li><strong>Organisation</strong> : Classez et identifiez les ressources par projet, équipe, environnement (prod/dev/test), ou toute autre catégorie.</li>
 <li><strong>Analyse des coûts</strong> : Attribuez des coûts à des projets ou départements spécifiques.</li>
-<li><strong>Automatisation</strong> : Simplifiez les opérations avec des scripts et des politiques basés sur les étiquettes.</li>
+<li><strong>Automatisation</strong> : Simplifiez les opérations avec des scripts et des stratégies basés sur les étiquettes.</li>
 <li><strong>Gestion centralisée</strong> : Filtrez et recherchez rapidement des ressources dans le portail Azure.</li>
 </ol>
 <hr />
@@ -268,26 +268,26 @@ Vous pouvez également utiliser Azure CLI :</p>
 <p><strong>Azure Policy</strong> permet de définir des règles pour garantir que toutes les ressources ont les étiquettes nécessaires. Par exemple, vous pouvez exiger que toutes les ressources dans un groupe de ressources aient une étiquette <code>Environnement</code>.</p>
 <ol>
 <li>
-<p><strong>Créer une politique pour les étiquettes</strong> :</p>
+<p><strong>Créer une stratégie pour les étiquettes</strong> :</p>
 <ul>
 <li>Accédez à <strong>Azure Policy</strong> dans le portail.</li>
 <li>Cliquez sur <strong>Définitions</strong> &gt; <strong>+ Ajouter une définition personnalisée</strong>.</li>
 <li>Utilisez une définition intégrée ou personnalisez une règle.
 Exemple d'une définition intégrée : <strong>Ajouter une étiquette à une ressource lors de son création</strong>.</li>
-<li>Spécifiez les détails de la politique (clé/valeur).</li>
+<li>Spécifiez les détails de la stratégie (clé/valeur).</li>
 </ul>
 </li>
 <li>
-<p><strong>Affecter la politique</strong> :</p>
+<p><strong>Affecter la stratégie</strong> :</p>
 <ul>
 <li>Allez dans <strong>Assignations</strong> dans Azure Policy.</li>
-<li>Affectez la politique à un abonnement ou un groupe de ressources.</li>
+<li>Affectez la stratégie à un abonnement ou un groupe de ressources.</li>
 </ul>
 </li>
 <li>
 <p><strong>Automatiser les corrections</strong> :</p>
 <ul>
-<li>Configurez la politique pour appliquer automatiquement les étiquettes manquantes.</li>
+<li>Configurez la stratégie pour appliquer automatiquement les étiquettes manquantes.</li>
 </ul>
 </li>
 </ol>

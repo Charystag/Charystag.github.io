@@ -188,7 +188,7 @@
 <h3 id="avantages-"><a class="header" href="#avantages-">Avantages :</a></h3>
 <ul>
 <li><strong>Organisation</strong> : Regroupez des ressources liées à un même projet ou environnement.</li>
-<li><strong>Gestion simplifiée</strong> : Appliquez des politiques ou surveillez toutes les ressources en une seule action.</li>
+<li><strong>Gestion simplifiée</strong> : Appliquez des stratégies ou surveillez toutes les ressources en une seule action.</li>
 <li><strong>Coûts et budgets</strong> : Analysez les dépenses par projet ou application.</li>
 </ul>
 <hr />
@@ -281,10 +281,10 @@
 <li>Accédez à <strong>Analyse des coûts</strong> depuis le groupe de ressources pour suivre les dépenses liées aux ressources.</li>
 </ul>
 <hr />
-<h2 id="Étape-5--appliquer-des-politiques-ou-gérer-laccès"><a class="header" href="#Étape-5--appliquer-des-politiques-ou-gérer-laccès"><strong>Étape 5 : Appliquer des politiques ou gérer l'accès</strong></a></h2>
-<h3 id="51-appliquer-une-politique-azure-policy-"><a class="header" href="#51-appliquer-une-politique-azure-policy-">5.1 Appliquer une politique (Azure Policy) :</a></h3>
+<h2 id="Étape-5--appliquer-des-stratégies-ou-gérer-laccès"><a class="header" href="#Étape-5--appliquer-des-stratégies-ou-gérer-laccès"><strong>Étape 5 : Appliquer des stratégies ou gérer l'accès</strong></a></h2>
+<h3 id="51-appliquer-une-stratégie-azure-policy-"><a class="header" href="#51-appliquer-une-stratégie-azure-policy-">5.1 Appliquer une stratégie (Azure Policy) :</a></h3>
 <ul>
-<li>Dans le groupe, allez à <strong>Politique</strong> et attribuez des règles :
+<li>Dans le groupe, allez à <strong>Stratégie</strong> et attribuez des règles :
 <ul>
 <li>Exemples : restreindre les régions pour les ressources ou limiter certains types de ressources.</li>
 </ul>
@@ -331,7 +331,7 @@
 <ol>
 <li><strong>Organisation</strong> : Classez et identifiez les ressources par projet, équipe, environnement (prod/dev/test), ou toute autre catégorie.</li>
 <li><strong>Analyse des coûts</strong> : Attribuez des coûts à des projets ou départements spécifiques.</li>
-<li><strong>Automatisation</strong> : Simplifiez les opérations avec des scripts et des politiques basés sur les étiquettes.</li>
+<li><strong>Automatisation</strong> : Simplifiez les opérations avec des scripts et des stratégies basés sur les étiquettes.</li>
 <li><strong>Gestion centralisée</strong> : Filtrez et recherchez rapidement des ressources dans le portail Azure.</li>
 </ol>
 <hr />
@@ -419,26 +419,26 @@ Vous pouvez également utiliser Azure CLI :</p>
 <p><strong>Azure Policy</strong> permet de définir des règles pour garantir que toutes les ressources ont les étiquettes nécessaires. Par exemple, vous pouvez exiger que toutes les ressources dans un groupe de ressources aient une étiquette <code>Environnement</code>.</p>
 <ol>
 <li>
-<p><strong>Créer une politique pour les étiquettes</strong> :</p>
+<p><strong>Créer une stratégie pour les étiquettes</strong> :</p>
 <ul>
 <li>Accédez à <strong>Azure Policy</strong> dans le portail.</li>
 <li>Cliquez sur <strong>Définitions</strong> &gt; <strong>+ Ajouter une définition personnalisée</strong>.</li>
 <li>Utilisez une définition intégrée ou personnalisez une règle.
 Exemple d'une définition intégrée : <strong>Ajouter une étiquette à une ressource lors de son création</strong>.</li>
-<li>Spécifiez les détails de la politique (clé/valeur).</li>
+<li>Spécifiez les détails de la stratégie (clé/valeur).</li>
 </ul>
 </li>
 <li>
-<p><strong>Affecter la politique</strong> :</p>
+<p><strong>Affecter la stratégie</strong> :</p>
 <ul>
 <li>Allez dans <strong>Assignations</strong> dans Azure Policy.</li>
-<li>Affectez la politique à un abonnement ou un groupe de ressources.</li>
+<li>Affectez la stratégie à un abonnement ou un groupe de ressources.</li>
 </ul>
 </li>
 <li>
 <p><strong>Automatiser les corrections</strong> :</p>
 <ul>
-<li>Configurez la politique pour appliquer automatiquement les étiquettes manquantes.</li>
+<li>Configurez la stratégie pour appliquer automatiquement les étiquettes manquantes.</li>
 </ul>
 </li>
 </ol>
@@ -1028,7 +1028,7 @@ scp $USER@$IP:$REMOTE_PATH $LOCAL_PATH
 <li><strong>Avantages</strong> :
 <ul>
 <li>Gestion centralisée.</li>
-<li>Protection automatisée avec des politiques de rétention.</li>
+<li>Protection automatisée avec des stratégies de rétention.</li>
 <li>Chiffrement des sauvegardes.</li>
 </ul>
 </li>
@@ -1191,7 +1191,7 @@ scp $USER@$IP:$REMOTE_PATH $LOCAL_PATH
 <ol>
 <li><strong>Automatisez les sauvegardes</strong> :
 <ul>
-<li>Utilisez des politiques pour garantir que toutes les VMs critiques sont protégées.</li>
+<li>Utilisez des stratégies pour garantir que toutes les VMs critiques sont protégées.</li>
 </ul>
 </li>
 <li><strong>Surveillez l'état des sauvegardes</strong> :
@@ -1341,7 +1341,7 @@ container_client = blob_service_client.get_container_client("nom_du_conteneur")
 </li>
 </ul>
 <hr />
-<h2 id="Étape-5--configurer-des-règles-de-sécurité-et-des-politiques"><a class="header" href="#Étape-5--configurer-des-règles-de-sécurité-et-des-politiques"><strong>Étape 5 : Configurer des règles de sécurité et des politiques</strong></a></h2>
+<h2 id="Étape-5--configurer-des-règles-de-sécurité-et-des-stratégies"><a class="header" href="#Étape-5--configurer-des-règles-de-sécurité-et-des-stratégies"><strong>Étape 5 : Configurer des règles de sécurité et des stratégies</strong></a></h2>
 <ol>
 <li>
 <p><strong>Activer les pare-feu et les réseaux virtuels</strong> :</p>
