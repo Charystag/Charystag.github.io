@@ -1,0 +1,2154 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Panorama du Cloud - Azure</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="tutoriels/resources_group.html"><strong aria-hidden="true">1.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="tutoriels/tags.html"><strong aria-hidden="true">2.</strong> Déploiement et Gestion des balises</a></li><li class="chapter-item expanded "><a href="tutoriels/vm.html"><strong aria-hidden="true">3.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="tutoriels/ssh.html"><strong aria-hidden="true">4.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="tutoriels/scp.html"><strong aria-hidden="true">5.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="tutoriels/snapshots.html"><strong aria-hidden="true">6.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="tutoriels/storage.html"><strong aria-hidden="true">7.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="tutoriels/azure_blob_storage.html"><strong aria-hidden="true">8.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="notions/azure_monitor.html"><strong aria-hidden="true">9.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="notions/ssh.html"><strong aria-hidden="true">10.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="notions/rdp.html"><strong aria-hidden="true">11.</strong> protocole RDP</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Panorama du Cloud - Azure</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="tutoriel--création-et-gestion-dun-groupe-de-ressources-sur-azure"><a class="header" href="#tutoriel--création-et-gestion-dun-groupe-de-ressources-sur-azure"><strong>Tutoriel : Création et gestion d’un groupe de ressources sur Azure</strong></a></h1>
+<p>Un groupe de ressources dans Azure est une unité logique qui regroupe des ressources cloud comme des machines virtuelles, des bases de données, des réseaux, etc. Cette organisation facilite leur gestion, leur supervision et leur contrôle.</p>
+<hr />
+<h2 id="quest-ce-quun-groupe-de-ressources-dans-azure-"><a class="header" href="#quest-ce-quun-groupe-de-ressources-dans-azure-"><strong>Qu’est-ce qu’un groupe de ressources dans Azure ?</strong></a></h2>
+<p>Un groupe de ressources Azure est un conteneur logique qui contient des ressources liées. Ces ressources peuvent inclure :</p>
+<ul>
+<li>Machines virtuelles,</li>
+<li>Comptes de stockage,</li>
+<li>Réseaux virtuels,</li>
+<li>Bases de données.</li>
+</ul>
+<h3 id="avantages-"><a class="header" href="#avantages-">Avantages :</a></h3>
+<ul>
+<li><strong>Organisation</strong> : Regroupez des ressources liées à un même projet ou environnement.</li>
+<li><strong>Gestion simplifiée</strong> : Appliquez des politiques ou surveillez toutes les ressources en une seule action.</li>
+<li><strong>Coûts et budgets</strong> : Analysez les dépenses par projet ou application.</li>
+</ul>
+<hr />
+<h2 id="Étape-1--accéder-au-portail-azure"><a class="header" href="#Étape-1--accéder-au-portail-azure"><strong>Étape 1 : Accéder au Portail Azure</strong></a></h2>
+<ol>
+<li>Rendez-vous sur le <a href="https://portal.azure.com">Portail Azure</a>.</li>
+<li>Connectez-vous avec vos identifiants.</li>
+</ol>
+<hr />
+<h2 id="Étape-2--créer-un-groupe-de-ressources"><a class="header" href="#Étape-2--créer-un-groupe-de-ressources"><strong>Étape 2 : Créer un groupe de ressources</strong></a></h2>
+<ol>
+<li>
+<p><strong>Naviguer vers la section des groupes de ressources</strong> :</p>
+<ul>
+<li>Dans le menu latéral gauche, cliquez sur <strong>Groupes de ressources</strong>.</li>
+<li>Si ce menu n’est pas visible, recherchez "Groupes de ressources" dans la barre de recherche en haut.</li>
+</ul>
+</li>
+<li>
+<p><strong>Créer un nouveau groupe de ressources</strong> :</p>
+<ul>
+<li>Cliquez sur le bouton <strong>+ Créer</strong>.</li>
+<li>Fournissez les informations nécessaires :
+<ul>
+<li><strong>Abonnement</strong> : Choisissez l’abonnement Azure à utiliser.</li>
+<li><strong>Nom du groupe de ressources</strong> : Donnez un nom explicite (ex. : <code>Groupe-ProjetXYZ</code>).</li>
+<li><strong>Région</strong> : Choisissez la région Azure où les métadonnées du groupe seront stockées.
+<blockquote>
+<p><em>Remarque : Les ressources dans ce groupe peuvent être dans d’autres régions.</em></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Vérifiez et créez</strong> :</p>
+<ul>
+<li>Cliquez sur <strong>Vérifier + Créer</strong>.</li>
+<li>Une fois la validation effectuée, cliquez sur <strong>Créer</strong>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-3--ajouter-des-ressources-à-un-groupe-de-ressources"><a class="header" href="#Étape-3--ajouter-des-ressources-à-un-groupe-de-ressources"><strong>Étape 3 : Ajouter des ressources à un groupe de ressources</strong></a></h2>
+<ol>
+<li>
+<p><strong>Depuis le groupe de ressources</strong> :</p>
+<ul>
+<li>Une fois créé, cliquez sur votre groupe dans la liste des groupes de ressources.</li>
+<li>Cliquez sur <strong>+ Ajouter</strong> pour créer une nouvelle ressource dans ce groupe.</li>
+</ul>
+</li>
+<li>
+<p><strong>Depuis une ressource existante</strong> :</p>
+<ul>
+<li>Lorsque vous créez une ressource (par exemple, une machine virtuelle), sélectionnez le groupe de ressources lors de la configuration.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-4--gérer-un-groupe-de-ressources"><a class="header" href="#Étape-4--gérer-un-groupe-de-ressources"><strong>Étape 4 : Gérer un groupe de ressources</strong></a></h2>
+<h3 id="41-modifier-les-paramètres-"><a class="header" href="#41-modifier-les-paramètres-">4.1 Modifier les paramètres :</a></h3>
+<ul>
+<li>Ouvrez le groupe de ressources.</li>
+<li>Accédez à l'onglet <strong>Paramètres</strong> pour :
+<ul>
+<li>Ajouter des balises (tags) pour organiser vos ressources.</li>
+<li>Consulter les informations sur le groupe (région, abonnement, etc.).</li>
+</ul>
+</li>
+</ul>
+<h3 id="42-supprimer-des-ressources-"><a class="header" href="#42-supprimer-des-ressources-">4.2 Supprimer des ressources :</a></h3>
+<ul>
+<li>Dans le groupe de ressources, sélectionnez une ressource.</li>
+<li>Cliquez sur <strong>Supprimer</strong> pour la supprimer individuellement.</li>
+</ul>
+<h3 id="43-supprimer-le-groupe-de-ressources-"><a class="header" href="#43-supprimer-le-groupe-de-ressources-">4.3 Supprimer le groupe de ressources :</a></h3>
+<ul>
+<li>Attention : La suppression d’un groupe de ressources entraîne la suppression <strong>de toutes les ressources qu’il contient</strong>.
+<ul>
+<li>Ouvrez le groupe.</li>
+<li>Cliquez sur <strong>Supprimer le groupe de ressources</strong>.</li>
+<li>Tapez le nom du groupe pour confirmer l’action.</li>
+</ul>
+</li>
+</ul>
+<h3 id="44-contrôler-les-coûts-"><a class="header" href="#44-contrôler-les-coûts-">4.4 Contrôler les coûts :</a></h3>
+<ul>
+<li>Accédez à <strong>Analyse des coûts</strong> depuis le groupe de ressources pour suivre les dépenses liées aux ressources.</li>
+</ul>
+<hr />
+<h2 id="Étape-5--appliquer-des-politiques-ou-gérer-laccès"><a class="header" href="#Étape-5--appliquer-des-politiques-ou-gérer-laccès"><strong>Étape 5 : Appliquer des politiques ou gérer l'accès</strong></a></h2>
+<h3 id="51-appliquer-une-politique-azure-policy-"><a class="header" href="#51-appliquer-une-politique-azure-policy-">5.1 Appliquer une politique (Azure Policy) :</a></h3>
+<ul>
+<li>Dans le groupe, allez à <strong>Politique</strong> et attribuez des règles :
+<ul>
+<li>Exemples : restreindre les régions pour les ressources ou limiter certains types de ressources.</li>
+</ul>
+</li>
+</ul>
+<h3 id="52-gérer-laccès-rbac---contrôle-daccès-basé-sur-les-rôles-"><a class="header" href="#52-gérer-laccès-rbac---contrôle-daccès-basé-sur-les-rôles-">5.2 Gérer l'accès (RBAC - Contrôle d’accès basé sur les rôles) :</a></h3>
+<ul>
+<li>Cliquez sur <strong>Contrôle d’accès (IAM)</strong> dans le menu du groupe.</li>
+<li>Ajoutez des utilisateurs ou groupes avec des rôles spécifiques (Lecteur, Contributeur, Propriétaire).</li>
+</ul>
+<hr />
+<h2 id="bonnes-pratiques-pour-la-gestion-des-groupes-de-ressources"><a class="header" href="#bonnes-pratiques-pour-la-gestion-des-groupes-de-ressources"><strong>Bonnes pratiques pour la gestion des groupes de ressources</strong></a></h2>
+<ol>
+<li>
+<p><strong>Nommez vos groupes de manière claire</strong> :</p>
+<ul>
+<li>Incluez des informations comme le projet, l’environnement (Dev/Test/Prod), ou l’équipe.</li>
+<li>Exemple : <code>ProjetX-Dev-Resources</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Utilisez des balises (Tags)</strong> :</p>
+<ul>
+<li>Les balises permettent d’ajouter des métadonnées personnalisées aux groupes et ressources (ex. : <code>Equipe:Marketing</code>, <code>Projet:SiteWeb</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Centralisez les ressources liées</strong> :</p>
+<ul>
+<li>Regroupez les ressources qui ont un cycle de vie similaire ou qui appartiennent à une même application.</li>
+</ul>
+</li>
+<li>
+<p><strong>Surveillez régulièrement</strong> :</p>
+<ul>
+<li>Utilisez <a href="tutoriels/../notions/azure_monitor.html"><strong>Azure Monitor</strong></a> pour suivre les performances et l’état des ressources du groupe.</li>
+</ul>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--déploiement-et-gestion-des-balises-tags-pour-une-meilleure-organisation-dans-azure"><a class="header" href="#tutoriel--déploiement-et-gestion-des-balises-tags-pour-une-meilleure-organisation-dans-azure"><strong>Tutoriel : Déploiement et gestion des balises (tags) pour une meilleure organisation dans Azure</strong></a></h1>
+<p>Les <strong>balises (tags)</strong> dans Microsoft Azure sont des paires clé-valeur que vous pouvez appliquer à des ressources, des groupes de ressources, et des abonnements pour améliorer leur organisation et leur gestion. Ce tutoriel vous guide à travers le déploiement et la gestion des balises dans Azure.</p>
+<hr />
+<h2 id="pourquoi-utiliser-les-balises-dans-azure-"><a class="header" href="#pourquoi-utiliser-les-balises-dans-azure-"><strong>Pourquoi utiliser les balises dans Azure ?</strong></a></h2>
+<ol>
+<li><strong>Organisation</strong> : Classez et identifiez les ressources par projet, équipe, environnement (prod/dev/test), ou toute autre catégorie.</li>
+<li><strong>Analyse des coûts</strong> : Attribuez des coûts à des projets ou départements spécifiques.</li>
+<li><strong>Automatisation</strong> : Simplifiez les opérations avec des scripts et des politiques basés sur les balises.</li>
+<li><strong>Gestion centralisée</strong> : Filtrez et recherchez rapidement des ressources dans le portail Azure.</li>
+</ol>
+<hr />
+<h2 id="Étape-1--comprendre-les-balises"><a class="header" href="#Étape-1--comprendre-les-balises"><strong>Étape 1 : Comprendre les balises</strong></a></h2>
+<p>Une balise se compose de deux parties :</p>
+<ul>
+<li><strong>Clé</strong> : Le nom ou la catégorie de la balise (ex. : <code>Projet</code>, <code>Environnement</code>, <code>Equipe</code>).</li>
+<li><strong>Valeur</strong> : L’information associée à la clé (ex. : <code>SiteWeb</code>, <code>Production</code>, <code>Marketing</code>).</li>
+</ul>
+<p>Exemple :<br />
+<code>Clé : Projet</code> → <code>Valeur : SiteWeb</code></p>
+<hr />
+<h2 id="Étape-2--ajouter-des-balises-à-une-ressource"><a class="header" href="#Étape-2--ajouter-des-balises-à-une-ressource"><strong>Étape 2 : Ajouter des balises à une ressource</strong></a></h2>
+<ol>
+<li>
+<p><strong>Depuis le Portail Azure</strong> :</p>
+<ul>
+<li>Accédez à une ressource (par exemple, une machine virtuelle ou un compte de stockage).</li>
+<li>Cliquez sur <strong>Balises</strong> dans le menu latéral.</li>
+<li>Ajoutez des paires clé-valeur :
+<ul>
+<li>Exemple : <code>Clé : Environnement</code> → <code>Valeur : Production</code></li>
+</ul>
+</li>
+<li>Cliquez sur <strong>Enregistrer</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Lors de la création d'une ressource</strong> :</p>
+<ul>
+<li>Lors de la configuration d’une nouvelle ressource, cherchez l’onglet ou la section <strong>Balises</strong>.</li>
+<li>Ajoutez les balises nécessaires avant de finaliser la création.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-3--ajouter-des-balises-à-plusieurs-ressources-simultanément"><a class="header" href="#Étape-3--ajouter-des-balises-à-plusieurs-ressources-simultanément"><strong>Étape 3 : Ajouter des balises à plusieurs ressources simultanément</strong></a></h2>
+<ol>
+<li>
+<p><strong>Utilisation du portail Azure</strong> :</p>
+<ul>
+<li>Dans la barre de recherche du portail, tapez <strong>Balises</strong> et sélectionnez l'option.</li>
+<li>Cliquez sur <strong>Ajouter une balise à des ressources</strong>.</li>
+<li>Sélectionnez plusieurs ressources dans la liste.</li>
+<li>Ajoutez les balises souhaitées (Clé/valeur).</li>
+<li>Cliquez sur <strong>Appliquer</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Avec Azure PowerShell</strong> :
+Utilisez PowerShell pour automatiser l’application de balises :</p>
+<pre><code class="language-powershell">Set-AzResource -ResourceId "/subscriptions/&lt;SubscriptionID&gt;/resourceGroups/&lt;ResourceGroupName&gt;/providers/&lt;ResourceType&gt;/&lt;ResourceName&gt;" `
+-Tag @{ "Projet" = "SiteWeb"; "Environnement" = "Production" }
+</code></pre>
+</li>
+<li>
+<p><strong>Avec Azure CLI</strong> :
+Vous pouvez également utiliser Azure CLI :</p>
+<pre><code class="language-bash">az resource tag --ids "/subscriptions/&lt;SubscriptionID&gt;/resourceGroups/&lt;ResourceGroupName&gt;/providers/&lt;ResourceType&gt;/&lt;ResourceName&gt;" \
+--tags Projet=SiteWeb Environnement=Production
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-4--gérer-et-modifier-les-balises"><a class="header" href="#Étape-4--gérer-et-modifier-les-balises"><strong>Étape 4 : Gérer et modifier les balises</strong></a></h2>
+<ol>
+<li>
+<p><strong>Modifier des balises</strong> :</p>
+<ul>
+<li>Accédez à une ressource ou un groupe de ressources.</li>
+<li>Cliquez sur <strong>Balises</strong>, modifiez les paires clé-valeur existantes ou ajoutez-en de nouvelles.</li>
+<li>Enregistrez vos modifications.</li>
+</ul>
+</li>
+<li>
+<p><strong>Supprimer des balises</strong> :</p>
+<ul>
+<li>Supprimez une clé ou une valeur dans la section <strong>Balises</strong>.</li>
+<li>Cliquez sur <strong>Enregistrer</strong> pour confirmer.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-5--utiliser-azure-policy-pour-appliquer-des-balises-automatiquement"><a class="header" href="#Étape-5--utiliser-azure-policy-pour-appliquer-des-balises-automatiquement"><strong>Étape 5 : Utiliser Azure Policy pour appliquer des balises automatiquement</strong></a></h2>
+<p><strong>Azure Policy</strong> permet de définir des règles pour garantir que toutes les ressources ont les balises nécessaires. Par exemple, vous pouvez exiger que toutes les ressources dans un groupe de ressources aient une balise <code>Environnement</code>.</p>
+<ol>
+<li>
+<p><strong>Créer une politique pour les balises</strong> :</p>
+<ul>
+<li>Accédez à <strong>Azure Policy</strong> dans le portail.</li>
+<li>Cliquez sur <strong>Définitions</strong> &gt; <strong>+ Ajouter une définition personnalisée</strong>.</li>
+<li>Utilisez une définition intégrée ou personnalisez une règle.
+Exemple d'une définition intégrée : <strong>Ajouter une balise à une ressource lors de son création</strong>.</li>
+<li>Spécifiez les détails de la politique (clé/valeur).</li>
+</ul>
+</li>
+<li>
+<p><strong>Affecter la politique</strong> :</p>
+<ul>
+<li>Allez dans <strong>Assignations</strong> dans Azure Policy.</li>
+<li>Affectez la politique à un abonnement ou un groupe de ressources.</li>
+</ul>
+</li>
+<li>
+<p><strong>Automatiser les corrections</strong> :</p>
+<ul>
+<li>Configurez la politique pour appliquer automatiquement les balises manquantes.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-6--surveiller-les-ressources-par-balises"><a class="header" href="#Étape-6--surveiller-les-ressources-par-balises"><strong>Étape 6 : Surveiller les ressources par balises</strong></a></h2>
+<ol>
+<li>
+<p><strong>Filtrer les ressources par balises</strong> :</p>
+<ul>
+<li>Accédez à la section <strong>Tous les services</strong> &gt; <strong>Ressources</strong>.</li>
+<li>Cliquez sur <strong>Filtrer</strong> et choisissez une balise (ex. : <code>Projet=SiteWeb</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Analyse des coûts par balises</strong> :</p>
+<ul>
+<li>Accédez à <strong>Analyse des coûts</strong>.</li>
+<li>Configurez un rapport de coût basé sur les balises (ex. : afficher les coûts par environnement).</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="bonnes-pratiques-pour-les-balises"><a class="header" href="#bonnes-pratiques-pour-les-balises"><strong>Bonnes pratiques pour les balises</strong></a></h2>
+<ol>
+<li><strong>Standardisez les clés</strong> : Utilisez des noms cohérents et explicites (<code>Projet</code>, <code>Environnement</code>, <code>Equipe</code>) pour éviter les doublons.</li>
+<li><strong>Automatisez l’application</strong> : Utilisez Azure Policy pour éviter les oublis.</li>
+<li><strong>Limitez les clés personnalisées</strong> : Utilisez des clés communes pour simplifier la gestion.</li>
+<li><strong>Surveillez et nettoyez régulièrement</strong> : Vérifiez les ressources avec des balises incomplètes ou incorrectes.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--déployer-une-machine-virtuelle-windowslinux-sur-azure"><a class="header" href="#tutoriel--déployer-une-machine-virtuelle-windowslinux-sur-azure"><strong>Tutoriel : Déployer une machine virtuelle Windows/Linux sur Azure</strong></a></h1>
+<p>Les machines virtuelles (VM) dans Azure permettent de créer et de gérer des serveurs virtuels exécutant Windows ou Linux. Ce tutoriel vous guidera à travers les étapes de déploiement d'une VM depuis le portail Azure.</p>
+<hr />
+<h2 id="Étape-1--accéder-au-portail-azure-1"><a class="header" href="#Étape-1--accéder-au-portail-azure-1"><strong>Étape 1 : Accéder au portail Azure</strong></a></h2>
+<ol>
+<li>Connectez-vous à votre compte sur le <a href="https://portal.azure.com">portail Azure</a>.</li>
+<li>Dans la barre de recherche, tapez <strong>"Machines virtuelles"</strong> et cliquez sur le service correspondant.</li>
+</ol>
+<hr />
+<h2 id="Étape-2--créer-une-nouvelle-machine-virtuelle"><a class="header" href="#Étape-2--créer-une-nouvelle-machine-virtuelle"><strong>Étape 2 : Créer une nouvelle machine virtuelle</strong></a></h2>
+<ol>
+<li>
+<p><strong>Cliquer sur "Créer" :</strong></p>
+<ul>
+<li>Dans la section <strong>Machines virtuelles</strong>, cliquez sur <strong>+ Créer</strong> puis <strong>Machine virtuelle Azure</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Configuration de base :</strong>
+Remplissez les champs suivants :</p>
+<ul>
+<li><strong>Abonnement</strong> : Sélectionnez l’abonnement Azure à utiliser.</li>
+<li><strong>Groupe de ressources</strong> : Choisissez un groupe existant ou créez-en un nouveau.</li>
+<li><strong>Nom de la machine virtuelle</strong> : Entrez un nom explicite pour la VM.</li>
+<li><strong>Région</strong> : Sélectionnez la région Azure où vous souhaitez héberger la VM.</li>
+<li><strong>Options de disponibilité</strong> : Configurez la redondance pour garantir la haute disponibilité (facultatif).</li>
+</ul>
+</li>
+<li>
+<p><strong>Système d’exploitation</strong> :</p>
+<ul>
+<li>Sélectionnez le système d’exploitation :
+<ul>
+<li><strong>Windows Server</strong> : Ex. : Windows Server 2019.</li>
+<li><strong>Linux</strong> : Ex. : Ubuntu Server 20.04 LTS.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Taille de la machine virtuelle</strong> :</p>
+<ul>
+<li>Cliquez sur <strong>Changer de taille</strong> et sélectionnez une taille en fonction des besoins (CPU, RAM).</li>
+<li>Exemples courants :
+<ul>
+<li><strong>B1ms</strong> pour des tests de base.</li>
+<li><strong>D2s_v3</strong> pour des charges de travail standard.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Options d'authentification</strong> :</p>
+<ul>
+<li>Pour <strong>Windows</strong> : Sélectionnez l’authentification par <strong>nom d’utilisateur et mot de passe</strong> ou une clé SSH (facultatif).</li>
+<li>Pour <strong>Linux</strong> : Utilisez une <strong>clé SSH</strong> (recommandée) ou un mot de passe.
+<ul>
+<li>Si vous choisissez une clé SSH, générez-en une via Azure ou utilisez votre propre clé.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-3--configuration-des-disques"><a class="header" href="#Étape-3--configuration-des-disques"><strong>Étape 3 : Configuration des disques</strong></a></h2>
+<ol>
+<li>
+<p><strong>Disque du système d’exploitation</strong> :</p>
+<ul>
+<li>Sélectionnez un type de disque : <strong>SSD Premium</strong>, <strong>SSD Standard</strong> ou <strong>HDD Standard</strong>.</li>
+<li>SSD Premium est recommandé pour des performances élevées.</li>
+</ul>
+</li>
+<li>
+<p><strong>Disques de données</strong> (facultatif) :</p>
+<ul>
+<li>Cliquez sur <strong>Créer et attacher un nouveau disque</strong> si vous avez besoin de stockage supplémentaire.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-4--configuration-réseau"><a class="header" href="#Étape-4--configuration-réseau"><strong>Étape 4 : Configuration réseau</strong></a></h2>
+<ol>
+<li>
+<p><strong>Réseau virtuel</strong> :</p>
+<ul>
+<li>Azure configure automatiquement un réseau virtuel par défaut. Vous pouvez également créer un réseau personnalisé.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sous-réseau</strong> :</p>
+<ul>
+<li>Vérifiez que le sous-réseau par défaut est sélectionné.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adresse IP publique</strong> :</p>
+<ul>
+<li>Activez l'adresse IP publique pour permettre l'accès à distance.</li>
+</ul>
+</li>
+<li>
+<p><strong>Port d’entrée</strong> :</p>
+<ul>
+<li>Pour <strong>Windows</strong>, ouvrez le port <strong>RDP (3389)</strong> pour l'accès à distance.</li>
+<li>Pour <strong>Linux</strong>, ouvrez le port <strong>SSH (22)</strong>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-5--vérification-et-déploiement"><a class="header" href="#Étape-5--vérification-et-déploiement"><strong>Étape 5 : Vérification et déploiement</strong></a></h2>
+<ol>
+<li>
+<p><strong>Options avancées</strong> (facultatif) :</p>
+<ul>
+<li>Configurez des extensions, des scripts de démarrage ou d'autres paramètres avancés selon vos besoins.</li>
+</ul>
+</li>
+<li>
+<p><strong>Revue et création</strong> :</p>
+<ul>
+<li>Cliquez sur <strong>Vérifier + créer</strong>.</li>
+<li>Azure validera vos configurations.</li>
+<li>Cliquez sur <strong>Créer</strong> pour démarrer le déploiement.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-6--connexion-à-la-machine-virtuelle"><a class="header" href="#Étape-6--connexion-à-la-machine-virtuelle"><strong>Étape 6 : Connexion à la machine virtuelle</strong></a></h2>
+<ol>
+<li>
+<p><strong>Pour Windows</strong> :</p>
+<ul>
+<li>Accédez à la VM dans le portail Azure.</li>
+<li>Cliquez sur <strong>Se connecter</strong> &gt; <strong>RDP</strong>.</li>
+<li>Téléchargez le fichier RDP, ouvrez-le avec votre client RDP, et connectez-vous avec vos identifiants.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pour Linux</strong> :</p>
+<ul>
+<li>Accédez à la VM dans le portail Azure.</li>
+<li>Cliquez sur <strong>Se connecter</strong> &gt; <strong>SSH</strong>.</li>
+<li>Suivez les instructions pour utiliser la clé SSH et la commande appropriée :
+<pre><code class="language-bash">ssh &lt;NomUtilisateur&gt;@&lt;AdresseIP&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-7--gérer-la-machine-virtuelle"><a class="header" href="#Étape-7--gérer-la-machine-virtuelle"><strong>Étape 7 : Gérer la machine virtuelle</strong></a></h2>
+<ol>
+<li>
+<p><strong>Arrêter/Démarrer</strong> :</p>
+<ul>
+<li>Vous pouvez arrêter ou redémarrer la VM depuis le portail.</li>
+</ul>
+</li>
+<li>
+<p><strong>Superviser les performances</strong> :</p>
+<ul>
+<li>Allez dans l’onglet <strong>Surveillance</strong> pour consulter les métriques (CPU, RAM, etc.).</li>
+</ul>
+</li>
+<li>
+<p><strong>Sauvegardes</strong> :</p>
+<ul>
+<li>Configurez des sauvegardes dans l’onglet <strong>Sauvegarde</strong> pour éviter la perte de données.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sécurité</strong> :</p>
+<ul>
+<li>Vérifiez régulièrement les règles de pare-feu.</li>
+<li>Utilisez <strong>Azure Bastion</strong> pour une connexion plus sécurisée.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="bonnes-pratiques"><a class="header" href="#bonnes-pratiques"><strong>Bonnes pratiques</strong></a></h2>
+<ol>
+<li>
+<p><strong>Fermer les ports inutilisés</strong> :</p>
+<ul>
+<li>Ne laissez ouverts que les ports nécessaires (3389 pour RDP, 22 pour SSH).</li>
+</ul>
+</li>
+<li>
+<p><strong>Automatisez</strong> :</p>
+<ul>
+<li>Utilisez des outils comme Azure CLI, PowerShell ou des modèles ARM pour déployer des VMs plus rapidement.</li>
+</ul>
+</li>
+<li>
+<p><strong>Gérez les coûts</strong> :</p>
+<ul>
+<li>Arrêtez les VMs inutilisées pour réduire les coûts.</li>
+<li>Surveillez les dépenses avec <strong>Azure Cost Management</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Maintenez vos VMs à jour</strong> :</p>
+<ul>
+<li>Appliquez les mises à jour système pour améliorer la sécurité et les performances.</li>
+</ul>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--connexion-à-une-machine-virtuelle-vm-avec-rdp-ou-ssh-sur-azure"><a class="header" href="#tutoriel--connexion-à-une-machine-virtuelle-vm-avec-rdp-ou-ssh-sur-azure"><strong>Tutoriel : Connexion à une Machine Virtuelle (VM) avec RDP ou SSH sur Azure</strong></a></h1>
+<p>Se connecter à une machine virtuelle sur Azure permet d’accéder à son interface pour la configurer, exécuter des applications, ou effectuer des maintenances. Ce guide vous explique comment se connecter à une VM, que ce soit avec <strong>Remote Desktop Protocol (RDP)</strong> pour Windows ou <strong>Secure Shell (SSH)</strong> pour Linux.</p>
+<hr />
+<h2 id="prérequis-pour-la-connexion"><a class="header" href="#prérequis-pour-la-connexion"><strong>Prérequis pour la connexion</strong></a></h2>
+<ol>
+<li>
+<p><strong>Pour RDP (Windows)</strong> :</p>
+<ul>
+<li>Une VM Windows déployée.</li>
+<li>Le port <strong>3389</strong> doit être ouvert dans les paramètres réseau de la VM.</li>
+<li>Vous devez disposer des <strong>identifiants de connexion</strong> (nom d'utilisateur et mot de passe).</li>
+</ul>
+</li>
+<li>
+<p><strong>Pour SSH (Linux)</strong> :</p>
+<ul>
+<li>Une VM Linux déployée.</li>
+<li>Le port <strong>22</strong> doit être ouvert dans les paramètres réseau de la VM.</li>
+<li>Vous devez disposer des <strong>clés SSH</strong> ou des <strong>identifiants utilisateur/mot de passe</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adresse IP publique</strong> :</p>
+<ul>
+<li>La VM doit avoir une <strong>adresse IP publique</strong> pour une connexion externe.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-1--vérifier-les-configurations-réseau-de-la-vm"><a class="header" href="#Étape-1--vérifier-les-configurations-réseau-de-la-vm"><strong>Étape 1 : Vérifier les configurations réseau de la VM</strong></a></h2>
+<p>Avant de vous connecter :</p>
+<ol>
+<li>Accédez à votre VM dans le <a href="https://portal.azure.com">portail Azure</a>.</li>
+<li>Allez dans l’onglet <strong>Réseau</strong> :
+<ul>
+<li>Vérifiez que l'adresse IP publique est activée.</li>
+<li>Confirmez que les ports nécessaires (3389 pour RDP ou 22 pour SSH) sont ouverts dans la <strong>groupe de sécurité réseau (NSG)</strong>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-2--connexion-à-une-vm-windows-via-rdp"><a class="header" href="#Étape-2--connexion-à-une-vm-windows-via-rdp"><strong>Étape 2 : Connexion à une VM Windows via RDP</strong></a></h2>
+<h3 id="1-récupérer-ladresse-ip"><a class="header" href="#1-récupérer-ladresse-ip"><strong>1. Récupérer l'adresse IP</strong></a></h3>
+<ul>
+<li>Accédez à votre VM sur le portail Azure.</li>
+<li>Dans l'onglet <strong>Vue d’ensemble</strong>, notez l’<strong>adresse IP publique</strong>.</li>
+</ul>
+<h3 id="2-télécharger-le-fichier-rdp"><a class="header" href="#2-télécharger-le-fichier-rdp"><strong>2. Télécharger le fichier RDP</strong></a></h3>
+<ul>
+<li>Dans le portail Azure, cliquez sur <strong>Se connecter</strong> &gt; <strong>RDP</strong>.</li>
+<li>Configurez les paramètres si nécessaire (port, adresse IP, etc.).</li>
+<li>Téléchargez le fichier <code>.rdp</code>.</li>
+</ul>
+<h3 id="3-ouvrir-la-connexion-rdp"><a class="header" href="#3-ouvrir-la-connexion-rdp"><strong>3. Ouvrir la connexion RDP</strong></a></h3>
+<ul>
+<li>Double-cliquez sur le fichier <code>.rdp</code> téléchargé.</li>
+<li>Cliquez sur <strong>Se connecter</strong> si une fenêtre d’avertissement s’affiche.</li>
+</ul>
+<h3 id="4-saisir-les-identifiants"><a class="header" href="#4-saisir-les-identifiants"><strong>4. Saisir les identifiants</strong></a></h3>
+<ul>
+<li>Entrez le <strong>nom d'utilisateur</strong> et le <strong>mot de passe</strong> configurés lors de la création de la VM.</li>
+<li>Cliquez sur <strong>OK</strong>.</li>
+</ul>
+<h3 id="5-accès-à-la-vm"><a class="header" href="#5-accès-à-la-vm"><strong>5. Accès à la VM</strong></a></h3>
+<ul>
+<li>Vous serez connecté à votre VM et pourrez accéder à son interface comme si vous étiez physiquement devant le serveur.</li>
+</ul>
+<hr />
+<h2 id="Étape-3--connexion-à-une-vm-linux-via-ssh"><a class="header" href="#Étape-3--connexion-à-une-vm-linux-via-ssh"><strong>Étape 3 : Connexion à une VM Linux via SSH</strong></a></h2>
+<h3 id="1-récupérer-ladresse-ip-1"><a class="header" href="#1-récupérer-ladresse-ip-1"><strong>1. Récupérer l'adresse IP</strong></a></h3>
+<ul>
+<li>Accédez à votre VM Linux dans le portail Azure.</li>
+<li>Notez l'<strong>adresse IP publique</strong> dans l'onglet <strong>Vue d’ensemble</strong>.</li>
+</ul>
+<h3 id="2-utiliser-une-clé-ssh-recommandé"><a class="header" href="#2-utiliser-une-clé-ssh-recommandé"><strong>2. Utiliser une clé SSH (recommandé)</strong></a></h3>
+<ol>
+<li>
+<p><strong>Avec un terminal sous Windows/Linux/Mac</strong> :</p>
+<ul>
+<li>Ouvrez un terminal.</li>
+<li>Tapez la commande suivante :
+<pre><code class="language-bash">ssh &lt;NomUtilisateur&gt;@&lt;AdresseIP&gt;
+</code></pre>
+Exemple :
+<pre><code class="language-bash">ssh azureuser@20.80.50.100
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Si une clé privée est nécessaire</strong> :</p>
+<ul>
+<li>Ajoutez le chemin vers la clé privée dans la commande :
+<pre><code class="language-bash">ssh -i /chemin/de/votre/cle_privee.pem azureuser@&lt;AdresseIP&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Accepter l'empreinte numérique</strong> :</p>
+<ul>
+<li>Lors de la première connexion, vous recevrez une demande pour accepter l'empreinte de la machine. Tapez <strong>yes</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-connexion-avec-un-mot-de-passe-optionnel-"><a class="header" href="#3-connexion-avec-un-mot-de-passe-optionnel-"><strong>3. Connexion avec un mot de passe (optionnel)</strong> :</a></h3>
+<ul>
+<li>Si vous n’utilisez pas de clé SSH, tapez simplement la commande suivante et fournissez le mot de passe :
+<pre><code class="language-bash">ssh &lt;NomUtilisateur&gt;@&lt;AdresseIP&gt;
+</code></pre>
+</li>
+</ul>
+<hr />
+<h2 id="Étape-4--dépannage-de-connexion"><a class="header" href="#Étape-4--dépannage-de-connexion"><strong>Étape 4 : Dépannage de connexion</strong></a></h2>
+<h3 id="pour-rdp-"><a class="header" href="#pour-rdp-"><strong>Pour RDP :</strong></a></h3>
+<ul>
+<li>
+<p><strong>Vérifiez que le port 3389 est ouvert</strong> :</p>
+<ul>
+<li>Dans la section <strong>Réseau</strong>, assurez-vous qu'une règle autorise <strong>Port 3389</strong> dans les <strong>Groupe de sécurité réseau (NSG)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adresse IP publique</strong> :</p>
+<ul>
+<li>Assurez-vous que votre VM a une adresse IP publique ou utilisez <strong>Azure Bastion</strong> pour une connexion sécurisée sans exposer l’IP publique.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pare-feu Windows</strong> :</p>
+<ul>
+<li>Confirmez que <strong>RDP</strong> est autorisé dans le pare-feu Windows de la VM.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="pour-ssh-"><a class="header" href="#pour-ssh-"><strong>Pour SSH :</strong></a></h3>
+<ul>
+<li>
+<p><strong>Port 22</strong> :</p>
+<ul>
+<li>Vérifiez que le <strong>port 22</strong> est ouvert dans les règles NSG.</li>
+</ul>
+</li>
+<li>
+<p><strong>Permission de la clé SSH</strong> :</p>
+<ul>
+<li>La clé privée utilisée pour la connexion SSH doit avoir les bonnes permissions :
+<pre><code class="language-bash">chmod 600 /chemin/de/votre/cle_privee.pem
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Utilisateur valide</strong> :</p>
+<ul>
+<li>Confirmez que vous utilisez le bon nom d’utilisateur (exemple : <code>azureuser</code> par défaut sur Ubuntu).</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="Étape-5--bonnes-pratiques-pour-la-connexion"><a class="header" href="#Étape-5--bonnes-pratiques-pour-la-connexion"><strong>Étape 5 : Bonnes pratiques pour la connexion</strong></a></h2>
+<ol>
+<li>
+<p><strong>Sécurisez vos connexions</strong> :</p>
+<ul>
+<li>Utilisez une <strong>clé SSH</strong> plutôt qu’un mot de passe pour les VMs Linux.</li>
+<li>Configurez <strong>Azure Bastion</strong> pour éviter d'exposer vos ports RDP/SSH au public.</li>
+</ul>
+</li>
+<li>
+<p><strong>Restreignez l'accès</strong> :</p>
+<ul>
+<li>Modifiez les règles du NSG pour n’autoriser que votre adresse IP à se connecter à la VM.</li>
+</ul>
+</li>
+<li>
+<p><strong>Surveillez les connexions</strong> :</p>
+<ul>
+<li>Utilisez <strong>Azure Monitor</strong> pour superviser les tentatives de connexion et détecter les anomalies.</li>
+</ul>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--utiliser-le-protocole-scp-pour-transférer-des-fichiers-sur-une-vm-linux-dans-azure"><a class="header" href="#tutoriel--utiliser-le-protocole-scp-pour-transférer-des-fichiers-sur-une-vm-linux-dans-azure"><strong>Tutoriel : Utiliser le protocole SCP pour transférer des fichiers sur une VM Linux dans Azure</strong></a></h1>
+<p><strong>SCP (Secure Copy Protocol)</strong> est un outil puissant pour transférer des fichiers entre un système local et une machine virtuelle Linux en utilisant le protocole SSH. Ce guide vous explique comment utiliser SCP pour transférer des fichiers sur une VM Linux hébergée sur Azure.</p>
+<hr />
+<h2 id="prérequis"><a class="header" href="#prérequis"><strong>Prérequis</strong></a></h2>
+<ol>
+<li>
+<p>Une <strong>machine virtuelle Linux</strong> déployée sur Azure avec :</p>
+<ul>
+<li>Un <strong>port SSH (22)</strong> ouvert dans les règles du groupe de sécurité réseau (NSG).</li>
+<li>Une <strong>clé SSH</strong> ou un mot de passe pour vous connecter à la VM.</li>
+</ul>
+</li>
+<li>
+<p>Une adresse IP publique associée à la VM.</p>
+</li>
+<li>
+<p><strong>SCP installé</strong> sur votre système local :</p>
+<ul>
+<li>SCP est inclus par défaut sur les systèmes <strong>Linux</strong> et <strong>MacOS</strong>.</li>
+<li>Pour <strong>Windows</strong>, utilisez un outil comme <strong>PuTTY (avec pscp)</strong> ou installez <strong>OpenSSH</strong> via PowerShell.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-1--vérifiez-la-connectivité-ssh-avec-la-vm"><a class="header" href="#Étape-1--vérifiez-la-connectivité-ssh-avec-la-vm"><strong>Étape 1 : Vérifiez la connectivité SSH avec la VM</strong></a></h2>
+<ol>
+<li>
+<p>Récupérez l'adresse IP publique de la VM :</p>
+<ul>
+<li>Dans le portail Azure, allez dans <strong>Machines virtuelles &gt; Votre VM &gt; Vue d’ensemble</strong>.</li>
+<li>Notez l'<strong>adresse IP publique</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Testez la connexion SSH depuis votre terminal :</p>
+<pre><code class="language-bash">ssh &lt;NomUtilisateur&gt;@&lt;AdresseIP&gt;
+</code></pre>
+<p>Exemple :</p>
+<pre><code class="language-bash">ssh azureuser@20.50.60.70
+</code></pre>
+<p>Si la connexion est réussie, vous êtes prêt à utiliser SCP.</p>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-2--transférer-des-fichiers-vers-la-vm-avec-scp"><a class="header" href="#Étape-2--transférer-des-fichiers-vers-la-vm-avec-scp"><strong>Étape 2 : Transférer des fichiers vers la VM avec SCP</strong></a></h2>
+<h3 id="transfert-dun-fichier-unique"><a class="header" href="#transfert-dun-fichier-unique"><strong>Transfert d’un fichier unique</strong></a></h3>
+<p>Utilisez la commande suivante pour copier un fichier local vers votre VM Linux :</p>
+<pre><code class="language-bash">scp &lt;CheminLocalDuFichier&gt; &lt;NomUtilisateur&gt;@&lt;AdresseIP&gt;:&lt;CheminCible&gt;
+</code></pre>
+<ul>
+<li><strong><CheminLocalDuFichier></strong> : Chemin complet du fichier à transférer.</li>
+<li><strong><NomUtilisateur></strong> : Nom d'utilisateur pour la connexion SSH (souvent <code>azureuser</code>).</li>
+<li><strong><AdresseIP></strong> : Adresse IP publique de la VM.</li>
+<li><strong><CheminCible></strong> : Chemin où le fichier sera stocké sur la VM.</li>
+</ul>
+<h4 id="exemple-"><a class="header" href="#exemple-">Exemple :</a></h4>
+<p>Pour copier un fichier nommé <code>rapport.txt</code> dans le répertoire <code>/home/azureuser</code> de la VM :</p>
+<pre><code class="language-bash">scp ~/Documents/rapport.txt azureuser@20.50.60.70:/home/azureuser/
+</code></pre>
+<hr />
+<h3 id="transfert-de-plusieurs-fichiers-ou-répertoires"><a class="header" href="#transfert-de-plusieurs-fichiers-ou-répertoires"><strong>Transfert de plusieurs fichiers ou répertoires</strong></a></h3>
+<p>Pour transférer un répertoire entier vers la VM, utilisez l'option <code>-r</code> (récursif) :</p>
+<pre><code class="language-bash">scp -r &lt;CheminLocalDuDossier&gt; &lt;NomUtilisateur&gt;@&lt;AdresseIP&gt;:&lt;CheminCible&gt;
+</code></pre>
+<h4 id="exemple--1"><a class="header" href="#exemple--1">Exemple :</a></h4>
+<p>Pour copier un dossier <code>projet</code> vers <code>/home/azureuser/</code> sur la VM :</p>
+<pre><code class="language-bash">scp -r ~/projet azureuser@20.50.60.70:/home/azureuser/
+</code></pre>
+<hr />
+<h2 id="Étape-3--télécharger-des-fichiers-depuis-la-vm"><a class="header" href="#Étape-3--télécharger-des-fichiers-depuis-la-vm"><strong>Étape 3 : Télécharger des fichiers depuis la VM</strong></a></h2>
+<p>Pour copier des fichiers ou répertoires de la VM vers votre machine locale, inversez les chemins dans la commande SCP.</p>
+<h3 id="téléchargement-dun-fichier-unique"><a class="header" href="#téléchargement-dun-fichier-unique"><strong>Téléchargement d’un fichier unique</strong></a></h3>
+<pre><code class="language-bash">scp &lt;NomUtilisateur&gt;@&lt;AdresseIP&gt;:&lt;CheminDuFichierSurLaVM&gt; &lt;CheminLocalDeDestination&gt;
+</code></pre>
+<h4 id="exemple--2"><a class="header" href="#exemple--2">Exemple :</a></h4>
+<p>Pour copier un fichier <code>rapport.txt</code> depuis la VM vers le répertoire local <code>~/Documents</code> :</p>
+<pre><code class="language-bash">scp azureuser@20.50.60.70:/home/azureuser/rapport.txt ~/Documents/
+</code></pre>
+<h3 id="téléchargement-dun-répertoire"><a class="header" href="#téléchargement-dun-répertoire"><strong>Téléchargement d’un répertoire</strong></a></h3>
+<p>Utilisez l'option <code>-r</code> pour copier un répertoire entier :</p>
+<pre><code class="language-bash">scp -r &lt;NomUtilisateur&gt;@&lt;AdresseIP&gt;:&lt;CheminDuDossierSurLaVM&gt; &lt;CheminLocalDeDestination&gt;
+</code></pre>
+<h4 id="exemple--3"><a class="header" href="#exemple--3">Exemple :</a></h4>
+<p>Pour copier un dossier <code>projet</code> depuis <code>/home/azureuser</code> de la VM vers <code>~/Documents</code> sur votre machine locale :</p>
+<pre><code class="language-bash">scp -r azureuser@20.50.60.70:/home/azureuser/projet ~/Documents/
+</code></pre>
+<hr />
+<h2 id="Étape-4--résolution-des-problèmes-courants"><a class="header" href="#Étape-4--résolution-des-problèmes-courants"><strong>Étape 4 : Résolution des problèmes courants</strong></a></h2>
+<ol>
+<li>
+<p><strong>Erreur "Permission denied"</strong> :</p>
+<ul>
+<li>Vérifiez que vous utilisez le bon nom d'utilisateur et que votre clé SSH ou mot de passe est correct.</li>
+<li>Assurez-vous que le port 22 est ouvert dans les <strong>règles NSG</strong> de la VM.</li>
+</ul>
+</li>
+<li>
+<p><strong>Connexion impossible (Timeout)</strong> :</p>
+<ul>
+<li>Vérifiez que votre adresse IP est autorisée dans les règles du pare-feu réseau Azure.</li>
+<li>Confirmez que la VM est en cours d'exécution.</li>
+</ul>
+</li>
+<li>
+<p><strong>Accès refusé au chemin cible sur la VM</strong> :</p>
+<ul>
+<li>Assurez-vous que l'utilisateur a les permissions nécessaires pour écrire dans le répertoire cible.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-5--automatisation-avec-des-scripts"><a class="header" href="#Étape-5--automatisation-avec-des-scripts"><strong>Étape 5 : Automatisation avec des scripts</strong></a></h2>
+<p>Vous pouvez automatiser les transferts de fichiers avec un script Shell.</p>
+<h3 id="exemple-de-script-pour-transférer-des-fichiers-vers-la-vm-"><a class="header" href="#exemple-de-script-pour-transférer-des-fichiers-vers-la-vm-">Exemple de script pour transférer des fichiers vers la VM :</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# Variables
+USER="azureuser"
+IP="20.50.60.70"
+LOCAL_PATH="/path/to/local/file"
+REMOTE_PATH="/path/to/remote/destination"
+
+# Transférer un fichier
+scp $LOCAL_PATH $USER@$IP:$REMOTE_PATH
+</code></pre>
+<h3 id="exemple-de-script-pour-sauvegarder-des-fichiers-depuis-la-vm-"><a class="header" href="#exemple-de-script-pour-sauvegarder-des-fichiers-depuis-la-vm-">Exemple de script pour sauvegarder des fichiers depuis la VM :</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# Variables
+USER="azureuser"
+IP="20.50.60.70"
+REMOTE_PATH="/path/to/remote/file"
+LOCAL_PATH="/path/to/local/destination"
+
+# Télécharger un fichier
+scp $USER@$IP:$REMOTE_PATH $LOCAL_PATH
+</code></pre>
+<hr />
+<h2 id="bonnes-pratiques-pour-le-transfert-scp"><a class="header" href="#bonnes-pratiques-pour-le-transfert-scp"><strong>Bonnes pratiques pour le transfert SCP</strong></a></h2>
+<ol>
+<li><strong>Utilisez des clés SSH</strong> :
+<ul>
+<li>Préférez les clés SSH au lieu des mots de passe pour des connexions plus sécurisées.</li>
+</ul>
+</li>
+<li><strong>Réduisez l’exposition publique</strong> :
+<ul>
+<li>Utilisez des <strong>règles NSG</strong> pour limiter l’accès SSH à des adresses IP spécifiques.</li>
+</ul>
+</li>
+<li><strong>Compression</strong> :
+<ul>
+<li>Ajoutez l'option <code>-C</code> pour compresser les fichiers pendant le transfert, améliorant la vitesse.</li>
+</ul>
+<pre><code class="language-bash">scp -C &lt;CheminLocalDuFichier&gt; &lt;NomUtilisateur&gt;@&lt;AdresseIP&gt;:&lt;CheminCible&gt;
+</code></pre>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--gérer-les-sauvegardes-et-les-snapshots-des-machines-virtuelles-vms-sur-azure"><a class="header" href="#tutoriel--gérer-les-sauvegardes-et-les-snapshots-des-machines-virtuelles-vms-sur-azure"><strong>Tutoriel : Gérer les sauvegardes et les snapshots des Machines Virtuelles (VMs) sur Azure</strong></a></h1>
+<p>La gestion des sauvegardes et des snapshots des machines virtuelles (VMs) dans Azure est essentielle pour garantir la continuité des opérations et éviter les pertes de données en cas de panne. Ce tutoriel explique comment configurer et gérer les sauvegardes et les snapshots des VMs.</p>
+<hr />
+<h2 id="1-différence-entre-sauvegardes-et-snapshots"><a class="header" href="#1-différence-entre-sauvegardes-et-snapshots"><strong>1. Différence entre sauvegardes et snapshots</strong></a></h2>
+<h3 id="sauvegardes"><a class="header" href="#sauvegardes"><strong>Sauvegardes</strong></a></h3>
+<ul>
+<li><strong>Description</strong> : Les sauvegardes Azure (via le service <strong>Azure Backup</strong>) permettent de créer des copies cohérentes de vos VMs, incluant le système d'exploitation, les disques, et les données.</li>
+<li><strong>Utilisation</strong> : Restauration complète ou partielle en cas de panne, de suppression accidentelle ou de corruption de données.</li>
+<li><strong>Avantages</strong> :
+<ul>
+<li>Gestion centralisée.</li>
+<li>Protection automatisée avec des politiques de rétention.</li>
+<li>Chiffrement des sauvegardes.</li>
+</ul>
+</li>
+</ul>
+<h3 id="snapshots"><a class="header" href="#snapshots"><strong>Snapshots</strong></a></h3>
+<ul>
+<li><strong>Description</strong> : Un snapshot est une copie ponctuelle d’un disque VM spécifique (généralement un disque OS ou un disque de données).</li>
+<li><strong>Utilisation</strong> : Revenir rapidement à un état précédent, cloner des disques, ou tester des modifications.</li>
+<li><strong>Avantages</strong> :
+<ul>
+<li>Plus rapide à créer que les sauvegardes.</li>
+<li>Utile pour des sauvegardes temporaires ou des tests.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="2-gérer-les-sauvegardes-dune-vm-avec-azure-backup"><a class="header" href="#2-gérer-les-sauvegardes-dune-vm-avec-azure-backup"><strong>2. Gérer les sauvegardes d'une VM avec Azure Backup</strong></a></h2>
+<h3 id="Étape-1--configurer-une-sauvegarde-pour-une-vm"><a class="header" href="#Étape-1--configurer-une-sauvegarde-pour-une-vm"><strong>Étape 1 : Configurer une sauvegarde pour une VM</strong></a></h3>
+<ol>
+<li>
+<p><strong>Accéder à la VM</strong> :</p>
+<ul>
+<li>Dans le portail Azure, recherchez et sélectionnez votre machine virtuelle.</li>
+</ul>
+</li>
+<li>
+<p><strong>Configurer Azure Backup</strong> :</p>
+<ul>
+<li>Dans le menu latéral, cliquez sur <strong>Sauvegarde</strong>.</li>
+<li>Sélectionnez un <strong>Coffre Recovery Services</strong> existant ou créez-en un :
+<ul>
+<li>Donnez un nom au coffre.</li>
+<li>Sélectionnez une région et un abonnement.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Configurer la stratégie de sauvegarde</strong> :</p>
+<ul>
+<li>Azure propose une stratégie par défaut :
+<ul>
+<li>Sauvegarde quotidienne.</li>
+<li>Conservation des sauvegardes pendant 30 jours.</li>
+</ul>
+</li>
+<li>Vous pouvez personnaliser les paramètres :
+<ul>
+<li>Fréquence (quotidienne/hebdomadaire).</li>
+<li>Durée de conservation (jours, semaines, mois, années).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Activer la sauvegarde</strong> :</p>
+<ul>
+<li>Cliquez sur <strong>Activer la sauvegarde</strong> pour démarrer la protection de la VM.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-2--restauration-depuis-une-sauvegarde"><a class="header" href="#Étape-2--restauration-depuis-une-sauvegarde"><strong>Étape 2 : Restauration depuis une sauvegarde</strong></a></h3>
+<ol>
+<li>
+<p><strong>Accéder au Coffre Recovery Services</strong> :</p>
+<ul>
+<li>Allez dans <strong>Coffres Recovery Services</strong> depuis le portail Azure.</li>
+<li>Sélectionnez le coffre contenant la sauvegarde.</li>
+</ul>
+</li>
+<li>
+<p><strong>Choisir l'élément à restaurer</strong> :</p>
+<ul>
+<li>Cliquez sur <strong>Articles sauvegardés</strong>.</li>
+<li>Sélectionnez la VM et choisissez un point de restauration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Options de restauration</strong> :</p>
+<ul>
+<li><strong>Créer une nouvelle VM</strong> : Crée une nouvelle VM à partir de la sauvegarde.</li>
+<li><strong>Restauration des disques</strong> : Restaure uniquement les disques, que vous pouvez attacher à une VM existante.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="3-gérer-les-snapshots-des-disques-vm"><a class="header" href="#3-gérer-les-snapshots-des-disques-vm"><strong>3. Gérer les snapshots des disques VM</strong></a></h2>
+<h3 id="Étape-1--créer-un-snapshot"><a class="header" href="#Étape-1--créer-un-snapshot"><strong>Étape 1 : Créer un snapshot</strong></a></h3>
+<ol>
+<li>
+<p><strong>Accéder au disque de la VM</strong> :</p>
+<ul>
+<li>Dans le portail Azure, ouvrez la VM.</li>
+<li>Cliquez sur <strong>Disques</strong> dans le menu.</li>
+<li>Sélectionnez le disque que vous voulez snapshotter (ex. : disque OS ou disque de données).</li>
+</ul>
+</li>
+<li>
+<p><strong>Créer un snapshot</strong> :</p>
+<ul>
+<li>Dans l'onglet <strong>Vue d'ensemble</strong> du disque, cliquez sur <strong>Créer un snapshot</strong>.</li>
+<li>Configurez les paramètres :
+<ul>
+<li><strong>Nom</strong> : Donnez un nom explicite (ex. : <code>Snapshot-Disque-Prod</code>).</li>
+<li><strong>Type de snapshot</strong> : Sélectionnez <strong>Snapshot complet</strong> (copie complète) ou <strong>Snapshot incrémental</strong> (plus rapide et moins coûteux).</li>
+<li><strong>Compte de stockage</strong> : Spécifiez où stocker le snapshot.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Créer</strong> :</p>
+<ul>
+<li>Cliquez sur <strong>Créer</strong> pour démarrer la création du snapshot.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-2--utiliser-un-snapshot"><a class="header" href="#Étape-2--utiliser-un-snapshot"><strong>Étape 2 : Utiliser un snapshot</strong></a></h3>
+<ol>
+<li>
+<p><strong>Créer un nouveau disque depuis un snapshot</strong> :</p>
+<ul>
+<li>Allez dans le service <strong>Snapshots</strong> dans le portail Azure.</li>
+<li>Sélectionnez le snapshot souhaité.</li>
+<li>Cliquez sur <strong>Créer un disque</strong> et configurez les options (type, taille, etc.).</li>
+<li>Le disque créé peut ensuite être attaché à une VM.</li>
+</ul>
+</li>
+<li>
+<p><strong>Remplacer un disque existant</strong> :</p>
+<ul>
+<li>Arrêtez la VM.</li>
+<li>Détachez le disque existant.</li>
+<li>Attachez le disque restauré à partir du snapshot.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-3--supprimer-un-snapshot"><a class="header" href="#Étape-3--supprimer-un-snapshot"><strong>Étape 3 : Supprimer un snapshot</strong></a></h3>
+<ol>
+<li>
+<p><strong>Accéder au service Snapshots</strong> :</p>
+<ul>
+<li>Recherchez <strong>Snapshots</strong> dans le portail Azure.</li>
+<li>Sélectionnez le snapshot que vous souhaitez supprimer.</li>
+</ul>
+</li>
+<li>
+<p><strong>Supprimer</strong> :</p>
+<ul>
+<li>Cliquez sur <strong>Supprimer</strong> pour libérer de l'espace de stockage.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="4-bonnes-pratiques-pour-les-sauvegardes-et-snapshots"><a class="header" href="#4-bonnes-pratiques-pour-les-sauvegardes-et-snapshots"><strong>4. Bonnes pratiques pour les sauvegardes et snapshots</strong></a></h2>
+<h3 id="sauvegardes-1"><a class="header" href="#sauvegardes-1"><strong>Sauvegardes</strong></a></h3>
+<ol>
+<li><strong>Automatisez les sauvegardes</strong> :
+<ul>
+<li>Utilisez des politiques pour garantir que toutes les VMs critiques sont protégées.</li>
+</ul>
+</li>
+<li><strong>Surveillez l'état des sauvegardes</strong> :
+<ul>
+<li>Configurez des alertes pour les échecs de sauvegarde.</li>
+</ul>
+</li>
+<li><strong>Testez régulièrement les restaurations</strong> :
+<ul>
+<li>Assurez-vous que les points de restauration sont valides et utilisables.</li>
+</ul>
+</li>
+</ol>
+<h3 id="snapshots-1"><a class="header" href="#snapshots-1"><strong>Snapshots</strong></a></h3>
+<ol>
+<li><strong>Utilisez des snapshots pour des modifications rapides</strong> :
+<ul>
+<li>Avant une mise à jour majeure ou des tests.</li>
+</ul>
+</li>
+<li><strong>Nettoyez régulièrement</strong> :
+<ul>
+<li>Supprimez les snapshots obsolètes pour économiser les coûts de stockage.</li>
+</ul>
+</li>
+<li><strong>Combinez snapshots et sauvegardes</strong> :
+<ul>
+<li>Utilisez les sauvegardes pour des restaurations complètes et les snapshots pour des interventions rapides.</li>
+</ul>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--configurer-un-compte-de-stockage-azure"><a class="header" href="#tutoriel--configurer-un-compte-de-stockage-azure"><strong>Tutoriel : Configurer un compte de stockage Azure</strong></a></h1>
+<p>Les comptes de stockage Azure sont des solutions flexibles pour stocker des données dans le cloud. Ils permettent de gérer des objets (blobs), des fichiers, des disques, des tables et des files d'attente. Ce tutoriel explique comment configurer et gérer un compte de stockage Azure.</p>
+<hr />
+<h2 id="Étape-1--comprendre-les-types-de-stockage-azure"><a class="header" href="#Étape-1--comprendre-les-types-de-stockage-azure"><strong>Étape 1 : Comprendre les types de stockage Azure</strong></a></h2>
+<p>Avant de commencer, comprenez les principaux types de stockage offerts par Azure :</p>
+<ol>
+<li><strong>Blob Storage</strong> : Stockage d’objets pour les données non structurées (images, vidéos, sauvegardes).</li>
+<li><strong>File Storage</strong> : Partages de fichiers accessibles via SMB ou NFS.</li>
+<li><strong>Queue Storage</strong> : Files d'attente de messages pour la communication asynchrone.</li>
+<li><strong>Table Storage</strong> : Stockage NoSQL pour les données structurées.</li>
+</ol>
+<hr />
+<h2 id="Étape-2--créer-un-compte-de-stockage-azure"><a class="header" href="#Étape-2--créer-un-compte-de-stockage-azure"><strong>Étape 2 : Créer un compte de stockage Azure</strong></a></h2>
+<h3 id="1-accéder-au-portail-azure"><a class="header" href="#1-accéder-au-portail-azure"><strong>1. Accéder au portail Azure</strong></a></h3>
+<ul>
+<li>Connectez-vous au <a href="https://portal.azure.com">portail Azure</a>.</li>
+<li>Recherchez <strong>Comptes de stockage</strong> dans la barre de recherche et cliquez sur l’option correspondante.</li>
+</ul>
+<h3 id="2-créer-un-compte-de-stockage"><a class="header" href="#2-créer-un-compte-de-stockage"><strong>2. Créer un compte de stockage</strong></a></h3>
+<ul>
+<li>Cliquez sur <strong>+ Créer</strong>.</li>
+<li>Remplissez les informations nécessaires :</li>
+</ul>
+<h4 id="onglet-de-base"><a class="header" href="#onglet-de-base"><strong>Onglet "De base"</strong></a></h4>
+<ul>
+<li><strong>Abonnement</strong> : Sélectionnez l'abonnement Azure à utiliser.</li>
+<li><strong>Groupe de ressources</strong> : Choisissez un groupe existant ou créez-en un nouveau.</li>
+<li><strong>Nom du compte de stockage</strong> : Donnez un nom unique (entre 3 et 24 caractères, uniquement alphanumériques).</li>
+<li><strong>Région</strong> : Sélectionnez la région Azure où vous souhaitez héberger le compte.</li>
+<li><strong>Performance</strong> :
+<ul>
+<li><strong>Standard</strong> : Idéal pour des applications courantes avec des besoins modérés en performance.</li>
+<li><strong>Premium</strong> : Pour des applications nécessitant des performances élevées (par exemple, bases de données).</li>
+</ul>
+</li>
+<li><strong>Redondance</strong> :
+<ul>
+<li><strong>LRS (Locally Redundant Storage)</strong> : Redondance dans une seule région.</li>
+<li><strong>GRS (Geo-Redundant Storage)</strong> : Redondance géographique pour la haute disponibilité.</li>
+</ul>
+</li>
+</ul>
+<h4 id="onglets-supplémentaires-facultatif"><a class="header" href="#onglets-supplémentaires-facultatif"><strong>Onglets supplémentaires (facultatif)</strong></a></h4>
+<ul>
+<li>
+<p><strong>Réseau</strong> : Configurez l’accès privé ou public.</p>
+</li>
+<li>
+<p><strong>Sécurité</strong> : Activez le chiffrement avec des clés gérées par le client ou Azure.</p>
+</li>
+<li>
+<p><strong>Avancé</strong> : Configurez des fonctionnalités telles que le stockage hiérarchisé.</p>
+</li>
+<li>
+<p>Une fois tous les champs remplis, cliquez sur <strong>Vérifier + Créer</strong> puis sur <strong>Créer</strong>.</p>
+</li>
+</ul>
+<hr />
+<h2 id="Étape-3--configurer-le-compte-de-stockage"><a class="header" href="#Étape-3--configurer-le-compte-de-stockage"><strong>Étape 3 : Configurer le compte de stockage</strong></a></h2>
+<h3 id="1-accéder-au-compte-de-stockage"><a class="header" href="#1-accéder-au-compte-de-stockage"><strong>1. Accéder au compte de stockage</strong></a></h3>
+<ul>
+<li>Une fois créé, cliquez sur le compte dans la liste des <strong>Comptes de stockage</strong>.</li>
+</ul>
+<h3 id="2-configurer-des-services-spécifiques"><a class="header" href="#2-configurer-des-services-spécifiques"><strong>2. Configurer des services spécifiques</strong></a></h3>
+<ul>
+<li><strong>Blob Storage</strong> :
+<ul>
+<li>Allez dans l'onglet <strong>Conteneurs</strong>.</li>
+<li>Cliquez sur <strong>+ Conteneur</strong> pour créer un nouveau conteneur.</li>
+<li>Définissez les permissions d'accès (Public/Privé).</li>
+</ul>
+</li>
+<li><strong>File Storage</strong> :
+<ul>
+<li>Accédez à <strong>Partages de fichiers</strong>.</li>
+<li>Cliquez sur <strong>+ Partage de fichiers</strong> pour en créer un.</li>
+<li>Définissez la capacité maximale du partage.</li>
+</ul>
+</li>
+<li><strong>Queue Storage</strong> :
+<ul>
+<li>Accédez à <strong>Files d’attente</strong>.</li>
+<li>Cliquez sur <strong>+ File d'attente</strong> et donnez un nom.</li>
+</ul>
+</li>
+<li><strong>Table Storage</strong> :
+<ul>
+<li>Accédez à <strong>Tables</strong>.</li>
+<li>Cliquez sur <strong>+ Table</strong> et donnez un nom.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="Étape-4--connecter-une-application-au-compte-de-stockage"><a class="header" href="#Étape-4--connecter-une-application-au-compte-de-stockage"><strong>Étape 4 : Connecter une application au compte de stockage</strong></a></h2>
+<h3 id="1-récupérer-la-clé-daccès"><a class="header" href="#1-récupérer-la-clé-daccès"><strong>1. Récupérer la clé d'accès</strong></a></h3>
+<ul>
+<li>Dans l’onglet <strong>Clés d'accès</strong>, copiez une des clés d’accès et le nom du compte.</li>
+<li>Utilisez cette clé pour autoriser les applications à accéder aux données du compte de stockage.</li>
+</ul>
+<h3 id="2-utiliser-les-chaînes-de-connexion"><a class="header" href="#2-utiliser-les-chaînes-de-connexion"><strong>2. Utiliser les chaînes de connexion</strong></a></h3>
+<ul>
+<li>Dans l’onglet <strong>Chaînes de connexion</strong>, copiez la chaîne complète.</li>
+<li>La chaîne inclut toutes les informations nécessaires pour se connecter à votre compte.</li>
+</ul>
+<h3 id="3-intégration-avec-des-sdk-ou-outils"><a class="header" href="#3-intégration-avec-des-sdk-ou-outils"><strong>3. Intégration avec des SDK ou outils</strong></a></h3>
+<ul>
+<li>Azure Storage peut être utilisé avec les SDKs (disponibles pour .NET, Python, Java, etc.).</li>
+<li>Exemple pour Python :
+<pre><code class="language-python">from azure.storage.blob import BlobServiceClient
+
+connection_string = "votre_chaine_de_connexion"
+blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+
+container_client = blob_service_client.get_container_client("nom_du_conteneur")
+</code></pre>
+</li>
+</ul>
+<hr />
+<h2 id="Étape-5--configurer-des-règles-de-sécurité-et-des-politiques"><a class="header" href="#Étape-5--configurer-des-règles-de-sécurité-et-des-politiques"><strong>Étape 5 : Configurer des règles de sécurité et des politiques</strong></a></h2>
+<ol>
+<li>
+<p><strong>Activer les pare-feu et les réseaux virtuels</strong> :</p>
+<ul>
+<li>Dans l'onglet <strong>Mise en réseau</strong>, autorisez uniquement des adresses IP spécifiques ou des sous-réseaux Azure à accéder au compte.</li>
+</ul>
+</li>
+<li>
+<p><strong>Activer le versioning des blobs</strong> :</p>
+<ul>
+<li>Dans l'onglet <strong>Configuration</strong>, activez le <strong>Versionnement des blobs</strong> pour conserver les versions précédentes des objets.</li>
+</ul>
+</li>
+<li>
+<p><strong>Configurer des sauvegardes automatiques</strong> :</p>
+<ul>
+<li>Utilisez <strong>Azure Backup</strong> pour planifier des sauvegardes régulières des données dans le compte de stockage.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-6--surveiller-et-gérer-le-compte-de-stockage"><a class="header" href="#Étape-6--surveiller-et-gérer-le-compte-de-stockage"><strong>Étape 6 : Surveiller et gérer le compte de stockage</strong></a></h2>
+<ol>
+<li><strong>Analyse des métriques</strong> :
+<ul>
+<li>Accédez à l’onglet <strong>Métriques</strong> pour surveiller les performances (latence, débit, etc.).</li>
+</ul>
+</li>
+<li><strong>Configurer des alertes</strong> :
+<ul>
+<li>Allez dans <strong>Alertes</strong> pour recevoir des notifications en cas de dépassement des seuils (par exemple, utilisation du stockage).</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="bonnes-pratiques-1"><a class="header" href="#bonnes-pratiques-1"><strong>Bonnes pratiques</strong></a></h2>
+<ol>
+<li><strong>Standardisez les noms</strong> :
+<ul>
+<li>Utilisez des conventions claires pour nommer les conteneurs et partages.</li>
+</ul>
+</li>
+<li><strong>Sécurisez les données</strong> :
+<ul>
+<li>Activez l’accès privé ou limitez l'accès par réseau.</li>
+</ul>
+</li>
+<li><strong>Optimisez les coûts</strong> :
+<ul>
+<li>Configurez des règles de cycle de vie pour supprimer automatiquement les données obsolètes.</li>
+</ul>
+</li>
+<li><strong>Testez la récupération</strong> :
+<ul>
+<li>Vérifiez régulièrement que vous pouvez accéder et récupérer les données sauvegardées.</li>
+</ul>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--utiliser-azure-blob-storage-pour-stocker-et-gérer-des-fichiers"><a class="header" href="#tutoriel--utiliser-azure-blob-storage-pour-stocker-et-gérer-des-fichiers"><strong>Tutoriel : Utiliser Azure Blob Storage pour stocker et gérer des fichiers</strong></a></h1>
+<p><strong>Azure Blob Storage</strong> est un service de stockage d’objets conçu pour stocker des données non structurées, comme des documents, des images, des vidéos, et des sauvegardes. Ce guide vous montre comment configurer et utiliser Azure Blob Storage pour stocker et gérer vos fichiers.</p>
+<hr />
+<h2 id="Étape-1--comprendre-les-types-de-blobs"><a class="header" href="#Étape-1--comprendre-les-types-de-blobs"><strong>Étape 1 : Comprendre les types de blobs</strong></a></h2>
+<p>Azure Blob Storage propose trois types de blobs pour différents cas d’utilisation :</p>
+<ol>
+<li><strong>Blobs de bloc (Block Blob)</strong> : Idéal pour stocker des fichiers (documents, médias, etc.).</li>
+<li><strong>Blobs d’ajout (Append Blob)</strong> : Utilisé pour les fichiers devant recevoir des ajouts fréquents (par exemple, fichiers journaux).</li>
+<li><strong>Blobs de pages (Page Blob)</strong> : Optimisé pour les mises à jour fréquentes (comme les disques de machines virtuelles).</li>
+</ol>
+<hr />
+<h2 id="Étape-2--créer-un-compte-de-stockage-azure-1"><a class="header" href="#Étape-2--créer-un-compte-de-stockage-azure-1"><strong>Étape 2 : Créer un compte de stockage Azure</strong></a></h2>
+<ol>
+<li><strong>Connectez-vous au portail Azure</strong> : <a href="https://portal.azure.com">https://portal.azure.com</a>.</li>
+<li><strong>Recherchez "Comptes de stockage"</strong> et cliquez sur <strong>Créer un compte de stockage</strong>.</li>
+<li>Configurez le compte de stockage :
+<ul>
+<li><strong>Performance</strong> : Standard ou Premium.</li>
+<li><strong>Redondance</strong> : LRS, ZRS, GRS, ou RA-GRS selon vos besoins.</li>
+</ul>
+</li>
+<li>Une fois les options sélectionnées, cliquez sur <strong>Créer</strong>.</li>
+</ol>
+<hr />
+<h2 id="Étape-3--configurer-un-conteneur-pour-les-blobs"><a class="header" href="#Étape-3--configurer-un-conteneur-pour-les-blobs"><strong>Étape 3 : Configurer un conteneur pour les blobs</strong></a></h2>
+<ol>
+<li>Accédez au compte de stockage créé.</li>
+<li>Dans le menu latéral, sélectionnez <strong>Conteneurs</strong>.</li>
+<li>Cliquez sur <strong>+ Conteneur</strong> pour créer un nouveau conteneur :
+<ul>
+<li><strong>Nom</strong> : Donnez un nom explicite (ex. : <code>documents</code>, <code>images</code>).</li>
+<li><strong>Niveau d'accès public</strong> :
+<ul>
+<li><strong>Privé</strong> : Accessible uniquement via des autorisations spécifiques.</li>
+<li><strong>Public (lecture)</strong> : Tous les utilisateurs peuvent lire les blobs.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cliquez sur <strong>Créer</strong>.</li>
+</ol>
+<hr />
+<h2 id="Étape-4--télécharger-des-fichiers-dans-azure-blob-storage"><a class="header" href="#Étape-4--télécharger-des-fichiers-dans-azure-blob-storage"><strong>Étape 4 : Télécharger des fichiers dans Azure Blob Storage</strong></a></h2>
+<h3 id="depuis-le-portail-azure"><a class="header" href="#depuis-le-portail-azure"><strong>Depuis le portail Azure</strong></a></h3>
+<ol>
+<li>Accédez à votre conteneur.</li>
+<li>Cliquez sur <strong>Télécharger</strong> et sélectionnez un fichier à télécharger depuis votre ordinateur.</li>
+<li>Une fois téléchargé, le fichier apparaîtra dans la liste des blobs du conteneur.</li>
+</ol>
+<h3 id="depuis-azure-cli"><a class="header" href="#depuis-azure-cli"><strong>Depuis Azure CLI</strong></a></h3>
+<ol>
+<li>Ouvrez une fenêtre de terminal.</li>
+<li>Connectez-vous à Azure :
+<pre><code class="language-bash">az login
+</code></pre>
+</li>
+<li>Téléchargez un fichier vers un conteneur :
+<pre><code class="language-bash">az storage blob upload --account-name &lt;NomDuCompte&gt; --container-name &lt;NomDuConteneur&gt; --name &lt;NomDuFichier&gt; --file &lt;CheminDuFichier&gt;
+</code></pre>
+Exemple :
+<pre><code class="language-bash">az storage blob upload --account-name moncompte --container-name documents --name rapport.pdf --file /home/user/rapport.pdf
+</code></pre>
+</li>
+</ol>
+<h3 id="depuis-un-script-python"><a class="header" href="#depuis-un-script-python"><strong>Depuis un script Python</strong></a></h3>
+<ol>
+<li>Installez le SDK Azure pour Python :
+<pre><code class="language-bash">pip install azure-storage-blob
+</code></pre>
+</li>
+<li>Téléchargez un fichier :
+<pre><code class="language-python">from azure.storage.blob import BlobServiceClient
+
+connection_string = "votre_chaine_de_connexion"
+blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+container_client = blob_service_client.get_container_client("nom_du_conteneur")
+
+with open("chemin_du_fichier", "rb") as fichier:
+    container_client.upload_blob(name="nom_du_blob", data=fichier)
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-5--télécharger-ou-gérer-les-fichiers-stockés"><a class="header" href="#Étape-5--télécharger-ou-gérer-les-fichiers-stockés"><strong>Étape 5 : Télécharger ou gérer les fichiers stockés</strong></a></h2>
+<h3 id="télécharger-un-fichier"><a class="header" href="#télécharger-un-fichier"><strong>Télécharger un fichier</strong></a></h3>
+<ul>
+<li>
+<p>Dans le portail Azure :</p>
+<ul>
+<li>Sélectionnez le fichier dans le conteneur.</li>
+<li>Cliquez sur <strong>Télécharger</strong> pour le récupérer.</li>
+</ul>
+</li>
+<li>
+<p>Avec Azure CLI :</p>
+<pre><code class="language-bash">az storage blob download --account-name &lt;NomDuCompte&gt; --container-name &lt;NomDuConteneur&gt; --name &lt;NomDuBlob&gt; --file &lt;CheminLocal&gt;
+</code></pre>
+<p>Exemple :</p>
+<pre><code class="language-bash">az storage blob download --account-name moncompte --container-name documents --name rapport.pdf --file ./rapport_local.pdf
+</code></pre>
+</li>
+</ul>
+<h3 id="supprimer-un-fichier"><a class="header" href="#supprimer-un-fichier"><strong>Supprimer un fichier</strong></a></h3>
+<ul>
+<li>Dans le portail Azure :
+<ul>
+<li>Sélectionnez le blob, cliquez sur <strong>Supprimer</strong>.</li>
+</ul>
+</li>
+<li>Avec Azure CLI :
+<pre><code class="language-bash">az storage blob delete --account-name &lt;NomDuCompte&gt; --container-name &lt;NomDuConteneur&gt; --name &lt;NomDuBlob&gt;
+</code></pre>
+</li>
+</ul>
+<hr />
+<h2 id="Étape-6--configurer-des-règles-de-cycle-de-vie"><a class="header" href="#Étape-6--configurer-des-règles-de-cycle-de-vie"><strong>Étape 6 : Configurer des règles de cycle de vie</strong></a></h2>
+<ol>
+<li>Accédez à l’onglet <strong>Cycle de vie</strong> dans le compte de stockage.</li>
+<li>Configurez des règles pour automatiser la gestion des fichiers :
+<ul>
+<li><strong>Déplacement vers le stockage d’archives</strong> après X jours.</li>
+<li><strong>Suppression automatique</strong> des fichiers après une certaine durée.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-7--contrôler-laccès-aux-blobs"><a class="header" href="#Étape-7--contrôler-laccès-aux-blobs"><strong>Étape 7 : Contrôler l’accès aux blobs</strong></a></h2>
+<ol>
+<li>
+<p><strong>Utiliser des clés d'accès</strong> :</p>
+<ul>
+<li>Accédez à l’onglet <strong>Clés d'accès</strong> pour récupérer une clé permettant d'accéder au compte.</li>
+<li>Utilisez cette clé dans vos applications pour interagir avec les blobs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Générer un lien SAS (Shared Access Signature)</strong> :</p>
+<ul>
+<li>Accédez à l’onglet <strong>Signature d'accès partagé (SAS)</strong>.</li>
+<li>Configurez les permissions (lecture, écriture, suppression).</li>
+<li>Générez un lien SAS pour partager temporairement l'accès à un fichier.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-8--surveiller-et-analyser-lutilisation"><a class="header" href="#Étape-8--surveiller-et-analyser-lutilisation"><strong>Étape 8 : Surveiller et analyser l’utilisation</strong></a></h2>
+<ol>
+<li>Accédez à l’onglet <strong>Métriques</strong> dans le compte de stockage pour consulter les statistiques (latence, utilisation, débit).</li>
+<li>Configurez des alertes dans <strong>Alertes</strong> pour être notifié en cas d'anomalies ou de dépassement des quotas.</li>
+</ol>
+<hr />
+<h2 id="bonnes-pratiques-pour-azure-blob-storage"><a class="header" href="#bonnes-pratiques-pour-azure-blob-storage"><strong>Bonnes pratiques pour Azure Blob Storage</strong></a></h2>
+<ol>
+<li><strong>Sécurisez vos données</strong> :
+<ul>
+<li>Utilisez des conteneurs privés et activez le chiffrement.</li>
+<li>Générez des liens SAS pour partager l'accès de manière temporaire.</li>
+</ul>
+</li>
+<li><strong>Automatisez la gestion des fichiers</strong> :
+<ul>
+<li>Configurez des règles de cycle de vie pour réduire les coûts.</li>
+</ul>
+</li>
+<li><strong>Utilisez des conventions de nommage claires</strong> :
+<ul>
+<li>Organisez les blobs avec des noms significatifs et hiérarchiques (ex. : <code>2024/images/projetA/image1.jpg</code>).</li>
+</ul>
+</li>
+<li><strong>Surveillez vos coûts</strong> :
+<ul>
+<li>Suivez l'utilisation du stockage dans <strong>Analyse des coûts</strong>.</li>
+</ul>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="azure-monitor--quest-ce-que-cest-"><a class="header" href="#azure-monitor--quest-ce-que-cest-"><strong>Azure Monitor : Qu'est-ce que c'est ?</strong></a></h1>
+<p><strong>Azure Monitor</strong> est un service de gestion et de surveillance des performances proposé par Microsoft Azure. Il permet de collecter, analyser et agir sur des données relatives aux performances et à l'état de vos ressources Azure, ainsi que sur celles qui se trouvent en dehors d'Azure.</p>
+<p><strong>Objectif principal :</strong> Fournir une vue d'ensemble des performances, détecter les problèmes et optimiser les ressources dans le cloud.</p>
+<hr />
+<h3 id="les-principaux-composants-dazure-monitor"><a class="header" href="#les-principaux-composants-dazure-monitor"><strong>Les principaux composants d'Azure Monitor</strong></a></h3>
+<ol>
+<li>
+<p><strong>Collecte de données :</strong>
+Azure Monitor collecte deux types de données :</p>
+<ul>
+<li><strong>Données de métriques :</strong> Informations numériques sur l'état et les performances d'une ressource, comme le taux d'utilisation du CPU ou les requêtes par seconde.</li>
+<li><strong>Données de journaux (logs) :</strong> Informations plus détaillées et souvent textuelles, comme les diagnostics ou les erreurs.</li>
+</ul>
+<p><strong>Exemple :</strong></p>
+<ul>
+<li>Collecter les métriques d'une machine virtuelle (VM) pour surveiller son utilisation CPU en temps réel.</li>
+<li>Analyser les journaux de diagnostic d'une application pour identifier des erreurs.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/azure-monitor/overview">Documentations sur les données collectées</a></p>
+</li>
+</ol>
+<hr />
+<ol start="2">
+<li>
+<p><strong>Insights pour les services spécifiques :</strong>
+Azure Monitor propose des solutions dédiées pour surveiller certains services Azure ou applications :</p>
+<ul>
+<li><strong>VM Insights :</strong> Pour surveiller la santé et les performances des machines virtuelles.</li>
+<li><strong>Container Insights :</strong> Pour surveiller les clusters Kubernetes (AKS).</li>
+<li><strong>Application Insights :</strong> Pour superviser vos applications et détecter automatiquement les anomalies.</li>
+</ul>
+<p><strong>Exemple :</strong>
+Si vous hébergez une application dans Azure Kubernetes Service (AKS), vous pouvez utiliser <strong>Container Insights</strong> pour surveiller l'utilisation des pods et les erreurs.</p>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/azure-monitor/insights/">Insights disponibles</a></p>
+</li>
+</ol>
+<hr />
+<ol start="3">
+<li>
+<p><strong>Visualisation :</strong>
+Les données collectées par Azure Monitor peuvent être visualisées via plusieurs outils :</p>
+<ul>
+<li><strong>Tableaux de bord Azure :</strong> Pour créer des visualisations personnalisées.</li>
+<li><strong>Azure Monitor Workbooks :</strong> Pour des rapports interactifs et des visualisations avancées.</li>
+<li><strong>Power BI :</strong> Pour connecter vos données Azure Monitor à Power BI et créer des tableaux de bord dynamiques.</li>
+</ul>
+<p><strong>Exemple :</strong>
+Vous pouvez créer un tableau de bord qui affiche les métriques CPU, RAM et trafic réseau de vos machines virtuelles en temps réel.</p>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/azure-monitor/visualizations">Configurer des visualisations dans Azure Monitor</a></p>
+</li>
+</ol>
+<hr />
+<ol start="4">
+<li>
+<p><strong>Alertes :</strong>
+Les alertes permettent de configurer des notifications automatiques basées sur des seuils de performance ou des événements spécifiques. Ces alertes peuvent envoyer des notifications par email, SMS, ou déclencher des actions comme des scripts ou des runbooks.</p>
+<p><strong>Exemple :</strong></p>
+<ul>
+<li>Configurer une alerte pour recevoir une notification si le CPU d'une machine virtuelle dépasse 80 % pendant plus de 10 minutes.</li>
+<li>Déclencher une action automatique pour redémarrer un service en cas d'erreur.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/azure-monitor/alerts/alerts-overview">Créer des alertes dans Azure Monitor</a></p>
+</li>
+</ol>
+<hr />
+<ol start="5">
+<li>
+<p><strong>Analyse avec KQL (Kusto Query Language) :</strong>
+Azure Monitor permet d'utiliser le langage KQL pour analyser les logs collectés. C'est un outil puissant pour effectuer des recherches complexes sur les données.</p>
+<p><strong>Exemple :</strong>
+Si votre application rencontre des erreurs fréquentes, vous pouvez exécuter une requête KQL pour extraire tous les logs d'erreurs associés et identifier leur cause.</p>
+<p><strong>Requête simple KQL :</strong></p>
+<pre><code class="language-kql">AppTraces
+| where SeverityLevel == "Error"
+| summarize CountByType = count() by Message
+</code></pre>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/data-explorer/kql-cheat-sheet">Introduction à KQL</a></p>
+</li>
+</ol>
+<hr />
+<ol start="6">
+<li>
+<p><strong>Actions automatisées :</strong>
+Azure Monitor peut interagir avec d'autres services Azure pour automatiser des actions en réponse à des événements détectés :</p>
+<ul>
+<li><strong>Azure Logic Apps</strong> : Pour orchestrer des workflows.</li>
+<li><strong>Azure Automation</strong> : Pour exécuter des scripts ou des runbooks.</li>
+<li><strong>Event Grid</strong> ou <strong>Webhooks</strong> : Pour connecter d'autres systèmes externes.</li>
+</ul>
+<p><strong>Exemple :</strong>
+En cas de saturation de la CPU d'une machine virtuelle, Azure Monitor peut automatiquement redimensionner la VM ou déclencher un runbook.</p>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/azure-monitor/platform/action-groups">Intégrer des actions avec Azure Monitor</a></p>
+</li>
+</ol>
+<hr />
+<h3 id="cas-dusage-dazure-monitor"><a class="header" href="#cas-dusage-dazure-monitor"><strong>Cas d'usage d'Azure Monitor</strong></a></h3>
+<ol>
+<li>
+<p><strong>Surveillance des applications :</strong>
+Utilisez <strong>Application Insights</strong> pour surveiller le comportement des applications web, les performances et suivre les utilisateurs en temps réel.</p>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/azure-monitor/app/app-insights-overview">Application Insights</a></p>
+</li>
+<li>
+<p><strong>Optimisation des coûts :</strong>
+Analyser les performances des ressources Azure pour identifier les ressources sous-utilisées ou mal configurées.</p>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/azure-monitor/monitor-cost-optimization">Optimisation avec Azure Monitor</a></p>
+</li>
+<li>
+<p><strong>Détection des menaces :</strong>
+Intégrer Azure Monitor avec <strong>Microsoft Defender for Cloud</strong> pour détecter et répondre aux menaces de sécurité.</p>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/defender-for-cloud/alerts-reference">Surveillance de la sécurité</a></p>
+</li>
+</ol>
+<hr />
+<h3 id="exemple-pratique--configuration-dune-alerte-de-métrique"><a class="header" href="#exemple-pratique--configuration-dune-alerte-de-métrique"><strong>Exemple pratique : Configuration d'une alerte de métrique</strong></a></h3>
+<p>Voici un exemple pas-à-pas pour configurer une alerte sur une machine virtuelle Azure :</p>
+<ol>
+<li>Accédez à <strong>Azure Monitor</strong> depuis le portail Azure.</li>
+<li>Dans la section <strong>Alertes</strong>, cliquez sur <strong>Nouvelle règle d'alerte</strong>.</li>
+<li>Sélectionnez la machine virtuelle comme ressource.</li>
+<li>Définissez une condition, par exemple "CPU &gt; 80%".</li>
+<li>Configurez une <strong>action group</strong> pour recevoir une notification par email ou SMS.</li>
+<li>Donnez un nom à la règle et créez-la.</li>
+</ol>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/azure-monitor/alerts/tutorial-metric-alerts">Tutoriel détaillé sur les alertes</a></p>
+<hr />
+<h3 id="ressources-supplémentaires"><a class="header" href="#ressources-supplémentaires"><strong>Ressources supplémentaires</strong></a></h3>
+<ul>
+<li>
+<p><strong>Documentation officielle Azure Monitor</strong> :<br />
+<a href="https://learn.microsoft.com/fr-fr/azure/azure-monitor/overview">https://learn.microsoft.com/fr-fr/azure/azure-monitor/overview</a></p>
+</li>
+<li>
+<p><strong>Tutoriels interactifs Azure Monitor</strong> :<br />
+<a href="https://learn.microsoft.com/fr-fr/training/paths/monitor-manage-azure-resources/">https://learn.microsoft.com/fr-fr/training/paths/monitor-manage-azure-resources/</a></p>
+</li>
+<li>
+<p><strong>API Azure Monitor</strong> :<br />
+<a href="https://learn.microsoft.com/fr-fr/rest/api/monitor/">https://learn.microsoft.com/fr-fr/rest/api/monitor/</a></p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="le-protocole-ssh--quest-ce-que-cest-"><a class="header" href="#le-protocole-ssh--quest-ce-que-cest-"><strong>Le protocole SSH : Qu'est-ce que c'est ?</strong></a></h1>
+<p>Le protocole <strong>SSH (Secure Shell)</strong> est un protocole réseau cryptographique permettant d'établir une connexion sécurisée entre deux machines, souvent utilisée pour administrer des systèmes à distance de manière sécurisée. SSH remplace des protocoles non sécurisés comme Telnet, FTP ou RSH, qui transmettent les données (y compris les mots de passe) en clair.</p>
+<hr />
+<h3 id="caractéristiques-principales-du-protocole-ssh"><a class="header" href="#caractéristiques-principales-du-protocole-ssh"><strong>Caractéristiques principales du protocole SSH</strong></a></h3>
+<ol>
+<li>
+<p><strong>Connexion sécurisée :</strong>
+SSH utilise le chiffrement pour garantir la confidentialité et l'intégrité des données échangées entre le client et le serveur.</p>
+</li>
+<li>
+<p><strong>Authentification forte :</strong></p>
+<ul>
+<li>Authentification par mot de passe.</li>
+<li>Authentification par clé publique/privée (méthode recommandée).</li>
+<li>Authentification multifactorielle (MFA).</li>
+</ul>
+</li>
+<li>
+<p><strong>Fonctionnalités variées :</strong></p>
+<ul>
+<li>Administration à distance des serveurs via une console.</li>
+<li>Transfert sécurisé de fichiers (<strong>SCP</strong>, <strong>SFTP</strong>).</li>
+<li>Tunneling et redirection de ports pour accéder à des services protégés.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="comment-fonctionne-ssh-"><a class="header" href="#comment-fonctionne-ssh-"><strong>Comment fonctionne SSH ?</strong></a></h3>
+<ol>
+<li>
+<p><strong>Établissement de la connexion :</strong></p>
+<ul>
+<li>Le client SSH initie la connexion avec le serveur sur le port <strong>22</strong> (par défaut).</li>
+<li>Le serveur SSH répond avec sa clé publique.</li>
+<li>Le client vérifie cette clé publique (comparée à une liste de clés connues ou approuvées) pour s'assurer de l'authenticité du serveur.</li>
+</ul>
+</li>
+<li>
+<p><strong>Négociation des algorithmes :</strong>
+Les deux parties négocient les algorithmes de chiffrement, de hachage et d'échange de clés pour sécuriser la communication.</p>
+</li>
+<li>
+<p><strong>Authentification de l'utilisateur :</strong></p>
+<ul>
+<li>Soit avec un mot de passe.</li>
+<li>Soit avec une paire de clés SSH (le client présente la clé privée associée à une clé publique préalablement enregistrée sur le serveur).</li>
+</ul>
+</li>
+<li>
+<p><strong>Session sécurisée :</strong>
+Une fois la connexion établie, les données échangées sont chiffrées.</p>
+</li>
+</ol>
+<hr />
+<h3 id="exemple-dutilisation-du-protocole-ssh"><a class="header" href="#exemple-dutilisation-du-protocole-ssh"><strong>Exemple d'utilisation du protocole SSH</strong></a></h3>
+<h4 id="connexion-à-un-serveur-distant"><a class="header" href="#connexion-à-un-serveur-distant"><strong>Connexion à un serveur distant</strong></a></h4>
+<p>Vous pouvez utiliser le client SSH pour vous connecter à une machine distante. Sur un terminal, tapez :</p>
+<pre><code class="language-bash">ssh username@hostname
+</code></pre>
+<ul>
+<li><strong>username</strong> : Nom de l'utilisateur sur la machine distante.</li>
+<li><strong>hostname</strong> : Adresse IP ou nom de domaine de la machine.</li>
+</ul>
+<p><strong>Exemple :</strong></p>
+<pre><code class="language-bash">ssh admin@192.168.1.100
+</code></pre>
+<h4 id="utilisation-dune-clé-ssh-pour-se-connecter"><a class="header" href="#utilisation-dune-clé-ssh-pour-se-connecter"><strong>Utilisation d’une clé SSH pour se connecter</strong></a></h4>
+<ol>
+<li>
+<p><strong>Générer une paire de clés SSH :</strong></p>
+<pre><code class="language-bash">ssh-keygen -t rsa -b 2048
+</code></pre>
+<p>Par défaut, cela génère deux fichiers dans <code>~/.ssh/</code> :</p>
+<ul>
+<li><code>id_rsa</code> : Clé privée (à garder secrète).</li>
+<li><code>id_rsa.pub</code> : Clé publique (à copier sur le serveur distant).</li>
+</ul>
+</li>
+<li>
+<p><strong>Copier la clé publique sur le serveur :</strong></p>
+<pre><code class="language-bash">ssh-copy-id username@hostname
+</code></pre>
+</li>
+<li>
+<p><strong>Connexion sans mot de passe :</strong>
+Maintenant, vous pouvez vous connecter sans entrer votre mot de passe :</p>
+<pre><code class="language-bash">ssh username@hostname
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="transfert-de-fichiers-avec-ssh"><a class="header" href="#transfert-de-fichiers-avec-ssh"><strong>Transfert de fichiers avec SSH</strong></a></h3>
+<ol>
+<li>
+<p><strong>Utilisation de SCP (Secure Copy Protocol) :</strong></p>
+<ul>
+<li>Pour envoyer un fichier vers un serveur :
+<pre><code class="language-bash">scp localfile username@hostname:/remote/directory/
+</code></pre>
+</li>
+<li>Pour télécharger un fichier depuis un serveur :
+<pre><code class="language-bash">scp username@hostname:/remote/file /local/directory/
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Utilisation de SFTP (Secure File Transfer Protocol) :</strong>
+Pour un accès interactif :</p>
+<pre><code class="language-bash">sftp username@hostname
+</code></pre>
+<p>Commandes SFTP typiques :</p>
+<ul>
+<li><code>ls</code> : Lister les fichiers sur le serveur.</li>
+<li><code>put localfile</code> : Envoyer un fichier vers le serveur.</li>
+<li><code>get remotefile</code> : Télécharger un fichier.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="fonctionnalités-avancées"><a class="header" href="#fonctionnalités-avancées"><strong>Fonctionnalités avancées</strong></a></h3>
+<ol>
+<li>
+<p><strong>Tunneling SSH :</strong>
+SSH peut rediriger un port local vers une machine distante (utile pour accéder à des services protégés).</p>
+<pre><code class="language-bash">ssh -L local_port:target_host:target_port username@hostname
+</code></pre>
+<p><strong>Exemple :</strong>
+Accéder à une base de données MySQL sur un serveur distant :</p>
+<pre><code class="language-bash">ssh -L 3306:localhost:3306 user@remote_server
+</code></pre>
+</li>
+<li>
+<p><strong>Exécution de commandes à distance :</strong>
+SSH permet d’exécuter directement des commandes sur un serveur sans ouvrir une session interactive.</p>
+<pre><code class="language-bash">ssh username@hostname "commande"
+</code></pre>
+<p><strong>Exemple :</strong>
+Redémarrer un serveur :</p>
+<pre><code class="language-bash">ssh admin@192.168.1.100 "sudo reboot"
+</code></pre>
+</li>
+<li>
+<p><strong>Proxy SSH :</strong>
+SSH peut être utilisé comme un proxy pour accéder à d'autres réseaux.</p>
+<pre><code class="language-bash">ssh -D 8080 username@hostname
+</code></pre>
+<p>Cela configure un proxy SOCKS sur le port 8080.</p>
+</li>
+</ol>
+<hr />
+<h3 id="cas-dusage-du-protocole-ssh"><a class="header" href="#cas-dusage-du-protocole-ssh"><strong>Cas d’usage du protocole SSH</strong></a></h3>
+<ol>
+<li>
+<p><strong>Administration des serveurs :</strong>
+Les administrateurs utilisent SSH pour gérer leurs serveurs Linux/Unix, effectuer des mises à jour ou résoudre des problèmes.</p>
+</li>
+<li>
+<p><strong>Transferts sécurisés :</strong>
+Remplacer FTP par SCP ou SFTP pour des échanges sécurisés de fichiers.</p>
+</li>
+<li>
+<p><strong>Accès sécurisé à des services internes :</strong>
+SSH est utilisé pour se connecter à des services hébergés dans des réseaux privés via des tunnels.</p>
+</li>
+<li>
+<p><strong>Automatisation des tâches :</strong>
+En combinant SSH avec des outils comme <strong>Ansible</strong> ou <strong>Bash scripts</strong>, vous pouvez automatiser des déploiements ou des configurations.</p>
+</li>
+</ol>
+<hr />
+<h3 id="avantages-du-protocole-ssh"><a class="header" href="#avantages-du-protocole-ssh"><strong>Avantages du protocole SSH</strong></a></h3>
+<ul>
+<li><strong>Sécurisé :</strong> Chiffrement fort des données échangées.</li>
+<li><strong>Polyvalent :</strong> Permet la gestion distante, le transfert de fichiers, le tunneling, etc.</li>
+<li><strong>Large adoption :</strong> Prend en charge presque tous les systèmes (Windows, macOS, Linux).</li>
+<li><strong>Open Source :</strong> Implémentations comme OpenSSH sont largement utilisées et maintenues.</li>
+</ul>
+<hr />
+<h3 id="liens-vers-la-documentation-et-ressources"><a class="header" href="#liens-vers-la-documentation-et-ressources"><strong>Liens vers la documentation et ressources</strong></a></h3>
+<ol>
+<li>
+<p><strong>Documentation officielle OpenSSH :</strong><br />
+<a href="https://www.openssh.com/">https://www.openssh.com/</a></p>
+</li>
+<li>
+<p><strong>Tutoriel SSH complet :</strong><br />
+<a href="https://www.ssh.com/academy/ssh">https://www.ssh.com/academy/ssh</a></p>
+</li>
+<li>
+<p><strong>Configurer SSH sur Azure :</strong><br />
+<a href="https://learn.microsoft.com/fr-fr/azure/virtual-machines/linux/ssh-from-windows">Configurer l’accès SSH pour une machine virtuelle Azure</a></p>
+</li>
+<li>
+<p><strong>Sécuriser un serveur SSH :</strong><br />
+<a href="https://www.digitalocean.com/community/tutorials/how-to-secure-ssh-on-your-server">10 conseils pour sécuriser SSH</a></p>
+</li>
+</ol>
+<hr />
+<h3 id="résumé"><a class="header" href="#résumé"><strong>Résumé</strong></a></h3>
+<p>SSH est un outil essentiel pour tout administrateur ou développeur. Il permet des connexions sécurisées et flexibles pour gérer des systèmes distants, transférer des fichiers ou créer des tunnels sécurisés. Sa polyvalence et son niveau de sécurité en font une solution incontournable pour la gestion des serveurs.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="le-protocole-rdp--quest-ce-que-cest-"><a class="header" href="#le-protocole-rdp--quest-ce-que-cest-"><strong>Le protocole RDP : Qu'est-ce que c'est ?</strong></a></h1>
+<p>Le protocole <strong>RDP (Remote Desktop Protocol)</strong> est un protocole réseau développé par Microsoft pour permettre une connexion graphique à distance entre un client et une machine hôte (souvent un serveur ou un PC). Il est largement utilisé pour administrer des machines Windows, mais il peut également être utilisé pour d'autres systèmes grâce à des clients tiers.</p>
+<p>RDP fonctionne sur le port <strong>3389</strong> par défaut et permet d'accéder à l'interface graphique complète d'un système distant comme si vous étiez physiquement devant celui-ci.</p>
+<hr />
+<h3 id="principales-fonctionnalités-du-protocole-rdp"><a class="header" href="#principales-fonctionnalités-du-protocole-rdp"><strong>Principales fonctionnalités du protocole RDP</strong></a></h3>
+<ol>
+<li>
+<p><strong>Interface graphique complète :</strong>
+Contrairement à SSH (orienté ligne de commande), RDP permet de voir et interagir avec l'interface graphique (GUI) d'un système distant.</p>
+</li>
+<li>
+<p><strong>Partage de ressources locales :</strong></p>
+<ul>
+<li>Accès aux disques locaux depuis la machine distante.</li>
+<li>Partage des imprimantes et périphériques locaux.</li>
+<li>Redirection audio pour écouter les sons générés par la machine distante.</li>
+</ul>
+</li>
+<li>
+<p><strong>Prise en charge des multi-écrans :</strong>
+RDP permet de gérer plusieurs écrans connectés au client.</p>
+</li>
+<li>
+<p><strong>Transferts de fichiers :</strong>
+Copier des fichiers entre la machine locale et distante via l'interface.</p>
+</li>
+<li>
+<p><strong>Sécurité intégrée :</strong>
+RDP prend en charge des mécanismes comme SSL/TLS pour chiffrer les connexions, ainsi que l'authentification via <strong>NLA (Network Level Authentication)</strong>.</p>
+</li>
+</ol>
+<hr />
+<h3 id="comment-fonctionne-le-protocole-rdp-"><a class="header" href="#comment-fonctionne-le-protocole-rdp-"><strong>Comment fonctionne le protocole RDP ?</strong></a></h3>
+<ol>
+<li>
+<p><strong>Établissement de la connexion :</strong></p>
+<ul>
+<li>Le client RDP initie une connexion vers l'hôte distant sur le port 3389.</li>
+<li>L'utilisateur s'authentifie avec ses identifiants (nom d'utilisateur et mot de passe).</li>
+</ul>
+</li>
+<li>
+<p><strong>Communication et affichage :</strong></p>
+<ul>
+<li>Le serveur RDP envoie des données graphiques au client.</li>
+<li>Les actions du client (clavier, souris) sont envoyées au serveur.</li>
+</ul>
+</li>
+<li>
+<p><strong>Compression et optimisation :</strong>
+Les données graphiques et les entrées sont compressées pour minimiser la consommation de bande passante.</p>
+</li>
+</ol>
+<hr />
+<h3 id="exemple-dutilisation--connexion-à-distance-avec-rdp"><a class="header" href="#exemple-dutilisation--connexion-à-distance-avec-rdp"><strong>Exemple d'utilisation : Connexion à distance avec RDP</strong></a></h3>
+<h4 id="depuis-un-ordinateur-windows"><a class="header" href="#depuis-un-ordinateur-windows"><strong>Depuis un ordinateur Windows</strong></a></h4>
+<ol>
+<li>Ouvrez l'outil <strong>Connexion Bureau à distance</strong> (<code>mstsc</code>).</li>
+<li>Entrez l'adresse IP ou le nom de l'hôte distant (ex. : <code>192.168.1.100</code>).</li>
+<li>Cliquez sur <strong>Connecter</strong>, puis entrez vos identifiants d'accès.</li>
+<li>Une fois authentifié, vous avez accès à l'interface graphique de l'hôte.</li>
+</ol>
+<h4 id="depuis-un-autre-système-linuxmacos"><a class="header" href="#depuis-un-autre-système-linuxmacos"><strong>Depuis un autre système (Linux/macOS)</strong></a></h4>
+<ul>
+<li>Vous pouvez utiliser des clients RDP tiers, comme :
+<ul>
+<li><strong>Remmina</strong> (Linux).</li>
+<li><strong>Microsoft Remote Desktop</strong> (macOS et Windows).</li>
+<li><strong>FreeRDP</strong> (client open source).</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="sécurité-avec-rdp"><a class="header" href="#sécurité-avec-rdp"><strong>Sécurité avec RDP</strong></a></h3>
+<p>RDP, bien que puissant, peut être une cible pour les attaques s'il n'est pas correctement sécurisé. Voici quelques recommandations :</p>
+<ol>
+<li>
+<p><strong>Activer NLA (Network Level Authentication) :</strong></p>
+<ul>
+<li>Cela nécessite que les utilisateurs soient authentifiés avant d'établir une session RDP.</li>
+<li>Réduit les risques d'attaques de force brute.</li>
+</ul>
+</li>
+<li>
+<p><strong>Limiter l'accès via un pare-feu :</strong></p>
+<ul>
+<li>Autoriser uniquement des IP spécifiques à accéder au port 3389.</li>
+<li>Éviter d'exposer directement RDP à Internet.</li>
+</ul>
+</li>
+<li>
+<p><strong>Utiliser un VPN ou un Bastion :</strong></p>
+<ul>
+<li>Connectez-vous à un réseau privé (via VPN) pour accéder à RDP.</li>
+<li>Sur Azure, utilisez un <strong>Azure Bastion</strong>, une passerelle sécurisée pour RDP et SSH sans exposer les ports publics.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/bastion/bastion-overview">Documentation Azure Bastion</a></p>
+</li>
+<li>
+<p><strong>Changer le port RDP par défaut :</strong></p>
+<ul>
+<li>Modifier le port 3389 réduit les risques d'attaques automatisées.</li>
+</ul>
+</li>
+<li>
+<p><strong>Activer l'authentification multi-facteur (MFA) :</strong></p>
+<ul>
+<li>Pour renforcer la sécurité des connexions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Activer des règles de verrouillage de compte :</strong></p>
+<ul>
+<li>Bloquer les comptes après plusieurs tentatives de connexion échouées.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="fonctionnalités-avancées-de-rdp"><a class="header" href="#fonctionnalités-avancées-de-rdp"><strong>Fonctionnalités avancées de RDP</strong></a></h3>
+<ol>
+<li>
+<p><strong>Sessions multiples :</strong>
+Sur les versions serveur de Windows (par ex., Windows Server 2019), plusieurs utilisateurs peuvent ouvrir des sessions RDP en même temps (si configuré).</p>
+</li>
+<li>
+<p><strong>Accès administrateur :</strong>
+Les administrateurs système peuvent utiliser RDP pour résoudre des problèmes ou configurer des serveurs distants.</p>
+</li>
+<li>
+<p><strong>Assistance à distance :</strong>
+RDP peut être utilisé pour fournir une assistance technique en temps réel.</p>
+</li>
+<li>
+<p><strong>Redirection des périphériques locaux :</strong></p>
+<ul>
+<li>Redirigez des clés USB, imprimantes ou disques vers la machine distante pour les utiliser comme s'ils étaient connectés localement.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="comparaison-rdp-vs-autres-protocoles"><a class="header" href="#comparaison-rdp-vs-autres-protocoles"><strong>Comparaison RDP vs autres protocoles</strong></a></h3>
+<div class="table-wrapper"><table><thead><tr><th><strong>Protocole</strong></th><th><strong>Caractéristique principale</strong></th><th><strong>Cas d'usage</strong></th></tr></thead><tbody>
+<tr><td><strong>RDP</strong></td><td>Connexion graphique sécurisée</td><td>Administration de serveurs ou bureaux distants.</td></tr>
+<tr><td><strong>SSH</strong></td><td>Connexion en ligne de commande sécurisée</td><td>Gestion de serveurs Linux/Unix.</td></tr>
+<tr><td><strong>VNC</strong></td><td>Connexion graphique (sans chiffrement natif)</td><td>Contrôle d'ordinateurs à domicile.</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h3 id="cas-dusage-du-protocole-rdp"><a class="header" href="#cas-dusage-du-protocole-rdp"><strong>Cas d'usage du protocole RDP</strong></a></h3>
+<ol>
+<li>
+<p><strong>Administration de serveurs Windows :</strong>
+Les administrateurs système utilisent RDP pour gérer des serveurs ou machines de bureau à distance.</p>
+</li>
+<li>
+<p><strong>Travail à distance :</strong>
+RDP est largement utilisé pour permettre aux employés d'accéder à leurs bureaux ou applications depuis chez eux.</p>
+</li>
+<li>
+<p><strong>Assistance technique :</strong>
+Fournir une assistance en prenant temporairement le contrôle d'un PC à distance.</p>
+</li>
+<li>
+<p><strong>Accès à des environnements de développement :</strong>
+Les développeurs peuvent accéder à des machines virtuelles dans le cloud via RDP.</p>
+</li>
+</ol>
+<hr />
+<h3 id="liens-utiles"><a class="header" href="#liens-utiles"><strong>Liens utiles</strong></a></h3>
+<ol>
+<li>
+<p><strong>Documentation officielle Microsoft RDP</strong> :<br />
+<a href="https://learn.microsoft.com/fr-fr/windows-server/remote/remote-desktop-services">https://learn.microsoft.com/fr-fr/windows-server/remote/remote-desktop-services</a></p>
+</li>
+<li>
+<p><strong>Configurer RDP sur Windows</strong> :<br />
+<a href="https://learn.microsoft.com/fr-fr/windows-server/remote/remote-desktop-services">https://learn.microsoft.com/fr-fr/windows-server/remote/remote-desktop-services</a></p>
+</li>
+<li>
+<p><strong>Télécharger le client Bureau à distance pour macOS :</strong><br />
+<a href="https://apps.apple.com/fr/app/microsoft-remote-desktop/id1295203466">Microsoft Remote Desktop sur macOS</a></p>
+</li>
+<li>
+<p><strong>Sécuriser RDP avec NLA</strong> :<br />
+<a href="https://learn.microsoft.com/fr-fr/windows-server/remote/network-level-authentication">https://learn.microsoft.com/fr-fr/windows-server/remote/network-level-authentication</a></p>
+</li>
+</ol>
+<hr />
+<h3 id="résumé-1"><a class="header" href="#résumé-1"><strong>Résumé</strong></a></h3>
+<p>Le protocole RDP est un outil puissant pour accéder et administrer à distance des machines, en particulier dans les environnements Windows. Sa capacité à offrir une interface graphique complète et à rediriger des ressources locales en fait un choix incontournable pour les professionnels de l'informatique. Cependant, pour une utilisation sécurisée, il est essentiel d'appliquer des bonnes pratiques comme l'utilisation de NLA, de pare-feu et de VPN.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

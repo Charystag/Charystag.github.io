@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Création et Gestion d&#x27;un groupe de resources - Panorama du Cloud - Azure</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="tutoriels/resources_group.html" class="active"><strong aria-hidden="true">1.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="tutoriels/tags.html"><strong aria-hidden="true">2.</strong> Déploiement et Gestion des balises</a></li><li class="chapter-item expanded "><a href="tutoriels/vm.html"><strong aria-hidden="true">3.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="tutoriels/ssh.html"><strong aria-hidden="true">4.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="tutoriels/scp.html"><strong aria-hidden="true">5.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="tutoriels/snapshots.html"><strong aria-hidden="true">6.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="tutoriels/storage.html"><strong aria-hidden="true">7.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="tutoriels/azure_blob_storage.html"><strong aria-hidden="true">8.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="notions/azure_monitor.html"><strong aria-hidden="true">9.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="notions/ssh.html"><strong aria-hidden="true">10.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="notions/rdp.html"><strong aria-hidden="true">11.</strong> protocole RDP</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Panorama du Cloud - Azure</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="tutoriel--création-et-gestion-dun-groupe-de-ressources-sur-azure"><a class="header" href="#tutoriel--création-et-gestion-dun-groupe-de-ressources-sur-azure"><strong>Tutoriel : Création et gestion d’un groupe de ressources sur Azure</strong></a></h1>
+<p>Un groupe de ressources dans Azure est une unité logique qui regroupe des ressources cloud comme des machines virtuelles, des bases de données, des réseaux, etc. Cette organisation facilite leur gestion, leur supervision et leur contrôle.</p>
+<hr />
+<h2 id="quest-ce-quun-groupe-de-ressources-dans-azure-"><a class="header" href="#quest-ce-quun-groupe-de-ressources-dans-azure-"><strong>Qu’est-ce qu’un groupe de ressources dans Azure ?</strong></a></h2>
+<p>Un groupe de ressources Azure est un conteneur logique qui contient des ressources liées. Ces ressources peuvent inclure :</p>
+<ul>
+<li>Machines virtuelles,</li>
+<li>Comptes de stockage,</li>
+<li>Réseaux virtuels,</li>
+<li>Bases de données.</li>
+</ul>
+<h3 id="avantages-"><a class="header" href="#avantages-">Avantages :</a></h3>
+<ul>
+<li><strong>Organisation</strong> : Regroupez des ressources liées à un même projet ou environnement.</li>
+<li><strong>Gestion simplifiée</strong> : Appliquez des politiques ou surveillez toutes les ressources en une seule action.</li>
+<li><strong>Coûts et budgets</strong> : Analysez les dépenses par projet ou application.</li>
+</ul>
+<hr />
+<h2 id="Étape-1--accéder-au-portail-azure"><a class="header" href="#Étape-1--accéder-au-portail-azure"><strong>Étape 1 : Accéder au Portail Azure</strong></a></h2>
+<ol>
+<li>Rendez-vous sur le <a href="https://portal.azure.com">Portail Azure</a>.</li>
+<li>Connectez-vous avec vos identifiants.</li>
+</ol>
+<hr />
+<h2 id="Étape-2--créer-un-groupe-de-ressources"><a class="header" href="#Étape-2--créer-un-groupe-de-ressources"><strong>Étape 2 : Créer un groupe de ressources</strong></a></h2>
+<ol>
+<li>
+<p><strong>Naviguer vers la section des groupes de ressources</strong> :</p>
+<ul>
+<li>Dans le menu latéral gauche, cliquez sur <strong>Groupes de ressources</strong>.</li>
+<li>Si ce menu n’est pas visible, recherchez "Groupes de ressources" dans la barre de recherche en haut.</li>
+</ul>
+</li>
+<li>
+<p><strong>Créer un nouveau groupe de ressources</strong> :</p>
+<ul>
+<li>Cliquez sur le bouton <strong>+ Créer</strong>.</li>
+<li>Fournissez les informations nécessaires :
+<ul>
+<li><strong>Abonnement</strong> : Choisissez l’abonnement Azure à utiliser.</li>
+<li><strong>Nom du groupe de ressources</strong> : Donnez un nom explicite (ex. : <code>Groupe-ProjetXYZ</code>).</li>
+<li><strong>Région</strong> : Choisissez la région Azure où les métadonnées du groupe seront stockées.
+<blockquote>
+<p><em>Remarque : Les ressources dans ce groupe peuvent être dans d’autres régions.</em></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Vérifiez et créez</strong> :</p>
+<ul>
+<li>Cliquez sur <strong>Vérifier + Créer</strong>.</li>
+<li>Une fois la validation effectuée, cliquez sur <strong>Créer</strong>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-3--ajouter-des-ressources-à-un-groupe-de-ressources"><a class="header" href="#Étape-3--ajouter-des-ressources-à-un-groupe-de-ressources"><strong>Étape 3 : Ajouter des ressources à un groupe de ressources</strong></a></h2>
+<ol>
+<li>
+<p><strong>Depuis le groupe de ressources</strong> :</p>
+<ul>
+<li>Une fois créé, cliquez sur votre groupe dans la liste des groupes de ressources.</li>
+<li>Cliquez sur <strong>+ Ajouter</strong> pour créer une nouvelle ressource dans ce groupe.</li>
+</ul>
+</li>
+<li>
+<p><strong>Depuis une ressource existante</strong> :</p>
+<ul>
+<li>Lorsque vous créez une ressource (par exemple, une machine virtuelle), sélectionnez le groupe de ressources lors de la configuration.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-4--gérer-un-groupe-de-ressources"><a class="header" href="#Étape-4--gérer-un-groupe-de-ressources"><strong>Étape 4 : Gérer un groupe de ressources</strong></a></h2>
+<h3 id="41-modifier-les-paramètres-"><a class="header" href="#41-modifier-les-paramètres-">4.1 Modifier les paramètres :</a></h3>
+<ul>
+<li>Ouvrez le groupe de ressources.</li>
+<li>Accédez à l'onglet <strong>Paramètres</strong> pour :
+<ul>
+<li>Ajouter des balises (tags) pour organiser vos ressources.</li>
+<li>Consulter les informations sur le groupe (région, abonnement, etc.).</li>
+</ul>
+</li>
+</ul>
+<h3 id="42-supprimer-des-ressources-"><a class="header" href="#42-supprimer-des-ressources-">4.2 Supprimer des ressources :</a></h3>
+<ul>
+<li>Dans le groupe de ressources, sélectionnez une ressource.</li>
+<li>Cliquez sur <strong>Supprimer</strong> pour la supprimer individuellement.</li>
+</ul>
+<h3 id="43-supprimer-le-groupe-de-ressources-"><a class="header" href="#43-supprimer-le-groupe-de-ressources-">4.3 Supprimer le groupe de ressources :</a></h3>
+<ul>
+<li>Attention : La suppression d’un groupe de ressources entraîne la suppression <strong>de toutes les ressources qu’il contient</strong>.
+<ul>
+<li>Ouvrez le groupe.</li>
+<li>Cliquez sur <strong>Supprimer le groupe de ressources</strong>.</li>
+<li>Tapez le nom du groupe pour confirmer l’action.</li>
+</ul>
+</li>
+</ul>
+<h3 id="44-contrôler-les-coûts-"><a class="header" href="#44-contrôler-les-coûts-">4.4 Contrôler les coûts :</a></h3>
+<ul>
+<li>Accédez à <strong>Analyse des coûts</strong> depuis le groupe de ressources pour suivre les dépenses liées aux ressources.</li>
+</ul>
+<hr />
+<h2 id="Étape-5--appliquer-des-politiques-ou-gérer-laccès"><a class="header" href="#Étape-5--appliquer-des-politiques-ou-gérer-laccès"><strong>Étape 5 : Appliquer des politiques ou gérer l'accès</strong></a></h2>
+<h3 id="51-appliquer-une-politique-azure-policy-"><a class="header" href="#51-appliquer-une-politique-azure-policy-">5.1 Appliquer une politique (Azure Policy) :</a></h3>
+<ul>
+<li>Dans le groupe, allez à <strong>Politique</strong> et attribuez des règles :
+<ul>
+<li>Exemples : restreindre les régions pour les ressources ou limiter certains types de ressources.</li>
+</ul>
+</li>
+</ul>
+<h3 id="52-gérer-laccès-rbac---contrôle-daccès-basé-sur-les-rôles-"><a class="header" href="#52-gérer-laccès-rbac---contrôle-daccès-basé-sur-les-rôles-">5.2 Gérer l'accès (RBAC - Contrôle d’accès basé sur les rôles) :</a></h3>
+<ul>
+<li>Cliquez sur <strong>Contrôle d’accès (IAM)</strong> dans le menu du groupe.</li>
+<li>Ajoutez des utilisateurs ou groupes avec des rôles spécifiques (Lecteur, Contributeur, Propriétaire).</li>
+</ul>
+<hr />
+<h2 id="bonnes-pratiques-pour-la-gestion-des-groupes-de-ressources"><a class="header" href="#bonnes-pratiques-pour-la-gestion-des-groupes-de-ressources"><strong>Bonnes pratiques pour la gestion des groupes de ressources</strong></a></h2>
+<ol>
+<li>
+<p><strong>Nommez vos groupes de manière claire</strong> :</p>
+<ul>
+<li>Incluez des informations comme le projet, l’environnement (Dev/Test/Prod), ou l’équipe.</li>
+<li>Exemple : <code>ProjetX-Dev-Resources</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Utilisez des balises (Tags)</strong> :</p>
+<ul>
+<li>Les balises permettent d’ajouter des métadonnées personnalisées aux groupes et ressources (ex. : <code>Equipe:Marketing</code>, <code>Projet:SiteWeb</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Centralisez les ressources liées</strong> :</p>
+<ul>
+<li>Regroupez les ressources qui ont un cycle de vie similaire ou qui appartiennent à une même application.</li>
+</ul>
+</li>
+<li>
+<p><strong>Surveillez régulièrement</strong> :</p>
+<ul>
+<li>Utilisez <a href="../notions/azure_monitor.html"><strong>Azure Monitor</strong></a> pour suivre les performances et l’état des ressources du groupe.</li>
+</ul>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+                            <a rel="next prefetch" href="tutoriels/tags.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+                    <a rel="next prefetch" href="tutoriels/tags.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

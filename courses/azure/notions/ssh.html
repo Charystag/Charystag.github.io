@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>protocole SSH - Panorama du Cloud - Azure</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../tutoriels/resources_group.html"><strong aria-hidden="true">1.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="../tutoriels/tags.html"><strong aria-hidden="true">2.</strong> Déploiement et Gestion des balises</a></li><li class="chapter-item expanded "><a href="../tutoriels/vm.html"><strong aria-hidden="true">3.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/ssh.html"><strong aria-hidden="true">4.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/scp.html"><strong aria-hidden="true">5.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/snapshots.html"><strong aria-hidden="true">6.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="../tutoriels/storage.html"><strong aria-hidden="true">7.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/azure_blob_storage.html"><strong aria-hidden="true">8.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="../notions/azure_monitor.html"><strong aria-hidden="true">9.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="../notions/ssh.html" class="active"><strong aria-hidden="true">10.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="../notions/rdp.html"><strong aria-hidden="true">11.</strong> protocole RDP</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Panorama du Cloud - Azure</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="le-protocole-ssh--quest-ce-que-cest-"><a class="header" href="#le-protocole-ssh--quest-ce-que-cest-"><strong>Le protocole SSH : Qu'est-ce que c'est ?</strong></a></h1>
+<p>Le protocole <strong>SSH (Secure Shell)</strong> est un protocole réseau cryptographique permettant d'établir une connexion sécurisée entre deux machines, souvent utilisée pour administrer des systèmes à distance de manière sécurisée. SSH remplace des protocoles non sécurisés comme Telnet, FTP ou RSH, qui transmettent les données (y compris les mots de passe) en clair.</p>
+<hr />
+<h3 id="caractéristiques-principales-du-protocole-ssh"><a class="header" href="#caractéristiques-principales-du-protocole-ssh"><strong>Caractéristiques principales du protocole SSH</strong></a></h3>
+<ol>
+<li>
+<p><strong>Connexion sécurisée :</strong>
+SSH utilise le chiffrement pour garantir la confidentialité et l'intégrité des données échangées entre le client et le serveur.</p>
+</li>
+<li>
+<p><strong>Authentification forte :</strong></p>
+<ul>
+<li>Authentification par mot de passe.</li>
+<li>Authentification par clé publique/privée (méthode recommandée).</li>
+<li>Authentification multifactorielle (MFA).</li>
+</ul>
+</li>
+<li>
+<p><strong>Fonctionnalités variées :</strong></p>
+<ul>
+<li>Administration à distance des serveurs via une console.</li>
+<li>Transfert sécurisé de fichiers (<strong>SCP</strong>, <strong>SFTP</strong>).</li>
+<li>Tunneling et redirection de ports pour accéder à des services protégés.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="comment-fonctionne-ssh-"><a class="header" href="#comment-fonctionne-ssh-"><strong>Comment fonctionne SSH ?</strong></a></h3>
+<ol>
+<li>
+<p><strong>Établissement de la connexion :</strong></p>
+<ul>
+<li>Le client SSH initie la connexion avec le serveur sur le port <strong>22</strong> (par défaut).</li>
+<li>Le serveur SSH répond avec sa clé publique.</li>
+<li>Le client vérifie cette clé publique (comparée à une liste de clés connues ou approuvées) pour s'assurer de l'authenticité du serveur.</li>
+</ul>
+</li>
+<li>
+<p><strong>Négociation des algorithmes :</strong>
+Les deux parties négocient les algorithmes de chiffrement, de hachage et d'échange de clés pour sécuriser la communication.</p>
+</li>
+<li>
+<p><strong>Authentification de l'utilisateur :</strong></p>
+<ul>
+<li>Soit avec un mot de passe.</li>
+<li>Soit avec une paire de clés SSH (le client présente la clé privée associée à une clé publique préalablement enregistrée sur le serveur).</li>
+</ul>
+</li>
+<li>
+<p><strong>Session sécurisée :</strong>
+Une fois la connexion établie, les données échangées sont chiffrées.</p>
+</li>
+</ol>
+<hr />
+<h3 id="exemple-dutilisation-du-protocole-ssh"><a class="header" href="#exemple-dutilisation-du-protocole-ssh"><strong>Exemple d'utilisation du protocole SSH</strong></a></h3>
+<h4 id="connexion-à-un-serveur-distant"><a class="header" href="#connexion-à-un-serveur-distant"><strong>Connexion à un serveur distant</strong></a></h4>
+<p>Vous pouvez utiliser le client SSH pour vous connecter à une machine distante. Sur un terminal, tapez :</p>
+<pre><code class="language-bash">ssh username@hostname
+</code></pre>
+<ul>
+<li><strong>username</strong> : Nom de l'utilisateur sur la machine distante.</li>
+<li><strong>hostname</strong> : Adresse IP ou nom de domaine de la machine.</li>
+</ul>
+<p><strong>Exemple :</strong></p>
+<pre><code class="language-bash">ssh admin@192.168.1.100
+</code></pre>
+<h4 id="utilisation-dune-clé-ssh-pour-se-connecter"><a class="header" href="#utilisation-dune-clé-ssh-pour-se-connecter"><strong>Utilisation d’une clé SSH pour se connecter</strong></a></h4>
+<ol>
+<li>
+<p><strong>Générer une paire de clés SSH :</strong></p>
+<pre><code class="language-bash">ssh-keygen -t rsa -b 2048
+</code></pre>
+<p>Par défaut, cela génère deux fichiers dans <code>~/.ssh/</code> :</p>
+<ul>
+<li><code>id_rsa</code> : Clé privée (à garder secrète).</li>
+<li><code>id_rsa.pub</code> : Clé publique (à copier sur le serveur distant).</li>
+</ul>
+</li>
+<li>
+<p><strong>Copier la clé publique sur le serveur :</strong></p>
+<pre><code class="language-bash">ssh-copy-id username@hostname
+</code></pre>
+</li>
+<li>
+<p><strong>Connexion sans mot de passe :</strong>
+Maintenant, vous pouvez vous connecter sans entrer votre mot de passe :</p>
+<pre><code class="language-bash">ssh username@hostname
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="transfert-de-fichiers-avec-ssh"><a class="header" href="#transfert-de-fichiers-avec-ssh"><strong>Transfert de fichiers avec SSH</strong></a></h3>
+<ol>
+<li>
+<p><strong>Utilisation de SCP (Secure Copy Protocol) :</strong></p>
+<ul>
+<li>Pour envoyer un fichier vers un serveur :
+<pre><code class="language-bash">scp localfile username@hostname:/remote/directory/
+</code></pre>
+</li>
+<li>Pour télécharger un fichier depuis un serveur :
+<pre><code class="language-bash">scp username@hostname:/remote/file /local/directory/
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Utilisation de SFTP (Secure File Transfer Protocol) :</strong>
+Pour un accès interactif :</p>
+<pre><code class="language-bash">sftp username@hostname
+</code></pre>
+<p>Commandes SFTP typiques :</p>
+<ul>
+<li><code>ls</code> : Lister les fichiers sur le serveur.</li>
+<li><code>put localfile</code> : Envoyer un fichier vers le serveur.</li>
+<li><code>get remotefile</code> : Télécharger un fichier.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="fonctionnalités-avancées"><a class="header" href="#fonctionnalités-avancées"><strong>Fonctionnalités avancées</strong></a></h3>
+<ol>
+<li>
+<p><strong>Tunneling SSH :</strong>
+SSH peut rediriger un port local vers une machine distante (utile pour accéder à des services protégés).</p>
+<pre><code class="language-bash">ssh -L local_port:target_host:target_port username@hostname
+</code></pre>
+<p><strong>Exemple :</strong>
+Accéder à une base de données MySQL sur un serveur distant :</p>
+<pre><code class="language-bash">ssh -L 3306:localhost:3306 user@remote_server
+</code></pre>
+</li>
+<li>
+<p><strong>Exécution de commandes à distance :</strong>
+SSH permet d’exécuter directement des commandes sur un serveur sans ouvrir une session interactive.</p>
+<pre><code class="language-bash">ssh username@hostname "commande"
+</code></pre>
+<p><strong>Exemple :</strong>
+Redémarrer un serveur :</p>
+<pre><code class="language-bash">ssh admin@192.168.1.100 "sudo reboot"
+</code></pre>
+</li>
+<li>
+<p><strong>Proxy SSH :</strong>
+SSH peut être utilisé comme un proxy pour accéder à d'autres réseaux.</p>
+<pre><code class="language-bash">ssh -D 8080 username@hostname
+</code></pre>
+<p>Cela configure un proxy SOCKS sur le port 8080.</p>
+</li>
+</ol>
+<hr />
+<h3 id="cas-dusage-du-protocole-ssh"><a class="header" href="#cas-dusage-du-protocole-ssh"><strong>Cas d’usage du protocole SSH</strong></a></h3>
+<ol>
+<li>
+<p><strong>Administration des serveurs :</strong>
+Les administrateurs utilisent SSH pour gérer leurs serveurs Linux/Unix, effectuer des mises à jour ou résoudre des problèmes.</p>
+</li>
+<li>
+<p><strong>Transferts sécurisés :</strong>
+Remplacer FTP par SCP ou SFTP pour des échanges sécurisés de fichiers.</p>
+</li>
+<li>
+<p><strong>Accès sécurisé à des services internes :</strong>
+SSH est utilisé pour se connecter à des services hébergés dans des réseaux privés via des tunnels.</p>
+</li>
+<li>
+<p><strong>Automatisation des tâches :</strong>
+En combinant SSH avec des outils comme <strong>Ansible</strong> ou <strong>Bash scripts</strong>, vous pouvez automatiser des déploiements ou des configurations.</p>
+</li>
+</ol>
+<hr />
+<h3 id="avantages-du-protocole-ssh"><a class="header" href="#avantages-du-protocole-ssh"><strong>Avantages du protocole SSH</strong></a></h3>
+<ul>
+<li><strong>Sécurisé :</strong> Chiffrement fort des données échangées.</li>
+<li><strong>Polyvalent :</strong> Permet la gestion distante, le transfert de fichiers, le tunneling, etc.</li>
+<li><strong>Large adoption :</strong> Prend en charge presque tous les systèmes (Windows, macOS, Linux).</li>
+<li><strong>Open Source :</strong> Implémentations comme OpenSSH sont largement utilisées et maintenues.</li>
+</ul>
+<hr />
+<h3 id="liens-vers-la-documentation-et-ressources"><a class="header" href="#liens-vers-la-documentation-et-ressources"><strong>Liens vers la documentation et ressources</strong></a></h3>
+<ol>
+<li>
+<p><strong>Documentation officielle OpenSSH :</strong><br />
+<a href="https://www.openssh.com/">https://www.openssh.com/</a></p>
+</li>
+<li>
+<p><strong>Tutoriel SSH complet :</strong><br />
+<a href="https://www.ssh.com/academy/ssh">https://www.ssh.com/academy/ssh</a></p>
+</li>
+<li>
+<p><strong>Configurer SSH sur Azure :</strong><br />
+<a href="https://learn.microsoft.com/fr-fr/azure/virtual-machines/linux/ssh-from-windows">Configurer l’accès SSH pour une machine virtuelle Azure</a></p>
+</li>
+<li>
+<p><strong>Sécuriser un serveur SSH :</strong><br />
+<a href="https://www.digitalocean.com/community/tutorials/how-to-secure-ssh-on-your-server">10 conseils pour sécuriser SSH</a></p>
+</li>
+</ol>
+<hr />
+<h3 id="résumé"><a class="header" href="#résumé"><strong>Résumé</strong></a></h3>
+<p>SSH est un outil essentiel pour tout administrateur ou développeur. Il permet des connexions sécurisées et flexibles pour gérer des systèmes distants, transférer des fichiers ou créer des tunnels sécurisés. Sa polyvalence et son niveau de sécurité en font une solution incontournable pour la gestion des serveurs.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../notions/azure_monitor.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../notions/rdp.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../notions/azure_monitor.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../notions/rdp.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Connection à une VM avec RDP ou SSH sur azure - Panorama du Cloud - Azure</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../tutoriels/resources_group.html"><strong aria-hidden="true">1.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="../tutoriels/tags.html"><strong aria-hidden="true">2.</strong> Déploiement et Gestion des balises</a></li><li class="chapter-item expanded "><a href="../tutoriels/vm.html"><strong aria-hidden="true">3.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/ssh.html" class="active"><strong aria-hidden="true">4.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/scp.html"><strong aria-hidden="true">5.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/snapshots.html"><strong aria-hidden="true">6.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="../tutoriels/storage.html"><strong aria-hidden="true">7.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/azure_blob_storage.html"><strong aria-hidden="true">8.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="../notions/azure_monitor.html"><strong aria-hidden="true">9.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="../notions/ssh.html"><strong aria-hidden="true">10.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="../notions/rdp.html"><strong aria-hidden="true">11.</strong> protocole RDP</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Panorama du Cloud - Azure</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="tutoriel--connexion-à-une-machine-virtuelle-vm-avec-rdp-ou-ssh-sur-azure"><a class="header" href="#tutoriel--connexion-à-une-machine-virtuelle-vm-avec-rdp-ou-ssh-sur-azure"><strong>Tutoriel : Connexion à une Machine Virtuelle (VM) avec RDP ou SSH sur Azure</strong></a></h1>
+<p>Se connecter à une machine virtuelle sur Azure permet d’accéder à son interface pour la configurer, exécuter des applications, ou effectuer des maintenances. Ce guide vous explique comment se connecter à une VM, que ce soit avec <strong>Remote Desktop Protocol (RDP)</strong> pour Windows ou <strong>Secure Shell (SSH)</strong> pour Linux.</p>
+<hr />
+<h2 id="prérequis-pour-la-connexion"><a class="header" href="#prérequis-pour-la-connexion"><strong>Prérequis pour la connexion</strong></a></h2>
+<ol>
+<li>
+<p><strong>Pour RDP (Windows)</strong> :</p>
+<ul>
+<li>Une VM Windows déployée.</li>
+<li>Le port <strong>3389</strong> doit être ouvert dans les paramètres réseau de la VM.</li>
+<li>Vous devez disposer des <strong>identifiants de connexion</strong> (nom d'utilisateur et mot de passe).</li>
+</ul>
+</li>
+<li>
+<p><strong>Pour SSH (Linux)</strong> :</p>
+<ul>
+<li>Une VM Linux déployée.</li>
+<li>Le port <strong>22</strong> doit être ouvert dans les paramètres réseau de la VM.</li>
+<li>Vous devez disposer des <strong>clés SSH</strong> ou des <strong>identifiants utilisateur/mot de passe</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adresse IP publique</strong> :</p>
+<ul>
+<li>La VM doit avoir une <strong>adresse IP publique</strong> pour une connexion externe.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-1--vérifier-les-configurations-réseau-de-la-vm"><a class="header" href="#Étape-1--vérifier-les-configurations-réseau-de-la-vm"><strong>Étape 1 : Vérifier les configurations réseau de la VM</strong></a></h2>
+<p>Avant de vous connecter :</p>
+<ol>
+<li>Accédez à votre VM dans le <a href="https://portal.azure.com">portail Azure</a>.</li>
+<li>Allez dans l’onglet <strong>Réseau</strong> :
+<ul>
+<li>Vérifiez que l'adresse IP publique est activée.</li>
+<li>Confirmez que les ports nécessaires (3389 pour RDP ou 22 pour SSH) sont ouverts dans la <strong>groupe de sécurité réseau (NSG)</strong>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="Étape-2--connexion-à-une-vm-windows-via-rdp"><a class="header" href="#Étape-2--connexion-à-une-vm-windows-via-rdp"><strong>Étape 2 : Connexion à une VM Windows via RDP</strong></a></h2>
+<h3 id="1-récupérer-ladresse-ip"><a class="header" href="#1-récupérer-ladresse-ip"><strong>1. Récupérer l'adresse IP</strong></a></h3>
+<ul>
+<li>Accédez à votre VM sur le portail Azure.</li>
+<li>Dans l'onglet <strong>Vue d’ensemble</strong>, notez l’<strong>adresse IP publique</strong>.</li>
+</ul>
+<h3 id="2-télécharger-le-fichier-rdp"><a class="header" href="#2-télécharger-le-fichier-rdp"><strong>2. Télécharger le fichier RDP</strong></a></h3>
+<ul>
+<li>Dans le portail Azure, cliquez sur <strong>Se connecter</strong> &gt; <strong>RDP</strong>.</li>
+<li>Configurez les paramètres si nécessaire (port, adresse IP, etc.).</li>
+<li>Téléchargez le fichier <code>.rdp</code>.</li>
+</ul>
+<h3 id="3-ouvrir-la-connexion-rdp"><a class="header" href="#3-ouvrir-la-connexion-rdp"><strong>3. Ouvrir la connexion RDP</strong></a></h3>
+<ul>
+<li>Double-cliquez sur le fichier <code>.rdp</code> téléchargé.</li>
+<li>Cliquez sur <strong>Se connecter</strong> si une fenêtre d’avertissement s’affiche.</li>
+</ul>
+<h3 id="4-saisir-les-identifiants"><a class="header" href="#4-saisir-les-identifiants"><strong>4. Saisir les identifiants</strong></a></h3>
+<ul>
+<li>Entrez le <strong>nom d'utilisateur</strong> et le <strong>mot de passe</strong> configurés lors de la création de la VM.</li>
+<li>Cliquez sur <strong>OK</strong>.</li>
+</ul>
+<h3 id="5-accès-à-la-vm"><a class="header" href="#5-accès-à-la-vm"><strong>5. Accès à la VM</strong></a></h3>
+<ul>
+<li>Vous serez connecté à votre VM et pourrez accéder à son interface comme si vous étiez physiquement devant le serveur.</li>
+</ul>
+<hr />
+<h2 id="Étape-3--connexion-à-une-vm-linux-via-ssh"><a class="header" href="#Étape-3--connexion-à-une-vm-linux-via-ssh"><strong>Étape 3 : Connexion à une VM Linux via SSH</strong></a></h2>
+<h3 id="1-récupérer-ladresse-ip-1"><a class="header" href="#1-récupérer-ladresse-ip-1"><strong>1. Récupérer l'adresse IP</strong></a></h3>
+<ul>
+<li>Accédez à votre VM Linux dans le portail Azure.</li>
+<li>Notez l'<strong>adresse IP publique</strong> dans l'onglet <strong>Vue d’ensemble</strong>.</li>
+</ul>
+<h3 id="2-utiliser-une-clé-ssh-recommandé"><a class="header" href="#2-utiliser-une-clé-ssh-recommandé"><strong>2. Utiliser une clé SSH (recommandé)</strong></a></h3>
+<ol>
+<li>
+<p><strong>Avec un terminal sous Windows/Linux/Mac</strong> :</p>
+<ul>
+<li>Ouvrez un terminal.</li>
+<li>Tapez la commande suivante :
+<pre><code class="language-bash">ssh &lt;NomUtilisateur&gt;@&lt;AdresseIP&gt;
+</code></pre>
+Exemple :
+<pre><code class="language-bash">ssh azureuser@20.80.50.100
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Si une clé privée est nécessaire</strong> :</p>
+<ul>
+<li>Ajoutez le chemin vers la clé privée dans la commande :
+<pre><code class="language-bash">ssh -i /chemin/de/votre/cle_privee.pem azureuser@&lt;AdresseIP&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Accepter l'empreinte numérique</strong> :</p>
+<ul>
+<li>Lors de la première connexion, vous recevrez une demande pour accepter l'empreinte de la machine. Tapez <strong>yes</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-connexion-avec-un-mot-de-passe-optionnel-"><a class="header" href="#3-connexion-avec-un-mot-de-passe-optionnel-"><strong>3. Connexion avec un mot de passe (optionnel)</strong> :</a></h3>
+<ul>
+<li>Si vous n’utilisez pas de clé SSH, tapez simplement la commande suivante et fournissez le mot de passe :
+<pre><code class="language-bash">ssh &lt;NomUtilisateur&gt;@&lt;AdresseIP&gt;
+</code></pre>
+</li>
+</ul>
+<hr />
+<h2 id="Étape-4--dépannage-de-connexion"><a class="header" href="#Étape-4--dépannage-de-connexion"><strong>Étape 4 : Dépannage de connexion</strong></a></h2>
+<h3 id="pour-rdp-"><a class="header" href="#pour-rdp-"><strong>Pour RDP :</strong></a></h3>
+<ul>
+<li>
+<p><strong>Vérifiez que le port 3389 est ouvert</strong> :</p>
+<ul>
+<li>Dans la section <strong>Réseau</strong>, assurez-vous qu'une règle autorise <strong>Port 3389</strong> dans les <strong>Groupe de sécurité réseau (NSG)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adresse IP publique</strong> :</p>
+<ul>
+<li>Assurez-vous que votre VM a une adresse IP publique ou utilisez <strong>Azure Bastion</strong> pour une connexion sécurisée sans exposer l’IP publique.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pare-feu Windows</strong> :</p>
+<ul>
+<li>Confirmez que <strong>RDP</strong> est autorisé dans le pare-feu Windows de la VM.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="pour-ssh-"><a class="header" href="#pour-ssh-"><strong>Pour SSH :</strong></a></h3>
+<ul>
+<li>
+<p><strong>Port 22</strong> :</p>
+<ul>
+<li>Vérifiez que le <strong>port 22</strong> est ouvert dans les règles NSG.</li>
+</ul>
+</li>
+<li>
+<p><strong>Permission de la clé SSH</strong> :</p>
+<ul>
+<li>La clé privée utilisée pour la connexion SSH doit avoir les bonnes permissions :
+<pre><code class="language-bash">chmod 600 /chemin/de/votre/cle_privee.pem
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Utilisateur valide</strong> :</p>
+<ul>
+<li>Confirmez que vous utilisez le bon nom d’utilisateur (exemple : <code>azureuser</code> par défaut sur Ubuntu).</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="Étape-5--bonnes-pratiques-pour-la-connexion"><a class="header" href="#Étape-5--bonnes-pratiques-pour-la-connexion"><strong>Étape 5 : Bonnes pratiques pour la connexion</strong></a></h2>
+<ol>
+<li>
+<p><strong>Sécurisez vos connexions</strong> :</p>
+<ul>
+<li>Utilisez une <strong>clé SSH</strong> plutôt qu’un mot de passe pour les VMs Linux.</li>
+<li>Configurez <strong>Azure Bastion</strong> pour éviter d'exposer vos ports RDP/SSH au public.</li>
+</ul>
+</li>
+<li>
+<p><strong>Restreignez l'accès</strong> :</p>
+<ul>
+<li>Modifiez les règles du NSG pour n’autoriser que votre adresse IP à se connecter à la VM.</li>
+</ul>
+</li>
+<li>
+<p><strong>Surveillez les connexions</strong> :</p>
+<ul>
+<li>Utilisez <strong>Azure Monitor</strong> pour superviser les tentatives de connexion et détecter les anomalies.</li>
+</ul>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../tutoriels/vm.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../tutoriels/scp.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../tutoriels/vm.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../tutoriels/scp.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
