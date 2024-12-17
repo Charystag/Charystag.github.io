@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="exercises/deploy_nginx.html"><strong aria-hidden="true">1.</strong> Déployez un Serveur Web sur une Machine Virtuelle Azure</a></li><li class="chapter-item expanded "><a href="exercises/multi_tier.html"><strong aria-hidden="true">2.</strong> Déployez une Application Multi-Tiers avec Azure</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutoriels</li><li class="chapter-item expanded "><a href="tutoriels/resources_group.html"><strong aria-hidden="true">3.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="tutoriels/tags.html"><strong aria-hidden="true">4.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="tutoriels/vm.html"><strong aria-hidden="true">5.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="tutoriels/ssh.html"><strong aria-hidden="true">6.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="tutoriels/scp.html"><strong aria-hidden="true">7.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="tutoriels/snapshots.html"><strong aria-hidden="true">8.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="tutoriels/storage.html"><strong aria-hidden="true">9.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="tutoriels/azure_blob_storage.html"><strong aria-hidden="true">10.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="notions/azure_monitor.html"><strong aria-hidden="true">11.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="notions/ssh.html"><strong aria-hidden="true">12.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="notions/rdp.html"><strong aria-hidden="true">13.</strong> protocole RDP</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="exercises/deploy_nginx.html"><strong aria-hidden="true">1.</strong> Déployez un Serveur Web sur une Machine Virtuelle Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="corrections/deploy_nginx.html"><strong aria-hidden="true">1.1.</strong> Correction de la partie non-guidée</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/multi_tier.html"><strong aria-hidden="true">2.</strong> Déployez une Application Multi-Tiers avec Azure</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutoriels</li><li class="chapter-item expanded "><a href="tutoriels/resources_group.html"><strong aria-hidden="true">3.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="tutoriels/tags.html"><strong aria-hidden="true">4.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="tutoriels/vm.html"><strong aria-hidden="true">5.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="tutoriels/ssh.html"><strong aria-hidden="true">6.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="tutoriels/scp.html"><strong aria-hidden="true">7.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="tutoriels/snapshots.html"><strong aria-hidden="true">8.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="tutoriels/storage.html"><strong aria-hidden="true">9.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="tutoriels/azure_blob_storage.html"><strong aria-hidden="true">10.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="notions/azure_monitor.html"><strong aria-hidden="true">11.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="notions/ssh.html"><strong aria-hidden="true">12.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="notions/rdp.html"><strong aria-hidden="true">13.</strong> protocole RDP</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -324,7 +324,68 @@ Azure :</p>
 <li><strong>Script Bash</strong> : <a href="https://linuxize.com/post/bash-scripting-tutorial/">Tutoriel Bash</a></li>
 <li><strong>Gestion des Ports Azure</strong> : <a href="https://learn.microsoft.com/fr-fr/azure/virtual-machines/linux/nsg-quickstart-portal">Configurer NSG</a></li>
 </ul>
-<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="exercice--déployez-une-application-multi-tiers-avec-azure"><a class="header" href="#exercice--déployez-une-application-multi-tiers-avec-azure"><strong>Exercice : Déployez une Application Multi-Tiers avec Azure</strong></a></h1>
+<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="correction"><a class="header" href="#correction"><strong>Correction</strong></a></h1>
+<h3 id="1-personnalisation-de-la-page-web"><a class="header" href="#1-personnalisation-de-la-page-web"><strong>1. Personnalisation de la Page Web</strong></a></h3>
+<p><strong>Commande pour modifier <code>index.html</code> :</strong></p>
+<pre><code class="language-bash">sudo bash -c 'echo "&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Page Personnalisée&lt;/title&gt;
+&lt;style&gt;body { font-family: Arial; text-align: center; margin-top: 50px; }&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Bienvenue sur mon serveur Nginx !&lt;/h1&gt;
+&lt;p&gt;Date actuelle : $(date)&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;" &gt; /var/www/html/index.html'
+</code></pre>
+<hr />
+<h3 id="2-installation-et-configuration-dapache"><a class="header" href="#2-installation-et-configuration-dapache"><strong>2. Installation et Configuration d'Apache</strong></a></h3>
+<p><strong>Installez Apache et configurez le port 8080 :</strong></p>
+<pre><code class="language-bash">sudo apt install apache2 -y
+sudo sed -i 's/Listen 80/Listen 8080/' /etc/apache2/ports.conf
+sudo systemctl restart apache2
+</code></pre>
+<p><strong>Créez une page HTML personnalisée pour Apache :</strong></p>
+<pre><code class="language-bash">sudo bash -c 'echo "&lt;html&gt;&lt;body&gt;&lt;h1&gt;Bienvenue sur Apache !&lt;/h1&gt;&lt;p&gt;Port 8080&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" &gt; /var/www/html/index_apache.html'
+</code></pre>
+<hr />
+<h3 id="3-automatisation-avec-un-script-bash"><a class="header" href="#3-automatisation-avec-un-script-bash"><strong>3. Automatisation avec un Script Bash</strong></a></h3>
+<p><strong>Exemple de script Bash :</strong></p>
+<pre><code class="language-bash">#!/bin/bash
+# Mise à jour
+sudo apt update -y
+
+# Installation de Nginx
+sudo apt install nginx -y
+
+# Configuration de la page
+sudo bash -c 'echo "&lt;html&gt;&lt;body&gt;&lt;h1&gt;Page déployée via script Bash&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;" &gt; /var/www/html/index.html'
+
+# Démarrage de Nginx
+sudo systemctl restart nginx
+sudo systemctl enable nginx
+
+echo "Nginx installé avec succès !"
+</code></pre>
+<p><strong>Exécutez le script :</strong></p>
+<pre><code class="language-bash">chmod +x deploy_nginx.sh
+./deploy_nginx.sh
+</code></pre>
+<hr />
+<h3 id="4-nettoyage-des-ressources"><a class="header" href="#4-nettoyage-des-ressources"><strong>4. Nettoyage des Ressources</strong></a></h3>
+<p><strong>Supprimez le groupe de ressources :</strong></p>
+<pre><code class="language-bash">az group delete --name GroupeVMWeb --yes --no-wait
+</code></pre>
+<hr />
+<h2 id="conclusion"><a class="header" href="#conclusion"><strong>Conclusion</strong></a></h2>
+<p>Grâce à cet exercice, vous avez appris à :</p>
+<ul>
+<li>Créer et configurer une Machine Virtuelle Azure.</li>
+<li>Installer et configurer des serveurs web (Nginx et Apache).</li>
+<li>Automatiser des tâches d’installation avec un script Bash.</li>
+</ul>
+<p>Ces compétences vous seront utiles pour des déploiements plus avancés sur Azure, comme l'hébergement d'applications complètes ou l'automatisation des déploiements via des outils DevOps. 🚀</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exercice--déployez-une-application-multi-tiers-avec-azure"><a class="header" href="#exercice--déployez-une-application-multi-tiers-avec-azure"><strong>Exercice : Déployez une Application Multi-Tiers avec Azure</strong></a></h1>
 <hr />
 <h2 id="objectif-1"><a class="header" href="#objectif-1"><strong>Objectif</strong></a></h2>
 <p>Déployer une <strong>application multi-tiers</strong> composée de :</p>
