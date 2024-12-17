@@ -1,0 +1,111 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Qu'est-ce qu'une application multi-tiers dans le contexte d'Azure ?"
+prompt.distractors = [
+  "Une application hébergée uniquement sur un serveur sans état",
+  "Une application utilisant exclusivement Azure Kubernetes Service (AKS)",
+  "Une application ne contenant qu'une seule base de données sur le cloud"
+]
+answer.answer = "Une application divisée en plusieurs couches comme le web, l'application et la base de données"
+context = """
+Une application multi-tiers est structurée en plusieurs couches pour séparer les responsabilités : par exemple, une couche Web pour l'interface utilisateur et une couche base de données pour le stockage.
+"""
+id = "019c407b-f629-4fd7-8837-610826404211"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel service Azure permet de déployer des machines virtuelles pour héberger des serveurs multi-tiers ?"
+prompt.distractors = [
+  "Azure Functions",
+  "Azure Container Instances",
+  "Azure Blob Storage"
+]
+answer.answer = "Azure Virtual Machines"
+context = """
+Azure Virtual Machines permettent d'héberger des serveurs, des applications et des bases de données dans le cloud Azure.
+"""
+id = "78f094f7-9b04-4559-892f-b0a80d31e0ec"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande Azure CLI permet d'ouvrir un port sur une VM ?"
+prompt.distractors = [
+  "az vm add-port",
+  "az vm configure-firewall",
+  "az network allow-port"
+]
+answer.answer = "az vm open-port"
+context = """
+La commande `az vm open-port` permet de configurer les règles de pare-feu pour ouvrir un port spécifique sur une machine virtuelle Azure.
+"""
+id = "e9b29f83-311f-4a51-a60a-9a2348d9fa73"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle base de données légère peut être utilisée localement sur une VM pour des applications simples ?"
+prompt.distractors = [
+  "Azure Cosmos DB",
+  "MySQL",
+  "PostgreSQL"
+]
+answer.answer = "SQLite"
+context = """
+SQLite est une base de données relationnelle légère qui ne nécessite pas de serveur. Elle est souvent utilisée pour des applications locales ou des démonstrations.
+"""
+id = "55105249-1143-4620-b990-8683fc3b620a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel langage est utilisé pour créer des serveurs d'application dans cet exercice ?"
+prompt.distractors = [
+  "JavaScript (Node.js)",
+  "C# (.NET)",
+  "Go"
+]
+answer.answer = "Python (Flask)"
+context = """
+Flask est un micro-framework en Python souvent utilisé pour créer des serveurs Web simples et rapides.
+"""
+id = "c98f1460-335d-4f1c-a718-3c6af302841f"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel protocole est utilisé pour se connecter à une machine virtuelle Linux dans Azure ?"
+prompt.distractors = [
+  "RDP (Remote Desktop Protocol)",
+  "HTTP",
+  "FTP"
+]
+answer.answer = "SSH"
+context = """
+Le protocole SSH (Secure Shell) est utilisé pour établir une connexion sécurisée à distance avec des machines virtuelles Linux.
+"""
+id = "f6b77729-9353-4a80-b061-b50ff821d4ba"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande permet de récupérer l'adresse IP privée d'une VM Azure ?"
+prompt.distractors = [
+  "az vm list-ip",
+  "az network show-ip",
+  "az vm get-private-ip"
+]
+answer.answer = "az vm show -d --query privateIps"
+context = """
+La commande `az vm show -d --query privateIps` permet de récupérer l'adresse IP privée d'une machine virtuelle Azure.
+"""
+id = "fb67a119-eb86-4bc1-9e88-92ba6dffc21a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel port est souvent utilisé pour les applications Flask en développement ?"
+prompt.distractors = [
+  "80",
+  "22",
+  "443"
+]
+answer.answer = "5000"
+context = """
+Par défaut, Flask utilise le port 5000 lorsqu'il est exécuté en mode développement.
+"""
+id = "223ec466-bd49-4312-b05e-1dfa15948cee"

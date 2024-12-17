@@ -1,0 +1,445 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Déployez une Application Multi-Tiers avec Azure - Panorama du Cloud - Azure</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../exercises/deploy_nginx.html"><strong aria-hidden="true">1.</strong> Déployez un Serveur Web sur une Machine Virtuelle Azure</a></li><li class="chapter-item expanded "><a href="../exercises/multi_tier.html" class="active"><strong aria-hidden="true">2.</strong> Déployez une Application Multi-Tiers avec Azure</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutoriels</li><li class="chapter-item expanded "><a href="../tutoriels/resources_group.html"><strong aria-hidden="true">3.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="../tutoriels/tags.html"><strong aria-hidden="true">4.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="../tutoriels/vm.html"><strong aria-hidden="true">5.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/ssh.html"><strong aria-hidden="true">6.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/scp.html"><strong aria-hidden="true">7.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/snapshots.html"><strong aria-hidden="true">8.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="../tutoriels/storage.html"><strong aria-hidden="true">9.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/azure_blob_storage.html"><strong aria-hidden="true">10.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="../notions/azure_monitor.html"><strong aria-hidden="true">11.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="../notions/ssh.html"><strong aria-hidden="true">12.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="../notions/rdp.html"><strong aria-hidden="true">13.</strong> protocole RDP</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Panorama du Cloud - Azure</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="exercice--déployez-une-application-multi-tiers-avec-azure"><a class="header" href="#exercice--déployez-une-application-multi-tiers-avec-azure"><strong>Exercice : Déployez une Application Multi-Tiers avec Azure</strong></a></h1>
+<hr />
+<h2 id="objectif"><a class="header" href="#objectif"><strong>Objectif</strong></a></h2>
+<p>Déployer une <strong>application multi-tiers</strong> composée de :</p>
+<ul>
+<li>Une <strong>VM Web</strong> hébergeant un serveur Python (Flask).</li>
+<li>Une <strong>VM Base de Données</strong> hébergeant une base SQLite (simple à configurer).<br />
+L’objectif est de démontrer la communication entre les deux serveurs.</li>
+</ul>
+<hr />
+<h2 id="prérequis"><a class="header" href="#prérequis"><strong>Prérequis</strong></a></h2>
+<ul>
+<li>Compte Azure avec droits d’administration.</li>
+<li>Azure CLI installé ou utilisation d’Azure Cloud Shell.</li>
+<li>Connaissance de base des commandes Linux.</li>
+</ul>
+<hr />
+<h2 id="Étapes"><a class="header" href="#Étapes"><strong>Étapes</strong></a></h2>
+<h3 id="Étape-1--création-des-ressources-azure"><a class="header" href="#Étape-1--création-des-ressources-azure"><strong>Étape 1 : Création des Ressources Azure</strong></a></h3>
+<ol>
+<li>
+<p><strong>Créez un groupe de ressources dans Azure CloudShell</strong> :</p>
+<pre><code class="language-bash">az group create --name GroupeMultiTiers --location "westeurope"
+</code></pre>
+</li>
+<li>
+<p><strong>Créez deux machines virtuelles Ubuntu</strong> :</p>
+<ul>
+<li><strong>VM1</strong> : Serveur Web</li>
+<li><strong>VM2</strong> : Serveur Base de Données</li>
+</ul>
+<p><strong>Pour la VM Web (WebServerVM)</strong> :</p>
+<pre><code class="language-bash">az vm create \
+  --resource-group GroupeMultiTiers \
+  --name WebServerVM \
+  --image UbuntuLTS \
+  --size Standard_B1s \
+  --admin-username azureuser \
+  --generate-ssh-keys \
+  --location "westeurope"
+</code></pre>
+<p><strong>Pour la VM Base de Données (DBServerVM)</strong> :</p>
+<pre><code class="language-bash">az vm create \
+  --resource-group GroupeMultiTiers \
+  --name DBServerVM \
+  --image UbuntuLTS \
+  --size Standard_B1s \
+  --admin-username azureuser \
+  --generate-ssh-keys \
+  --location "westeurope"
+</code></pre>
+</li>
+<li>
+<p><strong>Configurez les règles de pare-feu</strong> pour autoriser :</p>
+<ul>
+<li><strong>HTTP (port 80)</strong> sur la <strong>VM Web</strong> :
+<pre><code class="language-bash">az vm open-port --resource-group GroupeMultiTiers --name WebServerVM --port 80
+</code></pre>
+</li>
+<li><strong>SSH (port 22)</strong> sur les deux VMs (déjà configuré par défaut).</li>
+<li><strong>Port 5000</strong> pour le serveur de base de données :
+<pre><code class="language-bash">az vm open-port --resource-group GroupeMultiTiers --name DBServerVM --port 5000
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-2--configuration-du-serveur-base-de-données-sqlite"><a class="header" href="#Étape-2--configuration-du-serveur-base-de-données-sqlite"><strong>Étape 2 : Configuration du Serveur Base de Données (SQLite)</strong></a></h3>
+<ol>
+<li>
+<p><strong>Connectez-vous à la VM Base de Données</strong> :</p>
+<pre><code class="language-bash">ssh azureuser@&lt;IP_PUBLIQUE_DBServerVM&gt;
+</code></pre>
+</li>
+<li>
+<p><strong>Installez Python et SQLite</strong> :</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install python3 python3-pip sqlite3 -y
+</code></pre>
+</li>
+<li>
+<p><strong>Créez une base de données SQLite</strong> :</p>
+<pre><code class="language-bash">mkdir ~/db
+cd ~/db
+sqlite3 demo.db "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);"
+sqlite3 demo.db "INSERT INTO users (name) VALUES ('Alice'), ('Bob');"
+</code></pre>
+</li>
+<li>
+<p><strong>Démarrez un serveur Flask pour accéder à la base de données</strong> :<br />
+Créez un fichier <code>db_server.py</code> :</p>
+<pre><code class="language-bash">nano db_server.py
+</code></pre>
+<p><strong>Contenu de <code>db_server.py</code></strong> :</p>
+<pre><code class="language-python">import sqlite3
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/users')
+def get_users():
+    conn = sqlite3.connect('/home/azureuser/db/demo.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users")
+    users = [{"id": row[0], "name": row[1]} for row in cursor.fetchall()]
+    conn.close()
+    return jsonify(users)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+</code></pre>
+</li>
+<li>
+<p><strong>Installez Flask et lancez le serveur</strong> :</p>
+<pre><code class="language-bash">pip3 install flask
+python3 db_server.py
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-3--configuration-du-serveur-web"><a class="header" href="#Étape-3--configuration-du-serveur-web"><strong>Étape 3 : Configuration du Serveur Web</strong></a></h3>
+<ol>
+<li>
+<p><strong>Connectez-vous à la VM Web</strong> :</p>
+<pre><code class="language-bash">ssh azureuser@&lt;IP_PUBLIQUE_WebServerVM&gt;
+</code></pre>
+</li>
+<li>
+<p><strong>Installez Python et Flask</strong> :</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install python3 python3-pip -y
+pip3 install flask requests
+</code></pre>
+</li>
+<li>
+<p><strong>Créez un serveur Flask pour accéder aux données de la VM Base de Données</strong> :</p>
+<pre><code class="language-bash">nano web_server.py
+</code></pre>
+<p><strong>Contenu de <code>web_server.py</code></strong> :</p>
+<pre><code class="language-python">import requests
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+DB_SERVER_IP = "&lt;IP_PRIVÉE_DBServerVM&gt;"
+
+@app.route('/')
+def home():
+    return "Bienvenue sur le serveur web ! Accédez aux utilisateurs via /users"
+
+@app.route('/users')
+def get_users():
+    try:
+        response = requests.get(f"http://{DB_SERVER_IP}:5000/users")
+        return jsonify(response.json())
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80)
+</code></pre>
+</li>
+<li>
+<p><strong>Récupérez l’adresse IP privée de la VM Base de Données</strong> :</p>
+<pre><code class="language-bash">az vm show -d --resource-group GroupeMultiTiers --name DBServerVM --query privateIps -o tsv
+</code></pre>
+</li>
+<li>
+<p><strong>Remplacez <code>&lt;IP_PRIVÉE_DBServerVM&gt;</code></strong> dans <code>web_server.py</code> avec l’adresse récupérée.</p>
+</li>
+<li>
+<p><strong>Lancez le serveur Flask</strong> :</p>
+<pre><code class="language-bash">sudo python3 web_server.py
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-4--test-de-communication-entre-les-vms"><a class="header" href="#Étape-4--test-de-communication-entre-les-vms"><strong>Étape 4 : Test de Communication entre les VMs</strong></a></h3>
+<ol>
+<li>
+<p><strong>Accédez à la VM Web</strong> via son IP publique dans un navigateur :</p>
+<pre><code>http://&lt;IP_PUBLIQUE_WebServerVM&gt;
+</code></pre>
+</li>
+<li>
+<p><strong>Accédez aux données de la base de données via la route <code>/users</code></strong> :</p>
+<pre><code>http://&lt;IP_PUBLIQUE_WebServerVM&gt;/users
+</code></pre>
+<ul>
+<li>Vous devriez voir les utilisateurs <strong>"Alice"</strong> et <strong>"Bob"</strong> provenant de la base de données SQLite sur la VM Base de Données.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="entraînement-extension-non-guidée"><a class="header" href="#entraînement-extension-non-guidée"><strong>Entraînement</strong> (Extension non-guidée)</a></h3>
+<ol>
+<li>
+<p><strong>Ajout de Route <code>/add_user</code></strong><br />
+Ajoutez une fonctionnalité pour insérer dynamiquement des utilisateurs via une route POST.</p>
+</li>
+<li>
+<p><strong>Automatisation</strong></p>
+<ul>
+<li>Écrivez un script Bash pour configurer automatiquement les deux serveurs.</li>
+</ul>
+</li>
+</ol>
+<h3 id="quiz"><a class="header" href="#quiz"><strong>Quiz</strong></a></h3>
+<p>Voici un quiz sur les applications Multi-Tier :</p>
+<div class="quiz-placeholder" data-quiz-name="&quot;multi_tier&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Une application multi-tiers est structurée en plusieurs couches pour séparer les responsabilités : par exemple, une couche Web pour l'interface utilisateur et une couche base de données pour le stockage.\n&quot;,&quot;id&quot;:&quot;019c407b-f629-4fd7-8837-610826404211&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une application divisée en plusieurs couches comme le web, l'application et la base de données&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Une application hébergée uniquement sur un serveur sans état&quot;,&quot;Une application utilisant exclusivement Azure Kubernetes Service (AKS)&quot;,&quot;Une application ne contenant qu'une seule base de données sur le cloud&quot;],&quot;prompt&quot;:&quot;Qu'est-ce qu'une application multi-tiers dans le contexte d'Azure ?&quot;}},{&quot;context&quot;:&quot;Azure Virtual Machines permettent d'héberger des serveurs, des applications et des bases de données dans le cloud Azure.\n&quot;,&quot;id&quot;:&quot;78f094f7-9b04-4559-892f-b0a80d31e0ec&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Azure Virtual Machines&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Azure Functions&quot;,&quot;Azure Container Instances&quot;,&quot;Azure Blob Storage&quot;],&quot;prompt&quot;:&quot;Quel service Azure permet de déployer des machines virtuelles pour héberger des serveurs multi-tiers ?&quot;}},{&quot;context&quot;:&quot;La commande `az vm open-port` permet de configurer les règles de pare-feu pour ouvrir un port spécifique sur une machine virtuelle Azure.\n&quot;,&quot;id&quot;:&quot;e9b29f83-311f-4a51-a60a-9a2348d9fa73&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;az vm open-port&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;az vm add-port&quot;,&quot;az vm configure-firewall&quot;,&quot;az network allow-port&quot;],&quot;prompt&quot;:&quot;Quelle commande Azure CLI permet d'ouvrir un port sur une VM ?&quot;}},{&quot;context&quot;:&quot;SQLite est une base de données relationnelle légère qui ne nécessite pas de serveur. Elle est souvent utilisée pour des applications locales ou des démonstrations.\n&quot;,&quot;id&quot;:&quot;55105249-1143-4620-b990-8683fc3b620a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;SQLite&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Azure Cosmos DB&quot;,&quot;MySQL&quot;,&quot;PostgreSQL&quot;],&quot;prompt&quot;:&quot;Quelle base de données légère peut être utilisée localement sur une VM pour des applications simples ?&quot;}},{&quot;context&quot;:&quot;Flask est un micro-framework en Python souvent utilisé pour créer des serveurs Web simples et rapides.\n&quot;,&quot;id&quot;:&quot;c98f1460-335d-4f1c-a718-3c6af302841f&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Python (Flask)&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;JavaScript (Node.js)&quot;,&quot;C# (.NET)&quot;,&quot;Go&quot;],&quot;prompt&quot;:&quot;Quel langage est utilisé pour créer des serveurs d'application dans cet exercice ?&quot;}},{&quot;context&quot;:&quot;Le protocole SSH (Secure Shell) est utilisé pour établir une connexion sécurisée à distance avec des machines virtuelles Linux.\n&quot;,&quot;id&quot;:&quot;f6b77729-9353-4a80-b061-b50ff821d4ba&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;SSH&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;RDP (Remote Desktop Protocol)&quot;,&quot;HTTP&quot;,&quot;FTP&quot;],&quot;prompt&quot;:&quot;Quel protocole est utilisé pour se connecter à une machine virtuelle Linux dans Azure ?&quot;}},{&quot;context&quot;:&quot;La commande `az vm show -d --query privateIps` permet de récupérer l'adresse IP privée d'une machine virtuelle Azure.\n&quot;,&quot;id&quot;:&quot;fb67a119-eb86-4bc1-9e88-92ba6dffc21a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;az vm show -d --query privateIps&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;az vm list-ip&quot;,&quot;az network show-ip&quot;,&quot;az vm get-private-ip&quot;],&quot;prompt&quot;:&quot;Quelle commande permet de récupérer l'adresse IP privée d'une VM Azure ?&quot;}},{&quot;context&quot;:&quot;Par défaut, Flask utilise le port 5000 lorsqu'il est exécuté en mode développement.\n&quot;,&quot;id&quot;:&quot;223ec466-bd49-4312-b05e-1dfa15948cee&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;5000&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;80&quot;,&quot;22&quot;,&quot;443&quot;],&quot;prompt&quot;:&quot;Quel port est souvent utilisé pour les applications Flask en développement ?&quot;}}]}"></div>
+<h3 id="liens-vers-la-documentation"><a class="header" href="#liens-vers-la-documentation"><strong>Liens vers la Documentation</strong></a></h3>
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/cli/azure/vm">Azure CLI - Création de VM</a></li>
+<li><a href="https://flask.palletsprojects.com/">Flask - Documentation</a></li>
+<li><a href="https://www.sqlite.org/docs.html">SQLite - Guide d’utilisation</a></li>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/virtual-network/network-security-groups-overview">Groupes de Sécurité Réseau (NSG)</a></li>
+</ul>
+<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../exercises/deploy_nginx.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../tutoriels/resources_group.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../exercises/deploy_nginx.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../tutoriels/resources_group.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
