@@ -1,0 +1,111 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Qu'est-ce qu'une machine virtuelle Azure (VM) ?"
+prompt.distractors = [
+  "Un service de base de données relationnelles dans le cloud",
+  "Un service d'exécution de code sans serveur",
+  "Une plateforme pour déployer des conteneurs Kubernetes"
+]
+answer.answer = "Une ressource informatique virtualisée dans le cloud"
+context = """
+Une machine virtuelle Azure (VM) est un ordinateur virtualisé qui s'exécute dans l'infrastructure cloud d'Azure. Elle permet de déployer et d'exécuter des logiciels comme un serveur physique.
+"""
+id = "a6be3cbf-a58a-4c28-8541-2a07912e3666"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est l'une des principales caractéristiques des machines virtuelles Azure ?"
+prompt.distractors = [
+  "Elles ne prennent en charge que les systèmes d'exploitation Windows.",
+  "Elles ne permettent pas de personnaliser les ressources matérielles.",
+  "Elles s'exécutent exclusivement dans des conteneurs."
+]
+answer.answer = "Elles permettent d'exécuter des systèmes d'exploitation et des applications personnalisés."
+context = """
+Les VMs Azure prennent en charge un large éventail de systèmes d'exploitation, notamment Windows et Linux, et permettent de personnaliser les ressources telles que le CPU, la RAM et le stockage.
+"""
+id = "82b7c932-5f07-469c-907d-be077373f058"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "À quoi servent les options de taille des machines virtuelles Azure ?"
+prompt.distractors = [
+  "À sécuriser automatiquement les données de la machine virtuelle",
+  "À surveiller les performances réseau de la VM",
+  "À chiffrer les disques de stockage"
+]
+answer.answer = "À déterminer le nombre de CPU, la RAM et les autres ressources allouées à une VM"
+context = """
+Les tailles des machines virtuelles Azure définissent les ressources informatiques, telles que les cœurs CPU, la mémoire RAM et l'espace disque, allouées à une VM.
+"""
+id = "9f99948b-25ec-4a68-9168-7e52e9c45eb9"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel outil permet de se connecter à une machine virtuelle Azure Windows ?"
+prompt.distractors = [
+  "Client SSH",
+  "Azure Monitor",
+  "Azure Blob Storage"
+]
+answer.answer = "Protocole RDP (Remote Desktop Protocol)"
+context = """
+Pour se connecter à une machine virtuelle Windows Azure, on utilise le protocole RDP (Remote Desktop Protocol). Pour les machines Linux, on utilise généralement un client SSH.
+"""
+id = "3dc25112-a43f-46de-a400-3ca99b989995"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel rôle jouent les disques managés Azure pour une machine virtuelle ?"
+prompt.distractors = [
+  "Surveiller les performances de la VM",
+  "Configurer automatiquement les sauvegardes",
+  "Assurer la connectivité réseau de la VM"
+]
+answer.answer = "Fournir un stockage persistant pour la machine virtuelle"
+context = """
+Les disques managés Azure sont des volumes de stockage de niveau bloc qui sont gérés par Azure et offrent un stockage persistant aux machines virtuelles.
+"""
+id = "dd655dda-eab1-48f0-8a46-da42b77cedad"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle fonctionnalité permet de faire évoluer plusieurs machines virtuelles automatiquement en fonction de la demande ?"
+prompt.distractors = [
+  "Azure Container Instances",
+  "Azure Functions",
+  "Azure Logic Apps"
+]
+answer.answer = "Azure Virtual Machine Scale Sets"
+context = """
+Azure Virtual Machine Scale Sets permettent de déployer et de gérer un ensemble de machines virtuelles identiques pour prendre en charge des charges de travail évolutives.
+"""
+id = "88384a92-d7fe-4784-9c3b-7744e43e28bc"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel service Azure permet de sauvegarder automatiquement des machines virtuelles ?"
+prompt.distractors = [
+  "Azure Monitor",
+  "Azure Blob Storage",
+  "Azure Kubernetes Service"
+]
+answer.answer = "Azure Backup"
+context = """
+Azure Backup est une solution simple et fiable pour sauvegarder des données, y compris des machines virtuelles, en utilisant le stockage Azure.
+"""
+id = "413a8e5f-f5c5-4500-a71f-d9255a525176"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel système d'exploitation n'est PAS pris en charge par Azure VMs ?"
+prompt.distractors = [
+  "Windows Server",
+  "Ubuntu Linux",
+  "Red Hat Enterprise Linux"
+]
+answer.answer = "MS-DOS"
+context = """
+Azure VMs prennent en charge un large éventail de systèmes d'exploitation modernes, tels que Windows Server et différentes distributions Linux. MS-DOS n'est pas pris en charge.
+"""
+id = "bec3f05e-b2dc-4db6-824e-4f3b4eb953db"
