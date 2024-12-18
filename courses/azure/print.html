@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="exercises/deploy_nginx.html"><strong aria-hidden="true">1.</strong> Déployez un Serveur Web sur une Machine Virtuelle Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="corrections/deploy_nginx.html"><strong aria-hidden="true">1.1.</strong> Correction de la partie non-guidée</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/multi_tier.html"><strong aria-hidden="true">2.</strong> Déployez une Application Multi-Tiers avec Azure</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutoriels</li><li class="chapter-item expanded "><a href="tutoriels/resources_group.html"><strong aria-hidden="true">3.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="tutoriels/tags.html"><strong aria-hidden="true">4.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="tutoriels/vm.html"><strong aria-hidden="true">5.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="tutoriels/ssh.html"><strong aria-hidden="true">6.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="tutoriels/scp.html"><strong aria-hidden="true">7.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="tutoriels/snapshots.html"><strong aria-hidden="true">8.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="tutoriels/storage.html"><strong aria-hidden="true">9.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="tutoriels/azure_blob_storage.html"><strong aria-hidden="true">10.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="notions/azure_monitor.html"><strong aria-hidden="true">11.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="notions/ssh.html"><strong aria-hidden="true">12.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="notions/rdp.html"><strong aria-hidden="true">13.</strong> protocole RDP</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="exercises/deploy_nginx.html"><strong aria-hidden="true">1.</strong> Déployez un Serveur Web sur une Machine Virtuelle Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="corrections/deploy_nginx.html"><strong aria-hidden="true">1.1.</strong> Correction de la partie non-guidée</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/multi_tier.html"><strong aria-hidden="true">2.</strong> Déployez une Application Multi-Tiers avec Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="corrections/multi_tier.html"><strong aria-hidden="true">2.1.</strong> Correction</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/deploy_appservice.html"><strong aria-hidden="true">3.</strong> Déployez une Application Flask sur Azure App Service via Git</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutoriels</li><li class="chapter-item expanded "><a href="tutoriels/resources_group.html"><strong aria-hidden="true">4.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="tutoriels/tags.html"><strong aria-hidden="true">5.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="tutoriels/vm.html"><strong aria-hidden="true">6.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="tutoriels/ssh.html"><strong aria-hidden="true">7.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="tutoriels/scp.html"><strong aria-hidden="true">8.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="tutoriels/snapshots.html"><strong aria-hidden="true">9.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="tutoriels/storage.html"><strong aria-hidden="true">10.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="tutoriels/azure_blob_storage.html"><strong aria-hidden="true">11.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="notions/azure_monitor.html"><strong aria-hidden="true">12.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="notions/ssh.html"><strong aria-hidden="true">13.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="notions/rdp.html"><strong aria-hidden="true">14.</strong> protocole RDP</a></li><li class="chapter-item expanded "><a href="notions/storage.html"><strong aria-hidden="true">15.</strong> Les redondances de stockage</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -315,7 +315,7 @@ sudo systemctl enable nginx
 <h2 id="quiz"><a class="header" href="#quiz">Quiz</a></h2>
 <p>Voici un quiz pour tester vos connaissances sur les machines virtuelles dans
 Azure :</p>
-<div class="quiz-placeholder" data-quiz-name="&quot;vms&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Une machine virtuelle Azure (VM) est un ordinateur virtualisé qui s'exécute dans l'infrastructure cloud d'Azure. Elle permet de déployer et d'exécuter des logiciels comme un serveur physique.\n&quot;,&quot;id&quot;:&quot;a6be3cbf-a58a-4c28-8541-2a07912e3666&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une ressource informatique virtualisée dans le cloud&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un service de base de données relationnelles dans le cloud&quot;,&quot;Un service d'exécution de code sans serveur&quot;,&quot;Une plateforme pour déployer des conteneurs Kubernetes&quot;],&quot;prompt&quot;:&quot;Qu'est-ce qu'une machine virtuelle Azure (VM) ?&quot;}},{&quot;context&quot;:&quot;Les VMs Azure prennent en charge un large éventail de systèmes d'exploitation, notamment Windows et Linux, et permettent de personnaliser les ressources telles que le CPU, la RAM et le stockage.\n&quot;,&quot;id&quot;:&quot;82b7c932-5f07-469c-907d-be077373f058&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Elles permettent d'exécuter des systèmes d'exploitation et des applications personnalisés.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Elles ne prennent en charge que les systèmes d'exploitation Windows.&quot;,&quot;Elles ne permettent pas de personnaliser les ressources matérielles.&quot;,&quot;Elles s'exécutent exclusivement dans des conteneurs.&quot;],&quot;prompt&quot;:&quot;Quelle est l'une des principales caractéristiques des machines virtuelles Azure ?&quot;}},{&quot;context&quot;:&quot;Les tailles des machines virtuelles Azure définissent les ressources informatiques, telles que les cœurs CPU, la mémoire RAM et l'espace disque, allouées à une VM.\n&quot;,&quot;id&quot;:&quot;9f99948b-25ec-4a68-9168-7e52e9c45eb9&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;À déterminer le nombre de CPU, la RAM et les autres ressources allouées à une VM&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;À sécuriser automatiquement les données de la machine virtuelle&quot;,&quot;À surveiller les performances réseau de la VM&quot;,&quot;À chiffrer les disques de stockage&quot;],&quot;prompt&quot;:&quot;À quoi servent les options de taille des machines virtuelles Azure ?&quot;}},{&quot;context&quot;:&quot;Pour se connecter à une machine virtuelle Windows Azure, on utilise le protocole RDP (Remote Desktop Protocol). Pour les machines Linux, on utilise généralement un client SSH.\n&quot;,&quot;id&quot;:&quot;3dc25112-a43f-46de-a400-3ca99b989995&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Protocole RDP (Remote Desktop Protocol)&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Client SSH&quot;,&quot;Azure Monitor&quot;,&quot;Azure Blob Storage&quot;],&quot;prompt&quot;:&quot;Quel outil permet de se connecter à une machine virtuelle Azure Windows ?&quot;}},{&quot;context&quot;:&quot;Les disques managés Azure sont des volumes de stockage de niveau bloc qui sont gérés par Azure et offrent un stockage persistant aux machines virtuelles.\n&quot;,&quot;id&quot;:&quot;dd655dda-eab1-48f0-8a46-da42b77cedad&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Fournir un stockage persistant pour la machine virtuelle&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Surveiller les performances de la VM&quot;,&quot;Configurer automatiquement les sauvegardes&quot;,&quot;Assurer la connectivité réseau de la VM&quot;],&quot;prompt&quot;:&quot;Quel rôle jouent les disques managés Azure pour une machine virtuelle ?&quot;}},{&quot;context&quot;:&quot;Azure Virtual Machine Scale Sets permettent de déployer et de gérer un ensemble de machines virtuelles identiques pour prendre en charge des charges de travail évolutives.\n&quot;,&quot;id&quot;:&quot;88384a92-d7fe-4784-9c3b-7744e43e28bc&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Azure Virtual Machine Scale Sets&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Azure Container Instances&quot;,&quot;Azure Functions&quot;,&quot;Azure Logic Apps&quot;],&quot;prompt&quot;:&quot;Quelle fonctionnalité permet de faire évoluer plusieurs machines virtuelles automatiquement en fonction de la demande ?&quot;}},{&quot;context&quot;:&quot;Azure Backup est une solution simple et fiable pour sauvegarder des données, y compris des machines virtuelles, en utilisant le stockage Azure.\n&quot;,&quot;id&quot;:&quot;413a8e5f-f5c5-4500-a71f-d9255a525176&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Azure Backup&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Azure Monitor&quot;,&quot;Azure Blob Storage&quot;,&quot;Azure Kubernetes Service&quot;],&quot;prompt&quot;:&quot;Quel service Azure permet de sauvegarder automatiquement des machines virtuelles ?&quot;}},{&quot;context&quot;:&quot;Azure VMs prennent en charge un large éventail de systèmes d'exploitation modernes, tels que Windows Server et différentes distributions Linux. MS-DOS n'est pas pris en charge.\n&quot;,&quot;id&quot;:&quot;bec3f05e-b2dc-4db6-824e-4f3b4eb953db&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;MS-DOS&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Windows Server&quot;,&quot;Ubuntu Linux&quot;,&quot;Red Hat Enterprise Linux&quot;],&quot;prompt&quot;:&quot;Quel système d'exploitation n'est PAS pris en charge par Azure VMs ?&quot;}}]}"></div>
+<div class="quiz-placeholder" data-quiz-name="&quot;vms&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Une machine virtuelle Azure (VM) est un ordinateur virtualisé qui s'exécute dans l'infrastructure cloud d'Azure. Elle permet de déployer et d'exécuter des logiciels comme un serveur physique.\n&quot;,&quot;id&quot;:&quot;a6be3cbf-a58a-4c28-8541-2a07912e3666&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une ressource informatique virtualisée dans le cloud&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un service de base de données relationnelles dans le cloud&quot;,&quot;Un service d'exécution de code sans serveur&quot;,&quot;Une plateforme pour déployer des conteneurs Kubernetes&quot;],&quot;prompt&quot;:&quot;Qu'est-ce qu'une machine virtuelle Azure (VM) ?&quot;}},{&quot;context&quot;:&quot;Les VMs Azure prennent en charge un large éventail de systèmes d'exploitation, notamment Windows et Linux, et permettent de personnaliser les ressources telles que le CPU, la RAM et le stockage.\n&quot;,&quot;id&quot;:&quot;82b7c932-5f07-469c-907d-be077373f058&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Elles permettent d'exécuter des systèmes d'exploitation et des applications personnalisés.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Elles ne prennent en charge que les systèmes d'exploitation Windows.&quot;,&quot;Elles ne permettent pas de personnaliser les ressources matérielles.&quot;,&quot;Elles s'exécutent exclusivement dans des conteneurs.&quot;],&quot;prompt&quot;:&quot;Quelle est l'une des principales caractéristiques des machines virtuelles Azure ?&quot;}},{&quot;context&quot;:&quot;Les tailles des machines virtuelles Azure définissent les ressources informatiques, telles que les cœurs CPU, la mémoire RAM et l'espace disque, allouées à une VM.\n&quot;,&quot;id&quot;:&quot;9f99948b-25ec-4a68-9168-7e52e9c45eb9&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;À déterminer le nombre de CPU, la RAM et les autres ressources allouées à une VM&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;À sécuriser automatiquement les données de la machine virtuelle&quot;,&quot;À surveiller les performances réseau de la VM&quot;,&quot;À chiffrer les disques de stockage&quot;],&quot;prompt&quot;:&quot;À quoi servent les options de taille des machines virtuelles Azure ?&quot;}},{&quot;context&quot;:&quot;Pour se connecter à une machine virtuelle Windows Azure, on utilise le protocole RDP (Remote Desktop Protocol). Pour les machines Linux, on utilise généralement un client SSH.\n&quot;,&quot;id&quot;:&quot;3dc25112-a43f-46de-a400-3ca99b989995&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Protocole RDP (Remote Desktop Protocol)&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Client SSH&quot;,&quot;Azure Monitor&quot;,&quot;Azure Blob Storage&quot;],&quot;prompt&quot;:&quot;Quel outil permet de se connecter à une machine virtuelle Azure Windows ?&quot;}},{&quot;context&quot;:&quot;Les disques managés Azure sont des volumes de stockage de niveau bloc qui sont gérés par Azure et offrent un stockage persistant aux machines virtuelles.\n&quot;,&quot;id&quot;:&quot;dd655dda-eab1-48f0-8a46-da42b77cedad&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Fournir un stockage persistant pour la machine virtuelle&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Surveiller les performances de la VM&quot;,&quot;Configurer automatiquement les sauvegardes&quot;,&quot;Assurer la connectivité réseau de la VM&quot;],&quot;prompt&quot;:&quot;Quel rôle jouent les disques managés Azure pour une machine virtuelle ?&quot;}},{&quot;context&quot;:&quot;Azure Virtual Machine Scale Sets permettent de déployer et de gérer un ensemble de machines virtuelles identiques pour prendre en charge des charges de travail évolutives.\n&quot;,&quot;id&quot;:&quot;88384a92-d7fe-4784-9c3b-7744e43e28bc&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Azure Virtual Machine Scale Sets&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Azure Container Instances&quot;,&quot;Azure Functions&quot;,&quot;Azure Logic Apps&quot;],&quot;prompt&quot;:&quot;Quelle fonctionnalité permet de faire évoluer plusieurs machines virtuelles automatiquement en fonction de la demande ?&quot;}},{&quot;context&quot;:&quot;Azure Backup est une solution simple et fiable pour sauvegarder des données, y compris des machines virtuelles, en utilisant le stockage Azure.\n&quot;,&quot;id&quot;:&quot;413a8e5f-f5c5-4500-a71f-d9255a525176&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Azure Backup&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Azure Monitor&quot;,&quot;Azure Blob Storage&quot;,&quot;Azure Kubernetes Service&quot;],&quot;prompt&quot;:&quot;Quel service Azure permet de sauvegarder automatiquement des machines virtuelles ?&quot;}},{&quot;context&quot;:&quot;Azure VMs prennent en charge un large éventail de systèmes d'exploitation modernes, tels que Windows Server et différentes distributions Linux. MS-DOS n'est pas pris en charge.\n&quot;,&quot;id&quot;:&quot;bec3f05e-b2dc-4db6-824e-4f3b4eb953db&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;MS-DOS&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Windows Server&quot;,&quot;Ubuntu Linux&quot;,&quot;Red Hat Enterprise Linux&quot;],&quot;prompt&quot;:&quot;Quel système d'exploitation n'est PAS pris en charge par Azure VMs ?&quot;}}]}" data-quiz-fullscreen="true"></div>
 <h3 id="liens-vers-la-documentation"><a class="header" href="#liens-vers-la-documentation"><strong>Liens vers la Documentation</strong></a></h3>
 <ul>
 <li><strong>Création d'une Machine Virtuelle</strong> : <a href="https://learn.microsoft.com/fr-fr/azure/virtual-machines/linux/quick-create-cli">Documentation Azure VM</a></li>
@@ -595,13 +595,227 @@ Ajoutez une fonctionnalité pour insérer dynamiquement des utilisateurs via une
 </ol>
 <h3 id="quiz-1"><a class="header" href="#quiz-1"><strong>Quiz</strong></a></h3>
 <p>Voici un quiz sur les applications Multi-Tier :</p>
-<div class="quiz-placeholder" data-quiz-name="&quot;multi_tier&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Une application multi-tiers est structurée en plusieurs couches pour séparer les responsabilités : par exemple, une couche Web pour l'interface utilisateur et une couche base de données pour le stockage.\n&quot;,&quot;id&quot;:&quot;019c407b-f629-4fd7-8837-610826404211&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une application divisée en plusieurs couches comme le web, l'application et la base de données&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Une application hébergée uniquement sur un serveur sans état&quot;,&quot;Une application utilisant exclusivement Azure Kubernetes Service (AKS)&quot;,&quot;Une application ne contenant qu'une seule base de données sur le cloud&quot;],&quot;prompt&quot;:&quot;Qu'est-ce qu'une application multi-tiers dans le contexte d'Azure ?&quot;}},{&quot;context&quot;:&quot;Azure Virtual Machines permettent d'héberger des serveurs, des applications et des bases de données dans le cloud Azure.\n&quot;,&quot;id&quot;:&quot;78f094f7-9b04-4559-892f-b0a80d31e0ec&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Azure Virtual Machines&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Azure Functions&quot;,&quot;Azure Container Instances&quot;,&quot;Azure Blob Storage&quot;],&quot;prompt&quot;:&quot;Quel service Azure permet de déployer des machines virtuelles pour héberger des serveurs multi-tiers ?&quot;}},{&quot;context&quot;:&quot;La commande `az vm open-port` permet de configurer les règles de pare-feu pour ouvrir un port spécifique sur une machine virtuelle Azure.\n&quot;,&quot;id&quot;:&quot;e9b29f83-311f-4a51-a60a-9a2348d9fa73&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;az vm open-port&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;az vm add-port&quot;,&quot;az vm configure-firewall&quot;,&quot;az network allow-port&quot;],&quot;prompt&quot;:&quot;Quelle commande Azure CLI permet d'ouvrir un port sur une VM ?&quot;}},{&quot;context&quot;:&quot;SQLite est une base de données relationnelle légère qui ne nécessite pas de serveur. Elle est souvent utilisée pour des applications locales ou des démonstrations.\n&quot;,&quot;id&quot;:&quot;55105249-1143-4620-b990-8683fc3b620a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;SQLite&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Azure Cosmos DB&quot;,&quot;MySQL&quot;,&quot;PostgreSQL&quot;],&quot;prompt&quot;:&quot;Quelle base de données légère peut être utilisée localement sur une VM pour des applications simples ?&quot;}},{&quot;context&quot;:&quot;Flask est un micro-framework en Python souvent utilisé pour créer des serveurs Web simples et rapides.\n&quot;,&quot;id&quot;:&quot;c98f1460-335d-4f1c-a718-3c6af302841f&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Python (Flask)&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;JavaScript (Node.js)&quot;,&quot;C# (.NET)&quot;,&quot;Go&quot;],&quot;prompt&quot;:&quot;Quel langage est utilisé pour créer des serveurs d'application dans cet exercice ?&quot;}},{&quot;context&quot;:&quot;Le protocole SSH (Secure Shell) est utilisé pour établir une connexion sécurisée à distance avec des machines virtuelles Linux.\n&quot;,&quot;id&quot;:&quot;f6b77729-9353-4a80-b061-b50ff821d4ba&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;SSH&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;RDP (Remote Desktop Protocol)&quot;,&quot;HTTP&quot;,&quot;FTP&quot;],&quot;prompt&quot;:&quot;Quel protocole est utilisé pour se connecter à une machine virtuelle Linux dans Azure ?&quot;}},{&quot;context&quot;:&quot;La commande `az vm show -d --query privateIps` permet de récupérer l'adresse IP privée d'une machine virtuelle Azure.\n&quot;,&quot;id&quot;:&quot;fb67a119-eb86-4bc1-9e88-92ba6dffc21a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;az vm show -d --query privateIps&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;az vm list-ip&quot;,&quot;az network show-ip&quot;,&quot;az vm get-private-ip&quot;],&quot;prompt&quot;:&quot;Quelle commande permet de récupérer l'adresse IP privée d'une VM Azure ?&quot;}},{&quot;context&quot;:&quot;Par défaut, Flask utilise le port 5000 lorsqu'il est exécuté en mode développement.\n&quot;,&quot;id&quot;:&quot;223ec466-bd49-4312-b05e-1dfa15948cee&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;5000&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;80&quot;,&quot;22&quot;,&quot;443&quot;],&quot;prompt&quot;:&quot;Quel port est souvent utilisé pour les applications Flask en développement ?&quot;}}]}"></div>
+<div class="quiz-placeholder" data-quiz-name="&quot;multi_tier&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Une application multi-tiers est structurée en plusieurs couches pour séparer les responsabilités : par exemple, une couche Web pour l'interface utilisateur et une couche base de données pour le stockage.\n&quot;,&quot;id&quot;:&quot;019c407b-f629-4fd7-8837-610826404211&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une application divisée en plusieurs couches comme le web, l'application et la base de données&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Une application hébergée uniquement sur un serveur sans état&quot;,&quot;Une application utilisant exclusivement Azure Kubernetes Service (AKS)&quot;,&quot;Une application ne contenant qu'une seule base de données sur le cloud&quot;],&quot;prompt&quot;:&quot;Qu'est-ce qu'une application multi-tiers dans le contexte d'Azure ?&quot;}},{&quot;context&quot;:&quot;Azure Virtual Machines permettent d'héberger des serveurs, des applications et des bases de données dans le cloud Azure.\n&quot;,&quot;id&quot;:&quot;78f094f7-9b04-4559-892f-b0a80d31e0ec&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Azure Virtual Machines&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Azure Functions&quot;,&quot;Azure Container Instances&quot;,&quot;Azure Blob Storage&quot;],&quot;prompt&quot;:&quot;Quel service Azure permet de déployer des machines virtuelles pour héberger des serveurs multi-tiers ?&quot;}},{&quot;context&quot;:&quot;La commande `az vm open-port` permet de configurer les règles de pare-feu pour ouvrir un port spécifique sur une machine virtuelle Azure.\n&quot;,&quot;id&quot;:&quot;e9b29f83-311f-4a51-a60a-9a2348d9fa73&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;az vm open-port&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;az vm add-port&quot;,&quot;az vm configure-firewall&quot;,&quot;az network allow-port&quot;],&quot;prompt&quot;:&quot;Quelle commande Azure CLI permet d'ouvrir un port sur une VM ?&quot;}},{&quot;context&quot;:&quot;SQLite est une base de données relationnelle légère qui ne nécessite pas de serveur. Elle est souvent utilisée pour des applications locales ou des démonstrations.\n&quot;,&quot;id&quot;:&quot;55105249-1143-4620-b990-8683fc3b620a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;SQLite&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Azure Cosmos DB&quot;,&quot;MySQL&quot;,&quot;PostgreSQL&quot;],&quot;prompt&quot;:&quot;Quelle base de données légère peut être utilisée localement sur une VM pour des applications simples ?&quot;}},{&quot;context&quot;:&quot;Flask est un micro-framework en Python souvent utilisé pour créer des serveurs Web simples et rapides.\n&quot;,&quot;id&quot;:&quot;c98f1460-335d-4f1c-a718-3c6af302841f&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Python (Flask)&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;JavaScript (Node.js)&quot;,&quot;C# (.NET)&quot;,&quot;Go&quot;],&quot;prompt&quot;:&quot;Quel langage est utilisé pour créer des serveurs d'application dans cet exercice ?&quot;}},{&quot;context&quot;:&quot;Le protocole SSH (Secure Shell) est utilisé pour établir une connexion sécurisée à distance avec des machines virtuelles Linux.\n&quot;,&quot;id&quot;:&quot;f6b77729-9353-4a80-b061-b50ff821d4ba&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;SSH&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;RDP (Remote Desktop Protocol)&quot;,&quot;HTTP&quot;,&quot;FTP&quot;],&quot;prompt&quot;:&quot;Quel protocole est utilisé pour se connecter à une machine virtuelle Linux dans Azure ?&quot;}},{&quot;context&quot;:&quot;La commande `az vm show -d --query privateIps` permet de récupérer l'adresse IP privée d'une machine virtuelle Azure.\n&quot;,&quot;id&quot;:&quot;fb67a119-eb86-4bc1-9e88-92ba6dffc21a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;az vm show -d --query privateIps&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;az vm list-ip&quot;,&quot;az network show-ip&quot;,&quot;az vm get-private-ip&quot;],&quot;prompt&quot;:&quot;Quelle commande permet de récupérer l'adresse IP privée d'une VM Azure ?&quot;}},{&quot;context&quot;:&quot;Par défaut, Flask utilise le port 5000 lorsqu'il est exécuté en mode développement.\n&quot;,&quot;id&quot;:&quot;223ec466-bd49-4312-b05e-1dfa15948cee&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;5000&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;80&quot;,&quot;22&quot;,&quot;443&quot;],&quot;prompt&quot;:&quot;Quel port est souvent utilisé pour les applications Flask en développement ?&quot;}}]}" data-quiz-fullscreen="true"></div>
 <h3 id="liens-vers-la-documentation-1"><a class="header" href="#liens-vers-la-documentation-1"><strong>Liens vers la Documentation</strong></a></h3>
 <ul>
 <li><a href="https://learn.microsoft.com/fr-fr/cli/azure/vm">Azure CLI - Création de VM</a></li>
 <li><a href="https://flask.palletsprojects.com/">Flask - Documentation</a></li>
 <li><a href="https://www.sqlite.org/docs.html">SQLite - Guide d’utilisation</a></li>
 <li><a href="https://learn.microsoft.com/fr-fr/azure/virtual-network/network-security-groups-overview">Groupes de Sécurité Réseau (NSG)</a></li>
+</ul>
+<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="correction-1"><a class="header" href="#correction-1"><strong>Correction</strong></a></h1>
+<h3 id="1-ajout-de-données-dynamiques"><a class="header" href="#1-ajout-de-données-dynamiques"><strong>1. Ajout de Données Dynamiques</strong></a></h3>
+<p>Ajoutez la route <code>/add_user</code> dans <code>db_server.py</code> :</p>
+<pre><code class="language-python">@app.route('/add_user/&lt;name&gt;', methods=['POST'])
+def add_user(name):
+    conn = sqlite3.connect('/home/azureuser/db/demo.db')
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO users (name) VALUES (?)", (name,))
+    conn.commit()
+    conn.close()
+    return jsonify({"message": f"Utilisateur {name} ajouté avec succès."})
+</code></pre>
+<h3 id="2-automatisation"><a class="header" href="#2-automatisation"><strong>2. Automatisation</strong></a></h3>
+<p>Script Bash pour le serveur de base de données :</p>
+<pre><code class="language-bash">#!/bin/bash
+sudo apt update -y
+sudo apt install python3 sqlite3 python3-pip -y
+pip3 install flask
+mkdir ~/db &amp;&amp; cd ~/db
+sqlite3 demo.db "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);"
+sqlite3 demo.db "INSERT INTO users (name) VALUES ('Alice'), ('Bob');"
+</code></pre>
+<hr />
+<h2 id="conclusion-1"><a class="header" href="#conclusion-1"><strong>Conclusion</strong></a></h2>
+<p>Cet exercice vous a permis de :</p>
+<ul>
+<li>Créer une architecture <strong>multi-tiers</strong> sur Azure.</li>
+<li>Déployer un serveur Web avec Flask et une base SQLite.</li>
+<li>Configurer la communication entre deux VMs.</li>
+</ul>
+<p>Vous avez exploré des concepts fondamentaux comme les réseaux, les bases de données simples, et les applications Flask ! 🚀</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exercice--déployez-une-application-flask-sur-azure-app-service-via-git"><a class="header" href="#exercice--déployez-une-application-flask-sur-azure-app-service-via-git"><strong>Exercice : Déployez une Application Flask sur Azure App Service via Git</strong></a></h1>
+<hr />
+<h2 id="objectif-2"><a class="header" href="#objectif-2"><strong>Objectif</strong></a></h2>
+<p>Dans cet exercice, vous allez déployer une <strong>application Python Flask</strong> sur <strong>Azure App Service</strong> en utilisant :</p>
+<ol>
+<li><strong>Le portail Azure</strong> pour configurer l’environnement.</li>
+<li><strong>Un dépôt Git local</strong> pour pousser votre code vers un dépôt distant sur Azure.</li>
+</ol>
+<hr />
+<h2 id="Étapes-2"><a class="header" href="#Étapes-2"><strong>Étapes</strong></a></h2>
+<h3 id="Étape-1--préparation-de-lapplication-flask"><a class="header" href="#Étape-1--préparation-de-lapplication-flask"><strong>Étape 1 : Préparation de l'Application Flask</strong></a></h3>
+<ol>
+<li>
+<p><strong>Créez un répertoire pour votre projet local</strong> :</p>
+<pre><code class="language-bash">mkdir flask-app
+cd flask-app
+</code></pre>
+</li>
+<li>
+<p><strong>Créez une application Flask simple</strong> :</p>
+<ul>
+<li>
+<p><strong>Créez un fichier <code>app.py</code></strong> :</p>
+<pre><code class="language-bash">nano app.py
+</code></pre>
+</li>
+<li>
+<p>Ajoutez le code suivant :</p>
+<pre><code class="language-python">from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return "Hello, Azure App Service! Bienvenue dans mon application Flask."
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000)
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Créez un environnement virtuel et chargez-le</strong> :</p>
+<pre><code class="language-bash">python -m venv .venv
+. .venv/bin/activate
+</code></pre>
+</li>
+</ol>
+<blockquote>
+Sur windows vous devrez lancer les commandes suivantes:
+<pre><code>
+py -m venv .venv
+.venv\scripts\activate
+</code></pre>
+</blockquote>
+<ol start="4">
+<li>
+<p><strong>Installez flask dans l'environnement virtuel</strong>:</p>
+<pre><code class="language-bash">pip install flask
+</code></pre>
+</li>
+<li>
+<p><strong>Ajoutez un fichier <code>requirements.txt</code> pour les dépendances</strong> :</p>
+<pre><code class="language-bash">pip freeze &gt; requirements.txt
+</code></pre>
+</li>
+<li>
+<p><strong>Créez un gitignore pour ignorer l'environnement virtuel</strong>:</p>
+<pre><code class="language-bash">echo ".venv" &gt; .gitignore
+</code></pre>
+</li>
+<li>
+<p><strong>Initialisez un dépôt Git local</strong> :</p>
+<pre><code class="language-bash">git init
+git add .
+git commit -m "Initial commit of Flask app"
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-2--création-dune-application-web-sur-azure-app-service"><a class="header" href="#Étape-2--création-dune-application-web-sur-azure-app-service"><strong>Étape 2 : Création d’une Application Web sur Azure App Service</strong></a></h3>
+<ol>
+<li>
+<p><strong>Connectez-vous au portail Azure</strong> : <a href="https://portal.azure.com">https://portal.azure.com</a>.</p>
+</li>
+<li>
+<p><strong>Créez un App Service Plan</strong> :</p>
+<ul>
+<li>
+<p>Accédez à <strong>"Créer une ressource"</strong> &gt; <strong>App Service</strong>.</p>
+</li>
+<li>
+<p>Remplissez les champs :</p>
+<ul>
+<li><strong>Nom de l’application</strong> : <code>flask-hello-app-&lt;votre_nom&gt;</code> (nom unique).</li>
+<li><strong>Abonnement</strong> : Sélectionnez votre abonnement.</li>
+<li><strong>Groupe de ressources</strong> : Créez-en un nouveau, par exemple <strong>FlaskAppServiceGroup</strong>.</li>
+<li><strong>Runtime Stack</strong> : <strong>Python 3.12</strong> (ou la version disponible la plus proche).</li>
+<li><strong>Région</strong> : <strong>westeurope</strong>.</li>
+<li><strong>Plan d'hébergement</strong> : <strong>Standard (S1)</strong> ou <strong>Free (F1)</strong> pour les tests.</li>
+</ul>
+</li>
+<li>
+<p>Cliquez sur <strong>"Créer"</strong> pour lancer le déploiement.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Configurez le déploiement via Git</strong> :</p>
+<ul>
+<li>Une fois l’App Service créé, allez dans le menu <strong>"Deployment Center"</strong> de votre App Service.</li>
+<li>Sélectionnez <strong>Local Git</strong> comme source de déploiement.</li>
+<li>Une URL Git vous sera fournie (exemple : <code>https://flask-hello-app-&lt;votre_nom&gt;.scm.azurewebsites.net:443/flask-hello-app.git</code>).</li>
+<li><strong>Copiez cette URL</strong>, vous en aurez besoin.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-3--configuration-du-déploiement-local-vers-azure"><a class="header" href="#Étape-3--configuration-du-déploiement-local-vers-azure"><strong>Étape 3 : Configuration du Déploiement Local vers Azure</strong></a></h3>
+<ol>
+<li>
+<p><strong>Ajoutez l'URL distante à votre dépôt local</strong> :</p>
+<pre><code class="language-bash">git remote add azure &lt;URL_COPIÉE&gt;
+</code></pre>
+<p>Remplacez <code>&lt;URL_COPIÉE&gt;</code> par l'URL fournie par le portail Azure.</p>
+</li>
+<li>
+<p><strong>Poussez votre code vers le dépôt distant Azure</strong> :</p>
+<pre><code class="language-bash">git push azure master
+</code></pre>
+<ul>
+<li>Lors du push, entrez les identifiants Git de déploiement (fournis dans le portail Azure).</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-4--vérification-de-lapplication-déployée"><a class="header" href="#Étape-4--vérification-de-lapplication-déployée"><strong>Étape 4 : Vérification de l'Application Déployée</strong></a></h3>
+<ol>
+<li>
+<p><strong>Accédez à votre application</strong> via l’URL du site web généré par Azure :</p>
+<pre><code>https://flask-hello-app-&lt;votre_nom&gt;.azurewebsites.net
+</code></pre>
+</li>
+<li>
+<p><strong>Vérifiez que la page s’affiche correctement</strong> :</p>
+<pre><code>Hello, Azure App Service! Bienvenue dans mon application Flask.
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2 id="entraînement-extension-non-guidée-2"><a class="header" href="#entraînement-extension-non-guidée-2"><strong>Entraînement</strong> (Extension non-guidée)</a></h2>
+<h3 id="tâches-à-réaliser-1"><a class="header" href="#tâches-à-réaliser-1"><strong>Tâches à Réaliser</strong></a></h3>
+<ol>
+<li>
+<p><strong>Ajoutez une route supplémentaire</strong></p>
+<ul>
+<li>Créez une route <code>/status</code> qui renvoie un message <strong>JSON</strong> indiquant que l’application est en ligne.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ajoutez une variable d’environnement</strong></p>
+<ul>
+<li>Configurez une variable d’environnement <strong>MESSAGE</strong> dans Azure App Service pour personnaliser le message d’accueil de la page principale.</li>
+</ul>
+</li>
+<li>
+<p><strong>Surveillez les journaux de déploiement</strong></p>
+<ul>
+<li>Utilisez le <strong>Portail Azure</strong>  pour observer les journaux de déploiement et d’exécution.</li>
+</ul>
+</li>
+</ol>
+<h3 id="quiz-2"><a class="header" href="#quiz-2"><strong>Quiz</strong></a></h3>
+<p>Voici pour finir un quiz sur AppService :</p>
+<div class="quiz-placeholder" data-quiz-name="&quot;appservice&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Azure App Service est une plateforme en tant que service (PaaS) permettant d'héberger des applications web, des API RESTful et des services backend.\n&quot;,&quot;id&quot;:&quot;7c9abf86-2e6a-4b4b-8029-3237b4d5988f&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Un service PaaS permettant d'héberger des applications web et API&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un service permettant d'exécuter des conteneurs Kubernetes&quot;,&quot;Un service de stockage pour les bases de données SQL&quot;,&quot;Un service de surveillance des ressources Azure&quot;],&quot;prompt&quot;:&quot;Qu'est-ce qu'Azure App Service ?&quot;}},{&quot;context&quot;:&quot;La commande `git init` initialise un dépôt Git local dans le répertoire de votre projet, permettant de suivre les versions du code.\n&quot;,&quot;id&quot;:&quot;fda13db6-5451-4179-93a1-989480aab2bb&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Exécuter la commande `git init`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Configurer un environnement Python virtuel&quot;,&quot;Ajouter un fichier app.py&quot;,&quot;Installer Flask dans l'environnement virtuel&quot;],&quot;prompt&quot;:&quot;Quelle est l'étape nécessaire pour initialiser un dépôt Git local dans un projet Flask ?&quot;}},{&quot;context&quot;:&quot;La commande `pip install flask` installe Flask, un framework Python léger pour construire des applications web.\n&quot;,&quot;id&quot;:&quot;6bb9c674-bdaf-498a-a97a-4eba11840f54&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;pip install flask&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;flask init&quot;,&quot;pip update flask&quot;,&quot;python setup.py flask&quot;],&quot;prompt&quot;:&quot;Quelle commande permet de configurer Flask comme dépendance pour le projet ?&quot;}},{&quot;context&quot;:&quot;Dans cet exercice, le déploiement est réalisé en utilisant Git Local, une méthode permettant de pousser le code d'un dépôt Git local vers un dépôt distant Azure.\n&quot;,&quot;id&quot;:&quot;44982267-3bbe-4b39-be2f-7840bb1f0d23&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Déploiement via Git Local&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Déploiement via Azure DevOps&quot;,&quot;Déploiement via FTP&quot;,&quot;Déploiement via conteneur Docker&quot;],&quot;prompt&quot;:&quot;Quelle méthode de déploiement est utilisée dans cet exercice ?&quot;}},{&quot;context&quot;:&quot;Le fichier `requirements.txt` contient les bibliothèques Python nécessaires au projet. Cela permet à Azure App Service d'installer automatiquement les dépendances lors du déploiement.\n&quot;,&quot;id&quot;:&quot;0613133f-14b8-4fe5-b97b-a22ed02f93f7&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Lister les dépendances Python nécessaires au projet&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Lister les fichiers nécessaires à l'application&quot;,&quot;Spécifier les variables d'environnement pour l'application&quot;,&quot;Contenir le code principal de l'application&quot;],&quot;prompt&quot;:&quot;Quel est le rôle du fichier `requirements.txt` dans le projet Flask ?&quot;}},{&quot;context&quot;:&quot;La commande `git push azure master` envoie le code local vers le dépôt distant Azure configuré pour le déploiement.\n&quot;,&quot;id&quot;:&quot;8c09d7b1-b5d6-4551-b2f2-29c4786f3c39&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;git push azure master&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;git deploy azure&quot;,&quot;az appservice push&quot;,&quot;az git upload&quot;],&quot;prompt&quot;:&quot;Quelle commande permet de pousser le code vers Azure App Service ?&quot;}},{&quot;context&quot;:&quot;Pour les applications Flask, qui sont écrites en Python, il faut sélectionner Python comme runtime dans Azure App Service.\n&quot;,&quot;id&quot;:&quot;91455bee-365d-48ce-be28-1fcc31f27b7d&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Python&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Node.js&quot;,&quot;Java&quot;,&quot;Ruby&quot;],&quot;prompt&quot;:&quot;Quel runtime doit être sélectionné dans Azure App Service pour une application Flask ?&quot;}},{&quot;context&quot;:&quot;La commande `python -m venv .venv` crée un environnement virtuel Python isolé pour gérer les dépendances spécifiques au projet.\n&quot;,&quot;id&quot;:&quot;f1a90394-8407-4c46-9d92-efc1c553d9d4&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;python -m venv .venv&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;python install venv&quot;,&quot;pip setup venv&quot;,&quot;venv create .&quot;],&quot;prompt&quot;:&quot;Quelle commande permet de créer un environnement virtuel Python pour le projet ?&quot;}},{&quot;context&quot;:&quot;Dans cet exercice, `app.py` est le fichier Python contenant le code de l'application Flask, qui sera exécuté par Azure App Service.\n&quot;,&quot;id&quot;:&quot;abc05ac8-3439-4dae-a501-443d4531f6bb&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;app.py&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;settings.json&quot;,&quot;startup.config&quot;,&quot;azure-flask.yml&quot;],&quot;prompt&quot;:&quot;Quel fichier est utilisé par Azure App Service pour exécuter l'application Flask ?&quot;}},{&quot;context&quot;:&quot;Une fois l'application déployée, vous pouvez accéder à l'URL générée par Azure App Service, sous la forme : https://&lt;nom-de-votre-app&gt;.azurewebsites.net.\n&quot;,&quot;id&quot;:&quot;5be3fa46-5547-47fc-a2a8-f9384de30552&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;https://&lt;nom-de-votre-app&gt;.azurewebsites.net&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;https://portal.azure.com/app&quot;,&quot;http://localhost:8000&quot;,&quot;https://&lt;nom-de-votre-app&gt;.git.azurewebsites.net&quot;],&quot;prompt&quot;:&quot;Quelle URL vous permet de vérifier que l'application Flask est déployée avec succès ?&quot;}},{&quot;context&quot;:&quot;Azure App Service supporte la mise à l'échelle automatique, permettant d'ajuster automatiquement les ressources en fonction de la demande.\n&quot;,&quot;id&quot;:&quot;4f73d16b-8ab9-4c8c-a1d8-133fc8cc19aa&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Il offre des fonctionnalités de mise à l'échelle automatique pour les applications.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Il permet uniquement d'héberger des bases de données SQL.&quot;,&quot;Il est réservé aux applications utilisant des conteneurs Docker.&quot;,&quot;Il ne supporte pas les déploiements via Git.&quot;],&quot;prompt&quot;:&quot;Quelle est une fonctionnalité clé d'Azure App Service ?&quot;}},{&quot;context&quot;:&quot;Azure App Service prend en charge les runtimes modernes et populaires tels que Python, Java, .NET, Node.js, et PHP pour le développement d'applications web.\n&quot;,&quot;id&quot;:&quot;666d1a63-324e-4aad-b13c-b3113afdaf88&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Python, Java, .NET, Node.js, PHP&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Ruby, COBOL, Fortran&quot;,&quot;C++, Scala, Haskell&quot;,&quot;Java, Perl, R&quot;],&quot;prompt&quot;:&quot;Quels sont les types de runtime pris en charge par Azure App Service ?&quot;}},{&quot;context&quot;:&quot;Les App Settings dans le Portail Azure permettent de configurer des variables d'environnement et d'autres paramètres pour les applications hébergées sur Azure App Service.\n&quot;,&quot;id&quot;:&quot;b48a50db-7e60-4f79-8b96-d3d778e27ba1&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Utiliser les App Settings dans le Portail Azure&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Utiliser un fichier local uniquement&quot;,&quot;Configurer un script PowerShell sur la VM sous-jacente&quot;,&quot;Modifier directement le fichier app.py&quot;],&quot;prompt&quot;:&quot;Quelle méthode peut être utilisée pour configurer des paramètres d'application dans Azure App Service ?&quot;}},{&quot;context&quot;:&quot;Choisir une région proche des utilisateurs finaux garantit une faible latence et une meilleure expérience utilisateur.\n&quot;,&quot;id&quot;:&quot;ce4e4c41-3428-43c5-9b8d-e15f35168d54&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;La région la plus proche de vos utilisateurs pour minimiser la latence&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;La région la plus éloignée pour éviter les conflits de réseau&quot;,&quot;La région avec la version Python la plus récente&quot;,&quot;Une région aléatoire&quot;],&quot;prompt&quot;:&quot;Quelle région Azure doit être choisie pour héberger une application sur Azure App Service ?&quot;}}]}" data-quiz-fullscreen="true"></div>
+<h3 id="liens-vers-la-documentation-2"><a class="header" href="#liens-vers-la-documentation-2"><strong>Liens vers la Documentation</strong></a></h3>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/app-service/quickstart-python?tabs=flask%2Cwindows%2Cazure-portal">Azure App Service - Déploiement Python</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git">Déploiement Git Local</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/app-service/configure-common#configure-app-settings">Configuration des variables d’environnement</a></li>
+<li><a href="https://flask.palletsprojects.com/en/2.0.x/">Flask Documentation</a></li>
 </ul>
 <script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--création-et-gestion-dun-groupe-de-ressources-sur-azure"><a class="header" href="#tutoriel--création-et-gestion-dun-groupe-de-ressources-sur-azure"><strong>Tutoriel : Création et gestion d’un groupe de ressources sur Azure</strong></a></h1>
 <p>Un groupe de ressources dans Azure est une unité logique qui regroupe des ressources cloud comme des machines virtuelles, des bases de données, des réseaux, etc. Cette organisation facilite leur gestion, leur supervision et leur contrôle.</p>
@@ -2536,6 +2750,147 @@ Les développeurs peuvent accéder à des machines virtuelles dans le cloud via 
 <hr />
 <h3 id="résumé-1"><a class="header" href="#résumé-1"><strong>Résumé</strong></a></h3>
 <p>Le protocole RDP est un outil puissant pour accéder et administrer à distance des machines, en particulier dans les environnements Windows. Sa capacité à offrir une interface graphique complète et à rediriger des ressources locales en fait un choix incontournable pour les professionnels de l'informatique. Cependant, pour une utilisation sécurisée, il est essentiel d'appliquer des bonnes pratiques comme l'utilisation de NLA, de pare-feu et de VPN.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="les-différents-types-de-redondance-de-stockage-dans-azure"><a class="header" href="#les-différents-types-de-redondance-de-stockage-dans-azure"><strong>Les différents types de redondance de stockage dans Azure</strong></a></h1>
+<p>Azure offre plusieurs niveaux de redondance pour garantir la disponibilité, la durabilité et la récupération des données en cas de panne ou de sinistre. Ces niveaux de redondance permettent de choisir la protection adéquate en fonction des besoins de votre application et de votre budget.</p>
+<h2 id="1-local-redundant-storage-lrs"><a class="header" href="#1-local-redundant-storage-lrs"><strong>1. Local Redundant Storage (LRS)</strong></a></h2>
+<h3 id="description-"><a class="header" href="#description-"><strong>Description :</strong></a></h3>
+<p>Le <strong>LRS (Local Redundant Storage)</strong> conserve trois copies de vos données dans un seul datacenter. Ces copies sont réparties sur des serveurs distincts dans un même centre de données pour protéger contre les défaillances matérielles locales (comme un disque défectueux).</p>
+<h3 id="caractéristiques-"><a class="header" href="#caractéristiques-"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Données répliquées <strong>uniquement dans un datacenter unique</strong>.</li>
+<li>Faible coût.</li>
+<li>Pas de protection contre les sinistres impactant le datacenter entier (pannes électriques, inondations, incendies).</li>
+</ul>
+<h3 id="cas-dusage-"><a class="header" href="#cas-dusage-"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Données qui peuvent être facilement recréées ou restaurées.</li>
+<li>Applications locales ou de test.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#local-redundant-storage">Documentation LRS</a></p>
+<h2 id="2-zone-redundant-storage-zrs"><a class="header" href="#2-zone-redundant-storage-zrs"><strong>2. Zone Redundant Storage (ZRS)</strong></a></h2>
+<h3 id="description--1"><a class="header" href="#description--1"><strong>Description :</strong></a></h3>
+<p>Le <strong>ZRS (Zone Redundant Storage)</strong> conserve trois copies de vos données dans <strong>différentes zones de disponibilité</strong> au sein de la même région Azure. Une <strong>zone de disponibilité</strong> est un regroupement de datacenters physiquement séparés et indépendants.</p>
+<h3 id="caractéristiques--1"><a class="header" href="#caractéristiques--1"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Haute disponibilité avec répartition des copies dans des zones distinctes.</li>
+<li>Protection contre les pannes d’un datacenter ou d’une zone entière.</li>
+<li>Latence légèrement accrue par rapport au LRS (en raison de la réplication entre zones).</li>
+</ul>
+<h3 id="cas-dusage--1"><a class="header" href="#cas-dusage--1"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Données critiques nécessitant une disponibilité élevée.</li>
+<li>Applications qui doivent rester en ligne même en cas de panne d'une zone Azure.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#zone-redundant-storage">Documentation ZRS</a></p>
+<h2 id="3-geo-redundant-storage-grs"><a class="header" href="#3-geo-redundant-storage-grs"><strong>3. Geo-Redundant Storage (GRS)</strong></a></h2>
+<h3 id="description--2"><a class="header" href="#description--2"><strong>Description :</strong></a></h3>
+<p>Le <strong>GRS (Geo-Redundant Storage)</strong> conserve <strong>six copies</strong> de vos données : trois dans un datacenter principal (LRS) et trois dans un datacenter secondaire situé dans une autre région Azure distante (réplication géographique).</p>
+<p>En cas de sinistre majeur dans la région principale, les données peuvent être lues depuis la région secondaire.</p>
+<h3 id="caractéristiques--2"><a class="header" href="#caractéristiques--2"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Protection contre des sinistres régionaux (comme une panne ou une catastrophe naturelle).</li>
+<li>La région secondaire est <strong>en lecture seule</strong> jusqu’à une bascule manuelle.</li>
+<li>Latence accrue pour la réplication inter-régions.</li>
+</ul>
+<h3 id="cas-dusage--2"><a class="header" href="#cas-dusage--2"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Données critiques nécessitant une haute durabilité.</li>
+<li>Applications avec tolérance aux sinistres régionaux.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#geo-redundant-storage">Documentation GRS</a></p>
+<h2 id="4-geo-zone-redundant-storage-gzrs"><a class="header" href="#4-geo-zone-redundant-storage-gzrs"><strong>4. Geo-Zone Redundant Storage (GZRS)</strong></a></h2>
+<h3 id="description--3"><a class="header" href="#description--3"><strong>Description :</strong></a></h3>
+<p>Le <strong>GZRS (Geo-Zone Redundant Storage)</strong> combine les avantages du ZRS et du GRS. Les données sont répliquées dans des zones de disponibilité au sein de la région principale, et également répliquées dans une région secondaire distante.</p>
+<h3 id="caractéristiques--3"><a class="header" href="#caractéristiques--3"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Haute disponibilité au sein de la région principale grâce au ZRS.</li>
+<li>Protection contre des sinistres régionaux grâce à la réplication géographique.</li>
+<li>Résilience maximale.</li>
+</ul>
+<h3 id="cas-dusage--3"><a class="header" href="#cas-dusage--3"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Données critiques et stratégiques nécessitant une protection maximale.</li>
+<li>Applications hautement disponibles, même en cas de sinistre régional.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#geo-zone-redundant-storage">Documentation GZRS</a></p>
+<h2 id="5-read-access-geo-redundant-storage-ra-grs"><a class="header" href="#5-read-access-geo-redundant-storage-ra-grs"><strong>5. Read-Access Geo-Redundant Storage (RA-GRS)</strong></a></h2>
+<h3 id="description--4"><a class="header" href="#description--4"><strong>Description :</strong></a></h3>
+<p>Le <strong>RA-GRS (Read-Access Geo-Redundant Storage)</strong> est une variante du GRS qui permet un accès <strong>en lecture seule</strong> aux données répliquées dans la région secondaire.</p>
+<h3 id="caractéristiques--4"><a class="header" href="#caractéristiques--4"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Ajoute la capacité d'accès en lecture à partir de la région secondaire sans bascule.</li>
+<li>Utilisé pour augmenter la disponibilité globale et réduire la latence pour des utilisateurs situés près de la région secondaire.</li>
+</ul>
+<h3 id="cas-dusage--4"><a class="header" href="#cas-dusage--4"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Données consultées fréquemment dans plusieurs régions.</li>
+<li>Réduction des temps d'arrêt pour les applications basées sur les données.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#read-access-geo-redundant-storage">Documentation RA-GRS</a></p>
+<h2 id="6-read-access-geo-zone-redundant-storage-ra-gzrs"><a class="header" href="#6-read-access-geo-zone-redundant-storage-ra-gzrs"><strong>6. Read-Access Geo-Zone Redundant Storage (RA-GZRS)</strong></a></h2>
+<h3 id="description--5"><a class="header" href="#description--5"><strong>Description :</strong></a></h3>
+<p>Le <strong>RA-GZRS</strong> est une variante du GZRS qui ajoute un accès en lecture seule à la région secondaire, comme le RA-GRS.</p>
+<h3 id="caractéristiques--5"><a class="header" href="#caractéristiques--5"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Réplication multi-zones dans la région principale (ZRS).</li>
+<li>Réplication géographique dans une région secondaire avec accès en lecture.</li>
+<li>Résilience et disponibilité maximales.</li>
+</ul>
+<h3 id="cas-dusage--5"><a class="header" href="#cas-dusage--5"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Applications critiques nécessitant à la fois une haute disponibilité locale et une récupération géographique rapide.</li>
+<li>Réduction des temps d'accès en lecture pour des utilisateurs globaux.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#read-access-geo-zone-redundant-storage">Documentation RA-GZRS</a></p>
+<h2 id="résumé-des-options-de-redondance"><a class="header" href="#résumé-des-options-de-redondance"><strong>Résumé des options de redondance</strong></a></h2>
+<div class="table-wrapper"><table><thead><tr><th><strong>Type</strong></th><th><strong>Copies des données</strong></th><th><strong>Localisation</strong></th><th><strong>Protection</strong></th><th><strong>Cas d’usage</strong></th></tr></thead><tbody>
+<tr><td><strong>LRS</strong></td><td>3 copies</td><td>Même datacenter</td><td>Défaillances matérielles locales</td><td>Scénarios peu critiques.</td></tr>
+<tr><td><strong>ZRS</strong></td><td>3 copies</td><td>Différentes zones</td><td>Défaillances de zones dans une région</td><td>Applications critiques locales.</td></tr>
+<tr><td><strong>GRS</strong></td><td>6 copies (3 local + 3 géographique)</td><td>Deux régions</td><td>Sinistres régionaux</td><td>Données avec reprise après sinistre.</td></tr>
+<tr><td><strong>GZRS</strong></td><td>6 copies (multi-zones + géographique)</td><td>Deux régions (multi-zone)</td><td>Sinistres régionaux et haute dispo.</td><td>Applications stratégiques critiques.</td></tr>
+<tr><td><strong>RA-GRS</strong></td><td>6 copies (lecture région secondaire)</td><td>Deux régions</td><td>Sinistres régionaux + lecture seule</td><td>Disponibilité accrue.</td></tr>
+<tr><td><strong>RA-GZRS</strong></td><td>6 copies (lecture région secondaire)</td><td>Deux régions (multi-zone)</td><td>Haute dispo. + lecture globale</td><td>Résilience maximale.</td></tr>
+</tbody></table>
+</div>
+<h2 id="bonnes-pratiques-pour-choisir-une-option-de-redondance"><a class="header" href="#bonnes-pratiques-pour-choisir-une-option-de-redondance"><strong>Bonnes pratiques pour choisir une option de redondance</strong></a></h2>
+<ol>
+<li>
+<p><strong>Besoins de disponibilité :</strong></p>
+<ul>
+<li>Si vous n’avez pas besoin de haute disponibilité, <strong>LRS</strong> peut suffire.</li>
+<li>Pour des applications critiques, préférez <strong>ZRS</strong> ou <strong>GZRS</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Besoins de récupération après sinistre :</strong></p>
+<ul>
+<li>Pour garantir une récupération en cas de panne régionale, choisissez <strong>GRS</strong>, <strong>GZRS</strong>, ou leurs variantes <strong>RA</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Budget :</strong></p>
+<ul>
+<li>Les solutions géographiquement redondantes (GRS, GZRS) sont plus coûteuses, mais elles offrent une meilleure résilience.</li>
+</ul>
+</li>
+<li>
+<p><strong>Accès global :</strong></p>
+<ul>
+<li>Si vous avez des utilisateurs répartis sur plusieurs régions, optez pour <strong>RA-GRS</strong> ou <strong>RA-GZRS</strong> pour une meilleure expérience utilisateur.</li>
+</ul>
+</li>
+</ol>
+<h2 id="liens-utiles-1"><a class="header" href="#liens-utiles-1"><strong>Liens utiles</strong></a></h2>
+<ul>
+<li>
+<p><strong>Documentation sur la redondance du stockage Azure</strong> :<br />
+<a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy">https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy</a></p>
+</li>
+<li>
+<p><strong>Calculateur des coûts Azure Storage</strong> :<br />
+<a href="https://azure.microsoft.com/pricing/calculator/">https://azure.microsoft.com/pricing/calculator/</a></p>
+</li>
+</ul>
 
                     </main>
 

@@ -1,0 +1,195 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Qu'est-ce qu'Azure App Service ?"
+prompt.distractors = [
+  "Un service permettant d'exécuter des conteneurs Kubernetes",
+  "Un service de stockage pour les bases de données SQL",
+  "Un service de surveillance des ressources Azure"
+]
+answer.answer = "Un service PaaS permettant d'héberger des applications web et API"
+context = """
+Azure App Service est une plateforme en tant que service (PaaS) permettant d'héberger des applications web, des API RESTful et des services backend.
+"""
+id = "7c9abf86-2e6a-4b4b-8029-3237b4d5988f"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est l'étape nécessaire pour initialiser un dépôt Git local dans un projet Flask ?"
+prompt.distractors = [
+  "Configurer un environnement Python virtuel",
+  "Ajouter un fichier app.py",
+  "Installer Flask dans l'environnement virtuel"
+]
+answer.answer = "Exécuter la commande `git init`"
+context = """
+La commande `git init` initialise un dépôt Git local dans le répertoire de votre projet, permettant de suivre les versions du code.
+"""
+id = "fda13db6-5451-4179-93a1-989480aab2bb"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande permet de configurer Flask comme dépendance pour le projet ?"
+prompt.distractors = [
+  "flask init",
+  "pip update flask",
+  "python setup.py flask"
+]
+answer.answer = "pip install flask"
+context = """
+La commande `pip install flask` installe Flask, un framework Python léger pour construire des applications web.
+"""
+id = "6bb9c674-bdaf-498a-a97a-4eba11840f54"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle méthode de déploiement est utilisée dans cet exercice ?"
+prompt.distractors = [
+  "Déploiement via Azure DevOps",
+  "Déploiement via FTP",
+  "Déploiement via conteneur Docker"
+]
+answer.answer = "Déploiement via Git Local"
+context = """
+Dans cet exercice, le déploiement est réalisé en utilisant Git Local, une méthode permettant de pousser le code d'un dépôt Git local vers un dépôt distant Azure.
+"""
+id = "44982267-3bbe-4b39-be2f-7840bb1f0d23"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle du fichier `requirements.txt` dans le projet Flask ?"
+prompt.distractors = [
+  "Lister les fichiers nécessaires à l'application",
+  "Spécifier les variables d'environnement pour l'application",
+  "Contenir le code principal de l'application"
+]
+answer.answer = "Lister les dépendances Python nécessaires au projet"
+context = """
+Le fichier `requirements.txt` contient les bibliothèques Python nécessaires au projet. Cela permet à Azure App Service d'installer automatiquement les dépendances lors du déploiement.
+"""
+id = "0613133f-14b8-4fe5-b97b-a22ed02f93f7"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande permet de pousser le code vers Azure App Service ?"
+prompt.distractors = [
+  "git deploy azure",
+  "az appservice push",
+  "az git upload"
+]
+answer.answer = "git push azure master"
+context = """
+La commande `git push azure master` envoie le code local vers le dépôt distant Azure configuré pour le déploiement.
+"""
+id = "8c09d7b1-b5d6-4551-b2f2-29c4786f3c39"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel runtime doit être sélectionné dans Azure App Service pour une application Flask ?"
+prompt.distractors = [
+  "Node.js",
+  "Java",
+  "Ruby"
+]
+answer.answer = "Python"
+context = """
+Pour les applications Flask, qui sont écrites en Python, il faut sélectionner Python comme runtime dans Azure App Service.
+"""
+id = "91455bee-365d-48ce-be28-1fcc31f27b7d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande permet de créer un environnement virtuel Python pour le projet ?"
+prompt.distractors = [
+  "python install venv",
+  "pip setup venv",
+  "venv create ."
+]
+answer.answer = "python -m venv .venv"
+context = """
+La commande `python -m venv .venv` crée un environnement virtuel Python isolé pour gérer les dépendances spécifiques au projet.
+"""
+id = "f1a90394-8407-4c46-9d92-efc1c553d9d4"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel fichier est utilisé par Azure App Service pour exécuter l'application Flask ?"
+prompt.distractors = [
+  "settings.json",
+  "startup.config",
+  "azure-flask.yml"
+]
+answer.answer = "app.py"
+context = """
+Dans cet exercice, `app.py` est le fichier Python contenant le code de l'application Flask, qui sera exécuté par Azure App Service.
+"""
+id = "abc05ac8-3439-4dae-a501-443d4531f6bb"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle URL vous permet de vérifier que l'application Flask est déployée avec succès ?"
+prompt.distractors = [
+  "https://portal.azure.com/app",
+  "http://localhost:8000",
+  "https://<nom-de-votre-app>.git.azurewebsites.net"
+]
+answer.answer = "https://<nom-de-votre-app>.azurewebsites.net"
+context = """
+Une fois l'application déployée, vous pouvez accéder à l'URL générée par Azure App Service, sous la forme : https://<nom-de-votre-app>.azurewebsites.net.
+"""
+id = "5be3fa46-5547-47fc-a2a8-f9384de30552"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est une fonctionnalité clé d'Azure App Service ?"
+prompt.distractors = [
+  "Il permet uniquement d'héberger des bases de données SQL.",
+  "Il est réservé aux applications utilisant des conteneurs Docker.",
+  "Il ne supporte pas les déploiements via Git."
+]
+answer.answer = "Il offre des fonctionnalités de mise à l'échelle automatique pour les applications."
+context = """
+Azure App Service supporte la mise à l'échelle automatique, permettant d'ajuster automatiquement les ressources en fonction de la demande.
+"""
+id = "4f73d16b-8ab9-4c8c-a1d8-133fc8cc19aa"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quels sont les types de runtime pris en charge par Azure App Service ?"
+prompt.distractors = [
+  "Ruby, COBOL, Fortran",
+  "C++, Scala, Haskell",
+  "Java, Perl, R"
+]
+answer.answer = "Python, Java, .NET, Node.js, PHP"
+context = """
+Azure App Service prend en charge les runtimes modernes et populaires tels que Python, Java, .NET, Node.js, et PHP pour le développement d'applications web.
+"""
+id = "666d1a63-324e-4aad-b13c-b3113afdaf88"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle méthode peut être utilisée pour configurer des paramètres d'application dans Azure App Service ?"
+prompt.distractors = [
+  "Utiliser un fichier local uniquement",
+  "Configurer un script PowerShell sur la VM sous-jacente",
+  "Modifier directement le fichier app.py"
+]
+answer.answer = "Utiliser les App Settings dans le Portail Azure"
+context = """
+Les App Settings dans le Portail Azure permettent de configurer des variables d'environnement et d'autres paramètres pour les applications hébergées sur Azure App Service.
+"""
+id = "b48a50db-7e60-4f79-8b96-d3d778e27ba1"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle région Azure doit être choisie pour héberger une application sur Azure App Service ?"
+prompt.distractors = [
+  "La région la plus éloignée pour éviter les conflits de réseau",
+  "La région avec la version Python la plus récente",
+  "Une région aléatoire"
+]
+answer.answer = "La région la plus proche de vos utilisateurs pour minimiser la latence"
+context = """
+Choisir une région proche des utilisateurs finaux garantit une faible latence et une meilleure expérience utilisateur.
+"""
+id = "ce4e4c41-3428-43c5-9b8d-e15f35168d54"

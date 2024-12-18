@@ -1,0 +1,362 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Les redondances de stockage - Panorama du Cloud - Azure</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../exercises/deploy_nginx.html"><strong aria-hidden="true">1.</strong> Déployez un Serveur Web sur une Machine Virtuelle Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../corrections/deploy_nginx.html"><strong aria-hidden="true">1.1.</strong> Correction de la partie non-guidée</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/multi_tier.html"><strong aria-hidden="true">2.</strong> Déployez une Application Multi-Tiers avec Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../corrections/multi_tier.html"><strong aria-hidden="true">2.1.</strong> Correction</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/deploy_appservice.html"><strong aria-hidden="true">3.</strong> Déployez une Application Flask sur Azure App Service via Git</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutoriels</li><li class="chapter-item expanded "><a href="../tutoriels/resources_group.html"><strong aria-hidden="true">4.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="../tutoriels/tags.html"><strong aria-hidden="true">5.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="../tutoriels/vm.html"><strong aria-hidden="true">6.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/ssh.html"><strong aria-hidden="true">7.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/scp.html"><strong aria-hidden="true">8.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/snapshots.html"><strong aria-hidden="true">9.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="../tutoriels/storage.html"><strong aria-hidden="true">10.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/azure_blob_storage.html"><strong aria-hidden="true">11.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="../notions/azure_monitor.html"><strong aria-hidden="true">12.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="../notions/ssh.html"><strong aria-hidden="true">13.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="../notions/rdp.html"><strong aria-hidden="true">14.</strong> protocole RDP</a></li><li class="chapter-item expanded "><a href="../notions/storage.html" class="active"><strong aria-hidden="true">15.</strong> Les redondances de stockage</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Panorama du Cloud - Azure</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="les-différents-types-de-redondance-de-stockage-dans-azure"><a class="header" href="#les-différents-types-de-redondance-de-stockage-dans-azure"><strong>Les différents types de redondance de stockage dans Azure</strong></a></h1>
+<p>Azure offre plusieurs niveaux de redondance pour garantir la disponibilité, la durabilité et la récupération des données en cas de panne ou de sinistre. Ces niveaux de redondance permettent de choisir la protection adéquate en fonction des besoins de votre application et de votre budget.</p>
+<h2 id="1-local-redundant-storage-lrs"><a class="header" href="#1-local-redundant-storage-lrs"><strong>1. Local Redundant Storage (LRS)</strong></a></h2>
+<h3 id="description-"><a class="header" href="#description-"><strong>Description :</strong></a></h3>
+<p>Le <strong>LRS (Local Redundant Storage)</strong> conserve trois copies de vos données dans un seul datacenter. Ces copies sont réparties sur des serveurs distincts dans un même centre de données pour protéger contre les défaillances matérielles locales (comme un disque défectueux).</p>
+<h3 id="caractéristiques-"><a class="header" href="#caractéristiques-"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Données répliquées <strong>uniquement dans un datacenter unique</strong>.</li>
+<li>Faible coût.</li>
+<li>Pas de protection contre les sinistres impactant le datacenter entier (pannes électriques, inondations, incendies).</li>
+</ul>
+<h3 id="cas-dusage-"><a class="header" href="#cas-dusage-"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Données qui peuvent être facilement recréées ou restaurées.</li>
+<li>Applications locales ou de test.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#local-redundant-storage">Documentation LRS</a></p>
+<h2 id="2-zone-redundant-storage-zrs"><a class="header" href="#2-zone-redundant-storage-zrs"><strong>2. Zone Redundant Storage (ZRS)</strong></a></h2>
+<h3 id="description--1"><a class="header" href="#description--1"><strong>Description :</strong></a></h3>
+<p>Le <strong>ZRS (Zone Redundant Storage)</strong> conserve trois copies de vos données dans <strong>différentes zones de disponibilité</strong> au sein de la même région Azure. Une <strong>zone de disponibilité</strong> est un regroupement de datacenters physiquement séparés et indépendants.</p>
+<h3 id="caractéristiques--1"><a class="header" href="#caractéristiques--1"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Haute disponibilité avec répartition des copies dans des zones distinctes.</li>
+<li>Protection contre les pannes d’un datacenter ou d’une zone entière.</li>
+<li>Latence légèrement accrue par rapport au LRS (en raison de la réplication entre zones).</li>
+</ul>
+<h3 id="cas-dusage--1"><a class="header" href="#cas-dusage--1"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Données critiques nécessitant une disponibilité élevée.</li>
+<li>Applications qui doivent rester en ligne même en cas de panne d'une zone Azure.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#zone-redundant-storage">Documentation ZRS</a></p>
+<h2 id="3-geo-redundant-storage-grs"><a class="header" href="#3-geo-redundant-storage-grs"><strong>3. Geo-Redundant Storage (GRS)</strong></a></h2>
+<h3 id="description--2"><a class="header" href="#description--2"><strong>Description :</strong></a></h3>
+<p>Le <strong>GRS (Geo-Redundant Storage)</strong> conserve <strong>six copies</strong> de vos données : trois dans un datacenter principal (LRS) et trois dans un datacenter secondaire situé dans une autre région Azure distante (réplication géographique).</p>
+<p>En cas de sinistre majeur dans la région principale, les données peuvent être lues depuis la région secondaire.</p>
+<h3 id="caractéristiques--2"><a class="header" href="#caractéristiques--2"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Protection contre des sinistres régionaux (comme une panne ou une catastrophe naturelle).</li>
+<li>La région secondaire est <strong>en lecture seule</strong> jusqu’à une bascule manuelle.</li>
+<li>Latence accrue pour la réplication inter-régions.</li>
+</ul>
+<h3 id="cas-dusage--2"><a class="header" href="#cas-dusage--2"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Données critiques nécessitant une haute durabilité.</li>
+<li>Applications avec tolérance aux sinistres régionaux.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#geo-redundant-storage">Documentation GRS</a></p>
+<h2 id="4-geo-zone-redundant-storage-gzrs"><a class="header" href="#4-geo-zone-redundant-storage-gzrs"><strong>4. Geo-Zone Redundant Storage (GZRS)</strong></a></h2>
+<h3 id="description--3"><a class="header" href="#description--3"><strong>Description :</strong></a></h3>
+<p>Le <strong>GZRS (Geo-Zone Redundant Storage)</strong> combine les avantages du ZRS et du GRS. Les données sont répliquées dans des zones de disponibilité au sein de la région principale, et également répliquées dans une région secondaire distante.</p>
+<h3 id="caractéristiques--3"><a class="header" href="#caractéristiques--3"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Haute disponibilité au sein de la région principale grâce au ZRS.</li>
+<li>Protection contre des sinistres régionaux grâce à la réplication géographique.</li>
+<li>Résilience maximale.</li>
+</ul>
+<h3 id="cas-dusage--3"><a class="header" href="#cas-dusage--3"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Données critiques et stratégiques nécessitant une protection maximale.</li>
+<li>Applications hautement disponibles, même en cas de sinistre régional.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#geo-zone-redundant-storage">Documentation GZRS</a></p>
+<h2 id="5-read-access-geo-redundant-storage-ra-grs"><a class="header" href="#5-read-access-geo-redundant-storage-ra-grs"><strong>5. Read-Access Geo-Redundant Storage (RA-GRS)</strong></a></h2>
+<h3 id="description--4"><a class="header" href="#description--4"><strong>Description :</strong></a></h3>
+<p>Le <strong>RA-GRS (Read-Access Geo-Redundant Storage)</strong> est une variante du GRS qui permet un accès <strong>en lecture seule</strong> aux données répliquées dans la région secondaire.</p>
+<h3 id="caractéristiques--4"><a class="header" href="#caractéristiques--4"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Ajoute la capacité d'accès en lecture à partir de la région secondaire sans bascule.</li>
+<li>Utilisé pour augmenter la disponibilité globale et réduire la latence pour des utilisateurs situés près de la région secondaire.</li>
+</ul>
+<h3 id="cas-dusage--4"><a class="header" href="#cas-dusage--4"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Données consultées fréquemment dans plusieurs régions.</li>
+<li>Réduction des temps d'arrêt pour les applications basées sur les données.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#read-access-geo-redundant-storage">Documentation RA-GRS</a></p>
+<h2 id="6-read-access-geo-zone-redundant-storage-ra-gzrs"><a class="header" href="#6-read-access-geo-zone-redundant-storage-ra-gzrs"><strong>6. Read-Access Geo-Zone Redundant Storage (RA-GZRS)</strong></a></h2>
+<h3 id="description--5"><a class="header" href="#description--5"><strong>Description :</strong></a></h3>
+<p>Le <strong>RA-GZRS</strong> est une variante du GZRS qui ajoute un accès en lecture seule à la région secondaire, comme le RA-GRS.</p>
+<h3 id="caractéristiques--5"><a class="header" href="#caractéristiques--5"><strong>Caractéristiques :</strong></a></h3>
+<ul>
+<li>Réplication multi-zones dans la région principale (ZRS).</li>
+<li>Réplication géographique dans une région secondaire avec accès en lecture.</li>
+<li>Résilience et disponibilité maximales.</li>
+</ul>
+<h3 id="cas-dusage--5"><a class="header" href="#cas-dusage--5"><strong>Cas d'usage :</strong></a></h3>
+<ul>
+<li>Applications critiques nécessitant à la fois une haute disponibilité locale et une récupération géographique rapide.</li>
+<li>Réduction des temps d'accès en lecture pour des utilisateurs globaux.</li>
+</ul>
+<p>👉 <a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy#read-access-geo-zone-redundant-storage">Documentation RA-GZRS</a></p>
+<h2 id="résumé-des-options-de-redondance"><a class="header" href="#résumé-des-options-de-redondance"><strong>Résumé des options de redondance</strong></a></h2>
+<div class="table-wrapper"><table><thead><tr><th><strong>Type</strong></th><th><strong>Copies des données</strong></th><th><strong>Localisation</strong></th><th><strong>Protection</strong></th><th><strong>Cas d’usage</strong></th></tr></thead><tbody>
+<tr><td><strong>LRS</strong></td><td>3 copies</td><td>Même datacenter</td><td>Défaillances matérielles locales</td><td>Scénarios peu critiques.</td></tr>
+<tr><td><strong>ZRS</strong></td><td>3 copies</td><td>Différentes zones</td><td>Défaillances de zones dans une région</td><td>Applications critiques locales.</td></tr>
+<tr><td><strong>GRS</strong></td><td>6 copies (3 local + 3 géographique)</td><td>Deux régions</td><td>Sinistres régionaux</td><td>Données avec reprise après sinistre.</td></tr>
+<tr><td><strong>GZRS</strong></td><td>6 copies (multi-zones + géographique)</td><td>Deux régions (multi-zone)</td><td>Sinistres régionaux et haute dispo.</td><td>Applications stratégiques critiques.</td></tr>
+<tr><td><strong>RA-GRS</strong></td><td>6 copies (lecture région secondaire)</td><td>Deux régions</td><td>Sinistres régionaux + lecture seule</td><td>Disponibilité accrue.</td></tr>
+<tr><td><strong>RA-GZRS</strong></td><td>6 copies (lecture région secondaire)</td><td>Deux régions (multi-zone)</td><td>Haute dispo. + lecture globale</td><td>Résilience maximale.</td></tr>
+</tbody></table>
+</div>
+<h2 id="bonnes-pratiques-pour-choisir-une-option-de-redondance"><a class="header" href="#bonnes-pratiques-pour-choisir-une-option-de-redondance"><strong>Bonnes pratiques pour choisir une option de redondance</strong></a></h2>
+<ol>
+<li>
+<p><strong>Besoins de disponibilité :</strong></p>
+<ul>
+<li>Si vous n’avez pas besoin de haute disponibilité, <strong>LRS</strong> peut suffire.</li>
+<li>Pour des applications critiques, préférez <strong>ZRS</strong> ou <strong>GZRS</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Besoins de récupération après sinistre :</strong></p>
+<ul>
+<li>Pour garantir une récupération en cas de panne régionale, choisissez <strong>GRS</strong>, <strong>GZRS</strong>, ou leurs variantes <strong>RA</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Budget :</strong></p>
+<ul>
+<li>Les solutions géographiquement redondantes (GRS, GZRS) sont plus coûteuses, mais elles offrent une meilleure résilience.</li>
+</ul>
+</li>
+<li>
+<p><strong>Accès global :</strong></p>
+<ul>
+<li>Si vous avez des utilisateurs répartis sur plusieurs régions, optez pour <strong>RA-GRS</strong> ou <strong>RA-GZRS</strong> pour une meilleure expérience utilisateur.</li>
+</ul>
+</li>
+</ol>
+<h2 id="liens-utiles"><a class="header" href="#liens-utiles"><strong>Liens utiles</strong></a></h2>
+<ul>
+<li>
+<p><strong>Documentation sur la redondance du stockage Azure</strong> :<br />
+<a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy">https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy</a></p>
+</li>
+<li>
+<p><strong>Calculateur des coûts Azure Storage</strong> :<br />
+<a href="https://azure.microsoft.com/pricing/calculator/">https://azure.microsoft.com/pricing/calculator/</a></p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../notions/rdp.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../notions/rdp.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,207 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est l’objectif principal du protocole SMB (Server Message Block) ?"
+prompt.distractors = [
+  "Créer des bases de données dans le cloud",
+  "Synchroniser des fichiers entre différents appareils",
+  "Fournir un accès direct à une machine virtuelle"
+]
+answer.answer = "Partager des fichiers et des ressources sur un réseau"
+context = """
+Le protocole SMB (Server Message Block) permet de partager des fichiers, des imprimantes et d'autres ressources réseau entre des appareils connectés.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel service Azure est utilisé pour créer des partages de fichiers compatibles SMB ?"
+prompt.distractors = [
+  "Azure Blob Storage",
+  "Azure SQL Database",
+  "Azure Kubernetes Service"
+]
+answer.answer = "Azure Files"
+context = """
+Azure Files est un service de partage de fichiers entièrement géré qui prend en charge les protocoles SMB et NFS, permettant un accès transparent aux fichiers depuis le cloud.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est une pratique recommandée pour sécuriser l'accès à un partage SMB Azure ?"
+prompt.distractors = [
+  "Partager vos clés d'accès avec toutes les personnes autorisées",
+  "Utiliser un pare-feu personnel uniquement",
+  "Se connecter sans authentification pour faciliter l'accès"
+]
+answer.answer = "Utiliser des tokens SAS pour limiter l'accès et définir une expiration"
+context = """
+Les tokens SAS (Shared Access Signature) permettent de limiter l'accès aux ressources Azure en définissant des permissions spécifiques et une durée de validité.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle étape est nécessaire pour monter un partage SMB sur un système Windows ?"
+prompt.distractors = [
+  "Activer le protocole NFS",
+  "Installer un logiciel tiers pour le montage SMB",
+  "Utiliser une commande FTP"
+]
+answer.answer = "Configurer un mappage de lecteur pour se connecter au partage SMB"
+context = """
+Sous Windows, vous pouvez configurer un mappage de lecteur réseau pour vous connecter facilement au partage SMB, avec l'option de rendre ce mappage persistant.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Pourquoi utiliser des clés SAS au lieu des clés d'accès principales pour un partage SMB Azure ?"
+prompt.distractors = [
+  "Les clés SAS permettent un accès sans authentification",
+  "Les clés SAS offrent une meilleure performance réseau",
+  "Les clés SAS ne nécessitent pas de configuration préalable"
+]
+answer.answer = "Les clés SAS limitent les permissions et ont une durée d'expiration"
+context = """
+Les clés SAS (Shared Access Signature) permettent de contrôler précisément l'accès, de limiter les permissions et de définir une durée d'expiration pour renforcer la sécurité.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment vérifier si le protocole SMB est activé sur un appareil Windows ?"
+prompt.distractors = [
+  "En vérifiant les paramètres du Pare-feu Windows uniquement",
+  "En exécutant une commande NFS",
+  "En configurant les permissions NTFS"
+]
+answer.answer = "En accédant aux paramètres des fonctionnalités Windows pour vérifier l'activation du SMB"
+context = """
+Vous pouvez vérifier si le protocole SMB est activé via les paramètres des fonctionnalités Windows. Il est généralement activé par défaut.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande Azure CLI permet de récupérer la clé d'accès d'un compte de stockage pour un partage SMB ?"
+prompt.distractors = [
+  "az files access-key",
+  "az storage blob keys list",
+  "az storage get-token"
+]
+answer.answer = "az storage account keys list"
+context = """
+La commande `az storage account keys list` permet de récupérer les clés d'accès primaires et secondaires d'un compte de stockage Azure, nécessaires pour accéder au partage SMB.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelles précautions sont nécessaires pour un montage SMB sur macOS ?"
+prompt.distractors = [
+  "Installer une version spécifique de SMB depuis l'App Store",
+  "Activer le protocole FTP dans les paramètres réseau",
+  "Désactiver la sécurité SIP (System Integrity Protection)"
+]
+answer.answer = "Vérifier les permissions en lecture/écriture sur le partage monté"
+context = """
+Lors du montage d'un partage SMB sur macOS, il peut être nécessaire de vérifier et ajuster les permissions en lecture/écriture pour garantir un accès fluide.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande permet de mapper un partage SMB Azure sur un lecteur sous Windows via la ligne de commande ?"
+prompt.distractors = [
+  "mount /d //mystorageaccount.file.core.windows.net/mystoragefile",
+  "az storage map smb //mystorageaccount.file.core.windows.net/mystoragefile",
+  "ftp //mystorageaccount.file.core.windows.net/mystoragefile"
+]
+answer.answer = "net use Z: \\\\mystorageaccount.file.core.windows.net\\mystoragefile /u:mystorageaccount <clé_d’accès>"
+context = """
+La commande `net use` permet de mapper un partage SMB Azure sur une lettre de lecteur sous Windows. Il est nécessaire de spécifier le compte de stockage et la clé d'accès.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle principal d'un SAS (Shared Access Signature) dans le cadre d'un partage SMB ?"
+prompt.distractors = [
+  "Créer un alias pour les partages SMB",
+  "Activer un accès anonyme aux fichiers partagés",
+  "Synchroniser automatiquement les fichiers locaux avec le partage"
+]
+answer.answer = "Restreindre l'accès au partage en définissant des permissions spécifiques et une durée d'expiration"
+context = """
+Un SAS (Shared Access Signature) permet de sécuriser l'accès aux partages SMB Azure en limitant les permissions et en définissant une durée d'expiration.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quelle section du portail Azure peut-on activer un partage de fichiers SMB sur un compte de stockage ?"
+prompt.distractors = [
+  "Diagnostics et analyse",
+  "Configurations réseau",
+  "Clés d'accès"
+]
+answer.answer = "Azure Files"
+context = """
+La section "Azure Files" du compte de stockage permet de créer et gérer des partages de fichiers SMB, en configurant leurs permissions et options.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande Azure CLI permet de vérifier si un partage SMB existe dans un compte de stockage ?"
+prompt.distractors = [
+  "az files check --name",
+  "az storage account list-smb",
+  "az storage share list"
+]
+answer.answer = "az storage share list"
+context = """
+La commande `az storage share list` permet de récupérer la liste des partages SMB configurés dans un compte de stockage Azure.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Sur macOS, quel outil utilise-t-on pour monter un partage SMB via le terminal ?"
+prompt.distractors = [
+  "mount -nfs",
+  "map smb",
+  "fuse mount"
+]
+answer.answer = "mount_smbfs"
+context = """
+Sur macOS, la commande `mount_smbfs` est utilisée pour monter un partage SMB Azure sur un répertoire local.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel paramètre réseau doit être vérifié si un partage SMB Azure n'est pas accessible ?"
+prompt.distractors = [
+  "Le port 22 pour SSH",
+  "Le paramètre DNS personnalisé",
+  "La latence réseau inférieure à 100 ms"
+]
+answer.answer = "Le port 445 doit être ouvert sur le pare-feu"
+context = """
+Le port 445, utilisé par le protocole SMB, doit être ouvert sur les pare-feu locaux et réseau pour permettre l'accès à un partage SMB Azure.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment rendre un mappage SMB persistant sur Windows pour qu'il se reconnecte après redémarrage ?"
+prompt.distractors = [
+  "Activer l'option 'synchronisation des fichiers Azure'",
+  "Utiliser la commande 'persist-mount' dans PowerShell",
+  "Configurer le mappage dans Azure Portal"
+]
+answer.answer = "Ajouter l'option '/persistent:yes' dans la commande 'net use'"
+context = """
+Sur Windows, l'option `/persistent:yes` de la commande `net use` garantit que le mappage sera reconnecté automatiquement après un redémarrage.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande Azure CLI permet de monter un partage SMB directement sur un appareil local ?"
+prompt.distractors = [
+  "az files mount",
+  "az smb connect",
+  "az storage blob attach"
+]
+answer.answer = "Il n'est pas possible de monter directement un partage SMB avec Azure CLI"
+context = """
+Azure CLI ne permet pas de monter directement un partage SMB sur un appareil local. Vous devez utiliser des commandes natives de votre système d'exploitation comme `net use` (Windows) ou `mount_smbfs` (macOS).
+"""

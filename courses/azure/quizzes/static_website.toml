@@ -1,0 +1,116 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Qu'est-ce qu'Azure Blob Storage ?"
+prompt.distractors = [
+  "Un service pour exécuter des conteneurs Docker",
+  "Une plateforme pour gérer des bases de données relationnelles",
+  "Un outil pour surveiller les ressources Azure"
+]
+answer.answer = "Un service permettant de stocker des données non structurées, comme des fichiers"
+context = """
+Azure Blob Storage est un service de stockage pour les données non structurées, idéal pour héberger des fichiers comme des images, des vidéos, ou des pages web statiques.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle option doit être activée pour héberger un site statique dans Blob Storage ?"
+prompt.distractors = [
+  "Conteneur privé",
+  "Diagnostic de stockage",
+  "Analyse de stockage"
+]
+answer.answer = "Page Web statique"
+context = """
+La fonctionnalité "Page Web statique" doit être activée dans le compte de stockage pour héberger un site web statique avec Azure Blob Storage.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel conteneur Azure Blob Storage est utilisé pour l'hébergement statique ?"
+prompt.distractors = [
+  "default",
+  "static-site",
+  "www-root"
+]
+answer.answer = "$web"
+context = """
+Azure crée un conteneur spécial appelé `$web` pour stocker les fichiers d'un site web statique. Ce conteneur est requis pour l'hébergement statique.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande Azure CLI permet d'uploader des fichiers dans le conteneur `$web` ?"
+prompt.distractors = [
+  "az blob upload",
+  "az storage copy",
+  "az storage sync"
+]
+answer.answer = "az storage blob upload-batch"
+context = """
+La commande `az storage blob upload-batch` permet de téléverser plusieurs fichiers à la fois dans un conteneur Blob Storage.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel document doit être défini comme 'document d’index' pour un site statique sur Azure Blob Storage ?"
+prompt.distractors = [
+  "styles.css",
+  "main.html",
+  "default.aspx"
+]
+answer.answer = "index.html"
+context = """
+Le 'document d’index' est la page par défaut de votre site statique. Azure recommande d'utiliser un fichier `index.html`.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel type de stockage est le plus approprié pour un site statique avec Blob Storage ?"
+prompt.distractors = [
+  "Premium performance",
+  "Geo-redundant storage (GRS)",
+  "Zone-redundant storage (ZRS)"
+]
+answer.answer = "Locally-redundant storage (LRS)"
+context = """
+Le stockage localement redondant (LRS) est généralement suffisant pour un site statique simple, car il offre un bon équilibre entre coût et durabilité.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment accéder à un site hébergé avec Azure Blob Storage ?"
+prompt.distractors = [
+  "Via l'interface Azure Portal uniquement",
+  "En activant une connexion SSH au conteneur",
+  "En utilisant un client FTP"
+]
+answer.answer = "Via l'URL publique du point de terminaison"
+context = """
+Une fois le site configuré, Azure fournit une URL publique (point de terminaison) pour accéder au site hébergé.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel type de contenu peut être hébergé sur un site Blob Storage statique ?"
+prompt.distractors = [
+  "Applications web interactives avec Node.js",
+  "Bases de données SQL intégrées",
+  "Pages web générées dynamiquement"
+]
+answer.answer = "Pages HTML, CSS, et fichiers statiques comme des images"
+context = """
+Blob Storage statique est conçu pour héberger des fichiers statiques comme des pages HTML, CSS, JavaScript, et des images, mais pas du contenu généré dynamiquement.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle fonctionnalité permet de gérer les erreurs 404 dans un site Blob Storage statique ?"
+prompt.distractors = [
+  "Redirect Rules",
+  "Blob Firewall",
+  "Traffic Manager"
+]
+answer.answer = "Document d’erreur"
+context = """
+Le document d’erreur, comme `error.html`, est utilisé pour afficher une page personnalisée en cas d'erreur (par exemple, une page introuvable 404).
+"""
