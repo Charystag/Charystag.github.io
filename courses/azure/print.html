@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="exercises/deploy_nginx.html"><strong aria-hidden="true">1.</strong> Déployez un Serveur Web sur une Machine Virtuelle Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="corrections/deploy_nginx.html"><strong aria-hidden="true">1.1.</strong> Correction de la partie non-guidée</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/multi_tier.html"><strong aria-hidden="true">2.</strong> Déployez une Application Multi-Tiers avec Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="corrections/multi_tier.html"><strong aria-hidden="true">2.1.</strong> Correction</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/deploy_appservice.html"><strong aria-hidden="true">3.</strong> Déployez une Application Flask sur Azure App Service via Git</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutoriels</li><li class="chapter-item expanded "><a href="tutoriels/resources_group.html"><strong aria-hidden="true">4.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="tutoriels/tags.html"><strong aria-hidden="true">5.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="tutoriels/vm.html"><strong aria-hidden="true">6.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="tutoriels/ssh.html"><strong aria-hidden="true">7.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="tutoriels/scp.html"><strong aria-hidden="true">8.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="tutoriels/snapshots.html"><strong aria-hidden="true">9.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="tutoriels/storage.html"><strong aria-hidden="true">10.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="tutoriels/azure_blob_storage.html"><strong aria-hidden="true">11.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="notions/azure_monitor.html"><strong aria-hidden="true">12.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="notions/ssh.html"><strong aria-hidden="true">13.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="notions/rdp.html"><strong aria-hidden="true">14.</strong> protocole RDP</a></li><li class="chapter-item expanded "><a href="notions/storage.html"><strong aria-hidden="true">15.</strong> Les redondances de stockage</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="exercises/deploy_nginx.html"><strong aria-hidden="true">1.</strong> Déployez un Serveur Web sur une Machine Virtuelle Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="corrections/deploy_nginx.html"><strong aria-hidden="true">1.1.</strong> Correction de la partie non-guidée</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/multi_tier.html"><strong aria-hidden="true">2.</strong> Déployez une Application Multi-Tiers avec Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="corrections/multi_tier.html"><strong aria-hidden="true">2.1.</strong> Correction</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/deploy_appservice.html"><strong aria-hidden="true">3.</strong> Déployez une Application Flask sur Azure App Service via Git</a></li><li class="chapter-item expanded "><a href="exercises/static_website_blob.html"><strong aria-hidden="true">4.</strong> Hébergement d'un Site Web Statique avec Azure Blob Storage</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutoriels</li><li class="chapter-item expanded "><a href="tutoriels/smb.html"><strong aria-hidden="true">5.</strong> Monter un partage de fichiers SMB sur Windows ou macOS</a></li><li class="chapter-item expanded "><a href="tutoriels/resources_group.html"><strong aria-hidden="true">6.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="tutoriels/tags.html"><strong aria-hidden="true">7.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="tutoriels/vm.html"><strong aria-hidden="true">8.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="tutoriels/ssh.html"><strong aria-hidden="true">9.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="tutoriels/scp.html"><strong aria-hidden="true">10.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="tutoriels/snapshots.html"><strong aria-hidden="true">11.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="tutoriels/storage.html"><strong aria-hidden="true">12.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="tutoriels/azure_blob_storage.html"><strong aria-hidden="true">13.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="notions/azure_monitor.html"><strong aria-hidden="true">14.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="notions/ssh.html"><strong aria-hidden="true">15.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="notions/rdp.html"><strong aria-hidden="true">16.</strong> protocole RDP</a></li><li class="chapter-item expanded "><a href="notions/storage.html"><strong aria-hidden="true">17.</strong> Les redondances de stockage</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -420,7 +420,7 @@ L’objectif est de démontrer la communication entre les deux serveurs.</li>
 <pre><code class="language-bash">az vm create \
   --resource-group GroupeMultiTiers \
   --name WebServerVM \
-  --image UbuntuLTS \
+  --image Ubuntu2404 \
   --size Standard_B1s \
   --admin-username azureuser \
   --generate-ssh-keys \
@@ -430,7 +430,7 @@ L’objectif est de démontrer la communication entre les deux serveurs.</li>
 <pre><code class="language-bash">az vm create \
   --resource-group GroupeMultiTiers \
   --name DBServerVM \
-  --image UbuntuLTS \
+  --image Ubuntu2404 \
   --size Standard_B1s \
   --admin-username azureuser \
   --generate-ssh-keys \
@@ -501,7 +501,7 @@ if __name__ == '__main__':
 <li>
 <p><strong>Installez Flask et lancez le serveur</strong> :</p>
 <pre><code class="language-bash">pip3 install flask
-python3 db_server.py
+flask --app db_server run
 </code></pre>
 </li>
 </ol>
@@ -545,7 +545,7 @@ def get_users():
         return jsonify({"error": str(e)})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run()
 </code></pre>
 </li>
 <li>
@@ -558,7 +558,7 @@ if __name__ == '__main__':
 </li>
 <li>
 <p><strong>Lancez le serveur Flask</strong> :</p>
-<pre><code class="language-bash">sudo python3 web_server.py
+<pre><code class="language-bash">flask --app web_server run
 </code></pre>
 </li>
 </ol>
@@ -817,6 +817,252 @@ git commit -m "Initial commit of Flask app"
 <li><a href="https://learn.microsoft.com/en-us/azure/app-service/configure-common#configure-app-settings">Configuration des variables d’environnement</a></li>
 <li><a href="https://flask.palletsprojects.com/en/2.0.x/">Flask Documentation</a></li>
 </ul>
+<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="exercice--hébergement-dun-site-web-statique-avec-azure-blob-storage"><a class="header" href="#exercice--hébergement-dun-site-web-statique-avec-azure-blob-storage"><strong>Exercice : Hébergement d'un Site Web Statique avec Azure Blob Storage</strong></a></h1>
+<hr />
+<h2 id="objectif-3"><a class="header" href="#objectif-3"><strong>Objectif</strong></a></h2>
+<p>Apprendre à :</p>
+<ol>
+<li><strong>Configurer un conteneur Blob Storage</strong> pour héberger un site web statique.</li>
+<li><strong>Uploader des fichiers HTML et CSS</strong>.</li>
+<li>Accéder au site web via l’URL publique.</li>
+</ol>
+<hr />
+<h2 id="Étapes-3"><a class="header" href="#Étapes-3"><strong>Étapes</strong></a></h2>
+<h3 id="Étape-1--créer-un-compte-de-stockage"><a class="header" href="#Étape-1--créer-un-compte-de-stockage"><strong>Étape 1 : Créer un Compte de Stockage</strong></a></h3>
+<ol>
+<li>
+<p>Connectez-vous au <strong>Portail Azure</strong> :<br />
+<a href="https://portal.azure.com">https://portal.azure.com</a>.</p>
+</li>
+<li>
+<p><strong>Créez un compte de stockage</strong> :</p>
+<ul>
+<li>Allez dans <strong>Créer une ressource</strong> &gt; <strong>Stockage</strong> &gt; <strong>Compte de stockage</strong>.</li>
+<li>Remplissez les champs :
+<ul>
+<li><strong>Nom</strong> : Par exemple <code>mystaticwebstorage</code>.</li>
+<li><strong>Région</strong> : <strong>westeurope</strong>.</li>
+<li><strong>Performance</strong> : <strong>Standard</strong>.</li>
+<li><strong>Redondance</strong> : <strong>Locally-redundant storage (LRS)</strong>.</li>
+</ul>
+</li>
+<li>Cliquez sur <strong>Revoir + Créer</strong>, puis sur <strong>Créer</strong>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-2--configurer-le-compte-de-stockage-pour-lhébergement-statique"><a class="header" href="#Étape-2--configurer-le-compte-de-stockage-pour-lhébergement-statique"><strong>Étape 2 : Configurer le Compte de Stockage pour l’Hébergement Statique</strong></a></h3>
+<ol>
+<li>
+<p>Une fois le compte de stockage créé, accédez-y dans le portail Azure.</p>
+</li>
+<li>
+<p>Allez dans la section <strong>Données et stockage</strong> &gt; <strong>Page Web statique</strong>.</p>
+</li>
+<li>
+<p>Activez l’hébergement statique :</p>
+<ul>
+<li><strong>État</strong> : Active.</li>
+<li><strong>Document d’index</strong> : <code>index.html</code>.</li>
+<li><strong>Document d’erreur (facultatif)</strong> : <code>error.html</code>.</li>
+<li>Cliquez sur <strong>Enregistrer</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Notez l’<strong>URL du point de terminaison</strong> (exemple : <code>https://mystaticwebstorage.z13.web.core.windows.net</code>).</p>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-3--créer-les-fichiers-html-et-css"><a class="header" href="#Étape-3--créer-les-fichiers-html-et-css"><strong>Étape 3 : Créer les Fichiers HTML et CSS</strong></a></h3>
+<ol>
+<li>
+<p><strong>Préparez les fichiers locaux</strong> :</p>
+<ul>
+<li>
+<p><strong>Fichier <code>index.html</code></strong> :</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Static Website&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Bienvenue sur mon site web statique&lt;/h1&gt;
+    &lt;p&gt;Ce site est hébergé avec Azure Blob Storage.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</li>
+<li>
+<p><strong>Fichier <code>styles.css</code></strong> :</p>
+<pre><code class="language-css">body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+h1 {
+    color: #4CAF50;
+}
+
+p {
+    font-size: 18px;
+}
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Enregistrez ces fichiers dans un répertoire local, par exemple : <code>/chemin/vers/mon-site</code>.</p>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-4--uploader-les-fichiers-dans-blob-storage"><a class="header" href="#Étape-4--uploader-les-fichiers-dans-blob-storage"><strong>Étape 4 : Uploader les Fichiers dans Blob Storage</strong></a></h3>
+<h4 id="option-1--utiliser-le-portail-azure"><a class="header" href="#option-1--utiliser-le-portail-azure"><strong>Option 1 : Utiliser le Portail Azure</strong></a></h4>
+<ol>
+<li>
+<p>Accédez à la section <strong>Conteneurs</strong> du compte de stockage.</p>
+</li>
+<li>
+<p>Ouvrez le conteneur par défaut créé pour l’hébergement statique (<code>$web</code>).</p>
+</li>
+<li>
+<p>Cliquez sur <strong>Télécharger</strong> et uploadez les fichiers <code>index.html</code> et <code>styles.css</code>.</p>
+</li>
+</ol>
+<hr />
+<h4 id="option-2--utiliser-azure-cli"><a class="header" href="#option-2--utiliser-azure-cli"><strong>Option 2 : Utiliser Azure CLI</strong></a></h4>
+<ol>
+<li>
+<p>Assurez-vous que vous êtes connecté à Azure CLI :</p>
+<pre><code class="language-bash">az login
+</code></pre>
+</li>
+<li>
+<p><strong>Uploader les fichiers dans le conteneur <code>$web</code></strong> :</p>
+<pre><code class="language-bash">az storage blob upload-batch \
+  --account-name mystaticwebstorage \
+  --destination '$web' \
+  --source /chemin/vers/mon-site
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="Étape-5--accéder-au-site-web"><a class="header" href="#Étape-5--accéder-au-site-web"><strong>Étape 5 : Accéder au Site Web</strong></a></h3>
+<ol>
+<li>
+<p>Ouvrez l’<strong>URL du point de terminaison</strong> dans un navigateur :</p>
+<pre><code>https://mystaticwebstorage.z13.web.core.windows.net
+</code></pre>
+</li>
+<li>
+<p>Vous devriez voir votre page HTML s’afficher avec le style CSS appliqué.</p>
+</li>
+</ol>
+<hr />
+<h2 id="entraînement-extension-non-guidée-3"><a class="header" href="#entraînement-extension-non-guidée-3"><strong>Entraînement</strong> (Extension non-guidée)</a></h2>
+<h3 id="tâches-à-réaliser-2"><a class="header" href="#tâches-à-réaliser-2"><strong>Tâches à Réaliser</strong></a></h3>
+<ol>
+<li>
+<p><strong>Ajoutez d’autres pages</strong> :</p>
+<ul>
+<li>Créez un fichier <code>about.html</code> avec des informations supplémentaires et mettez-le en lien depuis <code>index.html</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Personnalisez le site</strong> :</p>
+<ul>
+<li>Ajoutez des images et des scripts JavaScript pour dynamiser le site.</li>
+</ul>
+</li>
+<li>
+<p><strong>Gérez les erreurs</strong> :</p>
+<ul>
+<li>Créez un fichier <code>error.html</code> qui sera affiché pour les pages non trouvées (404).</li>
+</ul>
+</li>
+<li>
+<p><strong>Automatisez l’upload des fichiers</strong> :</p>
+<ul>
+<li>Écrivez un script Bash ou PowerShell pour automatiser le processus de mise à jour des fichiers.</li>
+</ul>
+</li>
+</ol>
+<h3 id="quiz-3"><a class="header" href="#quiz-3"><strong>Quiz</strong></a></h3>
+<p>Voici un quiz sur les sites statiques hébergés sur Azure</p>
+<div class="quiz-placeholder" data-quiz-name="&quot;static_website&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Azure Blob Storage est un service de stockage pour les données non structurées, idéal pour héberger des fichiers comme des images, des vidéos, ou des pages web statiques.\n&quot;,&quot;id&quot;:&quot;f25bc1de-43ea-4a02-ac7a-752b0962fe79&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Un service permettant de stocker des données non structurées, comme des fichiers&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un service pour exécuter des conteneurs Docker&quot;,&quot;Une plateforme pour gérer des bases de données relationnelles&quot;,&quot;Un outil pour surveiller les ressources Azure&quot;],&quot;prompt&quot;:&quot;Qu'est-ce qu'Azure Blob Storage ?&quot;}},{&quot;context&quot;:&quot;La fonctionnalité \&quot;Page Web statique\&quot; doit être activée dans le compte de stockage pour héberger un site web statique avec Azure Blob Storage.\n&quot;,&quot;id&quot;:&quot;b8804495-eb7a-444d-8104-89ed529faed4&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Page Web statique&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Conteneur privé&quot;,&quot;Diagnostic de stockage&quot;,&quot;Analyse de stockage&quot;],&quot;prompt&quot;:&quot;Quelle option doit être activée pour héberger un site statique dans Blob Storage ?&quot;}},{&quot;context&quot;:&quot;Azure crée un conteneur spécial appelé `$web` pour stocker les fichiers d'un site web statique. Ce conteneur est requis pour l'hébergement statique.\n&quot;,&quot;id&quot;:&quot;066e28f9-98fe-435e-b9bb-07793ee9b846&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;$web&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;default&quot;,&quot;static-site&quot;,&quot;www-root&quot;],&quot;prompt&quot;:&quot;Quel conteneur Azure Blob Storage est utilisé pour l'hébergement statique ?&quot;}},{&quot;context&quot;:&quot;La commande `az storage blob upload-batch` permet de téléverser plusieurs fichiers à la fois dans un conteneur Blob Storage.\n&quot;,&quot;id&quot;:&quot;b22f1c59-a924-4d26-9fe0-3f872b7e95d7&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;az storage blob upload-batch&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;az blob upload&quot;,&quot;az storage copy&quot;,&quot;az storage sync&quot;],&quot;prompt&quot;:&quot;Quelle commande Azure CLI permet d'uploader des fichiers dans le conteneur `$web` ?&quot;}},{&quot;context&quot;:&quot;Le 'document d’index' est la page par défaut de votre site statique. Azure recommande d'utiliser un fichier `index.html`.\n&quot;,&quot;id&quot;:&quot;e94d3aa8-e036-4577-9b18-4efdfe58b015&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;index.html&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;styles.css&quot;,&quot;main.html&quot;,&quot;default.aspx&quot;],&quot;prompt&quot;:&quot;Quel document doit être défini comme 'document d’index' pour un site statique sur Azure Blob Storage ?&quot;}},{&quot;context&quot;:&quot;Le stockage localement redondant (LRS) est généralement suffisant pour un site statique simple, car il offre un bon équilibre entre coût et durabilité.\n&quot;,&quot;id&quot;:&quot;a0817456-6f90-45e1-b99e-f85b0a2242c1&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Locally-redundant storage (LRS)&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Premium performance&quot;,&quot;Geo-redundant storage (GRS)&quot;,&quot;Zone-redundant storage (ZRS)&quot;],&quot;prompt&quot;:&quot;Quel type de stockage est le plus approprié pour un site statique avec Blob Storage ?&quot;}},{&quot;context&quot;:&quot;Une fois le site configuré, Azure fournit une URL publique (point de terminaison) pour accéder au site hébergé.\n&quot;,&quot;id&quot;:&quot;416db877-83af-4f43-8b6e-4e4efd0aebf8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Via l'URL publique du point de terminaison&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Via l'interface Azure Portal uniquement&quot;,&quot;En activant une connexion SSH au conteneur&quot;,&quot;En utilisant un client FTP&quot;],&quot;prompt&quot;:&quot;Comment accéder à un site hébergé avec Azure Blob Storage ?&quot;}},{&quot;context&quot;:&quot;Blob Storage statique est conçu pour héberger des fichiers statiques comme des pages HTML, CSS, JavaScript, et des images, mais pas du contenu généré dynamiquement.\n&quot;,&quot;id&quot;:&quot;01a3e9da-74bc-4f6b-8715-e66f3755cfae&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Pages HTML, CSS, et fichiers statiques comme des images&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Applications web interactives avec Node.js&quot;,&quot;Bases de données SQL intégrées&quot;,&quot;Pages web générées dynamiquement&quot;],&quot;prompt&quot;:&quot;Quel type de contenu peut être hébergé sur un site Blob Storage statique ?&quot;}},{&quot;context&quot;:&quot;Le document d’erreur, comme `error.html`, est utilisé pour afficher une page personnalisée en cas d'erreur (par exemple, une page introuvable 404).\n&quot;,&quot;id&quot;:&quot;e37bf17e-2883-41f0-8d40-3641b0e414c3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Document d’erreur&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Redirect Rules&quot;,&quot;Blob Firewall&quot;,&quot;Traffic Manager&quot;],&quot;prompt&quot;:&quot;Quelle fonctionnalité permet de gérer les erreurs 404 dans un site Blob Storage statique ?&quot;}}]}" data-quiz-fullscreen="true"></div>
+<hr />
+<h3 id="liens-vers-la-documentation-3"><a class="header" href="#liens-vers-la-documentation-3"><strong>Liens vers la Documentation</strong></a></h3>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website">Héberger un site statique sur Azure Blob Storage</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-cli">Utiliser Azure CLI pour Blob Storage</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction">Types de stockage Azure</a></li>
+</ul>
+<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="monter-un-partage-de-fichiers-smb-sur-windows-ou-macos"><a class="header" href="#monter-un-partage-de-fichiers-smb-sur-windows-ou-macos">Monter un partage de fichiers SMB sur Windows ou macOS</a></h1>
+<p>Le protocole <strong>SMB (Server Message Block)</strong> permet le partage de fichiers entre des appareils au sein d’un réseau. Avec <strong>Azure Files</strong>, Microsoft propose un service de partage de fichiers entièrement géré, compatible avec le protocole SMB. Cela permet une intégration fluide avec des machines Windows ou macOS, offrant un accès aux fichiers Azure comme s’ils étaient stockés localement.</p>
+<h2 id="vue-densemble"><a class="header" href="#vue-densemble">Vue d'ensemble</a></h2>
+<p>Monter un partage de fichiers SMB Azure sur votre machine simplifie l'accès aux fichiers et favorise la collaboration. C'est particulièrement utile pour les équipes ayant besoin d'un espace partagé ou pour les utilisateurs souhaitant étendre leur stockage local grâce à Azure.</p>
+<p><strong>Principaux cas d’usage :</strong></p>
+<ul>
+<li>Centralisation des ressources partagées.</li>
+<li>Accès rapide aux fichiers dans le cloud sans synchronisation.</li>
+<li>Stockage évolutif pour les applications nécessitant des partages réseau.</li>
+</ul>
+<p><strong>Prérequis :</strong></p>
+<ol>
+<li>Un partage de fichiers SMB Azure configuré dans votre compte Azure.</li>
+<li>Les informations d'accès : nom du compte de stockage et clé d’accès, ou un <strong>SAS (Shared Access Signature)</strong>.</li>
+<li>Les autorisations nécessaires pour monter le partage sur votre machine.</li>
+</ol>
+<h2 id="conseils-pour-réussir"><a class="header" href="#conseils-pour-réussir">Conseils pour réussir</a></h2>
+<ol>
+<li>
+<p><strong>Pour les utilisateurs Windows :</strong></p>
+<ul>
+<li>Assurez-vous que le protocole SMB est activé sur votre système (il l’est par défaut sur la plupart des versions de Windows).</li>
+<li>Configurez un mappage de lecteur persistant si vous voulez que le partage soit reconnecté après un redémarrage.</li>
+<li>Vérifiez les paramètres du pare-feu en cas de problèmes de connexion.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pour les utilisateurs macOS :</strong></p>
+<ul>
+<li>macOS prend en charge SMB par défaut, mais assurez-vous de disposer de la dernière version de macOS pour garantir une compatibilité optimale.</li>
+<li>Vous devrez peut-être ajuster manuellement les permissions pour garantir un accès fluide en lecture/écriture.</li>
+</ul>
+</li>
+<li>
+<p><strong>Considérations de sécurité :</strong></p>
+<ul>
+<li>Évitez de partager vos clés d’accès sensibles. Utilisez des <strong>tokens SAS</strong> (Shared Access Signature) pour limiter les accès et définir une date d’expiration.</li>
+<li>Changez régulièrement les clés d’accès pour renforcer la sécurité.</li>
+</ul>
+</li>
+<li>
+<p><strong>Optimisation des performances :</strong></p>
+<ul>
+<li>Surveillez la latence réseau, en particulier si vous accédez au partage SMB depuis une localisation éloignée de la région Azure où se trouve votre stockage.</li>
+<li>Activez le caching pour améliorer les performances lors d’opérations répétées.</li>
+</ul>
+</li>
+</ol>
+<h2 id="tutoriels"><a class="header" href="#tutoriels">Tutoriels</a></h2>
+<p>Pour suivre le processus étape par étape pour monter un partage de fichiers SMB sur <strong>Windows ou macOS</strong>, référez-vous à la documentation officielle de Microsoft :</p>
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/storage/files/storage-how-to-use-files-windows">Monter un partage SMB Azure Files sur Windows (en français)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-mac">Monter un partage SMB Azure Files sur macOS (en anglais)</a></li>
+</ul>
+<p>Ces guides détaillent :</p>
+<ul>
+<li>Comment récupérer les informations de connexion nécessaires.</li>
+<li>Les commandes ou étapes à suivre dans l’interface utilisateur pour se connecter au partage SMB.</li>
+<li>Les solutions aux problèmes courants.</li>
+</ul>
+<h2 id="quiz-4"><a class="header" href="#quiz-4">Quiz</a></h2>
+<p>Voici un quiz récapitulatif des notions abordées dans les tutoriels :</p>
+<div class="quiz-placeholder" data-quiz-name="&quot;smb&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Le protocole SMB (Server Message Block) permet de partager des fichiers, des imprimantes et d'autres ressources réseau entre des appareils connectés.\n&quot;,&quot;id&quot;:&quot;2b701d98-9b3f-4c63-8a10-5b3aa8311e7f&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Partager des fichiers et des ressources sur un réseau&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Créer des bases de données dans le cloud&quot;,&quot;Synchroniser des fichiers entre différents appareils&quot;,&quot;Fournir un accès direct à une machine virtuelle&quot;],&quot;prompt&quot;:&quot;Quel est l’objectif principal du protocole SMB (Server Message Block) ?&quot;}},{&quot;context&quot;:&quot;Azure Files est un service de partage de fichiers entièrement géré qui prend en charge les protocoles SMB et NFS, permettant un accès transparent aux fichiers depuis le cloud.\n&quot;,&quot;id&quot;:&quot;699856c2-62d2-42f9-ba52-4dbc5455000d&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Azure Files&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Azure Blob Storage&quot;,&quot;Azure SQL Database&quot;,&quot;Azure Kubernetes Service&quot;],&quot;prompt&quot;:&quot;Quel service Azure est utilisé pour créer des partages de fichiers compatibles SMB ?&quot;}},{&quot;context&quot;:&quot;Les tokens SAS (Shared Access Signature) permettent de limiter l'accès aux ressources Azure en définissant des permissions spécifiques et une durée de validité.\n&quot;,&quot;id&quot;:&quot;0e2cf92d-95dd-46ff-a67d-fec37aadeeca&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Utiliser des tokens SAS pour limiter l'accès et définir une expiration&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Partager vos clés d'accès avec toutes les personnes autorisées&quot;,&quot;Utiliser un pare-feu personnel uniquement&quot;,&quot;Se connecter sans authentification pour faciliter l'accès&quot;],&quot;prompt&quot;:&quot;Quelle est une pratique recommandée pour sécuriser l'accès à un partage SMB Azure ?&quot;}},{&quot;context&quot;:&quot;Sous Windows, vous pouvez configurer un mappage de lecteur réseau pour vous connecter facilement au partage SMB, avec l'option de rendre ce mappage persistant.\n&quot;,&quot;id&quot;:&quot;5d266d5a-e76c-4ec2-8023-2370e5204631&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Configurer un mappage de lecteur pour se connecter au partage SMB&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Activer le protocole NFS&quot;,&quot;Installer un logiciel tiers pour le montage SMB&quot;,&quot;Utiliser une commande FTP&quot;],&quot;prompt&quot;:&quot;Quelle étape est nécessaire pour monter un partage SMB sur un système Windows ?&quot;}},{&quot;context&quot;:&quot;Les clés SAS (Shared Access Signature) permettent de contrôler précisément l'accès, de limiter les permissions et de définir une durée d'expiration pour renforcer la sécurité.\n&quot;,&quot;id&quot;:&quot;d0e1ea71-a541-4e24-bba2-9141ac57f2b3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Les clés SAS limitent les permissions et ont une durée d'expiration&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Les clés SAS permettent un accès sans authentification&quot;,&quot;Les clés SAS offrent une meilleure performance réseau&quot;,&quot;Les clés SAS ne nécessitent pas de configuration préalable&quot;],&quot;prompt&quot;:&quot;Pourquoi utiliser des clés SAS au lieu des clés d'accès principales pour un partage SMB Azure ?&quot;}},{&quot;context&quot;:&quot;Vous pouvez vérifier si le protocole SMB est activé via les paramètres des fonctionnalités Windows. Il est généralement activé par défaut.\n&quot;,&quot;id&quot;:&quot;9de49655-06a1-4e0c-b956-1ad7cbbde823&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;En accédant aux paramètres des fonctionnalités Windows pour vérifier l'activation du SMB&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;En vérifiant les paramètres du Pare-feu Windows uniquement&quot;,&quot;En exécutant une commande NFS&quot;,&quot;En configurant les permissions NTFS&quot;],&quot;prompt&quot;:&quot;Comment vérifier si le protocole SMB est activé sur un appareil Windows ?&quot;}},{&quot;context&quot;:&quot;La commande `az storage account keys list` permet de récupérer les clés d'accès primaires et secondaires d'un compte de stockage Azure, nécessaires pour accéder au partage SMB.\n&quot;,&quot;id&quot;:&quot;982ce940-6d34-4852-84f6-c65f85a6d954&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;az storage account keys list&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;az files access-key&quot;,&quot;az storage blob keys list&quot;,&quot;az storage get-token&quot;],&quot;prompt&quot;:&quot;Quelle commande Azure CLI permet de récupérer la clé d'accès d'un compte de stockage pour un partage SMB ?&quot;}},{&quot;context&quot;:&quot;Lors du montage d'un partage SMB sur macOS, il peut être nécessaire de vérifier et ajuster les permissions en lecture/écriture pour garantir un accès fluide.\n&quot;,&quot;id&quot;:&quot;f132f0a3-4133-4fe6-b4db-6e6910d6618c&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Vérifier les permissions en lecture/écriture sur le partage monté&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Installer une version spécifique de SMB depuis l'App Store&quot;,&quot;Activer le protocole FTP dans les paramètres réseau&quot;,&quot;Désactiver la sécurité SIP (System Integrity Protection)&quot;],&quot;prompt&quot;:&quot;Quelles précautions sont nécessaires pour un montage SMB sur macOS ?&quot;}},{&quot;context&quot;:&quot;La commande `net use` permet de mapper un partage SMB Azure sur une lettre de lecteur sous Windows. Il est nécessaire de spécifier le compte de stockage et la clé d'accès.\n&quot;,&quot;id&quot;:&quot;b842b63e-6875-447f-9235-791c083247cd&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;net use Z: \\\\mystorageaccount.file.core.windows.net\\mystoragefile /u:mystorageaccount &lt;clé_d’accès&gt;&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;mount /d //mystorageaccount.file.core.windows.net/mystoragefile&quot;,&quot;az storage map smb //mystorageaccount.file.core.windows.net/mystoragefile&quot;,&quot;ftp //mystorageaccount.file.core.windows.net/mystoragefile&quot;],&quot;prompt&quot;:&quot;Quelle commande permet de mapper un partage SMB Azure sur un lecteur sous Windows via la ligne de commande ?&quot;}},{&quot;context&quot;:&quot;Un SAS (Shared Access Signature) permet de sécuriser l'accès aux partages SMB Azure en limitant les permissions et en définissant une durée d'expiration.\n&quot;,&quot;id&quot;:&quot;542b7a67-c002-46dd-ba74-bff5180b1366&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Restreindre l'accès au partage en définissant des permissions spécifiques et une durée d'expiration&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Créer un alias pour les partages SMB&quot;,&quot;Activer un accès anonyme aux fichiers partagés&quot;,&quot;Synchroniser automatiquement les fichiers locaux avec le partage&quot;],&quot;prompt&quot;:&quot;Quel est le rôle principal d'un SAS (Shared Access Signature) dans le cadre d'un partage SMB ?&quot;}},{&quot;context&quot;:&quot;La section \&quot;Azure Files\&quot; du compte de stockage permet de créer et gérer des partages de fichiers SMB, en configurant leurs permissions et options.\n&quot;,&quot;id&quot;:&quot;9ff70014-c442-4ab3-8ff2-1fee7a96c696&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Azure Files&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Diagnostics et analyse&quot;,&quot;Configurations réseau&quot;,&quot;Clés d'accès&quot;],&quot;prompt&quot;:&quot;Dans quelle section du portail Azure peut-on activer un partage de fichiers SMB sur un compte de stockage ?&quot;}},{&quot;context&quot;:&quot;La commande `az storage share list` permet de récupérer la liste des partages SMB configurés dans un compte de stockage Azure.\n&quot;,&quot;id&quot;:&quot;53bbf2ad-24a0-4f3b-b9f9-843c358bb621&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;az storage share list&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;az files check --name&quot;,&quot;az storage account list-smb&quot;,&quot;az storage share list&quot;],&quot;prompt&quot;:&quot;Quelle commande Azure CLI permet de vérifier si un partage SMB existe dans un compte de stockage ?&quot;}},{&quot;context&quot;:&quot;Sur macOS, la commande `mount_smbfs` est utilisée pour monter un partage SMB Azure sur un répertoire local.\n&quot;,&quot;id&quot;:&quot;e63d87a6-0daa-4bfa-a412-c2f276a40ed2&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;mount_smbfs&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;mount -nfs&quot;,&quot;map smb&quot;,&quot;fuse mount&quot;],&quot;prompt&quot;:&quot;Sur macOS, quel outil utilise-t-on pour monter un partage SMB via le terminal ?&quot;}},{&quot;context&quot;:&quot;Le port 445, utilisé par le protocole SMB, doit être ouvert sur les pare-feu locaux et réseau pour permettre l'accès à un partage SMB Azure.\n&quot;,&quot;id&quot;:&quot;348b7fe1-2d6d-4e74-9f5d-b746a4276074&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Le port 445 doit être ouvert sur le pare-feu&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Le port 22 pour SSH&quot;,&quot;Le paramètre DNS personnalisé&quot;,&quot;La latence réseau inférieure à 100 ms&quot;],&quot;prompt&quot;:&quot;Quel paramètre réseau doit être vérifié si un partage SMB Azure n'est pas accessible ?&quot;}},{&quot;context&quot;:&quot;Sur Windows, l'option `/persistent:yes` de la commande `net use` garantit que le mappage sera reconnecté automatiquement après un redémarrage.\n&quot;,&quot;id&quot;:&quot;5d2a54c4-9d00-4de0-85f5-f98a9bfb2b95&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Ajouter l'option '/persistent:yes' dans la commande 'net use'&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Activer l'option 'synchronisation des fichiers Azure'&quot;,&quot;Utiliser la commande 'persist-mount' dans PowerShell&quot;,&quot;Configurer le mappage dans Azure Portal&quot;],&quot;prompt&quot;:&quot;Comment rendre un mappage SMB persistant sur Windows pour qu'il se reconnecte après redémarrage ?&quot;}},{&quot;context&quot;:&quot;Azure CLI ne permet pas de monter directement un partage SMB sur un appareil local. Vous devez utiliser des commandes natives de votre système d'exploitation comme `net use` (Windows) ou `mount_smbfs` (macOS).\n&quot;,&quot;id&quot;:&quot;80f90227-0347-40d1-8b0d-c7bf40e9bdbb&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Il n'est pas possible de monter directement un partage SMB avec Azure CLI&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;az files mount&quot;,&quot;az smb connect&quot;,&quot;az storage blob attach&quot;],&quot;prompt&quot;:&quot;Quelle commande Azure CLI permet de monter un partage SMB directement sur un appareil local ?&quot;}}]}" data-quiz-fullscreen="true"></div>
 <script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="tutoriel--création-et-gestion-dun-groupe-de-ressources-sur-azure"><a class="header" href="#tutoriel--création-et-gestion-dun-groupe-de-ressources-sur-azure"><strong>Tutoriel : Création et gestion d’un groupe de ressources sur Azure</strong></a></h1>
 <p>Un groupe de ressources dans Azure est une unité logique qui regroupe des ressources cloud comme des machines virtuelles, des bases de données, des réseaux, etc. Cette organisation facilite leur gestion, leur supervision et leur contrôle.</p>
 <hr />

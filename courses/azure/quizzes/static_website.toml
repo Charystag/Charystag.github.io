@@ -10,6 +10,7 @@ answer.answer = "Un service permettant de stocker des données non structurées,
 context = """
 Azure Blob Storage est un service de stockage pour les données non structurées, idéal pour héberger des fichiers comme des images, des vidéos, ou des pages web statiques.
 """
+id = "f25bc1de-43ea-4a02-ac7a-752b0962fe79"
 
 [[questions]]
 type = "MultipleChoice"
@@ -23,6 +24,7 @@ answer.answer = "Page Web statique"
 context = """
 La fonctionnalité "Page Web statique" doit être activée dans le compte de stockage pour héberger un site web statique avec Azure Blob Storage.
 """
+id = "b8804495-eb7a-444d-8104-89ed529faed4"
 
 [[questions]]
 type = "MultipleChoice"
@@ -36,6 +38,7 @@ answer.answer = "$web"
 context = """
 Azure crée un conteneur spécial appelé `$web` pour stocker les fichiers d'un site web statique. Ce conteneur est requis pour l'hébergement statique.
 """
+id = "066e28f9-98fe-435e-b9bb-07793ee9b846"
 
 [[questions]]
 type = "MultipleChoice"
@@ -49,6 +52,7 @@ answer.answer = "az storage blob upload-batch"
 context = """
 La commande `az storage blob upload-batch` permet de téléverser plusieurs fichiers à la fois dans un conteneur Blob Storage.
 """
+id = "b22f1c59-a924-4d26-9fe0-3f872b7e95d7"
 
 [[questions]]
 type = "MultipleChoice"
@@ -62,6 +66,7 @@ answer.answer = "index.html"
 context = """
 Le 'document d’index' est la page par défaut de votre site statique. Azure recommande d'utiliser un fichier `index.html`.
 """
+id = "e94d3aa8-e036-4577-9b18-4efdfe58b015"
 
 [[questions]]
 type = "MultipleChoice"
@@ -75,6 +80,7 @@ answer.answer = "Locally-redundant storage (LRS)"
 context = """
 Le stockage localement redondant (LRS) est généralement suffisant pour un site statique simple, car il offre un bon équilibre entre coût et durabilité.
 """
+id = "a0817456-6f90-45e1-b99e-f85b0a2242c1"
 
 [[questions]]
 type = "MultipleChoice"
@@ -88,6 +94,7 @@ answer.answer = "Via l'URL publique du point de terminaison"
 context = """
 Une fois le site configuré, Azure fournit une URL publique (point de terminaison) pour accéder au site hébergé.
 """
+id = "416db877-83af-4f43-8b6e-4e4efd0aebf8"
 
 [[questions]]
 type = "MultipleChoice"
@@ -101,6 +108,7 @@ answer.answer = "Pages HTML, CSS, et fichiers statiques comme des images"
 context = """
 Blob Storage statique est conçu pour héberger des fichiers statiques comme des pages HTML, CSS, JavaScript, et des images, mais pas du contenu généré dynamiquement.
 """
+id = "01a3e9da-74bc-4f6b-8715-e66f3755cfae"
 
 [[questions]]
 type = "MultipleChoice"
@@ -114,3 +122,4 @@ answer.answer = "Document d’erreur"
 context = """
 Le document d’erreur, comme `error.html`, est utilisé pour afficher une page personnalisée en cas d'erreur (par exemple, une page introuvable 404).
 """
+id = "e37bf17e-2883-41f0-8d40-3641b0e414c3"

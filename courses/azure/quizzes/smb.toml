@@ -10,6 +10,7 @@ answer.answer = "Partager des fichiers et des ressources sur un réseau"
 context = """
 Le protocole SMB (Server Message Block) permet de partager des fichiers, des imprimantes et d'autres ressources réseau entre des appareils connectés.
 """
+id = "2b701d98-9b3f-4c63-8a10-5b3aa8311e7f"
 
 [[questions]]
 type = "MultipleChoice"
@@ -23,6 +24,7 @@ answer.answer = "Azure Files"
 context = """
 Azure Files est un service de partage de fichiers entièrement géré qui prend en charge les protocoles SMB et NFS, permettant un accès transparent aux fichiers depuis le cloud.
 """
+id = "699856c2-62d2-42f9-ba52-4dbc5455000d"
 
 [[questions]]
 type = "MultipleChoice"
@@ -36,6 +38,7 @@ answer.answer = "Utiliser des tokens SAS pour limiter l'accès et définir une e
 context = """
 Les tokens SAS (Shared Access Signature) permettent de limiter l'accès aux ressources Azure en définissant des permissions spécifiques et une durée de validité.
 """
+id = "0e2cf92d-95dd-46ff-a67d-fec37aadeeca"
 
 [[questions]]
 type = "MultipleChoice"
@@ -49,6 +52,7 @@ answer.answer = "Configurer un mappage de lecteur pour se connecter au partage S
 context = """
 Sous Windows, vous pouvez configurer un mappage de lecteur réseau pour vous connecter facilement au partage SMB, avec l'option de rendre ce mappage persistant.
 """
+id = "5d266d5a-e76c-4ec2-8023-2370e5204631"
 
 [[questions]]
 type = "MultipleChoice"
@@ -62,6 +66,7 @@ answer.answer = "Les clés SAS limitent les permissions et ont une durée d'expi
 context = """
 Les clés SAS (Shared Access Signature) permettent de contrôler précisément l'accès, de limiter les permissions et de définir une durée d'expiration pour renforcer la sécurité.
 """
+id = "d0e1ea71-a541-4e24-bba2-9141ac57f2b3"
 
 [[questions]]
 type = "MultipleChoice"
@@ -75,6 +80,7 @@ answer.answer = "En accédant aux paramètres des fonctionnalités Windows pour 
 context = """
 Vous pouvez vérifier si le protocole SMB est activé via les paramètres des fonctionnalités Windows. Il est généralement activé par défaut.
 """
+id = "9de49655-06a1-4e0c-b956-1ad7cbbde823"
 
 [[questions]]
 type = "MultipleChoice"
@@ -88,6 +94,7 @@ answer.answer = "az storage account keys list"
 context = """
 La commande `az storage account keys list` permet de récupérer les clés d'accès primaires et secondaires d'un compte de stockage Azure, nécessaires pour accéder au partage SMB.
 """
+id = "982ce940-6d34-4852-84f6-c65f85a6d954"
 
 [[questions]]
 type = "MultipleChoice"
@@ -101,6 +108,7 @@ answer.answer = "Vérifier les permissions en lecture/écriture sur le partage m
 context = """
 Lors du montage d'un partage SMB sur macOS, il peut être nécessaire de vérifier et ajuster les permissions en lecture/écriture pour garantir un accès fluide.
 """
+id = "f132f0a3-4133-4fe6-b4db-6e6910d6618c"
 
 [[questions]]
 type = "MultipleChoice"
@@ -114,6 +122,7 @@ answer.answer = "net use Z: \\\\mystorageaccount.file.core.windows.net\\mystorag
 context = """
 La commande `net use` permet de mapper un partage SMB Azure sur une lettre de lecteur sous Windows. Il est nécessaire de spécifier le compte de stockage et la clé d'accès.
 """
+id = "b842b63e-6875-447f-9235-791c083247cd"
 
 [[questions]]
 type = "MultipleChoice"
@@ -127,6 +136,7 @@ answer.answer = "Restreindre l'accès au partage en définissant des permissions
 context = """
 Un SAS (Shared Access Signature) permet de sécuriser l'accès aux partages SMB Azure en limitant les permissions et en définissant une durée d'expiration.
 """
+id = "542b7a67-c002-46dd-ba74-bff5180b1366"
 
 [[questions]]
 type = "MultipleChoice"
@@ -140,6 +150,7 @@ answer.answer = "Azure Files"
 context = """
 La section "Azure Files" du compte de stockage permet de créer et gérer des partages de fichiers SMB, en configurant leurs permissions et options.
 """
+id = "9ff70014-c442-4ab3-8ff2-1fee7a96c696"
 
 [[questions]]
 type = "MultipleChoice"
@@ -153,6 +164,7 @@ answer.answer = "az storage share list"
 context = """
 La commande `az storage share list` permet de récupérer la liste des partages SMB configurés dans un compte de stockage Azure.
 """
+id = "53bbf2ad-24a0-4f3b-b9f9-843c358bb621"
 
 [[questions]]
 type = "MultipleChoice"
@@ -166,6 +178,7 @@ answer.answer = "mount_smbfs"
 context = """
 Sur macOS, la commande `mount_smbfs` est utilisée pour monter un partage SMB Azure sur un répertoire local.
 """
+id = "e63d87a6-0daa-4bfa-a412-c2f276a40ed2"
 
 [[questions]]
 type = "MultipleChoice"
@@ -179,6 +192,7 @@ answer.answer = "Le port 445 doit être ouvert sur le pare-feu"
 context = """
 Le port 445, utilisé par le protocole SMB, doit être ouvert sur les pare-feu locaux et réseau pour permettre l'accès à un partage SMB Azure.
 """
+id = "348b7fe1-2d6d-4e74-9f5d-b746a4276074"
 
 [[questions]]
 type = "MultipleChoice"
@@ -192,6 +206,7 @@ answer.answer = "Ajouter l'option '/persistent:yes' dans la commande 'net use'"
 context = """
 Sur Windows, l'option `/persistent:yes` de la commande `net use` garantit que le mappage sera reconnecté automatiquement après un redémarrage.
 """
+id = "5d2a54c4-9d00-4de0-85f5-f98a9bfb2b95"
 
 [[questions]]
 type = "MultipleChoice"
@@ -205,3 +220,4 @@ answer.answer = "Il n'est pas possible de monter directement un partage SMB avec
 context = """
 Azure CLI ne permet pas de monter directement un partage SMB sur un appareil local. Vous devez utiliser des commandes natives de votre système d'exploitation comme `net use` (Windows) ou `mount_smbfs` (macOS).
 """
+id = "80f90227-0347-40d1-8b0d-c7bf40e9bdbb"
