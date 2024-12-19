@@ -1,0 +1,289 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Filtrer le trafic réseau avec un groupe de sécurité réseau - Panorama du Cloud - Azure</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../tutoriels/intro.html"><strong aria-hidden="true">1.</strong> Ressources</a></li><li class="chapter-item expanded affix "><li class="part-title">Exercices</li><li class="chapter-item expanded "><a href="../exercises/deploy_nginx.html"><strong aria-hidden="true">2.</strong> Déployez un Serveur Web sur une Machine Virtuelle Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../corrections/deploy_nginx.html"><strong aria-hidden="true">2.1.</strong> Correction de la partie non-guidée</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/multi_tier.html"><strong aria-hidden="true">3.</strong> Déployez une Application Multi-Tiers avec Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../corrections/multi_tier.html"><strong aria-hidden="true">3.1.</strong> Correction</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/deploy_appservice.html"><strong aria-hidden="true">4.</strong> Déployez une Application Flask sur Azure App Service via Git</a></li><li class="chapter-item expanded "><a href="../exercises/static_website_blob.html"><strong aria-hidden="true">5.</strong> Hébergement d'un Site Web Statique avec Azure Blob Storage</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutoriels</li><li class="chapter-item expanded "><a href="../tutoriels/smb.html"><strong aria-hidden="true">6.</strong> Monter un partage de fichiers SMB sur Windows ou macOS</a></li><li class="chapter-item expanded "><a href="../tutoriels/cdn.html"><strong aria-hidden="true">7.</strong> Ajouter un Azure CDN à une application web Azure App Service</a></li><li class="chapter-item expanded "><a href="../tutoriels/nsg.html" class="active"><strong aria-hidden="true">8.</strong> Filtrer le trafic réseau avec un groupe de sécurité réseau</a></li><li class="chapter-item expanded "><a href="../tutoriels/wordpress.html"><strong aria-hidden="true">9.</strong> Créer un site WordPress sur Azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/resources_group.html"><strong aria-hidden="true">10.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="../tutoriels/tags.html"><strong aria-hidden="true">11.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="../tutoriels/vm.html"><strong aria-hidden="true">12.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/ssh.html"><strong aria-hidden="true">13.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/scp.html"><strong aria-hidden="true">14.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/snapshots.html"><strong aria-hidden="true">15.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="../tutoriels/storage.html"><strong aria-hidden="true">16.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/azure_blob_storage.html"><strong aria-hidden="true">17.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Exercice Complet Sur Azure</li><li class="chapter-item expanded "><a href="../exercises/full.html"><strong aria-hidden="true">18.</strong> Infrastructure</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="../notions/azure_monitor.html"><strong aria-hidden="true">19.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="../notions/ssh.html"><strong aria-hidden="true">20.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="../notions/rdp.html"><strong aria-hidden="true">21.</strong> protocole RDP</a></li><li class="chapter-item expanded "><a href="../notions/storage.html"><strong aria-hidden="true">22.</strong> Les redondances de stockage</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Panorama du Cloud - Azure</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="filtrer-le-trafic-réseau-avec-un-groupe-de-sécurité-réseau-nsg"><a class="header" href="#filtrer-le-trafic-réseau-avec-un-groupe-de-sécurité-réseau-nsg">Filtrer le trafic réseau avec un groupe de sécurité réseau (NSG)</a></h1>
+<p>Un <a href="https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview"><strong>Network Security Group (NSG)</strong></a> dans Azure est un composant essentiel pour sécuriser le trafic réseau. Il permet de contrôler l’accès aux ressources Azure en filtrant les flux entrants et sortants sur la base de règles configurables. Cela vous aide à renforcer la sécurité de vos ressources tout en respectant les exigences réseau de vos applications.</p>
+<hr />
+<h2 id="vue-densemble"><a class="header" href="#vue-densemble">Vue d'ensemble</a></h2>
+<p>Un <strong>NSG</strong> agit comme un pare-feu virtuel qui vous permet de définir des règles pour autoriser ou bloquer le trafic réseau vers des sous-réseaux ou des interfaces réseau spécifiques dans Azure. Cela inclut des scénarios tels que :</p>
+<ul>
+<li>Restreindre l'accès à une machine virtuelle (VM) à partir de plages d'IP spécifiques.</li>
+<li>Limiter les communications inter-sous-réseaux dans un réseau virtuel.</li>
+<li>Bloquer des ports spécifiques pour renforcer la sécurité.</li>
+</ul>
+<hr />
+<h3 id="scénarios-courants"><a class="header" href="#scénarios-courants">Scénarios courants</a></h3>
+<h4 id="limiter-le-trafic-entrant"><a class="header" href="#limiter-le-trafic-entrant">Limiter le trafic entrant</a></h4>
+<ul>
+<li>Par exemple, n’autoriser que des adresses IP spécifiques à accéder à une application web sur le port 80 (HTTP) ou 443 (HTTPS).</li>
+</ul>
+<h4 id="contrôler-le-trafic-sortant"><a class="header" href="#contrôler-le-trafic-sortant">Contrôler le trafic sortant</a></h4>
+<ul>
+<li>Empêcher une VM de se connecter à des destinations externes non autorisées, comme des domaines malveillants.</li>
+</ul>
+<h4 id="appliquer-des-règles-granulaires"><a class="header" href="#appliquer-des-règles-granulaires">Appliquer des règles granulaires</a></h4>
+<ul>
+<li>Créer des règles basées sur des plages d’adresses IP, des ports ou des protocoles (TCP/UDP).</li>
+</ul>
+<h4 id="priorisation-des-règles"><a class="header" href="#priorisation-des-règles">Priorisation des règles</a></h4>
+<ul>
+<li>Les règles NSG sont évaluées par priorité, où les valeurs les plus basses sont traitées en premier.</li>
+</ul>
+<hr />
+<h2 id="conseils-pour-réussir"><a class="header" href="#conseils-pour-réussir">Conseils pour réussir</a></h2>
+<h3 id="planifiez-vos-règles-avec-soin"><a class="header" href="#planifiez-vos-règles-avec-soin">Planifiez vos règles avec soin</a></h3>
+<ul>
+<li>Déterminez à l'avance quels flux de trafic sont nécessaires pour vos ressources.</li>
+<li>Utilisez les groupes de sécurité par défaut et minimisez les règles globales trop permissives.</li>
+</ul>
+<h3 id="utilisez-des-balises-azure-tags"><a class="header" href="#utilisez-des-balises-azure-tags">Utilisez des balises Azure (tags)</a></h3>
+<ul>
+<li>Azure offre des balises intégrées comme <code>Internet</code>, <code>VirtualNetwork</code>, ou <code>AzureLoadBalancer</code>, qui simplifient la configuration des règles.</li>
+</ul>
+<h3 id="surveillez-limpact-des-règles"><a class="header" href="#surveillez-limpact-des-règles">Surveillez l’impact des règles</a></h3>
+<ul>
+<li>Testez les modifications avec précaution pour éviter des interruptions de service. Utilisez les <strong>journaux NSG</strong> et <strong>Azure Monitor</strong> pour vérifier l’efficacité des règles.</li>
+</ul>
+<h3 id="combinez-nsg-et-dautres-outils-de-sécurité"><a class="header" href="#combinez-nsg-et-dautres-outils-de-sécurité">Combinez NSG et d'autres outils de sécurité</a></h3>
+<ul>
+<li>Un NSG est efficace pour le trafic réseau au niveau de la couche 3 (IP) et 4 (TCP/UDP), mais vous pouvez renforcer la sécurité avec des outils comme <strong>Azure Firewall</strong> pour un contrôle plus avancé.</li>
+</ul>
+<h3 id="Évitez-les-règles-conflictuelles"><a class="header" href="#Évitez-les-règles-conflictuelles">Évitez les règles conflictuelles</a></h3>
+<ul>
+<li>Si plusieurs règles sont appliquées à un NSG, assurez-vous qu’elles ne se contredisent pas, en particulier pour des ports critiques comme 22 (SSH) ou 3389 (RDP).</li>
+</ul>
+<hr />
+<h2 id="tutoriels"><a class="header" href="#tutoriels">Tutoriels</a></h2>
+<p>Pour apprendre à configurer et gérer un Network Security Group, consultez la documentation officielle de Microsoft :</p>
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/virtual-network/network-security-groups-overview">Introduction aux groupes de sécurité réseau (en français)</a></li>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/virtual-network/manage-network-security-group">Créer et utiliser des NSG dans Azure (en français)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-portal">Surveiller et diagnostiquer les NSG (en anglais)</a></li>
+</ul>
+<h2 id="quiz"><a class="header" href="#quiz">Quiz</a></h2>
+<p>Voici un quiz pour récapituler et approfondir certaines notions des NSG</p>
+<div class="quiz-placeholder" data-quiz-name="&quot;nsg&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Un NSG agit comme un pare-feu virtuel permettant de filtrer le trafic réseau basé sur des règles définies pour des sous-réseaux ou des interfaces réseau.\n&quot;,&quot;id&quot;:&quot;e61857d4-f263-4f7a-909e-71b7c631970b&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Filtrer le trafic réseau entrant et sortant pour sécuriser les ressources&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Créer des sous-réseaux dans un réseau virtuel&quot;,&quot;Gérer les autorisations d'accès à un abonnement Azure&quot;,&quot;Surveiller la performance des applications&quot;],&quot;prompt&quot;:&quot;Quel est le rôle principal d'un Network Security Group (NSG) dans Azure ?&quot;}},{&quot;context&quot;:&quot;Un NSG contrôle les flux réseau entrants et sortants en fonction de règles basées sur les adresses IP, les ports et les protocoles (TCP/UDP).\n&quot;,&quot;id&quot;:&quot;270bc02a-ebc6-4f33-9a9a-42de10b82171&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Le trafic réseau entrant et sortant sur la base de règles configurables&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Les appels API entre services Azure&quot;,&quot;Le trafic interne aux VM uniquement&quot;,&quot;Les communications entre les régions Azure&quot;],&quot;prompt&quot;:&quot;Quel type de trafic un NSG peut-il contrôler ?&quot;}},{&quot;context&quot;:&quot;Les règles NSG sont évaluées par priorité, avec les valeurs les plus basses traitées en premier. Cela permet de structurer les règles pour un contrôle précis.\n&quot;,&quot;id&quot;:&quot;1b880bd7-0e67-49d3-847e-0d8848f5b43e&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Les règles avec une priorité basse sont appliquées en premier&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Les règles les plus récentes sont appliquées en premier&quot;,&quot;Les règles avec un numéro de priorité élevé sont appliquées en premier&quot;,&quot;Les règles globales remplacent toujours les règles personnalisées&quot;],&quot;prompt&quot;:&quot;Quelle est la priorité des règles dans un NSG ?&quot;}},{&quot;context&quot;:&quot;Par défaut, un NSG autorise le trafic sortant et bloque tout le trafic entrant, sauf si des règles spécifiques sont définies.\n&quot;,&quot;id&quot;:&quot;0e522a7d-8278-4196-8e13-575b6cb13741&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Bloquer tout le trafic entrant par défaut&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Autoriser tout le trafic sur le port 80&quot;,&quot;Autoriser tout le trafic sortant vers les réseaux privés&quot;,&quot;Bloquer tout le trafic entrant et sortant&quot;],&quot;prompt&quot;:&quot;Quelle règle est automatiquement incluse dans un NSG ?&quot;}},{&quot;context&quot;:&quot;Les balises intégrées comme `Internet`, `VirtualNetwork`, et `AzureLoadBalancer` simplifient la configuration des règles NSG en permettant de cibler des groupes spécifiques.\n&quot;,&quot;id&quot;:&quot;b113e93e-ded5-4793-accc-d03d28718c04&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Internet, VirtualNetwork, AzureLoadBalancer&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;ResourceGroup, AzureSQL, Internet&quot;,&quot;AdminAccess, StorageAccount, Backend&quot;,&quot;AzureBlob, ExternalUser, AppService&quot;],&quot;prompt&quot;:&quot;Quelles balises Azure peuvent être utilisées dans les règles d'un NSG ?&quot;}},{&quot;context&quot;:&quot;Un NSG fonctionne principalement au niveau de la couche 3 (IP) et de la couche 4 (TCP/UDP), en contrôlant les adresses IP, les ports et les protocoles.\n&quot;,&quot;id&quot;:&quot;d2688b08-dc0e-4ce1-9362-cceedcf424b0&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Couche 3 (IP) et Couche 4 (TCP/UDP)&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Couche 2 (liaison de données)&quot;,&quot;Couche 5 (session)&quot;,&quot;Couche 7 (application)&quot;],&quot;prompt&quot;:&quot;Quelle couche du modèle OSI est principalement ciblée par les règles d'un NSG ?&quot;}},{&quot;context&quot;:&quot;Les journaux NSG et Azure Monitor permettent de visualiser les flux réseau autorisés ou bloqués par les règles NSG, facilitant ainsi le diagnostic.\n&quot;,&quot;id&quot;:&quot;ea364bf0-5b30-4ed8-9e55-78d8c017a16a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;En utilisant les journaux NSG et Azure Monitor&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;En utilisant un agent installé dans les VM affectées&quot;,&quot;En activant des sauvegardes automatiques dans Azure Storage&quot;,&quot;En désactivant temporairement le NSG pour observer les changements&quot;],&quot;prompt&quot;:&quot;Comment surveiller l'impact des règles d'un NSG sur le trafic réseau ?&quot;}},{&quot;context&quot;:&quot;Pour éviter les conflits, il est essentiel de définir des priorités claires et de tester les règles NSG pour vérifier qu'elles fonctionnent comme prévu.\n&quot;,&quot;id&quot;:&quot;b1c37a8a-2692-4df5-9075-57dd8a21c76b&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;En définissant des priorités distinctes et en testant les règles&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;En supprimant toutes les règles par défaut&quot;,&quot;En assignant des priorités égales à toutes les règles&quot;,&quot;En autorisant tout le trafic entrant et sortant&quot;],&quot;prompt&quot;:&quot;Comment éviter les conflits entre plusieurs règles dans un NSG ?&quot;}}]}" data-quiz-fullscreen="true"></div>
+<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../tutoriels/cdn.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../tutoriels/wordpress.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../tutoriels/cdn.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../tutoriels/wordpress.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,111 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle principal d'un Network Security Group (NSG) dans Azure ?"
+prompt.distractors = [
+  "Créer des sous-réseaux dans un réseau virtuel",
+  "Gérer les autorisations d'accès à un abonnement Azure",
+  "Surveiller la performance des applications"
+]
+answer.answer = "Filtrer le trafic réseau entrant et sortant pour sécuriser les ressources"
+context = """
+Un NSG agit comme un pare-feu virtuel permettant de filtrer le trafic réseau basé sur des règles définies pour des sous-réseaux ou des interfaces réseau.
+"""
+id = "e61857d4-f263-4f7a-909e-71b7c631970b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel type de trafic un NSG peut-il contrôler ?"
+prompt.distractors = [
+  "Les appels API entre services Azure",
+  "Le trafic interne aux VM uniquement",
+  "Les communications entre les régions Azure"
+]
+answer.answer = "Le trafic réseau entrant et sortant sur la base de règles configurables"
+context = """
+Un NSG contrôle les flux réseau entrants et sortants en fonction de règles basées sur les adresses IP, les ports et les protocoles (TCP/UDP).
+"""
+id = "270bc02a-ebc6-4f33-9a9a-42de10b82171"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est la priorité des règles dans un NSG ?"
+prompt.distractors = [
+  "Les règles les plus récentes sont appliquées en premier",
+  "Les règles avec un numéro de priorité élevé sont appliquées en premier",
+  "Les règles globales remplacent toujours les règles personnalisées"
+]
+answer.answer = "Les règles avec une priorité basse sont appliquées en premier"
+context = """
+Les règles NSG sont évaluées par priorité, avec les valeurs les plus basses traitées en premier. Cela permet de structurer les règles pour un contrôle précis.
+"""
+id = "1b880bd7-0e67-49d3-847e-0d8848f5b43e"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle règle est automatiquement incluse dans un NSG ?"
+prompt.distractors = [
+  "Autoriser tout le trafic sur le port 80",
+  "Autoriser tout le trafic sortant vers les réseaux privés",
+  "Bloquer tout le trafic entrant et sortant"
+]
+answer.answer = "Bloquer tout le trafic entrant par défaut"
+context = """
+Par défaut, un NSG autorise le trafic sortant et bloque tout le trafic entrant, sauf si des règles spécifiques sont définies.
+"""
+id = "0e522a7d-8278-4196-8e13-575b6cb13741"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelles balises Azure peuvent être utilisées dans les règles d'un NSG ?"
+prompt.distractors = [
+  "ResourceGroup, AzureSQL, Internet",
+  "AdminAccess, StorageAccount, Backend",
+  "AzureBlob, ExternalUser, AppService"
+]
+answer.answer = "Internet, VirtualNetwork, AzureLoadBalancer"
+context = """
+Les balises intégrées comme `Internet`, `VirtualNetwork`, et `AzureLoadBalancer` simplifient la configuration des règles NSG en permettant de cibler des groupes spécifiques.
+"""
+id = "b113e93e-ded5-4793-accc-d03d28718c04"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle couche du modèle OSI est principalement ciblée par les règles d'un NSG ?"
+prompt.distractors = [
+  "Couche 2 (liaison de données)",
+  "Couche 5 (session)",
+  "Couche 7 (application)"
+]
+answer.answer = "Couche 3 (IP) et Couche 4 (TCP/UDP)"
+context = """
+Un NSG fonctionne principalement au niveau de la couche 3 (IP) et de la couche 4 (TCP/UDP), en contrôlant les adresses IP, les ports et les protocoles.
+"""
+id = "d2688b08-dc0e-4ce1-9362-cceedcf424b0"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment surveiller l'impact des règles d'un NSG sur le trafic réseau ?"
+prompt.distractors = [
+  "En utilisant un agent installé dans les VM affectées",
+  "En activant des sauvegardes automatiques dans Azure Storage",
+  "En désactivant temporairement le NSG pour observer les changements"
+]
+answer.answer = "En utilisant les journaux NSG et Azure Monitor"
+context = """
+Les journaux NSG et Azure Monitor permettent de visualiser les flux réseau autorisés ou bloqués par les règles NSG, facilitant ainsi le diagnostic.
+"""
+id = "ea364bf0-5b30-4ed8-9e55-78d8c017a16a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment éviter les conflits entre plusieurs règles dans un NSG ?"
+prompt.distractors = [
+  "En supprimant toutes les règles par défaut",
+  "En assignant des priorités égales à toutes les règles",
+  "En autorisant tout le trafic entrant et sortant"
+]
+answer.answer = "En définissant des priorités distinctes et en testant les règles"
+context = """
+Pour éviter les conflits, il est essentiel de définir des priorités claires et de tester les règles NSG pour vérifier qu'elles fonctionnent comme prévu.
+"""
+id = "b1c37a8a-2692-4df5-9075-57dd8a21c76b"

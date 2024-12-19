@@ -1,0 +1,125 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle principal d'un Content Delivery Network (CDN) dans une application web ?"
+prompt.distractors = [
+  "Stocker toutes les données de l'application dans le cloud",
+  "Exécuter du code backend à proximité des utilisateurs",
+  "Offrir une alternative au DNS pour la résolution d'adresse"
+]
+answer.answer = "Distribuer efficacement le contenu statique et dynamique via des points de présence (PoPs)"
+context = """
+Un CDN améliore les performances des applications web en mettant en cache et en livrant du contenu à partir de points de présence géographiquement dispersés.
+"""
+id = "1a22f71c-06dd-42c0-b8f5-082619691f8b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quels types de contenu sont généralement mis en cache par un CDN ?"
+prompt.distractors = [
+  "Bases de données relationnelles",
+  "Fichiers de configuration d'application",
+  "Logs système et journaux de diagnostic"
+]
+answer.answer = "Ressources statiques comme des images, CSS, et fichiers JavaScript"
+context = """
+Les CDN sont optimisés pour la mise en cache de contenu statique comme des images, fichiers CSS, JavaScript, ou vidéos, mais ne conviennent pas pour les bases de données ou logs.
+"""
+id = "28547fc0-de2c-4b44-a0d3-931312faae45"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quels fournisseurs sont pris en charge par Azure CDN ?"
+prompt.distractors = [
+  "Cloudflare et Fastly uniquement",
+  "Amazon CloudFront",
+  "Akamai, Google CDN, et Fastly"
+]
+answer.answer = "Microsoft, Akamai, et Verizon"
+context = """
+Azure CDN propose des intégrations avec Microsoft, Akamai, et Verizon, permettant de choisir un fournisseur en fonction des besoins en couverture géographique et fonctionnalités.
+"""
+id = "fa7e5cbd-5378-48b6-a18a-7e1633f066c7"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel avantage principal Azure CDN offre-t-il à un App Service existant ?"
+prompt.distractors = [
+  "Il permet de gérer des bases de données dans l'application",
+  "Il remplace les services backend existants",
+  "Il automatise les mises à jour des ressources dynamiques"
+]
+answer.answer = "Il réduit la charge du backend en mettant en cache les ressources statiques"
+context = """
+Azure CDN réduit la charge sur le serveur backend d'un App Service en servant directement les requêtes pour les ressources statiques mises en cache.
+"""
+id = "521c89aa-79dd-44cf-a90e-104442dd5f03"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle stratégie doit être activée pour garantir des connexions sécurisées via Azure CDN ?"
+prompt.distractors = [
+  "Configuration des IP autorisées uniquement",
+  "Activation du pare-feu applicatif",
+  "Optimisation des règles de cache"
+]
+answer.answer = "Activation d'un certificat SSL pour le CDN"
+context = """
+Pour garantir des connexions sécurisées, vous devez activer HTTPS en configurant un certificat SSL pour votre profil CDN Azure.
+"""
+id = "7bfebdf5-5db2-4e1b-96ec-c88712f88459"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle commande Azure CLI permet de créer un profil CDN dans un abonnement Azure ?"
+prompt.distractors = [
+  "az cdn profile init",
+  "az appservice create-cdn",
+  "az storage cdn profile new"
+]
+answer.answer = "az cdn profile create"
+context = """
+La commande `az cdn profile create` est utilisée pour créer un profil CDN dans Azure, spécifiant le nom, l'emplacement et le niveau tarifaire.
+"""
+id = "e16404a4-4dca-4665-8dd6-631f41611a25"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment tester les performances d'une application après l'intégration d'Azure CDN ?"
+prompt.distractors = [
+  "En utilisant le gestionnaire de ressources Azure uniquement",
+  "En désactivant les règles de cache pour vérifier les temps de chargement",
+  "En supprimant temporairement l'intégration CDN"
+]
+answer.answer = "En surveillant les métriques via Azure Monitor ou des outils tiers"
+context = """
+Après l'intégration d'Azure CDN, vous pouvez utiliser Azure Monitor ou des outils tiers pour mesurer les temps de réponse, latence et efficacité de mise en cache.
+"""
+id = "cfd7685c-6eb9-4285-b2cd-fc3a695e1b2a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelles règles permettent de contrôler la durée de mise en cache des ressources sur un CDN Azure ?"
+prompt.distractors = [
+  "Les groupes de redondance Azure",
+  "Les ACLs réseau (Listes de contrôle d'accès)",
+  "Les configurations de sauvegarde automatique"
+]
+answer.answer = "Les règles de cache personnalisées définies dans le profil CDN"
+context = """
+Les règles de cache personnalisées dans un profil CDN permettent de définir la durée de mise en cache et de spécifier les ressources qui doivent ou ne doivent pas être mises en cache.
+"""
+id = "d4222a2c-eeb1-46c3-9ae4-f47979ba8e45"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Combien de Points de Présence (PoPs) sont disponibles pour Azure CDN à l'échelle mondiale ?"
+prompt.distractors = [
+  "Entre 10 et 50",
+  "Entre 50 et 100",
+  "Plus de 500"
+]
+answer.answer = "Entre 100 et 300"
+context = """
+Azure CDN dispose d'environ 192 Points de Présence (PoPs) dans le monde, permettant de distribuer efficacement le contenu en le mettant en cache près des utilisateurs finaux.
+"""
+id = "d841ca05-07a6-4dc2-979d-a7ff5d18e87b"

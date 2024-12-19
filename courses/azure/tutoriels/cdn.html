@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ajouter un Azure CDN à une application web Azure App Service - Panorama du Cloud - Azure</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../tutoriels/intro.html"><strong aria-hidden="true">1.</strong> Ressources</a></li><li class="chapter-item expanded affix "><li class="part-title">Exercices</li><li class="chapter-item expanded "><a href="../exercises/deploy_nginx.html"><strong aria-hidden="true">2.</strong> Déployez un Serveur Web sur une Machine Virtuelle Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../corrections/deploy_nginx.html"><strong aria-hidden="true">2.1.</strong> Correction de la partie non-guidée</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/multi_tier.html"><strong aria-hidden="true">3.</strong> Déployez une Application Multi-Tiers avec Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../corrections/multi_tier.html"><strong aria-hidden="true">3.1.</strong> Correction</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/deploy_appservice.html"><strong aria-hidden="true">4.</strong> Déployez une Application Flask sur Azure App Service via Git</a></li><li class="chapter-item expanded "><a href="../exercises/static_website_blob.html"><strong aria-hidden="true">5.</strong> Hébergement d'un Site Web Statique avec Azure Blob Storage</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutoriels</li><li class="chapter-item expanded "><a href="../tutoriels/smb.html"><strong aria-hidden="true">6.</strong> Monter un partage de fichiers SMB sur Windows ou macOS</a></li><li class="chapter-item expanded "><a href="../tutoriels/cdn.html" class="active"><strong aria-hidden="true">7.</strong> Ajouter un Azure CDN à une application web Azure App Service</a></li><li class="chapter-item expanded "><a href="../tutoriels/nsg.html"><strong aria-hidden="true">8.</strong> Filtrer le trafic réseau avec un groupe de sécurité réseau</a></li><li class="chapter-item expanded "><a href="../tutoriels/wordpress.html"><strong aria-hidden="true">9.</strong> Créer un site WordPress sur Azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/resources_group.html"><strong aria-hidden="true">10.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="../tutoriels/tags.html"><strong aria-hidden="true">11.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="../tutoriels/vm.html"><strong aria-hidden="true">12.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/ssh.html"><strong aria-hidden="true">13.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/scp.html"><strong aria-hidden="true">14.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/snapshots.html"><strong aria-hidden="true">15.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="../tutoriels/storage.html"><strong aria-hidden="true">16.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/azure_blob_storage.html"><strong aria-hidden="true">17.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Exercice Complet Sur Azure</li><li class="chapter-item expanded "><a href="../exercises/full.html"><strong aria-hidden="true">18.</strong> Infrastructure</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="../notions/azure_monitor.html"><strong aria-hidden="true">19.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="../notions/ssh.html"><strong aria-hidden="true">20.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="../notions/rdp.html"><strong aria-hidden="true">21.</strong> protocole RDP</a></li><li class="chapter-item expanded "><a href="../notions/storage.html"><strong aria-hidden="true">22.</strong> Les redondances de stockage</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Panorama du Cloud - Azure</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h3 id="ajouter-un-azure-content-delivery-network-cdn-à-une-application-web-azure-app-service"><a class="header" href="#ajouter-un-azure-content-delivery-network-cdn-à-une-application-web-azure-app-service">Ajouter un <strong>Azure Content Delivery Network (CDN)</strong> à une application web Azure App Service</a></h3>
+<p>Le <strong>Content Delivery Network (CDN)</strong> d'Azure est une solution puissante qui permet de distribuer efficacement du contenu statique et dynamique aux utilisateurs à travers le monde en le mettant en cache dans des emplacements géographiquement dispersés. L'intégration d'un CDN à une application web déployée dans Azure App Service peut considérablement améliorer les performances, réduire la latence et augmenter la fiabilité.</p>
+<hr />
+<h3 id="vue-densemble"><a class="header" href="#vue-densemble">Vue d'ensemble</a></h3>
+<p>Ajouter un Azure CDN à votre application web Azure App Service est une excellente stratégie pour :</p>
+<ul>
+<li><strong>Accélérer le chargement des pages</strong> : Les ressources statiques comme les images, les fichiers CSS ou JavaScript sont livrées plus rapidement grâce à leur mise en cache dans des points de présence (PoPs) proches des utilisateurs.</li>
+<li><strong>Réduire la charge sur le serveur backend</strong> : Le CDN gère les requêtes pour le contenu mis en cache, ce qui libère les ressources de votre App Service.</li>
+<li><strong>Améliorer l’expérience utilisateur globale</strong> : Une application rapide et réactive est essentielle pour fidéliser les utilisateurs.</li>
+</ul>
+<p><strong>Prérequis :</strong></p>
+<ol>
+<li>Un <strong>Azure App Service</strong> existant hébergeant votre application web.</li>
+<li>Un <strong>profil CDN Azure</strong> configuré ou à configurer.</li>
+<li>Accès aux outils Azure CLI, Azure Portal ou Azure PowerShell.</li>
+</ol>
+<hr />
+<h3 id="conseils-pour-une-intégration-réussie"><a class="header" href="#conseils-pour-une-intégration-réussie">Conseils pour une intégration réussie</a></h3>
+<ol>
+<li>
+<p><strong>Choisissez le bon fournisseur CDN</strong> :</p>
+<ul>
+<li>Azure CDN prend en charge plusieurs fournisseurs, dont <strong>Microsoft</strong>, <strong>Akamai</strong> et <strong>Verizon</strong>. Choisissez celui qui correspond à vos besoins en termes de couverture géographique, de fonctionnalités avancées et de budget.</li>
+</ul>
+</li>
+<li>
+<p><strong>Identifiez les ressources à mettre en cache</strong> :</p>
+<ul>
+<li>Généralement, les ressources statiques comme les images, CSS, JS, vidéos et documents sont les meilleures candidates pour la mise en cache.</li>
+</ul>
+</li>
+<li>
+<p><strong>Configurer les règles de mise en cache</strong> :</p>
+<ul>
+<li>Définissez des règles personnalisées pour contrôler les durées de mise en cache et spécifiez les ressources qui ne doivent pas être mises en cache.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ajoutez une stratégie HTTPS</strong> :</p>
+<ul>
+<li>Activez l’utilisation d’un certificat SSL pour le CDN afin de garantir des connexions sécurisées aux utilisateurs finaux.</li>
+</ul>
+</li>
+<li>
+<p><strong>Testez avant de basculer</strong> :</p>
+<ul>
+<li>Une fois le CDN configuré, testez la performance de votre application via des outils comme <strong>Azure Monitor</strong> ou des solutions tierces pour mesurer les temps de chargement et vérifier la distribution correcte du contenu.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="tutoriels"><a class="header" href="#tutoriels">Tutoriels</a></h3>
+<p>Pour apprendre à configurer un CDN Azure et l’associer à une application web Azure App Service, consultez la documentation officielle :</p>
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/cdn/cdn-add-to-web-app">Configurer Azure CDN pour un App Service Web App (en français)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/cdn/">Guide complet sur Azure CDN (en anglais)</a></li>
+</ul>
+<p>Ces guides vous aideront à :</p>
+<ul>
+<li>Créer un profil CDN dans Azure.</li>
+<li>Associer votre profil CDN à un endpoint de votre application web.</li>
+<li>Configurer les règles de mise en cache et optimiser les paramètres pour votre usage.</li>
+</ul>
+<h3 id="quiz"><a class="header" href="#quiz">Quiz</a></h3>
+<p>Voici un quiz pour récapituler et approfondir certaines notions des CDN</p>
+<div class="quiz-placeholder" data-quiz-name="&quot;cdn&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Un CDN améliore les performances des applications web en mettant en cache et en livrant du contenu à partir de points de présence géographiquement dispersés.\n&quot;,&quot;id&quot;:&quot;1a22f71c-06dd-42c0-b8f5-082619691f8b&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Distribuer efficacement le contenu statique et dynamique via des points de présence (PoPs)&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Stocker toutes les données de l'application dans le cloud&quot;,&quot;Exécuter du code backend à proximité des utilisateurs&quot;,&quot;Offrir une alternative au DNS pour la résolution d'adresse&quot;],&quot;prompt&quot;:&quot;Quel est le rôle principal d'un Content Delivery Network (CDN) dans une application web ?&quot;}},{&quot;context&quot;:&quot;Les CDN sont optimisés pour la mise en cache de contenu statique comme des images, fichiers CSS, JavaScript, ou vidéos, mais ne conviennent pas pour les bases de données ou logs.\n&quot;,&quot;id&quot;:&quot;28547fc0-de2c-4b44-a0d3-931312faae45&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Ressources statiques comme des images, CSS, et fichiers JavaScript&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Bases de données relationnelles&quot;,&quot;Fichiers de configuration d'application&quot;,&quot;Logs système et journaux de diagnostic&quot;],&quot;prompt&quot;:&quot;Quels types de contenu sont généralement mis en cache par un CDN ?&quot;}},{&quot;context&quot;:&quot;Azure CDN propose des intégrations avec Microsoft, Akamai, et Verizon, permettant de choisir un fournisseur en fonction des besoins en couverture géographique et fonctionnalités.\n&quot;,&quot;id&quot;:&quot;fa7e5cbd-5378-48b6-a18a-7e1633f066c7&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Microsoft, Akamai, et Verizon&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Cloudflare et Fastly uniquement&quot;,&quot;Amazon CloudFront&quot;,&quot;Akamai, Google CDN, et Fastly&quot;],&quot;prompt&quot;:&quot;Quels fournisseurs sont pris en charge par Azure CDN ?&quot;}},{&quot;context&quot;:&quot;Azure CDN réduit la charge sur le serveur backend d'un App Service en servant directement les requêtes pour les ressources statiques mises en cache.\n&quot;,&quot;id&quot;:&quot;521c89aa-79dd-44cf-a90e-104442dd5f03&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Il réduit la charge du backend en mettant en cache les ressources statiques&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Il permet de gérer des bases de données dans l'application&quot;,&quot;Il remplace les services backend existants&quot;,&quot;Il automatise les mises à jour des ressources dynamiques&quot;],&quot;prompt&quot;:&quot;Quel avantage principal Azure CDN offre-t-il à un App Service existant ?&quot;}},{&quot;context&quot;:&quot;Pour garantir des connexions sécurisées, vous devez activer HTTPS en configurant un certificat SSL pour votre profil CDN Azure.\n&quot;,&quot;id&quot;:&quot;7bfebdf5-5db2-4e1b-96ec-c88712f88459&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Activation d'un certificat SSL pour le CDN&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Configuration des IP autorisées uniquement&quot;,&quot;Activation du pare-feu applicatif&quot;,&quot;Optimisation des règles de cache&quot;],&quot;prompt&quot;:&quot;Quelle stratégie doit être activée pour garantir des connexions sécurisées via Azure CDN ?&quot;}},{&quot;context&quot;:&quot;La commande `az cdn profile create` est utilisée pour créer un profil CDN dans Azure, spécifiant le nom, l'emplacement et le niveau tarifaire.\n&quot;,&quot;id&quot;:&quot;e16404a4-4dca-4665-8dd6-631f41611a25&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;az cdn profile create&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;az cdn profile init&quot;,&quot;az appservice create-cdn&quot;,&quot;az storage cdn profile new&quot;],&quot;prompt&quot;:&quot;Quelle commande Azure CLI permet de créer un profil CDN dans un abonnement Azure ?&quot;}},{&quot;context&quot;:&quot;Après l'intégration d'Azure CDN, vous pouvez utiliser Azure Monitor ou des outils tiers pour mesurer les temps de réponse, latence et efficacité de mise en cache.\n&quot;,&quot;id&quot;:&quot;cfd7685c-6eb9-4285-b2cd-fc3a695e1b2a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;En surveillant les métriques via Azure Monitor ou des outils tiers&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;En utilisant le gestionnaire de ressources Azure uniquement&quot;,&quot;En désactivant les règles de cache pour vérifier les temps de chargement&quot;,&quot;En supprimant temporairement l'intégration CDN&quot;],&quot;prompt&quot;:&quot;Comment tester les performances d'une application après l'intégration d'Azure CDN ?&quot;}},{&quot;context&quot;:&quot;Les règles de cache personnalisées dans un profil CDN permettent de définir la durée de mise en cache et de spécifier les ressources qui doivent ou ne doivent pas être mises en cache.\n&quot;,&quot;id&quot;:&quot;d4222a2c-eeb1-46c3-9ae4-f47979ba8e45&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Les règles de cache personnalisées définies dans le profil CDN&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Les groupes de redondance Azure&quot;,&quot;Les ACLs réseau (Listes de contrôle d'accès)&quot;,&quot;Les configurations de sauvegarde automatique&quot;],&quot;prompt&quot;:&quot;Quelles règles permettent de contrôler la durée de mise en cache des ressources sur un CDN Azure ?&quot;}},{&quot;context&quot;:&quot;Azure CDN dispose d'environ 192 Points de Présence (PoPs) dans le monde, permettant de distribuer efficacement le contenu en le mettant en cache près des utilisateurs finaux.\n&quot;,&quot;id&quot;:&quot;d841ca05-07a6-4dc2-979d-a7ff5d18e87b&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Entre 100 et 300&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Entre 10 et 50&quot;,&quot;Entre 50 et 100&quot;,&quot;Plus de 500&quot;],&quot;prompt&quot;:&quot;Combien de Points de Présence (PoPs) sont disponibles pour Azure CDN à l'échelle mondiale ?&quot;}}]}" data-quiz-fullscreen="true"></div>
+<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../tutoriels/smb.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../tutoriels/nsg.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../tutoriels/smb.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../tutoriels/nsg.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

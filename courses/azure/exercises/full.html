@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Infrastructure - Panorama du Cloud - Azure</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../tutoriels/intro.html"><strong aria-hidden="true">1.</strong> Ressources</a></li><li class="chapter-item expanded affix "><li class="part-title">Exercices</li><li class="chapter-item expanded "><a href="../exercises/deploy_nginx.html"><strong aria-hidden="true">2.</strong> Déployez un Serveur Web sur une Machine Virtuelle Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../corrections/deploy_nginx.html"><strong aria-hidden="true">2.1.</strong> Correction de la partie non-guidée</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/multi_tier.html"><strong aria-hidden="true">3.</strong> Déployez une Application Multi-Tiers avec Azure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../corrections/multi_tier.html"><strong aria-hidden="true">3.1.</strong> Correction</a></li></ol></li><li class="chapter-item expanded "><a href="../exercises/deploy_appservice.html"><strong aria-hidden="true">4.</strong> Déployez une Application Flask sur Azure App Service via Git</a></li><li class="chapter-item expanded "><a href="../exercises/static_website_blob.html"><strong aria-hidden="true">5.</strong> Hébergement d'un Site Web Statique avec Azure Blob Storage</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutoriels</li><li class="chapter-item expanded "><a href="../tutoriels/smb.html"><strong aria-hidden="true">6.</strong> Monter un partage de fichiers SMB sur Windows ou macOS</a></li><li class="chapter-item expanded "><a href="../tutoriels/cdn.html"><strong aria-hidden="true">7.</strong> Ajouter un Azure CDN à une application web Azure App Service</a></li><li class="chapter-item expanded "><a href="../tutoriels/nsg.html"><strong aria-hidden="true">8.</strong> Filtrer le trafic réseau avec un groupe de sécurité réseau</a></li><li class="chapter-item expanded "><a href="../tutoriels/wordpress.html"><strong aria-hidden="true">9.</strong> Créer un site WordPress sur Azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/resources_group.html"><strong aria-hidden="true">10.</strong> Création et Gestion d'un groupe de resources</a></li><li class="chapter-item expanded "><a href="../tutoriels/tags.html"><strong aria-hidden="true">11.</strong> Déploiement et Gestion des étiquettes</a></li><li class="chapter-item expanded "><a href="../tutoriels/vm.html"><strong aria-hidden="true">12.</strong> Déployer une machine virtuelle Windows/Linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/ssh.html"><strong aria-hidden="true">13.</strong> Connection à une VM avec RDP ou SSH sur azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/scp.html"><strong aria-hidden="true">14.</strong> Utiliser SCP pour transférer des fichiers sur une VM linux</a></li><li class="chapter-item expanded "><a href="../tutoriels/snapshots.html"><strong aria-hidden="true">15.</strong> Gérer les sauvegardes et les snapshots des VMS</a></li><li class="chapter-item expanded "><a href="../tutoriels/storage.html"><strong aria-hidden="true">16.</strong> Configurer un compte de stockage Azure</a></li><li class="chapter-item expanded "><a href="../tutoriels/azure_blob_storage.html"><strong aria-hidden="true">17.</strong> Utiliser Azure Blob Storage pour stocker et gérer des fichiers</a></li><li class="chapter-item expanded affix "><li class="part-title">Exercice Complet Sur Azure</li><li class="chapter-item expanded "><a href="../exercises/full.html" class="active"><strong aria-hidden="true">18.</strong> Infrastructure</a></li><li class="chapter-item expanded affix "><li class="part-title">Notions</li><li class="chapter-item expanded "><a href="../notions/azure_monitor.html"><strong aria-hidden="true">19.</strong> Azure Monitor</a></li><li class="chapter-item expanded "><a href="../notions/ssh.html"><strong aria-hidden="true">20.</strong> protocole SSH</a></li><li class="chapter-item expanded "><a href="../notions/rdp.html"><strong aria-hidden="true">21.</strong> protocole RDP</a></li><li class="chapter-item expanded "><a href="../notions/storage.html"><strong aria-hidden="true">22.</strong> Les redondances de stockage</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Panorama du Cloud - Azure</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="exercice--déploiement-dune-application-distribuée-avec-des-services-azure"><a class="header" href="#exercice--déploiement-dune-application-distribuée-avec-des-services-azure"><strong>Exercice : Déploiement d’une Application Distribuée avec des Services Azure</strong></a></h1>
+<h2 id="objectif-"><a class="header" href="#objectif-">Objectif :</a></h2>
+<p>Créer une architecture applicative distribuée sur Azure, en utilisant les services Azure App Service, Blob Storage, Virtual Machines (Linux), et un CDN pour améliorer la performance, la sécurité, et la résilience.</p>
+<h2 id="contexte-"><a class="header" href="#contexte-">Contexte :</a></h2>
+<p>Vous travaillez pour une entreprise qui souhaite déployer un système de partage et d’analyse de fichiers. Les utilisateurs doivent pouvoir :</p>
+<ol>
+<li>Charger des fichiers via une interface web.</li>
+<li>Voir une liste des fichiers disponibles et télécharger les résultats d’analyse.</li>
+<li>Utiliser une architecture performante et sécurisée avec Azure.</li>
+</ol>
+<h2 id="cahier-des-charges-"><a class="header" href="#cahier-des-charges-">Cahier des charges :</a></h2>
+<ol>
+<li>
+<p><strong>Interface utilisateur :</strong></p>
+<ul>
+<li>Déployez une application web via <strong>Azure App Service</strong> pour permettre aux utilisateurs de soumettre leurs fichiers et d’afficher les résultats.</li>
+<li>Configurez l’App Service pour interagir avec un <strong>Blob Storage</strong> où les fichiers seront stockés.
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/app-service/scenario-secure-app-access-storage">Documentation : Tutoriel - Application web accédant au stockage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Stockage des fichiers :</strong></p>
+<ul>
+<li>Configurez un <strong>Blob Storage</strong> pour stocker les fichiers soumis par les utilisateurs.
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/storage/blobs/storage-blobs-introduction">Documentation : Introduction à Azure Blob Storage</a></li>
+</ul>
+</li>
+<li>Créez deux conteneurs :
+<ul>
+<li><code>uploads</code> : Pour les fichiers soumis par les utilisateurs.</li>
+<li><code>results</code> : Pour les résultats générés après le traitement (simulé).</li>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/storage/blobs/storage-quickstart-blobs-portal">Documentation : Démarrage rapide - Créer un conteneur Blob et y charger un fichier</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Traitement simulé :</strong></p>
+<ul>
+<li>Déployez une <strong>Machine Virtuelle Linux (VM)</strong> pour simuler le traitement des fichiers.
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/virtual-machines/linux/quick-create-portal">Documentation : Démarrage rapide - Créer une machine virtuelle Linux dans le Portail Azure</a></li>
+</ul>
+</li>
+<li>Utilisez des outils Linux (par exemple, Bash, rsync ou un script Python) pour copier un fichier depuis le conteneur <code>uploads</code> vers le conteneur <code>results</code> en ajoutant une mention "traité" dans le nom.
+<ul>
+<li><strong>Exemple de tâche :</strong> Renommer le fichier pour inclure "_processed".</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Amélioration des performances avec un CDN :</strong></p>
+<ul>
+<li>Configurez un <strong>Azure CDN</strong> pour accélérer l’accès aux fichiers stockés dans le conteneur <code>results</code>.
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/cdn/cdn-overview">Documentation : Qu'est-ce qu'un réseau de distribution de contenu sur Azure ?</a></li>
+</ul>
+</li>
+<li>Les utilisateurs doivent pouvoir télécharger leurs fichiers traités via le CDN.
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/cdn/cdn-create-a-storage-account-with-cdn">Documentation : Intégrer un compte de stockage Azure avec Azure CDN</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Sécurité :</strong></p>
+<ul>
+<li>Configurez un <strong>Network Security Group (NSG)</strong> pour restreindre l’accès à la VM Linux, autorisant uniquement les connexions SSH depuis votre adresse IP.
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/virtual-network/network-security-groups-overview">Documentation : Vue d'ensemble des groupes de sécurité réseau Azure</a></li>
+</ul>
+</li>
+<li>Configurez le Blob Storage pour être accessible uniquement via l’application web et le CDN.
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/storage/blobs/assign-azure-role-data-access?tabs=portal">Documentation : Configurer les autorisations pour le stockage Blob</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="livrables-attendus-"><a class="header" href="#livrables-attendus-">Livrables attendus :</a></h2>
+<ol>
+<li>
+<p><strong>Documentation détaillée :</strong></p>
+<ul>
+<li>Diagramme de l’architecture décrivant les interactions entre les services (App Service, VM Linux, Blob Storage, CDN).</li>
+<li>Instructions pour reproduire le déploiement des services, avec les configurations spécifiques.</li>
+</ul>
+</li>
+<li>
+<p><strong>Résultat technique :</strong></p>
+<ul>
+<li>Une URL pour accéder à l’application déployée via App Service.</li>
+<li>Une URL générée par le CDN pour télécharger les fichiers traités.</li>
+</ul>
+</li>
+<li>
+<p><strong>Validation des exigences :</strong></p>
+<ul>
+<li>Démonstration que :
+<ul>
+<li>Les fichiers peuvent être soumis via l’interface web et stockés dans le conteneur <code>uploads</code>.</li>
+<li>Les fichiers traités (manuellement via la VM) apparaissent dans le conteneur <code>results</code>.</li>
+<li>Les fichiers du conteneur <code>results</code> sont accessibles via le CDN.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="bonus-"><a class="header" href="#bonus-">Bonus :</a></h2>
+<ol>
+<li>
+<p><strong>Automatisation sur la VM Linux</strong> :</p>
+<ul>
+<li>Configurez un script Bash ou Python sur la VM Linux pour automatiser le traitement des fichiers chaque minute, en utilisant un planificateur comme <strong>cron</strong>.
+<ul>
+<li><a href="https://opensource.com/article/17/11/how-use-cron-linux">Documentation : Planification des tâches avec cron</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Sécurisation avec des identités managées :</strong></p>
+<ul>
+<li>Configurez une <strong>identité managée</strong> pour permettre à l’App Service d’accéder au Blob Storage sans avoir besoin de clés ou de SAS.
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/active-directory/managed-identities-azure-resources/overview">Documentation : Utiliser des identités managées pour accéder au stockage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Gestion de la scalabilité :</strong></p>
+<ul>
+<li>Ajoutez un élément facultatif pour montrer comment configurer :
+<ul>
+<li>Le <strong>scaling automatique</strong> d'Azure App Service en fonction de la charge.
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/app-service/manage-scale-up">Documentation : Mise à l'échelle d'App Service</a></li>
+</ul>
+</li>
+<li>Un <strong>disque persistant</strong> pour la VM Linux afin d’augmenter sa capacité de stockage temporaire.
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/virtual-machines/linux/attach-disk-portal">Documentation : Attacher un disque persistant à une VM Linux</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Configuration de la redondance des données :</strong></p>
+<ul>
+<li>Mettez en œuvre une redondance adaptée (LRS, ZRS ou GRS) pour le Blob Storage en fonction des besoins de durabilité des fichiers.
+<ul>
+<li><a href="https://learn.microsoft.com/fr-fr/azure/storage/common/storage-redundancy">Documentation : Redondance dans Azure Storage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../tutoriels/azure_blob_storage.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../notions/azure_monitor.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../tutoriels/azure_blob_storage.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../notions/azure_monitor.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
