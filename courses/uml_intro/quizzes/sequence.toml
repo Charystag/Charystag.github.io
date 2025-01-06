@@ -1,0 +1,155 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle principal d’un diagramme de séquence en UML ?"
+prompt.distractors = [
+  "Représenter la structure statique des classes.",
+  "Montrer la hiérarchie des composants logiciels.",
+  "Illustrer les relations entre acteurs externes et le système."
+]
+answer.answer = "Représenter les interactions dynamiques entre les objets au fil du temps."
+context = """
+Les diagrammes de séquence montrent comment les objets communiquent entre eux au fil du temps pour accomplir une tâche spécifique. Ils mettent l'accent sur l'ordre chronologique des messages.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle caractéristique distingue un diagramme de séquence des autres diagrammes comportementaux UML ?"
+prompt.distractors = [
+  "Il se concentre uniquement sur les relations entre classes.",
+  "Il décrit les dépendances entre les composants logiciels.",
+  "Il modélise les états d'un objet au cours de son cycle de vie."
+]
+answer.answer = "Il illustre les interactions entre objets en se basant sur une chronologie des messages."
+context = """
+Un diagramme de séquence représente les échanges de messages entre les objets selon leur ordre chronologique, ce qui le distingue des autres diagrammes comportementaux.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quel cas est-il recommandé d’utiliser un diagramme de séquence ?"
+prompt.distractors = [
+  "Pour planifier le déploiement physique des composants logiciels.",
+  "Pour modéliser les dépendances entre classes et modules.",
+  "Pour identifier les transitions d'état d'un objet."
+]
+answer.answer = "Pour décrire le déroulement chronologique des interactions entre objets pour accomplir une fonctionnalité spécifique."
+context = """
+Les diagrammes de séquence sont particulièrement utiles pour modéliser des processus métiers ou des fonctionnalités complexes nécessitant des interactions multiples entre objets.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représente-t-on un objet dans un diagramme de séquence UML ?"
+prompt.distractors = [
+  "Par un losange avec le nom de l'objet.",
+  "Par un rectangle contenant uniquement des méthodes.",
+  "Par une ellipse connectée aux autres objets."
+]
+answer.answer = "Par un rectangle avec le nom de l'objet souligné."
+context = """
+Un objet dans un diagramme de séquence est représenté par un rectangle avec son nom souligné, suivi d'une ligne verticale appelée « ligne de vie », qui représente son existence dans le temps.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représente-t-on un acteur dans un diagramme de séquence UML ?"
+prompt.distractors = [
+  "Par un rectangle souligné.",
+  "Par une flèche pointillée.",
+  "Par un losange rempli."
+]
+answer.answer = "Par une figure humaine stylisée connectée à la ligne de vie correspondante."
+context = """
+Un acteur dans un diagramme de séquence est représenté par une figure humaine stylisée, indiquant qu'il interagit avec le système ou les objets du diagramme.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que représente la ligne verticale appelée « ligne de vie » dans un diagramme de séquence UML ?"
+prompt.distractors = [
+  "Le temps nécessaire pour exécuter une méthode.",
+  "Le cycle de vie complet d'une classe.",
+  "Le chemin physique entre deux objets dans le réseau."
+]
+answer.answer = "La durée pendant laquelle un objet ou un acteur existe et participe aux interactions."
+context = """
+La ligne de vie représente la période pendant laquelle un objet ou un acteur existe et interagit avec d'autres éléments du système.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans un diagramme de séquence UML, comment représente-t-on l’ordre d’envoi des messages entre objets ?"
+prompt.distractors = [
+  "Par l'épaisseur de la ligne connectant les objets.",
+  "Par des chiffres associés aux messages.",
+  "Par la taille relative des rectangles représentant les objets."
+]
+answer.answer = "Par la position verticale des messages, de haut en bas dans l’ordre chronologique."
+context = """
+Dans un diagramme de séquence, les messages sont représentés par des flèches horizontales entre les lignes de vie des objets. Leur position de haut en bas indique leur ordre dans le temps.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que se passe-t-il lorsqu'un message atteint une barre d'activation dans un diagramme de séquence ?"
+prompt.distractors = [
+  "Une nouvelle ligne de vie est créée.",
+  "Un objet est détruit.",
+  "Un nouvel acteur entre dans le système."
+]
+answer.answer = "L'objet ou l'acteur exécute une méthode ou une action spécifique."
+context = """
+La barre d'activation indique que l'objet est en cours d'exécution d'une méthode ou d'une tâche en réponse à un message reçu.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment montre-t-on la réponse à un message dans un diagramme de séquence ?"
+prompt.distractors = [
+  "Par une flèche pleine pointant vers l'objet initial.",
+  "Par une flèche continue sans pointe.",
+  "Par une ligne verticale sur la ligne de vie de l'objet."
+]
+answer.answer = "Par une flèche pointillée pointant vers l'émetteur du message initial."
+context = """
+Une flèche pointillée indique une réponse à un message précédent. Cela montre que l'objet initial a terminé l'exécution de l'action demandée.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que représente un cadre « alt » dans un diagramme de séquence UML ?"
+prompt.distractors = [
+  "Une boucle répétitive.",
+  "Une interaction obligatoire.",
+  "Une relation conditionnelle entre deux objets."
+]
+answer.answer = "Une alternative conditionnelle entre plusieurs séquences possibles."
+context = """
+Le cadre « alt » (alternatif) représente une condition dans laquelle une seule des branches possibles est exécutée en fonction de la satisfaction d’une condition.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans un diagramme de séquence UML, que signifie un cadre « loop » ?"
+prompt.distractors = [
+  "Une branche conditionnelle optionnelle.",
+  "Une interaction unique obligatoire.",
+  "Un retour de méthode automatique."
+]
+answer.answer = "Une séquence répétitive exécutée un certain nombre de fois ou jusqu’à ce qu’une condition soit remplie."
+context = """
+Le cadre « loop » est utilisé pour modéliser des boucles. Il inclut une condition qui détermine le nombre de répétitions ou la fin de la boucle.
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quand utiliser le cadre « opt » dans un diagramme de séquence UML ?"
+prompt.distractors = [
+  "Pour représenter plusieurs alternatives possibles.",
+  "Pour modéliser un appel de méthode obligatoire.",
+  "Pour indiquer une interaction entre deux objets sans condition."
+]
+answer.answer = "Pour modéliser une interaction optionnelle qui se produit uniquement si une condition est vraie."
+context = """
+Le cadre « opt » (optionnel) est utilisé lorsque vous souhaitez représenter une interaction qui ne se produit que si une condition spécifique est remplie.
+"""
