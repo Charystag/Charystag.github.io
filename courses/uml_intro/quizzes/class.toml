@@ -1,0 +1,214 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le but principal d’un diagramme de classe en UML ?"
+prompt.distractors = [
+  "Représenter les interactions dynamiques entre les objets.",
+  "Montrer la structure physique des composants logiciels.",
+  "Illustrer les processus métier et les flux de travail."
+]
+answer.answer = "Représenter la structure statique du système, incluant les classes, leurs attributs, méthodes et relations."
+context = """
+Les diagrammes de classe sont des diagrammes structurels qui illustrent les classes du système, leurs propriétés (attributs), leurs comportements (méthodes) et leurs relations (associations, généralisations, dépendances, etc.).
+"""
+id = "fc3f9b70-6d81-4ea0-ac78-a8c4c4c1b036"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment les relations d’héritage sont-elles représentées dans un diagramme de classe UML ?"
+prompt.distractors = [
+  "Par une flèche pointillée entre les classes.",
+  "Par une ligne avec un losange à une extrémité.",
+  "Par une ellipse connectée aux classes."
+]
+answer.answer = "Par une flèche pleine avec un triangle à l’extrémité pointant vers la classe parent."
+context = """
+En UML, une relation d’héritage (généralisation) est représentée par une flèche pleine avec un triangle pointant vers la classe parent. Cela indique que la classe enfant hérite des propriétés et comportements de la classe parent.
+"""
+id = "78def78d-3a00-437b-8d44-a33e5d1e7aa4"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle relation UML est représentée par une ligne avec un losange rempli ?"
+prompt.distractors = [
+  "Une association.",
+  "Une dépendance.",
+  "Une généralisation."
+]
+answer.answer = "Une composition."
+context = """
+La composition en UML est une relation forte de 'partie-tout', où les objets 'parties' ne peuvent pas exister indépendamment de l’objet 'tout'. Elle est représentée par une ligne avec un losange rempli.
+"""
+id = "e18171ef-d29c-4daf-8cb0-ea96457ea997"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est la différence entre une agrégation et une composition dans un diagramme de classe UML ?"
+prompt.distractors = [
+  "Il n’y a aucune différence entre les deux.",
+  "Une composition permet des relations bidirectionnelles, tandis qu’une agrégation est unidirectionnelle.",
+  "Une agrégation est une relation forte, tandis qu’une composition est une relation faible."
+]
+answer.answer = "Une composition est une relation forte où les parties ne peuvent pas exister indépendamment, tandis qu’une agrégation est une relation plus faible."
+context = """
+En UML, l'agrégation est une relation 'partie-tout' où les parties peuvent exister indépendamment de l’objet tout. La composition, en revanche, est une relation plus forte, où les parties ne peuvent exister sans l'objet principal.
+"""
+id = "03c0156a-0b48-48f0-b67a-349ba9bf06b4"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représente-t-on une méthode privée dans un diagramme de classe UML ?"
+prompt.distractors = [
+  "Avec un symbole « + » devant le nom de la méthode.",
+  "Avec un symbole « ~ » devant le nom de la méthode.",
+  "Avec un symbole « # » devant le nom de la méthode."
+]
+answer.answer = "Avec un symbole « - » devant le nom de la méthode."
+context = """
+En UML, les méthodes et attributs privés sont indiqués par le symbole « - ». Les symboles « + », « # » et « ~ » représentent respectivement la visibilité publique, protégée et package.
+"""
+id = "ec1bd9b1-092a-4e6b-8717-f1f2c9ac84ee"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que signifie une ligne simple entre deux classes dans un diagramme de classe UML ?"
+prompt.distractors = [
+  "Une relation d’héritage.",
+  "Une relation de dépendance.",
+  "Une relation de composition."
+]
+answer.answer = "Une relation d’association."
+context = """
+Une ligne simple entre deux classes dans un diagramme de classe représente une association, indiquant une relation logique entre deux classes.
+"""
+id = "64c1f89a-18bf-43ac-9200-5bb3c70654e8"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans un diagramme de classe UML, que représente une multiplicité comme « 0..* » au bout d'une relation ?"
+prompt.distractors = [
+  "Une limite fixe de 0 ou 1 instance.",
+  "Un lien obligatoire entre deux classes.",
+  "Une cardinalité obligatoire fixe."
+]
+answer.answer = "Une relation optionnelle avec un nombre illimité d'instances possibles."
+context = """
+La multiplicité « 0..* » indique qu’un objet peut être associé à aucun ou à plusieurs objets de l’autre classe. C'est un concept important pour représenter les cardinalités dans les relations.
+"""
+id = "866c84e5-cf0e-4c0e-b0f0-599a7d33b4bf"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel rôle jouent les méthodes dans un diagramme de classe UML ?"
+prompt.distractors = [
+  "Elles définissent les relations entre les objets.",
+  "Elles indiquent les types de données des classes.",
+  "Elles spécifient les contraintes de la relation entre les classes."
+]
+answer.answer = "Elles représentent les comportements ou fonctionnalités associés à une classe."
+context = """
+Les méthodes dans un diagramme de classe décrivent les comportements ou actions qu'une classe peut effectuer, ce qui est essentiel pour modéliser la logique métier.
+"""
+id = "d8d6eda3-5818-4cb6-8eed-bc0988607bb6"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représente-t-on une classe abstraite dans un diagramme de classe UML ?"
+prompt.distractors = [
+  "Avec un losange autour du nom de la classe.",
+  "En utilisant un fond grisé dans le rectangle de la classe.",
+  "En utilisant un triangle pointant vers la classe."
+]
+answer.answer = "En affichant le nom de la classe en italique."
+context = """
+Une classe abstraite en UML est indiquée en mettant son nom en italique. Cela montre qu'elle ne peut pas être instanciée directement.
+"""
+id = "a14616cc-06ef-4647-858c-4cfad1214caf"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est une caractéristique d’une classe abstraite ?"
+prompt.distractors = [
+  "Elle ne peut pas avoir d'attributs.",
+  "Elle ne peut pas hériter d'autres classes.",
+  "Elle doit toujours contenir au moins une méthode privée."
+]
+answer.answer = "Elle ne peut pas être instanciée directement."
+context = """
+Une classe abstraite définit un modèle pour les classes concrètes. Elle ne peut pas être utilisée pour créer des objets directement.
+"""
+id = "669d9651-3a81-4fd4-9133-52ba492c9cd8"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représente-t-on une relation de dépendance dans un diagramme de classe UML ?"
+prompt.distractors = [
+  "Avec une ligne continue.",
+  "Avec une ligne avec un losange rempli.",
+  "Avec une flèche pleine avec un triangle."
+]
+answer.answer = "Avec une flèche pointillée entre deux éléments."
+context = """
+Une relation de dépendance en UML est représentée par une flèche pointillée montrant qu’un élément dépend d’un autre pour fonctionner.
+"""
+id = "34a111b2-412e-46f2-a72a-cf2fc40ac5e8"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quel cas une relation de dépendance est-elle utilisée dans un diagramme de classe UML ?"
+prompt.distractors = [
+  "Quand une classe hérite d’une autre classe.",
+  "Quand une classe fait partie d’un objet composite.",
+  "Quand une classe définit une méthode utilisée par une autre classe."
+]
+answer.answer = "Quand une classe utilise temporairement une autre classe pour accomplir une tâche."
+context = """
+Les dépendances en UML indiquent qu'une classe utilise ou dépend temporairement des services d'une autre classe.
+"""
+id = "cc5c198c-13d2-4c8d-95bb-7c7ed3307fc6"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que signifie le symbole « + » devant un attribut dans un diagramme de classe UML ?"
+prompt.distractors = [
+  "L’attribut est protégé.",
+  "L’attribut est privé.",
+  "L’attribut est statique."
+]
+answer.answer = "L’attribut est public."
+context = """
+En UML, le symbole « + » signifie que l’attribut est public et accessible depuis n’importe quelle autre classe.
+"""
+id = "4f04475f-5c8d-4194-bd0a-d5b60c335737"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que signifie la multiplicité « 1..* » dans un diagramme de classe UML ?"
+prompt.distractors = [
+  "Une classe est associée à un maximum de un objet d’une autre classe.",
+  "Une classe peut être associée à zéro ou à un seul objet d’une autre classe.",
+  "Une classe peut être associée à exactement zéro ou un nombre illimité d’objets d’une autre classe."
+]
+answer.answer = "Une classe est associée à au moins un objet ou davantage d’une autre classe."
+context = """
+La multiplicité « 1..* » indique une association avec un ou plusieurs objets, définissant une contrainte minimale mais pas de maximum.
+"""
+id = "971f3422-7bee-4648-8743-549462a42d11"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle multiplicité convient pour représenter une association entre plusieurs objets d'une classe et plusieurs objets d'une autre classe dans un diagramme de classe UML ?"
+prompt.distractors = [
+  "1..1 à 0..1",
+  "1..* à 1..1",
+  "0..1 à 1..*"
+]
+answer.answer = "0..* à 0..*"
+context = """
+La multiplicité « 0..* » des deux côtés de l'association indique que chaque objet d'une classe peut être associé à plusieurs objets de l'autre classe, et inversement. Cela représente une relation de cardinalité multiple à multiple.
+
+Exemple d'application :
+Dans un système de gestion de bibliothèque, une relation « 0..* à 0..* » peut être utilisée entre les classes « Livre » et « Auteur ».  
+- Un livre peut avoir plusieurs auteurs (par exemple, dans le cas de livres coécrits).  
+- Un auteur peut écrire plusieurs livres.
+"""
+id = "d161ee10-d18d-478d-8b91-0cbfe4ee5ea9"

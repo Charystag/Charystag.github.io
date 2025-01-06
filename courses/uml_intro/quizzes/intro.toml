@@ -1,0 +1,223 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est l'objectif principal du langage UML ?"
+prompt.distractors = [
+  "Écrire directement du code source pour les systèmes logiciels.",
+  "Optimiser les performances des systèmes logiciels.",
+  "Créer des interfaces utilisateur graphiques."
+]
+answer.answer = "Représenter visuellement les différents aspects d’un système logiciel, de la conception à l’implémentation."
+context = """
+UML (Unified Modeling Language) est un langage de modélisation visuel qui permet de concevoir et de documenter les systèmes logiciels de manière standardisée.
+"""
+id = "1add07d7-84cd-441e-b067-ae902c8094db"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Parmi les avantages suivants, lequel est associé à l'utilisation d'UML ?"
+prompt.distractors = [
+  "Réduction du coût matériel.",
+  "Élimination des bugs dans le code source.",
+  "Génération automatique de rapports financiers."
+]
+answer.answer = "Fournir une documentation précise des systèmes, essentielle pour la maintenance et l’évolution des logiciels."
+context = """
+UML est particulièrement utile pour documenter les systèmes de manière claire et standardisée, facilitant leur maintenance et leur évolution.
+"""
+id = "66f32a30-6781-451c-b55c-04b9852ac870"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle catégorie de diagrammes UML illustre la structure statique d’un système ?"
+prompt.distractors = [
+  "Diagrammes comportementaux.",
+  "Diagrammes de flux.",
+  "Diagrammes algorithmiques."
+]
+answer.answer = "Diagrammes structurels."
+context = """
+Les diagrammes structurels incluent des diagrammes comme les diagrammes de classes, de composants et de déploiement, qui représentent les aspects statiques d’un système.
+"""
+id = "d53257ed-9530-4f03-b857-72c53ffeb1ab"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel type de diagramme est utilisé pour modéliser les exigences des utilisateurs ?"
+prompt.distractors = [
+  "Diagramme de classes.",
+  "Diagramme de déploiement.",
+  "Diagramme d’activités."
+]
+answer.answer = "Diagramme de cas d'utilisation."
+context = """
+Les diagrammes de cas d'utilisation sont utilisés pour identifier les besoins et les attentes des utilisateurs, en montrant les interactions entre les acteurs et le système.
+"""
+id = "e7219d77-7a4b-4f7c-a2d6-65280411f2ae"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel élément UML est représenté par un rectangle dans les diagrammes ?"
+prompt.distractors = [
+  "Un acteur.",
+  "Un cas d'utilisation.",
+  "Une relation."
+]
+answer.answer = "Une classe ou un composant."
+context = """
+En UML, les rectangles représentent des classes ou des composants, qui sont des éléments clés dans la modélisation structurelle d’un système.
+"""
+id = "1f9e5562-9a8a-429f-b80b-76cee8103d09"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quelle méthodologie UML est-il recommandé de commencer par un diagramme de cas d'utilisation ?"
+prompt.distractors = [
+  "Implémentation du système.",
+  "Documentation et maintenance.",
+  "Déploiement matériel."
+]
+answer.answer = "Analyse des exigences."
+context = """
+Lors de l’analyse des exigences, les diagrammes de cas d'utilisation permettent de capturer les besoins des utilisateurs et de définir les interactions clés du système.
+"""
+id = "92acaa6c-4068-481b-80fc-a6f89016dff3"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel avantage clé UML offre-t-il dans un environnement multi-équipes ?"
+prompt.distractors = [
+  "Il garantit une vitesse d’exécution optimale des logiciels.",
+  "Il automatise les tests logiciels.",
+  "Il génère automatiquement des schémas de bases de données."
+]
+answer.answer = "Il favorise une compréhension commune entre les parties prenantes grâce à des représentations standardisées."
+context = """
+UML est un standard largement adopté dans l'industrie pour faciliter la communication et la collaboration entre développeurs, analystes, designers et clients.
+"""
+id = "b91fe63c-a3a6-4bc6-b2d5-9699ba2b7d3c"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Combien de types de diagrammes UML existe-t-il, et comment sont-ils classés ?"
+prompt.distractors = [
+  "5 types, classés en diagrammes de développement et diagrammes de tests.",
+  "8 types, classés uniquement par leur utilité dans l'implémentation.",
+  "14 types, classés uniquement selon leur complexité."
+]
+answer.answer = "14 types, classés en diagrammes structurels et comportementaux."
+context = """
+UML comporte 14 types de diagrammes, répartis en diagrammes structurels (statique) et comportementaux (dynamique), pour couvrir différents aspects du système.
+"""
+id = "cbd2dd25-bb2e-4098-95ea-861bb931355a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Pourquoi UML est-il considéré comme un standard international ?"
+prompt.distractors = [
+  "Parce qu’il a été conçu pour remplacer tous les autres outils de modélisation.",
+  "Parce qu’il impose des méthodologies de développement spécifiques.",
+  "Parce qu’il est réservé à une seule industrie, celle des logiciels embarqués."
+]
+answer.answer = "Parce qu’il est largement adopté dans l’industrie pour modéliser les systèmes logiciels et favorise une compréhension commune."
+context = """
+UML est un standard reconnu qui fournit un langage visuel universel pour concevoir, documenter et comprendre les systèmes logiciels dans de nombreux domaines.
+"""
+id = "0cff717c-9d2f-4bd1-8d27-df1e4f4923bb"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel diagramme UML structurel est utilisé pour représenter la répartition physique des composants logiciels sur le matériel ?"
+prompt.distractors = [
+  "Diagramme de classes.",
+  "Diagramme de séquence.",
+  "Diagramme de cas d'utilisation."
+]
+answer.answer = "Diagramme de déploiement."
+context = """
+Le diagramme de déploiement montre comment les composants logiciels sont déployés sur le matériel, mettant en évidence la structure physique du système.
+"""
+id = "2611ed59-7410-4e32-a1af-bd4cabbac76f"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel concept UML représente une entité externe interagissant avec le système ?"
+prompt.distractors = [
+  "Un composant.",
+  "Une classe.",
+  "Un message."
+]
+answer.answer = "Un acteur."
+context = """
+Les acteurs en UML sont des entités externes, comme des utilisateurs ou d'autres systèmes, qui interagissent avec le système modélisé pour accomplir des objectifs.
+"""
+id = "f8594472-8a75-49a1-90c4-1d7f94facc05"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle principal des diagrammes comportementaux en UML ?"
+prompt.distractors = [
+  "Ils représentent la structure statique des classes dans le système.",
+  "Ils décrivent la hiérarchie des composants matériels.",
+  "Ils identifient les relations entre les bases de données."
+]
+answer.answer = "Ils illustrent la dynamique et les interactions dans le système."
+context = """
+Les diagrammes comportementaux se concentrent sur la représentation des processus dynamiques et des interactions entre les composants du système.
+"""
+id = "41716c3b-b09d-4ade-ba61-bd24aeb809fd"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle notation UML est utilisée pour représenter un cas d'utilisation ?"
+prompt.distractors = [
+  "Un rectangle.",
+  "Une flèche.",
+  "Un losange."
+]
+answer.answer = "Une ellipse."
+context = """
+En UML, les cas d'utilisation sont représentés par des ellipses, montrant les fonctionnalités ou services offerts par le système aux acteurs.
+"""
+id = "0a0cfc0b-6d6f-4824-9c92-996f9fc1aa4c"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quand est-il préférable d’utiliser un diagramme de séquence en UML ?"
+prompt.distractors = [
+  "Pour définir les classes et leurs relations dans le système.",
+  "Pour modéliser les composants logiciels et leur déploiement.",
+  "Pour représenter la hiérarchie des objets dans le système."
+]
+answer.answer = "Pour décrire les interactions chronologiques entre les objets ou composants du système."
+context = """
+Le diagramme de séquence est utile pour représenter la succession des messages échangés entre objets ou acteurs, montrant ainsi l'ordre des interactions.
+"""
+id = "e6d876cf-91bf-4f99-8408-9b5f1261afd7"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est une caractéristique clé des relations UML, comme les associations ou les dépendances ?"
+prompt.distractors = [
+  "Elles ne peuvent être utilisées qu’avec des diagrammes structurels.",
+  "Elles représentent uniquement les interactions entre classes.",
+  "Elles doivent toujours inclure des flèches bidirectionnelles."
+]
+answer.answer = "Elles permettent de définir des liens entre différents éléments du modèle, comme des classes, des objets ou des acteurs."
+context = """
+Les relations en UML, comme les associations ou les dépendances, définissent les connexions entre les éléments modélisés, qu’ils soient structurels ou comportementaux.
+"""
+id = "80e1cd13-187e-4c71-9fc0-46b48ec0ed48"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quels outils ou méthodologies UML peuvent être intégrés dans des approches de développement agile comme Scrum ?"
+prompt.distractors = [
+  "Uniquement les diagrammes structurels.",
+  "Uniquement les diagrammes comportementaux.",
+  "Aucune partie de UML ne convient au développement agile."
+]
+answer.answer = "Tous les diagrammes UML, en fonction des besoins du projet."
+context = """
+UML est flexible et peut être utilisé avec diverses méthodologies, y compris Scrum et Agile, pour modéliser les aspects nécessaires du système tout en restant adaptable.
+"""
+id = "37872066-c5c8-49eb-89ad-cf335ce52ced"

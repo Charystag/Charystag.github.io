@@ -1,0 +1,209 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Qu'est-ce qu'un diagramme de cas d'utilisation en UML ?"
+prompt.distractors = [
+  "Un diagramme qui montre la séquence des interactions entre objets.",
+  "Un diagramme représentant la structure statique d'un système avec ses classes.",
+  "Un diagramme montrant les composants logiciels et leur déploiement physique."
+]
+answer.answer = "Un diagramme qui illustre les interactions entre les acteurs externes et un système pour accomplir un objectif spécifique."
+context = """
+Un diagramme de cas d'utilisation représente les fonctionnalités d'un système du point de vue de l'utilisateur. Il inclut des acteurs, des cas d'utilisation et leurs relations.
+"""
+id = "b1d2facf-615e-4ec5-a02f-791312424c46"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est la fonction principale des acteurs dans un diagramme de cas d'utilisation ?"
+prompt.distractors = [
+  "Ils définissent les classes internes du système.",
+  "Ils déterminent les séquences d'exécution dans le système.",
+  "Ils représentent les composants physiques du système."
+]
+answer.answer = "Ils représentent les entités externes interagissant avec le système, comme des utilisateurs ou d'autres systèmes."
+context = """
+Les acteurs sont des entités externes (humaines ou non) qui interagissent avec le système pour réaliser une ou plusieurs actions décrites dans les cas d'utilisation.
+"""
+id = "f1666c63-1a53-4f19-bd19-0fc52c676ce9"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est la relation représentée par une flèche pointillée avec le stéréotype « include » dans un diagramme de cas d'utilisation ?"
+prompt.distractors = [
+  "Elle représente une relation d'extension entre deux cas d'utilisation.",
+  "Elle indique qu'un acteur est optionnel dans l'exécution du cas d'utilisation.",
+  "Elle illustre une hiérarchie entre les cas d'utilisation."
+]
+answer.answer = "Elle montre qu'un cas d'utilisation inclut systématiquement un autre cas d'utilisation pour fonctionner."
+context = """
+En UML, une relation « include » indique qu'un cas d'utilisation inclut toujours un autre cas d'utilisation dans son déroulement, souvent pour partager des comportements communs.
+"""
+id = "9004775d-e49e-4488-9325-eab6eb0dd853"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est la différence entre une relation « include » et une relation « extend » dans un diagramme de cas d'utilisation ?"
+prompt.distractors = [
+  "« Include » est utilisé pour les acteurs, tandis que « extend » est utilisé pour les cas d'utilisation.",
+  "« Include » indique une relation optionnelle, tandis que « extend » est obligatoire.",
+  "« Include » est utilisée pour des cas d'utilisation alternatifs, tandis que « extend » est pour des cas principaux."
+]
+answer.answer = "« Include » est obligatoire et partage des comportements communs, tandis que « extend » ajoute un comportement optionnel dans certaines conditions."
+context = """
+En UML, une relation « include » est utilisée pour décomposer un cas d'utilisation en sous-composants obligatoires, tandis que « extend » ajoute des fonctionnalités optionnelles exécutées uniquement dans certaines conditions.
+"""
+id = "a350d836-e298-4176-b42e-5d74ddc8067b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est la différence entre un acteur primaire et un acteur secondaire dans un diagramme de cas d'utilisation ?"
+prompt.distractors = [
+  "Un acteur primaire est interne au système, tandis qu'un acteur secondaire est externe.",
+  "Un acteur primaire représente un utilisateur humain, tandis qu'un acteur secondaire représente un système logiciel.",
+  "Il n'y a pas de différence ; les deux termes sont interchangeables en UML."
+]
+answer.answer = "Un acteur primaire initie une interaction avec le système pour atteindre un objectif, tandis qu'un acteur secondaire soutient ou assiste cette interaction."
+context = """
+Les acteurs primaires sont ceux qui ont un objectif spécifique à atteindre en interagissant avec le système. Les acteurs secondaires fournissent un support ou une assistance aux cas d'utilisation initiés par les acteurs primaires.
+"""
+id = "b49e26a4-7c48-4da0-a767-61e5902bb87e"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans un diagramme de cas d'utilisation, quel est le rôle d'un point d'extension ?"
+prompt.distractors = [
+  "Il représente une action obligatoire que le système doit effectuer.",
+  "Il détermine les relations hiérarchiques entre les cas d'utilisation.",
+  "Il désigne une interaction optionnelle entre l'acteur et le système principal."
+]
+answer.answer = "Il identifie une situation où un comportement additionnel (cas d'utilisation extend) peut être ajouté au cas d'utilisation principal."
+context = """
+Les points d'extension dans un cas d'utilisation définissent les emplacements où des cas d'utilisation supplémentaires peuvent être insérés conditionnellement pour étendre le comportement du système.
+"""
+id = "b79e80fe-78e4-41da-854e-93ad99aca685"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel type d'acteur interagit directement avec le système pour atteindre ses propres objectifs principaux ?"
+prompt.distractors = [
+  "Acteur secondaire.",
+  "Acteur externe.",
+  "Acteur de support."
+]
+answer.answer = "Acteur primaire."
+context = """
+Un acteur primaire est celui qui initie une interaction avec le système afin de réaliser un objectif spécifique. Par exemple, un client effectuant un achat en ligne est un acteur primaire.
+"""
+id = "22014cda-23cf-4170-8191-71aad05eb299"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est la relation correcte entre un cas d'utilisation et un point d'extension ?"
+prompt.distractors = [
+  "Un point d'extension ne peut être associé qu'à des acteurs secondaires.",
+  "Un point d'extension est obligatoire dans tous les cas d'utilisation.",
+  "Un point d'extension définit toujours une relation d'inclusion (include)."
+]
+answer.answer = "Un point d'extension permet de définir où des comportements optionnels (extend) peuvent être ajoutés au cas d'utilisation principal."
+context = """
+Un point d'extension est une caractéristique optionnelle dans un cas d'utilisation principal qui indique où des comportements additionnels peuvent être ajoutés en fonction de conditions spécifiques.
+"""
+id = "9241b0fb-23b6-4c3a-8ad5-0b18393b8919"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment les acteurs secondaires interagissent-ils généralement avec un système dans un diagramme de cas d'utilisation ?"
+prompt.distractors = [
+  "Ils déclenchent toujours le début d'un cas d'utilisation.",
+  "Ils modifient la logique principale du système.",
+  "Ils effectuent des actions qui sont critiques pour atteindre les objectifs principaux des acteurs primaires."
+]
+answer.answer = "Ils soutiennent les interactions entre le système et les acteurs primaires, souvent en fournissant des services ou des ressources supplémentaires."
+context = """
+Les acteurs secondaires ne cherchent pas directement à atteindre leurs propres objectifs via le système. Ils soutiennent les acteurs primaires ou le système pour accomplir des tâches spécifiques.
+"""
+id = "7b4badf4-9510-486b-9002-fc12da3bcd7b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quel cas est-il particulièrement utile d'utiliser un diagramme de cas d'utilisation ?"
+prompt.distractors = [
+  "Pour représenter la structure détaillée d'une base de données.",
+  "Pour modéliser le comportement précis d'un algorithme.",
+  "Pour visualiser les composants physiques du déploiement d'un système."
+]
+answer.answer = "Pour comprendre les besoins fonctionnels d'un système en termes d'interactions entre les utilisateurs et le système."
+context = """
+Les diagrammes de cas d'utilisation sont utiles pour capturer les exigences fonctionnelles d'un système en mettant en évidence les interactions entre les acteurs externes et les fonctionnalités du système.
+"""
+id = "2e4548c6-466a-4344-baad-8b4b8b328725"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est une limitation majeure des diagrammes de cas d'utilisation ?"
+prompt.distractors = [
+  "Ils ne permettent pas de représenter les acteurs impliqués dans le système.",
+  "Ils ne peuvent pas être utilisés pour décrire les relations entre les cas d'utilisation.",
+  "Ils montrent uniquement les interactions avec les acteurs et non les flux internes du système."
+]
+answer.answer = "Ils ne capturent pas les détails de l'implémentation ou les flux internes du système."
+context = """
+Les diagrammes de cas d'utilisation se concentrent sur les interactions externes et les fonctionnalités, mais ils n'offrent pas de vue détaillée sur l'architecture ou les processus internes du système.
+"""
+id = "6ea144cd-147b-49d2-9524-b9a2688c5d00"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quel cas un diagramme de cas d'utilisation ne serait-il pas suffisant pour modéliser un système ?"
+prompt.distractors = [
+  "Lorsque le système repose sur des interactions complexes entre acteurs externes.",
+  "Lorsque le système nécessite une vue d'ensemble des relations fonctionnelles entre les acteurs et les cas d'utilisation.",
+  "Lorsque le système doit capturer les objectifs d'un acteur principal."
+]
+answer.answer = "Lorsque le système doit être modélisé à un niveau détaillé incluant des flux d'exécution ou des algorithmes internes."
+context = """
+Un diagramme de cas d'utilisation est limité à la capture des interactions externes et des objectifs fonctionnels. Pour des détails internes comme les flux d'exécution, des diagrammes supplémentaires comme des diagrammes d'activité ou de séquence sont nécessaires.
+"""
+id = "a0560333-c72e-4394-92c9-64a67beeee4b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel type de diagramme peut compléter un diagramme de cas d'utilisation pour modéliser les flux internes du système ?"
+prompt.distractors = [
+  "Un diagramme de classes.",
+  "Un diagramme de déploiement.",
+  "Un diagramme d'objets."
+]
+answer.answer = "Un diagramme d'activité ou un diagramme de séquence."
+context = """
+Les diagrammes de cas d'utilisation se concentrent sur les interactions externes, tandis que les diagrammes d'activité ou de séquence permettent de décrire les flux internes et les interactions entre les objets au sein du système.
+"""
+id = "564cc58d-514c-4b02-857f-9eafef994bd4"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est un avantage clé des diagrammes de cas d'utilisation lors de la phase initiale de conception d'un système ?"
+prompt.distractors = [
+  "Ils définissent directement la structure des bases de données nécessaires.",
+  "Ils identifient toutes les classes nécessaires à l'implémentation.",
+  "Ils capturent les algorithmes spécifiques à implémenter."
+]
+answer.answer = "Ils permettent de communiquer clairement les besoins fonctionnels aux parties prenantes non techniques."
+context = """
+Les diagrammes de cas d'utilisation sont souvent utilisés comme outils de communication pour expliquer les besoins fonctionnels aux parties prenantes, en utilisant un langage simple et des représentations visuelles claires.
+"""
+id = "fc91f7e1-f3d5-4f23-abdc-bc2d41af1b72"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Pourquoi est-il parfois nécessaire de combiner les diagrammes de cas d'utilisation avec d'autres types de diagrammes UML ?"
+prompt.distractors = [
+  "Parce que les diagrammes de cas d'utilisation ne sont pas compatibles avec les diagrammes UML.",
+  "Parce que les diagrammes de cas d'utilisation n'identifient pas les cas d'interaction entre acteurs externes.",
+  "Parce que les diagrammes de cas d'utilisation montrent les fonctionnalités, mais pas la structure ou les flux internes."
+]
+answer.answer = "Parce que les diagrammes de cas d'utilisation ne permettent pas de modéliser des aspects techniques ou structurels du système."
+context = """
+Les diagrammes de cas d'utilisation se limitent à une vue fonctionnelle et externe du système. D'autres diagrammes comme les diagrammes de classes, de séquence ou d'activité sont nécessaires pour modéliser les aspects techniques ou structurels.
+"""
+id = "81cf6ad5-05e7-4f82-b106-6818ab104c56"
