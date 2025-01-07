@@ -202,12 +202,12 @@ prompt.distractors = [
   "1..* à 1..1",
   "0..1 à 1..*"
 ]
-answer.answer = "0..* à 0..*"
+answer.answer = "1..* à 1..*"
 context = """
-La multiplicité « 0..* » des deux côtés de l'association indique que chaque objet d'une classe peut être associé à plusieurs objets de l'autre classe, et inversement. Cela représente une relation de cardinalité multiple à multiple.
+La multiplicité « 1..* » des deux côtés de l'association indique que chaque objet d'une classe peut être associé à plusieurs objets de l'autre classe, et inversement. Cela représente une relation de cardinalité multiple à multiple.
 
 Exemple d'application :
-Dans un système de gestion de bibliothèque, une relation « 0..* à 0..* » peut être utilisée entre les classes « Livre » et « Auteur ».  
+Dans un système de gestion de bibliothèque, une relation « 1..* à 1..* » peut être utilisée entre les classes « Livre » et « Auteur ».  
 - Un livre peut avoir plusieurs auteurs (par exemple, dans le cas de livres coécrits).  
 - Un auteur peut écrire plusieurs livres.
 """

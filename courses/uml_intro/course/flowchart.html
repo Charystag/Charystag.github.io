@@ -1,0 +1,375 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Flowcharts - Introduction au Langage UML</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../course/intro.html"><strong aria-hidden="true">1.</strong> Introduction au langage UML</a></li><li class="chapter-item expanded "><a href="../course/use_case.html"><strong aria-hidden="true">2.</strong> Diagrammes de cas d'utilisation</a></li><li class="chapter-item expanded "><a href="../course/class.html"><strong aria-hidden="true">3.</strong> Diagrammes de classe</a></li><li class="chapter-item expanded "><a href="../course/sequence.html"><strong aria-hidden="true">4.</strong> Diagrammes de séquence</a></li><li class="chapter-item expanded "><a href="../course/flowchart.html" class="active"><strong aria-hidden="true">5.</strong> Flowcharts</a></li><li class="chapter-item expanded "><a href="../course/activity.html"><strong aria-hidden="true">6.</strong> Diagrammes d'activité</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Introduction au Langage UML</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="les-organigrammes-flowcharts"><a class="header" href="#les-organigrammes-flowcharts">Les organigrammes (Flowcharts)</a></h1>
+<h2 id="objectif"><a class="header" href="#objectif">Objectif</a></h2>
+<p>Les organigrammes, ou flowcharts, sont des diagrammes qui illustrent visuellement les étapes séquentielles d'un processus,
+d'un système ou d'un algorithme informatique. Ils sont utilisés pour documenter, analyser, planifier, améliorer et
+communiquer des processus complexes de manière claire et concise.</p>
+<h2 id="cas-principaux-dutilisation"><a class="header" href="#cas-principaux-dutilisation">Cas principaux d’utilisation</a></h2>
+<ol>
+<li>
+<p><strong>Documentation des processus</strong> :</p>
+<ul>
+<li>Fournir une représentation visuelle des étapes d'un processus pour une meilleure compréhension et communication.</li>
+</ul>
+</li>
+<li>
+<p><strong>Analyse et amélioration des processus</strong> :</p>
+<ul>
+<li>Identifier les inefficacités, les redondances ou les goulets d'étranglement dans un processus existant.</li>
+</ul>
+</li>
+<li>
+<p><strong>Planification et conception</strong> :</p>
+<ul>
+<li>Élaborer de nouveaux processus ou systèmes en définissant clairement chaque étape nécessaire.</li>
+</ul>
+</li>
+<li>
+<p><strong>Formation et éducation</strong> :</p>
+<ul>
+<li>Aider à expliquer des procédures complexes aux nouveaux employés ou aux étudiants.</li>
+</ul>
+</li>
+<li>
+<p><strong>Programmation informatique</strong> :</p>
+<ul>
+<li>Visualiser la logique d'un algorithme ou d'un programme avant son codage.</li>
+</ul>
+</li>
+</ol>
+<h2 id="composants-principaux"><a class="header" href="#composants-principaux">Composants principaux</a></h2>
+<h3 id="1-symboles-de-base"><a class="header" href="#1-symboles-de-base">1. <strong>Symboles de base</strong></a></h3>
+<ul>
+<li>
+<p><strong>Ovale (Terminaison)</strong> :</p>
+<ul>
+<li><em>Définition</em> : Indique le début ou la fin d'un processus.</li>
+<li><em>Utilisation</em> : Placé aux points de départ et de conclusion de l'organigramme.</li>
+</ul>
+</li>
+<li>
+<p><strong>Rectangle (Processus)</strong> :</p>
+<ul>
+<li><em>Définition</em> : Représente une étape ou une action spécifique dans le processus.</li>
+<li><em>Utilisation</em> : Utilisé pour décrire une opération ou une tâche.</li>
+</ul>
+</li>
+<li>
+<p><strong>Losange (Décision)</strong> :</p>
+<ul>
+<li><em>Définition</em> : Indique un point où une décision doit être prise, menant à des chemins différents.</li>
+<li><em>Utilisation</em> : Utilisé pour représenter des questions oui/non ou vrai/faux.</li>
+</ul>
+</li>
+<li>
+<p><strong>Parallélogramme (Entrée/Sortie)</strong> :</p>
+<ul>
+<li><em>Définition</em> : Représente l'entrée de données dans le système ou la sortie de résultats.</li>
+<li><em>Utilisation</em> : Utilisé pour montrer les points où des informations sont introduites ou extraites.</li>
+</ul>
+</li>
+<li>
+<p><strong>Flèches (Flux de contrôle)</strong> :</p>
+<ul>
+<li><em>Définition</em> : Indiquent la direction du flux entre les étapes du processus.</li>
+<li><em>Utilisation</em> : Connectent les différents symboles pour montrer la progression.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-connecteurs"><a class="header" href="#2-connecteurs">2. <strong>Connecteurs</strong></a></h3>
+<ul>
+<li>
+<p><strong>Connecteur sur page</strong> :</p>
+<ul>
+<li><em>Définition</em> : Petit cercle utilisé pour connecter des parties de l'organigramme sur la même page.</li>
+<li><em>Utilisation</em> : Simplifie les diagrammes complexes en évitant des lignes croisées.</li>
+</ul>
+</li>
+<li>
+<p><strong>Connecteur hors page</strong> :</p>
+<ul>
+<li><em>Définition</em> : Symbole en forme de pentagone utilisé pour indiquer que le flux continue sur une autre page.</li>
+<li><em>Utilisation</em> : Utilisé dans des organigrammes étendus sur plusieurs pages.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-swimlanes-couloirs"><a class="header" href="#3-swimlanes-couloirs">3. <strong>Swimlanes (Couloirs)</strong></a></h3>
+<ul>
+<li><strong>Définition</strong> :
+<ul>
+<li>Divisions horizontales ou verticales de l'organigramme qui attribuent des étapes spécifiques à différentes unités, départements ou acteurs.</li>
+</ul>
+</li>
+<li><strong>Utilisation</strong> :
+<ul>
+<li>Clarifient les responsabilités et les rôles dans un processus, montrant qui est responsable de chaque étape.</li>
+</ul>
+</li>
+</ul>
+<h2 id="structure-et-présentation-dun-organigramme"><a class="header" href="#structure-et-présentation-dun-organigramme">Structure et présentation d’un organigramme</a></h2>
+<ol>
+<li>
+<p><strong>Définir le processus</strong> :</p>
+<ul>
+<li>Identifier clairement le processus à modéliser, ses limites, son début et sa fin.</li>
+</ul>
+</li>
+<li>
+<p><strong>Lister les étapes</strong> :</p>
+<ul>
+<li>Énumérer toutes les étapes nécessaires du processus dans l'ordre séquentiel.</li>
+</ul>
+</li>
+<li>
+<p><strong>Déterminer les décisions</strong> :</p>
+<ul>
+<li>Identifier les points où des décisions sont prises et les résultats possibles de ces décisions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dessiner le diagramme</strong> :</p>
+<ul>
+<li>Utiliser les symboles appropriés pour représenter chaque étape et décision.</li>
+<li>Connecter les symboles avec des flèches pour indiquer le flux du processus.</li>
+</ul>
+</li>
+<li>
+<p><strong>Vérifier et valider</strong> :</p>
+<ul>
+<li>Examiner l'organigramme pour s'assurer de sa précision et de sa clarté.</li>
+<li>Le faire réviser par les parties prenantes concernées pour validation.</li>
+</ul>
+</li>
+</ol>
+<h2 id="résumé"><a class="header" href="#résumé">Résumé</a></h2>
+<p>Les organigrammes sont des outils précieux pour visualiser et comprendre les processus complexes. En fournissant une
+représentation graphique des étapes séquentielles et des décisions, ils facilitent la communication, l'analyse et
+l'amélioration des processus dans divers domaines, de l'ingénierie logicielle à la gestion des opérations.</p>
+<h2 id="quiz"><a class="header" href="#quiz">Quiz</a></h2>
+<div class="quiz-placeholder" data-quiz-name="&quot;flowchart&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Un flowchart est un outil visuel utilisé pour représenter des processus ou des flux de travail de manière séquentielle et structurée, ce qui facilite leur compréhension et leur analyse.\n&quot;,&quot;id&quot;:&quot;3a6fc182-95a7-4281-9ef8-e5ca728580ff&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Représenter visuellement un processus ou un flux de travail étape par étape.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Représenter la structure statique d’un système.&quot;,&quot;Illustrer les relations entre classes et objets.&quot;,&quot;Décrire la hiérarchie des composants logiciels.&quot;],&quot;prompt&quot;:&quot;Quel est le rôle principal d’un flowchart (diagramme de flux) ?&quot;}},{&quot;context&quot;:&quot;Les flowcharts sont idéaux pour analyser, planifier ou documenter des processus complexes impliquant des décisions, des étapes séquentielles, ou des boucles.\n&quot;,&quot;id&quot;:&quot;74087d6f-fcf5-40fd-b499-76351647c042&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Lors de l'analyse ou de la conception de processus nécessitant des décisions ou des étapes multiples.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Lors de la modélisation de l’architecture statique d’un système.&quot;,&quot;Lors de la documentation des relations entre bases de données.&quot;,&quot;Lors de la mise en œuvre de fonctionnalités simples sans processus complexe.&quot;],&quot;prompt&quot;:&quot;Dans quel contexte les flowcharts sont-ils particulièrement utiles ?&quot;}},{&quot;context&quot;:&quot;Un flowchart est conçu pour décrire un processus étape par étape, y compris les décisions ou les bifurcations, contrairement aux diagrammes plus axés sur les relations ou les structures.\n&quot;,&quot;id&quot;:&quot;52eb067e-5531-427c-991a-0402f0e70b1c&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Il montre les étapes successives et les décisions d’un processus dans un ordre chronologique.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Il se concentre sur les relations statiques des composants.&quot;,&quot;Il illustre principalement les dépendances entre modules logiciels.&quot;,&quot;Il nécessite l’utilisation de notations UML standards.&quot;],&quot;prompt&quot;:&quot;Quelle est une caractéristique clé d’un flowchart par rapport à d'autres diagrammes ?&quot;}},{&quot;context&quot;:&quot;Un losange est utilisé pour représenter une décision ou une bifurcation dans un flowchart, avec des flèches sortant pour les différentes options possibles.\n&quot;,&quot;id&quot;:&quot;33739b65-e949-433b-879e-d55c444460ec&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Un losange.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un rectangle.&quot;,&quot;Un ovale.&quot;,&quot;Un cercle.&quot;],&quot;prompt&quot;:&quot;Quel symbole représente une décision dans un flowchart standard ?&quot;}},{&quot;context&quot;:&quot;Un rectangle est utilisé pour représenter une action ou une étape spécifique dans un processus.\n&quot;,&quot;id&quot;:&quot;d7105259-4981-463d-9f0e-334d10558e56&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Un rectangle.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un losange.&quot;,&quot;Un ovale.&quot;,&quot;Un cercle.&quot;],&quot;prompt&quot;:&quot;Quel symbole est utilisé pour représenter une action ou un processus dans un flowchart standard ?&quot;}},{&quot;context&quot;:&quot;Un ovale dans un flowchart représente les points de départ ou d’arrivée du processus, souvent étiquetés comme « Start » et « End ».\n&quot;,&quot;id&quot;:&quot;29510337-0617-4eff-b14a-8b6e507b11b1&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Indiquer le début ou la fin du processus.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Indiquer une décision dans le processus.&quot;,&quot;Définir une connexion entre deux parties du diagramme.&quot;,&quot;Représenter une action conditionnelle.&quot;],&quot;prompt&quot;:&quot;Quel est le rôle d’un ovale dans un flowchart ?&quot;}},{&quot;context&quot;:&quot;Les choix dans un flowchart sont représentés par un losange avec des flèches sortant vers les différentes étapes ou actions possibles en fonction de la décision prise.\n&quot;,&quot;id&quot;:&quot;ffff672f-d3a6-42b3-b74e-b0eeaf3bb564&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Par des flèches sortant d’un losange, chaque flèche correspondant à une option possible.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Par des flèches pointant vers des rectangles d’action.&quot;,&quot;Par des cercles connectés en série.&quot;,&quot;Par des ovales avec des étiquettes différentes.&quot;],&quot;prompt&quot;:&quot;Comment sont représentés les choix dans un flowchart ?&quot;}},{&quot;context&quot;:&quot;Les boucles ou processus répétitifs sont modélisés dans un flowchart par une flèche qui revient à une étape précédente après une condition.\n&quot;,&quot;id&quot;:&quot;36e38997-2617-404d-b529-20d2a72d9790&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Avec une flèche retour vers une étape précédente dans le processus.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Avec un cercle connectant deux étapes.&quot;,&quot;Avec des lignes droites sans flèches.&quot;,&quot;Avec un losange indiquant une action répétitive.&quot;],&quot;prompt&quot;:&quot;Comment représenter un processus répétitif dans un flowchart ?&quot;}},{&quot;context&quot;:&quot;Les flowcharts sont parfaits pour représenter les processus métier, les flux de travail ou les étapes de résolution de problèmes impliquant des décisions et des séquences d'actions.\n&quot;,&quot;id&quot;:&quot;bfcab85a-1bf5-4fa3-ba13-0c54de6fddae&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Pour modéliser un processus métier ou un flux de travail impliquant des décisions séquentielles.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Pour modéliser une base de données relationnelle.&quot;,&quot;Pour représenter les relations hiérarchiques entre objets.&quot;,&quot;Pour décrire la structure physique d’un système logiciel.&quot;],&quot;prompt&quot;:&quot;Dans quel cas un flowchart est-il le plus approprié ?&quot;}},{&quot;context&quot;:&quot;Les flowcharts deviennent difficiles à lire et à comprendre lorsque le système ou le processus est trop complexe, avec un grand nombre d'étapes ou d'interactions.\n&quot;,&quot;id&quot;:&quot;5c9ee2d8-2cac-4d51-a92b-628bfa908791&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Ils ne conviennent pas pour des systèmes très complexes avec de nombreuses interactions.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Ils ne permettent pas de représenter des décisions ou bifurcations.&quot;,&quot;Ils nécessitent l'utilisation d'outils complexes pour être créés.&quot;,&quot;Ils ne conviennent pas pour des systèmes très complexes avec de nombreuses interactions.&quot;],&quot;prompt&quot;:&quot;Quelle est une limitation majeure des flowcharts ?&quot;}}]}" data-quiz-fullscreen="true" data-quiz-cache-answers="true"></div>
+<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../course/sequence.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../course/activity.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../course/sequence.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../course/activity.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

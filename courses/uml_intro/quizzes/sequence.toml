@@ -10,6 +10,7 @@ answer.answer = "Représenter les interactions dynamiques entre les objets au fi
 context = """
 Les diagrammes de séquence montrent comment les objets communiquent entre eux au fil du temps pour accomplir une tâche spécifique. Ils mettent l'accent sur l'ordre chronologique des messages.
 """
+id = "890eac49-0feb-4941-b4f3-9cbe19bf6497"
 
 [[questions]]
 type = "MultipleChoice"
@@ -23,6 +24,7 @@ answer.answer = "Il illustre les interactions entre objets en se basant sur une 
 context = """
 Un diagramme de séquence représente les échanges de messages entre les objets selon leur ordre chronologique, ce qui le distingue des autres diagrammes comportementaux.
 """
+id = "c69bbc76-75d4-4019-a90c-0157e89fac88"
 
 [[questions]]
 type = "MultipleChoice"
@@ -36,6 +38,7 @@ answer.answer = "Pour décrire le déroulement chronologique des interactions en
 context = """
 Les diagrammes de séquence sont particulièrement utiles pour modéliser des processus métiers ou des fonctionnalités complexes nécessitant des interactions multiples entre objets.
 """
+id = "25e04cef-f324-4bdf-8f2d-d54604fce15c"
 
 [[questions]]
 type = "MultipleChoice"
@@ -49,6 +52,7 @@ answer.answer = "Par un rectangle avec le nom de l'objet souligné."
 context = """
 Un objet dans un diagramme de séquence est représenté par un rectangle avec son nom souligné, suivi d'une ligne verticale appelée « ligne de vie », qui représente son existence dans le temps.
 """
+id = "b81b9388-bc7d-4efb-8cc3-574336e07115"
 
 [[questions]]
 type = "MultipleChoice"
@@ -62,6 +66,7 @@ answer.answer = "Par une figure humaine stylisée connectée à la ligne de vie 
 context = """
 Un acteur dans un diagramme de séquence est représenté par une figure humaine stylisée, indiquant qu'il interagit avec le système ou les objets du diagramme.
 """
+id = "001b46e5-322e-4df7-9df4-dd6707eaee34"
 
 [[questions]]
 type = "MultipleChoice"
@@ -75,6 +80,7 @@ answer.answer = "La durée pendant laquelle un objet ou un acteur existe et part
 context = """
 La ligne de vie représente la période pendant laquelle un objet ou un acteur existe et interagit avec d'autres éléments du système.
 """
+id = "46d7bd97-2c7b-4433-91f3-28bcb2ecde25"
 
 [[questions]]
 type = "MultipleChoice"
@@ -88,6 +94,7 @@ answer.answer = "Par la position verticale des messages, de haut en bas dans l�
 context = """
 Dans un diagramme de séquence, les messages sont représentés par des flèches horizontales entre les lignes de vie des objets. Leur position de haut en bas indique leur ordre dans le temps.
 """
+id = "2825cd6f-4f47-4493-841d-6a27d950d4fc"
 
 [[questions]]
 type = "MultipleChoice"
@@ -101,6 +108,7 @@ answer.answer = "L'objet ou l'acteur exécute une méthode ou une action spécif
 context = """
 La barre d'activation indique que l'objet est en cours d'exécution d'une méthode ou d'une tâche en réponse à un message reçu.
 """
+id = "a0e58afb-606f-4c9b-b2d1-d53711922d96"
 
 [[questions]]
 type = "MultipleChoice"
@@ -114,6 +122,7 @@ answer.answer = "Par une flèche pointillée pointant vers l'émetteur du messag
 context = """
 Une flèche pointillée indique une réponse à un message précédent. Cela montre que l'objet initial a terminé l'exécution de l'action demandée.
 """
+id = "e6dbc3fd-2295-40d3-bb39-a7ce7e903693"
 
 [[questions]]
 type = "MultipleChoice"
@@ -127,6 +136,7 @@ answer.answer = "Une alternative conditionnelle entre plusieurs séquences possi
 context = """
 Le cadre « alt » (alternatif) représente une condition dans laquelle une seule des branches possibles est exécutée en fonction de la satisfaction d’une condition.
 """
+id = "77b2d5ec-2089-4a77-8494-f2c82e706522"
 
 [[questions]]
 type = "MultipleChoice"
@@ -140,6 +150,7 @@ answer.answer = "Une séquence répétitive exécutée un certain nombre de fois
 context = """
 Le cadre « loop » est utilisé pour modéliser des boucles. Il inclut une condition qui détermine le nombre de répétitions ou la fin de la boucle.
 """
+id = "b3f74759-6baa-4f68-a2ed-de37fccb3f66"
 
 [[questions]]
 type = "MultipleChoice"
@@ -153,3 +164,46 @@ answer.answer = "Pour modéliser une interaction optionnelle qui se produit uniq
 context = """
 Le cadre « opt » (optionnel) est utilisé lorsque vous souhaitez représenter une interaction qui ne se produit que si une condition spécifique est remplie.
 """
+id = "894ec57f-35fc-4437-9ebb-c2eeb99d5a00"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est une limitation majeure des diagrammes de séquence en UML ?"
+prompt.distractors = [
+  "Ils ne permettent pas de modéliser les relations statiques entre les classes.",
+  "Ils ne permettent pas de représenter les dépendances entre composants.",
+  "Ils sont difficiles à relier aux diagrammes d'activité."
+]
+answer.answer = "Ils deviennent difficiles à lire pour des systèmes complexes avec de nombreux objets."
+context = """
+Les diagrammes de séquence deviennent difficiles à lire et à comprendre lorsque de nombreux objets ou messages sont impliqués. Ils sont adaptés pour des flux chronologiques, mais leur lisibilité est une limite pour des systèmes complexes.
+"""
+id = "813347e8-f4ab-4d39-887c-af8762c15294"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quel cas un diagramme de séquence n'est-il pas adapté ?"
+prompt.distractors = [
+  "Pour illustrer les interactions chronologiques entre objets.",
+  "Pour modéliser les flux d'exécution complexes impliquant plusieurs objets.",
+  "Pour décrire les dépendances logiques entre les cas d'utilisation."
+]
+answer.answer = "Pour définir la structure statique des classes et leurs relations."
+context = """
+Les diagrammes de séquence sont comportementaux et dynamiques. Ils conviennent pour modéliser des interactions et des flux chronologiques, mais pas pour définir la structure statique des classes ou leurs relations.
+"""
+id = "6d8b3a12-d26d-498f-b22f-e25eda38d3c1"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Pour quelle phase de développement un diagramme de séquence est-il particulièrement utile ?"
+prompt.distractors = [
+  "Lors de la mise en œuvre physique du système.",
+  "Lors de la définition des bases de données.",
+  "Lors de l’analyse des exigences métier uniquement."
+]
+answer.answer = "Lors de la conception détaillée pour modéliser le comportement des objets et leurs interactions."
+context = """
+Les diagrammes de séquence sont très utiles dans la phase de conception détaillée, car ils montrent les interactions entre les objets pour une fonctionnalité ou un processus spécifique.
+"""
+id = "ff1387a3-6604-4999-84f7-c83e0de39d2e"

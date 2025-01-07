@@ -1,0 +1,293 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle principal d’un diagramme d’activité en UML ?"
+prompt.distractors = [
+  "Représenter la structure statique d’un système.",
+  "Illustrer les interactions entre objets au fil du temps.",
+  "Montrer les dépendances entre composants logiciels."
+]
+answer.answer = "Représenter les flux de contrôle et les processus d’un système, souvent avec des décisions et des parallélismes."
+context = """
+Les diagrammes d’activité sont utilisés pour modéliser les processus métiers, les flux de contrôle ou les comportements dans un système, en mettant l’accent sur les séquences et les transitions.
+"""
+id = "eac282a8-4427-470d-8509-241284f29f5b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représente-t-on une activité dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Par un losange.",
+  "Par une ellipse.",
+  "Par une flèche."
+]
+answer.answer = "Par un rectangle aux coins arrondis."
+context = """
+Une activité, qui représente une tâche ou une action, est modélisée par un rectangle aux coins arrondis dans un diagramme d’activité.
+"""
+id = "065cdd93-fc47-4482-b0b5-95b11a2bdd3f"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel symbole représente une décision dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Un rectangle aux coins arrondis.",
+  "Un ovale.",
+  "Un cercle."
+]
+answer.answer = "Un losange."
+context = """
+Un losange est utilisé pour représenter une décision dans un diagramme d’activité, avec des flèches sortant indiquant les différentes branches possibles.
+"""
+id = "65b96276-551f-490e-a86e-91512c4e61d1"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle d’un flux (flèche) dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Délimiter des partitions ou swimlanes.",
+  "Représenter des boucles dans un processus.",
+  "Montrer les transitions entre acteurs externes."
+]
+answer.answer = "Montrer la transition ou le flux entre les activités."
+context = """
+Une flèche dans un diagramme d’activité indique la transition entre deux activités, ou entre une décision et les activités associées.
+"""
+id = "ff9ecff9-e315-4d1d-920f-84a63f241852"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Que représente une barre de fork dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Le début d’un processus.",
+  "La fusion de plusieurs flux en un seul.",
+  "Un point de décision conditionnelle."
+]
+answer.answer = "La division d’un flux unique en plusieurs flux parallèles."
+context = """
+Une barre de fork est utilisée pour indiquer que le flux se divise en plusieurs flux parallèles qui s’exécutent simultanément.
+"""
+id = "5b7b7067-5f3d-4264-9ba7-c89fd0524331"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle d’une barre de join dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Diviser un flux unique en plusieurs flux.",
+  "Indiquer une boucle dans le processus.",
+  "Montrer une interaction conditionnelle."
+]
+answer.answer = "Fusionner plusieurs flux parallèles en un flux unique."
+context = """
+Une barre de join est utilisée pour synchroniser plusieurs flux parallèles en un seul flux une fois que toutes les branches ont terminé leur exécution.
+"""
+id = "26dea6b4-c0f6-4d9a-b142-38f265fd4fe9"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quel cas utiliser à la fois un fork et un join dans un diagramme d’activité ?"
+prompt.distractors = [
+  "Pour modéliser une boucle infinie.",
+  "Pour représenter une décision conditionnelle.",
+  "Pour afficher des interactions séquentielles."
+]
+answer.answer = "Pour modéliser des processus parallèles suivis d’une synchronisation des résultats."
+context = """
+Un fork divise un flux en plusieurs branches parallèles, tandis qu’un join les synchronise. Cela est utile pour des processus parallèles nécessitant une convergence.
+"""
+id = "e17753a6-6f76-4748-b41a-ad2d0dbc2b2a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel symbole représente le début d’un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Un rectangle aux coins arrondis.",
+  "Un losange.",
+  "Une flèche pointillée."
+]
+answer.answer = "Un cercle plein."
+context = """
+Le point de départ d’un diagramme d’activité est représenté par un cercle plein. Il marque l’entrée dans le flux de processus.
+"""
+id = "94d32413-698e-4f82-9ba0-ed54c4c20037"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représente-t-on la fin d’un diagramme d’activité ?"
+prompt.distractors = [
+  "Par un rectangle vide.",
+  "Par un losange avec une croix.",
+  "Par une flèche vers un acteur."
+]
+answer.answer = "Par un cercle contenant un point plein."
+context = """
+La fin d’un processus dans un diagramme d’activité est représentée par un cercle avec un point plein à l’intérieur.
+"""
+id = "177f8ac6-2e50-49b9-b279-9631702d2e9c"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représente-t-on un flux conditionnel dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Par une flèche continue sans texte explicatif.",
+  "Par une flèche accompagnée d’un symbole circulaire.",
+  "Par une flèche qui revient toujours à l’activité précédente."
+]
+answer.answer = "Par une flèche avec une étiquette indiquant la condition."
+context = """
+Un flux conditionnel est indiqué par une flèche accompagnée d’une étiquette représentant la condition nécessaire pour suivre ce chemin. Par exemple, une flèche étiquetée « si validé » peut mener à une activité spécifique.
+"""
+id = "2014539d-e4b8-459d-ac19-1ebafa763983"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle des swimlanes (partitions) dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Indiquer des boucles dans un processus.",
+  "Représenter des décisions conditionnelles.",
+  "Marquer les transitions entre les étapes."
+]
+answer.answer = "Délimiter les responsabilités ou les acteurs dans un processus."
+context = """
+Les swimlanes organisent le diagramme d’activité en délimitant les responsabilités des acteurs ou des systèmes impliqués dans le processus.
+"""
+id = "6962b4e9-b681-4420-a56d-0c44a361a773"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quel cas est-il pertinent d’utiliser des swimlanes ?"
+prompt.distractors = [
+  "Lorsque le processus implique des boucles complexes.",
+  "Lorsque toutes les étapes sont exécutées par le même acteur.",
+  "Lorsque les flux ne nécessitent pas de parallélisme."
+]
+answer.answer = "Lorsque plusieurs acteurs ou systèmes participent au processus."
+context = """
+Les swimlanes sont utiles pour clarifier quelles étapes d’un processus sont réalisées par chaque acteur ou système impliqué.
+"""
+id = "b8c49689-be0a-44f0-8b96-02645df09ded"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quel cas un diagramme d’activité est-il le plus utile ?"
+prompt.distractors = [
+  "Pour modéliser la structure statique des classes.",
+  "Pour représenter les relations entre acteurs et cas d’utilisation.",
+  "Pour montrer les transitions entre les états d’un objet."
+]
+answer.answer = "Pour décrire les processus métier ou les flux de contrôle complexes."
+context = """
+Les diagrammes d’activité sont particulièrement utiles pour documenter les processus métier, les flux de données, ou les comportements complexes impliquant des parallélismes et des décisions.
+"""
+id = "66db0c55-5c6a-409e-92ae-e1ecd6a0a9b2"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est une limitation majeure des diagrammes d’activité ?"
+prompt.distractors = [
+  "Ils ne permettent pas de représenter les décisions conditionnelles.",
+  "Ils sont trop spécifiques pour les systèmes généraux.",
+  "Ils ne montrent pas clairement la responsabilité des acteurs impliqués."
+]
+answer.answer = "Ils deviennent difficiles à lire pour des processus très complexes."
+context = """
+Bien que puissants, les diagrammes d’activité peuvent devenir encombrés et difficiles à comprendre lorsque le processus modélisé est trop complexe ou contient de nombreuses branches parallèles. Cela peut nuire à leur lisibilité et à leur utilité pratique.
+"""
+id = "002f5ba0-4a0a-4e06-aa98-3b3a9b3ac124"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel rôle jouent les objets dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Ils définissent les relations hiérarchiques entre les classes.",
+  "Ils marquent uniquement les débuts et fins des flux.",
+  "Ils représentent les décisions dans un processus."
+]
+answer.answer = "Ils montrent les changements ou transitions d'état d'un objet au cours du processus."
+context = """
+Les objets dans un diagramme d’activité sont utilisés pour représenter l’état d’un objet à différents points du processus, souvent liés aux activités.
+"""
+id = "c41d10ee-25b0-45f3-a7a8-f81fe9361eb7"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représente-t-on un objet dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Par un rectangle aux coins arrondis.",
+  "Par un cercle avec un point plein.",
+  "Par un losange."
+]
+answer.answer = "Par un rectangle avec le nom de l'objet."
+context = """
+Les objets sont représentés par des rectangles contenant leur nom et, parfois, leur état. Ils sont connectés par des flèches pour montrer les transitions d’état.
+"""
+id = "e807dfae-a9f4-4cca-8093-806b0dfffa7d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quel cas est-il pertinent d’utiliser des objets dans un diagramme d’activité ?"
+prompt.distractors = [
+  "Pour représenter des processus parallèles.",
+  "Pour indiquer les responsabilités des acteurs dans les swimlanes.",
+  "Pour montrer uniquement les débuts et fins du processus."
+]
+answer.answer = "Pour suivre les états d’un objet tout au long du processus."
+context = """
+Les objets sont utilisés pour montrer comment un processus affecte un objet et comment ses états évoluent tout au long du diagramme d’activité.
+"""
+id = "11ea39f8-0c81-4102-b300-e3aaaefe9e80"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représente-t-on une boucle dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Avec un losange indiquant une décision conditionnelle.",
+  "Avec un cercle contenant le symbole de boucle.",
+  "Avec une barre de fork suivie d’un join."
+]
+answer.answer = "Avec un flux qui retourne vers une activité précédente après une condition."
+context = """
+Une boucle est représentée par une flèche retour, indiquant que le flux revient à une activité précédente tant qu’une condition spécifique est remplie.
+"""
+id = "57532dc6-88f5-435c-88d2-1c3dfa2d0555"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est un bon exemple d'utilisation d'une boucle dans un diagramme d'activité ?"
+prompt.distractors = [
+  "Pour synchroniser deux flux parallèles.",
+  "Pour décrire un processus avec des partitions multiples.",
+  "Pour indiquer un choix entre plusieurs branches."
+]
+answer.answer = "Pour représenter une tâche répétée jusqu'à ce qu'une condition soit remplie, comme 'valider toutes les entrées'."
+context = """
+Les boucles sont utiles pour modéliser des tâches répétitives dans des processus, comme un formulaire rempli jusqu'à validation ou un ensemble de données parcouru.
+"""
+id = "e4ca2ff9-de8c-4cfb-9479-fab1538085bb"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représente-t-on un événement temporel dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Par une flèche étiquetée avec une condition.",
+  "Par un losange contenant une condition temporelle.",
+  "Par un rectangle aux coins arrondis étiqueté avec un symbole de horloge."
+]
+answer.answer = "Par un sablier ou un symbole de chronomètre connecté à l'activité suivante."
+context = """
+Un événement temporel dans un diagramme d’activité UML est représenté par un sablier ou un symbole similaire, indiquant qu'une activité est déclenchée par une condition temporelle, comme 'après 5 minutes'.
+"""
+id = "e382865f-7c19-427f-ac36-4f58e2fb8f3b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est un exemple d’utilisation d’un événement temporel dans un diagramme d’activité UML ?"
+prompt.distractors = [
+  "Un utilisateur clique sur un bouton.",
+  "Une valeur est modifiée dans un objet.",
+  "Un signal externe est envoyé à un composant."
+]
+answer.answer = "L’exécution d’une activité après un délai spécifique, comme 'attendre 10 secondes avant de relancer le processus'."
+context = """
+Les événements temporels sont utiles pour modéliser des activités déclenchées après un délai ou à un moment spécifique, comme dans des systèmes d’horodatage ou de planification.
+"""
+id = "81cb8b3d-cfb7-4212-91fa-9e4c9cf40cbe"

@@ -1,0 +1,139 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle principal d’un flowchart (diagramme de flux) ?"
+prompt.distractors = [
+  "Représenter la structure statique d’un système.",
+  "Illustrer les relations entre classes et objets.",
+  "Décrire la hiérarchie des composants logiciels."
+]
+answer.answer = "Représenter visuellement un processus ou un flux de travail étape par étape."
+context = """
+Un flowchart est un outil visuel utilisé pour représenter des processus ou des flux de travail de manière séquentielle et structurée, ce qui facilite leur compréhension et leur analyse.
+"""
+id = "3a6fc182-95a7-4281-9ef8-e5ca728580ff"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quel contexte les flowcharts sont-ils particulièrement utiles ?"
+prompt.distractors = [
+  "Lors de la modélisation de l’architecture statique d’un système.",
+  "Lors de la documentation des relations entre bases de données.",
+  "Lors de la mise en œuvre de fonctionnalités simples sans processus complexe."
+]
+answer.answer = "Lors de l'analyse ou de la conception de processus nécessitant des décisions ou des étapes multiples."
+context = """
+Les flowcharts sont idéaux pour analyser, planifier ou documenter des processus complexes impliquant des décisions, des étapes séquentielles, ou des boucles.
+"""
+id = "74087d6f-fcf5-40fd-b499-76351647c042"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est une caractéristique clé d’un flowchart par rapport à d'autres diagrammes ?"
+prompt.distractors = [
+  "Il se concentre sur les relations statiques des composants.",
+  "Il illustre principalement les dépendances entre modules logiciels.",
+  "Il nécessite l’utilisation de notations UML standards."
+]
+answer.answer = "Il montre les étapes successives et les décisions d’un processus dans un ordre chronologique."
+context = """
+Un flowchart est conçu pour décrire un processus étape par étape, y compris les décisions ou les bifurcations, contrairement aux diagrammes plus axés sur les relations ou les structures.
+"""
+id = "52eb067e-5531-427c-991a-0402f0e70b1c"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel symbole représente une décision dans un flowchart standard ?"
+prompt.distractors = [
+  "Un rectangle.",
+  "Un ovale.",
+  "Un cercle."
+]
+answer.answer = "Un losange."
+context = """
+Un losange est utilisé pour représenter une décision ou une bifurcation dans un flowchart, avec des flèches sortant pour les différentes options possibles.
+"""
+id = "33739b65-e949-433b-879e-d55c444460ec"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel symbole est utilisé pour représenter une action ou un processus dans un flowchart standard ?"
+prompt.distractors = [
+  "Un losange.",
+  "Un ovale.",
+  "Un cercle."
+]
+answer.answer = "Un rectangle."
+context = """
+Un rectangle est utilisé pour représenter une action ou une étape spécifique dans un processus.
+"""
+id = "d7105259-4981-463d-9f0e-334d10558e56"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quel est le rôle d’un ovale dans un flowchart ?"
+prompt.distractors = [
+  "Indiquer une décision dans le processus.",
+  "Définir une connexion entre deux parties du diagramme.",
+  "Représenter une action conditionnelle."
+]
+answer.answer = "Indiquer le début ou la fin du processus."
+context = """
+Un ovale dans un flowchart représente les points de départ ou d’arrivée du processus, souvent étiquetés comme « Start » et « End ».
+"""
+id = "29510337-0617-4eff-b14a-8b6e507b11b1"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment sont représentés les choix dans un flowchart ?"
+prompt.distractors = [
+  "Par des flèches pointant vers des rectangles d’action.",
+  "Par des cercles connectés en série.",
+  "Par des ovales avec des étiquettes différentes."
+]
+answer.answer = "Par des flèches sortant d’un losange, chaque flèche correspondant à une option possible."
+context = """
+Les choix dans un flowchart sont représentés par un losange avec des flèches sortant vers les différentes étapes ou actions possibles en fonction de la décision prise.
+"""
+id = "ffff672f-d3a6-42b3-b74e-b0eeaf3bb564"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Comment représenter un processus répétitif dans un flowchart ?"
+prompt.distractors = [
+  "Avec un cercle connectant deux étapes.",
+  "Avec des lignes droites sans flèches.",
+  "Avec un losange indiquant une action répétitive."
+]
+answer.answer = "Avec une flèche retour vers une étape précédente dans le processus."
+context = """
+Les boucles ou processus répétitifs sont modélisés dans un flowchart par une flèche qui revient à une étape précédente après une condition.
+"""
+id = "36e38997-2617-404d-b529-20d2a72d9790"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Dans quel cas un flowchart est-il le plus approprié ?"
+prompt.distractors = [
+  "Pour modéliser une base de données relationnelle.",
+  "Pour représenter les relations hiérarchiques entre objets.",
+  "Pour décrire la structure physique d’un système logiciel."
+]
+answer.answer = "Pour modéliser un processus métier ou un flux de travail impliquant des décisions séquentielles."
+context = """
+Les flowcharts sont parfaits pour représenter les processus métier, les flux de travail ou les étapes de résolution de problèmes impliquant des décisions et des séquences d'actions.
+"""
+id = "bfcab85a-1bf5-4fa3-ba13-0c54de6fddae"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Quelle est une limitation majeure des flowcharts ?"
+prompt.distractors = [
+  "Ils ne permettent pas de représenter des décisions ou bifurcations.",
+  "Ils nécessitent l'utilisation d'outils complexes pour être créés.",
+  "Ils ne conviennent pas pour des systèmes très complexes avec de nombreuses interactions."
+]
+answer.answer = "Ils ne conviennent pas pour des systèmes très complexes avec de nombreuses interactions."
+context = """
+Les flowcharts deviennent difficiles à lire et à comprendre lorsque le système ou le processus est trop complexe, avec un grand nombre d'étapes ou d'interactions.
+"""
+id = "5c9ee2d8-2cac-4d51-a92b-628bfa908791"
