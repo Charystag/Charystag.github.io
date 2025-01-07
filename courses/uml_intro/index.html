@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction au langage UML - Introduction au Langage UML</title>
+        <title>Quiz - Introduction au Langage UML</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/intro.html" class="active"><strong aria-hidden="true">1.</strong> Introduction au langage UML</a></li><li class="chapter-item expanded "><a href="course/use_case.html"><strong aria-hidden="true">2.</strong> Diagrammes de cas d'utilisation</a></li><li class="chapter-item expanded "><a href="course/class.html"><strong aria-hidden="true">3.</strong> Diagrammes de classe</a></li><li class="chapter-item expanded "><a href="course/sequence.html"><strong aria-hidden="true">4.</strong> Diagrammes de séquence</a></li><li class="chapter-item expanded "><a href="course/flowchart.html"><strong aria-hidden="true">5.</strong> Flowcharts</a></li><li class="chapter-item expanded "><a href="course/activity.html"><strong aria-hidden="true">6.</strong> Diagrammes d'activité</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/quiz.html" class="active"><strong aria-hidden="true">1.</strong> Quiz</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,133 +173,52 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="introduction-au-langage-uml"><a class="header" href="#introduction-au-langage-uml">Introduction au Langage UML</a></h1>
-<h2 id="objectif"><a class="header" href="#objectif">Objectif</a></h2>
-<p>L’objectif de cette introduction est de comprendre les bases du langage UML
-(Unified Modeling Language), son rôle dans le développement logiciel, et les
-concepts fondamentaux qu’il introduit. UML est un langage de modélisation
-visuel qui permet de représenter les différents aspects d’un système logiciel,
-de la conception à l’implémentation.</p>
-<h2 id="pourquoi-utiliser-uml-"><a class="header" href="#pourquoi-utiliser-uml-">Pourquoi utiliser UML ?</a></h2>
-<ol>
-<li>
-<p><strong>Standardisation</strong> :</p>
+                        <h1 id="quiz-final---uml"><a class="header" href="#quiz-final---uml">Quiz Final - UML</a></h1>
+<p>Au cours de ce quiz composé de <strong>46 questions</strong>, vous aurez l'occasion
+de tester votre connaissance et votre compréhension des fondamentaux de l'UML</p>
+<h2 id="thèmes"><a class="header" href="#thèmes">Thèmes</a></h2>
+<p>Parmi les thèmes abordés vous retrouverez :</p>
 <ul>
-<li>UML est un standard international largement adopté dans l’industrie pour
-modéliser les systèmes logiciels.</li>
-<li>Il favorise une compréhension commune entre les parties prenantes.</li>
+<li>Origine et motivations de l'UML</li>
+<li>Diagrammes de cas d'utilisation</li>
+<li>Diagrammes de classe</li>
+<li>Diagrammes de séquence</li>
+<li>Organigrammes (Flowcharts)</li>
+<li>Diagrammes d'activité</li>
 </ul>
-</li>
-<li>
-<p><strong>Communication</strong> :</p>
+<h2 id="consignes"><a class="header" href="#consignes">Consignes</a></h2>
+<p>Vous aurez 1h pour réaliser le quiz.</p>
+<h3 id="erreur-potentielle"><a class="header" href="#erreur-potentielle">Erreur potentielle</a></h3>
+<p>Si vous pensez qu'une question est fausse, voici la procédure à suivre.
+Écrivez pourquoi la réponse proposée n'est selon-vous pas la bonne et
+pourquoi vous pensez que votre réponse est la bonne réponse. Si vous
+avez raison, la classe gagnera 1 point sur 46, si vous avez tord vous
+perdrez 2 points sur 46</p>
+<h3 id="interactions-avec-le-google-form"><a class="header" href="#interactions-avec-le-google-form">Interactions avec le Google Form</a></h3>
 <ul>
-<li>UML sert de support visuel pour faciliter la communication entre
-développeurs, analystes, designers et clients.</li>
+<li>Si vous cliquez sur suivant et que vous ne voyez pas la section
+suivante du quiz, scrollez vers le haut pour continuer à répondre</li>
+<li>À la dernière section du Quiz, vous devrez scroller vers le
+haut pour remplir un Captcha. Après l'avoir validé votre quiz
+sera définitivement envoyé.</li>
 </ul>
-</li>
-<li>
-<p><strong>Documentation</strong> :</p>
+<h2 id="consignes-importantes"><a class="header" href="#consignes-importantes"><strong>Consignes Importantes</strong></a></h2>
 <ul>
-<li>Il fournit une documentation précise des systèmes, essentielle pour la
-maintenance et l’évolution des logiciels.</li>
+<li>Aucune réponse ne sera acceptée après la fin du quiz</li>
+<li>Toute parole durant le quiz sera considérée comme une tentative de
+triche et résultera en une invalidation de votre résultat.</li>
 </ul>
-</li>
-<li>
-<p><strong>Planification et conception</strong> :</p>
-<ul>
-<li>UML aide à structurer et à planifier le développement logiciel en
-identifiant les composants, interactions, et flux de données.</li>
-</ul>
-</li>
-</ol>
-<h2 id="composantes-principales-duml"><a class="header" href="#composantes-principales-duml">Composantes principales d’UML</a></h2>
-<h3 id="1-les-diagrammes-uml"><a class="header" href="#1-les-diagrammes-uml">1. <strong>Les Diagrammes UML</strong></a></h3>
-<p>UML se compose de 14 types de diagrammes répartis en deux grandes catégories :</p>
-<ul>
-<li><strong>Diagrammes structurels</strong> : Illustrent la structure statique du système.</li>
-<li><strong>Diagrammes comportementaux</strong> : Illustrent la dynamique et les interactions
-dans le système.</li>
-</ul>
-<div class="table-wrapper"><table><thead><tr><th>Catégorie</th><th>Types de diagrammes</th></tr></thead><tbody>
-<tr><td><strong>Structurels</strong></td><td>Diagramme de classes, Diagramme de composants, Diagramme d’objets, Diagramme de déploiement, Diagramme de structure composite, Diagramme de paquets</td></tr>
-<tr><td><strong>Comportementaux</strong></td><td>Diagramme de cas d'utilisation, Diagramme de séquence, Diagramme d'activités, Diagramme de collaboration, Diagramme d'état, Diagramme de synchronisation, etc.</td></tr>
-</tbody></table>
-</div>
-<h3 id="2-concepts-clés"><a class="header" href="#2-concepts-clés">2. <strong>Concepts clés</strong></a></h3>
-<ul>
-<li><strong>Acteurs</strong> : Entités externes qui interagissent avec le système.</li>
-<li><strong>Objets</strong> : Instances des classes représentant des entités du système.</li>
-<li><strong>Relations</strong> : Liens entre les différents éléments UML, comme les
-associations, généralisations ou dépendances.</li>
-<li><strong>Messages</strong> : Échanges entre objets ou composants.</li>
-</ul>
-<h3 id="3-notations-standardisées"><a class="header" href="#3-notations-standardisées">3. <strong>Notations standardisées</strong></a></h3>
-<p>UML utilise des symboles graphiques spécifiques pour représenter les concepts :</p>
-<ul>
-<li><strong>Rectangles</strong> : Classes ou composants.</li>
-<li><strong>Ellipses</strong> : Cas d'utilisation.</li>
-<li><strong>Lignes</strong> : Relations entre éléments.</li>
-<li><strong>Flèches</strong> : Flux de contrôle, dépendances ou hiérarchies.</li>
-</ul>
-<h2 id="méthodologie-uml"><a class="header" href="#méthodologie-uml">Méthodologie UML</a></h2>
-<ol>
-<li>
-<p><strong>Analyse des exigences</strong> :</p>
-<ul>
-<li>Identifier les besoins et les attentes des utilisateurs.</li>
-<li>Utiliser des diagrammes comme les diagrammes de cas d'utilisation pour
-modéliser ces exigences.</li>
-</ul>
-</li>
-<li>
-<p><strong>Conception du système</strong> :</p>
-<ul>
-<li>Élaborer les diagrammes structurels pour définir les composants et leurs
-relations.</li>
-<li>Utiliser des diagrammes comportementaux pour représenter les interactions
-et les processus.</li>
-</ul>
-</li>
-<li>
-<p><strong>Implémentation</strong> :</p>
-<ul>
-<li>Traduire les modèles UML en code source tout en respectant la structure et
-les interactions définies.</li>
-</ul>
-</li>
-<li>
-<p><strong>Documentation et maintenance</strong> :</p>
-<ul>
-<li>Les modèles UML servent de référence pour documenter le système et
-faciliter sa mise à jour.</li>
-</ul>
-</li>
-</ol>
-<h2 id="avantages-duml"><a class="header" href="#avantages-duml">Avantages d’UML</a></h2>
-<ul>
-<li><strong>Clarté</strong> : Représentation visuelle et standardisée des systèmes.</li>
-<li><strong>Flexibilité</strong> : Adapté à différents types de projets, qu’ils soient petits
-ou complexes.</li>
-<li><strong>Intégration</strong> : Peut être utilisé avec de nombreuses méthodologies de
-développement (Agile, Scrum, Waterfall).</li>
-<li><strong>Interopérabilité</strong> : Supporté par une large gamme d’outils de modélisation.</li>
-</ul>
-<h2 id="résumé"><a class="header" href="#résumé">Résumé</a></h2>
-<p>UML est un langage de modélisation universel et puissant, essentiel pour
-concevoir, comprendre et documenter des systèmes logiciels. Grâce à ses
-diagrammes variés et standardisés, UML favorise une collaboration efficace et
-facilite le développement de logiciels robustes et évolutifs.</p>
+<h2 id="après-le-quiz"><a class="header" href="#après-le-quiz">Après le Quiz</a></h2>
+<p>Lorsque vous avez fini le quiz, vous pourrez sortir de la salle en silence
+jusqu'au retour de la pause</p>
 <h2 id="quiz"><a class="header" href="#quiz">Quiz</a></h2>
-<div class="quiz-placeholder" data-quiz-name="&quot;intro&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;UML (Unified Modeling Language) est un langage de modélisation visuel qui permet de concevoir et de documenter les systèmes logiciels de manière standardisée.\n&quot;,&quot;id&quot;:&quot;1add07d7-84cd-441e-b067-ae902c8094db&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Représenter visuellement les différents aspects d’un système logiciel, de la conception à l’implémentation.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Écrire directement du code source pour les systèmes logiciels.&quot;,&quot;Optimiser les performances des systèmes logiciels.&quot;,&quot;Créer des interfaces utilisateur graphiques.&quot;],&quot;prompt&quot;:&quot;Quel est l'objectif principal du langage UML ?&quot;}},{&quot;context&quot;:&quot;UML est particulièrement utile pour documenter les systèmes de manière claire et standardisée, facilitant leur maintenance et leur évolution.\n&quot;,&quot;id&quot;:&quot;66f32a30-6781-451c-b55c-04b9852ac870&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Fournir une documentation précise des systèmes, essentielle pour la maintenance et l’évolution des logiciels.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Réduction du coût matériel.&quot;,&quot;Élimination des bugs dans le code source.&quot;,&quot;Génération automatique de rapports financiers.&quot;],&quot;prompt&quot;:&quot;Parmi les avantages suivants, lequel est associé à l'utilisation d'UML ?&quot;}},{&quot;context&quot;:&quot;Les diagrammes structurels incluent des diagrammes comme les diagrammes de classes, de composants et de déploiement, qui représentent les aspects statiques d’un système.\n&quot;,&quot;id&quot;:&quot;d53257ed-9530-4f03-b857-72c53ffeb1ab&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Diagrammes structurels.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Diagrammes comportementaux.&quot;,&quot;Diagrammes de flux.&quot;,&quot;Diagrammes algorithmiques.&quot;],&quot;prompt&quot;:&quot;Quelle catégorie de diagrammes UML illustre la structure statique d’un système ?&quot;}},{&quot;context&quot;:&quot;Les diagrammes de cas d'utilisation sont utilisés pour identifier les besoins et les attentes des utilisateurs, en montrant les interactions entre les acteurs et le système.\n&quot;,&quot;id&quot;:&quot;e7219d77-7a4b-4f7c-a2d6-65280411f2ae&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Diagramme de cas d'utilisation.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Diagramme de classes.&quot;,&quot;Diagramme de déploiement.&quot;,&quot;Diagramme d’activités.&quot;],&quot;prompt&quot;:&quot;Quel type de diagramme est utilisé pour modéliser les exigences des utilisateurs ?&quot;}},{&quot;context&quot;:&quot;En UML, les rectangles représentent des classes ou des composants, qui sont des éléments clés dans la modélisation structurelle d’un système.\n&quot;,&quot;id&quot;:&quot;1f9e5562-9a8a-429f-b80b-76cee8103d09&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une classe ou un composant.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un acteur.&quot;,&quot;Un cas d'utilisation.&quot;,&quot;Une relation.&quot;],&quot;prompt&quot;:&quot;Quel élément UML est représenté par un rectangle dans les diagrammes ?&quot;}},{&quot;context&quot;:&quot;Lors de l’analyse des exigences, les diagrammes de cas d'utilisation permettent de capturer les besoins des utilisateurs et de définir les interactions clés du système.\n&quot;,&quot;id&quot;:&quot;92acaa6c-4068-481b-80fc-a6f89016dff3&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Analyse des exigences.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Implémentation du système.&quot;,&quot;Documentation et maintenance.&quot;,&quot;Déploiement matériel.&quot;],&quot;prompt&quot;:&quot;Dans quelle méthodologie UML est-il recommandé de commencer par un diagramme de cas d'utilisation ?&quot;}},{&quot;context&quot;:&quot;UML est un standard largement adopté dans l'industrie pour faciliter la communication et la collaboration entre développeurs, analystes, designers et clients.\n&quot;,&quot;id&quot;:&quot;b91fe63c-a3a6-4bc6-b2d5-9699ba2b7d3c&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Il favorise une compréhension commune entre les parties prenantes grâce à des représentations standardisées.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Il garantit une vitesse d’exécution optimale des logiciels.&quot;,&quot;Il automatise les tests logiciels.&quot;,&quot;Il génère automatiquement des schémas de bases de données.&quot;],&quot;prompt&quot;:&quot;Quel avantage clé UML offre-t-il dans un environnement multi-équipes ?&quot;}},{&quot;context&quot;:&quot;UML comporte 14 types de diagrammes, répartis en diagrammes structurels (statique) et comportementaux (dynamique), pour couvrir différents aspects du système.\n&quot;,&quot;id&quot;:&quot;cbd2dd25-bb2e-4098-95ea-861bb931355a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;14 types, classés en diagrammes structurels et comportementaux.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;5 types, classés en diagrammes de développement et diagrammes de tests.&quot;,&quot;8 types, classés uniquement par leur utilité dans l'implémentation.&quot;,&quot;14 types, classés uniquement selon leur complexité.&quot;],&quot;prompt&quot;:&quot;Combien de types de diagrammes UML existe-t-il, et comment sont-ils classés ?&quot;}},{&quot;context&quot;:&quot;UML est un standard reconnu qui fournit un langage visuel universel pour concevoir, documenter et comprendre les systèmes logiciels dans de nombreux domaines.\n&quot;,&quot;id&quot;:&quot;0cff717c-9d2f-4bd1-8d27-df1e4f4923bb&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Parce qu’il est largement adopté dans l’industrie pour modéliser les systèmes logiciels et favorise une compréhension commune.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Parce qu’il a été conçu pour remplacer tous les autres outils de modélisation.&quot;,&quot;Parce qu’il impose des méthodologies de développement spécifiques.&quot;,&quot;Parce qu’il est réservé à une seule industrie, celle des logiciels embarqués.&quot;],&quot;prompt&quot;:&quot;Pourquoi UML est-il considéré comme un standard international ?&quot;}},{&quot;context&quot;:&quot;Le diagramme de déploiement montre comment les composants logiciels sont déployés sur le matériel, mettant en évidence la structure physique du système.\n&quot;,&quot;id&quot;:&quot;2611ed59-7410-4e32-a1af-bd4cabbac76f&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Diagramme de déploiement.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Diagramme de classes.&quot;,&quot;Diagramme de séquence.&quot;,&quot;Diagramme de cas d'utilisation.&quot;],&quot;prompt&quot;:&quot;Quel diagramme UML structurel est utilisé pour représenter la répartition physique des composants logiciels sur le matériel ?&quot;}},{&quot;context&quot;:&quot;Les acteurs en UML sont des entités externes, comme des utilisateurs ou d'autres systèmes, qui interagissent avec le système modélisé pour accomplir des objectifs.\n&quot;,&quot;id&quot;:&quot;f8594472-8a75-49a1-90c4-1d7f94facc05&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Un acteur.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un composant.&quot;,&quot;Une classe.&quot;,&quot;Un message.&quot;],&quot;prompt&quot;:&quot;Quel concept UML représente une entité externe interagissant avec le système ?&quot;}},{&quot;context&quot;:&quot;Les diagrammes comportementaux se concentrent sur la représentation des processus dynamiques et des interactions entre les composants du système.\n&quot;,&quot;id&quot;:&quot;41716c3b-b09d-4ade-ba61-bd24aeb809fd&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Ils illustrent la dynamique et les interactions dans le système.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Ils représentent la structure statique des classes dans le système.&quot;,&quot;Ils décrivent la hiérarchie des composants matériels.&quot;,&quot;Ils identifient les relations entre les bases de données.&quot;],&quot;prompt&quot;:&quot;Quel est le rôle principal des diagrammes comportementaux en UML ?&quot;}},{&quot;context&quot;:&quot;En UML, les cas d'utilisation sont représentés par des ellipses, montrant les fonctionnalités ou services offerts par le système aux acteurs.\n&quot;,&quot;id&quot;:&quot;0a0cfc0b-6d6f-4824-9c92-996f9fc1aa4c&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une ellipse.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un rectangle.&quot;,&quot;Une flèche.&quot;,&quot;Un losange.&quot;],&quot;prompt&quot;:&quot;Quelle notation UML est utilisée pour représenter un cas d'utilisation ?&quot;}},{&quot;context&quot;:&quot;Le diagramme de séquence est utile pour représenter la succession des messages échangés entre objets ou acteurs, montrant ainsi l'ordre des interactions.\n&quot;,&quot;id&quot;:&quot;e6d876cf-91bf-4f99-8408-9b5f1261afd7&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Pour décrire les interactions chronologiques entre les objets ou composants du système.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Pour définir les classes et leurs relations dans le système.&quot;,&quot;Pour modéliser les composants logiciels et leur déploiement.&quot;,&quot;Pour représenter la hiérarchie des objets dans le système.&quot;],&quot;prompt&quot;:&quot;Quand est-il préférable d’utiliser un diagramme de séquence en UML ?&quot;}},{&quot;context&quot;:&quot;Les relations en UML, comme les associations ou les dépendances, définissent les connexions entre les éléments modélisés, qu’ils soient structurels ou comportementaux.\n&quot;,&quot;id&quot;:&quot;80e1cd13-187e-4c71-9fc0-46b48ec0ed48&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Elles permettent de définir des liens entre différents éléments du modèle, comme des classes, des objets ou des acteurs.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Elles ne peuvent être utilisées qu’avec des diagrammes structurels.&quot;,&quot;Elles représentent uniquement les interactions entre classes.&quot;,&quot;Elles doivent toujours inclure des flèches bidirectionnelles.&quot;],&quot;prompt&quot;:&quot;Quelle est une caractéristique clé des relations UML, comme les associations ou les dépendances ?&quot;}},{&quot;context&quot;:&quot;UML est flexible et peut être utilisé avec diverses méthodologies, y compris Scrum et Agile, pour modéliser les aspects nécessaires du système tout en restant adaptable.\n&quot;,&quot;id&quot;:&quot;37872066-c5c8-49eb-89ad-cf335ce52ced&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Tous les diagrammes UML, en fonction des besoins du projet.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Uniquement les diagrammes structurels.&quot;,&quot;Uniquement les diagrammes comportementaux.&quot;,&quot;Aucune partie de UML ne convient au développement agile.&quot;],&quot;prompt&quot;:&quot;Quels outils ou méthodologies UML peuvent être intégrés dans des approches de développement agile comme Scrum ?&quot;}}]}" data-quiz-fullscreen="true" data-quiz-cache-answers="true"></div>
-<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css">
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSecMmsUVJMoPx5ftizQIW7yNIiryKEh_swXQDQRRQRtXCmTmA/viewform?embedded=true" width="500" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
 
-                            <a rel="next prefetch" href="course/use_case.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -308,9 +227,6 @@ facilite le développement de logiciels robustes et évolutifs.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
 
-                    <a rel="next prefetch" href="course/use_case.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
