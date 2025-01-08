@@ -1,0 +1,641 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Diagrammes d&#x27;activité - Introduction au Langage UML</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Présentation du langage</li><li class="chapter-item expanded "><a href="../course/intro.html"><strong aria-hidden="true">1.</strong> Introduction au langage UML</a></li><li class="chapter-item expanded affix "><li class="part-title">Les principaux diagrammes</li><li class="chapter-item expanded "><a href="../course/use_case.html"><strong aria-hidden="true">2.</strong> Diagrammes de cas d'utilisation</a></li><li class="chapter-item expanded "><a href="../course/class.html"><strong aria-hidden="true">3.</strong> Diagrammes de classe</a></li><li class="chapter-item expanded "><a href="../course/sequence.html"><strong aria-hidden="true">4.</strong> Diagrammes de séquence</a></li><li class="chapter-item expanded "><a href="../course/flowchart.html"><strong aria-hidden="true">5.</strong> Flowcharts</a></li><li class="chapter-item expanded "><a href="../course/activity.html" class="active"><strong aria-hidden="true">6.</strong> Diagrammes d'activité</a></li><li class="chapter-item expanded affix "><li class="part-title">Quiz Final</li><li class="chapter-item expanded "><a href="../course/quiz.html"><strong aria-hidden="true">7.</strong> Quiz</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Introduction au Langage UML</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="diagrammes-dactivité"><a class="header" href="#diagrammes-dactivité">Diagrammes d'Activité</a></h1>
+<h2 id="objectif"><a class="header" href="#objectif">Objectif</a></h2>
+<p>Les diagrammes d'activité sont des représentations graphiques en UML qui
+illustrent les flux de contrôle et de données au sein d'un système. Ils mettent
+en évidence les étapes, les décisions et les interactions dynamiques entre
+composants, permettant de modéliser des processus, workflows ou comportements
+complexes.</p>
+<h2 id="cas-principaux-dutilisation"><a class="header" href="#cas-principaux-dutilisation">Cas principaux d’utilisation</a></h2>
+<ol>
+<li>
+<p><strong>Modélisation des processus métier</strong> :</p>
+<ul>
+<li>Représenter visuellement les étapes d'un processus pour une meilleure
+compréhension et optimisation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Analyse des workflows</strong> :</p>
+<ul>
+<li>Identifier les inefficacités, les redondances ou les goulets
+d'étranglement dans un flux de travail existant.</li>
+</ul>
+</li>
+<li>
+<p><strong>Conception de systèmes</strong> :</p>
+<ul>
+<li>Décrire le comportement dynamique d'un système, notamment les interactions
+entre composants.</li>
+</ul>
+</li>
+<li>
+<p><strong>Documentation des procédures</strong> :</p>
+<ul>
+<li>Fournir une référence claire pour les développeurs, les analystes et les
+parties prenantes.</li>
+</ul>
+</li>
+</ol>
+<h2 id="composants-principaux"><a class="header" href="#composants-principaux">Composants principaux</a></h2>
+<h3 id="1-nœuds-daction"><a class="header" href="#1-nœuds-daction">1. <strong>Nœuds d'action</strong></a></h3>
+<ul>
+<li><strong>Définition</strong> :<br />
+Représentent des tâches ou des opérations exécutées dans le cadre de
+l'activité.</li>
+<li><strong>Notation UML</strong> :<br />
+Un rectangle aux coins arrondis contenant le nom de l'action.</li>
+</ul>
+<hr />
+<h3 id="2-nœuds-de-contrôle"><a class="header" href="#2-nœuds-de-contrôle">2. <strong>Nœuds de contrôle</strong></a></h3>
+<ul>
+<li><strong>Définition</strong> :<br />
+Coordonnent les flux entre les autres nœuds.</li>
+<li><strong>Types courants</strong> :
+<ul>
+<li><strong>Nœud initial</strong> : Indique le point de départ de l'activité.</li>
+<li><strong>Nœud final d'activité</strong> : Termine tous les flux de l'activité.</li>
+<li><strong>Nœud final de flux</strong> : Termine un flux spécifique sans arrêter l'ensemble
+de l'activité.</li>
+<li><strong>Nœud de décision</strong> : Représente un point où une décision est prise,
+menant à des chemins alternatifs.</li>
+<li><strong>Nœud de fusion</strong> : Combine plusieurs flux alternatifs en un seul.</li>
+<li><strong>Nœud de fork</strong> : Divise un flux en plusieurs flux parallèles.</li>
+<li><strong>Nœud de jonction</strong> : Combine plusieurs flux parallèles en un seul.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="3-nœuds-dobjet"><a class="header" href="#3-nœuds-dobjet">3. <strong>Nœuds d'objet</strong></a></h3>
+<ul>
+<li><strong>Définition</strong> :<br />
+Indiquent que des instances d'un certain type peuvent être disponibles à un
+moment donné de l'activité.</li>
+<li><strong>Types courants</strong> :
+<ul>
+<li><strong>Objet</strong> : Représente des données ou des objets manipulés.</li>
+<li><strong>Pin</strong> : Point d'entrée ou de sortie pour les données dans une action.</li>
+<li><strong>Paramètre</strong> : Définit les entrées et sorties de l'activité.</li>
+<li><strong>Buffer central</strong> : Gère les flux provenant de multiples sources et
+destinations.</li>
+<li><strong>Magasin de données</strong> : Stocke des informations non transitoires.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="4-interruptions"><a class="header" href="#4-interruptions">4. <strong>Interruptions</strong></a></h3>
+<ul>
+<li>
+<p><strong>Définition</strong> :<br />
+Les interruptions permettent de modéliser des événements qui interrompent le
+flux normal d'une activité. Ces interruptions peuvent être déclenchées par
+des erreurs, des exceptions ou des événements externes.</p>
+</li>
+<li>
+<p><strong>Zones d'interruption</strong> :<br />
+Enclavent une ou plusieurs actions ou fragments, spécifiant les conditions
+sous lesquelles elles peuvent être interrompues. Ces zones sont indiquées
+par un contour en pointillés autour des éléments concernés.</p>
+</li>
+<li>
+<p><strong>Flux d'interruption</strong> :<br />
+Représentent les chemins empruntés en cas d'interruption. Ils sont
+indiqués par une flèche en zigzag partant d'une zone d'interruption vers une
+action ou un nœud de contrôle.</p>
+</li>
+</ul>
+<hr />
+<h3 id="5-régions-dexpansion"><a class="header" href="#5-régions-dexpansion">5. <strong>Régions d'expansion</strong></a></h3>
+<ul>
+<li><strong>Définition</strong> :<br />
+Enclavent un groupe de nœuds et d'arêtes qui sont exécutés plusieurs fois
+sur des données entrantes, une fois pour chaque élément de la collection
+d'entrée.</li>
+<li><strong>Utilisation</strong> :<br />
+Permettent de modéliser des opérations répétitives sur des collections de
+données.</li>
+</ul>
+<hr />
+<h3 id="6-bords-dactivité-activity-edges"><a class="header" href="#6-bords-dactivité-activity-edges">6. <strong>Bords d'activité (Activity Edges)</strong></a></h3>
+<ul>
+<li><strong>Définition</strong> :<br />
+Représentent les flux de contrôle ou de données entre les nœuds.</li>
+<li><strong>Types</strong> :
+<ul>
+<li><strong>Flux de contrôle</strong> : Indique le passage du contrôle d'un nœud à un
+autre.</li>
+<li><strong>Flux d'objet</strong> : Montre le déplacement des objets ou des données entre
+les actions.</li>
+</ul>
+</li>
+</ul>
+<h2 id="présentation-visuelle"><a class="header" href="#présentation-visuelle">Présentation Visuelle</a></h2>
+<p><img src="../img/activity_diagram_overview.svg" alt="Activity diagram Overview" />
+<img src="../img/activity_diagram_overview_1.svg" alt="Activity diagaram overview - second part" /></p>
+<h2 id="structure-et-présentation-dun-diagramme-dactivité"><a class="header" href="#structure-et-présentation-dun-diagramme-dactivité">Structure et présentation d’un diagramme d'activité</a></h2>
+<ol>
+<li>
+<p><strong>Identification des actions et des décisions</strong> :</p>
+<ul>
+<li>Déterminer les étapes clés et les points de décision du processus à
+modéliser.</li>
+</ul>
+</li>
+<li>
+<p><strong>Définition des flux</strong> :</p>
+<ul>
+<li>Tracer les flux de contrôle et de données entre les nœuds, en indiquant
+clairement la séquence des opérations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Utilisation des nœuds de contrôle</strong> :</p>
+<ul>
+<li>Intégrer des nœuds de décision, de fusion, de fork et de jonction pour
+représenter des comportements conditionnels ou parallèles.</li>
+</ul>
+</li>
+<li>
+<p><strong>Inclusion des interruptions</strong> :</p>
+<ul>
+<li>Ajouter des zones d'interruption et des flux d'interruption pour modéliser
+les événements pouvant interrompre le processus.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ajout des nœuds d'objet et des régions d'expansion</strong> :</p>
+<ul>
+<li>Intégrer les données et les actions répétitives pour fournir un modèle
+complet et détaillé.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="résumé"><a class="header" href="#résumé">Résumé</a></h2>
+<p>Les diagrammes d'activité sont des outils puissants pour modéliser et analyser
+les processus dynamiques au sein d'un système. En incluant les interruptions,
+les flux de contrôle et les données, ils permettent de visualiser des
+comportements complexes et de fournir une base claire pour l'analyse, la
+conception et la communication.</p>
+<h2 id="exemple-concret--commande-en-ligne"><a class="header" href="#exemple-concret--commande-en-ligne"><strong>Exemple Concret : Commande en Ligne</strong></a></h2>
+<h3 id="description-du-contexte-"><a class="header" href="#description-du-contexte-"><strong>Description du contexte :</strong></a></h3>
+<p>Un client en ligne peut parcourir ou rechercher des articles, consulter un article
+spécifique, l'ajouter au panier, visualiser ou mettre à jour le panier, et
+finaliser la commande via un processus de checkout. Le client peut consulter son
+panier à tout moment.</p>
+<h3 id="Étapes-principales-"><a class="header" href="#Étapes-principales-"><strong>Étapes principales :</strong></a></h3>
+<ol>
+<li>Le client commence par <strong>parcourir ou rechercher des articles</strong>.</li>
+<li>Une fois un article trouvé, il peut choisir de <strong>voir les détails de l'article</strong>.</li>
+<li>L'utilisateur peut <strong>ajouter l'article au panier</strong> ou revenir à la recherche.</li>
+<li>À tout moment, l'utilisateur peut <strong>visualiser le panier</strong>.</li>
+<li>Lors de la visualisation du panier, le client peut :
+<ul>
+<li><strong>Mettre à jour la quantité des articles</strong>.</li>
+<li><strong>Supprimer un article</strong>.</li>
+</ul>
+</li>
+<li>Après confirmation du panier, l'utilisateur procède au <strong>checkout</strong> :
+<ul>
+<li>Fournir ses informations de livraison et de paiement.</li>
+<li>Confirmer la commande.</li>
+</ul>
+</li>
+<li>Une fois la commande validée, le système affiche un <strong>message de confirmation</strong>.</li>
+</ol>
+<hr />
+<h3 id="liste-des-activités-"><a class="header" href="#liste-des-activités-"><strong>Liste des Activités :</strong></a></h3>
+<ol>
+<li><strong>Démarrer</strong> : L'utilisateur arrive sur le site ou ouvre l'application.</li>
+<li><strong>Parcourir ou rechercher des articles</strong> :
+<ul>
+<li>Option de recherche par mot-clé ou navigation par catégorie.</li>
+</ul>
+</li>
+<li><strong>Voir les détails d'un article</strong> :
+<ul>
+<li>Informations sur le produit (description, prix, avis, etc.).</li>
+</ul>
+</li>
+<li><strong>Ajouter au panier</strong> :
+<ul>
+<li>Le produit sélectionné est ajouté à la liste des articles du panier.</li>
+</ul>
+</li>
+<li><strong>Visualiser le panier</strong> :
+<ul>
+<li>Liste actuelle des articles, avec les options :
+<ul>
+<li>Mettre à jour la quantité.</li>
+<li>Supprimer un article.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Procéder au checkout</strong> :
+<ul>
+<li>Remplir les détails nécessaires (adresse, méthode de paiement).</li>
+<li>Valider la commande.</li>
+</ul>
+</li>
+<li><strong>Afficher la confirmation</strong> :
+<ul>
+<li>Confirmation de la commande avec numéro de suivi ou détails de paiement.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="flux-dactivités-"><a class="header" href="#flux-dactivités-"><strong>Flux d'activités :</strong></a></h3>
+<ol>
+<li><strong>Début</strong> :
+<ul>
+<li>Activité initiale : L'utilisateur accède au site ou à l'application.</li>
+</ul>
+</li>
+<li><strong>Choix :</strong>
+<ul>
+<li><strong>Parcourir/rechercher des articles</strong> :
+<ul>
+<li>Transition vers "Voir les détails d'un article".</li>
+</ul>
+</li>
+<li>Ou directement consulter le panier.</li>
+</ul>
+</li>
+<li><strong>Voir les détails d'un article</strong> :
+<ul>
+<li>Décision : Ajouter au panier ou continuer à chercher.</li>
+</ul>
+</li>
+<li><strong>Ajouter au panier</strong> :
+<ul>
+<li>Retour à "Parcourir/rechercher" ou transition vers "Visualiser le panier".</li>
+</ul>
+</li>
+<li><strong>Visualiser le panier</strong> :
+<ul>
+<li>Mettre à jour les quantités ou supprimer un article.</li>
+<li>Transition vers "Procéder au checkout" ou revenir au shopping.</li>
+</ul>
+</li>
+<li><strong>Procéder au checkout</strong> :
+<ul>
+<li>Fournir les informations nécessaires.</li>
+<li>Valider la commande.</li>
+</ul>
+</li>
+<li><strong>Afficher la confirmation</strong> :
+<ul>
+<li>Fin du processus.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="exemple-de-diagramme-textuel-pour-le-représenter-graphiquement-"><a class="header" href="#exemple-de-diagramme-textuel-pour-le-représenter-graphiquement-"><strong>Exemple de diagramme textuel (pour le représenter graphiquement) :</strong></a></h3>
+<ol>
+<li>
+<p><strong>Activité initiale :</strong></p>
+<ul>
+<li>Démarrer.</li>
+</ul>
+</li>
+<li>
+<p><strong>Activités principales :</strong></p>
+<ul>
+<li>Parcourir ou rechercher des articles.</li>
+<li>Voir les détails d'un article.</li>
+<li>Ajouter au panier.</li>
+<li>Visualiser le panier.</li>
+<li>Mettre à jour ou supprimer un article.</li>
+<li>Procéder au checkout.</li>
+<li>Afficher la confirmation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Transitions :</strong></p>
+<ul>
+<li>Démarrer --&gt; Parcourir ou rechercher des articles.</li>
+<li>Parcourir/rechercher des articles --&gt; Voir les détails d'un article.</li>
+<li>Voir les détails d'un article --&gt; Ajouter au panier.</li>
+<li>Ajouter au panier --&gt; Parcourir/rechercher des articles.</li>
+<li>Ajouter au panier --&gt; Visualiser le panier.</li>
+<li>Visualiser le panier --&gt; Mettre à jour/supprimer un article.</li>
+<li>Visualiser le panier --&gt; Procéder au checkout.</li>
+<li>Procéder au checkout --&gt; Afficher la confirmation.</li>
+<li>Afficher la confirmation --&gt; Fin.</li>
+</ul>
+</li>
+<li>
+<p><strong>Décisions :</strong></p>
+<ul>
+<li>Voir les détails d'un article : Ajouter au panier ou continuer à chercher.</li>
+<li>Visualiser le panier : Mettre à jour, supprimer, ou procéder au checkout.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="notes-supplémentaires-"><a class="header" href="#notes-supplémentaires-"><strong>Notes supplémentaires :</strong></a></h3>
+<ul>
+<li>L'utilisateur peut revenir à n'importe quel moment à l'activité "Parcourir ou
+rechercher des articles".</li>
+<li>Le diagramme inclut des décisions conditionnelles (par exemple, après avoir vu
+les détails d’un article, ajouter au panier ou continuer à chercher).</li>
+</ul>
+<details>
+<summary>Correction</summary>
+<p><img src="../img/activity_diagram_example_online_shopping.svg" alt="Activity diagram example" /></p>
+</details>
+<h2 id="quiz"><a class="header" href="#quiz">Quiz</a></h2>
+<div class="quiz-placeholder" data-quiz-name="&quot;activity&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Les diagrammes d’activité sont utilisés pour modéliser les processus métiers, les flux de contrôle ou les comportements dans un système, en mettant l’accent sur les séquences et les transitions.\n&quot;,&quot;id&quot;:&quot;eac282a8-4427-470d-8509-241284f29f5b&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Représenter les flux de contrôle et les processus d’un système, souvent avec des décisions et des parallélismes.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Représenter la structure statique d’un système.&quot;,&quot;Illustrer les interactions entre objets au fil du temps.&quot;,&quot;Montrer les dépendances entre composants logiciels.&quot;],&quot;prompt&quot;:&quot;Quel est le rôle principal d’un diagramme d’activité en UML ?&quot;}},{&quot;context&quot;:&quot;Une activité, qui représente une tâche ou une action, est modélisée par un rectangle aux coins arrondis dans un diagramme d’activité.\n&quot;,&quot;id&quot;:&quot;065cdd93-fc47-4482-b0b5-95b11a2bdd3f&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Par un rectangle aux coins arrondis.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Par un losange.&quot;,&quot;Par une ellipse.&quot;,&quot;Par une flèche.&quot;],&quot;prompt&quot;:&quot;Comment représente-t-on une activité dans un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;Un losange est utilisé pour représenter une décision dans un diagramme d’activité, avec des flèches sortant indiquant les différentes branches possibles.\n&quot;,&quot;id&quot;:&quot;65b96276-551f-490e-a86e-91512c4e61d1&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Un losange.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un rectangle aux coins arrondis.&quot;,&quot;Un ovale.&quot;,&quot;Un cercle.&quot;],&quot;prompt&quot;:&quot;Quel symbole représente une décision dans un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;Une flèche dans un diagramme d’activité indique la transition entre deux activités, ou entre une décision et les activités associées.\n&quot;,&quot;id&quot;:&quot;ff9ecff9-e315-4d1d-920f-84a63f241852&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Montrer la transition ou le flux entre les activités.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Délimiter des partitions ou swimlanes.&quot;,&quot;Représenter des boucles dans un processus.&quot;,&quot;Montrer les transitions entre acteurs externes.&quot;],&quot;prompt&quot;:&quot;Quel est le rôle d’un flux (flèche) dans un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;Une barre de fork est utilisée pour indiquer que le flux se divise en plusieurs flux parallèles qui s’exécutent simultanément.\n&quot;,&quot;id&quot;:&quot;5b7b7067-5f3d-4264-9ba7-c89fd0524331&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;La division d’un flux unique en plusieurs flux parallèles.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Le début d’un processus.&quot;,&quot;La fusion de plusieurs flux en un seul.&quot;,&quot;Un point de décision conditionnelle.&quot;],&quot;prompt&quot;:&quot;Que représente une barre de fork dans un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;Une barre de join est utilisée pour synchroniser plusieurs flux parallèles en un seul flux une fois que toutes les branches ont terminé leur exécution.\n&quot;,&quot;id&quot;:&quot;26dea6b4-c0f6-4d9a-b142-38f265fd4fe9&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Fusionner plusieurs flux parallèles en un flux unique.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Diviser un flux unique en plusieurs flux.&quot;,&quot;Indiquer une boucle dans le processus.&quot;,&quot;Montrer une interaction conditionnelle.&quot;],&quot;prompt&quot;:&quot;Quel est le rôle d’une barre de join dans un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;Un fork divise un flux en plusieurs branches parallèles, tandis qu’un join les synchronise. Cela est utile pour des processus parallèles nécessitant une convergence.\n&quot;,&quot;id&quot;:&quot;e17753a6-6f76-4748-b41a-ad2d0dbc2b2a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Pour modéliser des processus parallèles suivis d’une synchronisation des résultats.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Pour modéliser une boucle infinie.&quot;,&quot;Pour représenter une décision conditionnelle.&quot;,&quot;Pour afficher des interactions séquentielles.&quot;],&quot;prompt&quot;:&quot;Dans quel cas utiliser à la fois un fork et un join dans un diagramme d’activité ?&quot;}},{&quot;context&quot;:&quot;Le point de départ d’un diagramme d’activité est représenté par un cercle plein. Il marque l’entrée dans le flux de processus.\n&quot;,&quot;id&quot;:&quot;94d32413-698e-4f82-9ba0-ed54c4c20037&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Un cercle plein.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un rectangle aux coins arrondis.&quot;,&quot;Un losange.&quot;,&quot;Une flèche pointillée.&quot;],&quot;prompt&quot;:&quot;Quel symbole représente le début d’un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;La fin d’un processus dans un diagramme d’activité est représentée par un cercle avec un point plein à l’intérieur.\n&quot;,&quot;id&quot;:&quot;177f8ac6-2e50-49b9-b279-9631702d2e9c&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Par un cercle contenant un point plein.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Par un rectangle vide.&quot;,&quot;Par un losange avec une croix.&quot;,&quot;Par une flèche vers un acteur.&quot;],&quot;prompt&quot;:&quot;Comment représente-t-on la fin d’un diagramme d’activité ?&quot;}},{&quot;context&quot;:&quot;Un flux conditionnel est indiqué par une flèche accompagnée d’une étiquette représentant la condition nécessaire pour suivre ce chemin. Par exemple, une flèche étiquetée « si validé » peut mener à une activité spécifique.\n&quot;,&quot;id&quot;:&quot;2014539d-e4b8-459d-ac19-1ebafa763983&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Par une flèche avec une étiquette indiquant la condition.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Par une flèche continue sans texte explicatif.&quot;,&quot;Par une flèche accompagnée d’un symbole circulaire.&quot;,&quot;Par une flèche qui revient toujours à l’activité précédente.&quot;],&quot;prompt&quot;:&quot;Comment représente-t-on un flux conditionnel dans un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;Les swimlanes organisent le diagramme d’activité en délimitant les responsabilités des acteurs ou des systèmes impliqués dans le processus.\n&quot;,&quot;id&quot;:&quot;6962b4e9-b681-4420-a56d-0c44a361a773&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Délimiter les responsabilités ou les acteurs dans un processus.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Indiquer des boucles dans un processus.&quot;,&quot;Représenter des décisions conditionnelles.&quot;,&quot;Marquer les transitions entre les étapes.&quot;],&quot;prompt&quot;:&quot;Quel est le rôle des swimlanes (partitions) dans un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;Les swimlanes sont utiles pour clarifier quelles étapes d’un processus sont réalisées par chaque acteur ou système impliqué.\n&quot;,&quot;id&quot;:&quot;b8c49689-be0a-44f0-8b96-02645df09ded&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Lorsque plusieurs acteurs ou systèmes participent au processus.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Lorsque le processus implique des boucles complexes.&quot;,&quot;Lorsque toutes les étapes sont exécutées par le même acteur.&quot;,&quot;Lorsque les flux ne nécessitent pas de parallélisme.&quot;],&quot;prompt&quot;:&quot;Dans quel cas est-il pertinent d’utiliser des swimlanes ?&quot;}},{&quot;context&quot;:&quot;Les diagrammes d’activité sont particulièrement utiles pour documenter les processus métier, les flux de données, ou les comportements complexes impliquant des parallélismes et des décisions.\n&quot;,&quot;id&quot;:&quot;66db0c55-5c6a-409e-92ae-e1ecd6a0a9b2&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Pour décrire les processus métier ou les flux de contrôle complexes.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Pour modéliser la structure statique des classes.&quot;,&quot;Pour représenter les relations entre acteurs et cas d’utilisation.&quot;,&quot;Pour montrer les transitions entre les états d’un objet.&quot;],&quot;prompt&quot;:&quot;Dans quel cas un diagramme d’activité est-il le plus utile ?&quot;}},{&quot;context&quot;:&quot;Bien que puissants, les diagrammes d’activité peuvent devenir encombrés et difficiles à comprendre lorsque le processus modélisé est trop complexe ou contient de nombreuses branches parallèles. Cela peut nuire à leur lisibilité et à leur utilité pratique.\n&quot;,&quot;id&quot;:&quot;002f5ba0-4a0a-4e06-aa98-3b3a9b3ac124&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Ils deviennent difficiles à lire pour des processus très complexes.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Ils ne permettent pas de représenter les décisions conditionnelles.&quot;,&quot;Ils sont trop spécifiques pour les systèmes généraux.&quot;,&quot;Ils ne montrent pas clairement la responsabilité des acteurs impliqués.&quot;],&quot;prompt&quot;:&quot;Quelle est une limitation majeure des diagrammes d’activité ?&quot;}},{&quot;context&quot;:&quot;Les objets dans un diagramme d’activité sont utilisés pour représenter l’état d’un objet à différents points du processus, souvent liés aux activités.\n&quot;,&quot;id&quot;:&quot;c41d10ee-25b0-45f3-a7a8-f81fe9361eb7&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Ils montrent les changements ou transitions d'état d'un objet au cours du processus.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Ils définissent les relations hiérarchiques entre les classes.&quot;,&quot;Ils marquent uniquement les débuts et fins des flux.&quot;,&quot;Ils représentent les décisions dans un processus.&quot;],&quot;prompt&quot;:&quot;Quel rôle jouent les objets dans un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;Les objets sont représentés par des rectangles contenant leur nom et, parfois, leur état. Ils sont connectés par des flèches pour montrer les transitions d’état.\n&quot;,&quot;id&quot;:&quot;e807dfae-a9f4-4cca-8093-806b0dfffa7d&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Par un rectangle avec le nom de l'objet.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Par un rectangle aux coins arrondis.&quot;,&quot;Par un cercle avec un point plein.&quot;,&quot;Par un losange.&quot;],&quot;prompt&quot;:&quot;Comment représente-t-on un objet dans un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;Les objets sont utilisés pour montrer comment un processus affecte un objet et comment ses états évoluent tout au long du diagramme d’activité.\n&quot;,&quot;id&quot;:&quot;11ea39f8-0c81-4102-b300-e3aaaefe9e80&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Pour suivre les états d’un objet tout au long du processus.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Pour représenter des processus parallèles.&quot;,&quot;Pour indiquer les responsabilités des acteurs dans les swimlanes.&quot;,&quot;Pour montrer uniquement les débuts et fins du processus.&quot;],&quot;prompt&quot;:&quot;Dans quel cas est-il pertinent d’utiliser des objets dans un diagramme d’activité ?&quot;}},{&quot;context&quot;:&quot;Une boucle est représentée par une flèche retour, indiquant que le flux revient à une activité précédente tant qu’une condition spécifique est remplie.\n&quot;,&quot;id&quot;:&quot;57532dc6-88f5-435c-88d2-1c3dfa2d0555&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Avec un flux qui retourne vers une activité précédente après une condition.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Avec un losange indiquant une décision conditionnelle.&quot;,&quot;Avec un cercle contenant le symbole de boucle.&quot;,&quot;Avec une barre de fork suivie d’un join.&quot;],&quot;prompt&quot;:&quot;Comment représente-t-on une boucle dans un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;Les boucles sont utiles pour modéliser des tâches répétitives dans des processus, comme un formulaire rempli jusqu'à validation ou un ensemble de données parcouru.\n&quot;,&quot;id&quot;:&quot;e4ca2ff9-de8c-4cfb-9479-fab1538085bb&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Pour représenter une tâche répétée jusqu'à ce qu'une condition soit remplie, comme 'valider toutes les entrées'.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Pour synchroniser deux flux parallèles.&quot;,&quot;Pour décrire un processus avec des partitions multiples.&quot;,&quot;Pour indiquer un choix entre plusieurs branches.&quot;],&quot;prompt&quot;:&quot;Quel est un bon exemple d'utilisation d'une boucle dans un diagramme d'activité ?&quot;}},{&quot;context&quot;:&quot;Un événement temporel dans un diagramme d’activité UML est représenté par un sablier ou un symbole similaire, indiquant qu'une activité est déclenchée par une condition temporelle, comme 'après 5 minutes'.\n&quot;,&quot;id&quot;:&quot;e382865f-7c19-427f-ac36-4f58e2fb8f3b&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Par un sablier ou un symbole de chronomètre connecté à l'activité suivante.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Par une flèche étiquetée avec une condition.&quot;,&quot;Par un losange contenant une condition temporelle.&quot;,&quot;Par un rectangle aux coins arrondis étiqueté avec un symbole de horloge.&quot;],&quot;prompt&quot;:&quot;Comment représente-t-on un événement temporel dans un diagramme d’activité UML ?&quot;}},{&quot;context&quot;:&quot;Les événements temporels sont utiles pour modéliser des activités déclenchées après un délai ou à un moment spécifique, comme dans des systèmes d’horodatage ou de planification.\n&quot;,&quot;id&quot;:&quot;81cb8b3d-cfb7-4212-91fa-9e4c9cf40cbe&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;L’exécution d’une activité après un délai spécifique, comme 'attendre 10 secondes avant de relancer le processus'.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Un utilisateur clique sur un bouton.&quot;,&quot;Une valeur est modifiée dans un objet.&quot;,&quot;Un signal externe est envoyé à un composant.&quot;],&quot;prompt&quot;:&quot;Quel est un exemple d’utilisation d’un événement temporel dans un diagramme d’activité UML ?&quot;}}]}" data-quiz-fullscreen="true" data-quiz-cache-answers="true"></div>
+<h2 id="exercice"><a class="header" href="#exercice">Exercice</a></h2>
+<details>
+<summary> <b><h3 id="système-de-gestion-de-candidature"><a class="header" href="#système-de-gestion-de-candidature">Système de Gestion de Candidature</a></h3></b> </summary>
+<h4 id="contexte-du-système"><a class="header" href="#contexte-du-système">Contexte du système</a></h4>
+<p>Une entreprise souhaite mettre en place un système pour gérer le processus de
+recrutement. Ce processus inclut la soumission de candidature, la validation
+initiale par le service des ressources humaines (RH), les entretiens, et la
+décision finale.</p>
+<h4 id="scénario-choisi--processus-de-recrutement"><a class="header" href="#scénario-choisi--processus-de-recrutement">Scénario choisi : Processus de recrutement</a></h4>
+<h4 id="description-du-processus"><a class="header" href="#description-du-processus">Description du processus</a></h4>
+<ol>
+<li>
+<p><strong>Soumission de la candidature</strong> :</p>
+<ul>
+<li>Le candidat soumet son dossier en ligne (CV, lettre de motivation, etc.).</li>
+<li>Le système envoie un accusé de réception automatique au candidat.</li>
+</ul>
+</li>
+<li>
+<p><strong>Validation initiale</strong> :</p>
+<ul>
+<li>Le service RH vérifie que le dossier est complet.</li>
+<li>Si le dossier est incomplet, le candidat est invité à fournir les
+informations manquantes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Évaluation préliminaire</strong> :</p>
+<ul>
+<li>Si le dossier est complet, le recruteur évalue les compétences du candidat
+pour déterminer s'il convient pour un entretien.</li>
+<li>Si le candidat est jugé inadapté, un e-mail de refus lui est envoyé.</li>
+</ul>
+</li>
+<li>
+<p><strong>Entretien</strong> :</p>
+<ul>
+<li>Si le candidat est retenu, un entretien est programmé (en présentiel ou à
+distance).</li>
+<li>Après l’entretien, le recruteur évalue les performances du candidat.</li>
+</ul>
+</li>
+<li>
+<p><strong>Décision finale</strong> :</p>
+<ul>
+<li>Si le candidat est retenu, une offre d’embauche lui est envoyée.</li>
+<li>Si le candidat n’est pas retenu, un e-mail de refus lui est envoyé.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h4 id="instructions-pour-réaliser-le-diagramme"><a class="header" href="#instructions-pour-réaliser-le-diagramme">Instructions pour réaliser le diagramme</a></h4>
+<ol>
+<li>Décompose chaque étape du processus en <strong>activités</strong> claires (ex. : soumettre
+candidature, valider dossier, évaluer candidat, etc.).</li>
+<li>Utilise des <strong>décisions</strong> pour les choix conditionnels (ex. : dossier complet
+ou incomplet, retenu ou non).</li>
+<li>Ajoute des <strong>actions automatiques</strong> si nécessaire (ex. : envoi d’un e-mail de
+confirmation ou de refus).</li>
+<li>Indique le <strong>début</strong> et la <strong>fin</strong> du processus à l’aide des nœuds de début
+et de fin.</li>
+<li>Si pertinent, montre les <strong>flux parallèles</strong> (ex. : entre évaluation et
+entretien) pour indiquer que certaines actions peuvent se dérouler en même
+temps.</li>
+</ol>
+</details>
+<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../course/flowchart.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../course/quiz.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../course/flowchart.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../course/quiz.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

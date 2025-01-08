@@ -1,0 +1,689 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Diagrammes de classe - Introduction au Langage UML</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Présentation du langage</li><li class="chapter-item expanded "><a href="../course/intro.html"><strong aria-hidden="true">1.</strong> Introduction au langage UML</a></li><li class="chapter-item expanded affix "><li class="part-title">Les principaux diagrammes</li><li class="chapter-item expanded "><a href="../course/use_case.html"><strong aria-hidden="true">2.</strong> Diagrammes de cas d'utilisation</a></li><li class="chapter-item expanded "><a href="../course/class.html" class="active"><strong aria-hidden="true">3.</strong> Diagrammes de classe</a></li><li class="chapter-item expanded "><a href="../course/sequence.html"><strong aria-hidden="true">4.</strong> Diagrammes de séquence</a></li><li class="chapter-item expanded "><a href="../course/flowchart.html"><strong aria-hidden="true">5.</strong> Flowcharts</a></li><li class="chapter-item expanded "><a href="../course/activity.html"><strong aria-hidden="true">6.</strong> Diagrammes d'activité</a></li><li class="chapter-item expanded affix "><li class="part-title">Quiz Final</li><li class="chapter-item expanded "><a href="../course/quiz.html"><strong aria-hidden="true">7.</strong> Quiz</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Introduction au Langage UML</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="diagrammes-de-classes"><a class="header" href="#diagrammes-de-classes">Diagrammes de Classes</a></h1>
+<h2 id="objectif"><a class="header" href="#objectif">Objectif</a></h2>
+<p>Les diagrammes de classes sont des outils fondamentaux en UML qui permettent de
+modéliser la structure statique d’un système. Ils représentent les classes,
+leurs attributs, méthodes, et relations, offrant une vue d’ensemble des
+éléments constitutifs d’un système logiciel.</p>
+<h2 id="cas-principaux-dutilisation"><a class="header" href="#cas-principaux-dutilisation">Cas principaux d’utilisation</a></h2>
+<ol>
+<li>
+<p><strong>Représenter la structure statique d’un système</strong> :</p>
+<ul>
+<li>Montrer les classes, leurs propriétés, leurs méthodes, et leurs
+associations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Faciliter la conception orientée objet</strong> :</p>
+<ul>
+<li>Identifier les objets, leurs responsabilités et leurs relations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Documenter les relations entre classes</strong> :</p>
+<ul>
+<li>Fournir une vue claire des dépendances, généralisations, et associations
+dans le système.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base pour le développement et la maintenance</strong> :</p>
+<ul>
+<li>Guider l’implémentation en traduisant les diagrammes en code source.</li>
+<li>Servir de référence pour la maintenance et l’évolution du système.</li>
+</ul>
+</li>
+</ol>
+<h2 id="composants-principaux"><a class="header" href="#composants-principaux">Composants principaux</a></h2>
+<h3 id="1-classes"><a class="header" href="#1-classes">1. Classes</a></h3>
+<ul>
+<li>
+<p><strong>Définition</strong> :<br />
+Une classe est une entité abstraite qui définit les propriétés (attributs)
+et comportements (méthodes) communs à un groupe d’objets.</p>
+</li>
+<li>
+<p><strong>Notation UML</strong> :<br />
+Représentée par un rectangle divisé en trois parties :</p>
+<ul>
+<li><strong>Nom de la classe</strong> (en haut).</li>
+<li><strong>Attributs</strong> (au milieu).</li>
+<li><strong>Méthodes</strong> (en bas).</li>
+</ul>
+</li>
+</ul>
+<h4 id="exemple-de-notation"><a class="header" href="#exemple-de-notation">Exemple de notation</a></h4>
+<p><img src="../img/basic_class.svg" alt="Basic Class Example" /></p>
+<h4 id="visibilités"><a class="header" href="#visibilités">Visibilités</a></h4>
+<ul>
+<li><strong>Public (+)</strong> : Accessible partout.</li>
+<li><strong>Privé (-)</strong> : Accessible uniquement dans la classe.</li>
+<li><strong>Protégé (#)</strong> : Accessible dans la classe et ses sous-classes.</li>
+</ul>
+<h3 id="2-relations-entre-classes"><a class="header" href="#2-relations-entre-classes">2. Relations entre classes</a></h3>
+<h4 id="a-association"><a class="header" href="#a-association">a. Association</a></h4>
+<ul>
+<li><strong>Définition</strong> :<br />
+Une relation où une classe utilise ou connaît une autre.</li>
+<li><strong>Notation UML</strong> :<br />
+Une ligne simple entre deux classes.</li>
+<li><strong>Multiciplité</strong> :<br />
+Indique combien d’instances d’une classe peuvent être associées à une autre
+(ex. 1..* pour une ou plusieurs instances).</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th>Multiplicité</th><th>Signification</th><th>Exemple d'usage</th></tr></thead><tbody>
+<tr><td><code>1</code></td><td>Exactement une instance est associée</td><td>Une personne a <strong>exactement</strong> un passeport.</td></tr>
+<tr><td><code>0..1</code></td><td>Une instance est optionnelle</td><td>Un employé peut avoir <strong>aucun ou un</strong> bureau.</td></tr>
+<tr><td><code>*</code> ou <code>0..*</code></td><td>Une instance peut être associée à zéro ou plusieurs</td><td>Un professeur peut enseigner à <strong>aucun ou plusieurs</strong> étudiants.</td></tr>
+<tr><td><code>1..*</code></td><td>Une instance est associée à au moins une instance</td><td>Une commande doit contenir <strong>au moins un</strong> produit.</td></tr>
+<tr><td><code>n</code></td><td>Exactement <code>n</code> instances sont associées</td><td>Un hexagone a <strong>exactement 6</strong> côtés.</td></tr>
+<tr><td><code>n..m</code></td><td>Entre <code>n</code> et <code>m</code> instances sont associées</td><td>Une équipe doit avoir <strong>entre 3 et 11</strong> joueurs.</td></tr>
+</tbody></table>
+</div>
+<p><img src="../img/association.svg" alt="Association in UML Class Diagram" /></p>
+<h4 id="b-aggregation"><a class="header" href="#b-aggregation">b. Aggregation</a></h4>
+<ul>
+<li><strong>Définition</strong> :<br />
+Une relation "partie-tout" où les parties peuvent exister indépendamment du
+tout.</li>
+<li><strong>Notation UML</strong> :<br />
+Une ligne avec un losange vide du côté du tout.</li>
+</ul>
+<p><img src="../img/aggregation.svg" alt="Aggregation in UML Class Diagram" /></p>
+<h4 id="c-composition"><a class="header" href="#c-composition">c. Composition</a></h4>
+<ul>
+<li><strong>Définition</strong> :<br />
+Une relation "partie-tout" forte où les parties ne peuvent exister sans le
+tout.</li>
+<li><strong>Notation UML</strong> :<br />
+Une ligne avec un losange plein du côté du tout.</li>
+</ul>
+<p><img src="../img/composition.svg" alt="Composition in UML Class Diagram" /></p>
+<h4 id="d-héritage-généralisation"><a class="header" href="#d-héritage-généralisation">d. Héritage (Généralisation)</a></h4>
+<ul>
+<li><strong>Définition</strong> :<br />
+Une relation hiérarchique où une classe hérite des propriétés et
+comportements d’une classe parent.</li>
+<li><strong>Notation UML</strong> :<br />
+Une flèche avec un triangle vide pointant vers la classe parent.</li>
+</ul>
+<p><img src="../img/inheritance.svg" alt="Inheritance in UML Class Diagram" /></p>
+<h4 id="e-dépendance"><a class="header" href="#e-dépendance">e. Dépendance</a></h4>
+<ul>
+<li><strong>Définition</strong> :<br />
+Une relation faible où une classe dépend de l’existence d’une autre pour
+fonctionner.</li>
+<li><strong>Notation UML</strong> :<br />
+Une flèche pointillée entre deux classes.</li>
+</ul>
+<p><img src="../img/dependancy.svg" alt="Dependancy in UML Class Diagram" /></p>
+<h4 id="f-interface"><a class="header" href="#f-interface">f. Interface</a></h4>
+<ul>
+<li><strong>Définition</strong> :<br />
+Une classe abstraite contenant uniquement des méthodes sans implémentation,
+définissant un comportement attendu.</li>
+<li><strong>Notation UML</strong> :<br />
+Représentée par un rectangle avec le mot-clé <code>&lt;&lt;interface&gt;&gt;</code>.</li>
+</ul>
+<h3 id="3-attributs"><a class="header" href="#3-attributs">3. Attributs</a></h3>
+<ul>
+<li><strong>Définition</strong> :<br />
+Propriétés ou variables définies dans une classe.</li>
+<li><strong>Caractéristiques</strong> :
+<ul>
+<li>Ont un nom, un type de données, et parfois une valeur par défaut.</li>
+<li>Peuvent être publics, privés, ou protégés.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-méthodes"><a class="header" href="#4-méthodes">4. Méthodes</a></h3>
+<ul>
+<li><strong>Définition</strong> :<br />
+Comportements ou fonctions que peut exécuter une classe.</li>
+<li><strong>Caractéristiques</strong> :
+<ul>
+<li>Ont un nom, des paramètres, et un type de retour.</li>
+<li>Peuvent être abstraites (définies mais non implémentées) ou concrètes.</li>
+</ul>
+</li>
+</ul>
+<h2 id="structure-et-présentation-dun-diagramme-de-classes"><a class="header" href="#structure-et-présentation-dun-diagramme-de-classes">Structure et présentation d’un diagramme de classes</a></h2>
+<ol>
+<li>
+<p><strong>Identification des classes</strong> :</p>
+<ul>
+<li>Identifier les entités principales du système à modéliser.</li>
+</ul>
+</li>
+<li>
+<p><strong>Définition des attributs et méthodes</strong> :</p>
+<ul>
+<li>Ajouter les propriétés et comportements pertinents pour chaque classe.</li>
+</ul>
+</li>
+<li>
+<p><strong>Définition des relations</strong> :</p>
+<ul>
+<li>Identifier et tracer les relations pertinentes entre les classes (ex.
+associations, héritages, compositions).</li>
+</ul>
+</li>
+<li>
+<p><strong>Ajout des multiplicité et visibilités</strong> :</p>
+<ul>
+<li>Spécifier les règles de multiplicité et les niveaux de visibilité
+applicables.</li>
+</ul>
+</li>
+</ol>
+<h2 id="résumé"><a class="header" href="#résumé">Résumé</a></h2>
+<p>Les diagrammes de classes sont un pilier de la modélisation orientée objet. Ils
+offrent une vue d’ensemble claire et structurée des classes, de leurs
+propriétés et comportements, et des relations qui les lient. Ces diagrammes
+constituent une base essentielle pour concevoir, développer et maintenir des
+systèmes logiciels robustes.</p>
+<h2 id="exemple-concret--gestion-dun-store-en-ligne"><a class="header" href="#exemple-concret--gestion-dun-store-en-ligne"><strong>Exemple Concret : Gestion d'un Store en Ligne</strong></a></h2>
+<h3 id="description-du-contexte-"><a class="header" href="#description-du-contexte-"><strong>Description du contexte :</strong></a></h3>
+<p>Un store en ligne permet aux clients de parcourir les produits, passer des
+commandes, gérer leur compte, et consulter l'historique de leurs achats.
+Les administrateurs peuvent gérer les produits et traiter les commandes.</p>
+<h3 id="classes-principales-"><a class="header" href="#classes-principales-"><strong>Classes principales :</strong></a></h3>
+<ol>
+<li>
+<p><strong>Utilisateur</strong></p>
+<ul>
+<li><strong>Attributs :</strong>
+<ul>
+<li><code>idUtilisateur : int</code> - Identifiant unique pour chaque utilisateur.</li>
+<li><code>nom : String</code> - Nom de l'utilisateur.</li>
+<li><code>email : String</code> - Adresse e-mail de l'utilisateur.</li>
+<li><code>motDePasse : String</code> - Mot de passe de l'utilisateur.</li>
+</ul>
+</li>
+<li><strong>Méthodes :</strong>
+<ul>
+<li><code>seConnecter() : bool</code> - Permet à l'utilisateur de se connecter.</li>
+<li><code>mettreAJourProfil() : void</code> - Met à jour les informations personnelles.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Client</strong> (hérite de <strong>Utilisateur</strong>)</p>
+<ul>
+<li><strong>Attributs :</strong>
+<ul>
+<li><code>adresse : String</code> - Adresse de livraison du client.</li>
+<li><code>panier : Panier</code> - Panier en cours d'utilisation.</li>
+</ul>
+</li>
+<li><strong>Méthodes :</strong>
+<ul>
+<li><code>ajouterProduitPanier(produit : Produit) : void</code> - Ajoute un produit au
+panier.</li>
+<li><code>passerCommande() : Commande</code> - Valide le panier et crée une commande.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Administrateur</strong> (hérite de <strong>Utilisateur</strong>)</p>
+<ul>
+<li><strong>Attributs :</strong>
+<ul>
+<li><code>role : String</code> - Rôle ou permissions spécifiques.</li>
+</ul>
+</li>
+<li><strong>Méthodes :</strong>
+<ul>
+<li><code>ajouterProduit(produit : Produit) : void</code> - Ajoute un produit au store.</li>
+<li><code>supprimerProduit(idProduit : int) : void</code> - Supprime un produit.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Produit</strong></p>
+<ul>
+<li><strong>Attributs :</strong>
+<ul>
+<li><code>idProduit : int</code> - Identifiant unique du produit.</li>
+<li><code>nom : String</code> - Nom du produit.</li>
+<li><code>prix : double</code> - Prix du produit.</li>
+<li><code>quantiteEnStock : int</code> - Quantité disponible.</li>
+</ul>
+</li>
+<li><strong>Méthodes :</strong>
+<ul>
+<li><code>mettreAJourStock(qte : int) : void</code> - Met à jour la quantité en stock.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Panier</strong></p>
+<ul>
+<li><strong>Attributs :</strong>
+<ul>
+<li><code>idPanier : int</code> - Identifiant unique du panier.</li>
+<li><code>produits : List&lt;Produit&gt;</code> - Liste des produits dans le panier.</li>
+</ul>
+</li>
+<li><strong>Méthodes :</strong>
+<ul>
+<li><code>calculerTotal() : double</code> - Calcule le total des articles dans le panier.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Commande</strong></p>
+<ul>
+<li><strong>Attributs :</strong>
+<ul>
+<li><code>idCommande : int</code> - Identifiant unique de la commande.</li>
+<li><code>produits : List&lt;Produit&gt;</code> - Liste des produits commandés.</li>
+<li><code>total : double</code> - Montant total de la commande.</li>
+<li><code>statut : String</code> - Statut actuel de la commande (ex. "En cours",
+"Expédiée").</li>
+</ul>
+</li>
+<li><strong>Méthodes :</strong>
+<ul>
+<li><code>mettreAJourStatut(statut : String) : void</code> - Modifie le statut de
+la commande.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="relations-uml-"><a class="header" href="#relations-uml-"><strong>Relations UML :</strong></a></h3>
+<ol>
+<li>
+<p><strong>Héritage :</strong></p>
+<ul>
+<li><strong>Client</strong> et <strong>Administrateur</strong> héritent de la classe <strong>Utilisateur</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Association :</strong></p>
+<ul>
+<li><strong>Client</strong> est associé à <strong>Panier</strong> (relation 1:1).</li>
+<li><strong>Client</strong> est associé à <strong>Commande</strong> (relation 1:N).</li>
+<li><strong>Produit</strong> est associé à <strong>Panier</strong> (relation N:N).</li>
+<li><strong>Produit</strong> est associé à <strong>Commande</strong> (relation N:N).</li>
+</ul>
+</li>
+<li>
+<p><strong>Cardinalités :</strong></p>
+<ul>
+<li>Un <strong>Client</strong> peut avoir plusieurs <strong>Commandes</strong>, mais un <strong>Panier</strong> unique.</li>
+<li>Un <strong>Panier</strong> peut contenir plusieurs <strong>Produits</strong>.</li>
+<li>Une <strong>Commande</strong> inclut plusieurs <strong>Produits</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dépendance :</strong></p>
+<ul>
+<li><strong>Administrateur</strong> dépend de <strong>Produit</strong> pour ajouter ou supprimer des
+articles du store.</li>
+</ul>
+</li>
+</ol>
+<h3 id="exemple-de-diagramme-textuel-pour-le-représenter-graphiquement-"><a class="header" href="#exemple-de-diagramme-textuel-pour-le-représenter-graphiquement-"><strong>Exemple de diagramme textuel (pour le représenter graphiquement) :</strong></a></h3>
+<ol>
+<li>
+<p><strong>Classes et attributs :</strong></p>
+<ul>
+<li><strong>Utilisateur</strong>
+<ul>
+<li>idUtilisateur : int</li>
+<li>nom : String</li>
+<li>email : String</li>
+<li>motDePasse : String</li>
+</ul>
+</li>
+<li><strong>Client</strong> (hérite de Utilisateur)
+<ul>
+<li>adresse : String</li>
+<li>panier : Panier</li>
+</ul>
+</li>
+<li><strong>Administrateur</strong> (hérite de Utilisateur)
+<ul>
+<li>role : String</li>
+</ul>
+</li>
+<li><strong>Produit</strong>
+<ul>
+<li>idProduit : int</li>
+<li>nom : String</li>
+<li>prix : double</li>
+<li>quantiteEnStock : int</li>
+</ul>
+</li>
+<li><strong>Panier</strong>
+<ul>
+<li>idPanier : int</li>
+<li>produits : List<Produit></li>
+</ul>
+</li>
+<li><strong>Commande</strong>
+<ul>
+<li>idCommande : int</li>
+<li>produits : List<Produit></li>
+<li>total : double</li>
+<li>statut : String</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Relations :</strong></p>
+<ul>
+<li>Utilisateur &lt;|-- Client</li>
+<li>Utilisateur &lt;|-- Administrateur</li>
+<li>Client --&gt; Panier (1:1)</li>
+<li>Client --&gt; Commande (1:N)</li>
+<li>Produit --&gt; Panier (N:N)</li>
+<li>Produit --&gt; Commande (N:N)</li>
+</ul>
+</li>
+</ol>
+<details>
+<summary>Correction</summary>
+<p><img src="../img/class_diagram_example.svg" alt="Correction de l&#39;exemple" /></p>
+</details>
+<h2 id="quiz"><a class="header" href="#quiz"><strong>Quiz</strong></a></h2>
+<div class="quiz-placeholder" data-quiz-name="&quot;class&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Les diagrammes de classe sont des diagrammes structurels qui illustrent les classes du système, leurs propriétés (attributs), leurs comportements (méthodes) et leurs relations (associations, généralisations, dépendances, etc.).\n&quot;,&quot;id&quot;:&quot;fc3f9b70-6d81-4ea0-ac78-a8c4c4c1b036&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Représenter la structure statique du système, incluant les classes, leurs attributs, méthodes et relations.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Représenter les interactions dynamiques entre les objets.&quot;,&quot;Montrer la structure physique des composants logiciels.&quot;,&quot;Illustrer les processus métier et les flux de travail.&quot;],&quot;prompt&quot;:&quot;Quel est le but principal d’un diagramme de classe en UML ?&quot;}},{&quot;context&quot;:&quot;En UML, une relation d’héritage (généralisation) est représentée par une flèche pleine avec un triangle pointant vers la classe parent. Cela indique que la classe enfant hérite des propriétés et comportements de la classe parent.\n&quot;,&quot;id&quot;:&quot;78def78d-3a00-437b-8d44-a33e5d1e7aa4&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Par une flèche pleine avec un triangle à l’extrémité pointant vers la classe parent.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Par une flèche pointillée entre les classes.&quot;,&quot;Par une ligne avec un losange à une extrémité.&quot;,&quot;Par une ellipse connectée aux classes.&quot;],&quot;prompt&quot;:&quot;Comment les relations d’héritage sont-elles représentées dans un diagramme de classe UML ?&quot;}},{&quot;context&quot;:&quot;La composition en UML est une relation forte de 'partie-tout', où les objets 'parties' ne peuvent pas exister indépendamment de l’objet 'tout'. Elle est représentée par une ligne avec un losange rempli.\n&quot;,&quot;id&quot;:&quot;e18171ef-d29c-4daf-8cb0-ea96457ea997&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une composition.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Une association.&quot;,&quot;Une dépendance.&quot;,&quot;Une généralisation.&quot;],&quot;prompt&quot;:&quot;Quelle relation UML est représentée par une ligne avec un losange rempli ?&quot;}},{&quot;context&quot;:&quot;En UML, l'agrégation est une relation 'partie-tout' où les parties peuvent exister indépendamment de l’objet tout. La composition, en revanche, est une relation plus forte, où les parties ne peuvent exister sans l'objet principal.\n&quot;,&quot;id&quot;:&quot;03c0156a-0b48-48f0-b67a-349ba9bf06b4&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une composition est une relation forte où les parties ne peuvent pas exister indépendamment, tandis qu’une agrégation est une relation plus faible.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Il n’y a aucune différence entre les deux.&quot;,&quot;Une composition permet des relations bidirectionnelles, tandis qu’une agrégation est unidirectionnelle.&quot;,&quot;Une agrégation est une relation forte, tandis qu’une composition est une relation faible.&quot;],&quot;prompt&quot;:&quot;Quelle est la différence entre une agrégation et une composition dans un diagramme de classe UML ?&quot;}},{&quot;context&quot;:&quot;En UML, les méthodes et attributs privés sont indiqués par le symbole « - ». Les symboles « + », « # » et « ~ » représentent respectivement la visibilité publique, protégée et package.\n&quot;,&quot;id&quot;:&quot;ec1bd9b1-092a-4e6b-8717-f1f2c9ac84ee&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Avec un symbole « - » devant le nom de la méthode.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Avec un symbole « + » devant le nom de la méthode.&quot;,&quot;Avec un symbole « ~ » devant le nom de la méthode.&quot;,&quot;Avec un symbole « # » devant le nom de la méthode.&quot;],&quot;prompt&quot;:&quot;Comment représente-t-on une méthode privée dans un diagramme de classe UML ?&quot;}},{&quot;context&quot;:&quot;Une ligne simple entre deux classes dans un diagramme de classe représente une association, indiquant une relation logique entre deux classes.\n&quot;,&quot;id&quot;:&quot;64c1f89a-18bf-43ac-9200-5bb3c70654e8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une relation d’association.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Une relation d’héritage.&quot;,&quot;Une relation de dépendance.&quot;,&quot;Une relation de composition.&quot;],&quot;prompt&quot;:&quot;Que signifie une ligne simple entre deux classes dans un diagramme de classe UML ?&quot;}},{&quot;context&quot;:&quot;La multiplicité « 0..* » indique qu’un objet peut être associé à aucun ou à plusieurs objets de l’autre classe. C'est un concept important pour représenter les cardinalités dans les relations.\n&quot;,&quot;id&quot;:&quot;866c84e5-cf0e-4c0e-b0f0-599a7d33b4bf&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une relation optionnelle avec un nombre illimité d'instances possibles.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Une limite fixe de 0 ou 1 instance.&quot;,&quot;Un lien obligatoire entre deux classes.&quot;,&quot;Une cardinalité obligatoire fixe.&quot;],&quot;prompt&quot;:&quot;Dans un diagramme de classe UML, que représente une multiplicité comme « 0..* » au bout d'une relation ?&quot;}},{&quot;context&quot;:&quot;Les méthodes dans un diagramme de classe décrivent les comportements ou actions qu'une classe peut effectuer, ce qui est essentiel pour modéliser la logique métier.\n&quot;,&quot;id&quot;:&quot;d8d6eda3-5818-4cb6-8eed-bc0988607bb6&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Elles représentent les comportements ou fonctionnalités associés à une classe.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Elles définissent les relations entre les objets.&quot;,&quot;Elles indiquent les types de données des classes.&quot;,&quot;Elles spécifient les contraintes de la relation entre les classes.&quot;],&quot;prompt&quot;:&quot;Quel rôle jouent les méthodes dans un diagramme de classe UML ?&quot;}},{&quot;context&quot;:&quot;Une classe abstraite en UML est indiquée en mettant son nom en italique. Cela montre qu'elle ne peut pas être instanciée directement.\n&quot;,&quot;id&quot;:&quot;a14616cc-06ef-4647-858c-4cfad1214caf&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;En affichant le nom de la classe en italique.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Avec un losange autour du nom de la classe.&quot;,&quot;En utilisant un fond grisé dans le rectangle de la classe.&quot;,&quot;En utilisant un triangle pointant vers la classe.&quot;],&quot;prompt&quot;:&quot;Comment représente-t-on une classe abstraite dans un diagramme de classe UML ?&quot;}},{&quot;context&quot;:&quot;Une classe abstraite définit un modèle pour les classes concrètes. Elle ne peut pas être utilisée pour créer des objets directement.\n&quot;,&quot;id&quot;:&quot;669d9651-3a81-4fd4-9133-52ba492c9cd8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Elle ne peut pas être instanciée directement.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Elle ne peut pas avoir d'attributs.&quot;,&quot;Elle ne peut pas hériter d'autres classes.&quot;,&quot;Elle doit toujours contenir au moins une méthode privée.&quot;],&quot;prompt&quot;:&quot;Quelle est une caractéristique d’une classe abstraite ?&quot;}},{&quot;context&quot;:&quot;Une relation de dépendance en UML est représentée par une flèche pointillée montrant qu’un élément dépend d’un autre pour fonctionner.\n&quot;,&quot;id&quot;:&quot;34a111b2-412e-46f2-a72a-cf2fc40ac5e8&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Avec une flèche pointillée entre deux éléments.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Avec une ligne continue.&quot;,&quot;Avec une ligne avec un losange rempli.&quot;,&quot;Avec une flèche pleine avec un triangle.&quot;],&quot;prompt&quot;:&quot;Comment représente-t-on une relation de dépendance dans un diagramme de classe UML ?&quot;}},{&quot;context&quot;:&quot;Les dépendances en UML indiquent qu'une classe utilise ou dépend temporairement des services d'une autre classe.\n&quot;,&quot;id&quot;:&quot;cc5c198c-13d2-4c8d-95bb-7c7ed3307fc6&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Quand une classe utilise temporairement une autre classe pour accomplir une tâche.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Quand une classe hérite d’une autre classe.&quot;,&quot;Quand une classe fait partie d’un objet composite.&quot;,&quot;Quand une classe définit une méthode utilisée par une autre classe.&quot;],&quot;prompt&quot;:&quot;Dans quel cas une relation de dépendance est-elle utilisée dans un diagramme de classe UML ?&quot;}},{&quot;context&quot;:&quot;En UML, le symbole « + » signifie que l’attribut est public et accessible depuis n’importe quelle autre classe.\n&quot;,&quot;id&quot;:&quot;4f04475f-5c8d-4194-bd0a-d5b60c335737&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;L’attribut est public.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;L’attribut est protégé.&quot;,&quot;L’attribut est privé.&quot;,&quot;L’attribut est statique.&quot;],&quot;prompt&quot;:&quot;Que signifie le symbole « + » devant un attribut dans un diagramme de classe UML ?&quot;}},{&quot;context&quot;:&quot;La multiplicité « 1..* » indique une association avec un ou plusieurs objets, définissant une contrainte minimale mais pas de maximum.\n&quot;,&quot;id&quot;:&quot;971f3422-7bee-4648-8743-549462a42d11&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Une classe est associée à au moins un objet ou davantage d’une autre classe.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Une classe est associée à un maximum de un objet d’une autre classe.&quot;,&quot;Une classe peut être associée à zéro ou à un seul objet d’une autre classe.&quot;,&quot;Une classe peut être associée à exactement zéro ou un nombre illimité d’objets d’une autre classe.&quot;],&quot;prompt&quot;:&quot;Que signifie la multiplicité « 1..* » dans un diagramme de classe UML ?&quot;}},{&quot;context&quot;:&quot;La multiplicité « 1..* » des deux côtés de l'association indique que chaque objet d'une classe peut être associé à plusieurs objets de l'autre classe, et inversement. Cela représente une relation de cardinalité multiple à multiple.\n\nExemple d'application :\nDans un système de gestion de bibliothèque, une relation « 1..* à 1..* » peut être utilisée entre les classes « Livre » et « Auteur ».  \n- Un livre peut avoir plusieurs auteurs (par exemple, dans le cas de livres coécrits).  \n- Un auteur peut écrire plusieurs livres.\n&quot;,&quot;id&quot;:&quot;d161ee10-d18d-478d-8b91-0cbfe4ee5ea9&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;1..* à 1..*&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;1..1 à 0..1&quot;,&quot;1..* à 1..1&quot;,&quot;0..1 à 1..*&quot;],&quot;prompt&quot;:&quot;Quelle multiplicité convient pour représenter une association entre plusieurs objets d'une classe et plusieurs objets d'une autre classe dans un diagramme de classe UML ?&quot;}}]}" data-quiz-fullscreen="true" data-quiz-cache-answers="true"></div>
+<h2 id="exercice"><a class="header" href="#exercice"><strong>Exercice</strong></a></h2>
+<details>
+<summary> <b><h3 id="système-de-gestion-de-restaurant"><a class="header" href="#système-de-gestion-de-restaurant">Système de Gestion de Restaurant</a></h3></b> </summary>
+<h4 id="contexte-du-système"><a class="header" href="#contexte-du-système">Contexte du système</a></h4>
+<p>Un restaurant souhaite mettre en place un système informatique pour gérer les
+menus, les commandes des clients, les tables disponibles, et les employés.</p>
+<h4 id="description-des-besoins"><a class="header" href="#description-des-besoins">Description des besoins</a></h4>
+<ol>
+<li>
+<p><strong>Menu</strong> :</p>
+<ul>
+<li>Un menu est composé de plusieurs plats. Chaque plat a un nom, une
+description, un prix et une catégorie (entrée, plat principal, dessert).</li>
+<li>Les menus sont modifiables par les responsables du restaurant.</li>
+</ul>
+</li>
+<li>
+<p><strong>Table</strong> :</p>
+<ul>
+<li>Une table a un numéro unique et un nombre de places disponibles.</li>
+<li>Une table peut être libre ou occupée.</li>
+<li>Les réservations peuvent être associées à une table.</li>
+</ul>
+</li>
+<li>
+<p><strong>Commande</strong> :</p>
+<ul>
+<li>Une commande est passée par un client. Elle peut contenir plusieurs plats.</li>
+<li>Chaque commande a un statut (en attente, en préparation, servie, payée).</li>
+<li>Une commande est associée à une table occupée.</li>
+</ul>
+</li>
+<li>
+<p><strong>Client</strong> :</p>
+<ul>
+<li>Un client peut passer des commandes et réserver une table.</li>
+<li>Les informations d’un client incluent son nom et son numéro de téléphone.</li>
+</ul>
+</li>
+<li>
+<p><strong>Employé</strong> :</p>
+<ul>
+<li>Un employé a un identifiant unique, un nom, et un rôle (serveur, cuisinier,
+responsable).</li>
+<li>Les serveurs sont associés aux tables pour la gestion des commandes.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h4 id="instructions-pour-réaliser-le-diagramme"><a class="header" href="#instructions-pour-réaliser-le-diagramme">Instructions pour réaliser le diagramme</a></h4>
+<ol>
+<li>Identifie les <strong>classes</strong> principales à partir des éléments décrits
+(ex. : Menu, Table, Commande, etc.).</li>
+<li>Modélise les <strong>attributs</strong> nécessaires pour chaque classe (ex. : numéro de
+table, statut de commande).</li>
+<li>Décris les <strong>relations</strong> entre les classes (ex. : une commande est associée à
+une table, un menu contient plusieurs plats).</li>
+<li>Ajoute les <strong>multiplicités</strong> aux relations pour indiquer combien d’instances
+d’une classe peuvent être liées à une autre (ex. : une commande peut
+contenir plusieurs plats).</li>
+<li>Si nécessaire, inclue des <strong>associations spéciales</strong> comme l’héritage
+(ex. : un employé peut être spécialisé en serveur ou en cuisinier).</li>
+</ol>
+</details>
+<script type="text/javascript" src="../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../quiz/style.css">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../course/use_case.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../course/sequence.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../course/use_case.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../course/sequence.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
