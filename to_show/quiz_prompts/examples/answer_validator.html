@@ -1,0 +1,572 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>answer-validator - Visualizing Prompts</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Rules</li><li class="chapter-item expanded "><a href="../rules/questions_rules.html"><strong aria-hidden="true">1.</strong> question_rules</a></li><li class="chapter-item expanded "><a href="../rules/answer_maker_rules.html"><strong aria-hidden="true">2.</strong> answer_maker_rules</a></li><li class="chapter-item expanded affix "><li class="part-title">Definitions</li><li class="chapter-item expanded "><a href="../definitions/parameter_definitions.html"><strong aria-hidden="true">3.</strong> parameter definitions</a></li><li class="chapter-item expanded affix "><li class="part-title">Formats</li><li class="chapter-item expanded "><a href="../formats/question_maker_input.html"><strong aria-hidden="true">4.</strong> question-maker-input</a></li><li class="chapter-item expanded "><a href="../formats/question_maker_output.html"><strong aria-hidden="true">5.</strong> question-maker-output</a></li><li class="chapter-item expanded "><a href="../formats/question_validator_input.html"><strong aria-hidden="true">6.</strong> question-validator-input</a></li><li class="chapter-item expanded "><a href="../formats/question_validator_output.html"><strong aria-hidden="true">7.</strong> question-validator-output</a></li><li class="chapter-item expanded "><a href="../formats/answer_maker_input.html"><strong aria-hidden="true">8.</strong> answer-maker-input</a></li><li class="chapter-item expanded "><a href="../formats/answer_maker_output.html"><strong aria-hidden="true">9.</strong> answer-maker-output</a></li><li class="chapter-item expanded "><a href="../formats/answer_validator_input.html"><strong aria-hidden="true">10.</strong> answer-validator-input</a></li><li class="chapter-item expanded "><a href="../formats/answer_validator_output.html"><strong aria-hidden="true">11.</strong> answer-validator-output</a></li><li class="chapter-item expanded affix "><li class="part-title">Examples</li><li class="chapter-item expanded "><a href="../examples/question_maker.html"><strong aria-hidden="true">12.</strong> question-maker</a></li><li class="chapter-item expanded "><a href="../examples/question_validator.html"><strong aria-hidden="true">13.</strong> question-validator</a></li><li class="chapter-item expanded "><a href="../examples/answer_maker.html"><strong aria-hidden="true">14.</strong> answer-maker</a></li><li class="chapter-item expanded "><a href="../examples/answer_validator.html" class="active"><strong aria-hidden="true">15.</strong> answer-validator</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompts</li><li class="chapter-item expanded "><a href="../prompts/question_maker.html"><strong aria-hidden="true">16.</strong> question-maker</a></li><li class="chapter-item expanded "><a href="../prompts/question_validator.html"><strong aria-hidden="true">17.</strong> question-validator</a></li><li class="chapter-item expanded "><a href="../prompts/answer_maker.html"><strong aria-hidden="true">18.</strong> answer-maker</a></li><li class="chapter-item expanded "><a href="../prompts/answer_validator.html"><strong aria-hidden="true">19.</strong> answer-validator</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Visualizing Prompts</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>Below are several examples demonstrating how the answer_validator should behave given various inputs. Each example shows the validator’s input (the question, rules, and generated answers) and the expected output (validation result and feedback).</p>
+<p><strong>Note:</strong> These examples assume that the validator already has access to the global rules and definitions the question_maker and answer_maker followed. The validator’s job is strictly to verify the compliance of the provided answers.</p>
+<hr />
+<h3 id="example-1-valid-multiple-choice-question"><a class="header" href="#example-1-valid-multiple-choice-question">Example 1: Valid Multiple Choice Question</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which symbol is used for comments in Python?",
+  "rules": {
+    "topic": "Python",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "No prior programming experience."
+  },
+  "answers": {
+    "options": [
+      {"text": "#", "correct": true},
+      {"text": "//", "correct": false},
+      {"text": "/*", "correct": false},
+      {"text": "--", "correct": false}
+    ],
+    "explanation": "In Python, the '#' symbol is used to start a comment.",
+    "documentation_links": [
+      {
+        "url": "https://docs.python.org/3/tutorial/introduction.html#comments",
+        "description": "Python Official Documentation: Comments"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": true,
+  "feedback": null
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Exactly one correct answer.</li>
+<li>The explanation aligns with the correct answer.</li>
+<li>The documentation link is relevant.</li>
+</ul>
+<hr />
+<h3 id="example-2-multiple-correct-answers-in-multiple-choice"><a class="header" href="#example-2-multiple-correct-answers-in-multiple-choice">Example 2: Multiple Correct Answers in Multiple Choice</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which data structure ensures FIFO ordering?",
+  "rules": {
+    "topic": "Data Structures",
+    "programming_language": null,
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "Understands basic programming concepts."
+  },
+  "answers": {
+    "options": [
+      {"text": "A queue", "correct": true},
+      {"text": "A stack", "correct": true},
+      {"text": "A linked list", "correct": false},
+      {"text": "A binary tree", "correct": false}
+    ],
+    "explanation": "A queue ensures FIFO ordering, while a stack is LIFO.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "Multiple options are marked as correct in a multiple-choice question. Only one correct answer is allowed."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Two correct answers (<code>A queue</code> and <code>A stack</code>) violates the single-correct-answer rule for multiple choice.</li>
+</ul>
+<hr />
+<h3 id="example-3-incorrect-explanation"><a class="header" href="#example-3-incorrect-explanation">Example 3: Incorrect Explanation</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "True or False: In Python, lists are defined using square brackets.",
+  "rules": {
+    "topic": "Python",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "true_false",
+    "purpose": "conceptual",
+    "background": "No prior programming experience."
+  },
+  "answers": {
+    "options": [
+      {"text": "True", "correct": true},
+      {"text": "False", "correct": false}
+    ],
+    "explanation": "Lists in Python are defined using curly braces {}.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The explanation does not justify the correct answer. It claims lists use curly braces, but the correct answer is True for square brackets."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The correct answer is True (square brackets), but the explanation contradicts this, making it invalid.</li>
+</ul>
+<hr />
+<h3 id="example-4-irrelevant-documentation-link"><a class="header" href="#example-4-irrelevant-documentation-link">Example 4: Irrelevant Documentation Link</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which AWS service is used to store objects in buckets?",
+  "rules": {
+    "topic": "S3",
+    "programming_language": "AWS",
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "Knows basic AWS services."
+  },
+  "answers": {
+    "options": [
+      {"text": "Amazon S3", "correct": true},
+      {"text": "Amazon EC2", "correct": false},
+      {"text": "Amazon RDS", "correct": false},
+      {"text": "AWS Lambda", "correct": false}
+    ],
+    "explanation": "Amazon S3 stores data as objects in buckets.",
+    "documentation_links": [
+      {
+        "url": "https://docs.aws.amazon.com/ec2/",
+        "description": "AWS EC2 Documentation"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The documentation link is not relevant. It references EC2, which is unrelated to S3. Provide an S3-related documentation link or omit it."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The correct answer and explanation are fine, but the documentation link references EC2 instead of S3, violating the relevance requirement.</li>
+</ul>
+<hr />
+<h3 id="example-5-truefalse-with-no-correct-answer-marked"><a class="header" href="#example-5-truefalse-with-no-correct-answer-marked">Example 5: True/False With No Correct Answer Marked</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "True or False: A function in Python must always return a value explicitly.",
+  "rules": {
+    "topic": "Functions",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "true_false",
+    "purpose": "conceptual",
+    "background": "Familiar with Python basics."
+  },
+  "answers": {
+    "options": [
+      {"text": "True", "correct": false},
+      {"text": "False", "correct": false}
+    ],
+    "explanation": "A Python function without an explicit return defaults to returning None.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "No correct option is marked in a true/false question. Exactly one of 'True' or 'False' must be correct."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>A true/false question must have exactly one correct answer. None are correct here.</li>
+</ul>
+<hr />
+<h3 id="example-6-multiple-issues-wrong-answer-and-poor-explanation"><a class="header" href="#example-6-multiple-issues-wrong-answer-and-poor-explanation">Example 6: Multiple Issues (Wrong Answer and Poor Explanation)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which of these code snippets prints 'Hello, World' in Python?",
+  "rules": {
+    "topic": "Python",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "implementation",
+    "background": "No prior programming experience."
+  },
+  "answers": {
+    "options": [
+      {"text": "print('Goodbye, World')", "correct": true},
+      {"text": "echo 'Hello, World'", "correct": false},
+      {"text": "console.log('Hello, World')", "correct": false},
+      {"text": "print('Hello, World')", "correct": false}
+    ],
+    "explanation": "This code prints 'Goodbye, World' which is close enough.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The correct answer is incorrect (it prints 'Goodbye, World' not 'Hello, World'). The explanation does not justify the correct answer and is inconsistent with the question."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The chosen correct answer doesn’t match the question’s requirement.</li>
+<li>The explanation acknowledges it’s not printing ‘Hello, World’ but claims it’s “close enough,” which is not acceptable.</li>
+</ul>
+<hr />
+<h3 id="example-7-correct-answer-marked-but-actually-incorrect"><a class="header" href="#example-7-correct-answer-marked-but-actually-incorrect">Example 7: Correct Answer Marked but Actually Incorrect</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which of the following code snippets will print the numbers 0 to 2 in Python?",
+  "rules": {
+    "topic": "Loops",
+    "programming_language": "Python",
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "problem_solving",
+    "background": "Familiar with Python basics."
+  },
+  "answers": {
+    "options": [
+      {
+        "text": "for i in range(3):\n    print(i)",
+        "correct": false
+      },
+      {
+        "text": "for i in [0, 1, 2]:\n    print(i)",
+        "correct": false
+      },
+      {
+        "text": "for i in range(5, 8):\n    print(i)",
+        "correct": true
+      },
+      {
+        "text": "while i &lt; 3:\n    print(i)",
+        "correct": false
+      }
+    ],
+    "explanation": "The chosen snippet (range(5, 8)) prints 5, 6, 7 which is basically three numbers, so it’s fine.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The selected correct answer does not print 0 to 2; it prints 5, 6, 7. The explanation fails to justify why this would be acceptable."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The correct answer option is incorrect. It prints 5, 6, 7 instead of 0, 1, 2.</li>
+<li>The explanation tries to justify it as “three numbers,” but that does not match the question’s requirement.</li>
+</ul>
+<hr />
+<h3 id="example-8-incorrect-truefalse-selection"><a class="header" href="#example-8-incorrect-truefalse-selection">Example 8: Incorrect True/False Selection</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "True or False: In Python, '==' compares the values of two objects.",
+  "rules": {
+    "topic": "Python",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "true_false",
+    "purpose": "conceptual",
+    "background": "Familiar with basic Python operators."
+  },
+  "answers": {
+    "options": [
+      {"text": "True", "correct": false},
+      {"text": "False", "correct": true}
+    ],
+    "explanation": "The '==' operator compares references, not values.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The selected correct answer is wrong. The '==' operator in Python does compare values, not just references. The explanation is also incorrect."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The correct answer is marked as False, but the statement is actually True in Python.</li>
+<li>The explanation is also misleading, reinforcing the incorrect conclusion.</li>
+</ul>
+<hr />
+<h3 id="example-9-correct-answer-is-incorrect-and-documentation-link-is-off-topic"><a class="header" href="#example-9-correct-answer-is-incorrect-and-documentation-link-is-off-topic">Example 9: Correct Answer is Incorrect and Documentation Link is Off-Topic</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which AWS service automatically distributes incoming traffic across multiple targets?",
+  "rules": {
+    "topic": "Load Balancing",
+    "programming_language": "AWS",
+    "difficulty": "hard",
+    "type": "multiple_choice",
+    "purpose": "implementation",
+    "background": "Experienced with AWS services."
+  },
+  "answers": {
+    "options": [
+      {"text": "Amazon EC2", "correct": false},
+      {"text": "AWS Lambda", "correct": false},
+      {"text": "Amazon S3", "correct": true},
+      {"text": "Elastic Load Balancing (ELB)", "correct": false}
+    ],
+    "explanation": "Amazon S3 distributes objects but can also distribute incoming traffic.",
+    "documentation_links": [
+      {
+        "url": "https://docs.aws.amazon.com/s3/",
+        "description": "AWS Official Documentation: Amazon S3"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The chosen correct answer is incorrect. Amazon S3 does not distribute incoming traffic across multiple targets, Elastic Load Balancing does. The explanation and documentation link are also misaligned with the required service."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Elastic Load Balancing is the correct AWS service, not Amazon S3.</li>
+<li>The explanation and documentation links are incorrectly tied to S3, which is irrelevant for load balancing.</li>
+</ul>
+<hr />
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../examples/answer_maker.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../prompts/question_maker.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../examples/answer_maker.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../prompts/question_maker.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

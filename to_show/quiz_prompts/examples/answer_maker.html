@@ -1,0 +1,564 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>answer-maker - Visualizing Prompts</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Rules</li><li class="chapter-item expanded "><a href="../rules/questions_rules.html"><strong aria-hidden="true">1.</strong> question_rules</a></li><li class="chapter-item expanded "><a href="../rules/answer_maker_rules.html"><strong aria-hidden="true">2.</strong> answer_maker_rules</a></li><li class="chapter-item expanded affix "><li class="part-title">Definitions</li><li class="chapter-item expanded "><a href="../definitions/parameter_definitions.html"><strong aria-hidden="true">3.</strong> parameter definitions</a></li><li class="chapter-item expanded affix "><li class="part-title">Formats</li><li class="chapter-item expanded "><a href="../formats/question_maker_input.html"><strong aria-hidden="true">4.</strong> question-maker-input</a></li><li class="chapter-item expanded "><a href="../formats/question_maker_output.html"><strong aria-hidden="true">5.</strong> question-maker-output</a></li><li class="chapter-item expanded "><a href="../formats/question_validator_input.html"><strong aria-hidden="true">6.</strong> question-validator-input</a></li><li class="chapter-item expanded "><a href="../formats/question_validator_output.html"><strong aria-hidden="true">7.</strong> question-validator-output</a></li><li class="chapter-item expanded "><a href="../formats/answer_maker_input.html"><strong aria-hidden="true">8.</strong> answer-maker-input</a></li><li class="chapter-item expanded "><a href="../formats/answer_maker_output.html"><strong aria-hidden="true">9.</strong> answer-maker-output</a></li><li class="chapter-item expanded "><a href="../formats/answer_validator_input.html"><strong aria-hidden="true">10.</strong> answer-validator-input</a></li><li class="chapter-item expanded "><a href="../formats/answer_validator_output.html"><strong aria-hidden="true">11.</strong> answer-validator-output</a></li><li class="chapter-item expanded affix "><li class="part-title">Examples</li><li class="chapter-item expanded "><a href="../examples/question_maker.html"><strong aria-hidden="true">12.</strong> question-maker</a></li><li class="chapter-item expanded "><a href="../examples/question_validator.html"><strong aria-hidden="true">13.</strong> question-validator</a></li><li class="chapter-item expanded "><a href="../examples/answer_maker.html" class="active"><strong aria-hidden="true">14.</strong> answer-maker</a></li><li class="chapter-item expanded "><a href="../examples/answer_validator.html"><strong aria-hidden="true">15.</strong> answer-validator</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompts</li><li class="chapter-item expanded "><a href="../prompts/question_maker.html"><strong aria-hidden="true">16.</strong> question-maker</a></li><li class="chapter-item expanded "><a href="../prompts/question_validator.html"><strong aria-hidden="true">17.</strong> question-validator</a></li><li class="chapter-item expanded "><a href="../prompts/answer_maker.html"><strong aria-hidden="true">18.</strong> answer-maker</a></li><li class="chapter-item expanded "><a href="../prompts/answer_validator.html"><strong aria-hidden="true">19.</strong> answer-validator</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Visualizing Prompts</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<h3 id="example-1-classical-case-beginner-conceptual-python"><a class="header" href="#example-1-classical-case-beginner-conceptual-python">Example 1: Classical Case (Beginner, Conceptual, Python)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which of the following symbols is used for comments in Python?",
+  "rules": {
+    "topic": "Python",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "No prior programming experience."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "#", "correct": true},
+      {"text": "//", "correct": false},
+      {"text": "/*", "correct": false},
+      {"text": "--", "correct": false}
+    ],
+    "explanation": "In Python, comments start with the '#' symbol. Other symbols like '//' or '/*' are used for comments in different languages.",
+    "documentation_links": [
+      {
+        "url": "https://docs.python.org/3/tutorial/introduction.html#comments",
+        "description": "Python Official Documentation: Comments"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Straightforward question, simple conceptual difficulty, and a suitable link is provided.</li>
+</ul>
+<hr />
+<h3 id="example-2-classical-case-intermediate-problem-solving-python-loops"><a class="header" href="#example-2-classical-case-intermediate-problem-solving-python-loops">Example 2: Classical Case (Intermediate, Problem Solving, Python Loops)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "What does the following code print?\n\nfor i in range(3): print(i * 2)",
+  "rules": {
+    "topic": "Loops",
+    "programming_language": "Python",
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "problem_solving",
+    "background": "Familiar with Python basics."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "0, 2, 4", "correct": true},
+      {"text": "0, 1, 2", "correct": false},
+      {"text": "1, 2, 3", "correct": false},
+      {"text": "2, 4, 6", "correct": false}
+    ],
+    "explanation": "The range(3) function generates the numbers 0, 1, and 2. Multiplying each by 2 results in 0, 2, and 4 being printed.",
+    "documentation_links": [
+      {
+        "url": "https://docs.python.org/3/library/functions.html#func-range",
+        "description": "Python Documentation: range()"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>A problem-solving question at medium difficulty. The explanation walks through the code logic. Only one link is given since range() is directly relevant.</li>
+</ul>
+<hr />
+<h3 id="example-3-classical-case-advanced-implementation-aws"><a class="header" href="#example-3-classical-case-advanced-implementation-aws">Example 3: Classical Case (Advanced, Implementation, AWS)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which AWS service can you use to store files as objects in buckets?",
+  "rules": {
+    "topic": "S3",
+    "programming_language": "AWS",
+    "difficulty": "hard",
+    "type": "multiple_choice",
+    "purpose": "implementation",
+    "background": "Experienced with AWS services."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "Amazon S3", "correct": true},
+      {"text": "Amazon EC2", "correct": false},
+      {"text": "Amazon RDS", "correct": false},
+      {"text": "AWS Lambda", "correct": false}
+    ],
+    "explanation": "Amazon S3 (Simple Storage Service) is used to store and retrieve objects in buckets. EC2 is for virtual servers, RDS is for relational databases, and Lambda is for serverless functions.",
+    "documentation_links": [
+      {
+        "url": "https://docs.aws.amazon.com/s3/",
+        "description": "AWS Official Documentation: Amazon S3"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Hard difficulty with implementation focus can still include a direct concept check if the question itself was deemed valid. The explanation differentiates S3 from other AWS services.</li>
+</ul>
+<hr />
+<h3 id="example-4-edgy-case-null-topic-python-specified"><a class="header" href="#example-4-edgy-case-null-topic-python-specified">Example 4: Edgy Case (Null Topic, Python Specified)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "True or False: In Python, lists are defined using square brackets.",
+  "rules": {
+    "topic": null,
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "true_false",
+    "purpose": "conceptual",
+    "background": "No prior programming experience."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "True", "correct": true},
+      {"text": "False", "correct": false}
+    ],
+    "explanation": "Lists in Python are indeed created using square brackets, such as [1, 2, 3].",
+    "documentation_links": [
+      {
+        "url": "https://docs.python.org/3/tutorial/introduction.html#lists",
+        "description": "Python Official Documentation: Lists"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>No topic is specified, but <code>programming_language = "Python"</code> means we pick a fundamental Python concept. The question is simple and suitable for a beginner.</li>
+</ul>
+<hr />
+<h3 id="example-5-edgy-case-null-language-and-null-topic-medium-difficulty"><a class="header" href="#example-5-edgy-case-null-language-and-null-topic-medium-difficulty">Example 5: Edgy Case (Null Language and Null Topic, Medium Difficulty)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which data structure ensures elements are removed in the same order they were added?",
+  "rules": {
+    "topic": null,
+    "programming_language": null,
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "Understands basic programming concepts."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "A queue", "correct": true},
+      {"text": "A stack", "correct": false},
+      {"text": "A binary tree", "correct": false},
+      {"text": "A hash set", "correct": false}
+    ],
+    "explanation": "A queue is a First-In-First-Out (FIFO) data structure, meaning elements are removed in the order they are added.",
+    "documentation_links": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Queue_(abstract_data_type)",
+        "description": "General Documentation: Queue Data Structure"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Both topic and programming_language are null, so we choose a language-agnostic question aligned with medium difficulty and conceptual purpose. A general data structure question fits.</li>
+</ul>
+<p><strong>Note on Link:</strong> Since no direct official programming language documentation applies here (language is null and concept is generic), an authoritative external reference (like a Wikipedia entry) could be acceptable. If strict official docs are required, we might omit links.</p>
+<hr />
+<h3 id="example-6-edgy-case-hard-difficulty-implementation-python-more-complex-options"><a class="header" href="#example-6-edgy-case-hard-difficulty-implementation-python-more-complex-options">Example 6: Edgy Case (Hard Difficulty, Implementation, Python, More Complex Options)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which code snippet correctly handles a ZeroDivisionError in Python when dividing two user inputs?",
+  "rules": {
+    "topic": "Error Handling",
+    "programming_language": "Python",
+    "difficulty": "hard",
+    "type": "multiple_choice",
+    "purpose": "implementation",
+    "background": "Familiar with Python exceptions."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {
+        "text": "try:\n    a = int(input())\n    b = int(input())\n    print(a/b)\nexcept ZeroDivisionError:\n    print('Cannot divide by zero')",
+        "correct": true
+      },
+      {
+        "text": "try:\n    a = int(input())\n    b = int(input())\n    print(a*b)\nexcept ZeroDivisionError:\n    print('Error')",
+        "correct": false
+      },
+      {
+        "text": "a = int(input())\nb = int(input())\nprint(a/b) # No try-except",
+        "correct": false
+      },
+      {
+        "text": "try:\n    a = input()\n    b = input()\n    print(a/b)\nexcept ValueError:\n    print('Bad input')",
+        "correct": false
+      }
+    ],
+    "explanation": "The correct snippet uses try/except to catch ZeroDivisionError specifically and handle it by printing a message. Other options either handle the wrong error, perform a different operation, or lack error handling altogether.",
+    "documentation_links": [
+      {
+        "url": "https://docs.python.org/3/tutorial/errors.html#handling-exceptions",
+        "description": "Python Official Documentation: Handling Exceptions"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>A hard difficulty implementation scenario. The correct snippet specifically handles <code>ZeroDivisionError</code>.Below are additional examples, continuing from the previous numbering (starting from Example 7), that illustrate scenarios where no relevant official documentation links are easily identifiable or directly helpful. In these cases, the model should omit links entirely.</li>
+</ul>
+<hr />
+<h3 id="example-7-no-relevant-documentation-language-agnostic-general-concept"><a class="header" href="#example-7-no-relevant-documentation-language-agnostic-general-concept">Example 7: No Relevant Documentation (Language-Agnostic, General Concept)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "True or False: In a binary search tree, every node in the left subtree has a value less than the node’s own value.",
+  "rules": {
+    "topic": "Data Structures",
+    "programming_language": null,
+    "difficulty": "medium",
+    "type": "true_false",
+    "purpose": "conceptual",
+    "background": "Understands basic programming concepts."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "True", "correct": true},
+      {"text": "False", "correct": false}
+    ],
+    "explanation": "A binary search tree is defined such that every node’s left subtree contains values strictly less than the node’s value.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>This is a general data structure concept. While documentation might exist online, the instructions allow omitting links if no straightforward official source is evident. The model could rely on authoritative references like textbooks or general knowledge, but since we don’t have a direct official link (e.g., an official language/library doc) and the topic is language-agnostic, it’s acceptable to omit links.</li>
+</ul>
+<hr />
+<h3 id="example-8-no-relevant-documentation-niche-concept-or-scenario"><a class="header" href="#example-8-no-relevant-documentation-niche-concept-or-scenario">Example 8: No Relevant Documentation (Niche Concept or Scenario)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which of the following describes a scenario where a loop continues until a certain condition changes, rather than for a fixed number of iterations?",
+  "rules": {
+    "topic": "Loops",
+    "programming_language": null,
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "Familiar with basic programming constructs."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "A while loop", "correct": true},
+      {"text": "A for loop iterating over a fixed range", "correct": false},
+      {"text": "A do-while loop running exactly five times", "correct": false},
+      {"text": "A for loop with a break statement at the end", "correct": false}
+    ],
+    "explanation": "A while loop continues as long as its condition remains true, not for a predetermined number of iterations.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>While links to language documentation might exist for while loops in specific languages, this question is language-agnostic. There is no single authoritative official doc for the generic concept of a while loop. Thus, no links are included.</li>
+</ul>
+<hr />
+<h3 id="example-9-no-relevant-documentation-custom-scenario"><a class="header" href="#example-9-no-relevant-documentation-custom-scenario">Example 9: No Relevant Documentation (Custom Scenario)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which approach would you use to ensure that each request to your server is processed in sequence, one after another?",
+  "rules": {
+    "topic": null,
+    "programming_language": null,
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "problem_solving",
+    "background": "Understands basic concurrency concepts."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "Use a single-threaded event loop", "correct": true},
+      {"text": "Start a new thread for each request", "correct": false},
+      {"text": "Use a load balancer to distribute requests", "correct": false},
+      {"text": "Run requests in parallel using multiple processes", "correct": false}
+    ],
+    "explanation": "A single-threaded event loop processes tasks one at a time, ensuring sequential handling of requests. Other options involve parallelism or concurrency.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>This is a conceptual concurrency scenario not tied to a specific language or official source. While some languages or frameworks have documentation on event loops, there isn’t a single official doc that straightforwardly covers this general concept in a language-agnostic manner. Therefore, no links are included.</li>
+</ul>
+<hr />
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../examples/question_validator.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../examples/answer_validator.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../examples/question_validator.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../examples/answer_validator.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,1621 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Visualizing Prompts</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Rules</li><li class="chapter-item expanded "><a href="rules/questions_rules.html"><strong aria-hidden="true">1.</strong> question_rules</a></li><li class="chapter-item expanded "><a href="rules/answer_maker_rules.html"><strong aria-hidden="true">2.</strong> answer_maker_rules</a></li><li class="chapter-item expanded affix "><li class="part-title">Definitions</li><li class="chapter-item expanded "><a href="definitions/parameter_definitions.html"><strong aria-hidden="true">3.</strong> parameter definitions</a></li><li class="chapter-item expanded affix "><li class="part-title">Formats</li><li class="chapter-item expanded "><a href="formats/question_maker_input.html"><strong aria-hidden="true">4.</strong> question-maker-input</a></li><li class="chapter-item expanded "><a href="formats/question_maker_output.html"><strong aria-hidden="true">5.</strong> question-maker-output</a></li><li class="chapter-item expanded "><a href="formats/question_validator_input.html"><strong aria-hidden="true">6.</strong> question-validator-input</a></li><li class="chapter-item expanded "><a href="formats/question_validator_output.html"><strong aria-hidden="true">7.</strong> question-validator-output</a></li><li class="chapter-item expanded "><a href="formats/answer_maker_input.html"><strong aria-hidden="true">8.</strong> answer-maker-input</a></li><li class="chapter-item expanded "><a href="formats/answer_maker_output.html"><strong aria-hidden="true">9.</strong> answer-maker-output</a></li><li class="chapter-item expanded "><a href="formats/answer_validator_input.html"><strong aria-hidden="true">10.</strong> answer-validator-input</a></li><li class="chapter-item expanded "><a href="formats/answer_validator_output.html"><strong aria-hidden="true">11.</strong> answer-validator-output</a></li><li class="chapter-item expanded affix "><li class="part-title">Examples</li><li class="chapter-item expanded "><a href="examples/question_maker.html"><strong aria-hidden="true">12.</strong> question-maker</a></li><li class="chapter-item expanded "><a href="examples/question_validator.html"><strong aria-hidden="true">13.</strong> question-validator</a></li><li class="chapter-item expanded "><a href="examples/answer_maker.html"><strong aria-hidden="true">14.</strong> answer-maker</a></li><li class="chapter-item expanded "><a href="examples/answer_validator.html"><strong aria-hidden="true">15.</strong> answer-validator</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompts</li><li class="chapter-item expanded "><a href="prompts/question_maker.html"><strong aria-hidden="true">16.</strong> question-maker</a></li><li class="chapter-item expanded "><a href="prompts/question_validator.html"><strong aria-hidden="true">17.</strong> question-validator</a></li><li class="chapter-item expanded "><a href="prompts/answer_maker.html"><strong aria-hidden="true">18.</strong> answer-maker</a></li><li class="chapter-item expanded "><a href="prompts/answer_validator.html"><strong aria-hidden="true">19.</strong> answer-validator</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Visualizing Prompts</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="question-rules"><a class="header" href="#question-rules">Question Rules</a></h1>
+<blockquote>
+<ol>
+<li><strong>Adhere to Parameters</strong>: The question must align with every parameter specified, including <strong>audience</strong>, <strong>background</strong>, <strong>topic</strong>, <strong>difficulty</strong>, <strong>type</strong>, <strong>programming language</strong> and <strong>purpose</strong>. All these parameters will be provided in the <code>rules</code> object.</li>
+</ol>
+<ul>
+<li>
+<p>If <code>programming_language</code> is specified (e.g., "Python", "Java", "AWS"), the question must use concepts, syntax, or terminology relevant to that language or platform.</p>
+</li>
+<li>
+<p>If <code>programming_language</code> is <code>null</code>, the question must remain language-agnostic. Do not rely on any language-specific features or syntax.</p>
+</li>
+<li>
+<p>If <code>topic</code> is specified, the question must be clearly relevant to that topic.</p>
+<ul>
+<li><strong>Relevance</strong>: The question should directly involve concepts, features, operations, or scenarios commonly associated with the specified topic. For example, if the topic is "Loops" and the language is Python, the question should involve iteration structures recognizable in Python, not unrelated tasks. If the topic is "S3" and the language is AWS, the question should involve scenarios related to S3 buckets or objects, not something unrelated like EC2 instances.</li>
+</ul>
+</li>
+<li>
+<p>If <code>topic</code> is <code>null</code> and <code>programming_language</code> is not <code>null</code>, select a concept or scenario inherently related to that language or platform. For instance, if <code>programming_language = "Python"</code> and <code>topic = null</code>, you might choose a fundamental Python concept that matches the given audience, difficulty, and purpose, such as basic data types or simple loops for beginners, or function usage for intermediate.</p>
+</li>
+<li>
+<p>If both <code>topic</code> and <code>programming_language</code> are <code>null</code>, then any general programming question aligned with the other parameters is acceptable (though this scenario indicates a potential input error). In this case, choose a question that suits the specified audience, difficulty, and purpose in a general, language-neutral context.</p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>Uniqueness</strong>: The question must not duplicate or closely resemble any of the previously listed <code>previous_questions</code>.
+<ul>
+<li><strong>Closely Resembling</strong>: A question is considered “closely resembling” if it:
+<ul>
+<li>Uses the exact same code snippet or only trivial modifications (e.g., changing variable names without altering the concept tested).</li>
+<li>Tests the exact same concept in the same manner (e.g., previously asked the output of <code>print(2+2)</code>; now asking <code>print(1+3)</code> would be too similar as it tests the same trivial arithmetic output without introducing a new concept).</li>
+</ul>
+</li>
+<li>The new question should introduce at least one distinct element, concept, or scenario not previously tested.</li>
+</ul>
+</li>
+<li><strong>Focus on Novelty</strong>: The question should present at least one new aspect or variation. For example, if previous questions tested basic arithmetic, a novel question might incorporate a loop or a function call to encourage the learner to apply their knowledge differently.</li>
+<li><strong>Encourage Learning</strong>: The question should help expand the learner’s understanding. It should not merely re-test an identical concept at the same level. Instead, it might add a slightly more complex scenario or build upon previously tested knowledge.</li>
+<li><strong>No Answers/Explanations</strong>: The output should only contain the generated question and its type, no solutions or hints.</li>
+</ol>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><p><strong>Instructions:</strong></p>
+<ul>
+<li>
+<p><strong>Answer Options</strong>:</p>
+<ul>
+<li>For <strong>multiple_choice</strong>: Provide exactly 4 answer options by default, unless the difficulty or concept strongly suggests adding a 5th option. Exactly one answer must be marked as correct.</li>
+<li>For <strong>true_false</strong>: Provide two options, "True" and "False," with exactly one marked as correct.</li>
+</ul>
+</li>
+<li>
+<p><strong>Explanation</strong>:<br />
+Provide a concise explanation that justifies why the correct answer is correct. Tailor the depth and complexity of the explanation to the specified <strong>audience</strong>, <strong>background</strong>, and <strong>difficulty</strong>. For conceptual questions, clarify the theory or syntax. For problem-solving questions, walk through the reasoning steps. For implementation questions, highlight key practical details or code elements.</p>
+</li>
+<li>
+<p><strong>Documentation Links</strong>:<br />
+If directly relevant and high-quality official documentation exists for the tested concept, include up to 3 links. If no straightforward, suitable official documentation is available, omit links.</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="parameter-definitions"><a class="header" href="#parameter-definitions">Parameter Definitions</a></h2>
+<blockquote>
+<ul>
+<li>
+<p><strong>Audience</strong>: Describes the skill level and profile of the target learner.</p>
+<ul>
+<li><strong>Beginner</strong>: Simple, direct, no assumptions. Introduce the most basic concepts with clarity.</li>
+<li><strong>Intermediate</strong>: Build on fundamentals. The learner can interpret and apply basic concepts, handle simple problem-solving, and understand common terminology.</li>
+<li><strong>Advanced</strong>: Complex, multi-concept, potentially tricky scenarios requiring deep understanding and analysis. The learner can handle subtlety, debugging, and less common features.</li>
+</ul>
+</li>
+<li>
+<p><strong>Background</strong>: Provides context about the learner’s environment or prior knowledge.</p>
+<ul>
+<li><em>Example</em>: "No prior programming experience" means you must avoid assuming they know any programming terms. "Familiar with Python basics" allows using Python syntax and basic constructs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Programming Language</strong>: Specifies the main language or technology context for the question.</p>
+<ul>
+<li><em>Example</em>: "Python", "Java", "AWS", "Azure", or <code>null</code> if the question should be language-agnostic.</li>
+<li>If a programming language or platform is specified, the question should use relevant syntax, terminology, or services. If <code>null</code>, the question remains conceptually focused without language-specific syntax.</li>
+</ul>
+</li>
+<li>
+<p><strong>Topic</strong>: The subject matter or concept the question focuses on. This can be a language feature (e.g., Loops, Data Structures), a platform-related subject (e.g., S3, EC2, Virtual Networks), or more general programming concepts.</p>
+</li>
+<li>
+<p>If a specific topic is provided, the question should directly relate to it.</p>
+</li>
+<li>
+<p>If <code>null</code>, then the question should remain broadly relevant to the chosen programming language or context without focusing on a particular subtopic.</p>
+</li>
+<li>
+<p><strong>Difficulty</strong>: Indicates the complexity level of the question. The question must match the specified difficulty.</p>
+<ul>
+<li><strong>Easy</strong>: Simple recall or recognition tasks suitable for complete beginners. Typically involves direct, obvious outcomes (e.g., output of <code>print(2+3)</code>).</li>
+<li><strong>Medium</strong>: Requires applying known concepts in a straightforward scenario.
+<ul>
+<li><em>Straightforward</em> means no hidden tricks, obscure language features, or unexpected behavior.</li>
+<li>Example: If the learner knows loops and arithmetic, a medium question might ask: "What does the following loop print?", where the loop and arithmetic are directly understandable without guessing unusual behavior.</li>
+<li>Non-straightforward (which should NOT be in medium) might involve subtle language quirks, odd data structures rarely encountered, or performance optimizations not expected at this level.</li>
+</ul>
+</li>
+<li><strong>Hard</strong>: Demands advanced problem-solving. This might involve multiple concepts together, require understanding edge cases, debugging code, or interpreting less common language features. For example, analyzing nested loops with conditional logic that produce a non-obvious result, or identifying why a code snippet raises a <code>TypeError</code> due to a subtle misuse of types.</li>
+</ul>
+</li>
+<li>
+<p><strong>Type</strong>: Specifies the format of the question.</p>
+<ul>
+<li><strong>Multiple Choice</strong>: The final output is a question expecting multiple-choice answers. Do not provide the answers, only the question prompt.</li>
+<li><strong>True/False</strong>: The final output is a statement where the student decides if it’s true or false. Only output the statement.</li>
+</ul>
+</li>
+<li>
+<p><strong>Purpose</strong>: Defines the intent of the question.</p>
+<ul>
+<li><strong>Conceptual</strong>: Tests definitions, theory, or syntax without requiring execution or problem-solving. (e.g., "Which of these keywords defines a function in Python?")</li>
+<li><strong>Problem Solving</strong>: Requires applying concepts to derive an answer. (e.g., "What will be printed by this loop?")</li>
+<li><strong>Implementation</strong>: Focuses on real-world coding tasks, debugging, or understanding practical use cases. (e.g., "Which code snippet correctly initializes a Flask route?")</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><blockquote>
+<p><strong>Input Format</strong>:</p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "&lt;audience_level&gt;",
+    "background": "&lt;context&gt;",
+    "programming_language": "&lt;language_or_platform_or_null&gt;",
+    "topic": "&lt;specific_topic_or_null&gt;",
+    "difficulty": "&lt;difficulty_level&gt;",
+    "type": "&lt;question_type&gt;",
+    "purpose": "&lt;purpose&gt;"
+  },
+  "previous_questions": [
+    "Question 1",
+    "Question 2",
+    ...
+  ]
+}
+</code></pre>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><blockquote>
+<p><strong>Output Format</strong>:</p>
+<pre><code class="language-json">{
+  "question": "&lt;Your Generated Question&gt;",
+  "type": "&lt;question_type&gt;"
+}
+</code></pre>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><blockquote>
+<p><strong>Input Format (JSON)</strong>:</p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "&lt;audience_level&gt;",
+    "background": "&lt;context&gt;",
+    "programming_language": "&lt;language_or_platform_or_null&gt;",
+    "topic": "&lt;specific_topic_or_null&gt;",
+    "difficulty": "&lt;difficulty_level&gt;",
+    "type": "&lt;question_type&gt;",
+    "purpose": "&lt;purpose&gt;"
+  },
+  "question": "&lt;Generated question&gt;",
+  "previous_questions": [
+    "Question 1",
+    "Question 2",
+    ...
+  ]
+}
+</code></pre>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><blockquote>
+<p><strong>Output Format (JSON)</strong>:</p>
+<pre><code class="language-json">{
+  "validation": "&lt;true_or_false&gt;",
+  "feedback": "&lt;feedback_if_any&gt;"
+}
+</code></pre>
+<ul>
+<li>If <code>validation</code> is <code>true</code>, the <code>feedback</code> must be <code>null</code>.</li>
+<li>If <code>validation</code> is <code>false</code>, the <code>feedback</code> must provide specific reasons for the failure and how to fix the issues.</li>
+</ul>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><blockquote>
+<h3 id="input-format-json"><a class="header" href="#input-format-json"><strong>Input Format (JSON)</strong>:</a></h3>
+<pre><code class="language-json">{
+  "question": "&lt;Generated question&gt;",
+  "rules": {
+    "topic": "&lt;specific_topic&gt;",
+    "difficulty": "&lt;difficulty_level&gt;",
+    "type": "&lt;question_type&gt;",
+    "purpose": "&lt;purpose&gt;",
+    "background": "&lt;context&gt;"
+  }
+}
+</code></pre>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><blockquote>
+<h3 id="output-format-json"><a class="header" href="#output-format-json"><strong>Output Format (JSON)</strong>:</a></h3>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "&lt;Option 1&gt;", "correct": true_or_false},
+      {"text": "&lt;Option 2&gt;", "correct": true_or_false},
+      ...
+    ],
+    "explanation": "&lt;Detailed explanation for the correct answer&gt;",
+    "documentation_links": [
+      {"url": "&lt;Documentation URL 1&gt;", "description": "&lt;Description 1&gt;"},
+      {"url": "&lt;Documentation URL 2&gt;", "description": "&lt;Description 2&gt;"},
+      ...
+    ]
+  }
+}
+</code></pre>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><p><strong>Input Format (JSON)</strong>:</p>
+<pre><code class="language-json">{
+  "question": "&lt;Generated question&gt;",
+  "rules": {
+    "topic": "&lt;specific_topic_or_null&gt;",
+    "programming_language": "&lt;language_or_platform_or_null&gt;",
+    "difficulty": "&lt;difficulty_level&gt;",
+    "type": "&lt;question_type&gt;",
+    "purpose": "&lt;purpose&gt;",
+    "background": "&lt;context&gt;"
+  },
+  "answers": {
+    "options": [
+      {"text": "&lt;Option 1&gt;", "correct": true_or_false},
+      {"text": "&lt;Option 2&gt;", "correct": true_or_false},
+      ...
+    ],
+    "explanation": "&lt;Detailed explanation for the correct answer&gt;",
+    "documentation_links": [
+      {"url": "&lt;Documentation URL 1&gt;", "description": "&lt;Description 1&gt;"},
+      {"url": "&lt;Documentation URL 2&gt;", "description": "&lt;Description 2&gt;"},
+      ...
+    ]
+  }
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><p><strong>Output Format (JSON)</strong>:</p>
+<pre><code class="language-json">{
+  "validation": &lt;true_or_false&gt;,
+  "feedback": "&lt;feedback_if_any&gt;"
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="examples"><a class="header" href="#examples"><strong>Examples</strong></a></h3>
+<h3 id="example-1-beginner-conceptual-python-data-types"><a class="header" href="#example-1-beginner-conceptual-python-data-types">Example 1: Beginner, Conceptual, Python Data Types</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "beginner",
+    "background": "No prior programming experience.",
+    "programming_language": "Python",
+    "topic": "Data Types",
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "conceptual"
+  },
+  "previous_questions": [
+    "What is the output of print(2 + 2)?",
+    "Which of these is a valid Python variable name?"
+  ]
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Audience &amp; Background: Beginner with no experience → stick to very basic concepts.</li>
+<li>Programming Language: Python → use Pythonic terminology.</li>
+<li>Topic: Data Types → introduce Python data types, a fundamental concept.</li>
+<li>Difficulty: Easy → simple recall or recognition, no tricky aspects.</li>
+<li>Purpose: Conceptual → testing understanding of what data types exist in Python.</li>
+<li>Novelty: Previously tested arithmetic and variable naming; now test recognition of a specific data type form.</li>
+</ul>
+<p><strong>Output:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which of the following represents a string data type in Python?",
+  "type": "multiple_choice"
+}
+</code></pre>
+<p>This question shifts focus from arithmetic and variable names to identifying a data type (a string), encouraging learning and variety.</p>
+<hr />
+<h3 id="example-2-intermediate-problem-solving-python-loops"><a class="header" href="#example-2-intermediate-problem-solving-python-loops">Example 2: Intermediate, Problem Solving, Python Loops</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "intermediate",
+    "background": "Familiar with Python basics.",
+    "programming_language": "Python",
+    "topic": "Loops",
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "problem_solving"
+  },
+  "previous_questions": [
+    "What does the following code print? for i in range(3): print(i * 2)"
+  ]
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Audience &amp; Background: Intermediate with Python basics → can handle loops and simple conditions.</li>
+<li>Topic: Loops, and the previous question already tested a basic loop’s arithmetic output.</li>
+<li>Difficulty: Medium → apply known concepts straightforwardly, no hidden complexity.</li>
+<li>Purpose: Problem Solving → determine output by reading and understanding code.</li>
+<li>Novelty: Instead of just arithmetic in a loop, introduce a condition to encourage a slightly different scenario.</li>
+</ul>
+<p><strong>Output:</strong></p>
+<pre><code class="language-json">{
+  "question": "What will this code print?\n\nnumbers = [2, 4, 6, 8]\nfor n in numbers:\n    if n % 4 == 0:\n        print(n)",
+  "type": "multiple_choice"
+}
+</code></pre>
+<p>This code tests the learner’s ability to understand loops with a simple condition (modulus check). It’s still straightforward but more involved than a pure arithmetic loop.</p>
+<hr />
+<h3 id="example-3-advanced-implementation-aws-load-balancing"><a class="header" href="#example-3-advanced-implementation-aws-load-balancing">Example 3: Advanced, Implementation, AWS Load Balancing</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "advanced",
+    "background": "Experienced with AWS services.",
+    "programming_language": "AWS",
+    "topic": "Load Balancing",
+    "difficulty": "hard",
+    "type": "multiple_choice",
+    "purpose": "implementation"
+  },
+  "previous_questions": [
+    "Which AWS service stores files as objects in a bucket?",
+    "What does print(sum([1, 2, 3])) output in Python?"
+  ]
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Audience &amp; Background: Advanced and AWS-experienced → can assume familiarity with AWS services.</li>
+<li>Topic: Load Balancing → a more complex AWS concept than basic storage.</li>
+<li>Difficulty: Hard → involves understanding a real-world scenario: routing requests at scale.</li>
+<li>Purpose: Implementation → practical usage of AWS load balancing solutions.</li>
+<li>Novelty: Previously asked about basic AWS storage (S3) and a simple Python sum. Now we introduce load balancing, requiring knowledge of AWS’s application-level routing.</li>
+</ul>
+<p><strong>Output:</strong></p>
+<pre><code class="language-json">{
+  "question": "You have a microservices application running on multiple EC2 instances. Which AWS service would you use to distribute incoming HTTP requests based on URL paths?",
+  "type": "multiple_choice"
+}
+</code></pre>
+<p>This question targets Application Load Balancing—a more advanced and scenario-based concept, encouraging practical understanding.</p>
+<hr />
+<h3 id="example-4-intermediate-conceptual-java-syntax"><a class="header" href="#example-4-intermediate-conceptual-java-syntax">Example 4: Intermediate, Conceptual, Java Syntax</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "intermediate",
+    "background": "Understands basic Java programming.",
+    "programming_language": "Java",
+    "topic": "Syntax",
+    "difficulty": "medium",
+    "type": "true_false",
+    "purpose": "conceptual"
+  },
+  "previous_questions": [
+    "Which keyword defines a function in Python?",
+    "True or False: print(2+2) in Python returns 4?"
+  ]
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Audience &amp; Background: Intermediate and familiar with Java basics.</li>
+<li>Topic: Java Syntax → test a well-known rule in Java.</li>
+<li>Difficulty: Medium → straightforward conceptual understanding.</li>
+<li>Purpose: Conceptual → no code execution needed, just a language rule check.</li>
+<li>Novelty: Switches language from Python to Java and tests a different concept entirely (Java’s class-file naming rule), ensuring new learning.</li>
+</ul>
+<p><strong>Output:</strong></p>
+<pre><code class="language-json">{
+  "question": "True or False: In Java, a public class must be defined in a file sharing its exact name.",
+  "type": "true_false"
+}
+</code></pre>
+<p>This question tests a key Java convention, distinct from previous Python-based questions.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="examples-1"><a class="header" href="#examples-1">Examples</a></h1>
+<h3 id="example-1-valid-question-aligned-with-parameters"><a class="header" href="#example-1-valid-question-aligned-with-parameters">Example 1: Valid Question Aligned with Parameters</a></h3>
+<p><strong>Scenario:</strong></p>
+<ul>
+<li>Audience: beginner, background: "No prior programming experience."</li>
+<li>Programming_language: "Python", Topic: "Data Types"</li>
+<li>Difficulty: easy, Type: multiple_choice, Purpose: conceptual</li>
+<li>Previous questions: tested arithmetic output and variable naming only.</li>
+</ul>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "beginner",
+    "background": "No prior programming experience.",
+    "programming_language": "Python",
+    "topic": "Data Types",
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "conceptual"
+  },
+  "question": "Which of the following represents a string in Python?",
+  "previous_questions": [
+    "What is the output of print(2 + 2)?",
+    "Which of these is a valid Python variable name?"
+  ]
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": true,
+  "feedback": null
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The question is easy and conceptual (just identifying a string).</li>
+<li>It’s relevant to Python data types and not previously asked.</li>
+<li>The format is multiple_choice and no answers are provided.</li>
+</ul>
+<hr />
+<h3 id="example-2-question-not-relevant-to-topic"><a class="header" href="#example-2-question-not-relevant-to-topic">Example 2: Question Not Relevant to Topic</a></h3>
+<p><strong>Scenario:</strong></p>
+<ul>
+<li>Audience: intermediate, background: "Familiar with Python basics."</li>
+<li>Programming_language: "Python", Topic: "Loops"</li>
+<li>Difficulty: medium, Type: multiple_choice, Purpose: problem_solving</li>
+<li>Previous question tested a simple arithmetic loop.</li>
+</ul>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "intermediate",
+    "background": "Familiar with Python basics.",
+    "programming_language": "Python",
+    "topic": "Loops",
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "problem_solving"
+  },
+  "question": "Which of the following data types is immutable in Python?",
+  "previous_questions": [
+    "What does the following code print?\nfor i in range(3): print(i * 2)"
+  ]
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The question is not aligned with the specified topic 'Loops'. It should involve iteration or looping constructs in Python."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The parameters require a problem-solving question about loops.</li>
+<li>The provided question tests knowledge of immutable data types instead of loops, failing the relevance requirement.</li>
+</ul>
+<hr />
+<h3 id="example-3-question-too-trivial-for-the-difficulty"><a class="header" href="#example-3-question-too-trivial-for-the-difficulty">Example 3: Question Too Trivial for the Difficulty</a></h3>
+<p><strong>Scenario:</strong></p>
+<ul>
+<li>Audience: intermediate, background: "Has written simple Python functions."</li>
+<li>Programming_language: "Python", Topic: "Functions"</li>
+<li>Difficulty: medium, Type: multiple_choice, Purpose: problem_solving</li>
+<li>The question should require applying a known concept straightforwardly, not just recalling a fact.</li>
+</ul>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "intermediate",
+    "background": "Has written simple Python functions.",
+    "programming_language": "Python",
+    "topic": "Functions",
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "problem_solving"
+  },
+  "question": "Which keyword is used to define a function in Python?",
+  "previous_questions": [
+    "True or False: print(2+2) returns 4?"
+  ]
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The question is too simple for a 'medium' difficulty problem_solving scenario. It only asks for a keyword recall instead of requiring the learner to apply or interpret functions in context."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>At medium difficulty and with a problem_solving purpose, the question should not just ask which keyword defines a function.</li>
+<li>It should require interpreting or applying a function concept, e.g., understanding what a function returns or analyzing a function’s behavior.</li>
+</ul>
+<hr />
+<h3 id="example-4-question-gives-away-an-answer-or-explanation"><a class="header" href="#example-4-question-gives-away-an-answer-or-explanation">Example 4: Question Gives Away an Answer or Explanation</a></h3>
+<p><strong>Scenario:</strong></p>
+<ul>
+<li>Audience: advanced, background: "Experience with AWS"</li>
+<li>Programming_language: "AWS", Topic: "S3"</li>
+<li>Difficulty: hard, Type: multiple_choice, Purpose: implementation</li>
+<li>The question should test implementation-related S3 concepts.</li>
+</ul>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "advanced",
+    "background": "Experience with AWS",
+    "programming_language": "AWS",
+    "topic": "S3",
+    "difficulty": "hard",
+    "type": "multiple_choice",
+    "purpose": "implementation"
+  },
+  "question": "Which of the following AWS services can store objects in buckets? (Answer: S3)",
+  "previous_questions": [
+    "Which AWS service is used to run containers at scale?"
+  ]
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The question includes an answer hint '(Answer: S3)' which violates the rule of providing no answers or explanations."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The question includes an answer hint directly in the prompt, breaking the no-answer rule.</li>
+</ul>
+<hr />
+<h3 id="example-5-question-too-similar-to-a-previous-one"><a class="header" href="#example-5-question-too-similar-to-a-previous-one">Example 5: Question Too Similar to a Previous One</a></h3>
+<p><strong>Scenario:</strong></p>
+<ul>
+<li>The new question must introduce a novel element not previously tested.</li>
+</ul>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "beginner",
+    "background": "No prior programming experience.",
+    "programming_language": "Python",
+    "topic": "Data Types",
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "conceptual"
+  },
+  "question": "Which symbol indicates a comment in Python?",
+  "previous_questions": [
+    "What symbol is used for comments in Python?",
+    "Which of these is a valid Python variable name?"
+  ]
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The new question closely resembles a previous one testing the same concept (comments in Python) without introducing a new element."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The previous questions already tested the exact same concept (comment symbol). This new question is essentially a rephrased duplicate.</li>
+</ul>
+<p>Below are three additional examples, starting from Example 6, that address the suggested edge cases:</p>
+<hr />
+<h3 id="example-6-null-programming_language-but-a-specific-topic"><a class="header" href="#example-6-null-programming_language-but-a-specific-topic">Example 6: Null <code>programming_language</code> but a Specific <code>topic</code></a></h3>
+<p><strong>Scenario:</strong></p>
+<ul>
+<li><code>programming_language = null</code></li>
+<li><code>topic = "Data Structures"</code></li>
+<li>The question should remain language-agnostic and still be relevant to Data Structures.</li>
+<li>Parameters suggest an intermediate difficulty conceptual question. The question should involve data structures without referencing language-specific syntax.</li>
+</ul>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "intermediate",
+    "background": "Understands basic programming concepts.",
+    "programming_language": null,
+    "topic": "Data Structures",
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "conceptual"
+  },
+  "question": "Which data structure uses a Last-In-First-Out (LIFO) principle?",
+  "previous_questions": []
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": true,
+  "feedback": null
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The question is relevant to the <code>topic</code> (Data Structures) and remains language-agnostic as <code>programming_language</code> is null.</li>
+<li>For medium difficulty conceptual, identifying a LIFO data structure (like a stack) is straightforward yet not trivial.</li>
+<li>No issues with novelty or format.</li>
+</ul>
+<hr />
+<h3 id="example-7-hard-difficulty-question-not-complex-enough"><a class="header" href="#example-7-hard-difficulty-question-not-complex-enough">Example 7: Hard Difficulty Question Not Complex Enough</a></h3>
+<p><strong>Scenario:</strong></p>
+<ul>
+<li><code>programming_language = "Python"</code>, <code>topic = "Error Handling"</code></li>
+<li><code>difficulty = "hard"</code>, <code>type = "multiple_choice"</code>, <code>purpose = "implementation"</code></li>
+<li>The question should test advanced problem-solving or less common features. A trivial recall question fails this requirement.</li>
+</ul>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "advanced",
+    "background": "Comfortable with Python exceptions and debugging.",
+    "programming_language": "Python",
+    "topic": "Error Handling",
+    "difficulty": "hard",
+    "type": "multiple_choice",
+    "purpose": "implementation"
+  },
+  "question": "Which keyword is used to handle exceptions in Python?",
+  "previous_questions": []
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "This question is too simple for a hard difficulty implementation scenario. It only tests basic keyword recall rather than demanding advanced problem-solving or nuanced error handling logic."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Hard difficulty and implementation purpose imply a more complex scenario (e.g., handling specific exceptions or debugging tricky code).</li>
+<li>Asking which keyword handles exceptions is too trivial.</li>
+</ul>
+<hr />
+<h3 id="example-8-multiple-violations-in-one-question"><a class="header" href="#example-8-multiple-violations-in-one-question">Example 8: Multiple Violations in One Question</a></h3>
+<p><strong>Scenario:</strong></p>
+<ul>
+<li>Parameters suggest a medium difficulty problem-solving question about loops in Python.</li>
+<li>The question is irrelevant to loops AND provides an answer hint AND is too trivial.</li>
+</ul>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "rules": {
+    "audience": "intermediate",
+    "background": "Familiar with Python basics.",
+    "programming_language": "Python",
+    "topic": "Loops",
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "problem_solving"
+  },
+  "question": "Which symbol is used for comments in Python? (Answer: #)",
+  "previous_questions": [
+    "What does this loop print?\nfor i in range(3): print(i * 2)"
+  ]
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "Multiple issues detected: The question is not relevant to the 'Loops' topic, it includes an answer hint '(Answer: #)', and it does not meet the medium difficulty or problem_solving requirements."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The topic is loops, but the question is about comment syntax.</li>
+<li>It provides a direct answer hint, violating the no-answers rule.</li>
+<li>It’s too simple and not a problem-solving scenario.</li>
+<li>The feedback mentions all critical violations to make corrections easier.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="examples-2"><a class="header" href="#examples-2">Examples</a></h2>
+<h3 id="example-1-classical-case-beginner-conceptual-python"><a class="header" href="#example-1-classical-case-beginner-conceptual-python">Example 1: Classical Case (Beginner, Conceptual, Python)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which of the following symbols is used for comments in Python?",
+  "rules": {
+    "topic": "Python",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "No prior programming experience."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "#", "correct": true},
+      {"text": "//", "correct": false},
+      {"text": "/*", "correct": false},
+      {"text": "--", "correct": false}
+    ],
+    "explanation": "In Python, comments start with the '#' symbol. Other symbols like '//' or '/*' are used for comments in different languages.",
+    "documentation_links": [
+      {
+        "url": "https://docs.python.org/3/tutorial/introduction.html#comments",
+        "description": "Python Official Documentation: Comments"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Straightforward question, simple conceptual difficulty, and a suitable link is provided.</li>
+</ul>
+<hr />
+<h3 id="example-2-classical-case-intermediate-problem-solving-python-loops"><a class="header" href="#example-2-classical-case-intermediate-problem-solving-python-loops">Example 2: Classical Case (Intermediate, Problem Solving, Python Loops)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "What does the following code print?\n\nfor i in range(3): print(i * 2)",
+  "rules": {
+    "topic": "Loops",
+    "programming_language": "Python",
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "problem_solving",
+    "background": "Familiar with Python basics."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "0, 2, 4", "correct": true},
+      {"text": "0, 1, 2", "correct": false},
+      {"text": "1, 2, 3", "correct": false},
+      {"text": "2, 4, 6", "correct": false}
+    ],
+    "explanation": "The range(3) function generates the numbers 0, 1, and 2. Multiplying each by 2 results in 0, 2, and 4 being printed.",
+    "documentation_links": [
+      {
+        "url": "https://docs.python.org/3/library/functions.html#func-range",
+        "description": "Python Documentation: range()"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>A problem-solving question at medium difficulty. The explanation walks through the code logic. Only one link is given since range() is directly relevant.</li>
+</ul>
+<hr />
+<h3 id="example-3-classical-case-advanced-implementation-aws"><a class="header" href="#example-3-classical-case-advanced-implementation-aws">Example 3: Classical Case (Advanced, Implementation, AWS)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which AWS service can you use to store files as objects in buckets?",
+  "rules": {
+    "topic": "S3",
+    "programming_language": "AWS",
+    "difficulty": "hard",
+    "type": "multiple_choice",
+    "purpose": "implementation",
+    "background": "Experienced with AWS services."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "Amazon S3", "correct": true},
+      {"text": "Amazon EC2", "correct": false},
+      {"text": "Amazon RDS", "correct": false},
+      {"text": "AWS Lambda", "correct": false}
+    ],
+    "explanation": "Amazon S3 (Simple Storage Service) is used to store and retrieve objects in buckets. EC2 is for virtual servers, RDS is for relational databases, and Lambda is for serverless functions.",
+    "documentation_links": [
+      {
+        "url": "https://docs.aws.amazon.com/s3/",
+        "description": "AWS Official Documentation: Amazon S3"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Hard difficulty with implementation focus can still include a direct concept check if the question itself was deemed valid. The explanation differentiates S3 from other AWS services.</li>
+</ul>
+<hr />
+<h3 id="example-4-edgy-case-null-topic-python-specified"><a class="header" href="#example-4-edgy-case-null-topic-python-specified">Example 4: Edgy Case (Null Topic, Python Specified)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "True or False: In Python, lists are defined using square brackets.",
+  "rules": {
+    "topic": null,
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "true_false",
+    "purpose": "conceptual",
+    "background": "No prior programming experience."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "True", "correct": true},
+      {"text": "False", "correct": false}
+    ],
+    "explanation": "Lists in Python are indeed created using square brackets, such as [1, 2, 3].",
+    "documentation_links": [
+      {
+        "url": "https://docs.python.org/3/tutorial/introduction.html#lists",
+        "description": "Python Official Documentation: Lists"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>No topic is specified, but <code>programming_language = "Python"</code> means we pick a fundamental Python concept. The question is simple and suitable for a beginner.</li>
+</ul>
+<hr />
+<h3 id="example-5-edgy-case-null-language-and-null-topic-medium-difficulty"><a class="header" href="#example-5-edgy-case-null-language-and-null-topic-medium-difficulty">Example 5: Edgy Case (Null Language and Null Topic, Medium Difficulty)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which data structure ensures elements are removed in the same order they were added?",
+  "rules": {
+    "topic": null,
+    "programming_language": null,
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "Understands basic programming concepts."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "A queue", "correct": true},
+      {"text": "A stack", "correct": false},
+      {"text": "A binary tree", "correct": false},
+      {"text": "A hash set", "correct": false}
+    ],
+    "explanation": "A queue is a First-In-First-Out (FIFO) data structure, meaning elements are removed in the order they are added.",
+    "documentation_links": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Queue_(abstract_data_type)",
+        "description": "General Documentation: Queue Data Structure"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Both topic and programming_language are null, so we choose a language-agnostic question aligned with medium difficulty and conceptual purpose. A general data structure question fits.</li>
+</ul>
+<p><strong>Note on Link:</strong> Since no direct official programming language documentation applies here (language is null and concept is generic), an authoritative external reference (like a Wikipedia entry) could be acceptable. If strict official docs are required, we might omit links.</p>
+<hr />
+<h3 id="example-6-edgy-case-hard-difficulty-implementation-python-more-complex-options"><a class="header" href="#example-6-edgy-case-hard-difficulty-implementation-python-more-complex-options">Example 6: Edgy Case (Hard Difficulty, Implementation, Python, More Complex Options)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which code snippet correctly handles a ZeroDivisionError in Python when dividing two user inputs?",
+  "rules": {
+    "topic": "Error Handling",
+    "programming_language": "Python",
+    "difficulty": "hard",
+    "type": "multiple_choice",
+    "purpose": "implementation",
+    "background": "Familiar with Python exceptions."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {
+        "text": "try:\n    a = int(input())\n    b = int(input())\n    print(a/b)\nexcept ZeroDivisionError:\n    print('Cannot divide by zero')",
+        "correct": true
+      },
+      {
+        "text": "try:\n    a = int(input())\n    b = int(input())\n    print(a*b)\nexcept ZeroDivisionError:\n    print('Error')",
+        "correct": false
+      },
+      {
+        "text": "a = int(input())\nb = int(input())\nprint(a/b) # No try-except",
+        "correct": false
+      },
+      {
+        "text": "try:\n    a = input()\n    b = input()\n    print(a/b)\nexcept ValueError:\n    print('Bad input')",
+        "correct": false
+      }
+    ],
+    "explanation": "The correct snippet uses try/except to catch ZeroDivisionError specifically and handle it by printing a message. Other options either handle the wrong error, perform a different operation, or lack error handling altogether.",
+    "documentation_links": [
+      {
+        "url": "https://docs.python.org/3/tutorial/errors.html#handling-exceptions",
+        "description": "Python Official Documentation: Handling Exceptions"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>A hard difficulty implementation scenario. The correct snippet specifically handles <code>ZeroDivisionError</code>.Below are additional examples, continuing from the previous numbering (starting from Example 7), that illustrate scenarios where no relevant official documentation links are easily identifiable or directly helpful. In these cases, the model should omit links entirely.</li>
+</ul>
+<hr />
+<h3 id="example-7-no-relevant-documentation-language-agnostic-general-concept"><a class="header" href="#example-7-no-relevant-documentation-language-agnostic-general-concept">Example 7: No Relevant Documentation (Language-Agnostic, General Concept)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "True or False: In a binary search tree, every node in the left subtree has a value less than the node’s own value.",
+  "rules": {
+    "topic": "Data Structures",
+    "programming_language": null,
+    "difficulty": "medium",
+    "type": "true_false",
+    "purpose": "conceptual",
+    "background": "Understands basic programming concepts."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "True", "correct": true},
+      {"text": "False", "correct": false}
+    ],
+    "explanation": "A binary search tree is defined such that every node’s left subtree contains values strictly less than the node’s value.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>This is a general data structure concept. While documentation might exist online, the instructions allow omitting links if no straightforward official source is evident. The model could rely on authoritative references like textbooks or general knowledge, but since we don’t have a direct official link (e.g., an official language/library doc) and the topic is language-agnostic, it’s acceptable to omit links.</li>
+</ul>
+<hr />
+<h3 id="example-8-no-relevant-documentation-niche-concept-or-scenario"><a class="header" href="#example-8-no-relevant-documentation-niche-concept-or-scenario">Example 8: No Relevant Documentation (Niche Concept or Scenario)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which of the following describes a scenario where a loop continues until a certain condition changes, rather than for a fixed number of iterations?",
+  "rules": {
+    "topic": "Loops",
+    "programming_language": null,
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "Familiar with basic programming constructs."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "A while loop", "correct": true},
+      {"text": "A for loop iterating over a fixed range", "correct": false},
+      {"text": "A do-while loop running exactly five times", "correct": false},
+      {"text": "A for loop with a break statement at the end", "correct": false}
+    ],
+    "explanation": "A while loop continues as long as its condition remains true, not for a predetermined number of iterations.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>While links to language documentation might exist for while loops in specific languages, this question is language-agnostic. There is no single authoritative official doc for the generic concept of a while loop. Thus, no links are included.</li>
+</ul>
+<hr />
+<h3 id="example-9-no-relevant-documentation-custom-scenario"><a class="header" href="#example-9-no-relevant-documentation-custom-scenario">Example 9: No Relevant Documentation (Custom Scenario)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which approach would you use to ensure that each request to your server is processed in sequence, one after another?",
+  "rules": {
+    "topic": null,
+    "programming_language": null,
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "problem_solving",
+    "background": "Understands basic concurrency concepts."
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "answers": {
+    "options": [
+      {"text": "Use a single-threaded event loop", "correct": true},
+      {"text": "Start a new thread for each request", "correct": false},
+      {"text": "Use a load balancer to distribute requests", "correct": false},
+      {"text": "Run requests in parallel using multiple processes", "correct": false}
+    ],
+    "explanation": "A single-threaded event loop processes tasks one at a time, ensuring sequential handling of requests. Other options involve parallelism or concurrency.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>This is a conceptual concurrency scenario not tied to a specific language or official source. While some languages or frameworks have documentation on event loops, there isn’t a single official doc that straightforwardly covers this general concept in a language-agnostic manner. Therefore, no links are included.</li>
+</ul>
+<hr />
+<div style="break-before: page; page-break-before: always;"></div><p>Below are several examples demonstrating how the answer_validator should behave given various inputs. Each example shows the validator’s input (the question, rules, and generated answers) and the expected output (validation result and feedback).</p>
+<p><strong>Note:</strong> These examples assume that the validator already has access to the global rules and definitions the question_maker and answer_maker followed. The validator’s job is strictly to verify the compliance of the provided answers.</p>
+<hr />
+<h3 id="example-1-valid-multiple-choice-question"><a class="header" href="#example-1-valid-multiple-choice-question">Example 1: Valid Multiple Choice Question</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which symbol is used for comments in Python?",
+  "rules": {
+    "topic": "Python",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "No prior programming experience."
+  },
+  "answers": {
+    "options": [
+      {"text": "#", "correct": true},
+      {"text": "//", "correct": false},
+      {"text": "/*", "correct": false},
+      {"text": "--", "correct": false}
+    ],
+    "explanation": "In Python, the '#' symbol is used to start a comment.",
+    "documentation_links": [
+      {
+        "url": "https://docs.python.org/3/tutorial/introduction.html#comments",
+        "description": "Python Official Documentation: Comments"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": true,
+  "feedback": null
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Exactly one correct answer.</li>
+<li>The explanation aligns with the correct answer.</li>
+<li>The documentation link is relevant.</li>
+</ul>
+<hr />
+<h3 id="example-2-multiple-correct-answers-in-multiple-choice"><a class="header" href="#example-2-multiple-correct-answers-in-multiple-choice">Example 2: Multiple Correct Answers in Multiple Choice</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which data structure ensures FIFO ordering?",
+  "rules": {
+    "topic": "Data Structures",
+    "programming_language": null,
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "Understands basic programming concepts."
+  },
+  "answers": {
+    "options": [
+      {"text": "A queue", "correct": true},
+      {"text": "A stack", "correct": true},
+      {"text": "A linked list", "correct": false},
+      {"text": "A binary tree", "correct": false}
+    ],
+    "explanation": "A queue ensures FIFO ordering, while a stack is LIFO.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "Multiple options are marked as correct in a multiple-choice question. Only one correct answer is allowed."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Two correct answers (<code>A queue</code> and <code>A stack</code>) violates the single-correct-answer rule for multiple choice.</li>
+</ul>
+<hr />
+<h3 id="example-3-incorrect-explanation"><a class="header" href="#example-3-incorrect-explanation">Example 3: Incorrect Explanation</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "True or False: In Python, lists are defined using square brackets.",
+  "rules": {
+    "topic": "Python",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "true_false",
+    "purpose": "conceptual",
+    "background": "No prior programming experience."
+  },
+  "answers": {
+    "options": [
+      {"text": "True", "correct": true},
+      {"text": "False", "correct": false}
+    ],
+    "explanation": "Lists in Python are defined using curly braces {}.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The explanation does not justify the correct answer. It claims lists use curly braces, but the correct answer is True for square brackets."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The correct answer is True (square brackets), but the explanation contradicts this, making it invalid.</li>
+</ul>
+<hr />
+<h3 id="example-4-irrelevant-documentation-link"><a class="header" href="#example-4-irrelevant-documentation-link">Example 4: Irrelevant Documentation Link</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which AWS service is used to store objects in buckets?",
+  "rules": {
+    "topic": "S3",
+    "programming_language": "AWS",
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "conceptual",
+    "background": "Knows basic AWS services."
+  },
+  "answers": {
+    "options": [
+      {"text": "Amazon S3", "correct": true},
+      {"text": "Amazon EC2", "correct": false},
+      {"text": "Amazon RDS", "correct": false},
+      {"text": "AWS Lambda", "correct": false}
+    ],
+    "explanation": "Amazon S3 stores data as objects in buckets.",
+    "documentation_links": [
+      {
+        "url": "https://docs.aws.amazon.com/ec2/",
+        "description": "AWS EC2 Documentation"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The documentation link is not relevant. It references EC2, which is unrelated to S3. Provide an S3-related documentation link or omit it."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The correct answer and explanation are fine, but the documentation link references EC2 instead of S3, violating the relevance requirement.</li>
+</ul>
+<hr />
+<h3 id="example-5-truefalse-with-no-correct-answer-marked"><a class="header" href="#example-5-truefalse-with-no-correct-answer-marked">Example 5: True/False With No Correct Answer Marked</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "True or False: A function in Python must always return a value explicitly.",
+  "rules": {
+    "topic": "Functions",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "true_false",
+    "purpose": "conceptual",
+    "background": "Familiar with Python basics."
+  },
+  "answers": {
+    "options": [
+      {"text": "True", "correct": false},
+      {"text": "False", "correct": false}
+    ],
+    "explanation": "A Python function without an explicit return defaults to returning None.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "No correct option is marked in a true/false question. Exactly one of 'True' or 'False' must be correct."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>A true/false question must have exactly one correct answer. None are correct here.</li>
+</ul>
+<hr />
+<h3 id="example-6-multiple-issues-wrong-answer-and-poor-explanation"><a class="header" href="#example-6-multiple-issues-wrong-answer-and-poor-explanation">Example 6: Multiple Issues (Wrong Answer and Poor Explanation)</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which of these code snippets prints 'Hello, World' in Python?",
+  "rules": {
+    "topic": "Python",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "multiple_choice",
+    "purpose": "implementation",
+    "background": "No prior programming experience."
+  },
+  "answers": {
+    "options": [
+      {"text": "print('Goodbye, World')", "correct": true},
+      {"text": "echo 'Hello, World'", "correct": false},
+      {"text": "console.log('Hello, World')", "correct": false},
+      {"text": "print('Hello, World')", "correct": false}
+    ],
+    "explanation": "This code prints 'Goodbye, World' which is close enough.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The correct answer is incorrect (it prints 'Goodbye, World' not 'Hello, World'). The explanation does not justify the correct answer and is inconsistent with the question."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The chosen correct answer doesn’t match the question’s requirement.</li>
+<li>The explanation acknowledges it’s not printing ‘Hello, World’ but claims it’s “close enough,” which is not acceptable.</li>
+</ul>
+<hr />
+<h3 id="example-7-correct-answer-marked-but-actually-incorrect"><a class="header" href="#example-7-correct-answer-marked-but-actually-incorrect">Example 7: Correct Answer Marked but Actually Incorrect</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which of the following code snippets will print the numbers 0 to 2 in Python?",
+  "rules": {
+    "topic": "Loops",
+    "programming_language": "Python",
+    "difficulty": "medium",
+    "type": "multiple_choice",
+    "purpose": "problem_solving",
+    "background": "Familiar with Python basics."
+  },
+  "answers": {
+    "options": [
+      {
+        "text": "for i in range(3):\n    print(i)",
+        "correct": false
+      },
+      {
+        "text": "for i in [0, 1, 2]:\n    print(i)",
+        "correct": false
+      },
+      {
+        "text": "for i in range(5, 8):\n    print(i)",
+        "correct": true
+      },
+      {
+        "text": "while i &lt; 3:\n    print(i)",
+        "correct": false
+      }
+    ],
+    "explanation": "The chosen snippet (range(5, 8)) prints 5, 6, 7 which is basically three numbers, so it’s fine.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The selected correct answer does not print 0 to 2; it prints 5, 6, 7. The explanation fails to justify why this would be acceptable."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The correct answer option is incorrect. It prints 5, 6, 7 instead of 0, 1, 2.</li>
+<li>The explanation tries to justify it as “three numbers,” but that does not match the question’s requirement.</li>
+</ul>
+<hr />
+<h3 id="example-8-incorrect-truefalse-selection"><a class="header" href="#example-8-incorrect-truefalse-selection">Example 8: Incorrect True/False Selection</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "True or False: In Python, '==' compares the values of two objects.",
+  "rules": {
+    "topic": "Python",
+    "programming_language": "Python",
+    "difficulty": "easy",
+    "type": "true_false",
+    "purpose": "conceptual",
+    "background": "Familiar with basic Python operators."
+  },
+  "answers": {
+    "options": [
+      {"text": "True", "correct": false},
+      {"text": "False", "correct": true}
+    ],
+    "explanation": "The '==' operator compares references, not values.",
+    "documentation_links": []
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The selected correct answer is wrong. The '==' operator in Python does compare values, not just references. The explanation is also incorrect."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The correct answer is marked as False, but the statement is actually True in Python.</li>
+<li>The explanation is also misleading, reinforcing the incorrect conclusion.</li>
+</ul>
+<hr />
+<h3 id="example-9-correct-answer-is-incorrect-and-documentation-link-is-off-topic"><a class="header" href="#example-9-correct-answer-is-incorrect-and-documentation-link-is-off-topic">Example 9: Correct Answer is Incorrect and Documentation Link is Off-Topic</a></h3>
+<p><strong>Input:</strong></p>
+<pre><code class="language-json">{
+  "question": "Which AWS service automatically distributes incoming traffic across multiple targets?",
+  "rules": {
+    "topic": "Load Balancing",
+    "programming_language": "AWS",
+    "difficulty": "hard",
+    "type": "multiple_choice",
+    "purpose": "implementation",
+    "background": "Experienced with AWS services."
+  },
+  "answers": {
+    "options": [
+      {"text": "Amazon EC2", "correct": false},
+      {"text": "AWS Lambda", "correct": false},
+      {"text": "Amazon S3", "correct": true},
+      {"text": "Elastic Load Balancing (ELB)", "correct": false}
+    ],
+    "explanation": "Amazon S3 distributes objects but can also distribute incoming traffic.",
+    "documentation_links": [
+      {
+        "url": "https://docs.aws.amazon.com/s3/",
+        "description": "AWS Official Documentation: Amazon S3"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code class="language-json">{
+  "validation": false,
+  "feedback": "The chosen correct answer is incorrect. Amazon S3 does not distribute incoming traffic across multiple targets, Elastic Load Balancing does. The explanation and documentation link are also misaligned with the required service."
+}
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Elastic Load Balancing is the correct AWS service, not Amazon S3.</li>
+<li>The explanation and documentation links are incorrectly tied to S3, which is irrelevant for load balancing.</li>
+</ul>
+<hr />
+<div style="break-before: page; page-break-before: always;"></div><p><strong>Prompt:</strong></p>
+<blockquote>
+<p>You are a question generator specialized in creating unique, engaging, and clearly defined quiz questions for programming topics. Your role is to produce a <strong>single question</strong> that adheres strictly to the rules and definitions provided. The question must not include answers or explanations—only the question itself.</p>
+<p><strong>Follow these Rules</strong>: rules</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><p><strong>Prompt:</strong></p>
+<blockquote>
+<p>You are a validator for quiz questions in the domain of programming. Your task is to analyze the given question based on the provided rules and determine if it adheres to all specifications. If the question passes validation, return a success result. If the question fails, identify the specific issues and provide constructive feedback.</p>
+<p><strong>Validation Rules</strong>: rules</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h4 id="prompt"><a class="header" href="#prompt"><strong>Prompt:</strong></a></h4>
+<blockquote>
+<p>You are an answer generator for quiz questions. Given a question and its associated parameters, produce a set of answer choices and identify the correct one(s). The difficulty, explanation complexity, and contextual details should match the specified parameters, as defined in the global rules and parameter definitions you have access to. Refer to these definitions for handling <code>null</code> values, ensuring relevance to the topic and/or programming language, adhering to difficulty levels, and matching the audience’s background.</p>
+<h3 id="definitions"><a class="header" href="#definitions"><strong>Definitions</strong>:</a></h3>
+<h2 id="instructions"><a class="header" href="#instructions"><strong>Instructions</strong></a></h2>
+</blockquote>
+<h2 id="formats"><a class="header" href="#formats"><strong>Formats</strong></a></h2>
+<h2 id="examples-3"><a class="header" href="#examples-3"><strong>Examples</strong></a></h2>
+<div style="break-before: page; page-break-before: always;"></div><p><strong>Prompt:</strong>
+You are an answer validator for programming-related quiz answers. Your purpose is to verify that the provided answers align with the globally defined parameters, rules, and definitions. You must ensure:</p>
+<ul>
+<li>The correct answer(s) are indeed correct based on the given question and explanation.</li>
+<li>The question’s format is followed:
+<ul>
+<li><strong>Multiple Choice</strong>: Exactly one <code>correct: true</code> answer.</li>
+<li><strong>True/False</strong>: Exactly one correct option (“True” or “False”).</li>
+</ul>
+</li>
+<li>The explanation accurately justifies the correct answer(s).</li>
+<li>Any provided documentation links are relevant and accurately described.</li>
+</ul>
+<p><strong>Feedback Rules</strong>:</p>
+<ul>
+<li>If validation passes, return <code>validation: true</code> with <code>feedback: null</code>.</li>
+<li>If validation fails, return <code>validation: false</code> with <code>feedback</code> describing all identified issues and suggesting how to fix them.
+<ul>
+<li>Be specific: reference the parameter or element that failed (e.g., “Multiple answers marked as correct,” “Explanation does not align with the correct option,” “Documentation link irrelevant to the question”).</li>
+<li>Include actionable advice so the user knows what to change.</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
