@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="backend.html" class="active"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="backend/backend.html" class="active"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,7 +173,837 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="express--mongodb"><a class="header" href="#express--mongodb">Express + MongoDB</a></h1>
+                        <link rel="stylesheet" href="styles.css">
+<h1 id="mern-stack-app"><a class="header" href="#mern-stack-app">MERN Stack app</a></h1>
+<h2 id="environment-setup"><a class="header" href="#environment-setup">Environment setup</a></h2>
+<p>setup project through Docker [create a docker image with all dependancies and then run container]
+run a bind mount between your host and the container for the folder where your app will
+live</p>
+<p>run the container with the command :</p>
+<pre><code class="language-bash">docker run -it --name node-dev -p 5000:5000 --mount type=bind,src=path/to/project,target=/app your-image zsh
+</code></pre>
+<h2 id="basic-setup"><a class="header" href="#basic-setup">Basic setup</a></h2>
+<p>create two dirs : backend frontend
+npm init -y [You can optionally change project name in package.json]
+npm install express mongoose dotenv
+edit 'package.json' to add the <code>"type": "module",</code> variable</p>
+<h2 id="node-setup-backend"><a class="header" href="#node-setup-backend">Node setup (Backend)</a></h2>
+<h3 id="first-server-file"><a class="header" href="#first-server-file">First server file</a></h3>
+<p>Create <code>server.js</code> in the backend directory and paste the following code :</p>
+<pre><code class="language-js">import express from 'express';
+
+const app = express();
+
+app.listen(5000, () =&gt; {
+	console.log('Server started at http://localhost:5000');
+});
+</code></pre>
+<p>You can run the server script by typing <code>node backend/server.js</code> in the container
+terminal (from within the <code>/app</code> directory)</p>
+<p>However, there is an easier way to run this command : Go to
+<code>package.json</code> and in the <code>scripts</code> variable, add a <code>,</code> at the end of the <code>test</code>
+script and write on a new line : <code>"dev": "node backend/server.js"</code></p>
+<p>You can now run : <code>npm run dev</code> to run the <code>dev</code> script</p>
+<h3 id="nodemon-install"><a class="header" href="#nodemon-install">Nodemon install</a></h3>
+<p>To monitor the changes in the server we'll install nodemon with</p>
+<p><code>npm install -D nodemon</code></p>
+<p>This will add nodemon to our <code>devDependancies</code> (thanks to the <code>-D</code> option). These are the
+dependancies needed to develop the app.</p>
+<p>You can now update your script to <code>nodemon backend/server.js</code></p>
+<blockquote>
+<p>If the application is not restarting when a file changes, update your script to:
+<code>nodemon -L backend/server.js</code> (the <code>-L</code> option is to
+enable the <a href="https://github.com/remy/nodemon?tab=readme-ov-file#application-isnt-restarting">legacy-watch</a>)</p>
+</blockquote>
+<h3 id="first-route"><a class="header" href="#first-route">First route</a></h3>
+<p>Let's now add a route to visit the homepage :</p>
+<p>add this above your <code>app.listen</code> function :</p>
+<pre><code class="language-js">app.get("/", (req, res) =&gt; {
+	res.send("Server is ready");
+});
+</code></pre>
+<h3 id="testing-the-first-route"><a class="header" href="#testing-the-first-route">Testing the first route</a></h3>
+<p>You can test this route by running  either :</p>
+<ol>
+<li><code>curl localhost:5000</code> in your docker container</li>
+<li><code>curl localhost:5001</code> in your machine terminal</li>
+<li><code>visiting localhost:5001</code> in your favorite browser</li>
+</ol>
+<h2 id="mongodb-database-setup"><a class="header" href="#mongodb-database-setup">Mongodb Database Setup</a></h2>
+<p>As we aim to deploy our app in the simplest way possible, we'll setup our mongodb
+database taking advantage of the fact that Mongodb is an OpenSource database engine
+and use the Official <a href="https://hub.docker.com/_/mongo/">Mongodb Docker Image</a></p>
+<h3 id="env-file-creation"><a class="header" href="#env-file-creation"><code>.env</code> file creation</a></h3>
+<p>First, let's define a few variables in a <code>.env</code> file within our app directory.</p>
+<p>Paste the following in your <code>.env</code> file:</p>
+<pre><code class="language-bash">MONGO_INITDB_ROOT_USERNAME="root"
+MONGO_INITIDB_ROOT_PASSWORD="bonjour"
+</code></pre>
+<h3 id="docker-network-creation"><a class="header" href="#docker-network-creation">Docker Network creation</a></h3>
+<p>Now that we have two containers over the network, we need to make them communicate.</p>
+<blockquote>
+<p>:warning: From now on, you won't be able to run the project if the mongodb container
+isn't up <strong>before</strong> you start the node server</p>
+</blockquote>
+<p>First, let's create a network so our containers can exchange data. To do so, let's run
+the command :</p>
+<pre><code class="language-bash">docker network create mern-app-network
+</code></pre>
+<h3 id="attaching-the-server-container-to-the-network"><a class="header" href="#attaching-the-server-container-to-the-network">Attaching the server-container to the network</a></h3>
+<p>Now we are going to stop and remove our first container (we need to do so in order
+to recreate it)</p>
+<pre><code class="language-bash">docker stop node-dev &amp;&amp; docker rm node-dev
+</code></pre>
+<p>We can now recreate it and attach it to the newly created network (here we'll give it the
+same network alias as its name):</p>
+<pre><code class="language-bash">docker run -it --name node-dev --network mern-app-network --network-alias node-dev -p 5000:5000 --mount type=bind,src=path/to/project,target=/app your-image zsh
+</code></pre>
+<h3 id="instanciating-our-database-container"><a class="header" href="#instanciating-our-database-container">Instanciating our database container</a></h3>
+<p>Now that our environement is ready, let's create our database container and attach it to
+the network. To do so let's type in the following commands :</p>
+<pre><code class="language-bash">docker run -d --network mern-app-network --network-alias database --name database mongo:latest
+</code></pre>
+<blockquote>
+<p>:bulb: For now, we don't use our authentication configuration from the environment in
+order to get used to the database</p>
+</blockquote>
+<h3 id="testing-the-connection"><a class="header" href="#testing-the-connection">Testing the connection</a></h3>
+<p>To test the connection, let's run the following command :</p>
+<pre><code class="language-bash">docker run -it --network mern-app-network --rm mongo mongosh --host database test
+</code></pre>
+<p>It :</p>
+<ol>
+<li>Connects to the database running on the <code>database</code> host</li>
+<li>Creates the table <code>test</code></li>
+<li>Puts us into the table, ready to insert some data</li>
+</ol>
+<h3 id="connecting-to-the-database-with-mongoose"><a class="header" href="#connecting-to-the-database-with-mongoose">Connecting to the database with mongoose</a></h3>
+<p>Let's add a new variable in our <code>.env</code> file :</p>
+<pre><code class="language-bash">MONGO_URI="mongodb://database:27017/mern-stack-app"
+</code></pre>
+<p>The format of the connection string is the following :</p>
+<pre><code class="language-bash">mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?options]]
+</code></pre>
+<p>Which is fully described in the <a href="https://www.mongodb.com/docs/manual/reference/connection-string/#standard-connection-string-format">docs</a></p>
+<h3 id="importing-the-config-in-the-serverjs-file"><a class="header" href="#importing-the-config-in-the-serverjs-file">Importing the config in the <code>server.js</code> file</a></h3>
+<p>Go in <code>server.js</code> and paste the following right after <code>import express from 'express'</code>:</p>
+<pre><code class="language-js">import dotenv from 'dotenv';
+
+dotenv.config();
+</code></pre>
+<p>This will use the <code>config</code> function from the <code>dotenv</code> module to read all the environment
+variable stored in our <code>.env</code> file.</p>
+<p>All the files that will be imported by <code>server.js</code> will then have access to our
+environment variables.</p>
+<p>For now on, we'll use our newly created <code>MONGO_URI</code> variable</p>
+<h3 id="creating-the-configdbjs-file"><a class="header" href="#creating-the-configdbjs-file">Creating the <code>config/db.js</code> file</a></h3>
+<p>Let's create a new directory within the backend directory called <code>config</code> and paste the
+following into the <code>db.js</code> file :</p>
+<pre><code class="language-js">import mongoose from 'mongoose';
+
+export const connectDB = async () =&gt; {
+    try {
+        const conn = await mongoose.connect(process.env.MONGO_URI);
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.error(`Error: ${error.message}`);
+        process.exit(1);
+    }
+}
+</code></pre>
+<p>This will use the <code>MONGO_URI</code> variable and connect to the database <code>mern-stack-app</code></p>
+<h3 id="connecting-the-database"><a class="header" href="#connecting-the-database">Connecting the database</a></h3>
+<p>Add the following import statement to <code>server.js</code> :</p>
+<pre><code class="language-js">import { connectDB } from './config/db.js';
+</code></pre>
+<p>add also the following statement, right at the beginning of the <code>app.listen</code> function
+(after the <code>{</code>) :</p>
+<pre><code class="language-js">connectDB();
+</code></pre>
+<p>You should now see the following line in your server terminal (which runs in your docker
+container)</p>
+<pre><code class="language-bash">MongoDB Connected: database
+</code></pre>
+<blockquote>
+<p>:warning: In case you can't connect to the database, make sure you deleted and restarted
+the <code>node-dev</code> container and attached it to the <code>mern-app-network</code>
+You should have added the options <code>--network mern-app-network</code> and
+<code>--network-alias node-dev</code> to your <code>docker run</code> command</p>
+</blockquote>
+<h2 id="creating-our-models"><a class="header" href="#creating-our-models">Creating our models</a></h2>
+<p>To create our database models, we'll use the <code>mongoose</code> package. For now, let's create a
+<code>product</code> model into a new <code>backend/models</code> directory (from now on, we'll refer to
+<code>backend/models</code> as <code>models</code>)</p>
+<h3 id="creating-our-first-schema"><a class="header" href="#creating-our-first-schema">Creating our first Schema</a></h3>
+<p>Paste the following code in <code>models/Product.js</code>:</p>
+<pre><code class="language-js">import mongoose from 'mongoose';
+
+const productSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+}, {
+    timestamp: true //createdAt, updatedAt
+});
+</code></pre>
+<p>What it does is that it takes a <a href="https://mongoosejs.com/docs/guide.html#schemas">schema</a>
+definition that every object of our database will have to adhere to. It also adds a
+<a href="https://mongoosejs.com/docs/timestamps.html">timestamp</a> to each object when it is
+either created or updated. The schema specification is in the
+<a href="https://www.json.org/json-en.html">json</a> format.</p>
+<p>From this schema we can see that <strong>each</strong> product will have :</p>
+<ul>
+<li>A name, which is a String</li>
+<li>A price, which is a Number</li>
+<li>An image, which is a String (and will be the url of a resource that represents our
+product)</li>
+</ul>
+<h3 id="compiling-our-schema-into-a-model"><a class="header" href="#compiling-our-schema-into-a-model">Compiling our schema into a model</a></h3>
+<p>Now that our schema is ready, we need to compile it into a
+<a href="https://mongoosejs.com/docs/models.html">model</a> we can work with in our code</p>
+<p>Add the following line at the end of <code>models/Product.js</code>:</p>
+<pre><code class="language-js">const Product = mongoose.model('Product', productSchema);
+</code></pre>
+<p>This will compile our <em>schema</em> into a <em>model</em>. We our now able to export it to be usable
+by other js scripts with the following line :</p>
+<pre><code class="language-js">export default Product;
+</code></pre>
+<p>That you should add at the end of <code>Product.js</code></p>
+<blockquote>
+<p>:bulb: The model name is <code>Product</code> and not <code>products</code> as mongoose will automatically
+look for the lowercased and plural version of your model name in the collections and
+create it for you. So for example, if you were to create the <code>cars</code> collection, you'd
+be required to create the <code>Car</code> model and not the <code>cars</code> model</p>
+</blockquote>
+<h2 id="creating-our-api"><a class="header" href="#creating-our-api">Creating our API</a></h2>
+<h3 id="first-real-route----adding-some-products"><a class="header" href="#first-real-route----adding-some-products">First Real Route -- <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">adding</a> some products</a></h3>
+<p>Up until now, we were only able to check that the server is up and running. Let's  now
+include our new <code>products</code> collection into the mix. Let's create a route <code>/products</code>
+which will accept the request method <span class=spoiler>POST</span> (as we want to send
+data to our API through this route).</p>
+<p>Let's now add the following code to our <code>server.js</code> file :</p>
+<pre><code class="language-js">import Product from './models/Product.js';
+</code></pre>
+<p>To import our newly created <code>Product</code> model from the file it resides in</p>
+<p>Let's now add the first route of our app (You can paste this code right under the
+statement <code>app.use(express.json());</code>:</p>
+<pre><code class="language-js">app.post("/products", async (req, res) =&gt; {
+    const product = req.body // user will send this data
+
+    if (!product) {
+        return res.status(400).json({
+            success: false,
+            message: "Please provide a request body"
+        });
+    }
+
+    if (!product.name || !product.price || !product.image) {
+        return res.status(400).json({
+            success: false,
+            message: "Please provide all fields" 
+        });
+    }
+    const newProduct = new Product(product);
+
+    try {
+        await newProduct.save();
+        res.status(201).json({
+            success: true,
+            data: newProduct
+        });
+    } catch (error) {
+        console.log("Error in Create Product:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+    }
+});
+</code></pre>
+<h3 id="testing-our-first-route"><a class="header" href="#testing-our-first-route">Testing our First Route</a></h3>
+<blockquote>
+<p>:bulb: If you are used to testing your API routes, feel free to use the method you're
+the most used too. Don't switch methods because I showed you that one. The main goal
+is to make you a real full stack programmer, not to destroy the knowledge you've spent
+months (if not years) acquiring.</p>
+</blockquote>
+<p>As I'm more a CLI guy than a GUI guy, we'll use a utility called <code>cURL</code> to do so. Let's
+first prepare our data. At the root of the project, we'll create a directory called
+<code>test_data</code>. This is were our test JSON files will live. Let's now create a <code>product</code> file
+in this <code>test_data</code> directory (we'll reorganize the directory later on but for now it is
+enough).</p>
+<blockquote>
+<p>:bulb: If you are on Windows and can't create a file without an extension, you can
+give the extension <code>.json</code> to all the files we'll create in the <code>test_data</code> directory</p>
+</blockquote>
+<p>Here is an example of what our directory structure looks like so far :</p>
+<pre><code class="language-bash">.
+├── backend
+│   ├── config
+│   │   └── db.js
+│   ├── models
+│   │   └── Product.js
+│   └── server.js
+├── frontend
+├── package-lock.json
+├── package.json
+└── test_data
+    └── product
+
+7 directories, 8 files
+</code></pre>
+<p>Let's put the following data in our <code>product</code> (or <code>product.js</code>) file:</p>
+<pre><code class="language-json">{
+    "name": "test_product",
+    "price": 100,
+    "image": "1234"
+}
+</code></pre>
+<p>This is a valid product definition which should be properly handled by our server. Let's
+now test this definition using the following command (from the root of our project) :</p>
+<pre><code class="language-bash">curl --json @test_data/product localhost:5000/products
+</code></pre>
+<p>You should see the following message:</p>
+<pre><code class="language-bash">{"success":false,"message":"Please provide a request body"}
+</code></pre>
+<p>Don't try to debug the command, it is working. The solution resides in the fact that
+we have to install the proper
+<a href="https://www.geeksforgeeks.org/what-is-middleware/">middleware</a> to handle the JSON
+interpretation for us.</p>
+<h3 id="installing-the-json-middleware"><a class="header" href="#installing-the-json-middleware">Installing the json middleware</a></h3>
+<p>We'll use the <a href="https://expressjs.com/en/api.html#express.json"><code>express.json</code></a> method in
+order to parse the request content as JSON. It is actually a built-in middleware that we
+can use without importing any further module. To do so, let's add the following statement
+right after instantiating our <code>app</code> variable :</p>
+<pre><code class="language-js">app.use(express.json()); //allows us to accept JSON data in req body
+</code></pre>
+<p>we can now relaunch the <code>cURL</code> command and observe that we get a successful response</p>
+<h3 id="renaming-the-routes-as-a-good-practice"><a class="header" href="#renaming-the-routes-as-a-good-practice">Renaming the routes as a good practice</a></h3>
+<p>Before continuing, let's rename our <code>products</code> route. It is a good practice to prefix all
+the API routes by <code>/api</code> so let's do this in our product route. Change the statement :
+<code>app.post("/products", ...)</code> into <code>app.post("/api/products", ...)</code></p>
+<blockquote>
+<p>:bulb: It seems to be widely accepted that it is a better practice to do so, however
+I didn't find any official documentation to back that fact up. For those interested,
+you can consult the following documents :</p>
+<ol>
+<li><a href="https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/">Stackoverflow blogpost</a> about REST APIs design.</li>
+<li><a href="https://restfulapi.net/rest-api-best-practices/">Restful api</a> (non official website)
+about API best practices.</li>
+<li><a href="https://cloud.google.com/blog/products/api-management/restful-web-api-design-best-practices">Google Cloud</a>
+guide about API design practices.</li>
+<li>This <a href="./api_prefixing.html">ChatGPT</a> summary about the ins and outs of following such
+design practices.</li>
+</ol>
+</blockquote>
+<h3 id="our-first-parameters"><a class="header" href="#our-first-parameters">Our first parameters</a></h3>
+<p>Let's now try to create a route that allows us to delete one product. We'll give this
+route the product id as a <a href="https://expressjs.com/en/guide/routing.html">parameter</a>.</p>
+<blockquote>
+<p>:bulb: If you open this documentation link, you'll have to <code>^f</code> for (or <code>cmd+f</code> on mac)
+and search for <code>Route parameters</code> (case sensitive search)</p>
+</blockquote>
+<p>Let's add the following code to our <code>server.js</code> file (right after the <code>app.post</code> route):</p>
+<pre><code class="language-js">app.delete("/api/products/:id", async (req, res) =&gt; {
+    const { id } = req.params;
+    console.log(`id: \`${id}'`);
+});
+</code></pre>
+<p>What it will do is allow us to give params to our requests to this route (in the
+<code>req.params</code> variable).
+We <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">destructure</a>
+the <code>req.params.id</code> into a variable named <code>id</code> and print it to the console.</p>
+<h3 id="testing-our-parametrized-request"><a class="header" href="#testing-our-parametrized-request">Testing our parametrized request</a></h3>
+<p>Let's now write a <code>cURL</code> request that will allow us to test our newly created route. We
+can use the <code>-X</code> option to specify the HTTP Method we'd like to use. Thus leading us to
+the full request :</p>
+<pre><code class="language-bash">curl -X DELETE localhost:5001/api/products/bonjour
+</code></pre>
+<p>As you can see, even though the request was received by the server and the <code>id: bonjour</code>
+was printed, we can observe that the request hangs. This is because, by default, <code>cURL</code>
+doesn't have any timeout once connected (if the file is very large or the network very
+slow for example). To prevent our requests from hanging, we'll set a reasonnable timeout
+of 3 ms using the <code>-m</code> (or <code>--max-time</code>) option.</p>
+<p>Our full command is then:</p>
+<pre><code class="language-bash">curl -X DELETE -m 3 localhost:5001/api/products/bonjour
+</code></pre>
+<h3 id="implementing-the-product-deletion"><a class="header" href="#implementing-the-product-deletion">Implementing the product <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE">deletion</a></a></h3>
+<p>To delete our product we'll use the method
+[<code>findByIdAndDelete</code>](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndDelete(%29)
+of the <code>mongoose</code> models.</p>
+<p>Let's add a <code>try..catch</code> block with the following inside our newly created <code>app.delete</code>
+route:</p>
+<pre><code class="language-js">try {
+    await Product.findByIdAndDelete(id);
+    res.status(200).json({
+        success: true,
+        message: "Product successfully deleted"
+    });
+} catch (error) {
+    console.log("Error in Create Product:", error.message);
+    res.status(404).json({
+        success: false,
+        message: "Product not found"
+    });
+}
+</code></pre>
+<p>We can now:</p>
+<ol>
+<li>Add a product using the <code>/api/products</code> endpoint</li>
+<li>Retrieve the id from the response</li>
+<li>Use our <code>/api/products:id</code> endpoint to delete the product</li>
+</ol>
+<p>If you followed all the steps up until now you should receive the response:</p>
+<pre><code class="language-bash">{"success":true,"message":"Product successfully deleted"}
+</code></pre>
+<p>in your terminal.</p>
+<h2 id="implementing-more-routes"><a class="header" href="#implementing-more-routes">Implementing more routes</a></h2>
+<h3 id="get-all-products"><a class="header" href="#get-all-products"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET">Get</a> all products</a></h3>
+<p>Let's implement a route that will allow us to get all products. Let's add the following
+code fragment, right above the <code>app.post</code> route in our <code>server.js</code> file:</p>
+<pre><code class="language-js">app.get("/api/products", async (req, res) =&gt; {
+    try {
+        const products = await Product.find({});
+        res.status(200).json({
+            success: true,
+            data: products
+        });
+    } catch (error) {
+        console.log("Error in fetching products:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+    }
+});
+</code></pre>
+<blockquote>
+<p>We give use the <code>{}</code> in the
+[.find()](https://mongoosejs.com/docs/api/model.html#Model.find(%29) function
+in order to retrieve all the products in the <code>products</code> collection.</p>
+</blockquote>
+<h3 id="testing-our-new-route"><a class="header" href="#testing-our-new-route">Testing our new route</a></h3>
+<p>Let's now add a few products to our database. You can either use a <code>cURL</code> request
+with different products or you can run it in a for loop (like the following if you're
+using <code>bash</code>):</p>
+<blockquote>
+<p>Once again, I'm a CLI guy so I suggest and use CLI tools, however if you're used
+to another method of working, feel free to do so with the method you've been acustomed
+to</p>
+</blockquote>
+<pre><code class="language-bash">for i in {0..9}; do curl --json @test_data/product localhost:5000/api/products ; done
+</code></pre>
+<p>You can see that this command added 10 products (the same though) to our database</p>
+<p>Let's now test our route. To do so, once again we can use our friend <code>cURL</code> to do the
+job for us.</p>
+<pre><code class="language-bash">curl localhost:5000/api/products
+</code></pre>
+<blockquote>
+<p>If you've been following the instructions in the terminal like I showed, you may have
+found that the output is not quite readable on its own. No worries, we can use another
+utility for that. It is called <a href="https://jqlang.org/manual/"><code>jq</code></a> and is a great tool
+to work with json on itself, but for now we'll only use it to produce a more readble
+output from the <code>cURL</code> command.</p>
+<p>You can run :</p>
+<pre><code class="language-bash">curl localhost:5000/api/products | jq
+</code></pre>
+<p>to get a more readable output from the <code>cURL</code> command</p>
+</blockquote>
+<h3 id="our-last-crud-operation---updating-a-product-state"><a class="header" href="#our-last-crud-operation---updating-a-product-state">Our last CRUD operation - <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT">updating</a> a product state</a></h3>
+<p>Let's implement the update of a product. Let's paste the following code in our <code>server.js</code>
+file. Somewhere near the other endpoints.</p>
+<pre><code class="language-js">app.put("/api/products/:id", async (req, res) =&gt; {
+    const { id } = req.params;
+
+    const product = req.body;
+
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(id, product, {new: true});
+        res.status(200).json({
+            success: true,
+            message: updatedProduct
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+    }
+});
+</code></pre>
+<p>We have just created a
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT"><code>PUT</code></a>
+route where a user can updated a product using the
+[<code>findByIdAndUpdate</code>](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndUpdate(%29) mongoose method.</p>
+<h3 id="testing-our-route"><a class="header" href="#testing-our-route">Testing our route</a></h3>
+<p>First let's get the id of one of our products. To do so, let's get all the products and
+pick the id of one product</p>
+<p>We can now test the route by running :</p>
+<pre><code class="language-bash">curl -X PUT --json { "name": "Bonjour" } localhost:5001/api/products/&lt;our_product_id&gt;
+</code></pre>
+<blockquote>
+<p>:bulb: Don't forget to replace <code>&lt;our_product_id&gt;</code> with a real product id</p>
+</blockquote>
+<p>We can now see that the request was successful.</p>
+<p>However, if the user enters a wrong id, we get a "Server Error", which isn't a very
+explicit message. Let's try and make it a bit more verbose.</p>
+<p>First, let's add the following import statement to our <code>server.js</code> near the other
+statements:</p>
+<pre><code class="language-js">import mongoose from 'mongoose';
+</code></pre>
+<p>And then let's add the following code fragment, right before the <code>try..catch</code> block
+in our <code>app.put</code> function:</p>
+<pre><code class="language-js">if (! mongoose.isValidObjectId(id)) {
+    return res.status(404).json({
+        success: false,
+        message: "Product not found"
+    });
+}
+</code></pre>
+<p>What it does is that it uses the [<code>isValidObjectId()</code>](https://mongoosejs.com/docs/api/mongoose.html#Mongoose.prototype.isValidObjectId(%29)
+method of the mongoose module to check if the id can be used to construct an
+<a href="https://mongoosejs.com/docs/schematypes.html#objectids">ObjectId</a> variable</p>
+<p>Now, when we run our request with an invalid id, for example:</p>
+<pre><code class="language-bash">curl -X PUT --json { "name": "Bonjour" } localhost:5001/api/products/1234
+</code></pre>
+<p>We now get the "Product not found" message.</p>
+<h2 id="organizing-application-files"><a class="header" href="#organizing-application-files">Organizing Application Files</a></h2>
+<h3 id="creating-a-router"><a class="header" href="#creating-a-router">Creating a <a href="https://expressjs.com/en/api.html#router">router</a></a></h3>
+<p>The goal of a router is to allow us "route" our request to the corresponding application
+it basically allows us to split our app into multiple files/folders and to send specific
+requests to specific endpoints.</p>
+<p>To create a router, let's create a <code>routes</code> directory within the backend directory
+and put the following code into <code>routes/Product.js</code>:</p>
+<pre><code class="language-js">import express from "express"
+
+const router = express.Router();
+
+export default router;
+</code></pre>
+<p>It basically creates a <code>Router</code> object and exports it for use by other apps</p>
+<h3 id="giving-our-routes-to-the-newly-created-router"><a class="header" href="#giving-our-routes-to-the-newly-created-router">Giving our routes to the newly created router</a></h3>
+<p>Let's now take our routes and give them to the router. To so, let's remove them from
+<code>server.js</code> and put them into <code>routes/Product.js</code>:</p>
+<details>
+<summary>`routes/Product.js`</summary>
+<pre><code class="language-js">import express from "express"
+
+const router = express.Router();
+
+router.get("/api/products", async (req, res) =&gt; {
+    try {
+        const products = await Product.find({});
+        res.status(200).json({
+            success: true,
+            data: products
+        });
+    } catch (error) {
+        console.log("Error in fetching products:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+    }
+});
+
+router.post("/api/products", async (req, res) =&gt; {
+    const product = req.body // user will send this data
+
+    if (!product) {
+        return res.status(400).json({
+            success: false,
+            message: "Please provide a request body"
+        });
+    }
+
+    if (!product.name || !product.price || !product.image) {
+        return res.status(400).json({
+            success: false,
+            message: "Please provide all fields" 
+        });
+    }
+    const newProduct = new Product(product);
+
+    try {
+        await newProduct.save();
+        res.status(201).json({
+            success: true,
+            data: newProduct
+        });
+    } catch (error) {
+        console.log("Error in Create Product:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+    }
+});
+
+router.delete("/api/products/:id", async (req, res) =&gt; {
+    const { id } = req.params;
+
+    try {
+        await Product.findByIdAndDelete(id);
+        res.status(200).json({
+            success: true,
+            message: "Product successfully deleted"
+        });
+    } catch (error) {
+        console.log("Error in Create Product:", error.message);
+        res.status(404).json({
+            success: false,
+            message: "Product not found"
+        });
+    }
+});
+
+router.put("/api/products/:id", async (req, res) =&gt; {
+    const { id } = req.params;
+
+    const product = req.body;
+
+    if (! mongoose.isValidObjectId(id)) {
+        return res.status(404).json({
+            success: false,
+            message: "Product not found"
+        });
+    }
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(id, product, {new: true});
+        res.status(200).json({
+            success: true,
+            message: updatedProduct
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+    }
+});
+
+export default router;
+</code></pre>
+</details>
+<details>
+<summary>`backend` directory structure</summary>
+<pre><code class="language-bash">backend/
+├── config
+│   └── db.js
+├── models
+│   └── Product.js
+├── routes
+│   └── Product.js
+└── server.js
+
+4 directories, 4 files
+</code></pre>
+</details>
+<p>Now we can now
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">import</a>
+the <code>router</code> that is
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">export</a>ed
+in <code>routes/Products.js</code> with any name (because it is the default export).</p>
+<blockquote>
+<p>:warning: Don't forget to fix the import statements in the <code>routes/Product.js</code> file</p>
+</blockquote>
+<h3 id="importing-our-router"><a class="header" href="#importing-our-router">Importing our router</a></h3>
+<p>Let's now import <code>productRouter</code> from <code>./routes/Product.js</code></p>
+<p>Write the following code to <code>backend/server.js</code>:</p>
+<pre><code class="language-js">app.use("/api/products", productRouter);
+</code></pre>
+<p>You could put it right after the <code>app.use(express.json());</code></p>
+<p>Let's now replace the <code>/api/products</code> part of the url in every route with <code>/</code> (because now
+the router is the hub that receive all the requests that target <code>/api/products</code>)</p>
+<p>From now on you can test the routes and see that everything is working as before</p>
+<h3 id="creating-controllers"><a class="header" href="#creating-controllers">Creating controllers</a></h3>
+<p>Let's make our code even cleaner by putting our functions into a controllers file</p>
+<blockquote>
+<p>:bulb: The controllers come from the
+<a href="https://developer.mozilla.org/en-US/docs/Glossary/MVC">MVC</a> architecture.</p>
+<p>It is also detailed
+<a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/routes">here</a></p>
+</blockquote>
+<p>Let's extract each of our reply functions and put them into a separate <code>Product</code> file
+under a <code>controllers</code> directory</p>
+<details>
+<summary>Directory Structure of the `backend` directory</summary>
+<pre><code class="language-bash">backend/
+├── config
+│   └── db.js
+├── controllers
+│   └── Product.js
+├── models
+│   └── Product.js
+├── routes
+│   └── Product.js
+└── server.js
+
+5 directories, 5 files
+</code></pre>
+</details>
+<details>
+<summary>`controllers/Product.js` file</summary>
+<pre><code class="language-js">import mongoose from 'mongoose';
+import Product from '../models/Product.js';
+
+export const getProducts = async (req, res) =&gt; {
+    try {
+        const products = await Product.find({});
+        res.status(200).json({
+            success: true,
+            data: products
+        });
+    } catch (error) {
+        console.log("Error in fetching products:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+    }
+};
+
+export const createProduct = async (req, res) =&gt; {
+    const product = req.body // user will send this data
+
+    if (!product) {
+        return res.status(400).json({
+            success: false,
+            message: "Please provide a request body"
+        });
+    }
+
+    if (!product.name || !product.price || !product.image) {
+        return res.status(400).json({
+            success: false,
+            message: "Please provide all fields" 
+        });
+    }
+    const newProduct = new Product(product);
+
+    try {
+        await newProduct.save();
+        res.status(201).json({
+            success: true,
+            data: newProduct
+        });
+    } catch (error) {
+        console.log("Error in Create Product:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+    }
+};
+
+export const deleteProduct = async (req, res) =&gt; {
+    const { id } = req.params;
+
+    try {
+        await Product.findByIdAndDelete(id);
+        res.status(200).json({
+            success: true,
+            message: "Product successfully deleted"
+        });
+    } catch (error) {
+        console.log("Error in Create Product:", error.message);
+        res.status(404).json({
+            success: false,
+            message: "Product not found"
+        });
+    }
+};
+
+
+export const updateProduct = async (req, res) =&gt; {
+    const { id } = req.params;
+
+    const product = req.body;
+
+    if (! mongoose.isValidObjectId(id)) {
+        return res.status(404).json({
+            success: false,
+            message: "Product not found"
+        });
+    }
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(id, product, {new: true});
+        res.status(200).json({
+            success: true,
+            message: updatedProduct
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+    }
+};
+</code></pre>
+</details>
+<p>Let's now use these controllers in our <code>routes/Product.js</code> file.</p>
+<p>First, add the following import statements (we have to import all the routes):</p>
+<pre><code class="language-js">import {
+    createProduct,
+    deleteProduct,
+    getProducts,
+    updateProduct
+} from "../controllers/Product.js";
+</code></pre>
+<p>Now, replace the original routes with the following code fragment:</p>
+<pre><code class="language-js">router.get("/", getProducts);
+router.post("/", createProduct);
+router.delete("/:id", deleteProduct);
+router.put("/:id", updateProduct);
+</code></pre>
+<p>You should now be able to run all the requests we've previously ran before.</p>
+<blockquote>
+<p>:bulb: Writting these lines, I realise that it may be useful to write a small script
+(if using <code>cURL</code>) that tests the routes all at once. Just to get sure that we get the
+right response when everything is in order.</p>
+<p>Let's do so.</p>
+<p>We'll start by adding a product, then getting the product, then updating the product
+and finally deleting the product (you got it right, CRUD!)</p>
+<pre><code class="language-bash">a=$(mktemp);
+if ! curl -s --json @test_data/product localhost:5000/api/products &gt; "$a";
+then echo "POST request failed"; kill -INT $$; fi
+id="$(jq &lt; "$a" | grep _id | cut -f 2 -d ':' | grep -E '[^" ]+' -o | head -n 1)"
+if ! curl -s localhost:5000/api/products &gt;/dev/null;
+then echo "GET request failed"; kill -INT $$; fi
+if ! curl -s -X PUT --json '{ "name": "Salut" }' localhost:5000/api/products/"$id" &gt;/dev/null;
+then echo "PUT request failed"; kill -INT $$; fi
+if ! curl -s -X DELETE localhost:5000/api/products/"$id" &gt;/dev/null;
+then echo "DELETE request failed"; kill -INT $$; fi
+echo -e "\nCRUD properly implemented!";
+</code></pre>
+<p>With the previously written script, we can thus ensure that our application is
+working right. We can now run it every time we want to modify something just to get sure
+that we are keeping the state as is (not introducing unwanted modifications)</p>
+</blockquote>
+<p>With the backend now done, we can safely move on to the frontend. But first, lets get
+the port from the environment (instead of hardcoding it) and let the hardcoded port as
+a fallback value if the port is undefined.</p>
+<p>Let's add the following to our <code>server.js</code>:</p>
+<pre><code class="language-js">const PORT = process.env.PORT || 5000;
+</code></pre>
+<p>And let's change the <code>5000</code> with our newly created <code>PORT</code> variable in the <code>app.listen</code>
+function.</p>
+<p>It should now look like this code fragment:</p>
+<pre><code class="language-js">app.listen(PORT, () =&gt; {
+    connectDB();
+	console.log('Server started at http://localhost:' + PORT);
+});
+</code></pre>
+<p>We are now all set to implement our frontend.</p>
 
                     </main>
 
