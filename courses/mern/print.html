@@ -1005,22 +1005,87 @@ function.</p>
 });
 </code></pre>
 <p>We are now all set to implement our frontend.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="exercise-1-hello-world"><a class="header" href="#exercise-1-hello-world"><strong>Exercise 1: "Hello World+"</strong></a></h1>
-<p>Modify the basic Express server to:</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exercise-1-basic-express-setup-hello-world"><a class="header" href="#exercise-1-basic-express-setup-hello-world"><strong>Exercise 1: Basic Express Setup ("Hello World+")</strong></a></h1>
+<p>Your goal is to <strong>set up an Express server</strong> that can handle different types of requests.</p>
+<hr />
+<h2 id="requirements"><a class="header" href="#requirements"><strong>Requirements</strong></a></h2>
+<ol>
+<li><strong>Set up an Express server</strong> that listens on port <code>5000</code>.</li>
+<li><strong>Add the following routes:</strong>
 <ul>
-<li>Add a new route <code>GET /status</code> returning <code>{ "uptime": 12345 }</code></li>
-<li>Create a route with params: <code>GET /echo/:message</code> returning <code>{ "message": "your-text" }</code></li>
-<li>Handle query params: <code>GET /repeat?times=N&amp;message=X</code> that repeats the message <code>N</code> times</li>
+<li><code>GET /time</code> → Returns <code>{ "serverTime": &lt;current server time&gt; }</code>.</li>
+<li><code>GET /echo/:message</code> → Returns <code>{ "message": "&lt;your-text&gt;" }</code>.</li>
+<li><code>POST /api/mock/create</code> → Returns <code>{ "message": "Mock user created" }</code>.</li>
+<li><code>PUT /api/mock/update</code> → Returns <code>{ "message": "Mock user updated" }</code>.</li>
+<li><code>DELETE /api/mock/delete</code> → Returns <code>{ "message": "Mock user deleted" }</code>.</li>
 </ul>
-<p><strong>Documentation:</strong></p>
+</li>
+<li><strong>Ensure all responses are in JSON format</strong> (not plain text).</li>
+<li><strong>Use HTTP status codes correctly</strong> (e.g., <code>201 Created</code> for <code>POST</code>, <code>200 OK</code> for <code>GET</code>, etc.).</li>
+<li><strong>Test all routes using cURL</strong> to make sure they return the correct data.</li>
+</ol>
+<hr />
+<h2 id="documentation"><a class="header" href="#documentation"><strong>Documentation</strong></a></h2>
+<p>Use the following <strong>official Express documentation</strong> to complete the exercise:</p>
 <ul>
 <li><a href="https://expressjs.com/en/guide/routing.html">Express Routing</a></li>
+<li><a href="https://expressjs.com/en/guide/routing.html#route-parameters">Express Route Parameters (<code>req.params</code>)</a></li>
+<li><a href="https://expressjs.com/en/api.html#res.json">Express JSON Response (<code>res.json</code>)</a></li>
+<li><a href="https://expressjs.com/en/5x/api.html#res.status">Express Status Codes (<code>res.status</code>)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP Methods (<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>)</a></li>
+<li><a href="https://expressjs.com/en/guide/writing-middleware.html">Writing Middleware</a></li>
+<li><a href="https://expressjs.com/en/guide/using-middleware.html">Using Middleware</a></li>
 </ul>
-<p><strong>Test:</strong></p>
-<pre><code class="language-bash">curl http://localhost:5000/status
+<hr />
+<h2 id="how-to-test-your-api"><a class="header" href="#how-to-test-your-api"><strong>How to Test Your API</strong></a></h2>
+<p>After setting up the server, test the endpoints using <strong>cURL</strong>:</p>
+<pre><code class="language-bash">curl http://localhost:5000/time
 curl http://localhost:5000/echo/hello
-curl http://localhost:5000/repeat/times/3/message/hi
+curl -X POST http://localhost:5000/api/mock/create
+curl -X PUT http://localhost:5000/api/mock/update
+curl -X DELETE http://localhost:5000/api/mock/delete
 </code></pre>
+<h3 id="expected-output"><a class="header" href="#expected-output"><strong>Expected Output</strong></a></h3>
+<p>If your implementation is correct, you should get responses like:</p>
+<pre><code class="language-json">// GET /time
+{ "serverTime": "2024-02-17T12:00:00Z" }
+
+// GET /echo/hello
+{ "message": "hello" }
+
+// POST /api/mock/create
+{ "message": "Mock user created" }
+
+// PUT /api/mock/update
+{ "message": "Mock user updated" }
+
+// DELETE /api/mock/delete
+{ "message": "Mock user deleted" }
+</code></pre>
+<blockquote>
+<p>:warning: The timestamp might be slightly different depending
+on your machine language and locale</p>
+</blockquote>
+<hr />
+<h2 id="bonus-optional-if-you-finish-early"><a class="header" href="#bonus-optional-if-you-finish-early"><strong>Bonus (Optional, if you finish early)</strong></a></h2>
+<p>If you complete the exercise quickly, try these extra challenges:</p>
+<ol>
+<li>Modify <code>/time</code> to return <strong>more details</strong>, such as:
+<pre><code class="language-json">{ "serverTime": "2024-02-17T12:00:00Z", "timezone": "UTC" }
+</code></pre>
+</li>
+<li>Add a new route:
+<ul>
+<li><code>GET /hello/:name</code> → Returns <code>{ "greeting": "Hello, &lt;name&gt;!" }</code>.</li>
+</ul>
+</li>
+<li><strong>Modify the status codes</strong> for each request to match HTTP conventions:
+<ul>
+<li><code>POST /api/mock/create</code> → Should return <strong><code>201 Created</code></strong>.</li>
+<li><code>DELETE /api/mock/delete</code> → Should return <strong><code>204 No Content</code></strong>.</li>
+</ul>
+</li>
+</ol>
 
                     </main>
 
