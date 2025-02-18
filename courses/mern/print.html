@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_3.html"><strong aria-hidden="true">1.3.</strong> Exercise 3</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_3.html"><strong aria-hidden="true">1.3.</strong> Exercise 3</a></li><li class="chapter-item expanded "><a href="backend/final_project.html"><strong aria-hidden="true">1.4.</strong> Project Backend</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -1384,6 +1384,125 @@ curl http://localhost:5000/api/books/genre/Fantasy
     ]
 }
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="final-project-e-commerce-api"><a class="header" href="#final-project-e-commerce-api"><strong>Final Project: E-commerce API</strong></a></h3>
+<h4 id="team-size-2-3-people"><a class="header" href="#team-size-2-3-people"><strong>Team Size: 2-3 People</strong></a></h4>
+<p>Objective: Build a <strong>RESTful E-commerce API</strong> that allows users to manage <strong>products, customers, and orders</strong>.</p>
+<hr />
+<h2 id="1-requirements--deliverables"><a class="header" href="#1-requirements--deliverables"><strong>1. Requirements &amp; Deliverables</strong></a></h2>
+<h3 id="deliverables"><a class="header" href="#deliverables"><strong>Deliverables</strong></a></h3>
+<ul>
+<li>A <strong>GitHub or GitLab repository</strong> containing the full project at the root (not inside subfolders).</li>
+<li>A <strong>README.md file</strong> describing:
+<ul>
+<li>API Routes with descriptions.</li>
+<li>A list of commands to run the project in Docker.</li>
+</ul>
+</li>
+<li>A <strong><code>run.sh</code> script</strong> to automate the setup process.</li>
+<li>A <strong><code>test.sh</code> script</strong> to test all the api routes (the user management workflow)</li>
+<li>A <strong>structured project</strong> using <code>models/</code>, <code>routes/</code>, and <code>controllers/</code>.</li>
+</ul>
+<hr />
+<h2 id="2-api-endpoints-proper-restful-methods"><a class="header" href="#2-api-endpoints-proper-restful-methods"><strong>2. API Endpoints (Proper RESTful Methods)</strong></a></h2>
+<h3 id="product-management"><a class="header" href="#product-management"><strong>Product Management</strong></a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Action</th><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead><tbody>
+<tr><td>Create Product</td><td><code>POST</code></td><td><code>/api/products</code></td><td>Add a new product</td></tr>
+<tr><td>Get All Products</td><td><code>GET</code></td><td><code>/api/products</code></td><td>Retrieve all products</td></tr>
+<tr><td>Get Product by ID</td><td><code>GET</code></td><td><code>/api/products/:id</code></td><td>Retrieve a single product</td></tr>
+<tr><td>Update Product</td><td><code>PUT</code></td><td><code>/api/products/:id</code></td><td>Modify an existing product</td></tr>
+<tr><td>Delete Product</td><td><code>DELETE</code></td><td><code>/api/products/:id</code></td><td>Remove a product</td></tr>
+</tbody></table>
+</div>
+<h3 id="customer-management"><a class="header" href="#customer-management"><strong>Customer Management</strong></a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Action</th><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead><tbody>
+<tr><td>Create Customer</td><td><code>POST</code></td><td><code>/api/customers</code></td><td>Add a new customer</td></tr>
+<tr><td>Get Customers</td><td><code>GET</code></td><td><code>/api/customers</code></td><td>Retrieve customers</td></tr>
+</tbody></table>
+</div>
+<h3 id="order-management"><a class="header" href="#order-management"><strong>Order Management</strong></a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Action</th><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead><tbody>
+<tr><td>Create Order</td><td><code>POST</code></td><td><code>/api/orders</code></td><td>Place a new order</td></tr>
+<tr><td>Get Order by ID</td><td><code>GET</code></td><td><code>/api/orders/:id</code></td><td>Retrieve order details</td></tr>
+<tr><td>Update Order</td><td><code>PUT</code></td><td><code>/api/orders/:id</code></td><td>Modify an existing order</td></tr>
+<tr><td>Delete Order</td><td><code>DELETE</code></td><td><code>/api/orders/:id</code></td><td>Remove an order</td></tr>
+</tbody></table>
+</div>
+<h3 id="direct-order"><a class="header" href="#direct-order"><strong>Direct Order</strong></a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Action</th><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead><tbody>
+<tr><td>Place Order for Customer</td><td><code>POST</code></td><td><code>/api/orders/direct/:customerId</code></td><td>Create an order for an existing customer</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="3-direct-order-implementation"><a class="header" href="#3-direct-order-implementation"><strong>3. Direct Order Implementation</strong></a></h2>
+<p>The <strong>Direct Order</strong> route allows an existing customer to place an order with selected products.</p>
+<h3 id="example-request"><a class="header" href="#example-request"><strong>Example Request</strong></a></h3>
+<pre><code class="language-bash">curl -X POST --json '{
+    "products": ["65a42b1fcf6a1c3d9b654321"]
+}' http://localhost:5000/api/orders/direct/65a42b1fcf6a1c3d9b123456
+</code></pre>
+<h3 id="expected-response"><a class="header" href="#expected-response"><strong>Expected Response</strong></a></h3>
+<pre><code class="language-json">{
+    "message": "Order created successfully",
+    "order": {
+        "_id": "65a42b1fcf6a1c3d9b999999",
+        "customer": "65a42b1fcf6a1c3d9b123456",
+        "products": ["65a42b1fcf6a1c3d9b654321"]
+    }
+}
+</code></pre>
+<p>This route <strong>requires the customer to exist</strong>. If the customer ID is invalid or not found, return a <code>404 Not Found</code> error.</p>
+<hr />
+<h2 id="4-project-setup--docker-requirements"><a class="header" href="#4-project-setup--docker-requirements"><strong>4. Project Setup &amp; Docker Requirements</strong></a></h2>
+<p>Students will use a <strong><code>run.sh</code> script</strong> instead of <code>docker-compose</code>.</p>
+<h3 id="runsh-requirements"><a class="header" href="#runsh-requirements"><strong><code>run.sh</code> Requirements</strong></a></h3>
+<ol>
+<li><strong>Creates a Docker network</strong> called <code>backend-test-network</code>.</li>
+<li><strong>Creates a MongoDB container</strong>:
+<pre><code class="language-bash">docker network create backend-test-network
+docker run -d --name db-container --network backend-test-network --network-alias db-container mongo
+</code></pre>
+</li>
+<li><strong>Builds and runs the Express API</strong>:
+<pre><code class="language-bash">docker build -t express-project .
+docker run -d --name express-app --network backend-test-network express-project
+</code></pre>
+</li>
+</ol>
+<p>The Express project <strong>must be structured correctly</strong>:</p>
+<pre><code>/models
+/routes
+/controllers
+server.js
+package.json
+package-lock.json
+Dockerfile
+run.sh
+README.md
+</code></pre>
+<hr />
+<h2 id="5-prerequisites-checklist"><a class="header" href="#5-prerequisites-checklist"><strong>5. Prerequisites Checklist</strong></a></h2>
+<ul>
+<li><strong>GitHub/GitLab repository</strong> (not inside a subfolder).</li>
+<li><strong>README.md that includes</strong>:
+<ul>
+<li>API routes.</li>
+<li>Commands to run containers.</li>
+</ul>
+</li>
+<li><strong>A <code>run.sh</code> script</strong> to launch MongoDB + Express API.</li>
+<li><strong>A <code>test.sh</code> script</strong> that tests all the API routes</li>
+<li><strong>Project follows MVC structure</strong> (<code>models/</code>, <code>routes/</code>, <code>controllers/</code>).</li>
+<li><strong>All responses should be JSON-formatted</strong>.</li>
+<li><strong>Correct HTTP status codes (<code>201</code>, <code>400</code>, <code>404</code>, <code>500</code>)</strong>.</li>
+</ul>
+<hr />
+<h2 id="6-bonus-challenges-optional"><a class="header" href="#6-bonus-challenges-optional"><strong>6. Bonus Challenges (Optional)</strong></a></h2>
+<p>For students who finish early:</p>
+<ol>
+<li><strong>Implement search functionality for products</strong>.</li>
+<li><strong>Implement pagination for <code>GET /api/products</code></strong>.</li>
+<li><strong>Improve error handling</strong> (invalid IDs, missing fields, stock validation).</li>
+</ol>
 
                     </main>
 

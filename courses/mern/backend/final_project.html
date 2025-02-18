@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Project Backend - MERN Stack APP</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="../backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li><li class="chapter-item expanded "><a href="../backend/exercises/exercise_3.html"><strong aria-hidden="true">1.3.</strong> Exercise 3</a></li><li class="chapter-item expanded "><a href="../backend/final_project.html" class="active"><strong aria-hidden="true">1.4.</strong> Project Backend</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">MERN Stack APP</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h3 id="final-project-e-commerce-api"><a class="header" href="#final-project-e-commerce-api"><strong>Final Project: E-commerce API</strong></a></h3>
+<h4 id="team-size-2-3-people"><a class="header" href="#team-size-2-3-people"><strong>Team Size: 2-3 People</strong></a></h4>
+<p>Objective: Build a <strong>RESTful E-commerce API</strong> that allows users to manage <strong>products, customers, and orders</strong>.</p>
+<hr />
+<h2 id="1-requirements--deliverables"><a class="header" href="#1-requirements--deliverables"><strong>1. Requirements &amp; Deliverables</strong></a></h2>
+<h3 id="deliverables"><a class="header" href="#deliverables"><strong>Deliverables</strong></a></h3>
+<ul>
+<li>A <strong>GitHub or GitLab repository</strong> containing the full project at the root (not inside subfolders).</li>
+<li>A <strong>README.md file</strong> describing:
+<ul>
+<li>API Routes with descriptions.</li>
+<li>A list of commands to run the project in Docker.</li>
+</ul>
+</li>
+<li>A <strong><code>run.sh</code> script</strong> to automate the setup process.</li>
+<li>A <strong><code>test.sh</code> script</strong> to test all the api routes (the user management workflow)</li>
+<li>A <strong>structured project</strong> using <code>models/</code>, <code>routes/</code>, and <code>controllers/</code>.</li>
+</ul>
+<hr />
+<h2 id="2-api-endpoints-proper-restful-methods"><a class="header" href="#2-api-endpoints-proper-restful-methods"><strong>2. API Endpoints (Proper RESTful Methods)</strong></a></h2>
+<h3 id="product-management"><a class="header" href="#product-management"><strong>Product Management</strong></a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Action</th><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead><tbody>
+<tr><td>Create Product</td><td><code>POST</code></td><td><code>/api/products</code></td><td>Add a new product</td></tr>
+<tr><td>Get All Products</td><td><code>GET</code></td><td><code>/api/products</code></td><td>Retrieve all products</td></tr>
+<tr><td>Get Product by ID</td><td><code>GET</code></td><td><code>/api/products/:id</code></td><td>Retrieve a single product</td></tr>
+<tr><td>Update Product</td><td><code>PUT</code></td><td><code>/api/products/:id</code></td><td>Modify an existing product</td></tr>
+<tr><td>Delete Product</td><td><code>DELETE</code></td><td><code>/api/products/:id</code></td><td>Remove a product</td></tr>
+</tbody></table>
+</div>
+<h3 id="customer-management"><a class="header" href="#customer-management"><strong>Customer Management</strong></a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Action</th><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead><tbody>
+<tr><td>Create Customer</td><td><code>POST</code></td><td><code>/api/customers</code></td><td>Add a new customer</td></tr>
+<tr><td>Get Customers</td><td><code>GET</code></td><td><code>/api/customers</code></td><td>Retrieve customers</td></tr>
+</tbody></table>
+</div>
+<h3 id="order-management"><a class="header" href="#order-management"><strong>Order Management</strong></a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Action</th><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead><tbody>
+<tr><td>Create Order</td><td><code>POST</code></td><td><code>/api/orders</code></td><td>Place a new order</td></tr>
+<tr><td>Get Order by ID</td><td><code>GET</code></td><td><code>/api/orders/:id</code></td><td>Retrieve order details</td></tr>
+<tr><td>Update Order</td><td><code>PUT</code></td><td><code>/api/orders/:id</code></td><td>Modify an existing order</td></tr>
+<tr><td>Delete Order</td><td><code>DELETE</code></td><td><code>/api/orders/:id</code></td><td>Remove an order</td></tr>
+</tbody></table>
+</div>
+<h3 id="direct-order"><a class="header" href="#direct-order"><strong>Direct Order</strong></a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Action</th><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead><tbody>
+<tr><td>Place Order for Customer</td><td><code>POST</code></td><td><code>/api/orders/direct/:customerId</code></td><td>Create an order for an existing customer</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="3-direct-order-implementation"><a class="header" href="#3-direct-order-implementation"><strong>3. Direct Order Implementation</strong></a></h2>
+<p>The <strong>Direct Order</strong> route allows an existing customer to place an order with selected products.</p>
+<h3 id="example-request"><a class="header" href="#example-request"><strong>Example Request</strong></a></h3>
+<pre><code class="language-bash">curl -X POST --json '{
+    "products": ["65a42b1fcf6a1c3d9b654321"]
+}' http://localhost:5000/api/orders/direct/65a42b1fcf6a1c3d9b123456
+</code></pre>
+<h3 id="expected-response"><a class="header" href="#expected-response"><strong>Expected Response</strong></a></h3>
+<pre><code class="language-json">{
+    "message": "Order created successfully",
+    "order": {
+        "_id": "65a42b1fcf6a1c3d9b999999",
+        "customer": "65a42b1fcf6a1c3d9b123456",
+        "products": ["65a42b1fcf6a1c3d9b654321"]
+    }
+}
+</code></pre>
+<p>This route <strong>requires the customer to exist</strong>. If the customer ID is invalid or not found, return a <code>404 Not Found</code> error.</p>
+<hr />
+<h2 id="4-project-setup--docker-requirements"><a class="header" href="#4-project-setup--docker-requirements"><strong>4. Project Setup &amp; Docker Requirements</strong></a></h2>
+<p>Students will use a <strong><code>run.sh</code> script</strong> instead of <code>docker-compose</code>.</p>
+<h3 id="runsh-requirements"><a class="header" href="#runsh-requirements"><strong><code>run.sh</code> Requirements</strong></a></h3>
+<ol>
+<li><strong>Creates a Docker network</strong> called <code>backend-test-network</code>.</li>
+<li><strong>Creates a MongoDB container</strong>:
+<pre><code class="language-bash">docker network create backend-test-network
+docker run -d --name db-container --network backend-test-network --network-alias db-container mongo
+</code></pre>
+</li>
+<li><strong>Builds and runs the Express API</strong>:
+<pre><code class="language-bash">docker build -t express-project .
+docker run -d --name express-app --network backend-test-network express-project
+</code></pre>
+</li>
+</ol>
+<p>The Express project <strong>must be structured correctly</strong>:</p>
+<pre><code>/models
+/routes
+/controllers
+server.js
+package.json
+package-lock.json
+Dockerfile
+run.sh
+README.md
+</code></pre>
+<hr />
+<h2 id="5-prerequisites-checklist"><a class="header" href="#5-prerequisites-checklist"><strong>5. Prerequisites Checklist</strong></a></h2>
+<ul>
+<li><strong>GitHub/GitLab repository</strong> (not inside a subfolder).</li>
+<li><strong>README.md that includes</strong>:
+<ul>
+<li>API routes.</li>
+<li>Commands to run containers.</li>
+</ul>
+</li>
+<li><strong>A <code>run.sh</code> script</strong> to launch MongoDB + Express API.</li>
+<li><strong>A <code>test.sh</code> script</strong> that tests all the API routes</li>
+<li><strong>Project follows MVC structure</strong> (<code>models/</code>, <code>routes/</code>, <code>controllers/</code>).</li>
+<li><strong>All responses should be JSON-formatted</strong>.</li>
+<li><strong>Correct HTTP status codes (<code>201</code>, <code>400</code>, <code>404</code>, <code>500</code>)</strong>.</li>
+</ul>
+<hr />
+<h2 id="6-bonus-challenges-optional"><a class="header" href="#6-bonus-challenges-optional"><strong>6. Bonus Challenges (Optional)</strong></a></h2>
+<p>For students who finish early:</p>
+<ol>
+<li><strong>Implement search functionality for products</strong>.</li>
+<li><strong>Implement pagination for <code>GET /api/products</code></strong>.</li>
+<li><strong>Improve error handling</strong> (invalid IDs, missing fields, stock validation).</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../backend/exercises/exercise_3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../backend/exercises/exercise_3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
