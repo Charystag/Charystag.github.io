@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Exercise 2 - MERN Stack APP</title>
+        <title>Exercise 3 - MERN Stack APP</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="../../backend/exercises/exercise_2.html" class="active"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li><li class="chapter-item expanded "><a href="../../backend/exercises/exercise_3.html"><strong aria-hidden="true">1.3.</strong> Exercise 3</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="../../backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li><li class="chapter-item expanded "><a href="../../backend/exercises/exercise_3.html" class="active"><strong aria-hidden="true">1.3.</strong> Exercise 3</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,137 +173,194 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="exercise-2-mongodb-integration-user-management-system"><a class="header" href="#exercise-2-mongodb-integration-user-management-system"><strong>Exercise 2: MongoDB Integration (User Management System)</strong></a></h1>
-<p>Your goal is to <strong>set up a user management system in Express using MongoDB</strong>, handling <strong>duplicate key errors</strong> properly.</p>
+                        <h1 id="exercise-3-more-crud"><a class="header" href="#exercise-3-more-crud"><strong>Exercise 3: More CRUD</strong></a></h1>
+<h2 id="exercise-3a-crud-with-route-parameters-book-api"><a class="header" href="#exercise-3a-crud-with-route-parameters-book-api"><strong>Exercise 3A: CRUD with Route Parameters (Book API)</strong></a></h2>
+<p>Your goal is to implement a <strong>CRUD API</strong> for books, using <strong>route parameters (<code>req.params</code>) only where it makes sense</strong>, while keeping <code>POST</code> and <code>PUT</code> realistic with <code>req.body</code>.</p>
 <hr />
-<h2 id="requirements"><a class="header" href="#requirements"><strong>Requirements</strong></a></h2>
+<h3 id="requirements"><a class="header" href="#requirements"><strong>Requirements</strong></a></h3>
 <ol>
-<li><strong>Set up MongoDB connection</strong> using <code>mongoose</code>.</li>
-<li><strong>Create a <code>User</code> model</strong> with the following fields:
+<li><strong>Create a <code>Book</code> model</strong> with the following fields:
 <ul>
-<li><code>username</code> (String, required, <strong>unique</strong>).</li>
-<li><code>email</code> (String, required, <strong>unique</strong>).</li>
-<li><code>created_at</code> (Timestamp, defaults to current time).</li>
+<li><code>title</code> (String, required).</li>
+<li><code>author</code> (String, required).</li>
+<li><code>year</code> (Number, required).</li>
+<li><code>genre</code> (String, required).</li>
 </ul>
 </li>
 <li><strong>Implement the following API routes:</strong>
 <ul>
-<li><code>POST /api/users</code> → Creates a new user.</li>
-<li><code>GET /api/users</code> → Returns a list of all users.</li>
+<li><code>GET /api/books</code> → Fetch all books.</li>
+<li><code>GET /api/books/:id</code> → Fetch a specific book by ID.</li>
+<li><code>POST /api/books</code> → Create a book (<strong>use <code>req.body</code></strong>).</li>
+<li><code>PUT /api/books/:id</code> → Update a book (<strong>use <code>req.body</code></strong>).</li>
+<li><code>DELETE /api/books/:id</code> → Delete a book.</li>
 </ul>
 </li>
-<li><strong>Use proper HTTP error responses</strong>:
-<ul>
-<li><code>400 Bad Request</code> → If required fields are missing.</li>
-<li><code>409 Conflict</code> → If <code>username</code> or <code>email</code> already exists (<strong>handle duplicate key errors</strong>).</li>
-<li><code>500 Internal Server Error</code> → For unexpected errors.</li>
-</ul>
-</li>
+<li><strong>Ensure that <code>:id</code> routes check if the provided ID is valid</strong> before querying the database.</li>
+<li><strong>Use proper HTTP status codes</strong> (<code>400</code>, <code>404</code>, <code>500</code>).</li>
 <li><strong>Ensure all responses are in JSON format</strong>.</li>
 <li><strong>Test all routes using cURL</strong>.</li>
 </ol>
-<h3 id="bonus-optional"><a class="header" href="#bonus-optional"><strong>Bonus (Optional)</strong></a></h3>
-<ul>
-<li><strong>Add input validation</strong>: Ensure <code>username</code> and <code>email</code> follow basic rules (e.g., valid email format, username length).</li>
-</ul>
 <hr />
-<h2 id="handling-duplicate-key-errors-e11000"><a class="header" href="#handling-duplicate-key-errors-e11000"><strong>Handling Duplicate Key Errors (<code>E11000</code>)</strong></a></h2>
-<p>Your implementation <strong>must</strong> detect and handle duplicate users correctly.</p>
+<h3 id="documentation"><a class="header" href="#documentation"><strong>Documentation</strong></a></h3>
 <ul>
-<li>If a user <strong>with the same <code>username</code> or <code>email</code></strong> already exists, MongoDB will throw an <strong>E11000 duplicate key error</strong>.</li>
-<li>Your API must <strong>catch this error</strong> and return:
-<ul>
-<li>HTTP <strong>409 Conflict</strong></li>
-<li>A JSON message specifying the conflict.</li>
-</ul>
-</li>
-</ul>
-<p><strong>Useful Documentation:</strong></p>
-<ul>
-<li><a href="https://www.mongodb.com/docs/manual/reference/method/db.collection.insertOne/#duplicate-key-error">MongoDB Duplicate Key Error (<code>E11000</code>)</a></li>
-</ul>
-<hr />
-<h2 id="documentation"><a class="header" href="#documentation"><strong>Documentation</strong></a></h2>
-<p>Use the following <strong>official MongoDB &amp; Express documentation</strong> to complete the exercise:</p>
-<ul>
+<li><a href="https://expressjs.com/en/guide/routing.html#route-parameters">Express Route Parameters (<code>req.params</code>)</a></li>
 <li><a href="https://mongoosejs.com/docs/models.html">Mongoose Models</a></li>
-<li><a href="https://mongoosejs.com/docs/schematypes.html">Mongoose Schema Types</a></li>
+<li><a href="https://mongoosejs.com/docs/api/mongoose.html#Mongoose.prototype.isValidObjectId">MongoDB ObjectId Validation (<code>mongoose.isValidObjectId</code>)</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP Status Codes</a></li>
-<li><a href="https://www.mongodb.com/docs/manual/reference/method/db.collection.insertOne/#duplicate-key-error">MongoDB Errors (<code>E11000</code> for duplicate keys)</a></li>
 </ul>
 <hr />
-<h2 id="how-to-test-your-api"><a class="header" href="#how-to-test-your-api"><strong>How to Test Your API</strong></a></h2>
-<p>After implementing the server and database connection, test the endpoints using <strong>cURL</strong>:</p>
-<pre><code class="language-bash"># Create a new user
-curl --json '{"username":"testUser","email":"test@example.com"}' http://localhost:5000/api/users
+<h3 id="how-to-test-your-api"><a class="header" href="#how-to-test-your-api"><strong>How to Test Your API</strong></a></h3>
+<pre><code class="language-bash"># Fetch all books
+curl http://localhost:5000/api/books
 
-# Get all users
-curl http://localhost:5000/api/users
+# Fetch a specific book by ID
+curl http://localhost:5000/api/books/65a42b1fcf6a1c3d9b123456
 
-# Try creating a duplicate user (should return 409 Conflict)
-curl --json '{"username":"testUser","email":"test@example.com"}' http://localhost:5000/api/users
+# Create a new book (JSON body)
+curl -X POST --json '{"title":"The Hobbit","author":"Tolkien","year":1937,"genre":"Fantasy"}' http://localhost:5000/api/books
+
+# Update a book by ID (JSON body)
+curl -X PUT --json '{"title":"The Hobbit Updated","author":"Tolkien","year":1937,"genre":"Fantasy"}' http://localhost:5000/api/books/65a42b1fcf6a1c3d9b123456
+
+# Delete a book by ID
+curl -X DELETE http://localhost:5000/api/books/65a42b1fcf6a1c3d9b123456
 </code></pre>
 <hr />
 <h3 id="expected-output"><a class="header" href="#expected-output"><strong>Expected Output</strong></a></h3>
-<h4 id="user-creation-post-apiusers"><a class="header" href="#user-creation-post-apiusers"><strong>User Creation (<code>POST /api/users</code>)</strong></a></h4>
+<h4 id="-creating-a-book-post-apibooks"><a class="header" href="#-creating-a-book-post-apibooks">✅ <strong>Creating a Book (<code>POST /api/books</code>)</strong></a></h4>
 <pre><code class="language-json">{
-    "message": "User created successfully",
-    "user": {
+    "message": "Book created successfully",
+    "book": {
         "_id": "65a42b1fcf6a1c3d9b999999",
-        "username": "testUser",
-        "email": "test@example.com",
-        "created_at": "2024-02-17T12:00:00Z"
+        "title": "The Hobbit",
+        "author": "Tolkien",
+        "year": 1937,
+        "genre": "Fantasy"
     }
 }
 </code></pre>
-<h4 id="user-retrieval-get-apiusers"><a class="header" href="#user-retrieval-get-apiusers"><strong>User Retrieval (<code>GET /api/users</code>)</strong></a></h4>
+<h4 id="-fetching-all-books-get-apibooks"><a class="header" href="#-fetching-all-books-get-apibooks">✅ <strong>Fetching All Books (<code>GET /api/books</code>)</strong></a></h4>
 <pre><code class="language-json">{
-    "users": [
+    "books": [
         {
-            "_id": "65a42b1fcf6a1c3d9b999999",
-            "username": "testUser",
-            "email": "test@example.com",
-            "created_at": "2024-02-17T12:00:00Z"
+            "_id": "65a42b1fcf6a1c3d9b123456",
+            "title": "The Hobbit",
+            "author": "Tolkien",
+            "year": 1937,
+            "genre": "Fantasy"
         }
     ]
 }
 </code></pre>
-<h4 id="handling-duplicate-users-post-apiusers-duplicate-entry"><a class="header" href="#handling-duplicate-users-post-apiusers-duplicate-entry"><strong>Handling Duplicate Users (<code>POST /api/users</code>, duplicate entry)</strong></a></h4>
+<h4 id="-updating-a-book-put-apibooksid"><a class="header" href="#-updating-a-book-put-apibooksid">✅ <strong>Updating a Book (<code>PUT /api/books/:id</code>)</strong></a></h4>
 <pre><code class="language-json">{
-    "error": "Username or email already exists"
+    "message": "Book updated successfully",
+    "book": {
+        "_id": "65a42b1fcf6a1c3d9b123456",
+        "title": "The Hobbit Updated",
+        "author": "Tolkien",
+        "year": 1937,
+        "genre": "Fantasy"
+    }
 }
 </code></pre>
-<p><em>(Response status: <strong>409 Conflict</strong>)</em></p>
-<h4 id="other-error-handling-examples"><a class="header" href="#other-error-handling-examples"><strong>Other Error Handling Examples</strong></a></h4>
+<h4 id="-deleting-a-book-delete-apibooksid"><a class="header" href="#-deleting-a-book-delete-apibooksid">✅ <strong>Deleting a Book (<code>DELETE /api/books/:id</code>)</strong></a></h4>
+<pre><code class="language-json">{
+    "message": "Book deleted successfully"
+}
+</code></pre>
+<hr />
+<h2 id="exercise-3b-book-filtering-with-route-parameters"><a class="header" href="#exercise-3b-book-filtering-with-route-parameters"><strong>Exercise 3B: Book Filtering with Route Parameters</strong></a></h2>
+<p>Your goal is to implement <strong>route-based filtering and searching</strong> for books, using <strong><code>req.params</code></strong> to dynamically extract search criteria.</p>
+<hr />
+<h3 id="requirements-1"><a class="header" href="#requirements-1"><strong>Requirements</strong></a></h3>
+<ol>
+<li><strong>Modify the Book API to support filtering and searching via route parameters:</strong>
 <ul>
-<li><strong>Missing fields (<code>400 Bad Request</code>)</strong>
-<pre><code class="language-json">{ "error": "Username and email are required" }
-</code></pre>
+<li><code>GET /api/books/author/:author</code> → Fetch books by author.</li>
+<li><code>GET /api/books/year/:year</code> → Fetch books published in a specific year.</li>
+<li><code>GET /api/books/genre/:genre</code> → Fetch books by genre.</li>
+</ul>
 </li>
-<li><strong>Server error (<code>500 Internal Server Error</code>)</strong>
-<pre><code class="language-json">{ "error": "Something went wrong" }
-</code></pre>
-</li>
+<li><strong>Return proper JSON responses.</strong></li>
+<li><strong>Use <code>mongoose</code> queries to filter books in the database.</strong></li>
+<li><strong>Test all routes using cURL.</strong></li>
+</ol>
+<hr />
+<h3 id="documentation-1"><a class="header" href="#documentation-1"><strong>Documentation</strong></a></h3>
+<ul>
+<li><a href="https://expressjs.com/en/guide/routing.html#route-parameters">Express Route Parameters (<code>req.params</code>)</a></li>
+<li><a href="https://mongoosejs.com/docs/queries.html">Mongoose Queries (<code>.find()</code>)</a></li>
 </ul>
 <hr />
-<h2 id="bonus-optional-if-you-finish-early"><a class="header" href="#bonus-optional-if-you-finish-early"><strong>Bonus (Optional, if you finish early)</strong></a></h2>
-<p>If you complete the exercise quickly, try these extra challenges:</p>
-<ol>
-<li><strong>Validate email format</strong> before saving the user.</li>
-<li><strong>Ensure <code>username</code> has at least 3 characters</strong>.</li>
-</ol>
+<h3 id="how-to-test-your-api-1"><a class="header" href="#how-to-test-your-api-1"><strong>How to Test Your API</strong></a></h3>
+<pre><code class="language-bash"># Fetch books by author
+curl http://localhost:5000/api/books/author/Tolkien
+
+# Fetch books by year
+curl http://localhost:5000/api/books/year/1937
+
+# Fetch books by genre
+curl http://localhost:5000/api/books/genre/Fantasy
+</code></pre>
+<hr />
+<h3 id="expected-output-1"><a class="header" href="#expected-output-1"><strong>Expected Output</strong></a></h3>
+<h4 id="-fetching-books-by-author-get-apibooksauthorauthor"><a class="header" href="#-fetching-books-by-author-get-apibooksauthorauthor">✅ <strong>Fetching Books by Author (<code>GET /api/books/author/:author</code>)</strong></a></h4>
+<pre><code class="language-json">{
+    "books": [
+        {
+            "_id": "65a42b1fcf6a1c3d9b123456",
+            "title": "The Hobbit",
+            "author": "Tolkien",
+            "year": 1937,
+            "genre": "Fantasy"
+        }
+    ]
+}
+</code></pre>
+<h4 id="-fetching-books-by-year-get-apibooksyearyear"><a class="header" href="#-fetching-books-by-year-get-apibooksyearyear">✅ <strong>Fetching Books by Year (<code>GET /api/books/year/:year</code>)</strong></a></h4>
+<pre><code class="language-json">{
+    "books": [
+        {
+            "_id": "65a42b1fcf6a1c3d9b654321",
+            "title": "Another Book",
+            "author": "Another Author",
+            "year": 1937,
+            "genre": "Adventure"
+        }
+    ]
+}
+</code></pre>
+<h4 id="-fetching-books-by-genre-get-apibooksgenregenre"><a class="header" href="#-fetching-books-by-genre-get-apibooksgenregenre">✅ <strong>Fetching Books by Genre (<code>GET /api/books/genre/:genre</code>)</strong></a></h4>
+<pre><code class="language-json">{
+    "books": [
+        {
+            "_id": "65a42b1fcf6a1c3d9b123456",
+            "title": "The Hobbit",
+            "author": "Tolkien",
+            "year": 1937,
+            "genre": "Fantasy"
+        },
+        {
+            "_id": "65a42b1fcf6a1c3d9b789012",
+            "title": "Another Fantasy Book",
+            "author": "Some Author",
+            "year": 2000,
+            "genre": "Fantasy"
+        }
+    ]
+}
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../backend/exercises/exercise_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../backend/exercises/exercise_2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../backend/exercises/exercise_3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -311,13 +368,10 @@ curl --json '{"username":"testUser","email":"test@example.com"}' http://localhos
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../backend/exercises/exercise_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../backend/exercises/exercise_2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../backend/exercises/exercise_3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
