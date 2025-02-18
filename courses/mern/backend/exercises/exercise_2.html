@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Exercise 1 - MERN Stack APP</title>
+        <title>Exercise 2 - MERN Stack APP</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../backend/exercises/exercise_1.html" class="active"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="../../backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="../../backend/exercises/exercise_2.html" class="active"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,99 +173,134 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="exercise-1-basic-express-setup-hello-world"><a class="header" href="#exercise-1-basic-express-setup-hello-world"><strong>Exercise 1: Basic Express Setup ("Hello World+")</strong></a></h1>
-<p>Your goal is to <strong>set up an Express server</strong> that can handle different types of requests.</p>
+                        <h1 id="exercise-2-mongodb-integration-user-management-system"><a class="header" href="#exercise-2-mongodb-integration-user-management-system"><strong>Exercise 2: MongoDB Integration (User Management System)</strong></a></h1>
+<p>Your goal is to <strong>set up a user management system in Express using MongoDB</strong>, handling <strong>duplicate key errors</strong> properly.</p>
 <hr />
 <h2 id="requirements"><a class="header" href="#requirements"><strong>Requirements</strong></a></h2>
 <ol>
-<li><strong>Set up an Express server</strong> that listens on port <code>5000</code>.</li>
-<li><strong>Add the following routes:</strong>
+<li><strong>Set up MongoDB connection</strong> using <code>mongoose</code>.</li>
+<li><strong>Create a <code>User</code> model</strong> with the following fields:
 <ul>
-<li><code>GET /time</code> → Returns <code>{ "serverTime": &lt;current server time&gt; }</code>.</li>
-<li><code>GET /echo/:message</code> → Returns <code>{ "message": "&lt;your-text&gt;" }</code>.</li>
-<li><code>POST /api/mock/create</code> → Returns <code>{ "message": "Mock user created" }</code>.</li>
-<li><code>PUT /api/mock/update</code> → Returns <code>{ "message": "Mock user updated" }</code>.</li>
-<li><code>DELETE /api/mock/delete</code> → Returns <code>{ "message": "Mock user deleted" }</code>.</li>
+<li><code>username</code> (String, required, <strong>unique</strong>).</li>
+<li><code>email</code> (String, required, <strong>unique</strong>).</li>
+<li><code>created_at</code> (Timestamp, defaults to current time).</li>
 </ul>
 </li>
-<li><strong>Ensure all responses are in JSON format</strong> (not plain text).</li>
-<li><strong>Use HTTP status codes correctly</strong> (e.g., <code>201 Created</code> for <code>POST</code>, <code>200 OK</code> for <code>GET</code>, etc.).</li>
-<li><strong>Test all routes using cURL</strong> to make sure they return the correct data.</li>
+<li><strong>Implement the following API routes:</strong>
+<ul>
+<li><code>POST /api/users</code> → Creates a new user.</li>
+<li><code>GET /api/users</code> → Returns a list of all users.</li>
+</ul>
+</li>
+<li><strong>Use proper HTTP error responses</strong>:
+<ul>
+<li><code>400 Bad Request</code> → If required fields are missing.</li>
+<li><code>409 Conflict</code> → If <code>username</code> or <code>email</code> already exists (<strong>handle duplicate key errors</strong>).</li>
+<li><code>500 Internal Server Error</code> → For unexpected errors.</li>
+</ul>
+</li>
+<li><strong>Ensure all responses are in JSON format</strong>.</li>
+<li><strong>Test all routes using cURL</strong>.</li>
 </ol>
+<h3 id="bonus-optional"><a class="header" href="#bonus-optional"><strong>Bonus (Optional)</strong></a></h3>
+<ul>
+<li><strong>Add input validation</strong>: Ensure <code>username</code> and <code>email</code> follow basic rules (e.g., valid email format, username length).</li>
+</ul>
+<hr />
+<h2 id="handling-duplicate-key-errors-e11000"><a class="header" href="#handling-duplicate-key-errors-e11000"><strong>Handling Duplicate Key Errors (<code>E11000</code>)</strong></a></h2>
+<p>Your implementation <strong>must</strong> detect and handle duplicate users correctly.</p>
+<ul>
+<li>If a user <strong>with the same <code>username</code> or <code>email</code></strong> already exists, MongoDB will throw an <strong>E11000 duplicate key error</strong>.</li>
+<li>Your API must <strong>catch this error</strong> and return:
+<ul>
+<li>HTTP <strong>409 Conflict</strong></li>
+<li>A JSON message specifying the conflict.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Useful Documentation:</strong></p>
+<ul>
+<li><a href="https://www.mongodb.com/docs/manual/reference/method/db.collection.insertOne/#duplicate-key-error">MongoDB Duplicate Key Error (<code>E11000</code>)</a></li>
+</ul>
 <hr />
 <h2 id="documentation"><a class="header" href="#documentation"><strong>Documentation</strong></a></h2>
-<p>Use the following <strong>official Express documentation</strong> to complete the exercise:</p>
+<p>Use the following <strong>official MongoDB &amp; Express documentation</strong> to complete the exercise:</p>
 <ul>
-<li><a href="https://expressjs.com/en/guide/routing.html">Express Routing</a></li>
-<li><a href="https://expressjs.com/en/guide/routing.html#route-parameters">Express Route Parameters (<code>req.params</code>)</a></li>
-<li><a href="https://expressjs.com/en/api.html#res.json">Express JSON Response (<code>res.json</code>)</a></li>
-<li><a href="https://expressjs.com/en/5x/api.html#res.status">Express Status Codes (<code>res.status</code>)</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP Methods (<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>)</a></li>
-<li><a href="https://expressjs.com/en/guide/writing-middleware.html">Writing Middleware</a></li>
-<li><a href="https://expressjs.com/en/guide/using-middleware.html">Using Middleware</a></li>
+<li><a href="https://mongoosejs.com/docs/models.html">Mongoose Models</a></li>
+<li><a href="https://mongoosejs.com/docs/schematypes.html">Mongoose Schema Types</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP Status Codes</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/reference/method/db.collection.insertOne/#duplicate-key-error">MongoDB Errors (<code>E11000</code> for duplicate keys)</a></li>
 </ul>
 <hr />
 <h2 id="how-to-test-your-api"><a class="header" href="#how-to-test-your-api"><strong>How to Test Your API</strong></a></h2>
-<p>After setting up the server, test the endpoints using <strong>cURL</strong>:</p>
-<pre><code class="language-bash">curl http://localhost:5000/time
-curl http://localhost:5000/echo/hello
-curl -X POST http://localhost:5000/api/mock/create
-curl -X PUT http://localhost:5000/api/mock/update
-curl -X DELETE http://localhost:5000/api/mock/delete
+<p>After implementing the server and database connection, test the endpoints using <strong>cURL</strong>:</p>
+<pre><code class="language-bash"># Create a new user
+curl --json '{"username":"testUser","email":"test@example.com"}' http://localhost:5000/api/users
+
+# Get all users
+curl http://localhost:5000/api/users
+
+# Try creating a duplicate user (should return 409 Conflict)
+curl --json '{"username":"testUser","email":"test@example.com"}' http://localhost:5000/api/users
 </code></pre>
+<hr />
 <h3 id="expected-output"><a class="header" href="#expected-output"><strong>Expected Output</strong></a></h3>
-<p>If your implementation is correct, you should get responses like:</p>
-<pre><code class="language-json">// GET /time
-{ "serverTime": "2024-02-17T12:00:00Z" }
-
-// GET /echo/hello
-{ "message": "hello" }
-
-// POST /api/mock/create
-{ "message": "Mock user created" }
-
-// PUT /api/mock/update
-{ "message": "Mock user updated" }
-
-// DELETE /api/mock/delete
-{ "message": "Mock user deleted" }
+<h4 id="user-creation-post-apiusers"><a class="header" href="#user-creation-post-apiusers"><strong>User Creation (<code>POST /api/users</code>)</strong></a></h4>
+<pre><code class="language-json">{
+    "message": "User created successfully",
+    "user": {
+        "_id": "65a42b1fcf6a1c3d9b999999",
+        "username": "testUser",
+        "email": "test@example.com",
+        "created_at": "2024-02-17T12:00:00Z"
+    }
+}
 </code></pre>
-<blockquote>
-<p>:warning: The timestamp might be slightly different depending
-on your machine language and locale</p>
-</blockquote>
+<h4 id="user-retrieval-get-apiusers"><a class="header" href="#user-retrieval-get-apiusers"><strong>User Retrieval (<code>GET /api/users</code>)</strong></a></h4>
+<pre><code class="language-json">{
+    "users": [
+        {
+            "_id": "65a42b1fcf6a1c3d9b999999",
+            "username": "testUser",
+            "email": "test@example.com",
+            "created_at": "2024-02-17T12:00:00Z"
+        }
+    ]
+}
+</code></pre>
+<h4 id="handling-duplicate-users-post-apiusers-duplicate-entry"><a class="header" href="#handling-duplicate-users-post-apiusers-duplicate-entry"><strong>Handling Duplicate Users (<code>POST /api/users</code>, duplicate entry)</strong></a></h4>
+<pre><code class="language-json">{
+    "error": "Username or email already exists"
+}
+</code></pre>
+<p><em>(Response status: <strong>409 Conflict</strong>)</em></p>
+<h4 id="other-error-handling-examples"><a class="header" href="#other-error-handling-examples"><strong>Other Error Handling Examples</strong></a></h4>
+<ul>
+<li><strong>Missing fields (<code>400 Bad Request</code>)</strong>
+<pre><code class="language-json">{ "error": "Username and email are required" }
+</code></pre>
+</li>
+<li><strong>Server error (<code>500 Internal Server Error</code>)</strong>
+<pre><code class="language-json">{ "error": "Something went wrong" }
+</code></pre>
+</li>
+</ul>
 <hr />
 <h2 id="bonus-optional-if-you-finish-early"><a class="header" href="#bonus-optional-if-you-finish-early"><strong>Bonus (Optional, if you finish early)</strong></a></h2>
 <p>If you complete the exercise quickly, try these extra challenges:</p>
 <ol>
-<li>Modify <code>/time</code> to return <strong>more details</strong>, such as:
-<pre><code class="language-json">{ "serverTime": "2024-02-17T12:00:00Z", "timezone": "UTC" }
-</code></pre>
-</li>
-<li>Add a new route:
-<ul>
-<li><code>GET /hello/:name</code> → Returns <code>{ "greeting": "Hello, &lt;name&gt;!" }</code>.</li>
-</ul>
-</li>
-<li><strong>Modify the status codes</strong> for each request to match HTTP conventions:
-<ul>
-<li><code>POST /api/mock/create</code> → Should return <strong><code>201 Created</code></strong>.</li>
-<li><code>DELETE /api/mock/delete</code> → Should return <strong><code>204 No Content</code></strong>.</li>
-</ul>
-</li>
+<li><strong>Validate email format</strong> before saving the user.</li>
+<li><strong>Ensure <code>username</code> has at least 3 characters</strong>.</li>
 </ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../backend/backend.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../backend/exercises/exercise_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../backend/exercises/exercise_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -273,13 +308,10 @@ on your machine language and locale</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../backend/backend.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../backend/exercises/exercise_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../backend/exercises/exercise_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

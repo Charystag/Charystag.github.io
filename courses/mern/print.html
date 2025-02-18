@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -1085,6 +1085,125 @@ on your machine language and locale</p>
 <li><code>DELETE /api/mock/delete</code> → Should return <strong><code>204 No Content</code></strong>.</li>
 </ul>
 </li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exercise-2-mongodb-integration-user-management-system"><a class="header" href="#exercise-2-mongodb-integration-user-management-system"><strong>Exercise 2: MongoDB Integration (User Management System)</strong></a></h1>
+<p>Your goal is to <strong>set up a user management system in Express using MongoDB</strong>, handling <strong>duplicate key errors</strong> properly.</p>
+<hr />
+<h2 id="requirements-1"><a class="header" href="#requirements-1"><strong>Requirements</strong></a></h2>
+<ol>
+<li><strong>Set up MongoDB connection</strong> using <code>mongoose</code>.</li>
+<li><strong>Create a <code>User</code> model</strong> with the following fields:
+<ul>
+<li><code>username</code> (String, required, <strong>unique</strong>).</li>
+<li><code>email</code> (String, required, <strong>unique</strong>).</li>
+<li><code>created_at</code> (Timestamp, defaults to current time).</li>
+</ul>
+</li>
+<li><strong>Implement the following API routes:</strong>
+<ul>
+<li><code>POST /api/users</code> → Creates a new user.</li>
+<li><code>GET /api/users</code> → Returns a list of all users.</li>
+</ul>
+</li>
+<li><strong>Use proper HTTP error responses</strong>:
+<ul>
+<li><code>400 Bad Request</code> → If required fields are missing.</li>
+<li><code>409 Conflict</code> → If <code>username</code> or <code>email</code> already exists (<strong>handle duplicate key errors</strong>).</li>
+<li><code>500 Internal Server Error</code> → For unexpected errors.</li>
+</ul>
+</li>
+<li><strong>Ensure all responses are in JSON format</strong>.</li>
+<li><strong>Test all routes using cURL</strong>.</li>
+</ol>
+<h3 id="bonus-optional"><a class="header" href="#bonus-optional"><strong>Bonus (Optional)</strong></a></h3>
+<ul>
+<li><strong>Add input validation</strong>: Ensure <code>username</code> and <code>email</code> follow basic rules (e.g., valid email format, username length).</li>
+</ul>
+<hr />
+<h2 id="handling-duplicate-key-errors-e11000"><a class="header" href="#handling-duplicate-key-errors-e11000"><strong>Handling Duplicate Key Errors (<code>E11000</code>)</strong></a></h2>
+<p>Your implementation <strong>must</strong> detect and handle duplicate users correctly.</p>
+<ul>
+<li>If a user <strong>with the same <code>username</code> or <code>email</code></strong> already exists, MongoDB will throw an <strong>E11000 duplicate key error</strong>.</li>
+<li>Your API must <strong>catch this error</strong> and return:
+<ul>
+<li>HTTP <strong>409 Conflict</strong></li>
+<li>A JSON message specifying the conflict.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Useful Documentation:</strong></p>
+<ul>
+<li><a href="https://www.mongodb.com/docs/manual/reference/method/db.collection.insertOne/#duplicate-key-error">MongoDB Duplicate Key Error (<code>E11000</code>)</a></li>
+</ul>
+<hr />
+<h2 id="documentation-1"><a class="header" href="#documentation-1"><strong>Documentation</strong></a></h2>
+<p>Use the following <strong>official MongoDB &amp; Express documentation</strong> to complete the exercise:</p>
+<ul>
+<li><a href="https://mongoosejs.com/docs/models.html">Mongoose Models</a></li>
+<li><a href="https://mongoosejs.com/docs/schematypes.html">Mongoose Schema Types</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP Status Codes</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/reference/method/db.collection.insertOne/#duplicate-key-error">MongoDB Errors (<code>E11000</code> for duplicate keys)</a></li>
+</ul>
+<hr />
+<h2 id="how-to-test-your-api-1"><a class="header" href="#how-to-test-your-api-1"><strong>How to Test Your API</strong></a></h2>
+<p>After implementing the server and database connection, test the endpoints using <strong>cURL</strong>:</p>
+<pre><code class="language-bash"># Create a new user
+curl --json '{"username":"testUser","email":"test@example.com"}' http://localhost:5000/api/users
+
+# Get all users
+curl http://localhost:5000/api/users
+
+# Try creating a duplicate user (should return 409 Conflict)
+curl --json '{"username":"testUser","email":"test@example.com"}' http://localhost:5000/api/users
+</code></pre>
+<hr />
+<h3 id="expected-output-1"><a class="header" href="#expected-output-1"><strong>Expected Output</strong></a></h3>
+<h4 id="user-creation-post-apiusers"><a class="header" href="#user-creation-post-apiusers"><strong>User Creation (<code>POST /api/users</code>)</strong></a></h4>
+<pre><code class="language-json">{
+    "message": "User created successfully",
+    "user": {
+        "_id": "65a42b1fcf6a1c3d9b999999",
+        "username": "testUser",
+        "email": "test@example.com",
+        "created_at": "2024-02-17T12:00:00Z"
+    }
+}
+</code></pre>
+<h4 id="user-retrieval-get-apiusers"><a class="header" href="#user-retrieval-get-apiusers"><strong>User Retrieval (<code>GET /api/users</code>)</strong></a></h4>
+<pre><code class="language-json">{
+    "users": [
+        {
+            "_id": "65a42b1fcf6a1c3d9b999999",
+            "username": "testUser",
+            "email": "test@example.com",
+            "created_at": "2024-02-17T12:00:00Z"
+        }
+    ]
+}
+</code></pre>
+<h4 id="handling-duplicate-users-post-apiusers-duplicate-entry"><a class="header" href="#handling-duplicate-users-post-apiusers-duplicate-entry"><strong>Handling Duplicate Users (<code>POST /api/users</code>, duplicate entry)</strong></a></h4>
+<pre><code class="language-json">{
+    "error": "Username or email already exists"
+}
+</code></pre>
+<p><em>(Response status: <strong>409 Conflict</strong>)</em></p>
+<h4 id="other-error-handling-examples"><a class="header" href="#other-error-handling-examples"><strong>Other Error Handling Examples</strong></a></h4>
+<ul>
+<li><strong>Missing fields (<code>400 Bad Request</code>)</strong>
+<pre><code class="language-json">{ "error": "Username and email are required" }
+</code></pre>
+</li>
+<li><strong>Server error (<code>500 Internal Server Error</code>)</strong>
+<pre><code class="language-json">{ "error": "Something went wrong" }
+</code></pre>
+</li>
+</ul>
+<hr />
+<h2 id="bonus-optional-if-you-finish-early-1"><a class="header" href="#bonus-optional-if-you-finish-early-1"><strong>Bonus (Optional, if you finish early)</strong></a></h2>
+<p>If you complete the exercise quickly, try these extra challenges:</p>
+<ol>
+<li><strong>Validate email format</strong> before saving the user.</li>
+<li><strong>Ensure <code>username</code> has at least 3 characters</strong>.</li>
 </ol>
 
                     </main>
