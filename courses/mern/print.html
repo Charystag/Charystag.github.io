@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_3.html"><strong aria-hidden="true">1.3.</strong> Exercise 3</a></li><li class="chapter-item expanded "><a href="backend/final_project.html"><strong aria-hidden="true">1.4.</strong> Project Backend</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_3.html"><strong aria-hidden="true">1.3.</strong> Exercise 3</a></li><li class="chapter-item expanded "><a href="backend/final_project.html"><strong aria-hidden="true">1.4.</strong> Project Backend</a></li></ol></li><li class="chapter-item expanded "><a href="react/react.html"><strong aria-hidden="true">2.</strong> React Basics</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -1479,6 +1479,8 @@ Dockerfile
 run.sh
 README.md
 </code></pre>
+<p>The server should run on the port <code>5000</code> and the should be forwarded from
+host's port <code>5201</code> to the docker container's port <code>5000</code></p>
 <hr />
 <h2 id="5-prerequisites-checklist"><a class="header" href="#5-prerequisites-checklist"><strong>5. Prerequisites Checklist</strong></a></h2>
 <ul>
@@ -1503,6 +1505,497 @@ README.md
 <li><strong>Implement pagination for <code>GET /api/products</code></strong>.</li>
 <li><strong>Improve error handling</strong> (invalid IDs, missing fields, stock validation).</li>
 </ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="react-frontend-application"><a class="header" href="#react-frontend-application">React Frontend Application</a></h1>
+<p>How to create a basic react application</p>
+<h2 id="project-setup"><a class="header" href="#project-setup">Project Setup</a></h2>
+<p>Let's use <a href="https://vite.dev/"><code>vite</code></a> tooling framework to setup our react application.</p>
+<p>We are going to run the following command:</p>
+<pre><code class="language-bash">npm create vite@latest
+</code></pre>
+<blockquote>
+<p>:bulb: Make sure that npm is installed on your machine.</p>
+<p>If you want, you can also use the <a href="react/./Dockerfile"><code>Dockerfile</code></a> provided with the project
+to build a custom development image.</p>
+<p>Build with :</p>
+<pre><code class="language-bash">docker build -t node-dev .
+</code></pre>
+<p>and run with :</p>
+<pre><code class="language-bash">docker run -it --name dev-container -p 5173:5173 --mount type=bind,src="${PWD}",target=/app node-dev
+</code></pre>
+</blockquote>
+<p>You can now name the project <code>react-app</code>, select <code>React</code> and then <code>Typescript</code>.</p>
+<p>Once the project is initialized, follow along and run :</p>
+<pre><code class="language-bash">cd react-app
+npm install
+npm run dev
+</code></pre>
+<p><code>npm install</code> will basically install all the dependencies and <code>npm run dev</code> will run the
+<code>dev</code> script in <code>package.json</code> (which will start the vite server)</p>
+<p>You can now run <code>curl localhost:5173</code> or visit <code>localhost:5173</code> in your browser to ensure
+that everything is working.</p>
+<blockquote>
+<p>:bulb: If you started vite into a container, you might notice that the <code>cURL</code> request
+doesn't work. This is because you need to provide <a href="https://vite.dev/config/server-options"><code>--host</code></a>
+to vite in order to expose your server to your network (and not only to localhost).
+to fix this, add the <code>--host</code> option to your <code>dev</code> script in <code>package.json</code>.</p>
+</blockquote>
+<h2 id="our-first-component"><a class="header" href="#our-first-component">Our first component</a></h2>
+<p>For now, there is only one component, the <code>App</code> component. Now let's create another
+component called <code>Message</code>. Let's create a file <code>Message.tsx</code> under the <code>src</code> directory</p>
+<blockquote>
+<p>:bulb: a typescript file can have the extension <code>.ts</code> or <code>.tsx</code>. We often use the
+<code>.ts</code> extension for plain typescript and the <code>.tsx</code> extension for typescript with
+React</p>
+</blockquote>
+<p>For this course, we are going to use
+<a href="https://react.dev/learn/your-first-component#defining-a-component">function based components</a>.
+However, for old codebases you could encounter
+<a href="https://react.dev/reference/react/Component">class based components</a>.</p>
+<p>Let's declare a <code>Message</code> function.</p>
+<blockquote>
+<p>:bulb: pay attention to name your components following the
+<a href="https://pascal-case.com/#definition">PascalCasing</a> convention
+as this is the convention that everyone expects in a React
+project.</p>
+</blockquote>
+<p>The goal of this function is to describe what our UI should look
+like. So for example if we want to use this function to render
+a <code>h1</code> element with the value <code>hello-world</code>, we can simply
+enter:</p>
+<pre><code class="language-jsx">function Message() {
+    return &lt;h1&gt; Hello World &lt;/h1&gt;;
+}
+</code></pre>
+<blockquote>
+<p>:bulb: Even though it looks like we're writting <code>HTML</code> in the
+middle of <code>JS</code>, the syntax is actually a syntax called
+<a href="https://legacy.reactjs.org/docs/introducing-jsx.html"><code>JSX</code></a></p>
+<p>You can also view the official <a href="https://facebook.github.io/jsx/">facebook paper</a>
+about the ins and outs of <code>JSX</code></p>
+<p>What you have to remember though, is that under the hood, your
+<code>JSX</code> code will be converted to plain <code>JS</code></p>
+</blockquote>
+<p>Let's now export the <code>Message</code> component as the
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#description">default</a></p>
+<blockquote>
+<p>:bulb: to view the information about the default export"
+you have to scroll a bit and look after the "named exports".</p>
+</blockquote>
+<p>Let's delete all the contents of <code>App.tsx</code> and write the following
+code instead:</p>
+<pre><code class="language-js">import Message from "./Message";
+
+function App() {
+    return (&lt;div&gt;
+            &lt;Message&gt;
+            &lt;/Message&gt;
+        &lt;/div&gt;);
+}
+
+export default App;
+</code></pre>
+<p>We can now restart our server and visit <code>http://localhost:5173</code>
+to see that our "Hello World" is rendered in the browser.</p>
+<blockquote>
+<p>:bulb: One of the main advantages of <code>JSX</code> is that it allows the
+use of javascript within our components. So we can add
+contionals and looping constructs to precisely manage the state
+of our components</p>
+</blockquote>
+<h2 id="creating-a-listgroup-component"><a class="header" href="#creating-a-listgroup-component">Creating a ListGroup Component</a></h2>
+<h3 id="installing-bootstrap"><a class="header" href="#installing-bootstrap">Installing Bootstrap</a></h3>
+<p>Let's go ahead and install <code>boostrap</code> within our application so
+either in your terminal (or in the <code>Docker</code> container running
+your application) you can run the command :</p>
+<pre><code class="language-bash">npm install bootstrap
+</code></pre>
+<p>Let's now actually use bootstrap in one of our <code>css</code> files. To do
+so, we'll start by deleting all the contents of <code>App.css</code> (as
+this was the content for the default app that doesn't exist
+anymore)</p>
+<p>We can also delete the <code>index.css</code> file entirely for the same
+reason and go to <code>main.tsx</code> and replace :</p>
+<pre><code class="language-js">import './index.css'
+</code></pre>
+<p>with</p>
+<pre><code class="language-js">import 'bootstrap/dist/css/bootstrap.css'
+</code></pre>
+<blockquote>
+<p>:information_desk_person: You can find the <code>bootstrap</code>
+modules and directory structure
+<a href="https://getbootstrap.com/docs/5.3/getting-started/contents/">here</a></p>
+</blockquote>
+<p>To check that everything worked properly, let's restart our
+server, go to the browser and check that the font has indeed
+changed and that the "Hello World" moved to the top of the page</p>
+<h3 id="creating-the-component"><a class="header" href="#creating-the-component">Creating the component</a></h3>
+<p>First let's create a directory called <code>components</code> within our
+<code>src</code> directory</p>
+<blockquote>
+<p>:information_desk_person: It is a convention that all the
+components are placed into a directory called <code>components</code>.
+You might not want to follow it, however as for the
+PascalCase convention, it will make reading your code easier
+for other maintainers of your projects</p>
+</blockquote>
+<p>We can now create <code>components/ListGroup.tsx</code> and just make it
+return a <code>h1</code> element that prints <code>ListGroup</code></p>
+<details>
+<summary>The <code>ListGroup.tsx</code> file</summary>
+<pre><code class="language-js">function ListGroup() {
+    return(&lt;h1&gt;ListGroup&lt;/h1&gt;);
+}
+
+export default ListGroup;
+</code></pre>
+</details>
+<p>Let's now import it in our <code>App.tsx</code> file (we don't need the
+<code>Message</code> component anymore so we can just delete any mention of
+it in the <code>App.tsx</code> file)</p>
+<details>
+<summary> The updated <code>App.tsx</code> file</summary>
+<pre><code class="language-js">import ListGroup from "./components/ListGroup.tsx";
+
+function App() {
+    return (&lt;div&gt;
+            &lt;ListGroup&gt;
+            &lt;/ListGroup&gt;
+        &lt;/div&gt;);
+}
+
+export default App;
+</code></pre>
+</details>
+<blockquote>
+<p>:bulb: As usual you can restart the server and go to the browser
+to check that everything is working</p>
+</blockquote>
+<h3 id="using-the-code-from-bootstrap"><a class="header" href="#using-the-code-from-bootstrap">Using the code from <code>bootstrap</code></a></h3>
+<p>To do so, we have to head over to the
+<a href="https://getbootstrap.com/docs/5.3/components/list-group/#basic-example">ListGroup</a>
+page in the bootstrap documentation.</p>
+<p>Now we have all the information we need to create our component.
+Let's copy the code and head back to our component.</p>
+<p>We can now replace the <code>h1</code> element with:</p>
+<pre><code class="language-html">&lt;ul class="list-group"&gt;
+  &lt;li class="list-group-item"&gt;An item&lt;/li&gt;
+  &lt;li class="list-group-item"&gt;A second item&lt;/li&gt;
+  &lt;li class="list-group-item"&gt;A third item&lt;/li&gt;
+  &lt;li class="list-group-item"&gt;A fourth item&lt;/li&gt;
+  &lt;li class="list-group-item"&gt;And a fifth one&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<p>As you can see if you're using any syntactical highlighting tool,
+you get a bunch of errors because <code>class</code> is a reserved keyword in
+react. To remove them, you should use the <code>className</code> property.</p>
+<blockquote>
+<p>:warning: Make sure to enclose your <code>JSX</code> into parenthesis so
+you can spread it over multiple lines</p>
+</blockquote>
+<p>After eventually reloading the server, you should now see our
+<code>ListGroup</code> component.</p>
+<h3 id="returning-a-fragment"><a class="header" href="#returning-a-fragment">Returning a <a href="https://react.dev/reference/react/Fragment"><code>Fragment</code></a></a></h3>
+<p>In React, a component can't return more than one element, so if
+we'd like to add a heading to our <code>ListGroup</code>, we can use a
+<code>Fragment</code> either with <code>&lt;Fragment&gt;..&lt;/Fragment&gt;</code> (thus importing
+the <code>Fragment</code> Component from the <code>react</code> module) or just by
+enclosing our elements in <code>&lt;&gt;..&lt;/&gt;</code>.</p>
+<p>Let's do this and add a title to our <code>ListGroup</code> component.</p>
+<h3 id="making-our-list-more-dynamic"><a class="header" href="#making-our-list-more-dynamic">Making our list more dynamic</a></h3>
+<p>In React, we don't have any looping construct, so we can't write
+a <code>for</code> loop to iterate over an array of items.</p>
+<p>Instead, we're going to use a <code>js</code> function called <code>map</code> to
+transform our items into other items.</p>
+<p>Let's then map each item to a
+<code>&lt;li className="list-group-item"&gt;{item}&lt;/li&gt;</code> and add a <code>key</code>
+property to the <code>item</code>.</p>
+<blockquote>
+<p>:information_desk_person: In react, each item needs to have
+unique a <code>key</code> property so that react can keep track of each
+item and properly update the DOM</p>
+</blockquote>
+<p>In this example, we'll use the item value as our <code>key</code> property.</p>
+<p>Your final listgroup should look something like this one:</p>
+<pre><code class="language-js">function ListGroup() {
+    const items = [
+        "Luanda",
+        "Yamoussoukro",
+        "Abidjan",
+        "Dakar",
+        "Brazzaville"
+    ];
+
+    return (
+        &lt;&gt;
+            &lt;h1&gt;ListGroup&lt;/h1&gt;
+            &lt;ul className="list-group"&gt;
+                {items.map((item) =&gt; (
+                    &lt;li className="list-group-item"
+                        key={item}
+                    &gt;{item}&lt;/li&gt;
+                ))}
+            &lt;/ul&gt;
+        &lt;/&gt;
+        );
+}
+
+export default ListGroup;
+</code></pre>
+<h3 id="conditional-rendering"><a class="header" href="#conditional-rendering">Conditional Rendering</a></h3>
+<p>Sometimes, we'd like to change the content based on the value of
+some of our variables. To do so, we can use <code>if</code> conditions in
+React.</p>
+<p>For example, let's say that we want to warn the user that there
+is not item in the list if the <code>items</code> array is empty. to do so,
+we could replace the beginning of our function with the
+following code:</p>
+<pre><code class="language-js">let items = [
+    "Luanda",
+    "Yamoussoukro",
+    "Abidjan",
+    "Dakar",
+    "Brazzaville"
+];
+items = [];
+</code></pre>
+<p>As you can see, the items variable is not const anymore. We can
+then use a ternary operator to render a message conditionnally:</p>
+<p>The addition would look like the following (with the lines above
+and under added for context):</p>
+<pre><code class="language-jsx">&lt;h1&gt;ListGroup&lt;/h1&gt;
+{ items.length === 0 ? &lt;p&gt;No Items Found&lt;/p&gt; : null }
+&lt;ul className="list-group"&gt;
+</code></pre>
+<p>However, it is not very clean to have the code in the middle of
+the rendering. So two possibilities:</p>
+<ol>
+<li>Turning it into a constant :</li>
+</ol>
+<pre><code class="language-js">const message = items.length === 0 ? &lt;p&gt;No Items Found&lt;/p&gt; : null
+</code></pre>
+<p>And then rendering <code>message</code> with <code>{message}</code></p>
+<ol start="2">
+<li>Turning it into a function :</li>
+</ol>
+<pre><code class="language-js">const getMessage = () =&gt; {
+    return items.length === 0 ? &lt;p&gt;No Items Found&lt;/p&gt; : null;
+}
+</code></pre>
+<p>And then rendering it with <code>{getMessage()}</code></p>
+<blockquote>
+<p>:information_desk_person: A good rule of thumb is: if you need
+parameters, use a function. Otherwise use a variable.</p>
+</blockquote>
+<blockquote>
+<p>:bulb: Instead of using a ternary opeator, we could also
+perform a logical <code>&amp;&amp;</code> between our variable and the value we
+want to return</p>
+</blockquote>
+<h2 id="handling-events"><a class="header" href="#handling-events">Handling Events</a></h2>
+<p>In React, each item has an
+<a href="https://react.dev/learn/responding-to-events"><code>onClick</code></a>
+property that let's you listen to the <code>click</code> <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Events">event</a></p>
+<p>Let's now handle the click event in our ListGroup Component.</p>
+<p>For now, let's just add an <code>onClick</code> property with the following :</p>
+<pre><code class="language-js">onClick={() =&gt; console.log("Clicked")}
+</code></pre>
+<p>You should see in the browser that it works as expected.</p>
+<p>In our <code>map</code> function, we can also add an <code>index</code> parameter when
+we map the items so we can see the index of the item that was
+<code>map</code>ed.</p>
+<p>If we change our code, it should look like this :</p>
+<pre><code class="language-js">{items.map((item, index) =&gt; (
+&lt;li className="list-group-item"
+    key={item}
+    onClick={() =&gt; console.log(item, index)}
+&gt;
+</code></pre>
+<p>With the other lines unmodified.</p>
+<p>We can now see in the browser that we can view the index of the
+item that was clicked</p>
+<blockquote>
+<p>:bulb: We can also give the event as a parameter to see some
+useful information about the event that was passed as an
+argument.</p>
+</blockquote>
+<h2 id="managing-state"><a class="header" href="#managing-state">Managing State</a></h2>
+<p>If we want to manage state with a variable that is local to our
+function, react won't be aware of what we're doing.
+To effectively manage state, we have to tell react that we are
+using a variable that it should manage.</p>
+<p>So let's do this and use the
+<a href="https://react.dev/reference/react/useState">useState</a> react hook</p>
+<p>let's add the following code to our component.</p>
+<pre><code class="language-js">const [selectedIndex, setSelectedIndex] = useState(-1);
+</code></pre>
+<blockquote>
+<p>:warning: The following code won't work if you don't import
+the <code>useState</code> hook from the <code>react</code> module</p>
+</blockquote>
+<p>We can now modifying our code as follows:</p>
+<pre><code class="language-jsx">{items.map((item, index) =&gt; (
+&lt;li className={
+    selectedIndex === index
+    ? "list-group-item active"
+    : "list-group-item"
+}
+    key={item}
+    onClick={() =&gt; setSelectedIndex(index)}
+&gt;
+</code></pre>
+<p>With the other lines unchanged. You should now see in the browser
+that if we click on the elements, it should select the items
+dynamically.</p>
+<h2 id="passing-properties-via-props"><a class="header" href="#passing-properties-via-props">Passing Properties via <a href="https://react.dev/learn/passing-props-to-a-component">props</a></a></h2>
+<p>Let's say we now want to change the cities displayed or change the
+heading of our list. To do so, we'll need to pass them via
+<a href="https://react.dev/learn/passing-props-to-a-component">props</a></p>
+<h3 id="interface-declaration"><a class="header" href="#interface-declaration">Interface Declaration</a></h3>
+<p>let's add the following code to our <code>components/ListGroup.tsx</code>:</p>
+<pre><code class="language-js">interface Props {
+    items: string[];
+    heading: string;
+}
+</code></pre>
+<p>It declares an <a href="https://www.typescriptlang.org/docs/handbook/interfaces.html">interface</a>
+which shapes what our <code>Props</code> item should look like</p>
+<h3 id="passing-props-to-our-componen"><a class="header" href="#passing-props-to-our-componen">Passing props to our componen</a></h3>
+<p>We can now move our list of items to the <code>App</code> component and
+use it within our <code>ListGroup</code> component by providing it as a
+<code>prop</code>.</p>
+<details>
+<summary>Overview of the <code>App</code> component</summary>
+<pre><code class="language-jsx">function App() {
+    let items = [
+        "Luanda",
+        "Yamoussoukro",
+        "Abidjan",
+        "Dakar",
+        "Brazzaville"
+    ];
+
+    return (&lt;div&gt;
+            &lt;ListGroup items={items} heading="Cities"&gt;
+            &lt;/ListGroup&gt;
+        &lt;/div&gt;);
+}
+</code></pre>
+</details>
+<p>We can now use our prop object in our <code>ListGroup</code> component by
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment"><code>destructuring</code></a>
+our <code>Props</code> object.</p>
+<p>Here what the beginning of our <code>ListGroup</code> component should look
+like now:</p>
+<pre><code class="language-tsx">function ListGroup(props: Props) {
+    let { items, heading } = props;
+</code></pre>
+<h2 id="passing-functions-via-props"><a class="header" href="#passing-functions-via-props">Passing functions via props</a></h2>
+<p>Let's now say we'd like to do an action once an item is selected,
+rather than hardcoding this action into our component (which would
+prevent it from being reusable), we can also pass functions via
+<code>props</code>.</p>
+<p>To do so, we need to implement a mechanism to notify the
+<code>consumer</code>/<code>parent</code> of our component that an item is selected</p>
+<p>To do so, let's declare a new element in our <code>Props</code> interface.</p>
+<pre><code class="language-ts">onSelectItem: (item: string) =&gt; void;
+</code></pre>
+<p>This will be a function we'll define in the <code>parent</code> and use in
+our component when an item is selected</p>
+<p>We can now go in the <code>App</code> component and declare our event handler.</p>
+<pre><code class="language-ts">const handleSelectItem = (item: string) =&gt; {
+    console.log(item);
+};
+</code></pre>
+<blockquote>
+<p>:warning: Make sure to put the function inside the <code>App()</code>
+declaration</p>
+</blockquote>
+<p>We can now pass it as a <code>prop</code> of our <code>ListGroup</code> component:</p>
+<pre><code class="language-tsx">return (&lt;div&gt;
+        &lt;ListGroup items={items} 
+        heading="Cities"
+        onSelectItem={handleSelectItem}&gt;
+        &lt;/ListGroup&gt;
+    &lt;/div&gt;);
+</code></pre>
+<p>We also need to retrieve it from our <code>prop</code> object in the
+<code>ListGroup</code> component:</p>
+<pre><code class="language-tsx">let { onSelectItem } = props;
+</code></pre>
+<blockquote>
+<p>:alert: I just realize that I forgot to write the props as
+constant but never try to
+<a href="https://react.dev/learn/passing-props-to-a-component#how-props-change-over-time">modify props</a></p>
+</blockquote>
+<p>We can now call the selected function within our <code>onClick</code> event handler:</p>
+<pre><code class="language-tsx">onClick={() =&gt; {
+    setSelectedIndex(index);
+    onSelectItem(item);
+}}
+</code></pre>
+<p>With all those additions it should now log the clicked item in the console
+(and also log that the log comes from the <code>App</code> component)</p>
+<h2 id="passing-children-to-our-components"><a class="header" href="#passing-children-to-our-components">Passing Children to our Components</a></h2>
+<p>Let's now create an <code>Alert</code> component</p>
+<pre><code class="language-tsx">function Alert() {
+    return &lt;div&gt;Alert&lt;/div&gt;;
+}
+
+export default Alert;
+</code></pre>
+<p>and use it in our <code>App</code> component:</p>
+<pre><code class="language-tsx">import Alert from "./components/Alert.tsx";
+
+function App() {
+        return (&lt;div&gt;
+            &lt;Alert/&gt;
+        &lt;/div&gt;);
+}
+
+export default App;
+</code></pre>
+<p>To style our component, we'll borrow some code
+from the Boostrap <a href="https://getbootstrap.com/docs/5.0/components/alerts/"><code>Alert</code></a>
+page</p>
+<p>let's give the classes <code>alert alert-primary</code> to our <code>Alert</code> component.
+We can now do the same as before and use props to pass the <code>Alert</code> text
+dynamically.</p>
+<details>
+<summary> The <code>Alert.tsx</code> file</summary>
+<pre><code class="language-tsx">interface Props{
+    text: string
+};
+
+function Alert(props: Props) {
+    const { text } = props;
+    return &lt;div className="alert alert-primary"&gt;{text}&lt;/div&gt;;
+}
+
+export default Alert;
+</code></pre>
+</details>
+<p>We can now use the <code>Alert</code> component, same as before, as:</p>
+<pre><code class="language-tsx">&lt;Alert text="Bonjour"/&gt;
+</code></pre>
+<p>However, if we'd like to pass text in a more natural way,
+like with:</p>
+<pre><code class="language-tsx">&lt;Alert&gt;
+    Bonjour
+&lt;/Alert&gt;
+</code></pre>
+<p>We need to use the <a href="https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children">children</a>
+<code>prop</code></p>
+<p>Let's modify this in our <code>Alert</code> component. Now the code we've written in the
+<code>App</code> component works.</p>
+<blockquote>
+<p>The modification consist in replacing all the references to the <code>text</code> variable
+with a reference to the <code>children</code> variable instead.</p>
+</blockquote>
+<p>However, if we replace <code>Bonjour</code> with <code>&lt;span&gt;Bonjour&lt;/span&gt;</code> in <code>App.tsx</code>, the
+code raises a typescript compilation error. To fix it, we need to import
+<a href="https://react.dev/learn/typescript#typing-children"><code>ReactNode</code></a>
+from the 'react' module and declare <code>children</code> of type <code>ReactNode</code> in our
+<code>interface</code>.</p>
 
                     </main>
 
