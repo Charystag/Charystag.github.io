@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_3.html"><strong aria-hidden="true">1.3.</strong> Exercise 3</a></li><li class="chapter-item expanded "><a href="backend/final_project.html"><strong aria-hidden="true">1.4.</strong> Project Backend</a></li></ol></li><li class="chapter-item expanded "><a href="react/react.html"><strong aria-hidden="true">2.</strong> React Basics</a></li><li class="chapter-item expanded "><a href="react/useEffect.html"><strong aria-hidden="true">3.</strong> UseEffect</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li><li class="chapter-item expanded "><a href="backend/exercises/exercise_3.html"><strong aria-hidden="true">1.3.</strong> Exercise 3</a></li><li class="chapter-item expanded "><a href="backend/final_project.html"><strong aria-hidden="true">1.4.</strong> Project Backend</a></li></ol></li><li class="chapter-item expanded "><a href="react/react.html"><strong aria-hidden="true">2.</strong> React Basics</a></li><li class="chapter-item expanded "><a href="react/useEffect.html"><strong aria-hidden="true">3.</strong> UseEffect</a></li><li class="chapter-item expanded "><a href="react/fetch_intro.html"><strong aria-hidden="true">4.</strong> Fetch API introduction</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -2110,6 +2110,296 @@ export default ExampleComponent;
 <hr />
 <blockquote>
 <p><strong>Next:</strong> Now that we understand <code>useEffect</code>, let’s apply it in our React application to fetch products from our Express server.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="introduction-to-fetch-in-javascript"><a class="header" href="#introduction-to-fetch-in-javascript">Introduction to Fetch in JavaScript</a></h2>
+<p>When working with APIs in JavaScript, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch</code></a> API provides a simple and modern way to make network requests. It allows us to retrieve resources asynchronously, typically in the form of JSON data from a server.</p>
+<p>The <code>fetch</code> function returns a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"><code>Promise</code></a>, meaning it works asynchronously and resolves with a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response"><code>Response</code></a> object.</p>
+<h3 id="basic-usage"><a class="header" href="#basic-usage">Basic Usage</a></h3>
+<p>Here’s a simple example of fetching data from a public API:</p>
+<pre><code class="language-js">fetch("https://jsonplaceholder.typicode.com/todos/1")
+    .then((response) =&gt; response.json()) // Convert response to JSON
+    .then((data) =&gt; console.log(data)) // Handle the data
+    .catch((error) =&gt; console.error("Error:", error)); // Handle errors
+</code></pre>
+<p>In the example above:</p>
+<ul>
+<li>We make a GET request to the API.</li>
+<li>We convert the response to JSON using <code>.json()</code>, which also returns a Promise.</li>
+<li>We log the result to the console.</li>
+<li>We handle any potential errors with <code>.catch()</code>.</li>
+</ul>
+<h3 id="using-asyncawait"><a class="header" href="#using-asyncawait">Using <code>async/await</code></a></h3>
+<p>Using <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises#async_and_await"><code>async/await</code></a> makes the code easier to read and avoids deep nesting:</p>
+<pre><code class="language-js">async function fetchData() {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+fetchData();
+</code></pre>
+<blockquote>
+<p>:bulb: Unlike <code>.then()</code>, using <code>async/await</code> allows us to write asynchronous code in a synchronous style.</p>
+</blockquote>
+<h3 id="handling-errors"><a class="header" href="#handling-errors">Handling Errors</a></h3>
+<p>The <code>fetch</code> API only rejects a <code>Promise</code> if there is a <strong>network failure</strong> (e.g., no internet connection). If the request is successful but returns an HTTP error (like 404 or 500), <code>fetch</code> does <strong>not</strong> reject the promise. To handle such cases, we need to check <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response/ok"><code>response.ok</code></a>:</p>
+<pre><code class="language-js">async function fetchData() {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+}
+
+fetchData();
+</code></pre>
+<blockquote>
+<p>:warning: Always check <code>response.ok</code> before processing the response.</p>
+</blockquote>
+<p>Your introduction to <code>fetch</code> is quite solid, but to ensure <strong>full coverage of the basics</strong>, I would suggest expanding it with the following additional topics:</p>
+<hr />
+<h3 id="making-different-types-of-requests-get-post-put-delete"><a class="header" href="#making-different-types-of-requests-get-post-put-delete">Making Different Types of Requests (GET, POST, PUT, DELETE)</a></h3>
+<p>By default, <code>fetch</code> makes a <code>GET</code> request, but you can specify different HTTP methods like <code>POST</code>, <code>PUT</code>, and <code>DELETE</code> using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/request"><code>RequestInit</code></a> object.</p>
+<h4 id="sending-a-post-request-with-fetch"><a class="header" href="#sending-a-post-request-with-fetch">Sending a <code>POST</code> Request with <code>fetch</code></a></h4>
+<p>A <code>POST</code> request is used to send data to a server. This typically requires a request body in <code>JSON</code> format and specifying the appropriate headers.</p>
+<pre><code class="language-js">async function createPost() {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: "New Post",
+                body: "This is a new post",
+                userId: 1,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Created post:", data);
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+}
+
+createPost();
+</code></pre>
+<blockquote>
+<p>:bulb: Always set the <code>Content-Type</code> header to <code>"application/json"</code> when sending JSON data in a <code>POST</code> request.</p>
+</blockquote>
+<hr />
+<h4 id="sending-a-put-request"><a class="header" href="#sending-a-put-request">Sending a <code>PUT</code> Request</a></h4>
+<p>A <code>PUT</code> request is used to <strong>update</strong> an existing resource.</p>
+<pre><code class="language-js">async function updatePost(postId) {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: postId,
+                title: "Updated Post",
+                body: "This post has been updated",
+                userId: 1,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Updated post:", data);
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+}
+
+updatePost(1);
+</code></pre>
+<blockquote>
+<p>:warning: <code>PUT</code> typically replaces the entire resource, so <strong>all fields</strong> must be included in the request body.</p>
+</blockquote>
+<hr />
+<h4 id="sending-a-delete-request"><a class="header" href="#sending-a-delete-request">Sending a <code>DELETE</code> Request</a></h4>
+<p>A <code>DELETE</code> request removes a resource from the server.</p>
+<pre><code class="language-js">async function deletePost(postId) {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        console.log(`Post ${postId} deleted successfully`);
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+}
+
+deletePost(1);
+</code></pre>
+<blockquote>
+<p>:bulb: Unlike <code>POST</code> or <code>PUT</code>, a <code>DELETE</code> request typically does <strong>not</strong> require a request body.</p>
+</blockquote>
+<hr />
+<h3 id="handling-timeouts-in-fetch"><a class="header" href="#handling-timeouts-in-fetch">Handling Timeouts in <code>fetch</code></a></h3>
+<p>The <code>fetch</code> API <strong>does not</strong> have a built-in timeout mechanism. If a request hangs indefinitely, you need to use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController"><code>AbortController</code></a> API.</p>
+<pre><code class="language-js">async function fetchWithTimeout(url, timeout = 5000) {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    setTimeout(() =&gt; controller.abort(), timeout);
+
+    try {
+        const response = await fetch(url, { signal });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        if (error.name === "AbortError") {
+            console.error("Request timed out");
+        } else {
+            console.error("Fetch error:", error);
+        }
+    }
+}
+
+fetchWithTimeout("https://jsonplaceholder.typicode.com/todos/1", 3000);
+</code></pre>
+<blockquote>
+<p>:warning: If the request takes longer than <code>timeout</code>, the request will be aborted.</p>
+</blockquote>
+<hr />
+<h3 id="setting-custom-headers"><a class="header" href="#setting-custom-headers">Setting Custom Headers</a></h3>
+<p>Sometimes, you need to send additional headers in your request, such as an <code>Authorization</code> token.</p>
+<pre><code class="language-js">async function fetchWithHeaders() {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/todos/1", {
+            headers: {
+                "Authorization": "Bearer YOUR_ACCESS_TOKEN",
+                "Accept": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+}
+
+fetchWithHeaders();
+</code></pre>
+<blockquote>
+<p>:bulb: Custom headers are required for authentication and setting request preferences.</p>
+</blockquote>
+<hr />
+<h3 id="handling-cors-issues"><a class="header" href="#handling-cors-issues">Handling CORS Issues</a></h3>
+<p>When fetching data from a different origin, you may encounter <strong>CORS (Cross-Origin Resource Sharing) errors</strong>. These errors occur because the browser enforces <strong>same-origin policy</strong>.</p>
+<ul>
+<li>If you're fetching from an Express server, you need to enable <a href="https://expressjs.com/en/resources/middleware/cors.html"><code>CORS</code></a> on the backend:</li>
+</ul>
+<pre><code class="language-js">const cors = require("cors");
+const express = require("express");
+
+const app = express();
+app.use(cors());
+
+app.get("/get/products", (req, res) =&gt; {
+    res.json([{ name: "Laptop", price: 1200, image: "laptop.jpg" }]);
+});
+
+app.listen(5000, () =&gt; console.log("Server running on port 5000"));
+</code></pre>
+<blockquote>
+<p>:warning: <strong>Never use <code>cors()</code> with <code>Access-Control-Allow-Origin: '*'</code> in production</strong> unless it's truly necessary.</p>
+</blockquote>
+<hr />
+<h3 id="sending-url-parameters-with-fetch"><a class="header" href="#sending-url-parameters-with-fetch">Sending URL Parameters with <code>fetch</code></a></h3>
+<p>If an API requires <strong>query parameters</strong>, use <a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams"><code>URLSearchParams</code></a>:</p>
+<pre><code class="language-js">async function fetchWithParams() {
+    const params = new URLSearchParams({ userId: 1 });
+
+    const response = await fetch(`https://jsonplaceholder.typicode.com/todos?${params.toString()}`);
+    const data = await response.json();
+    console.log(data);
+}
+
+fetchWithParams();
+</code></pre>
+<blockquote>
+<p>:bulb: This method is useful when filtering or paginating API results.</p>
+</blockquote>
+<hr />
+<h3 id="downloading-and-processing-binary-data-images-pdfs"><a class="header" href="#downloading-and-processing-binary-data-images-pdfs">Downloading and Processing Binary Data (Images, PDFs)</a></h3>
+<p>To download and process binary data (e.g., images, PDFs), use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response/blob"><code>Response.blob()</code></a>:</p>
+<pre><code class="language-js">async function fetchImage() {
+    const response = await fetch("https://via.placeholder.com/150");
+    const blob = await response.blob();
+    const imgUrl = URL.createObjectURL(blob);
+
+    const img = document.createElement("img");
+    img.src = imgUrl;
+    document.body.appendChild(img);
+}
+
+fetchImage();
+</code></pre>
+<blockquote>
+<p>:bulb: <code>blob()</code> allows handling files, such as downloading PDFs or images.</p>
+</blockquote>
+<hr />
+<h3 id="summary-table"><a class="header" href="#summary-table">Summary Table</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Use Case</th><th>Method</th><th>Example</th></tr></thead><tbody>
+<tr><td>Fetch JSON data</td><td><code>GET</code></td><td><code>fetch(url).then(res =&gt; res.json())</code></td></tr>
+<tr><td>Send data to a server</td><td><code>POST</code></td><td><code>fetch(url, { method: "POST", body: JSON.stringify(data) })</code></td></tr>
+<tr><td>Update data</td><td><code>PUT</code></td><td><code>fetch(url, { method: "PUT", body: JSON.stringify(data) })</code></td></tr>
+<tr><td>Delete data</td><td><code>DELETE</code></td><td><code>fetch(url, { method: "DELETE" })</code></td></tr>
+<tr><td>Handle errors</td><td>Check <code>response.ok</code></td><td><code>if (!response.ok) throw new Error(response.status)</code></td></tr>
+<tr><td>Handle timeouts</td><td><code>AbortController</code></td><td><code>const controller = new AbortController();</code></td></tr>
+<tr><td>Set custom headers</td><td><code>headers</code></td><td><code>fetch(url, { headers: { Authorization: "Bearer XYZ" } })</code></td></tr>
+<tr><td>Send URL parameters</td><td><code>URLSearchParams</code></td><td><code>new URLSearchParams({ key: "value" })</code></td></tr>
+<tr><td>Fetch binary data</td><td><code>Response.blob()</code></td><td><code>const blob = await response.blob();</code></td></tr>
+</tbody></table>
+</div>
+<hr />
+<h3 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h3>
+<p>This expanded introduction now <strong>fully covers the basics of <code>fetch</code></strong>, including different request methods, error handling, timeout handling, and working with headers. For more details, refer to:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch</code> API - MDN</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response"><code>Response</code> Object - MDN</a></li>
+<li><a href="https://expressjs.com/en/resources/middleware/cors.html"><code>CORS</code> Middleware in Express</a></li>
+</ul>
+<blockquote>
+<p>:bulb: <strong>Next</strong>, we'll apply <code>fetch</code> in a React component using <code>useEffect</code>!</p>
 </blockquote>
 
                     </main>
