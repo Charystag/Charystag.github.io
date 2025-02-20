@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Fetch in React - MERN Stack APP</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="../backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li><li class="chapter-item expanded "><a href="../backend/exercises/exercise_3.html"><strong aria-hidden="true">1.3.</strong> Exercise 3</a></li><li class="chapter-item expanded "><a href="../backend/final_project.html"><strong aria-hidden="true">1.4.</strong> Project Backend</a></li></ol></li><li class="chapter-item expanded "><a href="../react/react.html"><strong aria-hidden="true">2.</strong> React Basics</a></li><li class="chapter-item expanded "><a href="../react/useEffect.html"><strong aria-hidden="true">3.</strong> UseEffect</a></li><li class="chapter-item expanded "><a href="../react/fetch_intro.html"><strong aria-hidden="true">4.</strong> Fetch API introduction</a></li><li class="chapter-item expanded "><a href="../react/fetch_in_react.html" class="active"><strong aria-hidden="true">5.</strong> Fetch in React</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">MERN Stack APP</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="fetching-data-from-a-backend-in-a-react-component-dockerized-setup"><a class="header" href="#fetching-data-from-a-backend-in-a-react-component-dockerized-setup">Fetching Data from a Backend in a React Component (Dockerized Setup)</a></h2>
+<p>When running a React frontend and an Express backend in <strong>separate Docker containers</strong> on the <strong>same network</strong>, we must consider <strong>cross-container communication</strong>, <strong>CORS</strong>, and how to correctly fetch data from the backend.</p>
+<h3 id="backend-setup-express-container-on-port-5000"><a class="header" href="#backend-setup-express-container-on-port-5000">Backend Setup (<code>express-container</code> on Port <code>5000</code>)</a></h3>
+<p>The backend runs inside a Docker container with the hostname <code>express-container</code>, listening on <strong>port 5000</strong>.</p>
+<hr />
+<h3 id="setting-up-cors-in-express"><a class="header" href="#setting-up-cors-in-express">Setting Up CORS in Express</a></h3>
+<p>Since the frontend and backend are running in <strong>different containers</strong>, we must configure <strong>CORS (Cross-Origin Resource Sharing)</strong> on the backend to allow requests from the React app.</p>
+<blockquote>
+<p>:warning: By default, browsers block cross-origin requests unless the server explicitly allows them.</p>
+</blockquote>
+<p>To enable CORS in <strong>Express</strong>, install the <a href="https://expressjs.com/en/resources/middleware/cors.html"><code>cors</code></a> middleware:</p>
+<pre><code class="language-bash">npm install cors
+</code></pre>
+<p>Then, modify your Express server (<code>server.js</code>) to allow requests from the React frontend:</p>
+<pre><code class="language-js">import express from 'express';
+import cors from 'cors';
+
+const app = express();
+
+// Allow CORS for requests coming from the frontend container
+app.use(
+    cors({
+        origin: "http://react-container:5173", // Change to match your frontend container's address
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+);
+
+// Sample API Route
+app.get("/get/products", (req, res) =&gt; {
+    res.json([
+        { name: "Laptop", price: 1200, image: "laptop.jpg" },
+        { name: "Phone", price: 800, image: "phone.jpg" },
+    ]);
+});
+
+app.listen(5000, () =&gt; console.log("Backend running on port 5000"));
+</code></pre>
+<blockquote>
+<p>:bulb: Setting <code>origin: "http://react-container:5173"</code> ensures that only the frontend can access the API.<br />
+To allow <strong>all origins</strong> (not recommended in production), use <code>origin: "*"</code>.</p>
+</blockquote>
+<hr />
+<h3 id="docker-network-setup"><a class="header" href="#docker-network-setup">Docker Network Setup</a></h3>
+<p>Both containers should be part of the <strong>same Docker network</strong> so that React can reach Express using <code>http://express-container:5000</code>.</p>
+<h3 id="fetching-data-in-a-react-component"><a class="header" href="#fetching-data-in-a-react-component">Fetching Data in a React Component</a></h3>
+<p>Now that the backend is reachable at <code>http://express-container:5000</code>, we can fetch data inside a React component.</p>
+<h4 id="creating-the-productlist-component"><a class="header" href="#creating-the-productlist-component">Creating the <code>ProductList</code> Component</a></h4>
+<p>Let's create <code>components/ProductList.tsx</code> and fetch product data from the backend.</p>
+<pre><code class="language-tsx">import { useEffect, useState } from "react";
+
+interface Product {
+    name: string;
+    price: number;
+    image: string;
+}
+
+function ProductList() {
+    const [products, setProducts] = useState&lt;Product[]&gt;([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() =&gt; {
+        fetch("http://express-container:5000/get/products") // Using backend container name
+            .then((response) =&gt; {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) =&gt; {
+                setProducts(data);
+                setLoading(false);
+            })
+            .catch((error) =&gt; {
+                console.error("Error fetching products:", error);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) {
+        return &lt;p&gt;Loading products...&lt;/p&gt;;
+    }
+
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;Product List&lt;/h2&gt;
+            &lt;ul&gt;
+                {products.map((product, index) =&gt; (
+                    &lt;li key={index}&gt;
+                        &lt;h3&gt;{product.name}&lt;/h3&gt;
+                        &lt;p&gt;Price: ${product.price}&lt;/p&gt;
+                        &lt;img src={product.image} alt={product.name} width={100} /&gt;
+                    &lt;/li&gt;
+                ))}
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    );
+}
+
+export default ProductList;
+</code></pre>
+<blockquote>
+<p>:warning: <strong>Why use <code>http://express-container:5000</code> instead of <code>localhost</code>?</strong><br />
+When running inside Docker, <code>localhost</code> refers <strong>to the container itself</strong>, not the backend. Instead, we use <code>express-container</code>, which is <strong>the hostname of the backend inside the Docker network</strong>.</p>
+</blockquote>
+<hr />
+<h3 id="using-productlist-in-the-app-component"><a class="header" href="#using-productlist-in-the-app-component">Using <code>ProductList</code> in the <code>App</code> Component</a></h3>
+<p>Now, we can import and use the <code>ProductList</code> component inside <code>App.tsx</code>.</p>
+<pre><code class="language-tsx">import ProductList from "./components/ProductList.tsx";
+
+function App() {
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;Welcome to the Store&lt;/h1&gt;
+            &lt;ProductList /&gt;
+        &lt;/div&gt;
+    );
+}
+
+export default App;
+</code></pre>
+<hr />
+<h3 id="handling-cors-issues-inside-docker"><a class="header" href="#handling-cors-issues-inside-docker">Handling CORS Issues Inside Docker</a></h3>
+<p>If your frontend cannot reach the backend due to CORS issues, ensure:</p>
+<ol>
+<li>The backend allows requests from the correct origin (<code>http://frontend-container:5173</code>).</li>
+<li>The frontend is correctly fetching from <code>http://express-container:5000</code>, not <code>localhost</code>.</li>
+<li>The backend container is <strong>reachable</strong> from the frontend container by checking:</li>
+</ol>
+<pre><code class="language-bash">docker exec -it react-container ping express-container
+</code></pre>
+<p>If the backend is unreachable, <strong>check your Docker network settings</strong>.</p>
+<hr />
+<h3 id="alternative-using-environment-variables-for-api-urls"><a class="header" href="#alternative-using-environment-variables-for-api-urls">Alternative: Using Environment Variables for API URLs</a></h3>
+<p>Instead of hardcoding <code>http://express-container:5000</code>, you can store the API URL in an <strong>environment variable</strong>.</p>
+<h4 id="create-a-env-file-in-the-frontend"><a class="header" href="#create-a-env-file-in-the-frontend">Create a <code>.env</code> File in the Frontend</a></h4>
+<pre><code>BACKEND_URL=http://express-container:5000
+</code></pre>
+<h4 id="access-it-in-productlisttsx"><a class="header" href="#access-it-in-productlisttsx">Access It in <code>ProductList.tsx</code></a></h4>
+<pre><code class="language-tsx">const API_URL = process.env.BACKEND_URL;
+
+useEffect(() =&gt; {
+    fetch(`${API_URL}/get/products`)
+</code></pre>
+<blockquote>
+<p>:bulb: <strong>Why use environment variables?</strong><br />
+This makes it <strong>easier to switch between environments</strong> (e.g., development, production) without changing the code.</p>
+</blockquote>
+<hr />
+<h3 id="summary"><a class="header" href="#summary">Summary</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Step</th><th>What You Need to Do</th></tr></thead><tbody>
+<tr><td><strong>Backend CORS Setup</strong></td><td>Enable CORS in Express with <code>origin: "http://react-container:5173"</code></td></tr>
+<tr><td><strong>Docker Networking</strong></td><td>Use a shared Docker network so the frontend can reach <code>express-container</code></td></tr>
+<tr><td><strong>Fetching Data</strong></td><td>Use <code>http://express-container:5000</code> in React (<code>fetch</code>)</td></tr>
+<tr><td><strong>Using Environment Variables</strong></td><td>Store API URL in <code>.env</code> instead of hardcoding it</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h3 id="useful-links"><a class="header" href="#useful-links">Useful Links</a></h3>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch</code> API - MDN</a></li>
+<li><a href="https://react.dev/reference/react/useEffect"><code>useEffect</code> Hook - React Docs</a></li>
+<li><a href="https://expressjs.com/en/resources/middleware/cors.html"><code>CORS</code> Middleware - Express Docs</a></li>
+<li><a href="https://docs.docker.com/network/"><code>Docker Networking</code> - Docs</a></li>
+</ul>
+<hr />
+<h3 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h3>
+<p>Now, your React frontend can successfully fetch data from the backend <strong>running in a separate Docker container</strong>. If you experience any issues, check:</p>
+<ul>
+<li>The backend is <strong>running and reachable</strong> (<code>docker exec -it react-container ping express-container</code>).</li>
+<li>The <code>CORS</code> middleware allows requests from the frontend.</li>
+<li>You're using the <strong>correct container hostname (<code>express-container</code>)</strong> instead of <code>localhost</code>.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../react/fetch_intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../react/fetch_intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
