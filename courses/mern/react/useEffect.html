@@ -1,0 +1,334 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>UseEffect - MERN Stack APP</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../backend/backend.html"><strong aria-hidden="true">1.</strong> Express + MongoDB</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../backend/exercises/exercise_1.html"><strong aria-hidden="true">1.1.</strong> Exercise 1</a></li><li class="chapter-item expanded "><a href="../backend/exercises/exercise_2.html"><strong aria-hidden="true">1.2.</strong> Exercise 2</a></li><li class="chapter-item expanded "><a href="../backend/exercises/exercise_3.html"><strong aria-hidden="true">1.3.</strong> Exercise 3</a></li><li class="chapter-item expanded "><a href="../backend/final_project.html"><strong aria-hidden="true">1.4.</strong> Project Backend</a></li></ol></li><li class="chapter-item expanded "><a href="../react/react.html"><strong aria-hidden="true">2.</strong> React Basics</a></li><li class="chapter-item expanded "><a href="../react/useEffect.html" class="active"><strong aria-hidden="true">3.</strong> UseEffect</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">MERN Stack APP</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="introduction-to-useeffect"><a class="header" href="#introduction-to-useeffect">Introduction to <code>useEffect</code></a></h2>
+<p>In React, the <a href="https://react.dev/reference/react/useEffect"><code>useEffect</code></a> hook allows you to handle <strong>side effects</strong> in your components. Side effects include:</p>
+<ul>
+<li>Fetching data from an API</li>
+<li>Subscribing to and unsubscribing from events</li>
+<li>Manipulating the DOM</li>
+<li>Setting up or cleaning up timers (e.g., <code>setTimeout</code>, <code>setInterval</code>)</li>
+</ul>
+<p>Before <code>useEffect</code>, handling side effects in function components was more complex, often requiring <strong>class-based components</strong> and lifecycle methods like <code>componentDidMount</code> and <code>componentDidUpdate</code>. However, with hooks, we can now perform side effects in function components in a much simpler way.</p>
+<h3 id="basic-syntax"><a class="header" href="#basic-syntax">Basic Syntax</a></h3>
+<p>The <code>useEffect</code> hook takes <strong>two arguments</strong>:</p>
+<pre><code class="language-tsx">useEffect(effectFunction, dependencyArray);
+</code></pre>
+<ol>
+<li><strong><code>effectFunction</code></strong>: A function that contains the side effect code (e.g., fetching data, updating the title).</li>
+<li><strong><code>dependencyArray</code></strong> (optional): An array of values that determine when the effect should run.</li>
+</ol>
+<h3 id="running-an-effect-on-every-render"><a class="header" href="#running-an-effect-on-every-render">Running an Effect on Every Render</a></h3>
+<p>If you <strong>don’t provide</strong> a dependency array, the effect runs <strong>after every render</strong>:</p>
+<pre><code class="language-tsx">import { useEffect, useState } from "react";
+
+function ExampleComponent() {
+    const [count, setCount] = useState(0);
+
+    useEffect(() =&gt; {
+        console.log("Effect ran after render");
+    });
+
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Count: {count}&lt;/p&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+
+export default ExampleComponent;
+</code></pre>
+<blockquote>
+<p>:warning: <strong>Be careful when omitting the dependency array!</strong><br />
+If the effect runs on <strong>every render</strong>, it can lead to performance issues.</p>
+</blockquote>
+<hr />
+<h3 id="running-an-effect-only-once-on-mount"><a class="header" href="#running-an-effect-only-once-on-mount">Running an Effect <strong>Only Once</strong> (on Mount)</a></h3>
+<p>If you pass an <strong>empty dependency array (<code>[]</code>)</strong>, the effect runs <strong>only once</strong>, when the component <strong>mounts</strong>:</p>
+<pre><code class="language-tsx">useEffect(() =&gt; {
+    console.log("Component mounted!");
+}, []); // Runs only once
+</code></pre>
+<p>This is useful for <strong>fetching data from an API</strong> when a component loads.</p>
+<hr />
+<h3 id="running-an-effect-only-when-certain-values-change"><a class="header" href="#running-an-effect-only-when-certain-values-change">Running an Effect <strong>Only When Certain Values Change</strong></a></h3>
+<p>If you provide <strong>a dependency array with variables</strong>, the effect <strong>only runs when those values change</strong>:</p>
+<pre><code class="language-tsx">useEffect(() =&gt; {
+    console.log(`Count changed: ${count}`);
+}, [count]); // Runs only when `count` changes
+</code></pre>
+<p>Example:</p>
+<pre><code class="language-tsx">import { useEffect, useState } from "react";
+
+function ExampleComponent() {
+    const [count, setCount] = useState(0);
+    const [text, setText] = useState("");
+
+    useEffect(() =&gt; {
+        console.log(`Count updated: ${count}`);
+    }, [count]); // Runs when `count` changes, but NOT when `text` changes
+
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Count: {count}&lt;/p&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
+            &lt;input type="text" onChange={(e) =&gt; setText(e.target.value)} /&gt;
+        &lt;/div&gt;
+    );
+}
+
+export default ExampleComponent;
+</code></pre>
+<blockquote>
+<p>:bulb: You can pass multiple dependencies:</p>
+<pre><code class="language-tsx">useEffect(() =&gt; {
+  console.log("Either count or text changed");
+}, [count, text]); // Runs when `count` OR `text` changes
+</code></pre>
+</blockquote>
+<hr />
+<h3 id="cleaning-up-effects"><a class="header" href="#cleaning-up-effects">Cleaning Up Effects</a></h3>
+<p>Sometimes, effects need <strong>cleanup</strong> to avoid memory leaks. For example, if you're setting up an event listener or a timer, you need to remove it when the component unmounts.</p>
+<p>To <strong>clean up an effect</strong>, return a function inside <code>useEffect</code>:</p>
+<pre><code class="language-tsx">useEffect(() =&gt; {
+    console.log("Effect started");
+
+    return () =&gt; {
+        console.log("Cleanup before unmounting or updating");
+    };
+}, []);
+</code></pre>
+<h3 id="summary"><a class="header" href="#summary">Summary</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Scenario</th><th>Dependency Array</th><th>When it Runs</th></tr></thead><tbody>
+<tr><td>Runs on every render</td><td>Omitted</td><td>Every render</td></tr>
+<tr><td>Runs only once</td><td><code>[]</code> (empty array)</td><td>On mount</td></tr>
+<tr><td>Runs when a value changes</td><td><code>[value]</code></td><td>When <code>value</code> changes</td></tr>
+<tr><td>Runs when multiple values change</td><td><code>[value1, value2]</code></td><td>When <code>value1</code> or <code>value2</code> changes</td></tr>
+<tr><td>Cleans up before unmounting</td><td><code>return</code> inside <code>useEffect</code></td><td>Before unmounting</td></tr>
+</tbody></table>
+</div>
+<hr />
+<p>This concludes our in-depth introduction to <code>useEffect</code>. You can read more about it in the <a href="https://react.dev/reference/react/useEffect">React documentation</a>.</p>
+<hr />
+<blockquote>
+<p><strong>Next:</strong> Now that we understand <code>useEffect</code>, let’s apply it in our React application to fetch products from our Express server.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../react/react.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../react/react.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
