@@ -1,0 +1,575 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Presentation</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="clic_acronym.html"><strong aria-hidden="true">1.</strong> Clic</a></li><li class="chapter-item expanded "><a href="astuces.html"><strong aria-hidden="true">2.</strong> Astuces</a></li><li class="chapter-item expanded "><a href="exercises.html"><strong aria-hidden="true">3.</strong> Exercises</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Presentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="-acronyme-pour-faire-des-bonnes-slides--clic"><a class="header" href="#-acronyme-pour-faire-des-bonnes-slides--clic">🔤 Acronyme pour faire des bonnes slides : <strong>CLIC</strong></a></h2>
+<blockquote>
+<p>Parce qu’une bonne slide, ça fait “CLIC” dans le cerveau — pas “scroll” jusqu’à la mort cérébrale.</p>
+</blockquote>
+<h3 id="-clic-"><a class="header" href="#-clic-">🧠 <strong>C.L.I.C. =</strong></a></h3>
+<hr />
+<h3 id="c--clarté"><a class="header" href="#c--clarté"><strong>C</strong> — <em>Clarté</em></a></h3>
+<ul>
+<li>Une idée par slide.</li>
+<li>Titre explicite. Pas “Résultats” mais “Notre méthode réduit le temps de traitement de 43%”.</li>
+<li>Pas de phrases complètes → mots clés.</li>
+</ul>
+<h3 id="l--lisibilité"><a class="header" href="#l--lisibilité"><strong>L</strong> — <em>Lisibilité</em></a></h3>
+<ul>
+<li>Police lisible, contraste fort (pas du gris clair sur fond blanc).</li>
+<li>Minimum 30 pts si y’a du texte.</li>
+<li>Aucune slide ne doit te forcer à zoomer ou cligner des yeux.</li>
+</ul>
+<h3 id="i--impact-visuel"><a class="header" href="#i--impact-visuel"><strong>I</strong> — <em>Impact visuel</em></a></h3>
+<ul>
+<li>Graphiques, schémas, images utiles.</li>
+<li>Les visuels doivent <strong>appuyer ton message</strong>, pas juste être jolis.</li>
+<li>Si t’utilises une image, explique-la.</li>
+</ul>
+<h3 id="c--cohérence"><a class="header" href="#c--cohérence"><strong>C</strong> — <em>Cohérence</em></a></h3>
+<ul>
+<li>Même style sur tout le deck (couleurs, typo, alignement).</li>
+<li>Slide = support, pas antisèche.</li>
+<li>Si t’as 15 bullets par slide et des gifs qui clignotent : t’as perdu le game.</li>
+</ul>
+<p>💡 <em>Astuce bonus : si tu dois dire “je sais pas si vous voyez bien”, ta slide est déjà pourrie.</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="-astuces-assassines-pour-slides-qui-claquent"><a class="header" href="#-astuces-assassines-pour-slides-qui-claquent">🔪 ASTUCES ASSASSINES POUR SLIDES QUI CLAQUENT</a></h2>
+<h3 id="-1-le-titre-cest-un-punchline"><a class="header" href="#-1-le-titre-cest-un-punchline">💬 <strong>1. Le titre, c’est un punchline</strong></a></h3>
+<blockquote>
+<p>“Une slide sans titre fort, c’est comme une API sans doc : elle peut marcher, mais personne capte.”</p>
+</blockquote>
+<p>Le titre doit <strong>raconter quelque chose</strong>, pas juste décrire.</p>
+<ul>
+<li>✅ “Gain de 43% sur le temps de traitement”</li>
+<li>❌ “Résultats de l’étude sur les optimisations du backend” 🥱</li>
+<li>❌ “Résultats”</li>
+<li>✅ “Notre méthode divise le temps de traitement par deux”</li>
+</ul>
+<p>💡 <em>Règle d’or : ton titre doit presque suffire à comprendre la slide.</em><br />
+Si quelqu’un lit juste tes titres d’un coup, il doit capter l’histoire.</p>
+<p><strong>→ Exception :</strong> un titre un peu plus long peut être justifié <strong>si c’est pour raconter une micro-histoire</strong> ou <strong>soutenir un message clé.</strong></p>
+<blockquote>
+<p>Exemple :<br />
+✅ “On pensait avoir optimisé… jusqu’à ce qu’on trouve <em>ça</em>.”<br />
+→ C’est long, mais ça crée du <strong>suspense</strong> → utile pour capter l’attention.</p>
+</blockquote>
+<hr />
+<h3 id="-2-si-tu-texcuses-pour-ta-slide-cest-quelle-est-flinguée"><a class="header" href="#-2-si-tu-texcuses-pour-ta-slide-cest-quelle-est-flinguée">🔇 <strong>2. Si tu t’excuses pour ta slide, c’est qu’elle est flinguée</strong></a></h3>
+<blockquote>
+<p>“Je sais que c’est un peu dense…” = tu viens d'avouer ton crime.</p>
+</blockquote>
+<ul>
+<li>Règle : <strong>Si t’es gêné de la montrer, refais-la.</strong></li>
+<li>Si elle est trop chargée, découpe-la.</li>
+<li>Si tu dois la lire, réécris-la.</li>
+<li>Si t’as besoin de dire “Je vais expliquer tout ça” = tu l’as pas assez expliqué visuellement.</li>
+</ul>
+<hr />
+<h3 id="-3-bullet-points--ok-liste-de-course--nope"><a class="header" href="#-3-bullet-points--ok-liste-de-course--nope">🔢 <strong>3. Bullet points ? OK. Liste de course ? Nope.</strong></a></h3>
+<blockquote>
+<p>“Plus de 5 bullets ? T’as pas fait une slide, t’as fait une page Wikipédia.”</p>
+</blockquote>
+<ul>
+<li>Limite les bullet points à 3-4 max.</li>
+<li>Chaque bullet = une punchline, pas une phrase</li>
+</ul>
+<p><strong>→ Exception :</strong> parfois t’as une <strong>liste d’éléments que le public attend</strong> (ex : checklist, items d’un backlog).<br />
+Mais dans ce cas :</p>
+<ul>
+<li>Utilise un <strong>groupe visuel</strong> (tableau, grille)</li>
+<li>Ou sépare ça en plusieurs slides (un bullet par slide, façon storytelling)</li>
+</ul>
+<hr />
+<h3 id="-4-une-image-random--va-plutôt-chercher-du-sens"><a class="header" href="#-4-une-image-random--va-plutôt-chercher-du-sens">🖼️ <strong>4. Une image random ? Va plutôt chercher du sens</strong></a></h3>
+<blockquote>
+<p>“Une image floue ou hors sujet, c’est du bruit visuel.”</p>
+</blockquote>
+<ul>
+<li>Mets une image <strong>utile</strong> et <strong>expliquée</strong></li>
+<li>Pas juste un fond stylé → on n’est pas sur un Tumblr</li>
+<li>Une image doit :
+<ul>
+<li><strong>Soutenir</strong> ton propos</li>
+<li>Être <strong>de bonne qualité</strong></li>
+<li>Être <strong>expliquée</strong> (pas balancée sans contexte)</li>
+</ul>
+</li>
+</ul>
+<p><strong>→ Exception :</strong> une image humoristique ou décalée <strong>peut être volontairement gratuite</strong>… <strong>si elle sert ton storytelling</strong> ou ta connivence avec l’audience.</p>
+<blockquote>
+<p>Ex : un meme bien placé pour relancer l’attention à mi-prés, ou illustrer l’absurdité d’un bug → ça peut <em>cartonner</em>.</p>
+</blockquote>
+<hr />
+<h3 id="-5-graphique-de-lenfer--cache-ta-honte"><a class="header" href="#-5-graphique-de-lenfer--cache-ta-honte">📊 <strong>5. Graphique de l’enfer ? Cache ta honte</strong></a></h3>
+<blockquote>
+<p>“Si ton audience doit deviner ce que le graph montre, t’as codé un bug visuel.”</p>
+</blockquote>
+<ul>
+<li>Légende claire</li>
+<li>Contraste visible</li>
+<li>Highlight <strong>l’info importante</strong></li>
+<li>Supprime le superflu</li>
+<li>Pas de camemberts à 15 parts (on n’est pas au buffet)</li>
+</ul>
+<p><strong>→ Exception :</strong> si tu parles à un <strong>public d’experts techniques</strong>, tu peux montrer un graphique plus complexe, <strong>à condition de bien l’introduire et de guider la lecture</strong>.</p>
+<hr />
+<h3 id="-6-slide--support-pas-script"><a class="header" href="#-6-slide--support-pas-script">💀 <strong>6. Slide = support, pas script</strong></a></h3>
+<blockquote>
+<p>“Si tu lis tes slides mot pour mot, autant les envoyer par mail.”</p>
+</blockquote>
+<ul>
+<li>Ce que tu dis = complément, pas doublon</li>
+<li>Ce qui est sur la slide = l’essence, pas l’intégrale</li>
+<li>Slide = <strong>support visuel</strong>, pas <strong>transcription</strong></li>
+<li>Ce que tu dis = <strong>ce qui donne vie à ta slide</strong></li>
+</ul>
+<p><strong>→ Exception :</strong> en distanciel ou dans un handout PDF, c’est OK de faire des slides un peu plus “riches”, car les gens vont <strong>relire après coup.</strong><br />
+Mais même là, ça doit rester lisible et structuré.</p>
+<hr />
+<h2 id="-7-sois-sans-pitiÉ--si-ta-slide-pue-cest-quelle-est-pas-finie"><a class="header" href="#-7-sois-sans-pitiÉ--si-ta-slide-pue-cest-quelle-est-pas-finie">🧨 <strong>7. SOIS SANS PITIÉ : si ta slide pue, c’est qu’elle est pas finie.</strong></a></h2>
+<blockquote>
+<p>“T’as fait de la merde ? Pas grave. Mais assume, retravaille, et reviens avec mieux.”</p>
+</blockquote>
+<ul>
+<li>Tu ne “termine” pas une slide quand t’en as marre, tu la termines quand elle <strong>sert à fond ton message</strong>.</li>
+<li>Relis-toi comme si t’étais ton propre hater.</li>
+<li>T’as le droit à l’erreur. <strong>Pas au bâclage.</strong></li>
+</ul>
+<p>💡 <strong>Auto-check brutal mais utile :</strong></p>
+<blockquote>
+<p>→ “Est-ce que je serais content que cette slide me représente dans une conf devant 200 devs ?”<br />
+Si la réponse c’est “bof”… <strong>alors retourne au front.</strong></p>
+</blockquote>
+<hr />
+<h2 id="-résumé-visuel-si-tu-veux-lénoncer-à-loral-"><a class="header" href="#-résumé-visuel-si-tu-veux-lénoncer-à-loral-">💡 Résumé visuel si tu veux l’énoncer à l’oral :</a></h2>
+<blockquote>
+<p>“Une bonne slide, c’est comme un bon hook de rap : claire, courte, percutante, et elle reste dans la tête.”</p>
+</blockquote>
+<hr />
+<h2 id="-les-7-lois-dune-slide-qui-claque"><a class="header" href="#-les-7-lois-dune-slide-qui-claque">🧠 LES 7 LOIS D’UNE SLIDE QUI CLAQUE</a></h2>
+<p>(<strong>avec C.L.I.C. comme base</strong> + les règles badass)</p>
+<ol>
+<li>🎯 Clarté</li>
+<li>👓 Lisibilité</li>
+<li>🎥 Impact visuel</li>
+<li>🧩 Cohérence</li>
+<li>🎤 Slide ≠ Script</li>
+<li>🧻 Pas d’images ou de graphs random</li>
+<li>🧨 Sois sans pitié : <strong>si c’est éclaté, refais.</strong></li>
+</ol>
+<hr />
+<h2 id="-conclusion-"><a class="header" href="#-conclusion-">👉 Conclusion :</a></h2>
+<blockquote>
+<p>“Les règles qu’on voit aujourd’hui, c’est pour éviter de faire de la daube par défaut.<br />
+Quand vous saurez exactement <em>pourquoi</em> vous les brisez, là vous pourrez les exploser avec style. Mais en attendant… respectez-les.”</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="-exos--sujets--pack-olympic-ready"><a class="header" href="#-exos--sujets--pack-olympic-ready">🧪 EXOS &amp; SUJETS – Pack “Olympic Ready”</a></h1>
+<hr />
+<h2 id="-exos-courts-de-chauffe--rÉveil-510-min"><a class="header" href="#-exos-courts-de-chauffe--rÉveil-510-min">🟡 <strong>EXOS COURTS DE CHAUFFE / RÉVEIL (5–10 min)</strong></a></h2>
+<h2 id="-explique-comme-si-jétais-ta-grand-mère"><a class="header" href="#-explique-comme-si-jétais-ta-grand-mère">🧓 <strong>“Explique comme si j’étais ta grand-mère”</strong></a></h2>
+<p><strong>⏱️ Durée idéale : 5 à 7 min (2–3 min réflexion, 2 min passage, 1–2 min feedback)</strong></p>
+<blockquote>
+<p>Expliquer simplement, sans jargon, à quelqu’un qui n’est pas du tout dans la tech.<br />
+<strong>⚙️ Format : individuel ou binôme, à l’oral.</strong></p>
+</blockquote>
+<p>💥 Objectif : vulgariser, clarifier, simplifier sans infantiliser.</p>
+<blockquote>
+<p>“Si tu sais pas vulgariser, t’as pas compris à fond.”</p>
+</blockquote>
+<h3 id="sujets-"><a class="header" href="#sujets-">Sujets :</a></h3>
+<ul>
+<li>C’est quoi une API ?</li>
+<li>À quoi ça sert Git ?</li>
+<li>Pourquoi on code pas directement “en langage humain” ?</li>
+<li>C’est quoi le Cloud ?</li>
+<li>Pourquoi il faut faire des tests ?</li>
+<li>C’est quoi une IA, en vrai ?</li>
+<li>Pourquoi on peut pas “juste ajouter un bouton” en 5 minutes ?</li>
+<li>C’est quoi une base de données ?</li>
+<li>Pourquoi faut pas cliquer sur tous les mails ?</li>
+<li>C’est quoi une faille de sécurité ?</li>
+<li>C’est quoi un site web “responsive” ?</li>
+<li>Pourquoi parfois “ça marche chez moi mais pas chez toi” ?</li>
+</ul>
+<hr />
+<h2 id="-elevator-pitch"><a class="header" href="#-elevator-pitch">🛗 <strong>Elevator Pitch</strong></a></h2>
+<p><strong>⏱️ 30 à 45 secondes max, avec chrono !</strong><br />
+<strong>🎯 Format : solo, mode speed round.</strong></p>
+<h3 id="sujets--1"><a class="header" href="#sujets--1">Sujets :</a></h3>
+<ul>
+<li>Ton outil préféré (Postman, Notion, Docker…)</li>
+<li>Une techno que tu aimes</li>
+<li>Un projet que t’as réalisé</li>
+<li>Une fonctionnalité que t’as codée</li>
+<li>Une idée d’appli que t’aimerais lancer</li>
+<li>Un langage que tu recommandes</li>
+<li>Pourquoi ton script perso est révolutionnaire</li>
+<li>Pourquoi t’as automatisé X et gagné du temps</li>
+<li>Une lib que tu surkiffes</li>
+</ul>
+<p>💡 <em>But : aller à l’essentiel, donner envie, pas trop de détails techniques.</em></p>
+<hr />
+<h3 id="-le-pitch-au-feeling"><a class="header" href="#-le-pitch-au-feeling">🎭 <strong>“Le pitch au feeling”</strong></a></h3>
+<p>→ Tu tires un sujet au hasard :</p>
+<ul>
+<li>“Explique pourquoi <code>rm -rf /</code> est une mauvaise idée”</li>
+<li>“Pourquoi les devs détestent les réunions”</li>
+<li>“Pitch-moi le concept de React comme si c’était une religion”</li>
+</ul>
+<p>💥 Objectif : improviser, articuler un propos même débile, garder l’attention.</p>
+<hr />
+<h2 id="-exos-de-groupe-binômes-ou-petits-groupes"><a class="header" href="#-exos-de-groupe-binômes-ou-petits-groupes">🟢 <strong>EXOS DE GROUPE (binômes ou petits groupes)</strong></a></h2>
+<h3 id="-slide-rehab"><a class="header" href="#-slide-rehab">🧩 <strong>“Slide Rehab”</strong></a></h3>
+<p>→ Tu balances une <strong>slide dégueulasse</strong> (ou tu la décris à l’oral) :</p>
+<ul>
+<li>Trop de texte</li>
+<li>Titre vague (“Introduction”)</li>
+<li>Image random
+→ Ils doivent <strong>la corriger</strong> et expliquer pourquoi.</li>
+</ul>
+<p>💥 Objectif : entraîner l’œil à reconnaître une bonne slide.</p>
+<hr />
+<h2 id="-pitch-battle"><a class="header" href="#-pitch-battle">⚔️ <strong>Pitch Battle</strong></a></h2>
+<p><strong>⏱️ Prépa : 10–15 min en équipe / Passage : 3–5 min par groupe + feedback</strong></p>
+<p>💥 Objectif : structurer un argumentaire rapide, défendre un point.</p>
+<h3 id="sujets-opposés-"><a class="header" href="#sujets-opposés-">Sujets opposés :</a></h3>
+<ul>
+<li>Python vs Rust</li>
+<li>GitHub vs GitLab</li>
+<li>Tabs vs Spaces</li>
+<li>Frontend vs Backend</li>
+<li>Dark mode vs Light mode</li>
+<li>React vs Vue</li>
+<li>Dev solo vs Travail en équipe</li>
+<li>Documenter son code vs “le code se lit tout seul”</li>
+<li>Linux vs Windows</li>
+<li>L’IA va-t-elle remplacer les devs ?</li>
+<li>Frameworks low-code : bénédiction ou abomination ?</li>
+</ul>
+<hr />
+<h2 id="-sujets-de-prÉsentations-finales-libres-ou-imposés"><a class="header" href="#-sujets-de-prÉsentations-finales-libres-ou-imposés">🔴 <strong>SUJETS DE PRÉSENTATIONS FINALES (libres ou imposés)</strong></a></h2>
+<p>vous devez faire un <strong>talk de 5 min</strong> avec ou sans slides, sur un sujet où vous pouvez briller.</p>
+<h3 id="-sujets-techs-classiques-parfaits-pour-les-devs-"><a class="header" href="#-sujets-techs-classiques-parfaits-pour-les-devs-">📌 SUJETS TECHS CLASSIQUES (parfaits pour les devs) :</a></h3>
+<ul>
+<li>Présente une feature que t’as développée récemment</li>
+<li>Pourquoi tu préfères [nom du langage] à tous les autres</li>
+<li>Comment tu expliques Git à quelqu’un qui le découvre</li>
+<li>Un outil qui t’a changé la vie de dev (Postman, Docker, VSCode…)</li>
+<li>Un bug qui t’a rendu humble</li>
+</ul>
+<h3 id="-sujets-fuck-it-va-jouer-pour-tester-limpro-"><a class="header" href="#-sujets-fuck-it-va-jouer-pour-tester-limpro-">🤪 SUJETS “FUCK IT, VA JOUER” (pour tester l’impro) :</a></h3>
+<ul>
+<li>Pourquoi les tabs sont meilleurs que les spaces</li>
+<li>Ma première ligne de code, mon trauma</li>
+<li>Le framework que je déteste le plus (et pourquoi)</li>
+<li>Pourquoi les devs doivent faire du théâtre</li>
+<li>Pourquoi PowerPoint est une IA maléfique</li>
+</ul>
+<h3 id="-sujets-perso--transversaux-pour-briller-autrement-"><a class="header" href="#-sujets-perso--transversaux-pour-briller-autrement-">🧠 SUJETS PERSO + TRANSVERSAUX (pour briller autrement) :</a></h3>
+<ul>
+<li>Une tech que j’aimerais apprendre</li>
+<li>Le moment où j’ai le plus appris dans mes études</li>
+<li>Comment j’expliquerais mon métier à un ado</li>
+<li>La qualité la plus importante chez un dev ? (Spoiler : c’est pas coder vite)</li>
+</ul>
+<h2 id="-sujets-techs-classiques"><a class="header" href="#-sujets-techs-classiques">🧠 <strong>Sujets techs classiques</strong></a></h2>
+<p><strong>⏱️ Pour les présentations longues / finales (5 min environ)</strong></p>
+<ul>
+<li>Présente-moi une fonctionnalité que t’as codée</li>
+<li>Explique-moi une techno que t’as appris récemment</li>
+<li>Quel outil te fait gagner un temps fou ?</li>
+<li>Pourquoi tu préfères tel langage / IDE ?</li>
+<li>Ton workflow de dev en 3 étapes</li>
+<li>Comment tu gères le versionning d’un projet</li>
+<li>Explique-moi les tests (unitaires, e2e, etc.)</li>
+<li>Ton stack préféré et pourquoi</li>
+<li>Une bonne pratique que tu appliques tout le temps</li>
+<li>Une mauvaise pratique que t’as abandonnée</li>
+</ul>
+<hr />
+<h2 id="-sujets-perso--transversaux"><a class="header" href="#-sujets-perso--transversaux">🌱 <strong>Sujets perso / transversaux</strong></a></h2>
+<p><strong>⏱️ Idéal pour la fin du jour 2, ou si tu veux des présentations plus humaines</strong></p>
+<ul>
+<li>Le moment où t’as le plus progressé en dev</li>
+<li>Comment t’organises pour apprendre une nouvelle techno</li>
+<li>La compétence non-tech qui te rend meilleur dev</li>
+<li>Un échec ou bug qui t’a appris un truc</li>
+<li>Qu’est-ce qu’un bon développeur pour toi ?</li>
+<li>Qu’est-ce qui te motive à coder ?</li>
+<li>Où tu veux être dans 5 ans, côté tech ?</li>
+<li>Dev introverti vs dev extraverti – où tu te situes ?</li>
+<li>Ce que tu dirais à toi-même en L1</li>
+<li>Pourquoi tu fais de l’informatique ?</li>
+<li>Quelle techno t’attire même si t’y connais rien ?</li>
+</ul>
+<hr />
+<h1 id="-sujets-dimpro-fun--unhinged"><a class="header" href="#-sujets-dimpro-fun--unhinged">🤪 SUJETS D’IMPRO FUN &amp; UNHINGED</a></h1>
+<p><em>(Format “Le pitch au feeling” ou “impro en solo”)</em>
+<strong>⏱️ 1 min de prépa, 1-2 min de pitch max</strong></p>
+<hr />
+<h3 id="-lifestyle--absurdity"><a class="header" href="#-lifestyle--absurdity">🎭 LIFESTYLE / ABSURDITY</a></h3>
+<ul>
+<li>Pourquoi les pigeons sont les vrais rois de nos villes</li>
+<li>Comment j’ai survécu à une réunion Zoom de 4h sans m’évanouir</li>
+<li>Pourquoi je ne fais jamais confiance aux gens qui mangent des chips sans faire de bruit</li>
+<li>Le complot du grille-pain intelligent</li>
+<li>Défends ta théorie : “Les chaussettes dépareillées boostent la créativité”</li>
+<li>L’invention inutile que tu vends comme si c’était la prochaine révolution</li>
+<li>Pourquoi dormir, c’est pour les faibles</li>
+<li>Tu dois me vendre un abonnement premium… à l’air</li>
+<li>Pourquoi les lundis devraient être interdits par décret présidentiel</li>
+<li>Plaidoyer pour remplacer le café par du jus de cornichon</li>
+</ul>
+<hr />
+<h3 id="-philosophie-de-labsurde"><a class="header" href="#-philosophie-de-labsurde">🧠 PHILOSOPHIE DE L’ABSURDE</a></h3>
+<ul>
+<li>Est-ce que les chats savent qu’on travaille ou ils s’en foutent ?</li>
+<li>Les micro-ondes ont-ils une conscience ?</li>
+<li>Qu’est-ce que la procrastination nous apprend sur l’âme humaine ?</li>
+<li>Défends cette thèse : “On code comme on vit.”</li>
+<li>Faut-il interdire les emojis en milieu professionnel ?</li>
+<li>Pourquoi les réveils à 7h sont une forme moderne de torture mentale</li>
+</ul>
+<hr />
+<h3 id="-faux-produits--pitch-À-la-con"><a class="header" href="#-faux-produits--pitch-À-la-con">🎤 FAUX PRODUITS / PITCH À LA CON</a></h3>
+<ul>
+<li>Vends-moi un frigo qui parle (et engueule les gens)</li>
+<li>L’appli qui t’empêche de stalker ton ex</li>
+<li>Un service de livraison de nourriture pour ton ordi</li>
+<li>Une app qui t’oblige à dormir avant minuit (avec sanctions)</li>
+<li>Une startup qui recycle les bugs en NFTs</li>
+<li>L’aspirateur qui fait aussi thérapie de couple</li>
+</ul>
+<hr />
+<h3 id="-dÉbats-À-la-con-format-battle-ou-débat-solo"><a class="header" href="#-dÉbats-À-la-con-format-battle-ou-débat-solo">🥊 DÉBATS À LA CON (Format battle ou débat solo)</a></h3>
+<ul>
+<li>Est-ce que les croissants sont surestimés ?</li>
+<li>Vaut-il mieux avoir des bras de 3 mètres ou des jambes de 20 cm ?</li>
+<li>Faut-il légaliser la sieste au travail ?</li>
+<li>Les toilettes publiques : miracle ou malédiction ?</li>
+<li>Le meilleur repas à manger avec les doigts, toutes catégories confondues</li>
+</ul>
+<hr />
+<p>💡 <strong>Conseils vous lancer :</strong></p>
+<ul>
+<li>Tu peux les tirer au sort ou laisser les gens choisir</li>
+<li>Encourage le n’importe quoi mais <strong>avec structure</strong> : accroche / propos / chute</li>
+<li>Tu peux même jouer le faux investisseur / faux juge pendant leurs pitchs pour pimenter</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
