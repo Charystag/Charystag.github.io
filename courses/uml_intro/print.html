@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Présentation du langage</li><li class="chapter-item expanded "><a href="course/intro.html"><strong aria-hidden="true">1.</strong> Introduction au langage UML</a></li><li class="chapter-item expanded affix "><li class="part-title">Les principaux diagrammes</li><li class="chapter-item expanded "><a href="course/use_case.html"><strong aria-hidden="true">2.</strong> Diagrammes de cas d'utilisation</a></li><li class="chapter-item expanded "><a href="course/class.html"><strong aria-hidden="true">3.</strong> Diagrammes de classe</a></li><li class="chapter-item expanded "><a href="course/sequence.html"><strong aria-hidden="true">4.</strong> Diagrammes de séquence</a></li><li class="chapter-item expanded "><a href="course/flowchart.html"><strong aria-hidden="true">5.</strong> Flowcharts</a></li><li class="chapter-item expanded "><a href="course/activity.html"><strong aria-hidden="true">6.</strong> Diagrammes d'activité</a></li><li class="chapter-item expanded "><a href="course/corrections.html"><strong aria-hidden="true">7.</strong> Corrections</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Présentation du langage</li><li class="chapter-item expanded "><a href="course/intro.html"><strong aria-hidden="true">1.</strong> Introduction au langage UML</a></li><li class="chapter-item expanded affix "><li class="part-title">Les principaux diagrammes</li><li class="chapter-item expanded "><a href="course/use_case.html"><strong aria-hidden="true">2.</strong> Diagrammes de cas d'utilisation</a></li><li class="chapter-item expanded "><a href="course/class.html"><strong aria-hidden="true">3.</strong> Diagrammes de classe</a></li><li class="chapter-item expanded "><a href="course/sequence.html"><strong aria-hidden="true">4.</strong> Diagrammes de séquence</a></li><li class="chapter-item expanded "><a href="course/flowchart.html"><strong aria-hidden="true">5.</strong> Flowcharts</a></li><li class="chapter-item expanded "><a href="course/activity.html"><strong aria-hidden="true">6.</strong> Diagrammes d'activité</a></li><li class="chapter-item expanded "><a href="course/corrections.html"><strong aria-hidden="true">7.</strong> Corrections</a></li><li class="chapter-item expanded affix "><li class="part-title">Examen</li><li class="chapter-item expanded "><a href="exam/index.html"><strong aria-hidden="true">8.</strong> Sommaire</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exam/diagramme1.html"><strong aria-hidden="true">8.1.</strong> Diagramme 1</a></li><li class="chapter-item expanded "><a href="exam/diagramme2.html"><strong aria-hidden="true">8.2.</strong> Diagramme 2</a></li><li class="chapter-item expanded "><a href="exam/diagramme3.html"><strong aria-hidden="true">8.3.</strong> Diagramme 3</a></li><li class="chapter-item expanded "><a href="exam/diagramme4.html"><strong aria-hidden="true">8.4.</strong> Diagramme 4</a></li><li class="chapter-item expanded "><a href="exam/diagramme5.html"><strong aria-hidden="true">8.5.</strong> Diagramme 5</a></li><li class="chapter-item expanded "><a href="exam/diagramme6.html"><strong aria-hidden="true">8.6.</strong> Diagramme 6</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -2095,6 +2095,713 @@ temps.</li>
 <h2 id="diagramme-dactivite"><a class="header" href="#diagramme-dactivite">Diagramme d'activite</a></h2>
 <h3 id="exercice-du-cours"><a class="header" href="#exercice-du-cours">Exercice du cours</a></h3>
 <p><img src="course/../img/activity_diagram_correction.svg" alt="Correction" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="examen-final-uml--système-de-gestion-despaces-de-coworking"><a class="header" href="#examen-final-uml--système-de-gestion-despaces-de-coworking"><strong>Examen final UML – Système de gestion d’espaces de coworking</strong></a></h1>
+<h2 id="travail-en-groupe--6-exercices--durée--4h"><a class="header" href="#travail-en-groupe--6-exercices--durée--4h"><strong>Travail en Groupe – 6 exercices – Durée : 4h</strong></a></h2>
+<h2 id="objectif-global"><a class="header" href="#objectif-global"><strong>Objectif global</strong></a></h2>
+<p>Modéliser différents aspects d’un <strong>système de réservation d’espaces partagés</strong> utilisé par une entreprise pour permettre à ses clients de :</p>
+<ul>
+<li>Réserver des espaces de travail (bureaux, salles de réunion)</li>
+<li>Gérer leurs réservations</li>
+<li>Payer leurs factures</li>
+<li>Recevoir des notifications</li>
+<li>Gérer les ressources du côté admin</li>
+</ul>
+<h2 id="contexte-fonctionnel"><a class="header" href="#contexte-fonctionnel"><strong>Contexte fonctionnel</strong></a></h2>
+<p>La plateforme de coworking permet :</p>
+<h4 id="pour-les-clients-"><a class="header" href="#pour-les-clients-">Pour les clients :</a></h4>
+<ul>
+<li>Créer un compte</li>
+<li>Rechercher des espaces disponibles selon des critères (date, type, capacité)</li>
+<li>Réserver un ou plusieurs créneaux</li>
+<li>Annuler une réservation</li>
+<li>Consulter ses factures et les payer en ligne</li>
+<li>Recevoir des notifications automatiques (confirmation, annulation, rappel)</li>
+</ul>
+<h4 id="pour-les-admins-"><a class="header" href="#pour-les-admins-">Pour les admins :</a></h4>
+<ul>
+<li>Ajouter / modifier / désactiver des espaces</li>
+<li>Visualiser les réservations existantes</li>
+<li>Gérer les factures (statut payé/non payé)</li>
+<li>Consulter les utilisateurs et leurs historiques</li>
+</ul>
+<h4 id="pour-le-système-"><a class="header" href="#pour-le-système-">Pour le système :</a></h4>
+<ul>
+<li>Gérer les conflits (double réservation, annulation hors délai)</li>
+<li>Générer les factures</li>
+<li>Gérer les accès automatiques (badges, codes d’entrée)</li>
+</ul>
+<h2 id="travail-demandé"><a class="header" href="#travail-demandé"><strong>Travail demandé</strong></a></h2>
+<p>Vous devez modéliser le système sous forme de <strong>6 diagrammes UML</strong> :</p>
+<h2 id="1-diagramme-de-cas-dutilisation"><a class="header" href="#1-diagramme-de-cas-dutilisation"><strong>1. Diagramme de cas d’utilisation</strong></a></h2>
+<h3 id="objectif-"><a class="header" href="#objectif-">Objectif :</a></h3>
+<p>Identifier les fonctionnalités principales du système du point de vue des acteurs principaux (<strong>client, admin</strong>).</p>
+<h3 id="attendus-"><a class="header" href="#attendus-">Attendus :</a></h3>
+<ul>
+<li>Cas d’utilisation nommés clairement</li>
+<li>Relations <code>include</code> / <code>extend</code> si pertinent</li>
+<li>Aucun détail technique, uniquement les actions majeures</li>
+<li>Pas de surcharge inutile : vue macro</li>
+</ul>
+<hr />
+<h2 id="2-diagramme-de-classes"><a class="header" href="#2-diagramme-de-classes"><strong>2. Diagramme de classes</strong></a></h2>
+<h3 id="objectif--1"><a class="header" href="#objectif--1">Objectif :</a></h3>
+<p>Modéliser les entités métier, leurs attributs, méthodes, et relations.</p>
+<h3 id="attendus--1"><a class="header" href="#attendus--1">Attendus :</a></h3>
+<ul>
+<li>Classes avec nom clair, attributs pertinents, méthodes représentatives</li>
+<li>Relations pertinentes et correctement utilisées (<strong>Association, Héritage, Composition</strong> principalement attendues), avec <strong>cardinalités</strong>.</li>
+<li>Pas de classes fourre-tout</li>
+</ul>
+<hr />
+<h2 id="3-diagramme-de-séquence--réservation-dun-espace"><a class="header" href="#3-diagramme-de-séquence--réservation-dun-espace"><strong>3. Diagramme de séquence – Réservation d’un espace</strong></a></h2>
+<h3 id="objectif--2"><a class="header" href="#objectif--2">Objectif :</a></h3>
+<p>Montrer l’enchaînement des interactions nécessaires à la réservation d’un espace.</p>
+<h3 id="attendus--2"><a class="header" href="#attendus--2">Attendus :</a></h3>
+<ul>
+<li>Déclencheur : action du client dans l’interface</li>
+<li>Bloc <code>alt</code> : [Espace disponible] / [Espace non disponible]</li>
+<li>Vérification &gt; Création de réservation &gt; Génération de facture &gt; Envoi mail</li>
+<li>Retours de messages présents, messages nommés clairement</li>
+</ul>
+<hr />
+<h2 id="4-diagramme-de-séquence--paiement-dune-facture"><a class="header" href="#4-diagramme-de-séquence--paiement-dune-facture"><strong>4. Diagramme de séquence – Paiement d’une facture</strong></a></h2>
+<h3 id="objectif--3"><a class="header" href="#objectif--3">Objectif :</a></h3>
+<p>Modéliser le processus complet de consultation puis paiement d’une facture.</p>
+<h3 id="attendus--3"><a class="header" href="#attendus--3">Attendus :</a></h3>
+<ul>
+<li>Bloc <code>alt</code> : [Paiement accepté] / [Paiement refusé]</li>
+<li>Récupération de la facture, appel au service de paiement, mise à jour du statut, envoi mail (si succès)</li>
+<li>Respect du rôle de chaque objet (interface, contrôleur, BDD, service paiement)</li>
+</ul>
+<hr />
+<h2 id="5-diagramme-dactivité--réservation-côté-utilisateur"><a class="header" href="#5-diagramme-dactivité--réservation-côté-utilisateur"><strong>5. Diagramme d’activité – Réservation côté utilisateur</strong></a></h2>
+<h3 id="objectif--4"><a class="header" href="#objectif--4">Objectif :</a></h3>
+<p>Représenter le processus métier utilisateur complet : de la recherche à la confirmation.</p>
+<h3 id="attendus--4"><a class="header" href="#attendus--4">Attendus :</a></h3>
+<ul>
+<li>Bloc décisionnel : [Utilisateur connecté ?]</li>
+<li>Bloc décisionnel : [Espace disponible ?]</li>
+<li>Flux alternatifs en cas de refus ou indisponibilité</li>
+<li>Actions utilisateur et système bien distinctes</li>
+</ul>
+<hr />
+<h2 id="6-diagramme-dactivité--gestion-dun-espace-admin"><a class="header" href="#6-diagramme-dactivité--gestion-dun-espace-admin"><strong>6. Diagramme d’activité – Gestion d’un espace (admin)</strong></a></h2>
+<h3 id="objectif--5"><a class="header" href="#objectif--5">Objectif :</a></h3>
+<p>Modéliser le processus d’ajout, modification ou désactivation d’un espace, avec gestion des conflits.</p>
+<h3 id="attendus--5"><a class="header" href="#attendus--5">Attendus :</a></h3>
+<ul>
+<li>Bloc de choix de l’action (création, modif, désactivation)</li>
+<li>Vérification des champs (création)</li>
+<li>Vérification des réservations actives (désactivation)</li>
+<li>Flux de validation et d’échec bien identifiés</li>
+</ul>
+<hr />
+<h2 id="rappel-général-de-notation-"><a class="header" href="#rappel-général-de-notation-"><strong>Rappel général de notation :</strong></a></h2>
+<ul>
+<li>Clarté des diagrammes</li>
+<li>Cohérence des relations / enchaînements</li>
+<li>Respect des règles UML</li>
+<li>Complétude du scénario demandé</li>
+</ul>
+<h2 id="consignes-de-soumission-des-diagrammes"><a class="header" href="#consignes-de-soumission-des-diagrammes"><strong>Consignes de Soumission des Diagrammes</strong></a></h2>
+<p><strong>Organisation des fichiers :</strong></p>
+<ol>
+<li>Créez un <strong>dossier unique</strong> portant votre numero de groupe (par exemple : <code>Groupe1_ExamenUML</code>).</li>
+<li>Placez un fichier <em>README.txt</em> au sein de ce dossier avec les noms et prenoms des membres du groupe</li>
+<li>Placez <strong>tous</strong> vos fichiers de diagrammes UML à l'intérieur d'un dossier <code>img</code> au sein de ce dossier</li>
+</ol>
+<p><strong>Example de structure</strong></p>
+<pre><code>Groupe1_ExamenUML/
+├── README.txt
+└── img
+    ├── diagramme1.svg
+    ├── diagramme2.svg
+    ├── diagramme3.svg
+    ├── diagramme4.svg
+    ├── diagramme5.svg
+    └── diagramme6.svg
+</code></pre>
+<blockquote>
+<p><strong>Attention:</strong> une structure de dossier non respectee donnera lieu a un retrait de points</p>
+</blockquote>
+<p><strong>Nommage des fichiers :</strong></p>
+<p>Nommez <strong>chaque fichier diagramme</strong> de manière claire et cohérente, en utilisant le numéro de l'exercice correspondant. Par exemple :</p>
+<ul>
+<li><code>diagramme1.svg</code> (pour le diagramme de Cas d'Utilisation de l'exercice 1)</li>
+<li><code>diagramme2.svg</code> (pour le diagramme de Classes de l'exercice 2)</li>
+<li><code>diagramme3.svg</code> (pour le premier diagramme de Séquence)</li>
+<li>... et ainsi de suite jusqu'à <code>diagramme_6.svg</code>.</li>
+</ul>
+<p><strong>Format des fichiers (POINT CRUCIAL) :</strong></p>
+<ul>
+<li>Le format de fichier <strong>OBLIGATOIRE</strong> pour <strong>TOUS</strong> vos diagrammes est le format <strong>SVG (Scalable Vector Graphics)</strong>.</li>
+<li><strong>Pourquoi SVG ?</strong> C'est un format <em>vectoriel</em>. Cela signifie que je pourrai zoomer sur vos diagrammes autant que nécessaire <strong>sans aucune perte de qualité</strong> pour lire tous les détails. C'est absolument <strong>INDISPENSABLE</strong> pour une correction précise et équitable.</li>
+<li><strong>ATTENTION :</strong> Les fichiers dans d'autres formats (images JPG, PNG, GIF, captures d'écran, fichiers PDF non vectoriels, fichiers natifs de logiciels spécifiques non exportés) <strong>ne seront PAS acceptés</strong> car ils sont souvent illisibles une fois zoomés.</li>
+<li><strong>Assurez-vous que votre outil de modélisation UML (Lucidchart, Draw.io, etc.) permet bien d'exporter vos diagrammes au format <code>.svg</code></strong>. Faites un test si nécessaire avant la fin de l'examen.</li>
+</ul>
+<p><strong>=&gt; Tout diagramme non soumis au format SVG risque fortement de ne pas pouvoir être évalué.</strong> Ne prenez pas ce risque !</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="diagramme-1--diagramme-de-cas-dutilisation"><a class="header" href="#diagramme-1--diagramme-de-cas-dutilisation"><strong>Diagramme 1 : Diagramme de cas d’utilisation</strong></a></h2>
+<h3 id="contexte"><a class="header" href="#contexte"><strong>Contexte</strong></a></h3>
+<p>Un client souhaite réserver un espace de coworking en ligne. Le système permet :</p>
+<ul>
+<li>De rechercher et consulter les espaces disponibles</li>
+<li>De réserver un espace</li>
+<li>D’annuler ses réservations</li>
+<li>De consulter son historique de réservations</li>
+<li>D’envoyer des confirmations par email via un service externe.</li>
+</ul>
+<p>Les administrateurs gèrent :</p>
+<ul>
+<li>Les espaces (ajout, modification, disponibilité)</li>
+<li>La facturation des clients</li>
+<li>Les créneaux horaires associés aux espaces</li>
+</ul>
+<h3 id="consignes-détaillées-"><a class="header" href="#consignes-détaillées-"><strong>Consignes détaillées :</strong></a></h3>
+<ol>
+<li>
+<p><strong>Acteurs à identifier :</strong></p>
+<ul>
+<li><strong>Client</strong> (Utilisateur principal qui réserve et consulte)</li>
+<li><strong>Administrateur</strong> (Utilisateur qui gère les ressources et la facturation)</li>
+<li><strong>Service de Messagerie</strong> (Acteur secondaire : système externe sollicité pour envoyer des emails. Il n'initie pas d'action.)</li>
+</ul>
+</li>
+<li>
+<p><strong>Cas d’utilisation principaux à modéliser :</strong></p>
+<ul>
+<li><strong>S'authentifier</strong> <em>(Utile pour <code>include</code>)</em></li>
+<li><strong>Consulter les disponibilités</strong> (Recherche d'espaces)</li>
+<li><strong>Réserver un espace</strong></li>
+<li><strong>Annuler une réservation</strong></li>
+<li><strong>Consulter mes réservations</strong></li>
+<li><strong>Gérer les espaces</strong> (pour l'Admin)</li>
+<li><strong>Gérer les factures</strong> (pour l'Admin)</li>
+<li><em>(Optionnel mais logique : <strong>Gérer les utilisateurs</strong> (pour l'Admin))</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Relations :</strong></p>
+<ul>
+<li>Reliez les acteurs principaux (<strong>Client</strong>, <strong>Administrateur</strong>) aux cas d’utilisation qu'ils <strong>initient</strong> directement (ligne simple).</li>
+<li>Reliez l'acteur secondaire (<strong>Service de Messagerie</strong>) aux cas d’utilisation qui le <strong>sollicitent</strong> (ex : "Réserver un espace", "Annuler une réservation" envoient typiquement un email).</li>
+<li>Utilisez <strong><code>&lt;&lt;include&gt;&gt;</code></strong> pour un comportement <strong>obligatoire et partagé</strong>. Par exemple, "S'authentifier" est souvent inclus par la plupart des autres cas d'utilisation (sauf peut-être "Consulter les disponibilités" si c'est public). "Vérifier la disponibilité" peut être inclus dans "Réserver un espace".</li>
+<li>Utilisez <strong><code>&lt;&lt;extend&gt;&gt;</code></strong> pour un comportement <strong>optionnel ou conditionnel</strong> qui ajoute de la valeur au cas de base, sous certaines conditions. <em>Exemple : Si le client peut ajouter des options (vidéoprojecteur, café) lors de la réservation, cela pourrait être modélisé avec <code>extend</code>.</em> <strong>Note :</strong> L'envoi d'email de confirmation, étant souvent systématique, est rarement un bon exemple pour <code>extend</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Clarifications spécifiques :</strong></p>
+<ul>
+<li>Le diagramme doit montrer clairement <strong>qui peut faire quoi</strong> avec le système.</li>
+<li>Le <strong>Service de Messagerie</strong> ne fait qu'<strong>exécuter</strong> les demandes d'envoi d'email venant du système, il n'est pas proactif.</li>
+<li>Assurez-vous que les cas d'utilisation de l'<strong>Administrateur</strong> concernent bien la <strong>gestion</strong> du système.</li>
+</ul>
+</li>
+<li>
+<p><strong>Rappel</strong> : C'est un diagramme de <strong>niveau 1 (vue d'ensemble)</strong>. Concentrez-vous sur les fonctionnalités majeures et les interactions principales sans entrer dans les détails de chaque écran ou message d'erreur.</p>
+</li>
+</ol>
+<h3 id="critères-de-notation-"><a class="header" href="#critères-de-notation-"><strong>Critères de notation :</strong></a></h3>
+<ul>
+<li><strong>Identification pertinente</strong> des acteurs et des cas d'utilisation clés.</li>
+<li><strong>Exactitude des relations</strong> entre acteurs et cas d'utilisation (qui initie quoi, qui est sollicité).</li>
+<li><strong>Utilisation correcte et justifiée</strong> des relations <code>&lt;&lt;include&gt;&gt;</code> et <code>&lt;&lt;extend&gt;&gt;</code>.</li>
+<li><strong>Lisibilité</strong> et <strong>clarté</strong> générale du diagramme.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="diagramme-2--diagramme-de-classes-uml"><a class="header" href="#diagramme-2--diagramme-de-classes-uml"><strong>Diagramme 2 – Diagramme de classes UML</strong>  </a></h2>
+<h3 id="consignes-détaillées"><a class="header" href="#consignes-détaillées"><strong>Consignes détaillées</strong></a></h3>
+<h4 id="1-identification-des-classes-principales-avec-attributs-et-méthodes-suggérés-"><a class="header" href="#1-identification-des-classes-principales-avec-attributs-et-méthodes-suggérés-"><strong>1. Identification des classes principales (avec attributs et méthodes suggérés) :</strong></a></h4>
+<ul>
+<li>Pensez à utiliser des types précis (String, int, double, Date, boolean, List&lt;...&gt;) et des <strong>Énumérations (Enum)</strong> pour les statuts et types.</li>
+</ul>
+<ol>
+<li>
+<p><strong>Utilisateur</strong> <em>(Peut être abstraite si héritage)</em></p>
+<ul>
+<li>
+<p><strong>Attributs</strong> : <code>idUtilisateur</code> (PK), <code>nom</code> (String), <code>email</code> (String), <code>motDePasseHash</code> (String), <code>typeUtilisateur</code> (Enum: CLIENT, ADMIN) <em>(Alternative: utiliser l'héritage ci-dessous)</em></p>
+</li>
+<li>
+<p><strong>Méthodes</strong> : <code>authentifier()</code>, <code>modifierProfil()</code>, <code>consulterHistoriqueReservations()</code></p>
+</li>
+<li>
+<p><em>(Optionnel mais recommandé : Héritage)</em></p>
+<ul>
+<li><strong>Client</strong> (hérite de Utilisateur)
+<ul>
+<li><em>(Attributs/Méthodes spécifiques au client si besoin)</em></li>
+</ul>
+</li>
+<li><strong>Administrateur</strong> (hérite de Utilisateur)
+<ul>
+<li><em>(Attributs/Méthodes spécifiques à l'admin si besoin)</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Espace</strong></p>
+<ul>
+<li><strong>Attributs</strong> : <code>idEspace</code> (PK), <code>nom</code> (String), <code>typeEspace</code> (Enum: BUREAU, SALLE_REUNION), <code>capacite</code> (int), <code>description</code> (String), <code>equipements</code> (List<String>), <code>tarifHoraire</code> (double)</li>
+<li><strong>Méthodes</strong> : <code>verifierDisponibilite(debut: Date, fin: Date): boolean</code>, <code>getCreneauxDisponibles(jour: Date): List&lt;Créneau&gt;</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Réservation</strong></p>
+<ul>
+<li><strong>Attributs</strong> : <code>idReservation</code> (PK), <code>dateHeureDebut</code> (Date), <code>dateHeureFin</code> (Date), <code>statut</code> (Enum: CONFIRMEE, ANNULEE, PENDING_PAIEMENT), <code>tarifCalcule</code> (double)</li>
+<li><em>(Associations à modéliser : référence vers Client [1], Espace [1], Créneau [1..</em>])*</li>
+<li><strong>Méthodes</strong> : <code>confirmer()</code>, <code>annuler()</code>, <code>calculerTarif()</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Créneau</strong></p>
+<ul>
+<li><strong>Attributs</strong> : <code>idCreneau</code> (PK), <code>dateTimeDebut</code> (Date), <code>dateTimeFin</code> (Date), <code>statut</code> (Enum: DISPONIBLE, RESERVE, INDISPONIBLE)</li>
+<li><em>(Associations à modéliser : référence vers Espace [1], Réservation [0..1])</em></li>
+<li><strong>Méthodes</strong> : <code>marquerReserve(reservation: Réservation)</code>, <code>marquerDisponible()</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Facture</strong></p>
+<ul>
+<li><strong>Attributs</strong> : <code>idFacture</code> (PK), <code>numeroFacture</code> (String), <code>montant</code> (double), <code>dateEmission</code> (Date), <code>dateEcheance</code> (Date), <code>statut</code> (Enum: PAYEE, EN_ATTENTE, ANNULEE)</li>
+<li><em>(Association à modéliser : référence vers Réservation [1])</em></li>
+<li><strong>Méthodes</strong> : <code>genererPdf()</code>, <code>enregistrerPaiement()</code>, <code>verifierStatutPaiement()</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Notification</strong></p>
+<ul>
+<li><strong>Attributs</strong> : <code>idNotification</code> (PK), <code>typeNotification</code> (Enum: CONFIRMATION_RESA, ANNULATION_RESA, RAPPEL, FACTURE), <code>message</code> (String), <code>dateEnvoi</code> (Date), <code>statutEnvoi</code> (Enum: A_ENVOYER, ENVOYEE, ECHEC)</li>
+<li><em>(Association à modéliser : référence vers Utilisateur [1] (destinataire))</em></li>
+<li><strong>Méthodes</strong> : <code>envoyer()</code>, <code>archiver()</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="2-relations-entre-les-classes-utilisez-les-symboles-uml-appropriés-"><a class="header" href="#2-relations-entre-les-classes-utilisez-les-symboles-uml-appropriés-"><strong>2. Relations entre les classes (Utilisez les symboles UML appropriés) :</strong></a></h4>
+<ul>
+<li>
+<p><strong>Héritage</strong> (Flèche avec triangle vide vers la superclasse) :</p>
+<ul>
+<li><code>Client</code> ---|&gt; <code>Utilisateur</code></li>
+<li><code>Administrateur</code> ---|&gt; <code>Utilisateur</code> <em>(Si ce choix est fait)</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Composition</strong> (Ligne avec losange plein côté conteneur) :</p>
+<ul>
+<li><code>Espace</code> <em>1</em> &lt;&gt;--- <em>0..</em>* <code>Créneau</code> : Un Espace est composé de Créneaux. Un Créneau appartient à 1 seul Espace.</li>
+</ul>
+</li>
+<li>
+<p><strong>Association</strong> (Ligne simple, éventuellement avec flèche pour navigabilité) :</p>
+<ul>
+<li>
+<p><code>Client</code> <em>1</em> --- <em>0..</em>* <code>Réservation</code> : Un Client fait 0 à N Réservations. Une Réservation est faite par 1 Client.</p>
+</li>
+<li>
+<p><code>Réservation</code> <em>1</em> --- <em>1</em> <code>Espace</code> : Une Réservation concerne 1 Espace. Un Espace peut avoir 0 à N Réservations.</p>
+</li>
+<li>
+<p><code>Réservation</code> <em>1</em> --- <em>1..</em>* <code>Créneau</code> : Une Réservation couvre 1 à N Créneaux. Un Créneau est couvert par 0 ou 1 Réservation active.</p>
+</li>
+<li>
+<p><code>Facture</code> <em>1</em> --- <em>1</em> <code>Réservation</code> : Une Facture est liée à 1 Réservation. Une Réservation donne lieu à 1 Facture (simplification).</p>
+</li>
+<li>
+<p><code>Notification</code> <em>0..</em>* --- <em>1</em> <code>Utilisateur</code> : Une Notification est pour 1 Utilisateur. Un Utilisateur reçoit 0 à N Notifications.</p>
+</li>
+<li>
+<p><em>(Ajouter d'autres associations si nécessaires, ex: Admin -&gt; Espace pour gestion)</em></p>
+</li>
+<li>
+<p><strong>Note importante :</strong> Les anciennes "Dépendances" doivent être modélisées comme des <strong>Associations</strong> car il existe un lien structurel (attribut de référence).</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-points-à-considérer-pour-lexercice-"><a class="header" href="#3-points-à-considérer-pour-lexercice-"><strong>3. Points à considérer pour l’exercice :</strong></a></h4>
+<ul>
+<li><strong>Précision des Relations :</strong> Utilisez le bon type de relation (Héritage, Composition, Association). L'Agrégation (losange vide) est possible mais souvent moins précise qu'une Association bien définie ou une Composition.</li>
+<li><strong>Cardinalités (Multiplicités) :</strong> Indiquez les cardinalités à chaque extrémité des associations/compositions (ex: <code>1</code>, <code>0..1</code>, <code>*</code> ou <code>0..*</code>, <code>1..*</code>).</li>
+<li><strong>Attributs &amp; Méthodes :</strong> Soyez pertinents. Les méthodes doivent refléter les responsabilités de la classe. Utilisez des types et Enums.</li>
+</ul>
+<h4 id="4-consignes-supplémentaires-"><a class="header" href="#4-consignes-supplémentaires-"><strong>4. Consignes supplémentaires :</strong></a></h4>
+<ul>
+<li>Soignez la <strong>lisibilité</strong> : noms clairs, diagramme aéré.</li>
+<li>Justifiez brièvement vos choix de modélisation si nécessaire (non demandé explicitement, mais bon pour la compréhension).</li>
+</ul>
+<h3 id="critères-de-notation--1"><a class="header" href="#critères-de-notation--1"><strong>Critères de notation :</strong></a></h3>
+<ul>
+<li><strong>Lisibilité et clarté</strong> du diagramme.</li>
+<li><strong>Identification pertinente</strong> des classes, attributs, méthodes et types/enums.</li>
+<li><strong>Correction des relations UML</strong> : Utilisation appropriée de l'Héritage, la Composition, l'Association.</li>
+<li><strong>Précision et justification des cardinalités</strong>.</li>
+<li><strong>Cohérence globale</strong> du modèle avec le contexte fonctionnel.</li>
+<li><strong>Complétude</strong> des aspects majeurs du domaine.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="diagramme-3--diagramme-de-séquence-uml"><a class="header" href="#diagramme-3--diagramme-de-séquence-uml"><strong>Diagramme 3 – Diagramme de Séquence UML</strong></a></h2>
+<h3 id="titre--réservation-dun-espace-de-coworking"><a class="header" href="#titre--réservation-dun-espace-de-coworking"><strong>Titre : Réservation d’un espace de coworking</strong></a></h3>
+<hr />
+<h3 id="consignes-détaillées-1"><a class="header" href="#consignes-détaillées-1"><strong>Consignes détaillées</strong></a></h3>
+<h4 id="1-identification-des-objets-attendus-"><a class="header" href="#1-identification-des-objets-attendus-"><strong>1. Identification des objets attendus :</strong></a></h4>
+<ol>
+<li>
+<p><strong>Client</strong></p>
+<ul>
+<li>Acteur qui déclenche la réservation via l’interface</li>
+</ul>
+</li>
+<li>
+<p><strong>InterfaceWeb</strong></p>
+<ul>
+<li>Point d’entrée de l’action utilisateur</li>
+<li>Transmet les demandes au contrôleur</li>
+</ul>
+</li>
+<li>
+<p><strong>ControleurReservation</strong></p>
+<ul>
+<li>Contient la logique de traitement métier</li>
+<li>Vérifie la disponibilité, crée la réservation et initie les traitements liés</li>
+</ul>
+</li>
+<li>
+<p><strong>BaseDeDonnees</strong></p>
+<ul>
+<li>Gère la persistance des entités (lecture/écriture)</li>
+</ul>
+</li>
+<li>
+<p><strong>ServiceFacturation</strong></p>
+<ul>
+<li>Gère la génération et l’enregistrement de la facture liée à la réservation</li>
+</ul>
+</li>
+<li>
+<p><strong>ServiceMail</strong></p>
+<ul>
+<li>Envoie la confirmation de réservation au client</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h4 id="2-Éléments-obligatoires-dans-le-diagramme-"><a class="header" href="#2-Éléments-obligatoires-dans-le-diagramme-"><strong>2. Éléments obligatoires dans le diagramme :</strong></a></h4>
+<ul>
+<li>L’action utilisateur initiale : déclenchement de la réservation via un appel à l’interface.</li>
+<li>La vérification de disponibilité via un appel au contrôleur, qui interagit avec la base de données.</li>
+<li>Un <strong>bloc <code>alt</code></strong> pour distinguer les deux cas :
+<ul>
+<li>[Espace disponible]</li>
+<li>[Espace indisponible]</li>
+</ul>
+</li>
+<li>En cas de succès :
+<ul>
+<li>Création de la réservation</li>
+<li>Génération de la facture</li>
+<li>Enregistrement dans la base de données</li>
+<li>Envoi d’un mail de confirmation</li>
+</ul>
+</li>
+<li>En cas d’échec :
+<ul>
+<li>Message de refus affiché à l’utilisateur</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="3-contraintes-techniques-"><a class="header" href="#3-contraintes-techniques-"><strong>3. Contraintes techniques :</strong></a></h4>
+<ul>
+<li>Tous les <strong>messages doivent être nommés explicitement</strong> :<br />
+Exemples : <code>verifierDisponibilite()</code>, <code>creerReservation()</code>, <code>genererFacture()</code>, <code>envoyerMailConfirmation()</code></li>
+<li>Chaque interaction doit avoir un <strong>retour clair</strong> (message de retour ou résultat).</li>
+<li>Tous les objets doivent avoir une <strong>barre d’activation visible</strong> quand ils traitent une action.</li>
+<li>Le diagramme doit respecter la <strong>logique de séquence descendante</strong> : pas d’inversion d’ordre ou de retour flou.</li>
+<li>Aucun message ne doit venir directement du <code>Client</code> vers un objet métier ou la BDD : tout passe par l’interface.</li>
+</ul>
+<hr />
+<h4 id="4-consignes-supplémentaires--1"><a class="header" href="#4-consignes-supplémentaires--1"><strong>4. Consignes supplémentaires :</strong></a></h4>
+<ul>
+<li>Le diagramme doit rester <strong>lisible</strong>, même s’il est dense : alignement propre des objets, espacements suffisants.</li>
+<li>Les objets qui ne participent pas activement à cette séquence ne doivent <strong>pas être ajoutés par anticipation</strong>.</li>
+<li>Le bloc <code>alt</code> doit être lisible, avec des conditions <strong>clairement nommées</strong>.</li>
+<li>Il est autorisé (bonus) d’ajouter un service de vérification métier séparé si pertinent (<code>ServiceValidation</code>), mais ce n’est <strong>pas obligatoire</strong>.</li>
+</ul>
+<hr />
+<h3 id="critères-de-notation--2"><a class="header" href="#critères-de-notation--2"><strong>Critères de notation :</strong></a></h3>
+<ul>
+<li><strong>Clarté du diagramme</strong> : messages lisibles, ordonnés, sans surcharge inutile</li>
+<li><strong>Respect des conventions UML</strong> : syntaxe correcte, blocs bien formés, retours explicites</li>
+<li><strong>Cohérence fonctionnelle</strong> : le diagramme reflète bien le scénario de réservation</li>
+<li><strong>Complétude</strong> : toutes les étapes demandées sont représentées dans un scénario fluide</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="diagramme-4--diagramme-de-séquence-uml"><a class="header" href="#diagramme-4--diagramme-de-séquence-uml"><strong>Diagramme 4 – Diagramme de Séquence UML</strong></a></h2>
+<h3 id="titre--paiement-dune-facture"><a class="header" href="#titre--paiement-dune-facture"><strong>Titre : Paiement d’une facture</strong></a></h3>
+<hr />
+<h3 id="consignes-détaillées-2"><a class="header" href="#consignes-détaillées-2"><strong>Consignes détaillées</strong></a></h3>
+<h4 id="1-objets-attendus-dans-le-diagramme-"><a class="header" href="#1-objets-attendus-dans-le-diagramme-"><strong>1. Objets attendus dans le diagramme :</strong></a></h4>
+<ol>
+<li>
+<p><strong>Client</strong></p>
+<ul>
+<li>Acteur qui déclenche la consultation et le paiement</li>
+</ul>
+</li>
+<li>
+<p><strong>InterfaceWeb</strong></p>
+<ul>
+<li>Permet au client de consulter ses factures et d’initier le paiement</li>
+</ul>
+</li>
+<li>
+<p><strong>ControleurFacturation</strong></p>
+<ul>
+<li>Gère la logique métier liée à la récupération et au paiement des factures</li>
+</ul>
+</li>
+<li>
+<p><strong>BaseDeDonnees</strong></p>
+<ul>
+<li>Sert à récupérer les factures et mettre à jour leur statut</li>
+</ul>
+</li>
+<li>
+<p><strong>ServicePaiement</strong></p>
+<ul>
+<li>Appelé pour déclencher un paiement via un prestataire externe</li>
+</ul>
+</li>
+<li>
+<p><strong>ServiceMail</strong> <em>(optionnel mais recommandé)</em></p>
+<ul>
+<li>Utilisé pour envoyer un email de confirmation de paiement</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h4 id="2-Éléments-obligatoires-dans-le-diagramme--1"><a class="header" href="#2-Éléments-obligatoires-dans-le-diagramme--1"><strong>2. Éléments obligatoires dans le diagramme :</strong></a></h4>
+<ul>
+<li>L’action initiale du client : demande de consultation des factures</li>
+<li>La récupération des factures via le contrôleur, puis via la base de données</li>
+<li>Le clic du client sur “payer” pour une facture donnée</li>
+<li>Appel au service de paiement externe</li>
+<li>Bloc <code>alt</code> avec deux branches :
+<ul>
+<li>[Paiement accepté]</li>
+<li>[Paiement refusé]</li>
+</ul>
+</li>
+<li>En cas de succès :
+<ul>
+<li>Mise à jour du statut de la facture dans la base de données</li>
+<li>Envoi d’un email de confirmation</li>
+<li>Affichage d’un message de confirmation à l’utilisateur</li>
+</ul>
+</li>
+<li>En cas d’échec :
+<ul>
+<li>Message d’erreur à l’utilisateur, <strong>sans mise à jour de la base</strong></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="3-contraintes-techniques--1"><a class="header" href="#3-contraintes-techniques--1"><strong>3. Contraintes techniques :</strong></a></h4>
+<ul>
+<li>Chaque message doit être <strong>nommé explicitement</strong> :<br />
+Exemples : <code>recupererFactures()</code>, <code>payerFacture()</code>, <code>verifierPaiement()</code>, <code>mettreAJourStatut()</code>, <code>envoyerMailPaiementOk()</code></li>
+<li>Tous les retours doivent être représentés.</li>
+<li>Les activations doivent être visibles et correctement positionnées.</li>
+<li>Le service de paiement est <strong>externe au système</strong> : il peut être représenté comme un objet à part (<code>PrestatairePaiement</code>) ou intégré dans <code>ServicePaiement</code>.</li>
+</ul>
+<hr />
+<h4 id="4-consignes-supplémentaires--2"><a class="header" href="#4-consignes-supplémentaires--2"><strong>4. Consignes supplémentaires :</strong></a></h4>
+<ul>
+<li>Le diagramme ne doit <strong>pas modéliser tous les cas de paiement possibles</strong>, uniquement ceux indiqués (succès / échec simple).</li>
+<li>Ne surchargez pas le diagramme avec des vérifications bancaires détaillées.</li>
+<li>La base de données ne doit être appelée pour mise à jour <strong>que si le paiement est validé.</strong></li>
+<li>Si vous modélisez le mail de confirmation, placez-le <strong>après</strong> la mise à jour du statut.</li>
+</ul>
+<hr />
+<h3 id="critères-de-notation--3"><a class="header" href="#critères-de-notation--3"><strong>Critères de notation :</strong></a></h3>
+<ul>
+<li><strong>Fidélité au scénario</strong> : les étapes sont correctement ordonnées et complètes</li>
+<li><strong>Clarté des interactions</strong> : messages nommés clairement, retours bien visibles</li>
+<li><strong>Utilisation correcte du bloc <code>alt</code></strong></li>
+<li><strong>Respect des responsabilités</strong> : chaque objet fait ce qui est attendu de lui, sans confusion de rôles</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="diagramme-5--diagramme-dactivité-uml"><a class="header" href="#diagramme-5--diagramme-dactivité-uml"><strong>Diagramme 5 – Diagramme d’activité UML</strong></a></h2>
+<h3 id="titre--réservation-dun-espace--point-de-vue-utilisateur"><a class="header" href="#titre--réservation-dun-espace--point-de-vue-utilisateur"><strong>Titre : Réservation d’un espace – point de vue utilisateur</strong></a></h3>
+<hr />
+<h4 id="consignes-détaillées-3"><a class="header" href="#consignes-détaillées-3"><strong>Consignes détaillées</strong></a></h4>
+<h4 id="1-objectif-du-diagramme"><a class="header" href="#1-objectif-du-diagramme"><strong>1. Objectif du diagramme</strong></a></h4>
+<p>Vous devez représenter le <strong>processus métier complet</strong>, côté utilisateur, pour réserver un espace de coworking via la plateforme.</p>
+<hr />
+<h4 id="2-Éléments-attendus-dans-le-diagramme-"><a class="header" href="#2-Éléments-attendus-dans-le-diagramme-"><strong>2. Éléments attendus dans le diagramme :</strong></a></h4>
+<ul>
+<li>
+<p><strong>Point de départ clair</strong> : accès à la plateforme</p>
+</li>
+<li>
+<p><strong>Connexion utilisateur</strong> : prévoir un <strong>test de connexion</strong></p>
+<ul>
+<li>Bloc décisionnel <code>[Utilisateur connecté ?]</code>
+<ul>
+<li>Si non connecté : redirection vers l’écran de login</li>
+<li>Si connecté : poursuite du processus</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Recherche d’espace</strong> :</p>
+<ul>
+<li>Le client entre ses critères (type, date, horaires)</li>
+<li>Le système affiche une liste de résultats</li>
+</ul>
+</li>
+<li>
+<p><strong>Bloc décisionnel <code>[Espace disponible ?]</code></strong> :</p>
+<ul>
+<li>Si non : afficher un message d’erreur ou inviter à modifier les critères</li>
+<li>Si oui : passage à la sélection de l’espace</li>
+</ul>
+</li>
+<li>
+<p><strong>Sélection d’un créneau</strong> :</p>
+<ul>
+<li>Le client choisit un espace et un créneau horaire</li>
+<li>Le système pré-remplit les infos de réservation</li>
+</ul>
+</li>
+<li>
+<p><strong>Confirmation de réservation</strong> :</p>
+<ul>
+<li>Le client valide la réservation</li>
+<li>Le système envoie la confirmation</li>
+<li>Le processus se termine sur une action de fin explicite</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="3-représentation-obligatoire-"><a class="header" href="#3-représentation-obligatoire-"><strong>3. Représentation obligatoire :</strong></a></h4>
+<ul>
+<li><strong>Nœud de départ</strong> et <strong>nœud de fin</strong></li>
+<li><strong>Décisions</strong> (<code>losanges</code>) pour :
+<ul>
+<li>Connexion</li>
+<li>Disponibilité</li>
+</ul>
+</li>
+<li><strong>Flux alternatifs</strong> pour les cas d’échec :
+<ul>
+<li>Non connecté</li>
+<li>Aucune disponibilité</li>
+</ul>
+</li>
+<li><strong>Actions utilisateur</strong> et <strong>réactions du système</strong> doivent être bien distinguées</li>
+<li>Si pertinent : afficher un <strong>bloc d’interruption</strong> si l’utilisateur quitte le processus</li>
+</ul>
+<hr />
+<h4 id="4-contraintes-techniques-"><a class="header" href="#4-contraintes-techniques-"><strong>4. Contraintes techniques :</strong></a></h4>
+<ul>
+<li>Pas de swimlanes imposées, mais les actions doivent clairement indiquer <strong>qui fait quoi</strong></li>
+<li>Nommez les actions de manière <strong>fonctionnelle</strong> : “Entrer les critères”, “Valider la réservation”, “Afficher message d’erreur”</li>
+<li>Ne modélisez <strong>que le processus client</strong> : pas d’appel à des composants internes comme la base de données</li>
+</ul>
+<hr />
+<h3 id="critères-de-notation--4"><a class="header" href="#critères-de-notation--4"><strong>Critères de notation :</strong></a></h3>
+<ul>
+<li><strong>Clarté du process</strong> : déroulement logique et lisible du début à la fin</li>
+<li><strong>Bonne utilisation des décisions et conditions</strong></li>
+<li><strong>Absence d’ambiguïté sur les actions utilisateur / système</strong></li>
+<li><strong>Couverture complète du scénario</strong> (cas positifs + cas alternatifs)</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="diagramme-6--diagramme-dactivité-uml"><a class="header" href="#diagramme-6--diagramme-dactivité-uml"><strong>Diagramme 6 – Diagramme d’activité UML</strong></a></h2>
+<h3 id="titre--gestion-dun-espace-de-coworking--côté-administrateur"><a class="header" href="#titre--gestion-dun-espace-de-coworking--côté-administrateur"><strong>Titre : Gestion d’un espace de coworking – côté administrateur</strong></a></h3>
+<hr />
+<h3 id="consignes-détaillées-4"><a class="header" href="#consignes-détaillées-4"><strong>Consignes détaillées</strong></a></h3>
+<h4 id="1-objectif-du-diagramme-1"><a class="header" href="#1-objectif-du-diagramme-1"><strong>1. Objectif du diagramme</strong></a></h4>
+<p>Modéliser le processus métier de <strong>gestion des espaces</strong> (création, modification, désactivation) du point de vue d’un administrateur.<br />
+Le diagramme doit inclure <strong>les différents chemins possibles</strong>, <strong>les vérifications préalables</strong>, et <strong>les cas de conflit</strong>.</p>
+<hr />
+<h4 id="2-Éléments-attendus-dans-le-diagramme--1"><a class="header" href="#2-Éléments-attendus-dans-le-diagramme--1"><strong>2. Éléments attendus dans le diagramme :</strong></a></h4>
+<ul>
+<li><strong>Nœud de départ</strong> clair : l’administrateur accède à l’interface de gestion des espaces</li>
+<li><strong>Bloc de décision initial</strong> : choix de l’action
+<ul>
+<li>[Créer un espace]</li>
+<li>[Modifier un espace existant]</li>
+<li>[Désactiver un espace]</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h5 id="si-création-"><a class="header" href="#si-création-"><strong>Si création :</strong></a></h5>
+<ul>
+<li>Remplissage du formulaire (nom, capacité, type, etc.)</li>
+<li>Vérification de la complétude du formulaire
+<ul>
+<li>Si formulaire incomplet : message d’erreur, retour</li>
+<li>Si formulaire valide : création de l’espace et confirmation</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h5 id="si-modification-"><a class="header" href="#si-modification-"><strong>Si modification :</strong></a></h5>
+<ul>
+<li>Sélection d’un espace existant</li>
+<li>Modification des informations</li>
+<li>Sauvegarde</li>
+<li>Confirmation de modification</li>
+</ul>
+<hr />
+<h5 id="si-désactivation-"><a class="header" href="#si-désactivation-"><strong>Si désactivation :</strong></a></h5>
+<ul>
+<li>Vérification : l’espace a-t-il des réservations actives ?
+<ul>
+<li>Si oui : afficher un avertissement, bloquer ou proposer une replanification</li>
+<li>Si non : désactivation effective et message de confirmation</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="3-représentation-obligatoire--1"><a class="header" href="#3-représentation-obligatoire--1"><strong>3. Représentation obligatoire :</strong></a></h4>
+<ul>
+<li><strong>Nœud de fin clair</strong></li>
+<li><strong>Blocs décisionnels</strong> :
+<ul>
+<li>Sélection de l’action</li>
+<li>Vérifications de formulaire</li>
+<li>Gestion de conflits liés aux réservations actives</li>
+</ul>
+</li>
+<li><strong>Flux alternatifs</strong> :
+<ul>
+<li>Création échouée</li>
+<li>Désactivation refusée</li>
+</ul>
+</li>
+<li><strong>Actions nommées clairement</strong> : “Remplir le formulaire”, “Vérifier réservations actives”, “Afficher avertissement”, etc.</li>
+<li>Possibilité d’interrompre le processus à tout moment (zone d’interruption optionnelle si bien maîtrisée)</li>
+</ul>
+<hr />
+<h4 id="4-contraintes-techniques--1"><a class="header" href="#4-contraintes-techniques--1"><strong>4. Contraintes techniques :</strong></a></h4>
+<ul>
+<li>Pas besoin de modéliser les échanges avec la base de données</li>
+<li>L’accent est mis sur la <strong>logique métier</strong> de la gestion d’un espace</li>
+<li>Vous ne devez modéliser <strong>que le point de vue de l’admin</strong>, pas les impacts côté client</li>
+</ul>
+<hr />
+<h3 id="critères-de-notation--5"><a class="header" href="#critères-de-notation--5"><strong>Critères de notation :</strong></a></h3>
+<ul>
+<li><strong>Structure logique et complète du processus</strong></li>
+<li><strong>Utilisation pertinente des blocs de décision</strong></li>
+<li><strong>Modélisation claire des conflits et erreurs</strong></li>
+<li><strong>Lisibilité et pertinence des actions</strong></li>
+</ul>
 
                     </main>
 

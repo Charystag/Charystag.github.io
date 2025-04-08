@@ -1,0 +1,362 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Diagramme 2 - Introduction au Langage UML</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Présentation du langage</li><li class="chapter-item expanded "><a href="../course/intro.html"><strong aria-hidden="true">1.</strong> Introduction au langage UML</a></li><li class="chapter-item expanded affix "><li class="part-title">Les principaux diagrammes</li><li class="chapter-item expanded "><a href="../course/use_case.html"><strong aria-hidden="true">2.</strong> Diagrammes de cas d'utilisation</a></li><li class="chapter-item expanded "><a href="../course/class.html"><strong aria-hidden="true">3.</strong> Diagrammes de classe</a></li><li class="chapter-item expanded "><a href="../course/sequence.html"><strong aria-hidden="true">4.</strong> Diagrammes de séquence</a></li><li class="chapter-item expanded "><a href="../course/flowchart.html"><strong aria-hidden="true">5.</strong> Flowcharts</a></li><li class="chapter-item expanded "><a href="../course/activity.html"><strong aria-hidden="true">6.</strong> Diagrammes d'activité</a></li><li class="chapter-item expanded "><a href="../course/corrections.html"><strong aria-hidden="true">7.</strong> Corrections</a></li><li class="chapter-item expanded affix "><li class="part-title">Examen</li><li class="chapter-item expanded "><a href="../exam/index.html"><strong aria-hidden="true">8.</strong> Sommaire</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../exam/diagramme1.html"><strong aria-hidden="true">8.1.</strong> Diagramme 1</a></li><li class="chapter-item expanded "><a href="../exam/diagramme2.html" class="active"><strong aria-hidden="true">8.2.</strong> Diagramme 2</a></li><li class="chapter-item expanded "><a href="../exam/diagramme3.html"><strong aria-hidden="true">8.3.</strong> Diagramme 3</a></li><li class="chapter-item expanded "><a href="../exam/diagramme4.html"><strong aria-hidden="true">8.4.</strong> Diagramme 4</a></li><li class="chapter-item expanded "><a href="../exam/diagramme5.html"><strong aria-hidden="true">8.5.</strong> Diagramme 5</a></li><li class="chapter-item expanded "><a href="../exam/diagramme6.html"><strong aria-hidden="true">8.6.</strong> Diagramme 6</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Introduction au Langage UML</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="diagramme-2--diagramme-de-classes-uml"><a class="header" href="#diagramme-2--diagramme-de-classes-uml"><strong>Diagramme 2 – Diagramme de classes UML</strong>  </a></h2>
+<h3 id="consignes-détaillées"><a class="header" href="#consignes-détaillées"><strong>Consignes détaillées</strong></a></h3>
+<h4 id="1-identification-des-classes-principales-avec-attributs-et-méthodes-suggérés-"><a class="header" href="#1-identification-des-classes-principales-avec-attributs-et-méthodes-suggérés-"><strong>1. Identification des classes principales (avec attributs et méthodes suggérés) :</strong></a></h4>
+<ul>
+<li>Pensez à utiliser des types précis (String, int, double, Date, boolean, List&lt;...&gt;) et des <strong>Énumérations (Enum)</strong> pour les statuts et types.</li>
+</ul>
+<ol>
+<li>
+<p><strong>Utilisateur</strong> <em>(Peut être abstraite si héritage)</em></p>
+<ul>
+<li>
+<p><strong>Attributs</strong> : <code>idUtilisateur</code> (PK), <code>nom</code> (String), <code>email</code> (String), <code>motDePasseHash</code> (String), <code>typeUtilisateur</code> (Enum: CLIENT, ADMIN) <em>(Alternative: utiliser l'héritage ci-dessous)</em></p>
+</li>
+<li>
+<p><strong>Méthodes</strong> : <code>authentifier()</code>, <code>modifierProfil()</code>, <code>consulterHistoriqueReservations()</code></p>
+</li>
+<li>
+<p><em>(Optionnel mais recommandé : Héritage)</em></p>
+<ul>
+<li><strong>Client</strong> (hérite de Utilisateur)
+<ul>
+<li><em>(Attributs/Méthodes spécifiques au client si besoin)</em></li>
+</ul>
+</li>
+<li><strong>Administrateur</strong> (hérite de Utilisateur)
+<ul>
+<li><em>(Attributs/Méthodes spécifiques à l'admin si besoin)</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Espace</strong></p>
+<ul>
+<li><strong>Attributs</strong> : <code>idEspace</code> (PK), <code>nom</code> (String), <code>typeEspace</code> (Enum: BUREAU, SALLE_REUNION), <code>capacite</code> (int), <code>description</code> (String), <code>equipements</code> (List<String>), <code>tarifHoraire</code> (double)</li>
+<li><strong>Méthodes</strong> : <code>verifierDisponibilite(debut: Date, fin: Date): boolean</code>, <code>getCreneauxDisponibles(jour: Date): List&lt;Créneau&gt;</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Réservation</strong></p>
+<ul>
+<li><strong>Attributs</strong> : <code>idReservation</code> (PK), <code>dateHeureDebut</code> (Date), <code>dateHeureFin</code> (Date), <code>statut</code> (Enum: CONFIRMEE, ANNULEE, PENDING_PAIEMENT), <code>tarifCalcule</code> (double)</li>
+<li><em>(Associations à modéliser : référence vers Client [1], Espace [1], Créneau [1..</em>])*</li>
+<li><strong>Méthodes</strong> : <code>confirmer()</code>, <code>annuler()</code>, <code>calculerTarif()</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Créneau</strong></p>
+<ul>
+<li><strong>Attributs</strong> : <code>idCreneau</code> (PK), <code>dateTimeDebut</code> (Date), <code>dateTimeFin</code> (Date), <code>statut</code> (Enum: DISPONIBLE, RESERVE, INDISPONIBLE)</li>
+<li><em>(Associations à modéliser : référence vers Espace [1], Réservation [0..1])</em></li>
+<li><strong>Méthodes</strong> : <code>marquerReserve(reservation: Réservation)</code>, <code>marquerDisponible()</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Facture</strong></p>
+<ul>
+<li><strong>Attributs</strong> : <code>idFacture</code> (PK), <code>numeroFacture</code> (String), <code>montant</code> (double), <code>dateEmission</code> (Date), <code>dateEcheance</code> (Date), <code>statut</code> (Enum: PAYEE, EN_ATTENTE, ANNULEE)</li>
+<li><em>(Association à modéliser : référence vers Réservation [1])</em></li>
+<li><strong>Méthodes</strong> : <code>genererPdf()</code>, <code>enregistrerPaiement()</code>, <code>verifierStatutPaiement()</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Notification</strong></p>
+<ul>
+<li><strong>Attributs</strong> : <code>idNotification</code> (PK), <code>typeNotification</code> (Enum: CONFIRMATION_RESA, ANNULATION_RESA, RAPPEL, FACTURE), <code>message</code> (String), <code>dateEnvoi</code> (Date), <code>statutEnvoi</code> (Enum: A_ENVOYER, ENVOYEE, ECHEC)</li>
+<li><em>(Association à modéliser : référence vers Utilisateur [1] (destinataire))</em></li>
+<li><strong>Méthodes</strong> : <code>envoyer()</code>, <code>archiver()</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="2-relations-entre-les-classes-utilisez-les-symboles-uml-appropriés-"><a class="header" href="#2-relations-entre-les-classes-utilisez-les-symboles-uml-appropriés-"><strong>2. Relations entre les classes (Utilisez les symboles UML appropriés) :</strong></a></h4>
+<ul>
+<li>
+<p><strong>Héritage</strong> (Flèche avec triangle vide vers la superclasse) :</p>
+<ul>
+<li><code>Client</code> ---|&gt; <code>Utilisateur</code></li>
+<li><code>Administrateur</code> ---|&gt; <code>Utilisateur</code> <em>(Si ce choix est fait)</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Composition</strong> (Ligne avec losange plein côté conteneur) :</p>
+<ul>
+<li><code>Espace</code> <em>1</em> &lt;&gt;--- <em>0..</em>* <code>Créneau</code> : Un Espace est composé de Créneaux. Un Créneau appartient à 1 seul Espace.</li>
+</ul>
+</li>
+<li>
+<p><strong>Association</strong> (Ligne simple, éventuellement avec flèche pour navigabilité) :</p>
+<ul>
+<li>
+<p><code>Client</code> <em>1</em> --- <em>0..</em>* <code>Réservation</code> : Un Client fait 0 à N Réservations. Une Réservation est faite par 1 Client.</p>
+</li>
+<li>
+<p><code>Réservation</code> <em>1</em> --- <em>1</em> <code>Espace</code> : Une Réservation concerne 1 Espace. Un Espace peut avoir 0 à N Réservations.</p>
+</li>
+<li>
+<p><code>Réservation</code> <em>1</em> --- <em>1..</em>* <code>Créneau</code> : Une Réservation couvre 1 à N Créneaux. Un Créneau est couvert par 0 ou 1 Réservation active.</p>
+</li>
+<li>
+<p><code>Facture</code> <em>1</em> --- <em>1</em> <code>Réservation</code> : Une Facture est liée à 1 Réservation. Une Réservation donne lieu à 1 Facture (simplification).</p>
+</li>
+<li>
+<p><code>Notification</code> <em>0..</em>* --- <em>1</em> <code>Utilisateur</code> : Une Notification est pour 1 Utilisateur. Un Utilisateur reçoit 0 à N Notifications.</p>
+</li>
+<li>
+<p><em>(Ajouter d'autres associations si nécessaires, ex: Admin -&gt; Espace pour gestion)</em></p>
+</li>
+<li>
+<p><strong>Note importante :</strong> Les anciennes "Dépendances" doivent être modélisées comme des <strong>Associations</strong> car il existe un lien structurel (attribut de référence).</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-points-à-considérer-pour-lexercice-"><a class="header" href="#3-points-à-considérer-pour-lexercice-"><strong>3. Points à considérer pour l’exercice :</strong></a></h4>
+<ul>
+<li><strong>Précision des Relations :</strong> Utilisez le bon type de relation (Héritage, Composition, Association). L'Agrégation (losange vide) est possible mais souvent moins précise qu'une Association bien définie ou une Composition.</li>
+<li><strong>Cardinalités (Multiplicités) :</strong> Indiquez les cardinalités à chaque extrémité des associations/compositions (ex: <code>1</code>, <code>0..1</code>, <code>*</code> ou <code>0..*</code>, <code>1..*</code>).</li>
+<li><strong>Attributs &amp; Méthodes :</strong> Soyez pertinents. Les méthodes doivent refléter les responsabilités de la classe. Utilisez des types et Enums.</li>
+</ul>
+<h4 id="4-consignes-supplémentaires-"><a class="header" href="#4-consignes-supplémentaires-"><strong>4. Consignes supplémentaires :</strong></a></h4>
+<ul>
+<li>Soignez la <strong>lisibilité</strong> : noms clairs, diagramme aéré.</li>
+<li>Justifiez brièvement vos choix de modélisation si nécessaire (non demandé explicitement, mais bon pour la compréhension).</li>
+</ul>
+<h3 id="critères-de-notation-"><a class="header" href="#critères-de-notation-"><strong>Critères de notation :</strong></a></h3>
+<ul>
+<li><strong>Lisibilité et clarté</strong> du diagramme.</li>
+<li><strong>Identification pertinente</strong> des classes, attributs, méthodes et types/enums.</li>
+<li><strong>Correction des relations UML</strong> : Utilisation appropriée de l'Héritage, la Composition, l'Association.</li>
+<li><strong>Précision et justification des cardinalités</strong>.</li>
+<li><strong>Cohérence globale</strong> du modèle avec le contexte fonctionnel.</li>
+<li><strong>Complétude</strong> des aspects majeurs du domaine.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../exam/diagramme1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../exam/diagramme3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../exam/diagramme1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../exam/diagramme3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

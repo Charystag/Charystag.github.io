@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Corrections - Introduction au Langage UML</title>
+        <title>Diagramme 1 - Introduction au Langage UML</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Présentation du langage</li><li class="chapter-item expanded "><a href="../course/intro.html"><strong aria-hidden="true">1.</strong> Introduction au langage UML</a></li><li class="chapter-item expanded affix "><li class="part-title">Les principaux diagrammes</li><li class="chapter-item expanded "><a href="../course/use_case.html"><strong aria-hidden="true">2.</strong> Diagrammes de cas d'utilisation</a></li><li class="chapter-item expanded "><a href="../course/class.html"><strong aria-hidden="true">3.</strong> Diagrammes de classe</a></li><li class="chapter-item expanded "><a href="../course/sequence.html"><strong aria-hidden="true">4.</strong> Diagrammes de séquence</a></li><li class="chapter-item expanded "><a href="../course/flowchart.html"><strong aria-hidden="true">5.</strong> Flowcharts</a></li><li class="chapter-item expanded "><a href="../course/activity.html"><strong aria-hidden="true">6.</strong> Diagrammes d'activité</a></li><li class="chapter-item expanded "><a href="../course/corrections.html" class="active"><strong aria-hidden="true">7.</strong> Corrections</a></li><li class="chapter-item expanded affix "><li class="part-title">Examen</li><li class="chapter-item expanded "><a href="../exam/index.html"><strong aria-hidden="true">8.</strong> Sommaire</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../exam/diagramme1.html"><strong aria-hidden="true">8.1.</strong> Diagramme 1</a></li><li class="chapter-item expanded "><a href="../exam/diagramme2.html"><strong aria-hidden="true">8.2.</strong> Diagramme 2</a></li><li class="chapter-item expanded "><a href="../exam/diagramme3.html"><strong aria-hidden="true">8.3.</strong> Diagramme 3</a></li><li class="chapter-item expanded "><a href="../exam/diagramme4.html"><strong aria-hidden="true">8.4.</strong> Diagramme 4</a></li><li class="chapter-item expanded "><a href="../exam/diagramme5.html"><strong aria-hidden="true">8.5.</strong> Diagramme 5</a></li><li class="chapter-item expanded "><a href="../exam/diagramme6.html"><strong aria-hidden="true">8.6.</strong> Diagramme 6</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Présentation du langage</li><li class="chapter-item expanded "><a href="../course/intro.html"><strong aria-hidden="true">1.</strong> Introduction au langage UML</a></li><li class="chapter-item expanded affix "><li class="part-title">Les principaux diagrammes</li><li class="chapter-item expanded "><a href="../course/use_case.html"><strong aria-hidden="true">2.</strong> Diagrammes de cas d'utilisation</a></li><li class="chapter-item expanded "><a href="../course/class.html"><strong aria-hidden="true">3.</strong> Diagrammes de classe</a></li><li class="chapter-item expanded "><a href="../course/sequence.html"><strong aria-hidden="true">4.</strong> Diagrammes de séquence</a></li><li class="chapter-item expanded "><a href="../course/flowchart.html"><strong aria-hidden="true">5.</strong> Flowcharts</a></li><li class="chapter-item expanded "><a href="../course/activity.html"><strong aria-hidden="true">6.</strong> Diagrammes d'activité</a></li><li class="chapter-item expanded "><a href="../course/corrections.html"><strong aria-hidden="true">7.</strong> Corrections</a></li><li class="chapter-item expanded affix "><li class="part-title">Examen</li><li class="chapter-item expanded "><a href="../exam/index.html"><strong aria-hidden="true">8.</strong> Sommaire</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../exam/diagramme1.html" class="active"><strong aria-hidden="true">8.1.</strong> Diagramme 1</a></li><li class="chapter-item expanded "><a href="../exam/diagramme2.html"><strong aria-hidden="true">8.2.</strong> Diagramme 2</a></li><li class="chapter-item expanded "><a href="../exam/diagramme3.html"><strong aria-hidden="true">8.3.</strong> Diagramme 3</a></li><li class="chapter-item expanded "><a href="../exam/diagramme4.html"><strong aria-hidden="true">8.4.</strong> Diagramme 4</a></li><li class="chapter-item expanded "><a href="../exam/diagramme5.html"><strong aria-hidden="true">8.5.</strong> Diagramme 5</a></li><li class="chapter-item expanded "><a href="../exam/diagramme6.html"><strong aria-hidden="true">8.6.</strong> Diagramme 6</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,20 +173,83 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="correction-des-exercices"><a class="header" href="#correction-des-exercices">Correction des exercices</a></h1>
-<h2 id="diagramme-dactivite"><a class="header" href="#diagramme-dactivite">Diagramme d'activite</a></h2>
-<h3 id="exercice-du-cours"><a class="header" href="#exercice-du-cours">Exercice du cours</a></h3>
-<p><img src="../img/activity_diagram_correction.svg" alt="Correction" /></p>
+                        <h2 id="diagramme-1--diagramme-de-cas-dutilisation"><a class="header" href="#diagramme-1--diagramme-de-cas-dutilisation"><strong>Diagramme 1 : Diagramme de cas d’utilisation</strong></a></h2>
+<h3 id="contexte"><a class="header" href="#contexte"><strong>Contexte</strong></a></h3>
+<p>Un client souhaite réserver un espace de coworking en ligne. Le système permet :</p>
+<ul>
+<li>De rechercher et consulter les espaces disponibles</li>
+<li>De réserver un espace</li>
+<li>D’annuler ses réservations</li>
+<li>De consulter son historique de réservations</li>
+<li>D’envoyer des confirmations par email via un service externe.</li>
+</ul>
+<p>Les administrateurs gèrent :</p>
+<ul>
+<li>Les espaces (ajout, modification, disponibilité)</li>
+<li>La facturation des clients</li>
+<li>Les créneaux horaires associés aux espaces</li>
+</ul>
+<h3 id="consignes-détaillées-"><a class="header" href="#consignes-détaillées-"><strong>Consignes détaillées :</strong></a></h3>
+<ol>
+<li>
+<p><strong>Acteurs à identifier :</strong></p>
+<ul>
+<li><strong>Client</strong> (Utilisateur principal qui réserve et consulte)</li>
+<li><strong>Administrateur</strong> (Utilisateur qui gère les ressources et la facturation)</li>
+<li><strong>Service de Messagerie</strong> (Acteur secondaire : système externe sollicité pour envoyer des emails. Il n'initie pas d'action.)</li>
+</ul>
+</li>
+<li>
+<p><strong>Cas d’utilisation principaux à modéliser :</strong></p>
+<ul>
+<li><strong>S'authentifier</strong> <em>(Utile pour <code>include</code>)</em></li>
+<li><strong>Consulter les disponibilités</strong> (Recherche d'espaces)</li>
+<li><strong>Réserver un espace</strong></li>
+<li><strong>Annuler une réservation</strong></li>
+<li><strong>Consulter mes réservations</strong></li>
+<li><strong>Gérer les espaces</strong> (pour l'Admin)</li>
+<li><strong>Gérer les factures</strong> (pour l'Admin)</li>
+<li><em>(Optionnel mais logique : <strong>Gérer les utilisateurs</strong> (pour l'Admin))</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Relations :</strong></p>
+<ul>
+<li>Reliez les acteurs principaux (<strong>Client</strong>, <strong>Administrateur</strong>) aux cas d’utilisation qu'ils <strong>initient</strong> directement (ligne simple).</li>
+<li>Reliez l'acteur secondaire (<strong>Service de Messagerie</strong>) aux cas d’utilisation qui le <strong>sollicitent</strong> (ex : "Réserver un espace", "Annuler une réservation" envoient typiquement un email).</li>
+<li>Utilisez <strong><code>&lt;&lt;include&gt;&gt;</code></strong> pour un comportement <strong>obligatoire et partagé</strong>. Par exemple, "S'authentifier" est souvent inclus par la plupart des autres cas d'utilisation (sauf peut-être "Consulter les disponibilités" si c'est public). "Vérifier la disponibilité" peut être inclus dans "Réserver un espace".</li>
+<li>Utilisez <strong><code>&lt;&lt;extend&gt;&gt;</code></strong> pour un comportement <strong>optionnel ou conditionnel</strong> qui ajoute de la valeur au cas de base, sous certaines conditions. <em>Exemple : Si le client peut ajouter des options (vidéoprojecteur, café) lors de la réservation, cela pourrait être modélisé avec <code>extend</code>.</em> <strong>Note :</strong> L'envoi d'email de confirmation, étant souvent systématique, est rarement un bon exemple pour <code>extend</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Clarifications spécifiques :</strong></p>
+<ul>
+<li>Le diagramme doit montrer clairement <strong>qui peut faire quoi</strong> avec le système.</li>
+<li>Le <strong>Service de Messagerie</strong> ne fait qu'<strong>exécuter</strong> les demandes d'envoi d'email venant du système, il n'est pas proactif.</li>
+<li>Assurez-vous que les cas d'utilisation de l'<strong>Administrateur</strong> concernent bien la <strong>gestion</strong> du système.</li>
+</ul>
+</li>
+<li>
+<p><strong>Rappel</strong> : C'est un diagramme de <strong>niveau 1 (vue d'ensemble)</strong>. Concentrez-vous sur les fonctionnalités majeures et les interactions principales sans entrer dans les détails de chaque écran ou message d'erreur.</p>
+</li>
+</ol>
+<h3 id="critères-de-notation-"><a class="header" href="#critères-de-notation-"><strong>Critères de notation :</strong></a></h3>
+<ul>
+<li><strong>Identification pertinente</strong> des acteurs et des cas d'utilisation clés.</li>
+<li><strong>Exactitude des relations</strong> entre acteurs et cas d'utilisation (qui initie quoi, qui est sollicité).</li>
+<li><strong>Utilisation correcte et justifiée</strong> des relations <code>&lt;&lt;include&gt;&gt;</code> et <code>&lt;&lt;extend&gt;&gt;</code>.</li>
+<li><strong>Lisibilité</strong> et <strong>clarté</strong> générale du diagramme.</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../course/activity.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../exam/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../exam/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../exam/diagramme2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -196,11 +259,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../course/activity.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../exam/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../exam/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../exam/diagramme2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

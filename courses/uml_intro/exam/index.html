@@ -1,0 +1,372 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Sommaire - Introduction au Langage UML</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Présentation du langage</li><li class="chapter-item expanded "><a href="../course/intro.html"><strong aria-hidden="true">1.</strong> Introduction au langage UML</a></li><li class="chapter-item expanded affix "><li class="part-title">Les principaux diagrammes</li><li class="chapter-item expanded "><a href="../course/use_case.html"><strong aria-hidden="true">2.</strong> Diagrammes de cas d'utilisation</a></li><li class="chapter-item expanded "><a href="../course/class.html"><strong aria-hidden="true">3.</strong> Diagrammes de classe</a></li><li class="chapter-item expanded "><a href="../course/sequence.html"><strong aria-hidden="true">4.</strong> Diagrammes de séquence</a></li><li class="chapter-item expanded "><a href="../course/flowchart.html"><strong aria-hidden="true">5.</strong> Flowcharts</a></li><li class="chapter-item expanded "><a href="../course/activity.html"><strong aria-hidden="true">6.</strong> Diagrammes d'activité</a></li><li class="chapter-item expanded "><a href="../course/corrections.html"><strong aria-hidden="true">7.</strong> Corrections</a></li><li class="chapter-item expanded affix "><li class="part-title">Examen</li><li class="chapter-item expanded "><a href="../exam/index.html" class="active"><strong aria-hidden="true">8.</strong> Sommaire</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../exam/diagramme1.html"><strong aria-hidden="true">8.1.</strong> Diagramme 1</a></li><li class="chapter-item expanded "><a href="../exam/diagramme2.html"><strong aria-hidden="true">8.2.</strong> Diagramme 2</a></li><li class="chapter-item expanded "><a href="../exam/diagramme3.html"><strong aria-hidden="true">8.3.</strong> Diagramme 3</a></li><li class="chapter-item expanded "><a href="../exam/diagramme4.html"><strong aria-hidden="true">8.4.</strong> Diagramme 4</a></li><li class="chapter-item expanded "><a href="../exam/diagramme5.html"><strong aria-hidden="true">8.5.</strong> Diagramme 5</a></li><li class="chapter-item expanded "><a href="../exam/diagramme6.html"><strong aria-hidden="true">8.6.</strong> Diagramme 6</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Introduction au Langage UML</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="examen-final-uml--système-de-gestion-despaces-de-coworking"><a class="header" href="#examen-final-uml--système-de-gestion-despaces-de-coworking"><strong>Examen final UML – Système de gestion d’espaces de coworking</strong></a></h1>
+<h2 id="travail-en-groupe--6-exercices--durée--4h"><a class="header" href="#travail-en-groupe--6-exercices--durée--4h"><strong>Travail en Groupe – 6 exercices – Durée : 4h</strong></a></h2>
+<h2 id="objectif-global"><a class="header" href="#objectif-global"><strong>Objectif global</strong></a></h2>
+<p>Modéliser différents aspects d’un <strong>système de réservation d’espaces partagés</strong> utilisé par une entreprise pour permettre à ses clients de :</p>
+<ul>
+<li>Réserver des espaces de travail (bureaux, salles de réunion)</li>
+<li>Gérer leurs réservations</li>
+<li>Payer leurs factures</li>
+<li>Recevoir des notifications</li>
+<li>Gérer les ressources du côté admin</li>
+</ul>
+<h2 id="contexte-fonctionnel"><a class="header" href="#contexte-fonctionnel"><strong>Contexte fonctionnel</strong></a></h2>
+<p>La plateforme de coworking permet :</p>
+<h4 id="pour-les-clients-"><a class="header" href="#pour-les-clients-">Pour les clients :</a></h4>
+<ul>
+<li>Créer un compte</li>
+<li>Rechercher des espaces disponibles selon des critères (date, type, capacité)</li>
+<li>Réserver un ou plusieurs créneaux</li>
+<li>Annuler une réservation</li>
+<li>Consulter ses factures et les payer en ligne</li>
+<li>Recevoir des notifications automatiques (confirmation, annulation, rappel)</li>
+</ul>
+<h4 id="pour-les-admins-"><a class="header" href="#pour-les-admins-">Pour les admins :</a></h4>
+<ul>
+<li>Ajouter / modifier / désactiver des espaces</li>
+<li>Visualiser les réservations existantes</li>
+<li>Gérer les factures (statut payé/non payé)</li>
+<li>Consulter les utilisateurs et leurs historiques</li>
+</ul>
+<h4 id="pour-le-système-"><a class="header" href="#pour-le-système-">Pour le système :</a></h4>
+<ul>
+<li>Gérer les conflits (double réservation, annulation hors délai)</li>
+<li>Générer les factures</li>
+<li>Gérer les accès automatiques (badges, codes d’entrée)</li>
+</ul>
+<h2 id="travail-demandé"><a class="header" href="#travail-demandé"><strong>Travail demandé</strong></a></h2>
+<p>Vous devez modéliser le système sous forme de <strong>6 diagrammes UML</strong> :</p>
+<h2 id="1-diagramme-de-cas-dutilisation"><a class="header" href="#1-diagramme-de-cas-dutilisation"><strong>1. Diagramme de cas d’utilisation</strong></a></h2>
+<h3 id="objectif-"><a class="header" href="#objectif-">Objectif :</a></h3>
+<p>Identifier les fonctionnalités principales du système du point de vue des acteurs principaux (<strong>client, admin</strong>).</p>
+<h3 id="attendus-"><a class="header" href="#attendus-">Attendus :</a></h3>
+<ul>
+<li>Cas d’utilisation nommés clairement</li>
+<li>Relations <code>include</code> / <code>extend</code> si pertinent</li>
+<li>Aucun détail technique, uniquement les actions majeures</li>
+<li>Pas de surcharge inutile : vue macro</li>
+</ul>
+<hr />
+<h2 id="2-diagramme-de-classes"><a class="header" href="#2-diagramme-de-classes"><strong>2. Diagramme de classes</strong></a></h2>
+<h3 id="objectif--1"><a class="header" href="#objectif--1">Objectif :</a></h3>
+<p>Modéliser les entités métier, leurs attributs, méthodes, et relations.</p>
+<h3 id="attendus--1"><a class="header" href="#attendus--1">Attendus :</a></h3>
+<ul>
+<li>Classes avec nom clair, attributs pertinents, méthodes représentatives</li>
+<li>Relations pertinentes et correctement utilisées (<strong>Association, Héritage, Composition</strong> principalement attendues), avec <strong>cardinalités</strong>.</li>
+<li>Pas de classes fourre-tout</li>
+</ul>
+<hr />
+<h2 id="3-diagramme-de-séquence--réservation-dun-espace"><a class="header" href="#3-diagramme-de-séquence--réservation-dun-espace"><strong>3. Diagramme de séquence – Réservation d’un espace</strong></a></h2>
+<h3 id="objectif--2"><a class="header" href="#objectif--2">Objectif :</a></h3>
+<p>Montrer l’enchaînement des interactions nécessaires à la réservation d’un espace.</p>
+<h3 id="attendus--2"><a class="header" href="#attendus--2">Attendus :</a></h3>
+<ul>
+<li>Déclencheur : action du client dans l’interface</li>
+<li>Bloc <code>alt</code> : [Espace disponible] / [Espace non disponible]</li>
+<li>Vérification &gt; Création de réservation &gt; Génération de facture &gt; Envoi mail</li>
+<li>Retours de messages présents, messages nommés clairement</li>
+</ul>
+<hr />
+<h2 id="4-diagramme-de-séquence--paiement-dune-facture"><a class="header" href="#4-diagramme-de-séquence--paiement-dune-facture"><strong>4. Diagramme de séquence – Paiement d’une facture</strong></a></h2>
+<h3 id="objectif--3"><a class="header" href="#objectif--3">Objectif :</a></h3>
+<p>Modéliser le processus complet de consultation puis paiement d’une facture.</p>
+<h3 id="attendus--3"><a class="header" href="#attendus--3">Attendus :</a></h3>
+<ul>
+<li>Bloc <code>alt</code> : [Paiement accepté] / [Paiement refusé]</li>
+<li>Récupération de la facture, appel au service de paiement, mise à jour du statut, envoi mail (si succès)</li>
+<li>Respect du rôle de chaque objet (interface, contrôleur, BDD, service paiement)</li>
+</ul>
+<hr />
+<h2 id="5-diagramme-dactivité--réservation-côté-utilisateur"><a class="header" href="#5-diagramme-dactivité--réservation-côté-utilisateur"><strong>5. Diagramme d’activité – Réservation côté utilisateur</strong></a></h2>
+<h3 id="objectif--4"><a class="header" href="#objectif--4">Objectif :</a></h3>
+<p>Représenter le processus métier utilisateur complet : de la recherche à la confirmation.</p>
+<h3 id="attendus--4"><a class="header" href="#attendus--4">Attendus :</a></h3>
+<ul>
+<li>Bloc décisionnel : [Utilisateur connecté ?]</li>
+<li>Bloc décisionnel : [Espace disponible ?]</li>
+<li>Flux alternatifs en cas de refus ou indisponibilité</li>
+<li>Actions utilisateur et système bien distinctes</li>
+</ul>
+<hr />
+<h2 id="6-diagramme-dactivité--gestion-dun-espace-admin"><a class="header" href="#6-diagramme-dactivité--gestion-dun-espace-admin"><strong>6. Diagramme d’activité – Gestion d’un espace (admin)</strong></a></h2>
+<h3 id="objectif--5"><a class="header" href="#objectif--5">Objectif :</a></h3>
+<p>Modéliser le processus d’ajout, modification ou désactivation d’un espace, avec gestion des conflits.</p>
+<h3 id="attendus--5"><a class="header" href="#attendus--5">Attendus :</a></h3>
+<ul>
+<li>Bloc de choix de l’action (création, modif, désactivation)</li>
+<li>Vérification des champs (création)</li>
+<li>Vérification des réservations actives (désactivation)</li>
+<li>Flux de validation et d’échec bien identifiés</li>
+</ul>
+<hr />
+<h2 id="rappel-général-de-notation-"><a class="header" href="#rappel-général-de-notation-"><strong>Rappel général de notation :</strong></a></h2>
+<ul>
+<li>Clarté des diagrammes</li>
+<li>Cohérence des relations / enchaînements</li>
+<li>Respect des règles UML</li>
+<li>Complétude du scénario demandé</li>
+</ul>
+<h2 id="consignes-de-soumission-des-diagrammes"><a class="header" href="#consignes-de-soumission-des-diagrammes"><strong>Consignes de Soumission des Diagrammes</strong></a></h2>
+<p><strong>Organisation des fichiers :</strong></p>
+<ol>
+<li>Créez un <strong>dossier unique</strong> portant votre numero de groupe (par exemple : <code>Groupe1_ExamenUML</code>).</li>
+<li>Placez un fichier <em>README.txt</em> au sein de ce dossier avec les noms et prenoms des membres du groupe</li>
+<li>Placez <strong>tous</strong> vos fichiers de diagrammes UML à l'intérieur d'un dossier <code>img</code> au sein de ce dossier</li>
+</ol>
+<p><strong>Example de structure</strong></p>
+<pre><code>Groupe1_ExamenUML/
+├── README.txt
+└── img
+    ├── diagramme1.svg
+    ├── diagramme2.svg
+    ├── diagramme3.svg
+    ├── diagramme4.svg
+    ├── diagramme5.svg
+    └── diagramme6.svg
+</code></pre>
+<blockquote>
+<p><strong>Attention:</strong> une structure de dossier non respectee donnera lieu a un retrait de points</p>
+</blockquote>
+<p><strong>Nommage des fichiers :</strong></p>
+<p>Nommez <strong>chaque fichier diagramme</strong> de manière claire et cohérente, en utilisant le numéro de l'exercice correspondant. Par exemple :</p>
+<ul>
+<li><code>diagramme1.svg</code> (pour le diagramme de Cas d'Utilisation de l'exercice 1)</li>
+<li><code>diagramme2.svg</code> (pour le diagramme de Classes de l'exercice 2)</li>
+<li><code>diagramme3.svg</code> (pour le premier diagramme de Séquence)</li>
+<li>... et ainsi de suite jusqu'à <code>diagramme_6.svg</code>.</li>
+</ul>
+<p><strong>Format des fichiers (POINT CRUCIAL) :</strong></p>
+<ul>
+<li>Le format de fichier <strong>OBLIGATOIRE</strong> pour <strong>TOUS</strong> vos diagrammes est le format <strong>SVG (Scalable Vector Graphics)</strong>.</li>
+<li><strong>Pourquoi SVG ?</strong> C'est un format <em>vectoriel</em>. Cela signifie que je pourrai zoomer sur vos diagrammes autant que nécessaire <strong>sans aucune perte de qualité</strong> pour lire tous les détails. C'est absolument <strong>INDISPENSABLE</strong> pour une correction précise et équitable.</li>
+<li><strong>ATTENTION :</strong> Les fichiers dans d'autres formats (images JPG, PNG, GIF, captures d'écran, fichiers PDF non vectoriels, fichiers natifs de logiciels spécifiques non exportés) <strong>ne seront PAS acceptés</strong> car ils sont souvent illisibles une fois zoomés.</li>
+<li><strong>Assurez-vous que votre outil de modélisation UML (Lucidchart, Draw.io, etc.) permet bien d'exporter vos diagrammes au format <code>.svg</code></strong>. Faites un test si nécessaire avant la fin de l'examen.</li>
+</ul>
+<p><strong>=&gt; Tout diagramme non soumis au format SVG risque fortement de ne pas pouvoir être évalué.</strong> Ne prenez pas ce risque !</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../course/corrections.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../exam/diagramme1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../course/corrections.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../exam/diagramme1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
