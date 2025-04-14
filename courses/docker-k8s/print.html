@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -374,6 +374,73 @@ Pour cela :</p>
 <li>Quelle commande permet de voir les conteneurs qui tournent actuellement ?</li>
 <li>Quelle commande permet de supprimer un conteneur arrêté ?</li>
 </ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--construire-une-image-de-développement-à-la-main-ubuntu"><a class="header" href="#tp--construire-une-image-de-développement-à-la-main-ubuntu">TP – Construire une image de développement à la main (Ubuntu)</a></h1>
+<h2 id="objectif-2"><a class="header" href="#objectif-2">Objectif</a></h2>
+<p>Créer une image Docker personnalisée qui pourra te servir de base pour du développement en ligne de commande.<br />
+Pas de Dockerfile. Tu fais tout <strong>à la main</strong>, comme un artisan qui cloue ses propres conteneurs.</p>
+<hr />
+<h2 id="contexte"><a class="header" href="#contexte">Contexte</a></h2>
+<p>Tu pars d’une image de base : <code>ubuntu</code> (dernière version).<br />
+Tu installes ce dont <em>tu</em> as besoin pour coder/travailler dans un terminal.</p>
+<h3 id="ton-image-finale-doit-contenir-au-minimum-"><a class="header" href="#ton-image-finale-doit-contenir-au-minimum-">Ton image finale doit contenir <strong>au minimum</strong> :</a></h3>
+<ul>
+<li><code>curl</code> ou équivalent</li>
+<li><code>git</code></li>
+<li>un éditeur en ligne de commande (<code>nano</code>, <code>vim</code>, <code>micro</code>, autre)</li>
+<li>un dossier <code>/workspace</code> vide prêt à accueillir des projets</li>
+</ul>
+<hr />
+<h2 id="Étapes-2"><a class="header" href="#Étapes-2">Étapes</a></h2>
+<ol>
+<li>Lance un conteneur Ubuntu interactif :</li>
+</ol>
+<pre><code>docker run -it ubuntu bash
+</code></pre>
+<ol start="2">
+<li>
+<p>Installe les outils nécessaires. À toi de trouver les bonnes commandes.</p>
+</li>
+<li>
+<p>Crée un dossier <code>/workspace</code> dans le conteneur.</p>
+</li>
+<li>
+<p>Une fois que tout est prêt fige ton travail :</p>
+</li>
+</ol>
+<blockquote>
+<p>Attention a bien faire ca dans un autre terminal</p>
+</blockquote>
+<pre><code>docker commit &lt;id_du_conteneur&gt; dev-env-&lt;tonprenom&gt;
+</code></pre>
+<ol start="5">
+<li>Teste ton image : relance un conteneur à partir de <code>dev-env-&lt;tonprenom&gt;</code> et vérifie que tout est bien en place.</li>
+</ol>
+<hr />
+<h2 id="À-avoir-au-minimum"><a class="header" href="#À-avoir-au-minimum">À avoir au minimum</a></h2>
+<ul>
+<li>Le nom de ton image (<code>docker images</code>)</li>
+<li>Une image ou:
+<ul>
+<li><code>git</code> fonctionne</li>
+<li><code>curl</code> fonctionne</li>
+<li>ton éditeur fonctionne</li>
+<li><code>/workspace</code> existe</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="questions-2"><a class="header" href="#questions-2">Questions</a></h2>
+<ol>
+<li>Quels paquets as-tu dû installer ? (nom exact)</li>
+<li>Pourquoi n’a-t-on pas utilisé de Dockerfile ici ?</li>
+<li>Quels sont les avantages de cette méthode ? Les inconvénients ?</li>
+</ol>
+<hr />
+<h2 id="bonus-optionnel"><a class="header" href="#bonus-optionnel">Bonus (optionnel)</a></h2>
+<p>Ajoute un alias ou une commande custom dans <code>.bashrc</code> (ex: <code>alias ll='ls -la'</code>)<br />
+Vérifie qu’elle est bien présente au prochain lancement de conteneur.</p>
+<hr />
+<p><em>Rappelle-toi : une image Docker, c’est juste un conteneur figé. Tu peux la bricoler à la main, la commiter, la partager, mais sans traçabilité, c’est vite le bordel.</em></p>
 
                     </main>
 
