@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction à Docker - Docker-K8s</title>
+        <title>Telechargement de mp3 sur youtube - Docker-K8s</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html" class="active"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/mp3_download.html" class="active"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,26 +173,79 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="partie-1--introduction-à-la-conteneurisation-et-à-docker"><a class="header" href="#partie-1--introduction-à-la-conteneurisation-et-à-docker"><strong>Partie 1 : Introduction à la Conteneurisation et à Docker</strong></a></h1>
-<h2 id="introduction"><a class="header" href="#introduction"><strong>Introduction</strong></a></h2>
-<p>Au cours des dernières décennies, l'infrastructure informatique a connu une évolution spectaculaire, passant de serveurs physiques imposants à des technologies modernes telles que les conteneurs. Cette transition a transformé la manière dont les entreprises développent, testent, déploient et gèrent leurs applications.</p>
-<p>La conteneurisation est devenue une pièce maîtresse dans l'écosystème du cloud et des environnements modernes. Elle répond aux défis de flexibilité, de scalabilité et d'efficacité posés par les approches traditionnelles. Contrairement aux machines virtuelles, les conteneurs sont légers, portables et permettent de s’assurer que les applications fonctionnent de manière cohérente, quel que soit l’environnement dans lequel elles sont exécutées.</p>
-<p>Docker, l’outil le plus populaire de conteneurisation, a démocratisé cette technologie. Il offre une interface simple et intuitive pour créer, partager et gérer des conteneurs. Mais avant d’approfondir les aspects pratiques de Docker, il est essentiel de comprendre les concepts fondamentaux de la conteneurisation : son origine, ses caractéristiques, ses avantages, et ses cas d’usage.</p>
-<p>Dans cette première partie, nous explorerons :</p>
-<p>L’évolution des infrastructures informatiques, en retraçant le chemin des serveurs physiques aux conteneurs.
-Les caractéristiques clés des conteneurs, notamment leur légèreté, leur portabilité et leur capacité d’isolation.
-Les avantages stratégiques de la conteneurisation, tels que l’efficacité des ressources, la scalabilité rapide, et la consistance des environnements.
-Les cas d’usage courants, qui illustreront pourquoi cette technologie est devenue incontournable pour des architectures modernes comme les microservices ou les pipelines CI/CD.</p>
-<p>Enrichie de démonstrations pratiques et de quiz interactifs, cette partie vous donnera les bases nécessaires pour comprendre pourquoi la conteneurisation est une révolution pour l’informatique d’entreprise et pour les développeurs. À la fin de cette section, vous aurez une vision claire de ce que la conteneurisation peut apporter à vos projets, ainsi qu'une bonne compréhension des concepts fondamentaux pour passer à l’utilisation de Docker.</p>
+                        <h1 id="tp--télécharger-une-vidéo-ou-une-musique-avec-yt-dlp-dans-un-conteneur"><a class="header" href="#tp--télécharger-une-vidéo-ou-une-musique-avec-yt-dlp-dans-un-conteneur">TP – Télécharger une vidéo ou une musique avec yt-dlp dans un conteneur</a></h1>
+<h2 id="objectif"><a class="header" href="#objectif">Objectif</a></h2>
+<p>Créer un conteneur Docker basé sur Ubuntu, capable de télécharger <strong>l’audio d’une vidéo YouTube au format MP3</strong>, sans rien installer sur ton système hôte.</p>
+<hr />
+<h2 id="contraintes"><a class="header" href="#contraintes">Contraintes</a></h2>
+<ul>
+<li>Tu pars de l’image <code>ubuntu</code> (dernière version)</li>
+<li>Tu dois installer dans le conteneur :
+<ul>
+<li><code>python3</code>, <code>pip</code></li>
+<li><code>ffmpeg</code></li>
+<li><code>yt-dlp</code> via <code>pip</code></li>
+</ul>
+</li>
+<li>L’app doit :
+<ul>
+<li>Télécharger l’audio d’une vidéo YouTube</li>
+<li>Sauvegarder le fichier <code>.mp3</code> dans un dossier monté depuis l’hôte (<code>./downloads</code>)</li>
+<li>Utiliser les options suivantes :
+<pre><code>--restrict-filename -x --audio-format mp3
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>Exemple de ligne de commande (vous pouvez la tester):</p>
+<pre><code class="language-bash">yt-dlp --restrict-filenames -x --audio-format mp3 https://youtu.be/dQw4w9WgXcQ?si=rnTHt9xqOZdI1leO
+</code></pre>
+<hr />
+<h2 id="À-faire"><a class="header" href="#À-faire">À faire</a></h2>
+<ol>
+<li>
+<p>Crée un <code>Dockerfile</code> qui :</p>
+<ul>
+<li>Installe tous les outils nécessaires</li>
+<li>Configure un dossier <code>/downloads</code></li>
+<li>Utilise <code>CMD</code> ou un script Bash/Python pour télécharger</li>
+</ul>
+</li>
+<li>
+<p>Le conteneur doit se lancer avec une commande du style :</p>
+</li>
+</ol>
+<pre><code class="language-bash">docker build -t yt-downloader .
+docker run --rm -v $(pwd)/downloads:/downloads yt-downloader "https://www.youtube.com/watch?v=VIDEO_ID"
+</code></pre>
+<blockquote>
+<p>Le lien doit être passé en argument ou via une variable d’environnement
+Si aucune URL n’est fournie, le conteneur doit afficher une erreur claire et s’arrêter immédiatement.</p>
+</blockquote>
+<hr />
+<h2 id="À-avoir-a-la-fin"><a class="header" href="#À-avoir-a-la-fin">À avoir a la fin</a></h2>
+<ul>
+<li><code>Dockerfile</code></li>
+<li>Optionnel : script <code>download.sh</code> (ou <code>download.py</code>) qui appelle <code>yt-dlp</code></li>
+<li>Commande <code>docker run</code> utilisée</li>
+<li>Un exemple de fichier téléchargé</li>
+</ul>
+<hr />
+<h2 id="bonus"><a class="header" href="#bonus">Bonus</a></h2>
+<ul>
+<li>Gère les erreurs de téléchargement</li>
+<li>Ajoute la date ou un tag dans le nom du fichier</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-
-                            <a rel="next prefetch" href="../../course/part1/contenerisation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="../../exercises/docker/first_app.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
+
 
                         <div style="clear: both"></div>
                     </nav>
@@ -200,10 +253,10 @@ Les cas d’usage courants, qui illustreront pourquoi cette technologie est deve
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-
-                    <a rel="next prefetch" href="../../course/part1/contenerisation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="../../exercises/docker/first_app.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
+
             </nav>
 
         </div>

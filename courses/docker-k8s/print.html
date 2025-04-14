@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -555,6 +555,70 @@ docker run (avec les bons flags) backend
 <blockquote>
 <p>Ce TP ne teste pas ta capacité à coder un backend, mais ta capacité à <strong>faire dialoguer des conteneurs entre eux</strong>, proprement, sans docker-compose.</p>
 </blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--télécharger-une-vidéo-ou-une-musique-avec-yt-dlp-dans-un-conteneur"><a class="header" href="#tp--télécharger-une-vidéo-ou-une-musique-avec-yt-dlp-dans-un-conteneur">TP – Télécharger une vidéo ou une musique avec yt-dlp dans un conteneur</a></h1>
+<h2 id="objectif-5"><a class="header" href="#objectif-5">Objectif</a></h2>
+<p>Créer un conteneur Docker basé sur Ubuntu, capable de télécharger <strong>l’audio d’une vidéo YouTube au format MP3</strong>, sans rien installer sur ton système hôte.</p>
+<hr />
+<h2 id="contraintes-1"><a class="header" href="#contraintes-1">Contraintes</a></h2>
+<ul>
+<li>Tu pars de l’image <code>ubuntu</code> (dernière version)</li>
+<li>Tu dois installer dans le conteneur :
+<ul>
+<li><code>python3</code>, <code>pip</code></li>
+<li><code>ffmpeg</code></li>
+<li><code>yt-dlp</code> via <code>pip</code></li>
+</ul>
+</li>
+<li>L’app doit :
+<ul>
+<li>Télécharger l’audio d’une vidéo YouTube</li>
+<li>Sauvegarder le fichier <code>.mp3</code> dans un dossier monté depuis l’hôte (<code>./downloads</code>)</li>
+<li>Utiliser les options suivantes :
+<pre><code>--restrict-filename -x --audio-format mp3
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>Exemple de ligne de commande (vous pouvez la tester):</p>
+<pre><code class="language-bash">yt-dlp --restrict-filenames -x --audio-format mp3 https://youtu.be/dQw4w9WgXcQ?si=rnTHt9xqOZdI1leO
+</code></pre>
+<hr />
+<h2 id="À-faire-1"><a class="header" href="#À-faire-1">À faire</a></h2>
+<ol>
+<li>
+<p>Crée un <code>Dockerfile</code> qui :</p>
+<ul>
+<li>Installe tous les outils nécessaires</li>
+<li>Configure un dossier <code>/downloads</code></li>
+<li>Utilise <code>CMD</code> ou un script Bash/Python pour télécharger</li>
+</ul>
+</li>
+<li>
+<p>Le conteneur doit se lancer avec une commande du style :</p>
+</li>
+</ol>
+<pre><code class="language-bash">docker build -t yt-downloader .
+docker run --rm -v $(pwd)/downloads:/downloads yt-downloader "https://www.youtube.com/watch?v=VIDEO_ID"
+</code></pre>
+<blockquote>
+<p>Le lien doit être passé en argument ou via une variable d’environnement
+Si aucune URL n’est fournie, le conteneur doit afficher une erreur claire et s’arrêter immédiatement.</p>
+</blockquote>
+<hr />
+<h2 id="À-avoir-a-la-fin"><a class="header" href="#À-avoir-a-la-fin">À avoir a la fin</a></h2>
+<ul>
+<li><code>Dockerfile</code></li>
+<li>Optionnel : script <code>download.sh</code> (ou <code>download.py</code>) qui appelle <code>yt-dlp</code></li>
+<li>Commande <code>docker run</code> utilisée</li>
+<li>Un exemple de fichier téléchargé</li>
+</ul>
+<hr />
+<h2 id="bonus-1"><a class="header" href="#bonus-1">Bonus</a></h2>
+<ul>
+<li>Gère les erreurs de téléchargement</li>
+<li>Ajoute la date ou un tag dans le nom du fichier</li>
+</ul>
 
                     </main>
 
