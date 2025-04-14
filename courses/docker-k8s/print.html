@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -514,6 +514,47 @@ def hello():
 </ul>
 <p><em>À la fin, tu dois avoir une image que tu peux envoyer à n’importe qui.<br />
 Il la build, il la run, elle répond. Pas de dépendance locale.</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--backend--db-dans-deux-conteneurs-sans-compose"><a class="header" href="#tp--backend--db-dans-deux-conteneurs-sans-compose">TP — Backend + DB dans deux conteneurs (sans Compose)</a></h1>
+<h2 id="objectif-4"><a class="header" href="#objectif-4">Objectif</a></h2>
+<p>Créer une application en Python avec un backend qui communique avec une base de données, chaque composant tournant dans <strong>son propre conteneur</strong>, sur le <strong>même réseau Docker</strong>.</p>
+<hr />
+<h2 id="contraintes"><a class="header" href="#contraintes">Contraintes</a></h2>
+<ul>
+<li>Utilisation obligatoire de l’image <code>mariadb</code> ou <code>mongo</code> (au choix selon ton aisance)</li>
+<li>Le backend Python doit :
+<ul>
+<li>Se connecter à la DB via son <strong>nom de conteneur</strong></li>
+<li>Être accessible sur le port <code>5000</code> (depuis l’extérieur)</li>
+<li>Implementer le CRUD</li>
+</ul>
+</li>
+<li>Pas de docker-compose</li>
+<li>Le tout doit être lançable en ligne de commande :</li>
+</ul>
+<pre><code class="language-bash">docker network create app-network
+docker run (avec les bons flags) mongo/mariadb
+docker build -t backend .
+docker run (avec les bons flags) backend
+</code></pre>
+<p>Le backend doit proposer au minimum :</p>
+<ul>
+<li>POST /items → créer un élément</li>
+<li>GET /items → lister les éléments</li>
+<li>GET /items/<id> → voir un élément</li>
+<li>DELETE /items/<id> → supprimer un élément</li>
+</ul>
+<hr />
+<h2 id="À-avoir-1"><a class="header" href="#À-avoir-1">À avoir</a></h2>
+<ul>
+<li>Le code du backend (<code>main.py</code>, <code>requirements.txt</code>, etc.)</li>
+<li>Le <code>Dockerfile</code> du backend</li>
+<li>La commande exacte de <code>docker run</code> pour la DB</li>
+<li>La commande exacte de <code>docker run</code> pour le backend</li>
+<li>Preuve que la communication backend → DB fonctionne (ex : un GET sur <code>/status</code> retourne “DB OK”)</li>
+</ul>
+<blockquote>
+<p>Ce TP ne teste pas ta capacité à coder un backend, mais ta capacité à <strong>faire dialoguer des conteneurs entre eux</strong>, proprement, sans docker-compose.</p>
+</blockquote>
 
                     </main>
 

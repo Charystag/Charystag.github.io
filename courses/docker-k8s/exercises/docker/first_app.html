@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Flask Application - Docker-K8s</title>
+        <title>Premier Network - Docker-K8s</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/flask_app.html" class="active"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_app.html" class="active"><strong aria-hidden="true">6.</strong> Premier Network</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,91 +173,56 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="tp--construire-une-app-flask-dans-un-conteneur-ubuntu-image-autonome"><a class="header" href="#tp--construire-une-app-flask-dans-un-conteneur-ubuntu-image-autonome">TP — Construire une app Flask dans un conteneur Ubuntu (Image autonome)</a></h1>
+                        <h1 id="tp--backend--db-dans-deux-conteneurs-sans-compose"><a class="header" href="#tp--backend--db-dans-deux-conteneurs-sans-compose">TP — Backend + DB dans deux conteneurs (sans Compose)</a></h1>
 <h2 id="objectif"><a class="header" href="#objectif">Objectif</a></h2>
-<p>Développer une petite application Flask et la faire tourner dans un conteneur Docker <strong>basé sur Ubuntu</strong>.<br />
-Tu commences comme tu veux (interactif, scripté).<br />
-Mais <strong>à la fin</strong>, tu dois livrer <strong>une image autonome</strong>.</p>
+<p>Créer une application en Python avec un backend qui communique avec une base de données, chaque composant tournant dans <strong>son propre conteneur</strong>, sur le <strong>même réseau Docker</strong>.</p>
 <hr />
-<h2 id="départ"><a class="header" href="#départ">Départ</a></h2>
-<p>Tu pars d’un dossier <code>flask-docker/</code> contenant ces fichiers :</p>
-<h3 id="apppy"><a class="header" href="#apppy"><code>app.py</code></a></h3>
-<pre><code class="language-python">from flask import Flask
-
-app = Flask(__name__)
-
-@app.route("/")
-def hello():
-    return "Hello Docker"
+<h2 id="contraintes"><a class="header" href="#contraintes">Contraintes</a></h2>
+<ul>
+<li>Utilisation obligatoire de l’image <code>mariadb</code> ou <code>mongo</code> (au choix selon ton aisance)</li>
+<li>Le backend Python doit :
+<ul>
+<li>Se connecter à la DB via son <strong>nom de conteneur</strong></li>
+<li>Être accessible sur le port <code>5000</code> (depuis l’extérieur)</li>
+<li>Implementer le CRUD</li>
+</ul>
+</li>
+<li>Pas de docker-compose</li>
+<li>Le tout doit être lançable en ligne de commande :</li>
+</ul>
+<pre><code class="language-bash">docker network create app-network
+docker run (avec les bons flags) mongo/mariadb
+docker build -t backend .
+docker run (avec les bons flags) backend
 </code></pre>
-<h2 id="À-faire"><a class="header" href="#À-faire">À faire</a></h2>
-<ol>
-<li>Partir de l’image <code>ubuntu</code> (dernière version).</li>
-<li>Installer tout ce qu’il faut:
+<p>Le backend doit proposer au minimum :</p>
 <ul>
-<li><code>python3</code></li>
-<li><code>pip</code></li>
-<li><code>flask</code></li>
-</ul>
-</li>
-<li>Pendant le développement, fais comme tu veux : tu peux monter des fichiers, modifier en live, t’énerver.</li>
-<li><strong>Mais à la fin</strong>, ton projet doit être <strong>contenu dans une image autonome</strong> :
-<ul>
-<li>Tout est <strong>copié</strong> dans l’image (pas de <code>-v</code>, pas de montage)</li>
-<li>L’app se lance automatiquement</li>
-<li>Le conteneur expose <code>http://localhost:8080</code> quand on le run</li>
-</ul>
-</li>
-</ol>
-<hr />
-<h2 id="interdiction"><a class="header" href="#interdiction">Interdiction</a></h2>
-<ul>
-<li>Pas d’image <code>python:*</code></li>
-<li>Pas de <code>bind mount</code> dans le <code>docker run</code> final</li>
-<li>Pas de <code>flask run</code> lancé manuellement dans un shell</li>
+<li>POST /items → créer un élément</li>
+<li>GET /items → lister les éléments</li>
+<li>GET /items/<id> → voir un élément</li>
+<li>DELETE /items/<id> → supprimer un élément</li>
 </ul>
 <hr />
 <h2 id="À-avoir"><a class="header" href="#À-avoir">À avoir</a></h2>
 <ul>
-<li><code>Dockerfile</code> final propre</li>
-<li><code>app.py</code></li>
-<li>La commande complète <code>docker build</code> + <code>docker run</code> utilisée</li>
-<li>Preuve que ton conteneur tourne et répond bien sur <code>localhost:8080</code></li>
+<li>Le code du backend (<code>main.py</code>, <code>requirements.txt</code>, etc.)</li>
+<li>Le <code>Dockerfile</code> du backend</li>
+<li>La commande exacte de <code>docker run</code> pour la DB</li>
+<li>La commande exacte de <code>docker run</code> pour le backend</li>
+<li>Preuve que la communication backend → DB fonctionne (ex : un GET sur <code>/status</code> retourne “DB OK”)</li>
 </ul>
-<hr />
-<h2 id="liens-utiles"><a class="header" href="#liens-utiles">Liens utiles</a></h2>
-<ul>
-<li><a href="https://flask.palletsprojects.com/en/latest/">Docs Flask</a></li>
-<li><a href="https://docs.docker.com/engine/reference/builder/">Dockerfile référence</a></li>
-<li><a href="https://flask.palletsprojects.com/en/latest/cli/#run">Exemple <code>flask run</code></a></li>
-</ul>
-<hr />
-<h2 id="bonus"><a class="header" href="#bonus">Bonus</a></h2>
-<ul>
-<li>Ajoute un <code>ENTRYPOINT</code> ou <code>CMD</code> propre</li>
-<li>Utilise des variables d’environnement dans ton <code>Dockerfile</code> (ex : <code>FLASK_ENV=production</code>)</li>
-<li>Crée un dossier <code>/app</code> dans l’image pour bosser proprement</li>
-</ul>
-<hr />
-<h2 id="aide"><a class="header" href="#aide">Aide</a></h2>
-<ul>
-<li>Tu peux utiliser l'option <code>--port port_number</code> pour changer le port par defaut de <code>flask</code> (si besoin)</li>
-<li>Tu peux utiliser l'option <code>--host=0.0.0.0</code> pour que l'application ecoute sur tous les ports</li>
-</ul>
-<p><em>À la fin, tu dois avoir une image que tu peux envoyer à n’importe qui.<br />
-Il la build, il la run, elle répond. Pas de dépendance locale.</em></p>
+<blockquote>
+<p>Ce TP ne teste pas ta capacité à coder un backend, mais ta capacité à <strong>faire dialoguer des conteneurs entre eux</strong>, proprement, sans docker-compose.</p>
+</blockquote>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../exercises/docker/image_by_hand.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../exercises/docker/flask_app.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../exercises/docker/first_app.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -265,13 +230,10 @@ Il la build, il la run, elle répond. Pas de dépendance locale.</em></p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../exercises/docker/image_by_hand.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../exercises/docker/flask_app.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../exercises/docker/first_app.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
