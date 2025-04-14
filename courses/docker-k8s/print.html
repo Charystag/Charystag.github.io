@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -619,6 +619,74 @@ Si aucune URL n’est fournie, le conteneur doit afficher une erreur claire et s
 <li>Gère les erreurs de téléchargement</li>
 <li>Ajoute la date ou un tag dans le nom du fichier</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--dockerise-moi-ce-backend-en-ruby-avec-sinatra"><a class="header" href="#tp--dockerise-moi-ce-backend-en-ruby-avec-sinatra">TP — Dockerise-moi ce backend en Ruby (avec Sinatra)</a></h1>
+<h2 id="objectif-6"><a class="header" href="#objectif-6">Objectif</a></h2>
+<p>Tu vas créer une image Docker <strong>basée sur Ubuntu</strong>, dans laquelle tourne une petite app HTTP écrite en <strong>Ruby avec Sinatra</strong>.</p>
+<hr />
+<h2 id="contexte-1"><a class="header" href="#contexte-1">Contexte</a></h2>
+<p>Tu pars de ce code minimal, stocké dans un fichier <code>app.rb</code> :</p>
+<pre><code class="language-ruby">require 'sinatra'
+
+get '/' do
+  'Hello Docker'
+end
+
+set :bind =&gt; "0.0.0.0"
+set :port =&gt; port_number
+</code></pre>
+<hr />
+<h2 id="contraintes-2"><a class="header" href="#contraintes-2">Contraintes</a></h2>
+<ul>
+<li>Tu dois partir de l’image <code>ubuntu</code> (pas <code>ruby</code>, pas <code>alpine</code>)</li>
+<li>Tu dois <strong>chercher toi-même</strong> :
+<ul>
+<li>Quels paquets installer</li>
+<li>Comment installer le module <code>sinatra</code></li>
+</ul>
+</li>
+<li>Le serveur doit écouter sur le port <code>8080</code> de l’hôte</li>
+<li>Pas de <code>puma</code>, pas de framework Rails, juste Sinatra en mode brut</li>
+<li>Le conteneur doit lancer l’app automatiquement au démarrage</li>
+</ul>
+<blockquote>
+<p>Attention, tu dois installer <code>rackup</code> en plus de <code>sinatra</code> mais pas <code>puma</code></p>
+</blockquote>
+<hr />
+<h2 id="ce-que-tu-dois-faire"><a class="header" href="#ce-que-tu-dois-faire">Ce que tu dois faire</a></h2>
+<ol>
+<li>Crée un <code>Dockerfile</code> basé sur <code>ubuntu</code></li>
+<li>Installe tout ce qu’il faut pour :
+<ul>
+<li>Faire tourner Ruby</li>
+<li>Installer <code>sinatra</code> via <code>gem</code></li>
+</ul>
+</li>
+<li>Copie le fichier <code>app.rb</code> dans l’image</li>
+<li>Configure ton <code>Dockerfile</code> pour lancer l’app automatiquement</li>
+<li>Expose le port <code>8080</code></li>
+</ol>
+<hr />
+<h2 id="À-rendre"><a class="header" href="#À-rendre">À rendre</a></h2>
+<ul>
+<li><code>Dockerfile</code></li>
+<li>Le fichier <code>app.rb</code></li>
+<li>Commandes <code>docker build</code> + <code>docker run</code> utilisées</li>
+<li>Preuve que <a href="http://localhost:8080">http://localhost:8080</a> retourne “Hello Docker”</li>
+</ul>
+<hr />
+<h2 id="bonus-2"><a class="header" href="#bonus-2">Bonus</a></h2>
+<ul>
+<li>Utilise un <code>CMD</code> clair dans ton <code>Dockerfile</code></li>
+</ul>
+<hr />
+<h2 id="liens-utiles-1"><a class="header" href="#liens-utiles-1">Liens utiles</a></h2>
+<ul>
+<li><a href="https://sinatrarb.com/intro.html">Sinatra</a></li>
+<li><a href="https://www.ruby-lang.org/en/documentation/installation/">Ruby</a></li>
+</ul>
+<blockquote>
+<p>Ce TP t’apprend à dockeriser une app dans un langage que tu connais pas. Et c’est ça, être un dev solide : savoir s’adapter, chercher.</p>
+</blockquote>
 
                     </main>
 
