@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li><li class="chapter-item expanded "><a href="exercises/docker/env.html"><strong aria-hidden="true">11.</strong> Environnement</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -802,6 +802,124 @@ df5a49f5c822   2 hours ago   ENTRYPOINT ["./hello_world"]          0B        bui
 <p>Ce TP t’apprend à créer un mini réseau interne avec Docker,<br />
 à faire parler deux services.</p>
 </blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--config-ton-conteneur-variables-denvironnement"><a class="header" href="#tp--config-ton-conteneur-variables-denvironnement"><strong>TP : Config Ton Conteneur (Variables d'Environnement)</strong></a></h1>
+<h2 id="objectif-8"><a class="header" href="#objectif-8">Objectif</a></h2>
+<p>Fini de coder en dur la config ! On va voir comment piloter un conteneur Docker de l'extérieur juste avec les <strong>variables d'environnement (ENV)</strong>.
+Le but est de rendre tes images flexibles et réutilisables sans avoir à les reconstruire pour changer un port ou une clé API.</p>
+<p>On va apprendre à :</p>
+<ol>
+<li>Faire lire à une appli ses paramètres depuis l'environnement.</li>
+<li>Définir des valeurs par défaut dans le Dockerfile via <code>ENV</code>.</li>
+<li>Écraser ces valeurs au lancement (<code>docker run</code>) avec l'option <code>-e</code>.</li>
+<li>Utiliser un fichier <code>.env</code> pour gérer plusieurs variables via <code>--env-file</code>.</li>
+</ol>
+<hr />
+<h2 id="prérequis"><a class="header" href="#prérequis">Prérequis</a></h2>
+<ul>
+<li>Docker fonctionnel.</li>
+<li>Une <strong>petite application web simple</strong> (peu importe le langage : Node.js, Python/Flask, Ruby/Sinatra, Go...) qui :
+<ul>
+<li>Sait démarrer un serveur HTTP.</li>
+<li>Écoute sur un port réseau.</li>
+<li>Répond à une requête <code>GET</code> sur la racine <code>/</code>.</li>
+</ul>
+</li>
+<li>Savoir comment <strong>lire des variables d'environnement</strong> dans le langage choisi (c'est ça l'étape clé du code de l'appli).</li>
+</ul>
+<hr />
+<h2 id="À-faire-3"><a class="header" href="#À-faire-3">À Faire</a></h2>
+<ol>
+<li>
+<p><strong>Prépare ton application :</strong></p>
+<ul>
+<li>Assure-toi que ton code lit ses paramètres de configuration <strong>depuis les variables d'environnement</strong>. Prévois des <strong>valeurs par défaut</strong> si une variable n'est pas définie.</li>
+<li>Paramètres à lire (minimum) :
+<ul>
+<li><code>APP_PORT</code> : Le port sur lequel ton serveur doit écouter.</li>
+<li><code>GREETING_MSG</code> : Un message qu'il affichera ou retournera.</li>
+<li><code>API_KEY</code> : Une clé API bidon pour l'exemple.</li>
+</ul>
+</li>
+<li><em>Exemples pour lire une variable <code>VAR</code> avec une valeur par défaut <code>default</code> :</em>
+<ul>
+<li><em>Node.js :</em> <code>process.env.VAR || 'default'</code></li>
+<li><em>Python :</em> <code>os.getenv('VAR', 'default')</code> (nécessite <code>import os</code>)</li>
+<li><em>(Adapte selon ton langage)</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Crée un <code>Dockerfile</code> simple :</strong></p>
+<ul>
+<li>Pars de l'image de base <code>ubuntu:latest</code> ou <code>alpine:latest</code></li>
+<li>Installe les outils pour developper dans ton langage</li>
+<li>Mets en place la structure de base : <code>WORKDIR</code>, copie des fichiers nécessaires.</li>
+<li><strong>Copie le(s) fichier(s) de dépendances</strong> (ex: <code>package.json</code>, <code>requirements.txt</code>) et lance la <strong>commande pour installer les dépendances</strong> (<code>npm install --production</code>, <code>pip install -r requirements.txt</code>, <code>bundle install</code>, etc.).</li>
+<li>Copie le reste du code source de ton appli.</li>
+<li><strong>Définis les ENV par défaut</strong> dans le Dockerfile avec <code>ENV</code> :
+<pre><code class="language-dockerfile">ENV APP_PORT=3000
+ENV GREETING_MSG="Salut défini dans Dockerfile"
+ENV API_KEY="default_key_from_dockerfile"
+</code></pre>
+</li>
+<li><strong>Expose le port</strong> en utilisant la variable : <code>EXPOSE ${APP_PORT}</code></li>
+<li>Définis le <strong><code>CMD</code></strong> pour lancer ton application (ex: <code>CMD ["node", "server.js"]</code>, <code>CMD ["python", "app.py"]</code>, <code>CMD ["ruby", "app.rb"]</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Build l'image :</strong> <code>docker build -t mon-app-env .</code></p>
+</li>
+<li>
+<p><strong>Test 1 : Valeurs par défaut</strong></p>
+<ul>
+<li>Lance le conteneur : <code>docker run -d -p 8000:3000 --name test-default mon-app-env</code></li>
+<li><strong>Vérifie :</strong> Accède à <code>http://localhost:8000</code> (ou via <code>curl</code>). Regarde aussi les logs avec <code>docker logs test-default</code>. Tu dois voir les valeurs par défaut définies dans le Dockerfile être utilisées.</li>
+<li>Clean : <code>docker rm -f test-default</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Test 2 : Override avec <code>-e</code></strong></p>
+<ul>
+<li>Lance en changeant le message et la clé API : <code>docker run -d -p 8001:3000 --name test-e -e GREETING_MSG="Yo depuis le container" -e API_KEY="12345AZERTY" mon-app-env</code></li>
+<li><strong>Vérifie :</strong> Accède à <code>http://localhost:8001</code> et check les logs. Le nouveau message et la clé API doivent apparaître.</li>
+<li>Clean : <code>docker rm -f test-e</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Test 3 : Fichier <code>.env</code></strong></p>
+<ul>
+<li>Crée un fichier texte nommé <code>.env</code> à côté de ton Dockerfile :
+<pre><code class="language-env"># .env
+APP_PORT=9999
+GREETING_MSG=Hello depuis .env !
+API_KEY=cle_du_fichier_env
+</code></pre>
+</li>
+<li>Lance avec ce fichier : <code>docker run -d -p 9999:9999 --name test-envfile --env-file .env mon-app-env</code></li>
+<li><strong>Vérifie :</strong> Accède à <code>http://localhost:9999</code> et check les logs. Les valeurs du fichier <code>.env</code> doivent avoir été prises en compte.</li>
+<li>Clean : <code>docker rm -f test-envfile</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>(Bonus) Priorité <code>-e</code> vs <code>--env-file</code></strong></p>
+<ul>
+<li>Lance avec les deux, en mettant une valeur différente pour <code>GREETING_MSG</code> dans le <code>-e</code> par rapport au fichier <code>.env</code> :
+<code>docker run -d -p 8888:9999 --name test-prio -e GREETING_MSG='Priorité à -e !!!' --env-file .env mon-app-env</code></li>
+<li><strong>Vérifie :</strong> Accède à <code>http://localhost:8888</code>. Quel message s'affiche ? (<em>Normalement, <code>-e</code> gagne</em>).</li>
+<li>Clean : <code>docker rm -f test-prio</code>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="À-avoir-a-la-fin-1"><a class="header" href="#À-avoir-a-la-fin-1">À avoir a la fin</a></h2>
+<ul>
+<li>Le <strong>code source de votre application</strong> (fichier principal, etc.).</li>
+<li>Le fichier listant les <strong>dépendances</strong> (ex: <code>package.json</code>, <code>requirements.txt</code>).</li>
+<li>Le <code>Dockerfile</code>.</li>
+<li>Le fichier <code>.env</code>.</li>
+<li>Les <strong>commandes <code>docker build</code> et <code>docker run</code></strong> exactes que vous avez utilisées pour chaque test.</li>
+</ul>
 
                     </main>
 
