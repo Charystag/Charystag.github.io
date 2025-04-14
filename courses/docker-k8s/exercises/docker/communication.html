@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Dockerisation d&#x27;un langage inconnu - Docker-K8s</title>
+        <title>Communication entre plusieurs containers - Docker-K8s</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/unknown_language.html" class="active"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/communication.html" class="active"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,86 +173,80 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="tp--dockerise-moi-ce-backend-en-ruby-avec-sinatra"><a class="header" href="#tp--dockerise-moi-ce-backend-en-ruby-avec-sinatra">TP — Dockerise-moi ce backend en Ruby (avec Sinatra)</a></h1>
+                        <h1 id="tp--deux-conteneurs-qui-se-parlent-sans-docker-compose"><a class="header" href="#tp--deux-conteneurs-qui-se-parlent-sans-docker-compose">TP — Deux conteneurs qui se parlent (sans docker-compose)</a></h1>
 <h2 id="objectif"><a class="header" href="#objectif">Objectif</a></h2>
-<p>Tu vas créer une image Docker <strong>basée sur Ubuntu</strong>, dans laquelle tourne une petite app HTTP écrite en <strong>Ruby avec Sinatra</strong>.</p>
+<p>Faire tourner deux conteneurs Docker dans un même réseau personnalisé, et les faire communiquer directement par leur <strong>nom</strong>, sans utiliser d’IP.</p>
 <hr />
 <h2 id="contexte"><a class="header" href="#contexte">Contexte</a></h2>
-<p>Tu pars de ce code minimal, stocké dans un fichier <code>app.rb</code> :</p>
-<pre><code class="language-ruby">require 'sinatra'
-
-get '/' do
-  'Hello Docker'
-end
-
-set :bind =&gt; "0.0.0.0"
-set :port =&gt; port_number
-</code></pre>
+<p>Tu vas créer deux conteneurs :</p>
+<ol>
+<li>Un <strong>serveur HTTP minimal</strong> (ou TCP si tu préfères)</li>
+<li>Un <strong>client</strong> qui va s’y connecter et afficher la réponse</li>
+</ol>
+<p>Le tout sans Compose.</p>
 <hr />
 <h2 id="contraintes"><a class="header" href="#contraintes">Contraintes</a></h2>
 <ul>
-<li>Tu dois partir de l’image <code>ubuntu</code> (pas <code>ruby</code>, pas <code>alpine</code>)</li>
-<li>Tu dois <strong>chercher toi-même</strong> :
-<ul>
-<li>Quels paquets installer</li>
-<li>Comment installer le module <code>sinatra</code></li>
+<li>Pas de <code>docker-compose</code></li>
+<li>Les conteneurs doivent être connectés à un <strong>réseau custom</strong></li>
+<li>Le client doit pouvoir parler au serveur <strong>via son nom Docker</strong></li>
+<li>Pas de <code>localhost</code>, pas d’IP en dur, <strong>juste le nom du conteneur</strong></li>
 </ul>
-</li>
-<li>Le serveur doit écouter sur le port <code>8080</code> de l’hôte</li>
-<li>Pas de <code>puma</code>, pas de framework Rails, juste Sinatra en mode brut</li>
-<li>Le conteneur doit lancer l’app automatiquement au démarrage</li>
-</ul>
-<blockquote>
-<p>Attention, tu dois installer <code>rackup</code> en plus de <code>sinatra</code> mais pas <code>puma</code></p>
-</blockquote>
 <hr />
-<h2 id="ce-que-tu-dois-faire"><a class="header" href="#ce-que-tu-dois-faire">Ce que tu dois faire</a></h2>
+<h2 id="À-faire"><a class="header" href="#À-faire">À faire</a></h2>
 <ol>
-<li>Crée un <code>Dockerfile</code> basé sur <code>ubuntu</code></li>
-<li>Installe tout ce qu’il faut pour :
+<li>Crée une image <code>server</code> avec une app qui écoute sur un port (ex : Python Flask sur 5000 ou Node/Express)
 <ul>
-<li>Faire tourner Ruby</li>
-<li>Installer <code>sinatra</code> via <code>gem</code></li>
+<li>Réponds juste “Hello client” sur <code>/</code></li>
 </ul>
 </li>
-<li>Copie le fichier <code>app.rb</code> dans l’image</li>
-<li>Configure ton <code>Dockerfile</code> pour lancer l’app automatiquement</li>
-<li>Expose le port <code>8080</code></li>
-</ol>
-<hr />
-<h2 id="À-avoir"><a class="header" href="#À-avoir">À avoir</a></h2>
+<li>Crée une image <code>client</code> avec un script qui fait une requête HTTP vers <code>http://server:5000/</code>
 <ul>
-<li><code>Dockerfile</code></li>
-<li>Le fichier <code>app.rb</code></li>
-<li>Commandes <code>docker build</code> + <code>docker run</code> utilisées</li>
-<li>Preuve que <a href="http://localhost:8080">http://localhost:8080</a> retourne “Hello Docker”</li>
+<li>Utilise <code>curl</code>, <code>wget</code>, <code>httpie</code>, ou un script custom</li>
 </ul>
+</li>
+<li>Crée un <strong>réseau custom</strong> :</li>
+<li>Lance le serveur :</li>
+<li>Lance le client :</li>
+<li>Le client doit afficher la réponse du serveur (<code>Hello client</code>)</li>
+</ol>
 <hr />
 <h2 id="bonus"><a class="header" href="#bonus">Bonus</a></h2>
 <ul>
-<li>Utilise un <code>CMD</code> clair dans ton <code>Dockerfile</code></li>
+<li>Ajoute une variable d’environnement dans le client pour définir le nom du serveur (<code>SERVER_URL</code>)</li>
+<li>Passe une requête avec une donnée (<code>GET /?name=Bob</code>) et fais une réponse dynamique</li>
+<li>Montre que ça ne marche <strong>pas</strong> avec le réseau <code>bridge</code> par défaut</li>
+</ul>
+<hr />
+<h2 id="À-avoir"><a class="header" href="#À-avoir">À avoir</a></h2>
+<ul>
+<li>Le code du serveur + client</li>
+<li>Les Dockerfiles</li>
+<li>La commande <code>docker network create</code></li>
+<li>Les commandes <code>docker run</code> pour les deux conteneurs</li>
+<li>La sortie du client</li>
 </ul>
 <hr />
 <h2 id="liens-utiles"><a class="header" href="#liens-utiles">Liens utiles</a></h2>
 <ul>
-<li><a href="https://sinatrarb.com/intro.html">Sinatra</a></li>
-<li><a href="https://www.ruby-lang.org/en/documentation/installation/">Ruby</a></li>
+<li><a href="https://docs.docker.com/network/">Docker networking docs</a></li>
+<li><a href="https://flask.palletsprojects.com/en/latest/quickstart/">Flask Quickstart</a></li>
+<li><a href="https://docs.docker.com/engine/reference/commandline/inspect/">Docker inspect (pour voir les réseaux)</a></li>
 </ul>
+<hr />
 <blockquote>
-<p>Ce TP t’apprend à dockeriser une app dans un langage que tu connais pas. Et c’est ça, être un dev solide : savoir s’adapter, chercher.</p>
+<p>Ce TP t’apprend à créer un mini réseau interne avec Docker,<br />
+à faire parler deux services.</p>
 </blockquote>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../exercises/docker/mp3_download.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../exercises/docker/ms_builds.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../exercises/docker/ms_builds.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -260,13 +254,10 @@ set :port =&gt; port_number
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../exercises/docker/mp3_download.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../exercises/docker/ms_builds.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../exercises/docker/ms_builds.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

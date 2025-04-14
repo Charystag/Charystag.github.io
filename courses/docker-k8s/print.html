@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -739,6 +739,71 @@ df5a49f5c822   2 hours ago   ENTRYPOINT ["./hello_world"]          0B        bui
 </code></pre>
 <p>Find a way to compare the size of the two generated images and explain briefly why splitting builds into multiple stages affects the size of the resulting image</p>
 </details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--deux-conteneurs-qui-se-parlent-sans-docker-compose"><a class="header" href="#tp--deux-conteneurs-qui-se-parlent-sans-docker-compose">TP — Deux conteneurs qui se parlent (sans docker-compose)</a></h1>
+<h2 id="objectif-7"><a class="header" href="#objectif-7">Objectif</a></h2>
+<p>Faire tourner deux conteneurs Docker dans un même réseau personnalisé, et les faire communiquer directement par leur <strong>nom</strong>, sans utiliser d’IP.</p>
+<hr />
+<h2 id="contexte-2"><a class="header" href="#contexte-2">Contexte</a></h2>
+<p>Tu vas créer deux conteneurs :</p>
+<ol>
+<li>Un <strong>serveur HTTP minimal</strong> (ou TCP si tu préfères)</li>
+<li>Un <strong>client</strong> qui va s’y connecter et afficher la réponse</li>
+</ol>
+<p>Le tout sans Compose.</p>
+<hr />
+<h2 id="contraintes-3"><a class="header" href="#contraintes-3">Contraintes</a></h2>
+<ul>
+<li>Pas de <code>docker-compose</code></li>
+<li>Les conteneurs doivent être connectés à un <strong>réseau custom</strong></li>
+<li>Le client doit pouvoir parler au serveur <strong>via son nom Docker</strong></li>
+<li>Pas de <code>localhost</code>, pas d’IP en dur, <strong>juste le nom du conteneur</strong></li>
+</ul>
+<hr />
+<h2 id="À-faire-2"><a class="header" href="#À-faire-2">À faire</a></h2>
+<ol>
+<li>Crée une image <code>server</code> avec une app qui écoute sur un port (ex : Python Flask sur 5000 ou Node/Express)
+<ul>
+<li>Réponds juste “Hello client” sur <code>/</code></li>
+</ul>
+</li>
+<li>Crée une image <code>client</code> avec un script qui fait une requête HTTP vers <code>http://server:5000/</code>
+<ul>
+<li>Utilise <code>curl</code>, <code>wget</code>, <code>httpie</code>, ou un script custom</li>
+</ul>
+</li>
+<li>Crée un <strong>réseau custom</strong> :</li>
+<li>Lance le serveur :</li>
+<li>Lance le client :</li>
+<li>Le client doit afficher la réponse du serveur (<code>Hello client</code>)</li>
+</ol>
+<hr />
+<h2 id="bonus-3"><a class="header" href="#bonus-3">Bonus</a></h2>
+<ul>
+<li>Ajoute une variable d’environnement dans le client pour définir le nom du serveur (<code>SERVER_URL</code>)</li>
+<li>Passe une requête avec une donnée (<code>GET /?name=Bob</code>) et fais une réponse dynamique</li>
+<li>Montre que ça ne marche <strong>pas</strong> avec le réseau <code>bridge</code> par défaut</li>
+</ul>
+<hr />
+<h2 id="À-avoir-3"><a class="header" href="#À-avoir-3">À avoir</a></h2>
+<ul>
+<li>Le code du serveur + client</li>
+<li>Les Dockerfiles</li>
+<li>La commande <code>docker network create</code></li>
+<li>Les commandes <code>docker run</code> pour les deux conteneurs</li>
+<li>La sortie du client</li>
+</ul>
+<hr />
+<h2 id="liens-utiles-2"><a class="header" href="#liens-utiles-2">Liens utiles</a></h2>
+<ul>
+<li><a href="https://docs.docker.com/network/">Docker networking docs</a></li>
+<li><a href="https://flask.palletsprojects.com/en/latest/quickstart/">Flask Quickstart</a></li>
+<li><a href="https://docs.docker.com/engine/reference/commandline/inspect/">Docker inspect (pour voir les réseaux)</a></li>
+</ul>
+<hr />
+<blockquote>
+<p>Ce TP t’apprend à créer un mini réseau interne avec Docker,<br />
+à faire parler deux services.</p>
+</blockquote>
 
                     </main>
 
