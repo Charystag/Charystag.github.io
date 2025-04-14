@@ -1,0 +1,421 @@
+<!DOCTYPE HTML>
+<html lang="fr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Docker-K8s</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Docker-K8s</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="partie-1--introduction-à-la-conteneurisation-et-à-docker"><a class="header" href="#partie-1--introduction-à-la-conteneurisation-et-à-docker"><strong>Partie 1 : Introduction à la Conteneurisation et à Docker</strong></a></h1>
+<h2 id="introduction"><a class="header" href="#introduction"><strong>Introduction</strong></a></h2>
+<p>Au cours des dernières décennies, l'infrastructure informatique a connu une évolution spectaculaire, passant de serveurs physiques imposants à des technologies modernes telles que les conteneurs. Cette transition a transformé la manière dont les entreprises développent, testent, déploient et gèrent leurs applications.</p>
+<p>La conteneurisation est devenue une pièce maîtresse dans l'écosystème du cloud et des environnements modernes. Elle répond aux défis de flexibilité, de scalabilité et d'efficacité posés par les approches traditionnelles. Contrairement aux machines virtuelles, les conteneurs sont légers, portables et permettent de s’assurer que les applications fonctionnent de manière cohérente, quel que soit l’environnement dans lequel elles sont exécutées.</p>
+<p>Docker, l’outil le plus populaire de conteneurisation, a démocratisé cette technologie. Il offre une interface simple et intuitive pour créer, partager et gérer des conteneurs. Mais avant d’approfondir les aspects pratiques de Docker, il est essentiel de comprendre les concepts fondamentaux de la conteneurisation : son origine, ses caractéristiques, ses avantages, et ses cas d’usage.</p>
+<p>Dans cette première partie, nous explorerons :</p>
+<p>L’évolution des infrastructures informatiques, en retraçant le chemin des serveurs physiques aux conteneurs.
+Les caractéristiques clés des conteneurs, notamment leur légèreté, leur portabilité et leur capacité d’isolation.
+Les avantages stratégiques de la conteneurisation, tels que l’efficacité des ressources, la scalabilité rapide, et la consistance des environnements.
+Les cas d’usage courants, qui illustreront pourquoi cette technologie est devenue incontournable pour des architectures modernes comme les microservices ou les pipelines CI/CD.</p>
+<p>Enrichie de démonstrations pratiques et de quiz interactifs, cette partie vous donnera les bases nécessaires pour comprendre pourquoi la conteneurisation est une révolution pour l’informatique d’entreprise et pour les développeurs. À la fin de cette section, vous aurez une vision claire de ce que la conteneurisation peut apporter à vos projets, ainsi qu'une bonne compréhension des concepts fondamentaux pour passer à l’utilisation de Docker.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="i1-quest-ce-que-la-conteneurisation-"><a class="header" href="#i1-quest-ce-que-la-conteneurisation-"><strong>I.1 Qu'est-ce que la Conteneurisation ?</strong></a></h1>
+<h2 id="i1a-Évolution-des-infrastructures--des-serveurs-physiques-aux-conteneurs"><a class="header" href="#i1a-Évolution-des-infrastructures--des-serveurs-physiques-aux-conteneurs"><strong>I.1.a Évolution des infrastructures : des serveurs physiques aux conteneurs</strong></a></h2>
+<p>L'évolution de l'infrastructure informatique est fondamentale pour comprendre pourquoi et comment les conteneurs ont transformé l'informatique moderne.</p>
+<ol>
+<li>
+<p><strong>Serveurs physiques</strong><br />
+À l'origine, chaque application fonctionnait sur un serveur physique dédié. Cette configuration impliquait souvent un surdimensionnement des ressources pour gérer les charges maximales, conduisant à un gaspillage considérable.<br />
+<em>Exemple : Imaginez un serveur dédié uniquement à une application de gestion de fichiers, mais n’utilisé qu'à 30 % de sa capacité la majorité du temps.</em></p>
+</li>
+<li>
+<p><strong>Machines virtuelles (VMs)</strong><br />
+L’introduction des <strong>hyperviseurs</strong> (par exemple, VMware, Hyper-V) a permis de partitionner un serveur physique en plusieurs machines virtuelles, chacune exécutant son propre système d'exploitation. Bien que cette technologie ait optimisé l’utilisation des ressources, elle nécessitait encore une copie complète du système d’exploitation par VM, augmentant la consommation en mémoire et en stockage.<br />
+→ Pour approfondir : <a href="https://www.redhat.com/fr/topics/containers/containers-vs-vms">Red Hat – VMs vs Containers</a>.</p>
+</li>
+<li>
+<p><strong>Conteneurs</strong><br />
+Contrairement aux VMs, les conteneurs partagent le noyau du système d’exploitation avec leur hôte. Cela les rend légers, rapides à démarrer, et facilement portables. Par exemple, un conteneur peut contenir uniquement une application et ses dépendances, sans inclure un système d'exploitation complet.<br />
+→ En savoir plus : <a href="https://docs.docker.com/get-started/overview/">Documentation Docker – Qu'est-ce qu'un conteneur ?</a>.</p>
+</li>
+</ol>
+<p><img src="course/part1/../../img/part1/Container_Evolution.svg" alt="History of contenerization" /></p>
+<hr />
+<h2 id="i1b-caractéristiques-clés-des-conteneurs"><a class="header" href="#i1b-caractéristiques-clés-des-conteneurs"><strong>I.1.b Caractéristiques clés des conteneurs</strong></a></h2>
+<ul>
+<li><strong>Légèreté :</strong> Les conteneurs utilisent moins de ressources qu'une VM, car ils ne nécessitent pas un système d'exploitation complet.</li>
+<li><strong>Portabilité :</strong> Une fois créé, un conteneur peut être exécuté de manière identique sur un ordinateur local, un serveur on-premise ou dans un environnement cloud.</li>
+<li><strong>Isolation :</strong> Grâce aux technologies de namespaces et cgroups, chaque conteneur est isolé du reste du système, évitant ainsi des conflits entre applications.<br />
+→ Découvrez les bases des namespaces et cgroups dans la <a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">documentation Linux</a>.</li>
+</ul>
+<hr />
+<h2 id="i1c-les-avantages-de-la-conteneurisation"><a class="header" href="#i1c-les-avantages-de-la-conteneurisation"><strong>I.1.c Les avantages de la conteneurisation</strong></a></h2>
+<ul>
+<li><strong>Efficacité des ressources :</strong> Contrairement aux VMs, les conteneurs partagent le noyau avec l’hôte, ce qui réduit considérablement l’utilisation de la mémoire et des CPU.</li>
+<li><strong>Scalabilité rapide :</strong> Les conteneurs peuvent être créés, dupliqués, ou supprimés en quelques secondes, ce qui les rend idéaux pour gérer des charges variables.</li>
+<li><strong>Consistance des environnements :</strong> Avec les conteneurs, "ça marche sur ma machine" devient un problème du passé, car chaque conteneur inclut tout ce dont l'application a besoin pour fonctionner.</li>
+</ul>
+<hr />
+<h2 id="i1d-cas-dusage-courants-des-conteneurs"><a class="header" href="#i1d-cas-dusage-courants-des-conteneurs"><strong>I.1.d Cas d’usage courants des conteneurs</strong></a></h2>
+<ul>
+<li><strong>Microservices :</strong> Permettent de diviser une application complexe en composants plus petits et indépendants.</li>
+<li><strong>CI/CD :</strong> Intégration et déploiement continus grâce à des environnements identiques pour le développement, les tests et la production.</li>
+<li><strong>Tests :</strong> Facilite la création rapide d'environnements jetables pour tester de nouvelles fonctionnalités.<br />
+→ Cas pratique : <a href="https://netflixtechblog.com/">Netflix et les conteneurs</a>: découvrez comment Netflix utilise les conteneurs pour le streaming mondial.</li>
+</ul>
+<hr />
+<h2 id="exercices-pratiques"><a class="header" href="#exercices-pratiques"><strong>Exercices pratiques</strong></a></h2>
+<h4 id="exercice-1--comparaison-entre-vms-et-conteneurs"><a class="header" href="#exercice-1--comparaison-entre-vms-et-conteneurs"><strong>Exercice 1 : Comparaison entre VMs et conteneurs</strong></a></h4>
+<ol>
+<li>Téléchargez <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> et <a href="https://www.virtualbox.org/">VirtualBox</a>.</li>
+<li>Démarrez une machine virtuelle avec VirtualBox et installez un serveur web simple comme Apache. Notez les ressources consommées (RAM et CPU).</li>
+<li>Démarrez un conteneur avec Docker (exemple : <code>docker run -d -p 8080:80 nginx</code>) et observez les ressources consommées.</li>
+<li>Comparez le temps de démarrage, la mémoire et le CPU utilisés entre les deux configurations.</li>
+</ol>
+<h4 id="exercice-2--visualisation-des-namespaces-et-cgroups"><a class="header" href="#exercice-2--visualisation-des-namespaces-et-cgroups"><strong>Exercice 2 : Visualisation des namespaces et cgroups</strong></a></h4>
+<ol>
+<li>Lancez un conteneur avec Docker :
+<pre><code class="language-bash">docker run -it --name test-container ubuntu /bin/bash
+</code></pre>
+</li>
+<li>Depuis l’hôte, observez les namespaces associés au conteneur en exécutant :
+<pre><code class="language-bash">lsns
+</code></pre>
+</li>
+<li>Affichez les cgroups actifs pour le conteneur avec :
+<pre><code class="language-bash">cat /sys/fs/cgroup/&lt;group_path&gt;/tasks
+</code></pre>
+</li>
+<li>Résumez vos observations : que voyez-vous en termes d’isolation ?</li>
+</ol>
+<h2 id="quizz-dintroduction"><a class="header" href="#quizz-dintroduction"><strong>Quizz d'introduction</strong></a></h2>
+<p>Vous pouvez maintenant tester votre compréhension des notions de base de Docker avec le quizz suivant :</p>
+<div class="quiz-placeholder" data-quiz-name="&quot;intro_quizz&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Les conteneurs sont légers car ils n'ont pas besoin d'une instance séparée de système d'exploitation. Ils partagent le noyau de l'hôte.\n&quot;,&quot;id&quot;:&quot;f9d735c0-50dc-483f-8c10-822a08289b52&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Oui, les conteneurs partagent le noyau du système d’exploitation de l’hôte.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Non, les conteneurs possèdent leur propre noyau.&quot;,&quot;Seulement s'ils fonctionnent sur Linux.&quot;],&quot;prompt&quot;:&quot;Les conteneurs partagent-ils le noyau du système d’exploitation de l’hôte ?&quot;}},{&quot;context&quot;:&quot;Les machines virtuelles utilisent un hyperviseur pour émuler un système d'exploitation complet, tandis que les conteneurs s'appuient sur le système de l'hôte, ce qui les rend plus légers et rapides.\n&quot;,&quot;id&quot;:&quot;35c26965-2496-4582-9387-0c35b4e88683&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Les conteneurs partagent le noyau du système d’exploitation de l’hôte, tandis que les machines virtuelles émulent un système complet.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Les conteneurs sont plus lourds que les machines virtuelles.&quot;,&quot;Les machines virtuelles n'ont pas besoin de système d'exploitation.&quot;,&quot;Les conteneurs nécessitent un hyperviseur supplémentaire pour fonctionner.&quot;],&quot;prompt&quot;:&quot;Quelle est la principale différence entre les conteneurs et les machines virtuelles ?&quot;}},{&quot;context&quot;:&quot;Un conteneur encapsule tout ce dont une application a besoin pour fonctionner : son code, ses dépendances, et ses configurations, garantissant une cohérence totale entre les environnements.\n&quot;,&quot;id&quot;:&quot;55e1ea81-626a-4249-87d2-61dbb395a33a&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;application, dépendances&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Un conteneur est une unité légère et portable d'___ et de ses ___.&quot;}},{&quot;context&quot;:&quot;Les conteneurs sont idéaux pour des scénarios nécessitant une scalabilité, une portabilité et une cohérence, comme les microservices ou les pipelines CI/CD.\n&quot;,&quot;id&quot;:&quot;ec577900-6ec8-4305-946f-3d0850e74b8e&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:[&quot;Une architecture basée sur les microservices.&quot;,&quot;Des pipelines d'intégration et de déploiement continus (CI/CD).&quot;]},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Exécution d'une seule application sur un matériel dédié.&quot;,&quot;Déploiement d’une application monolithique sans mises à jour fréquentes.&quot;,&quot;Traitement par lots sur des serveurs bare-metal.&quot;],&quot;prompt&quot;:&quot;Quels scénarios bénéficient le plus de la conteneurisation ? (Choisissez deux)&quot;}},{&quot;context&quot;:&quot;Les serveurs physiques exécutent directement les applications sur le matériel. Les VMs émulent des environnements OS complets. Les conteneurs partagent le noyau de l’hôte.\n&quot;,&quot;id&quot;:&quot;f532170e-dd96-46a6-91c0-e7bdd59dfc1c&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:[&quot;Serveurs physiques : Application unique, non virtualisée.&quot;,&quot;Machines virtuelles : Lourd, émulation complète d'OS.&quot;,&quot;Conteneurs : Léger, partage le noyau de l'hôte.&quot;]},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Conteneurs : Lourds, émulation complète d'OS.&quot;,&quot;Serveurs physiques : Partage des ressources, processus isolés.&quot;,&quot;Machines virtuelles : Partagent le noyau de l'hôte.&quot;],&quot;prompt&quot;:&quot;Associez les technologies suivantes à leurs caractéristiques : serveurs physiques, machines virtuelles, conteneurs.&quot;}},{&quot;context&quot;:&quot;Les namespaces permettent d'assurer une isolation au sein des conteneurs, séparant les processus et ressources de l'hôte et des autres conteneurs.\n&quot;,&quot;id&quot;:&quot;6c07415e-b848-499f-8bc1-806143d72bd1&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;Isoler les processus, systèmes de fichiers et interfaces réseau.&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;Contrôler la quantité de ressources (CPU, RAM) qu’un conteneur peut utiliser.&quot;,&quot;Gérer les dépendances logicielles à l’intérieur d’un conteneur.&quot;],&quot;prompt&quot;:&quot;Dans une architecture conteneurisée, quel est le rôle des namespaces ?&quot;}},{&quot;context&quot;:&quot;Les namespaces permettent d'isoler les processus, les systèmes de fichiers, et les interfaces réseau des conteneurs, garantissant une séparation totale entre les conteneurs et l'hôte.\n&quot;,&quot;id&quot;:&quot;cfb52846-c478-4a66-a918-28241abf55ee&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;processus, systèmes de fichiers, interfaces réseau&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Dans une architecture conteneurisée, les namespaces servent à isoler ___, ___ et ___.&quot;}},{&quot;context&quot;:&quot;Les conteneurs sont conçus pour être plus légers et démarrer plus rapidement que les machines virtuelles, car ils n'ont pas besoin d'inclure un système d'exploitation complet.\n&quot;,&quot;id&quot;:&quot;56d269f9-466c-4526-ad36-b7fd5c06b5ba&quot;,&quot;type&quot;:&quot;ShortAnswer&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;léger, rapidement&quot;},&quot;prompt&quot;:{&quot;prompt&quot;:&quot;Un conteneur est plus ___ et démarre plus ___ qu'une machine virtuelle.&quot;}}]}" data-quiz-fullscreen="true"></div>
+<script type="text/javascript" src="../../quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="../../quiz/style.css"><div style="break-before: page; page-break-before: always;"></div><h1 id="tp--dockeriser-un-backend-simple-nodejs"><a class="header" href="#tp--dockeriser-un-backend-simple-nodejs">TP – Dockeriser un backend simple (Node.js)</a></h1>
+<h2 id="objectif"><a class="header" href="#objectif">Objectif</a></h2>
+<p>Découvrir les bases concrètes de Docker à travers une application Node.js minimaliste.<br />
+À la fin de l’exercice, vous devez avoir :</p>
+<ul>
+<li>Une image Docker fonctionnelle</li>
+<li>Un conteneur lancé à partir de cette image</li>
+<li>Une application accessible en local via un port exposé</li>
+</ul>
+<hr />
+<h2 id="fichiers-fournis"><a class="header" href="#fichiers-fournis">Fichiers fournis</a></h2>
+<p>Vous partez d’un dossier <code>simple-backend/</code> contenant :</p>
+<pre><code>simple-backend/
+├── app.js
+├── package.json
+</code></pre>
+<p>Contenu de <code>app.js</code> :</p>
+<pre><code class="language-js">const express = require('express');
+const app = express();
+app.get('/', (req, res) =&gt; res.send('Hello Docker'));
+app.listen(3000, () =&gt; console.log('Listening on port 3000'));
+</code></pre>
+<p>Contenu de <code>package.json</code> :</p>
+<pre><code class="language-json">{
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
+</code></pre>
+<hr />
+<h2 id="Étapes"><a class="header" href="#Étapes">Étapes</a></h2>
+<ol>
+<li>
+<p>Créez un fichier <code>Dockerfile</code> à la racine du projet.<br />
+Il doit :</p>
+<ul>
+<li>Utiliser l’image officielle <code>node:latest</code></li>
+<li>Définir un dossier de travail (<code>/app</code>)</li>
+<li>Copier les fichiers nécessaires dans le conteneur</li>
+<li>Installer les dépendances (<code>npm i</code>)</li>
+<li>Définir la commande de démarrage de l’application (<code>node app.js</code>)</li>
+</ul>
+</li>
+<li>
+<p>Construisez l’image Docker</p>
+</li>
+<li>
+<p>Lancez un conteneur à partir de l’image (n'oubliez-pas de transferer le port 8080 vers le port 3000)</p>
+</li>
+<li>
+<p>Vérifiez que votre application fonctionne en ouvrant <a href="http://localhost:8080">http://localhost:8080</a></p>
+</li>
+<li>
+<p>Affichez les logs du conteneur :</p>
+</li>
+</ol>
+<pre><code>docker logs backend
+</code></pre>
+<ol start="6">
+<li>Arrêtez puis supprimez le conteneur</li>
+</ol>
+<hr />
+<h2 id="questions"><a class="header" href="#questions">Questions</a></h2>
+<ol>
+<li>Quelle différence entre une <strong>image</strong> et un <strong>conteneur</strong> ?</li>
+<li>Si tu changes <code>app.js</code>, que dois-tu faire pour voir la mise à jour dans le conteneur ?</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--servir-un-site-statique-avec-nginx-dans-un-conteneur"><a class="header" href="#tp--servir-un-site-statique-avec-nginx-dans-un-conteneur">TP – Servir un site statique avec Nginx dans un conteneur</a></h1>
+<h2 id="objectif-1"><a class="header" href="#objectif-1">Objectif</a></h2>
+<p>Comprendre comment lancer un conteneur qui utilise une image officielle existante pour servir du contenu local.<br />
+Découvrir le <strong>montage de répertoire</strong> dans un conteneur (volume simple).</p>
+<hr />
+<h2 id="fichiers-à-créer"><a class="header" href="#fichiers-à-créer">Fichiers à créer</a></h2>
+<p>Dans un dossier <code>static-site/</code> :</p>
+<pre><code>static-site/
+└── index.html
+</code></pre>
+<p>Contenu simple de <code>index.html</code> :</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;&lt;title&gt;Mon site Dockerisé&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;&lt;h1&gt;Bienvenue dans le monde des conteneurs&lt;/h1&gt;&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<hr />
+<h2 id="Étapes-1"><a class="header" href="#Étapes-1">Étapes</a></h2>
+<ol>
+<li>
+<p>Créez un dossier <code>static-site/</code> contenant un fichier <code>index.html</code> comme ci-dessus.</p>
+</li>
+<li>
+<p>Lancez un conteneur basé sur l’image officielle <code>nginx</code>, avec ce fichier servi à la racine du site.<br />
+Pour cela :</p>
+<ul>
+<li>Montez votre dossier local dans <code>/usr/share/nginx/html</code> (répertoire utilisé par défaut par Nginx dans le conteneur)</li>
+<li>Transférez le port <code>8081</code> (host) vers le port <code>80</code> (conteneur)</li>
+<li>Donnez-lui un nom, par exemple <code>nginx-site</code></li>
+</ul>
+</li>
+<li>
+<p>Testez que le site est accessible sur <a href="http://localhost:8081">http://localhost:8081</a></p>
+</li>
+<li>
+<p>Modifiez <code>index.html</code>, rechargez la page, vérifiez que la modification est visible</p>
+</li>
+</ol>
+<blockquote>
+<p>Cela prouve que le dossier local est bien <strong>monté dans le conteneur</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="questions-1"><a class="header" href="#questions-1">Questions</a></h2>
+<ol>
+<li>À quoi sert le flag <code>--mount</code> dans <code>docker run</code> ?</li>
+<li>Quelle est la différence entre copier des fichiers dans l’image et les monter depuis l’extérieur ?</li>
+<li>Quelle commande permet de voir les conteneurs qui tournent actuellement ?</li>
+<li>Quelle commande permet de supprimer un conteneur arrêté ?</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
