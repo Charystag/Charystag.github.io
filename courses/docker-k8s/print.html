@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -441,6 +441,79 @@ Tu installes ce dont <em>tu</em> as besoin pour coder/travailler dans un termina
 Vérifie qu’elle est bien présente au prochain lancement de conteneur.</p>
 <hr />
 <p><em>Rappelle-toi : une image Docker, c’est juste un conteneur figé. Tu peux la bricoler à la main, la commiter, la partager, mais sans traçabilité, c’est vite le bordel.</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--construire-une-app-flask-dans-un-conteneur-ubuntu-image-autonome"><a class="header" href="#tp--construire-une-app-flask-dans-un-conteneur-ubuntu-image-autonome">TP — Construire une app Flask dans un conteneur Ubuntu (Image autonome)</a></h1>
+<h2 id="objectif-3"><a class="header" href="#objectif-3">Objectif</a></h2>
+<p>Développer une petite application Flask et la faire tourner dans un conteneur Docker <strong>basé sur Ubuntu</strong>.<br />
+Tu commences comme tu veux (interactif, scripté).<br />
+Mais <strong>à la fin</strong>, tu dois livrer <strong>une image autonome</strong>.</p>
+<hr />
+<h2 id="départ"><a class="header" href="#départ">Départ</a></h2>
+<p>Tu pars d’un dossier <code>flask-docker/</code> contenant ces fichiers :</p>
+<h3 id="apppy"><a class="header" href="#apppy"><code>app.py</code></a></h3>
+<pre><code class="language-python">from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello Docker"
+</code></pre>
+<h2 id="À-faire"><a class="header" href="#À-faire">À faire</a></h2>
+<ol>
+<li>Partir de l’image <code>ubuntu</code> (dernière version).</li>
+<li>Installer tout ce qu’il faut:
+<ul>
+<li><code>python3</code></li>
+<li><code>pip</code></li>
+<li><code>flask</code></li>
+</ul>
+</li>
+<li>Pendant le développement, fais comme tu veux : tu peux monter des fichiers, modifier en live, t’énerver.</li>
+<li><strong>Mais à la fin</strong>, ton projet doit être <strong>contenu dans une image autonome</strong> :
+<ul>
+<li>Tout est <strong>copié</strong> dans l’image (pas de <code>-v</code>, pas de montage)</li>
+<li>L’app se lance automatiquement</li>
+<li>Le conteneur expose <code>http://localhost:8080</code> quand on le run</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="interdiction"><a class="header" href="#interdiction">Interdiction</a></h2>
+<ul>
+<li>Pas d’image <code>python:*</code></li>
+<li>Pas de <code>bind mount</code> dans le <code>docker run</code> final</li>
+<li>Pas de <code>flask run</code> lancé manuellement dans un shell</li>
+</ul>
+<hr />
+<h2 id="À-avoir"><a class="header" href="#À-avoir">À avoir</a></h2>
+<ul>
+<li><code>Dockerfile</code> final propre</li>
+<li><code>app.py</code></li>
+<li>La commande complète <code>docker build</code> + <code>docker run</code> utilisée</li>
+<li>Preuve que ton conteneur tourne et répond bien sur <code>localhost:8080</code></li>
+</ul>
+<hr />
+<h2 id="liens-utiles"><a class="header" href="#liens-utiles">Liens utiles</a></h2>
+<ul>
+<li><a href="https://flask.palletsprojects.com/en/latest/">Docs Flask</a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/">Dockerfile référence</a></li>
+<li><a href="https://flask.palletsprojects.com/en/latest/cli/#run">Exemple <code>flask run</code></a></li>
+</ul>
+<hr />
+<h2 id="bonus"><a class="header" href="#bonus">Bonus</a></h2>
+<ul>
+<li>Ajoute un <code>ENTRYPOINT</code> ou <code>CMD</code> propre</li>
+<li>Utilise des variables d’environnement dans ton <code>Dockerfile</code> (ex : <code>FLASK_ENV=production</code>)</li>
+<li>Crée un dossier <code>/app</code> dans l’image pour bosser proprement</li>
+</ul>
+<hr />
+<h2 id="aide"><a class="header" href="#aide">Aide</a></h2>
+<ul>
+<li>Tu peux utiliser l'option <code>--port port_number</code> pour changer le port par defaut de <code>flask</code> (si besoin)</li>
+<li>Tu peux utiliser l'option <code>--host=0.0.0.0</code> pour que l'application ecoute sur tous les ports</li>
+</ul>
+<p><em>À la fin, tu dois avoir une image que tu peux envoyer à n’importe qui.<br />
+Il la build, il la run, elle répond. Pas de dépendance locale.</em></p>
 
                     </main>
 
