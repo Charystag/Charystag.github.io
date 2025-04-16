@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li><li class="chapter-item expanded "><a href="exercises/docker/env.html"><strong aria-hidden="true">11.</strong> Environnement</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Docker</li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li><li class="chapter-item expanded "><a href="exercises/docker/env.html"><strong aria-hidden="true">11.</strong> Environnement</a></li><li class="chapter-item expanded "><a href="exercises/docker/healthcheck.html"><strong aria-hidden="true">12.</strong> Healthcheck</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -920,6 +920,112 @@ API_KEY=cle_du_fichier_env
 <li>Le fichier <code>.env</code>.</li>
 <li>Les <strong>commandes <code>docker build</code> et <code>docker run</code></strong> exactes que vous avez utilisées pour chaque test.</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--ton-conteneur-couteau-suisse-entrypoint--healthcheck"><a class="header" href="#tp--ton-conteneur-couteau-suisse-entrypoint--healthcheck"><strong>TP : Ton Conteneur Couteau Suisse (Entrypoint &amp; Healthcheck)</strong></a></h1>
+<h2 id="objectif-9"><a class="header" href="#objectif-9">Objectif</a></h2>
+<p>On va voir deux trucs stylés :</p>
+<ol>
+<li>Comment créer une image Docker qui agit comme un <strong>outil en ligne de commande</strong> que tu peux appeler direct (<code>ENTRYPOINT</code>). Fini les <code>docker run ubuntu bash -c "ma commande"</code> !</li>
+<li>Comment ajouter un <strong>check de santé (<code>HEALTHCHECK</code>)</strong> à une image pour que Docker sache si ton service à l'intérieur est opérationnel.</li>
+</ol>
+<hr />
+<h2 id="prérequis-1"><a class="header" href="#prérequis-1">Prérequis</a></h2>
+<ul>
+<li>Docker fonctionnel (obviously).</li>
+<li>Savoir écrire un Dockerfile simple.</li>
+</ul>
+<hr />
+<h2 id="partie-1--le-conteneur-outil-avec-entrypoint"><a class="header" href="#partie-1--le-conteneur-outil-avec-entrypoint">Partie 1 : Le Conteneur-Outil avec <code>ENTRYPOINT</code></a></h2>
+<p>On va faire une image qui fait parler une vache pour ca, on va utiliser <code>cowsay</code>.</p>
+<ol>
+<li><strong>Crée un <code>Dockerfile.cowsay</code> :</strong>
+<ul>
+<li>Pars d'une image légère, genre <code>alpine:latest</code></li>
+<li>Mets à jour les paquets et <strong>installe <code>cowsay</code></strong>. Sur Alpine, c'est un peu différent, il faut souvent chercher le bon paquet ou passer par d'autres dépôts (ou prendre une base Debian/Ubuntu si Alpine est trop relou pour <code>cowsay</code>, mais Alpine c'est bien pour la légèreté).
+<ul>
+<li>Tu peux utiliser le script <code>install_cowsay.sh</code> present en annexe de l'exercice (attention, tu devras l'adapter si tu utilises alpine)</li>
+</ul>
+</li>
+<li><strong>LA LIGNE CLÉ :</strong> Définis l'entrypoint pour que le conteneur <em>devienne</em> la commande <code>cowsay</code> :
+<pre><code class="language-dockerfile">ENTRYPOINT ["cowsay"]
+# On peut ajouter un CMD par défaut si on veut (message par défaut si on lance sans args)
+# CMD ["Default message if no args"]
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Build l'image :</strong> <code>docker build -t mon-cowsay -f Dockerfile.cowsay .</code></li>
+<li><strong>Teste comme une commande :</strong>
+<ul>
+<li>Lance direct avec un message :
+<code>docker run --rm mon-cowsay "Docker parle!"</code>
+Tu devrais voir la vache parler.</li>
+<li>Lance avec une option de <code>cowsay</code> (pour changer l'animal, <code>-f</code>) :
+<code>docker run --rm mon-cowsay -f dragon "Je crache du feu sur tes bugs"</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="partie-2--le-check-de-santé-avec-healthcheck"><a class="header" href="#partie-2--le-check-de-santé-avec-healthcheck">Partie 2 : Le Check de Santé avec <code>HEALTHCHECK</code></a></h3>
+<p>On va créer un serveur web ultra-basique et lui ajouter un check de santé.</p>
+<ol>
+<li>
+<p><strong>Crée un <code>Dockerfile.webhealth</code> :</strong></p>
+<ul>
+<li>Pars d'une image <code>alpine</code> ou <code>ubuntu</code></li>
+<li>Installe <code>curl</code> (qui servira pour le healthcheck) : <code>RUN apt-get update &amp;&amp; apt-get install -y curl &amp;&amp; rm -rf /var/lib/apt/lists/*</code> (si base Debian/Ubuntu) ou <code>RUN apk add --no-cache curl</code> (si base Alpine).</li>
+<li>Installe <code>python</code></li>
+<li>Ajoute une commande <code>CMD</code> pour lancer un serveur web simple sur le port 8000. Le plus simple avec Python, c'est :
+<pre><code class="language-dockerfile"># ... après install curl ...
+WORKDIR /app # Juste pour avoir un dossier
+EXPOSE 8000
+CMD ["python3", "-m", "http.server", "8000"]
+</code></pre>
+</li>
+<li><strong>Ajoute le <code>HEALTHCHECK</code> :</strong> On va demander à Docker de vérifier toutes les X secondes si le serveur répond bien sur le port 8000.
+<pre><code class="language-dockerfile"># ... après CMD ...
+HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl --fail http://localhost:8000/ || exit 1
+</code></pre>
+<ul>
+<li><code>--interval=10s</code> : Vérifie toutes les 10 secondes.</li>
+<li><code>--timeout=3s</code> : Si la commande <code>curl</code> prend plus de 3s, c'est considéré comme échec.</li>
+<li><code>--start-period=5s</code> : Laisse 5 secondes au conteneur pour démarrer avant de commencer les checks (évite les fails au tout début).</li>
+<li><code>--retries=3</code> : Il faut 3 échecs consécutifs pour marquer le conteneur comme <code>unhealthy</code>.</li>
+<li><code>CMD curl ... || exit 1</code> : La commande de check. <code>curl --fail</code> retourne un code d'erreur si le HTTP status n'est pas 2xx. Le <code>|| exit 1</code> assure qu'on renvoie bien un code d'erreur si <code>curl</code> échoue.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Build l'image :</strong> <code>docker build -t web-health -f Dockerfile.webhealth .</code></p>
+</li>
+<li>
+<p><strong>Observe la santé :</strong></p>
+<ul>
+<li>Lance le conteneur : <code>docker run -d --name health-test web-health</code></li>
+<li>Regarde l'état avec <code>docker ps</code> :
+<pre><code class="language-bash">docker ps # Regarde la colonne STATUS
+</code></pre>
+Au début, tu verras peut-être <code>(health: starting)</code>. Après quelques secondes (le <code>start-period</code>), ça devrait passer à <code>(healthy)</code>.</li>
+<li><strong>(Bonus) Simule un problème :</strong> Connecte-toi au conteneur (<code>docker exec -it health-test sh</code> ou <code>bash</code>) et tue le processus Python (<code>pkill python</code>). Regarde à nouveau <code>docker ps</code> après quelques checks ratés (ça prendra <code>interval * retries</code> secondes), il devrait passer à <code>(unhealthy)</code>.</li>
+<li>Clean : <code>docker rm -f health-test</code>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="annexe-script-dinstallation"><a class="header" href="#annexe-script-dinstallation">Annexe: script d'installation</a></h2>
+<pre><code class="language-bash">set -e
+
+apt -y update &amp;&amp; apt -y upgrade
+
+apt -y install curl unzip perl
+
+curl -fsSLO https://github.com/tnalpgge/rank-amateur-cowsay/archive/refs/tags/cowsay-3.04.zip
+
+unzip cowsay-3.04.zip
+
+cd rank-amateur-cowsay-cowsay-3.04
+
+echo "" | bash install.sh
+</code></pre>
 
                     </main>
 
