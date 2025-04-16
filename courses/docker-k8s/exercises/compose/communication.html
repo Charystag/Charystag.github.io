@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Builds Multistage - Docker-K8s</title>
+        <title>Communication de Containers - Docker-K8s</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Docker</li><li class="chapter-item expanded "><a href="../../exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/ms_builds.html" class="active"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/env.html"><strong aria-hidden="true">11.</strong> Environnement</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/healthcheck.html"><strong aria-hidden="true">12.</strong> Healthcheck</a></li><li class="chapter-item expanded affix "><li class="part-title">Docker Compose</li><li class="chapter-item expanded "><a href="../../exercises/compose/communication.html"><strong aria-hidden="true">13.</strong> Communication de Containers</a></li><li class="chapter-item expanded "><a href="../../exercises/compose/first_app.html"><strong aria-hidden="true">14.</strong> Premiere Application</a></li><li class="chapter-item expanded "><a href="../../exercises/compose/env.html"><strong aria-hidden="true">15.</strong> Environment</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Docker</li><li class="chapter-item expanded "><a href="../../exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/env.html"><strong aria-hidden="true">11.</strong> Environnement</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/healthcheck.html"><strong aria-hidden="true">12.</strong> Healthcheck</a></li><li class="chapter-item expanded affix "><li class="part-title">Docker Compose</li><li class="chapter-item expanded "><a href="../../exercises/compose/communication.html" class="active"><strong aria-hidden="true">13.</strong> Communication de Containers</a></li><li class="chapter-item expanded "><a href="../../exercises/compose/first_app.html"><strong aria-hidden="true">14.</strong> Premiere Application</a></li><li class="chapter-item expanded "><a href="../../exercises/compose/env.html"><strong aria-hidden="true">15.</strong> Environment</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,68 +173,79 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="exercice"><a class="header" href="#exercice">Exercice</a></h1>
-<p><strong>Contenerization using multistages builds</strong></p>
-<p>Here is a sample C++ program:</p>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-
-int main(void){
-    std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
-    return (0);
-}
-</code></pre>
-<p>Here is the sequence of instructions that you should follow :</p>
-<details>
-<summary>Part 1: Project files retrieval</summary>
+                        <h1 id="tp--communication-clientserveur-avec-docker-compose"><a class="header" href="#tp--communication-clientserveur-avec-docker-compose"><strong>TP : Communication Client/Serveur avec Docker Compose</strong></a></h1>
+<h2 id="objectif"><a class="header" href="#objectif">Objectif</a></h2>
+<p>Cet exercice vise à reprendre le scénario simple "Client/Serveur" (deux conteneurs communiquant sur un réseau personnalisé) et à l'implémenter avec Docker Compose.</p>
+<p>L'objectif est de :</p>
 <ol>
-<li>Run a container interactively using the base image alpine and <strong>bind</strong> a volume called <code>project_files</code> to the folder <code>/project</code> on your container.</li>
-<li>Create the <code>hello_word.cpp</code> file <strong>within</strong> the container in the <code>/project</code> directory and commit the result as a new image called <code>project_files</code></li>
+<li>Définir deux services simples (un serveur minimaliste, un client) dans un fichier <code>docker-compose.yml</code>.</li>
+<li>Comprendre comment Docker Compose gère la création du réseau et permet la communication entre services en utilisant leurs noms.</li>
+<li>Comparer la simplicité de l'approche Compose par rapport aux commandes <code>docker network create</code> et <code>docker run</code> manuelles de l'exercice précédent.</li>
 </ol>
-</details>
-<details>
-<summary>Part 2: Project building</summary>
-<p>At this point in the exercise you should have a new base image containing only alpine and the <code>hello_world.cpp</code> file in the <code>/project</code> folder.</p>
-<ol start="3">
-<li>Run another container interactively based on the image  <code>project_files</code></li>
-<li>Install the tools needed in order to build the sample c++ program.</li>
-<li>Build the sample program and move the executable to <code>/project/bin</code>, creating the directory if needed</li>
-<li>Commit the result as a new layer, calling it : <code>executable</code></li>
-</ol>
-</details>
-<details>
-<summary>Part 3: Writting the Dockerfile</summary>
-<p>At this point, you should be able to run : <code>docker run executable /project/bin/hello_world</code> and everything should be working</p>
-<ol start="7">
-<li>Now that you know how to do this from the command line, this step is pretty straightforward, you should put all the previous steps but in your Dockerfile. It has to start with the instruction <code>FROM project_files</code></li>
-</ol>
-</details>
-<details>
-<summary>Part 4: Multistage Build</summary>
-<p>Running <code>docker build -t dockerfile_executable . &amp;&amp; docker run dockerfile_executable</code> should print <code>Hello World!</code> to <code>stdout</code></p>
-<ol start="8">
-<li>Split the build into multiple stages, the final image should contain only the executable.</li>
-</ol>
-</details>
-<details>
-<summary>Part 5: Comparison between both types of build</summary>
-<p>Here is an example of what you may see when running <code>docker image history multistage_image</code> for the image generated during the multistages build</p>
-<pre><code class="language-bash">IMAGE          CREATED       CREATED BY                            SIZE      COMMENT
-df5a49f5c822   2 hours ago   ENTRYPOINT ["./hello_world"]          0B        buildkit.dockerfile.v0
-&lt;missing&gt;      2 hours ago   COPY /test/hello_world . # buildkit   72.9kB    buildkit.dockerfile.v0
-&lt;missing&gt;      2 hours ago   WORKDIR /RUN                          0B        buildkit.dockerfile.v0
+<hr />
+<h2 id="prérequis"><a class="header" href="#prérequis">Prérequis</a></h2>
+<ul>
+<li>Docker et Docker Compose installés.</li>
+<li>Le code source et les <code>Dockerfile</code> fonctionnels pour le <strong>serveur HTTP minimal</strong> et pour le <strong>client</strong> (celui qui utilise <code>curl</code>, <code>wget</code> ou un script pour contacter le serveur) de l'exercice "Deux conteneurs qui se parlent (sans docker-compose)".</li>
+<li>Assurez-vous que le client est configuré pour contacter le serveur via un nom d'hôte (ex: <code>http://server:5000/</code>). Si ce nom était passé via une variable d'environnement (<code>SERVER_URL</code>), c'est encore mieux.</li>
+</ul>
+<hr />
+<h2 id="À-faire"><a class="header" href="#À-faire">À Faire</a></h2>
+<ol>
+<li>
+<p><strong>Créer le fichier <code>docker-compose.yml</code> :</strong> Dans un répertoire contenant les contextes de build (ou les Dockerfiles) pour votre serveur et votre client, créez un fichier <code>docker-compose.yml</code>.</p>
+</li>
+<li>
+<p><strong>Définir la configuration :</strong> Remplissez ce fichier pour lancer les deux conteneurs (serveur et client) et leur permettre de communiquer. Votre fichier <code>docker-compose.yml</code> doit :</p>
+<ul>
+<li>Définir <strong>deux services</strong>, par exemple nommés <code>server</code> et <code>client</code>.</li>
+<li>Chaque service doit être construit à partir de son <code>Dockerfile</code> respectif.</li>
+<li>Assurez-vous que le client contacte le serveur en utilisant le <strong>nom du service</strong> défini dans ce fichier (ex: l'URL <code>http://server:5000/</code> si le service serveur est nommé <code>server</code>). Si votre client utilise une variable d'environnement pour l'URL du serveur, définissez cette variable dans la section <code>environment</code> du service client.</li>
+<li>Utilisez <code>depends_on</code> dans le service <code>client</code> pour indiquer qu'il dépend du service <code>server</code>.</li>
+<li><em>(Facultatif mais recommandé pour la clarté)</em> : Définir explicitement un réseau de type <code>bridge</code> et connecter les deux services à ce réseau (même si Compose en créerait un par défaut).</li>
+<li><em>(Info)</em> : Vous n'avez normalement pas besoin de mapper de port (<code>ports:</code>) pour le service <code>server</code> si seul le conteneur <code>client</code> doit y accéder. Le mapping de port n'est utile que pour accéder au service depuis l'hôte.</li>
+</ul>
+</li>
+<li>
+<p><strong>Lancer les services :</strong> Depuis le répertoire contenant votre <code>docker-compose.yml</code>, lancez les services avec :</p>
+<pre><code class="language-bash">docker-compose up
 </code></pre>
-<p>Find a way to compare the size of the two generated images and explain briefly why splitting builds into multiple stages affects the size of the resulting image</p>
-</details>
+<ul>
+<li>Observez les logs affichés. Vous devriez voir le serveur démarrer, puis le client démarrer, effectuer sa requête et afficher la réponse du serveur ("Hello client" ou similaire).</li>
+<li>Si votre client est un script qui s'exécute une fois puis se termine, le conteneur client s'arrêtera (vous verrez <code>client_container_name exited with code 0</code>), mais <code>docker-compose up</code> continuera à tourner à cause du serveur. Vous pouvez l'arrêter avec <code>Ctrl+C</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Vérifier (alternative) :</strong> Si vous lancez en mode détaché (<code>docker-compose up -d</code>), vous pouvez voir les logs après coup avec <code>docker-compose logs client</code> et <code>docker-compose logs server</code>.</p>
+</li>
+<li>
+<p><strong>Arrêter et nettoyer :</strong> Utilisez <code>docker-compose down</code> pour arrêter et supprimer les conteneurs et le réseau.</p>
+</li>
+</ol>
+<hr />
+<h2 id="À-méditer--comparer"><a class="header" href="#À-méditer--comparer">À Méditer / Comparer</a></h2>
+<ul>
+<li>Comparez ce fichier <code>docker-compose.yml</code> aux commandes <code>docker network create</code>, <code>docker run server...</code>, <code>docker run client...</code> de l'exercice précédent.</li>
+<li>Comment la création du réseau et la résolution du nom <code>server</code> par le client sont-elles gérées par Compose ? Qu'est-ce qui est implicite ?</li>
+</ul>
+<hr />
+<h2 id="À-vérifier-pour-vous"><a class="header" href="#À-vérifier-pour-vous">À Vérifier (pour vous)</a></h2>
+<ul>
+<li>Avoir un fichier <code>docker-compose.yml</code> qui définit les services <code>server</code> et <code>client</code>.</li>
+<li>En lançant <code>docker-compose up</code>, observer dans les logs que le client réussit à contacter le <code>server</code> par son nom et affiche la réponse attendue.</li>
+<li>Pouvoir arrêter proprement avec <code>docker-compose down</code>.
+elui-là est plus simple que le précédent (Backend+DB), mais il illustre très bien la simplification du réseau et du lancement par Compose. Ça te semble correct comme niveau de guidage ?</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../exercises/docker/unknown_language.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../exercises/docker/healthcheck.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../exercises/docker/communication.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../exercises/compose/first_app.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -244,11 +255,11 @@ df5a49f5c822   2 hours ago   ENTRYPOINT ["./hello_world"]          0B        bui
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../exercises/docker/unknown_language.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../exercises/docker/healthcheck.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../exercises/docker/communication.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../exercises/compose/first_app.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

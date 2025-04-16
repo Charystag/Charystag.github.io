@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Docker</li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li><li class="chapter-item expanded "><a href="exercises/docker/env.html"><strong aria-hidden="true">11.</strong> Environnement</a></li><li class="chapter-item expanded "><a href="exercises/docker/healthcheck.html"><strong aria-hidden="true">12.</strong> Healthcheck</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Docker</li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li><li class="chapter-item expanded "><a href="exercises/docker/env.html"><strong aria-hidden="true">11.</strong> Environnement</a></li><li class="chapter-item expanded "><a href="exercises/docker/healthcheck.html"><strong aria-hidden="true">12.</strong> Healthcheck</a></li><li class="chapter-item expanded affix "><li class="part-title">Docker Compose</li><li class="chapter-item expanded "><a href="exercises/compose/communication.html"><strong aria-hidden="true">13.</strong> Communication de Containers</a></li><li class="chapter-item expanded "><a href="exercises/compose/first_app.html"><strong aria-hidden="true">14.</strong> Premiere Application</a></li><li class="chapter-item expanded "><a href="exercises/compose/env.html"><strong aria-hidden="true">15.</strong> Environment</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -1026,6 +1026,210 @@ cd rank-amateur-cowsay-cowsay-3.04
 
 echo "" | bash install.sh
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--communication-clientserveur-avec-docker-compose"><a class="header" href="#tp--communication-clientserveur-avec-docker-compose"><strong>TP : Communication Client/Serveur avec Docker Compose</strong></a></h1>
+<h2 id="objectif-10"><a class="header" href="#objectif-10">Objectif</a></h2>
+<p>Cet exercice vise à reprendre le scénario simple "Client/Serveur" (deux conteneurs communiquant sur un réseau personnalisé) et à l'implémenter avec Docker Compose.</p>
+<p>L'objectif est de :</p>
+<ol>
+<li>Définir deux services simples (un serveur minimaliste, un client) dans un fichier <code>docker-compose.yml</code>.</li>
+<li>Comprendre comment Docker Compose gère la création du réseau et permet la communication entre services en utilisant leurs noms.</li>
+<li>Comparer la simplicité de l'approche Compose par rapport aux commandes <code>docker network create</code> et <code>docker run</code> manuelles de l'exercice précédent.</li>
+</ol>
+<hr />
+<h2 id="prérequis-2"><a class="header" href="#prérequis-2">Prérequis</a></h2>
+<ul>
+<li>Docker et Docker Compose installés.</li>
+<li>Le code source et les <code>Dockerfile</code> fonctionnels pour le <strong>serveur HTTP minimal</strong> et pour le <strong>client</strong> (celui qui utilise <code>curl</code>, <code>wget</code> ou un script pour contacter le serveur) de l'exercice "Deux conteneurs qui se parlent (sans docker-compose)".</li>
+<li>Assurez-vous que le client est configuré pour contacter le serveur via un nom d'hôte (ex: <code>http://server:5000/</code>). Si ce nom était passé via une variable d'environnement (<code>SERVER_URL</code>), c'est encore mieux.</li>
+</ul>
+<hr />
+<h2 id="À-faire-4"><a class="header" href="#À-faire-4">À Faire</a></h2>
+<ol>
+<li>
+<p><strong>Créer le fichier <code>docker-compose.yml</code> :</strong> Dans un répertoire contenant les contextes de build (ou les Dockerfiles) pour votre serveur et votre client, créez un fichier <code>docker-compose.yml</code>.</p>
+</li>
+<li>
+<p><strong>Définir la configuration :</strong> Remplissez ce fichier pour lancer les deux conteneurs (serveur et client) et leur permettre de communiquer. Votre fichier <code>docker-compose.yml</code> doit :</p>
+<ul>
+<li>Définir <strong>deux services</strong>, par exemple nommés <code>server</code> et <code>client</code>.</li>
+<li>Chaque service doit être construit à partir de son <code>Dockerfile</code> respectif.</li>
+<li>Assurez-vous que le client contacte le serveur en utilisant le <strong>nom du service</strong> défini dans ce fichier (ex: l'URL <code>http://server:5000/</code> si le service serveur est nommé <code>server</code>). Si votre client utilise une variable d'environnement pour l'URL du serveur, définissez cette variable dans la section <code>environment</code> du service client.</li>
+<li>Utilisez <code>depends_on</code> dans le service <code>client</code> pour indiquer qu'il dépend du service <code>server</code>.</li>
+<li><em>(Facultatif mais recommandé pour la clarté)</em> : Définir explicitement un réseau de type <code>bridge</code> et connecter les deux services à ce réseau (même si Compose en créerait un par défaut).</li>
+<li><em>(Info)</em> : Vous n'avez normalement pas besoin de mapper de port (<code>ports:</code>) pour le service <code>server</code> si seul le conteneur <code>client</code> doit y accéder. Le mapping de port n'est utile que pour accéder au service depuis l'hôte.</li>
+</ul>
+</li>
+<li>
+<p><strong>Lancer les services :</strong> Depuis le répertoire contenant votre <code>docker-compose.yml</code>, lancez les services avec :</p>
+<pre><code class="language-bash">docker-compose up
+</code></pre>
+<ul>
+<li>Observez les logs affichés. Vous devriez voir le serveur démarrer, puis le client démarrer, effectuer sa requête et afficher la réponse du serveur ("Hello client" ou similaire).</li>
+<li>Si votre client est un script qui s'exécute une fois puis se termine, le conteneur client s'arrêtera (vous verrez <code>client_container_name exited with code 0</code>), mais <code>docker-compose up</code> continuera à tourner à cause du serveur. Vous pouvez l'arrêter avec <code>Ctrl+C</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Vérifier (alternative) :</strong> Si vous lancez en mode détaché (<code>docker-compose up -d</code>), vous pouvez voir les logs après coup avec <code>docker-compose logs client</code> et <code>docker-compose logs server</code>.</p>
+</li>
+<li>
+<p><strong>Arrêter et nettoyer :</strong> Utilisez <code>docker-compose down</code> pour arrêter et supprimer les conteneurs et le réseau.</p>
+</li>
+</ol>
+<hr />
+<h2 id="À-méditer--comparer"><a class="header" href="#À-méditer--comparer">À Méditer / Comparer</a></h2>
+<ul>
+<li>Comparez ce fichier <code>docker-compose.yml</code> aux commandes <code>docker network create</code>, <code>docker run server...</code>, <code>docker run client...</code> de l'exercice précédent.</li>
+<li>Comment la création du réseau et la résolution du nom <code>server</code> par le client sont-elles gérées par Compose ? Qu'est-ce qui est implicite ?</li>
+</ul>
+<hr />
+<h2 id="À-vérifier-pour-vous"><a class="header" href="#À-vérifier-pour-vous">À Vérifier (pour vous)</a></h2>
+<ul>
+<li>Avoir un fichier <code>docker-compose.yml</code> qui définit les services <code>server</code> et <code>client</code>.</li>
+<li>En lançant <code>docker-compose up</code>, observer dans les logs que le client réussit à contacter le <code>server</code> par son nom et affiche la réponse attendue.</li>
+<li>Pouvoir arrêter proprement avec <code>docker-compose down</code>.
+elui-là est plus simple que le précédent (Backend+DB), mais il illustre très bien la simplification du réseau et du lancement par Compose. Ça te semble correct comme niveau de guidage ?</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--application-backend--db-avec-docker-compose"><a class="header" href="#tp--application-backend--db-avec-docker-compose"><strong>TP : Application Backend + DB avec Docker Compose</strong></a></h1>
+<h2 id="objectif-11"><a class="header" href="#objectif-11">Objectif</a></h2>
+<p>Cet exercice consiste à reprendre l'application multi-conteneurs (Backend Python + Base de Données MariaDB/Mongo) réalisée précédemment avec des commandes <code>docker run</code> manuelles, et à la réimplémenter en utilisant <strong>Docker Compose</strong>.</p>
+<p>L'objectif est de :</p>
+<ol>
+<li>Comprendre la structure d'un fichier <code>docker-compose.yml</code>.</li>
+<li>Définir et configurer plusieurs services (backend, base de données) de manière déclarative.</li>
+<li>Gérer le réseau, les volumes, les variables d'environnement et les dépendances entre services via Docker Compose.</li>
+<li>Apprécier la simplification apportée par Docker Compose par rapport aux commandes manuelles.</li>
+</ol>
+<hr />
+<h2 id="prérequis-3"><a class="header" href="#prérequis-3">Prérequis</a></h2>
+<ul>
+<li>Docker et Docker Compose installés.</li>
+<li>Le code source fonctionnel du backend Python (avec son <code>Dockerfile</code>) de l'exercice précédent.</li>
+<li>Connaître les variables d'environnement nécessaires à la configuration de votre backend (pour la connexion à la base de données) et de votre base de données (utilisateur, mot de passe, nom de la base).</li>
+</ul>
+<hr />
+<h2 id="À-faire-5"><a class="header" href="#À-faire-5">À Faire</a></h2>
+<ol>
+<li>
+<p><strong>Créer le fichier <code>docker-compose.yml</code> :</strong> À la racine de votre projet backend, créez un fichier nommé <code>docker-compose.yml</code>.</p>
+</li>
+<li>
+<p><strong>Définir la configuration :</strong> Remplissez ce fichier pour reproduire le déploiement de l'application (backend + base de données) tel qu'il fonctionnait avec les commandes <code>docker run</code> manuelles. Votre fichier <code>docker-compose.yml</code> doit respecter les points suivants :</p>
+<ul>
+<li>Définir <strong>deux services</strong> : un pour la base de données (<code>db</code>) et un pour le backend (<code>backend</code>).</li>
+<li>Le service <code>db</code> doit utiliser l'image officielle <code>mariadb</code> (ou <code>mongo</code>) appropriée.</li>
+<li>Le service <code>backend</code> doit être construit à partir de votre <code>Dockerfile</code> existant.</li>
+<li>Configurer le service <code>db</code> avec les <strong>variables d'environnement</strong> nécessaires (ex: <code>MYSQL_ROOT_PASSWORD</code>, <code>MYSQL_DATABASE</code>, etc. pour MariaDB). <em>Consultez la documentation de l'image Docker Hub si besoin pour les noms exacts des variables.</em></li>
+<li>Configurer le service <code>backend</code> avec les <strong>variables d'environnement</strong> requises pour se connecter à la base de données (ex: <code>DB_HOST</code>, <code>DB_USER</code>, <code>DB_PASSWORD</code>, <code>DB_NAME</code>). Utilisez le <strong>nom du service <code>db</code></strong> comme hôte pour la connexion (<code>DB_HOST=db</code>).</li>
+<li>Assurer la <strong>persistance des données</strong> de la base de données à l'aide d'un <strong>volume nommé</strong> Docker.</li>
+<li>Définir et utiliser un <strong>réseau personnalisé</strong> pour que les deux services communiquent.</li>
+<li>Mapper le <strong>port</strong> du service <code>backend</code> pour qu'il soit accessible depuis l'hôte sur le port 5000 (ou le port que votre backend utilise).</li>
+<li>Utiliser <code>depends_on</code> dans le service <code>backend</code> pour indiquer sa dépendance vis-à-vis du service <code>db</code>.</li>
+<li><em>(Bonne pratique)</em> : Évitez de coder en dur les mots de passe dans le fichier <code>docker-compose.yml</code>. Recherchez comment Docker Compose peut utiliser un fichier <code>.env</code> pour gérer ce type d'informations sensibles.</li>
+</ul>
+</li>
+<li>
+<p><strong>Lancer l'application :</strong> Depuis le répertoire contenant votre <code>docker-compose.yml</code>, utilisez la commande <code>docker-compose up -d</code> pour démarrer l'ensemble des services.</p>
+</li>
+<li>
+<p><strong>Vérifier le fonctionnement :</strong></p>
+<ul>
+<li>Utilisez <code>docker-compose ps</code> pour voir l'état des conteneurs.</li>
+<li>Consultez les logs avec <code>docker-compose logs backend</code> et <code>docker-compose logs db</code>.</li>
+<li>Accédez à votre application via <code>http://localhost:5000</code> (ou le port mappé) et testez les fonctionnalités (CRUD) pour confirmer que la communication avec la base de données est opérationnelle.</li>
+</ul>
+</li>
+<li>
+<p><strong>Arrêter l'application :</strong> Utilisez la commande <code>docker-compose down</code> pour arrêter et supprimer les conteneurs et le réseau créés par Compose. Utilisez l'option <code>-v</code> si vous souhaitez également supprimer le volume de données.</p>
+</li>
+</ol>
+<hr />
+<h2 id="À-méditer--comparer-1"><a class="header" href="#À-méditer--comparer-1">À Méditer / Comparer</a></h2>
+<ul>
+<li>Analysez votre fichier <code>docker-compose.yml</code>. Quelle est sa complexité par rapport à l'ensemble des commandes <code>docker run</code> et <code>docker network create</code> que vous aviez utilisées précédemment ?</li>
+<li>Quels sont les avantages que vous voyez à utiliser Docker Compose pour ce scénario ?</li>
+</ul>
+<hr />
+<h2 id="À-vérifier-pour-vous-1"><a class="header" href="#À-vérifier-pour-vous-1">À Vérifier (pour vous)</a></h2>
+<ul>
+<li>Avoir un fichier <code>docker-compose.yml</code> valide qui décrit l'application.</li>
+<li>Pouvoir démarrer l'ensemble avec <code>docker-compose up -d</code>.</li>
+<li>L'application backend est accessible et fonctionnelle (communication avec la DB OK).</li>
+<li>Pouvoir arrêter proprement avec <code>docker-compose down</code>.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp--configuration-via-environnement-avec-docker-compose-mode-autonome"><a class="header" href="#tp--configuration-via-environnement-avec-docker-compose-mode-autonome"><strong>TP : Configuration via Environnement avec Docker Compose (Mode Autonome)</strong></a></h1>
+<h2 id="objectif-12"><a class="header" href="#objectif-12">Objectif</a></h2>
+<p>Cet exercice consiste à reprendre l'application configurée via variables d'environnement de l'exercice précédent et à la réimplémenter en utilisant <strong>Docker Compose</strong>. L'accent est mis sur votre capacité à trouver et appliquer les bonnes directives Compose pour gérer la configuration.</p>
+<p>L'objectif est de :</p>
+<ol>
+<li>Structurer un fichier <code>docker-compose.yml</code> pour un service unique.</li>
+<li>Définir et surcharger des variables d'environnement en utilisant les mécanismes de Docker Compose (<code>environment:</code>, intégration de fichiers <code>.env</code>, variables du shell).</li>
+<li>Comparer l'approche Compose avec les options manuelles de <code>docker run</code>.</li>
+</ol>
+<hr />
+<h2 id="prérequis-4"><a class="header" href="#prérequis-4">Prérequis</a></h2>
+<ul>
+<li>Docker et Docker Compose installés.</li>
+<li>Le code source de votre application (qui lit <code>APP_PORT</code>, <code>GREETING_MSG</code>, <code>API_KEY</code>, etc. depuis l'environnement) et son <code>Dockerfile</code> (celui de l'exercice précédent, qui définit des <code>ENV</code> par défaut).</li>
+<li>Le fichier <code>.env</code> créé lors de l'exercice précédent.</li>
+</ul>
+<hr />
+<h2 id="À-faire-6"><a class="header" href="#À-faire-6">À Faire</a></h2>
+<ol>
+<li>
+<p><strong>Créer le fichier <code>docker-compose.yml</code> :</strong> À la racine de votre projet, créez un fichier <code>docker-compose.yml</code>.</p>
+</li>
+<li>
+<p><strong>Définir la configuration du service :</strong> Configurez un unique service (nommez-le <code>app</code>) dans ce fichier pour qu'il lance votre application. Ce service doit :</p>
+<ul>
+<li>Être construit (<code>build</code>) à partir de votre <code>Dockerfile</code> existant.</li>
+<li>Définir une variable d'environnement <code>GREETING_MSG</code> via la section <code>environment:</code> de Compose, avec une valeur <em>différente</em> de celle par défaut dans votre Dockerfile.</li>
+<li>Mapper le port approprié (<code>ports:</code>) pour rendre l'application accessible depuis l'hôte.</li>
+<li><em>(Indice : Cherchez la documentation pour <code>services</code>, <code>build</code>, <code>ports</code>, <code>environment</code> dans Docker Compose).</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Test 1 : Priorité <code>environment:</code> (Compose) sur <code>ENV</code> (Dockerfile)</strong></p>
+<ul>
+<li>Lancez le service : <code>docker-compose up -d</code></li>
+<li><strong>Vérifiez :</strong> L'application utilise-t-elle le <code>GREETING_MSG</code> défini dans <code>docker-compose.yml</code> ? Quelles sont les valeurs pour <code>APP_PORT</code> et <code>API_KEY</code> (celles du Dockerfile ou autres) ? Utilisez <code>http://localhost:[port_mappé]</code> et <code>docker-compose logs app</code>.</li>
+<li>Arrêtez : <code>docker-compose down</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Test 2 : Intégration du fichier <code>.env</code></strong></p>
+<ul>
+<li>Placez votre fichier <code>.env</code> existant dans le même répertoire que <code>docker-compose.yml</code>.</li>
+<li><strong>Modifiez <code>docker-compose.yml</code></strong> pour qu'il utilise les variables définies dans ce fichier <code>.env</code>. Vous devrez probablement utiliser la syntaxe de substitution de variables de Compose (ex: <code>${VARIABLE}</code>). Assurez-vous que les valeurs de <code>APP_PORT</code>, <code>GREETING_MSG</code> et <code>API_KEY</code> proviennent maintenant du fichier <code>.env</code> lorsqu'elles y sont définies. Adaptez également le mapping de port si <code>APP_PORT</code> change via le <code>.env</code>.</li>
+<li><em>(Indice : Cherchez comment Docker Compose charge automatiquement les fichiers <code>.env</code> et comment utiliser la substitution de variables <code>${...}</code> dans votre <code>docker-compose.yml</code>)</em>.</li>
+<li>Lancez le service : <code>docker-compose up -d</code></li>
+<li><strong>Vérifiez :</strong> L'application utilise-t-elle bien les valeurs (<code>APP_PORT</code>, <code>GREETING_MSG</code>, <code>API_KEY</code>) définies dans votre fichier <code>.env</code> ? Vérifiez via le navigateur/curl et les logs.</li>
+<li>Arrêtez : <code>docker-compose down</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Test 3 : Priorité Variable Shell sur <code>.env</code> / <code>environment:</code></strong></p>
+<ul>
+<li>Dans votre <strong>terminal hôte</strong>, exportez une variable d'environnement (par exemple <code>GREETING_MSG</code>) avec une valeur encore différente.</li>
+<li>Depuis ce <strong>même terminal</strong>, relancez Compose : <code>docker-compose up -d</code></li>
+<li><strong>Vérifiez :</strong> Quelle valeur de <code>GREETING_MSG</code> l'application utilise-t-elle maintenant ? (<em>Indice : Les variables définies dans le shell qui lance Compose ont généralement la priorité</em>).</li>
+<li>Nettoyez votre variable d'environnement hôte et arrêtez : <code>docker-compose down</code>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="À-méditer--comparer-2"><a class="header" href="#À-méditer--comparer-2">À Méditer / Comparer</a></h2>
+<ul>
+<li>Comment la section <code>environment:</code> de Compose se compare-t-elle à l'instruction <code>ENV</code> du Dockerfile et à l'option <code>-e</code> de <code>docker run</code> ?</li>
+<li>Comment l'utilisation automatique du fichier <code>.env</code> par Compose simplifie-t-elle la gestion des configurations par rapport à l'option <code>--env-file</code> de <code>docker run</code> ?</li>
+<li>Quelle est la règle de priorité entre les différentes méthodes de définition des variables d'environnement (Shell hôte, <code>.env</code>, <code>environment:</code> dans Compose, <code>ENV</code> dans Dockerfile) ?</li>
+</ul>
+<hr />
+<h2 id="À-vérifier-pour-vous-2"><a class="header" href="#À-vérifier-pour-vous-2">À Vérifier (pour vous)</a></h2>
+<ul>
+<li>Avoir un fichier <code>docker-compose.yml</code> valide qui répond aux exigences.</li>
+<li>Avoir un fichier <code>.env</code> fonctionnel.</li>
+<li>Pouvoir vérifier par les logs ou l'accès web que les variables sont correctement prises en compte et que les priorités sont respectées lors des différents tests.</li>
+</ul>
 
                     </main>
 
