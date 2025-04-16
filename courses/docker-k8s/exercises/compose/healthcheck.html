@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction à Docker - Docker-K8s</title>
+        <title>Healthcheck - Docker-K8s</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html" class="active"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Docker</li><li class="chapter-item expanded "><a href="../../exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/env.html"><strong aria-hidden="true">11.</strong> Environnement</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/healthcheck.html"><strong aria-hidden="true">12.</strong> Healthcheck</a></li><li class="chapter-item expanded affix "><li class="part-title">Docker Compose</li><li class="chapter-item expanded "><a href="../../exercises/compose/communication.html"><strong aria-hidden="true">13.</strong> Communication de Containers</a></li><li class="chapter-item expanded "><a href="../../exercises/compose/first_app.html"><strong aria-hidden="true">14.</strong> Premiere Application</a></li><li class="chapter-item expanded "><a href="../../exercises/compose/env.html"><strong aria-hidden="true">15.</strong> Environment</a></li><li class="chapter-item expanded "><a href="../../exercises/compose/healthcheck.html"><strong aria-hidden="true">16.</strong> Healthcheck</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Docker</li><li class="chapter-item expanded "><a href="../../exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/env.html"><strong aria-hidden="true">11.</strong> Environnement</a></li><li class="chapter-item expanded "><a href="../../exercises/docker/healthcheck.html"><strong aria-hidden="true">12.</strong> Healthcheck</a></li><li class="chapter-item expanded affix "><li class="part-title">Docker Compose</li><li class="chapter-item expanded "><a href="../../exercises/compose/communication.html"><strong aria-hidden="true">13.</strong> Communication de Containers</a></li><li class="chapter-item expanded "><a href="../../exercises/compose/first_app.html"><strong aria-hidden="true">14.</strong> Premiere Application</a></li><li class="chapter-item expanded "><a href="../../exercises/compose/env.html"><strong aria-hidden="true">15.</strong> Environment</a></li><li class="chapter-item expanded "><a href="../../exercises/compose/healthcheck.html" class="active"><strong aria-hidden="true">16.</strong> Healthcheck</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,26 +173,95 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="partie-1--introduction-à-la-conteneurisation-et-à-docker"><a class="header" href="#partie-1--introduction-à-la-conteneurisation-et-à-docker"><strong>Partie 1 : Introduction à la Conteneurisation et à Docker</strong></a></h1>
-<h2 id="introduction"><a class="header" href="#introduction"><strong>Introduction</strong></a></h2>
-<p>Au cours des dernières décennies, l'infrastructure informatique a connu une évolution spectaculaire, passant de serveurs physiques imposants à des technologies modernes telles que les conteneurs. Cette transition a transformé la manière dont les entreprises développent, testent, déploient et gèrent leurs applications.</p>
-<p>La conteneurisation est devenue une pièce maîtresse dans l'écosystème du cloud et des environnements modernes. Elle répond aux défis de flexibilité, de scalabilité et d'efficacité posés par les approches traditionnelles. Contrairement aux machines virtuelles, les conteneurs sont légers, portables et permettent de s’assurer que les applications fonctionnent de manière cohérente, quel que soit l’environnement dans lequel elles sont exécutées.</p>
-<p>Docker, l’outil le plus populaire de conteneurisation, a démocratisé cette technologie. Il offre une interface simple et intuitive pour créer, partager et gérer des conteneurs. Mais avant d’approfondir les aspects pratiques de Docker, il est essentiel de comprendre les concepts fondamentaux de la conteneurisation : son origine, ses caractéristiques, ses avantages, et ses cas d’usage.</p>
-<p>Dans cette première partie, nous explorerons :</p>
-<p>L’évolution des infrastructures informatiques, en retraçant le chemin des serveurs physiques aux conteneurs.
-Les caractéristiques clés des conteneurs, notamment leur légèreté, leur portabilité et leur capacité d’isolation.
-Les avantages stratégiques de la conteneurisation, tels que l’efficacité des ressources, la scalabilité rapide, et la consistance des environnements.
-Les cas d’usage courants, qui illustreront pourquoi cette technologie est devenue incontournable pour des architectures modernes comme les microservices ou les pipelines CI/CD.</p>
-<p>Enrichie de démonstrations pratiques et de quiz interactifs, cette partie vous donnera les bases nécessaires pour comprendre pourquoi la conteneurisation est une révolution pour l’informatique d’entreprise et pour les développeurs. À la fin de cette section, vous aurez une vision claire de ce que la conteneurisation peut apporter à vos projets, ainsi qu'une bonne compréhension des concepts fondamentaux pour passer à l’utilisation de Docker.</p>
+                        <h1 id="tp--entrypoint-et-healthcheck-avec-docker-compose"><a class="header" href="#tp--entrypoint-et-healthcheck-avec-docker-compose"><strong>TP : Entrypoint et Healthcheck avec Docker Compose</strong></a></h1>
+<h2 id="objectif"><a class="header" href="#objectif">Objectif</a></h2>
+<p>Cet exercice adapte le TP précédent ("Conteneur Couteau Suisse") pour utiliser Docker Compose.</p>
+<p>L'objectif est de :</p>
+<ol>
+<li>Comprendre comment exécuter des tâches ponctuelles (comme un outil en ligne de commande) définies comme des services Compose, en utilisant <code>docker-compose run</code>.</li>
+<li>Apprendre à définir ou surcharger un <code>HEALTHCHECK</code> directement dans le fichier <code>docker-compose.yml</code>.</li>
+<li>Observer l'état de santé d'un service géré par Compose.</li>
+</ol>
+<hr />
+<h2 id="prérequis"><a class="header" href="#prérequis">Prérequis</a></h2>
+<ul>
+<li>Docker et Docker Compose installés.</li>
+<li>Les <code>Dockerfile.cowsay</code> et <code>Dockerfile.webhealth</code> fonctionnels de l'exercice précédent (ou la capacité de les recréer).</li>
+</ul>
+<hr />
+<h2 id="À-faire"><a class="header" href="#À-faire">À Faire</a></h2>
+<ol>
+<li>
+<p><strong>Créer le fichier <code>docker-compose.yml</code> :</strong> Créez un nouveau fichier <code>docker-compose.yml</code>.</p>
+</li>
+<li>
+<p><strong>Définir le service "Outil" (<code>cowsay</code>) :</strong></p>
+<ul>
+<li>Définissez un service (nommez-le <code>cowsay_tool</code>, par exemple) qui se base sur votre <code>Dockerfile.cowsay</code>. Utilisez la section <code>build:</code> appropriée (vous pouvez spécifier le <code>context</code> et le <code>dockerfile</code>).</li>
+<li><em>Note :</em> L'<code>ENTRYPOINT</code> est déjà défini dans votre <code>Dockerfile.cowsay</code>. Compose l'utilisera par défaut. Vous n'avez généralement pas besoin de le redéfinir ici sauf pour l'écraser.</li>
+</ul>
+</li>
+<li>
+<p><strong>Exécuter le service comme une commande :</strong></p>
+<ul>
+<li>Pour lancer une tâche ponctuelle basée sur la définition d'un service, on utilise <code>docker-compose run</code>. Essayez :
+<pre><code class="language-bash"># Lance cowsay avec un message
+docker-compose run --rm cowsay_tool "Compose me fait parler !"
+
+# Lance cowsay avec une option (-f)
+docker-compose run --rm cowsay_tool -f tux "Linux et Compose !"
+</code></pre>
+</li>
+<li>Observez le résultat. Le flag <code>--rm</code> est utile pour supprimer le conteneur juste après son exécution. Notez la différence avec <code>docker-compose up</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Définir le service Web avec Healthcheck :</strong></p>
+<ul>
+<li>Ajoutez un deuxième service à votre <code>docker-compose.yml</code> (nommez-le <code>web</code>, par exemple) qui se base sur votre <code>Dockerfile.webhealth</code>.</li>
+<li>Vous pouvez laisser Compose utiliser le <code>HEALTHCHECK</code> défini dans le Dockerfile, OU (pour pratiquer la syntaxe Compose), vous pouvez le <strong>définir explicitement</strong> dans la section <code>healthcheck:</code> du service <code>web</code> dans votre <code>docker-compose.yml</code>. Essayez de reproduire les mêmes paramètres (<code>interval</code>, <code>timeout</code>, <code>retries</code>, <code>start_period</code>) que ceux définis dans le <code>Dockerfile.webhealth</code>.</li>
+<li><em>(Indice : La syntaxe pour la commande de test dans <code>healthcheck:</code> est légèrement différente de celle du Dockerfile. Cherchez <code>test</code> dans la documentation <code>healthcheck</code> de Compose. Souvent, on utilise une liste comme <code>test: ["CMD", "curl", "--fail", "http://localhost:8000/"]</code> ou <code>test: ["CMD-SHELL", "curl... || exit 1"]</code>)</em>.</li>
+<li>Assurez-vous de mapper le port 8000 si vous voulez vérifier avec votre navigateur (facultatif, <code>docker ps</code> suffit).</li>
+</ul>
+</li>
+<li>
+<p><strong>Lancer et observer la santé :</strong></p>
+<ul>
+<li>Démarrez <em>uniquement</em> le service web (ou les deux si vous préférez) en arrière-plan :
+<pre><code class="language-bash">docker-compose up -d web
+# ou juste: docker-compose up -d
+</code></pre>
+</li>
+<li>Utilisez <code>docker-compose ps</code> pour observer l'état du service <code>web</code>. Regardez la colonne <code>State</code> ou <code>Status</code>. Vous devriez voir son état de santé évoluer de <code>starting</code> à <code>healthy</code> (si tout va bien).</li>
+<li><em>(Bonus)</em> : Comme dans l'exercice précédent, essayez de simuler une panne (<code>docker exec ... pkill python3</code>) et observez le statut passer à <code>unhealthy</code> dans <code>docker-compose ps</code> après quelques tentatives.</li>
+</ul>
+</li>
+<li>
+<p><strong>Arrêter et nettoyer :</strong> Utilisez <code>docker-compose down</code> à la fin.</p>
+</li>
+</ol>
+<hr />
+<h2 id="À-méditer--comparer"><a class="header" href="#À-méditer--comparer">À Méditer / Comparer</a></h2>
+<ul>
+<li>Quelle est la différence entre <code>docker-compose up</code> et <code>docker-compose run</code> ? Quand utiliseriez-vous l'un ou l'autre ?</li>
+<li>Est-il préférable de définir <code>ENTRYPOINT</code> et <code>HEALTHCHECK</code> dans le Dockerfile ou dans <code>docker-compose.yml</code> ? Quels sont les avantages/inconvénients de chaque approche ? (Indice : Dockerfile définit l'image "par défaut", Compose permet de l'adapter/l'orchestrer).</li>
+</ul>
+<hr />
+<h2 id="À-vérifier-pour-vous"><a class="header" href="#À-vérifier-pour-vous">À Vérifier (pour vous)</a></h2>
+<ul>
+<li>Avoir un <code>docker-compose.yml</code> définissant les deux services.</li>
+<li>Pouvoir exécuter le service <code>cowsay_tool</code> avec des arguments via <code>docker-compose run</code>.</li>
+<li>Pouvoir démarrer le service <code>web</code> avec <code>docker-compose up</code> et observer son état de santé devenir <code>healthy</code> via <code>docker-compose ps</code>.</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-
-                            <a rel="next prefetch" href="../../course/part1/contenerisation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="../../exercises/compose/env.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
+
 
                         <div style="clear: both"></div>
                     </nav>
@@ -200,10 +269,10 @@ Les cas d’usage courants, qui illustreront pourquoi cette technologie est deve
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-
-                    <a rel="next prefetch" href="../../course/part1/contenerisation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="../../exercises/compose/env.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
+
             </nav>
 
         </div>
