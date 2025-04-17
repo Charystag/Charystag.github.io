@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Docker</li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li><li class="chapter-item expanded "><a href="exercises/docker/env.html"><strong aria-hidden="true">11.</strong> Environnement</a></li><li class="chapter-item expanded "><a href="exercises/docker/healthcheck.html"><strong aria-hidden="true">12.</strong> Healthcheck</a></li><li class="chapter-item expanded affix "><li class="part-title">Docker Compose</li><li class="chapter-item expanded "><a href="exercises/compose/communication.html"><strong aria-hidden="true">13.</strong> Communication de Containers</a></li><li class="chapter-item expanded "><a href="exercises/compose/first_app.html"><strong aria-hidden="true">14.</strong> Premiere Application</a></li><li class="chapter-item expanded "><a href="exercises/compose/env.html"><strong aria-hidden="true">15.</strong> Environment</a></li><li class="chapter-item expanded "><a href="exercises/compose/healthcheck.html"><strong aria-hidden="true">16.</strong> Healthcheck</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="course/part1/intro.html"><strong aria-hidden="true">1.</strong> Introduction à Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="course/part1/contenerisation.html"><strong aria-hidden="true">1.1.</strong> Histoire de la conteneurisation</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Docker</li><li class="chapter-item expanded "><a href="exercises/docker/first_image.html"><strong aria-hidden="true">2.</strong> Premiere image node</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_bind_mount.html"><strong aria-hidden="true">3.</strong> Premier serveur nginx</a></li><li class="chapter-item expanded "><a href="exercises/docker/image_by_hand.html"><strong aria-hidden="true">4.</strong> Image a la main</a></li><li class="chapter-item expanded "><a href="exercises/docker/flask_app.html"><strong aria-hidden="true">5.</strong> Flask Application</a></li><li class="chapter-item expanded "><a href="exercises/docker/first_app.html"><strong aria-hidden="true">6.</strong> Premier Network</a></li><li class="chapter-item expanded "><a href="exercises/docker/mp3_download.html"><strong aria-hidden="true">7.</strong> Telechargement de mp3 sur youtube</a></li><li class="chapter-item expanded "><a href="exercises/docker/unknown_language.html"><strong aria-hidden="true">8.</strong> Dockerisation d'un langage inconnu</a></li><li class="chapter-item expanded "><a href="exercises/docker/ms_builds.html"><strong aria-hidden="true">9.</strong> Builds Multistage</a></li><li class="chapter-item expanded "><a href="exercises/docker/communication.html"><strong aria-hidden="true">10.</strong> Communication entre plusieurs containers</a></li><li class="chapter-item expanded "><a href="exercises/docker/env.html"><strong aria-hidden="true">11.</strong> Environnement</a></li><li class="chapter-item expanded "><a href="exercises/docker/healthcheck.html"><strong aria-hidden="true">12.</strong> Healthcheck</a></li><li class="chapter-item expanded affix "><li class="part-title">Docker Compose</li><li class="chapter-item expanded "><a href="exercises/compose/communication.html"><strong aria-hidden="true">13.</strong> Communication de Containers</a></li><li class="chapter-item expanded "><a href="exercises/compose/first_app.html"><strong aria-hidden="true">14.</strong> Premiere Application</a></li><li class="chapter-item expanded "><a href="exercises/compose/env.html"><strong aria-hidden="true">15.</strong> Environment</a></li><li class="chapter-item expanded "><a href="exercises/compose/healthcheck.html"><strong aria-hidden="true">16.</strong> Healthcheck</a></li><li class="chapter-item expanded affix "><li class="part-title">Kubernetes</li><li class="chapter-item expanded "><a href="course/k8s/hello_kind.html"><strong aria-hidden="true">17.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="course/k8s/first_deployment.html"><strong aria-hidden="true">18.</strong> Premier Deploiement</a></li><li class="chapter-item expanded "><a href="course/k8s/manifests.html"><strong aria-hidden="true">19.</strong> Premier Manifest</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -1310,6 +1310,404 @@ docker-compose run --rm cowsay_tool -f tux "Linux et Compose !"
 <li>Pouvoir exécuter le service <code>cowsay_tool</code> avec des arguments via <code>docker-compose run</code>.</li>
 <li>Pouvoir démarrer le service <code>web</code> avec <code>docker-compose up</code> et observer son état de santé devenir <code>healthy</code> via <code>docker-compose ps</code>.</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hello-kind"><a class="header" href="#hello-kind">Hello Kind</a></h1>
+<p>This tutorial shows you how to run a sample app on Kubernetes using kind (Kubernetes IN Docker).
+The tutorial provides a container image that uses NGINX (via agnhost) to echo back all the requests.</p>
+<h2 id="objectives"><a class="header" href="#objectives">Objectives</a></h2>
+<ul>
+<li>Deploy a sample application to a kind cluster.</li>
+<li>Run the app.</li>
+<li>View application logs.</li>
+<li>Access the application from your local machine.</li>
+</ul>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<p>This tutorial assumes that you have already set up <code>kind</code>.
+See the <strong>Installation</strong> section in the <a href="https://kind.sigs.k8s.io/docs/user/quick-start/#installation">kind Quick Start guide</a>.</p>
+<p>You also need to install <code>kubectl</code>.
+See <a href="https://kubernetes.io/docs/tasks/tools/#kubectl">Install tools</a> for installation instructions. (Note: Adjusted link assuming general K8s docs context, modify if needed).</p>
+<h2 id="create-a-kind-cluster"><a class="header" href="#create-a-kind-cluster">Create a kind cluster</a></h2>
+<p>If you don't already have a kind cluster running, create one now:</p>
+<pre><code class="language-shell">kind create cluster
+</code></pre>
+<p>This command creates a default cluster named <code>kind</code>. Your <code>kubectl</code> context will automatically be set to this new cluster (<code>kind-kind</code>). If you want to use a different name, you can specify it with <code>kind create cluster --name &lt;your-cluster-name&gt;</code>.</p>
+<h2 id="create-a-deployment"><a class="header" href="#create-a-deployment">Create a Deployment</a></h2>
+<p>A Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/pods/"><em>Pod</em></a> is a group of one or more Containers,
+tied together for the purposes of administration and networking. The Pod in this
+tutorial has only one Container. A Kubernetes
+<a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"><em>Deployment</em></a> checks on the health of your
+Pod and restarts the Pod's Container if it terminates. Deployments are the
+recommended way to manage the creation and scaling of Pods.</p>
+<ol>
+<li>
+<p>Use the <code>kubectl create</code> command to create a Deployment that manages a Pod. The Pod runs a Container based on the provided container image.</p>
+<pre><code class="language-shell"># Run a test container image that includes a webserver
+kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port=8080
+</code></pre>
+</li>
+<li>
+<p>View the Deployment:</p>
+<pre><code class="language-shell">kubectl get deployments
+</code></pre>
+<p>The output is similar to:</p>
+<pre><code>NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+hello-node   1/1     1            1           1m
+</code></pre>
+<p>(It may take some time for the pod to become available. If you see "0/1" under READY, try again in a few seconds.)</p>
+</li>
+<li>
+<p>View the Pod:</p>
+<pre><code class="language-shell">kubectl get pods
+</code></pre>
+<p>The output is similar to:</p>
+<pre><code>NAME                          READY   STATUS    RESTARTS   AGE
+hello-node-5f76cf6ccf-br9b5   1/1     Running   0          1m
+</code></pre>
+<p><em>(The exact pod name will differ)</em></p>
+</li>
+<li>
+<p>View cluster events:</p>
+<pre><code class="language-shell">kubectl get events
+</code></pre>
+</li>
+<li>
+<p>View the <code>kubectl</code> configuration (optional, shows the current context pointing to your kind cluster):</p>
+<pre><code class="language-shell">kubectl config view
+</code></pre>
+</li>
+<li>
+<p>View application logs for the container in the pod.</p>
+<blockquote>
+<p><strong>Note:</strong> Replace <code>hello-node-5f76cf6ccf-br9b5</code> in the <code>kubectl logs</code> command below with the actual name of the pod from the <code>kubectl get pods</code> command output you saw earlier.</p>
+</blockquote>
+<pre><code class="language-shell"># Example using the pod name from step 3:
+kubectl logs hello-node-5f76cf6ccf-br9b5
+</code></pre>
+<p>The output is similar to:</p>
+<pre><code>I0911 09:19:26.677397       1 log.go:195] Started HTTP server on port 8080
+I0911 09:19:26.677586       1 log.go:195] Started UDP server on port 8081
+</code></pre>
+</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> For more information about <code>kubectl</code> commands, see the <a href="https://kubernetes.io/docs/reference/kubectl/">kubectl overview</a>.</p>
+</blockquote>
+<h2 id="create-a-service"><a class="header" href="#create-a-service">Create a Service</a></h2>
+<p>By default, the Pod is only accessible by its internal IP address within the
+Kubernetes cluster. To make the <code>hello-node</code> Container accessible from outside the
+Kubernetes virtual network (specifically, from your local machine when using kind), you have to expose the Pod as a
+Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/"><em>Service</em></a>.</p>
+<blockquote>
+<p><strong>Warning:</strong> The agnhost container has a <code>/shell</code> endpoint, which is useful for
+debugging, but dangerous to expose to the public internet. Do not run this on an
+internet-facing cluster, or a production cluster. This tutorial is safe because we will only access it locally via port-forwarding.</p>
+</blockquote>
+<ol>
+<li>
+<p>Expose the Pod using the <code>kubectl expose</code> command:</p>
+<pre><code class="language-shell">kubectl expose deployment hello-node --type=LoadBalancer --port=8080
+</code></pre>
+<ul>
+<li>The <code>--type=LoadBalancer</code> flag indicates that you want to expose your Service. While <code>kind</code> doesn't provision a <em>cloud</em> load balancer, using this type allows tools or integrations (like MetalLB, if installed, though not needed for this tutorial) to assign an external IP or makes it selectable for port-forwarding.</li>
+<li>The application code inside the test image only listens on TCP port 8080. <code>kubectl expose</code> correctly maps the Service port 8080 to the Pod's targetPort 8080 by default when <code>--port</code> matches the container port.</li>
+</ul>
+</li>
+<li>
+<p>View the Service you created:</p>
+<pre><code class="language-shell">kubectl get services
+</code></pre>
+<p>The output is similar to:</p>
+<pre><code>NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+hello-node   LoadBalancer   10.96.152.149   &lt;pending&gt;     8080:3xxxx/TCP   21s
+kubernetes   ClusterIP      10.96.0.1       &lt;none&gt;        443/TCP          23m
+</code></pre>
+<p>Unlike cloud providers, <code>kind</code> does not automatically assign an <code>EXTERNAL-IP</code> to <code>LoadBalancer</code> services. The status will remain <code>&lt;pending&gt;</code>. To access the service from your host machine, you need to use <code>kubectl port-forward</code>.</p>
+</li>
+<li>
+<p>Forward a local port to the service port. Open a <strong>new terminal window</strong> (as this command blocks) and run:</p>
+<pre><code class="language-shell"># Forward local port 8080 to the service's port 8080
+kubectl port-forward service/hello-node 8080:8080
+</code></pre>
+<p>You should see output like:
+<code>Forwarding from 127.0.0.1:8080 -&gt; 8080</code>
+<code>Forwarding from [::1]:8080 -&gt; 8080</code></p>
+<p>Leave this terminal running.</p>
+</li>
+<li>
+<p>Now, access the application. Open your web browser and go to <code>http://localhost:8080</code>, or use <code>curl</code> in <strong>another</strong> terminal:</p>
+<pre><code class="language-shell">curl http://localhost:8080
+</code></pre>
+<p>You should see the output from the <code>agnhost</code> application, echoing details about the request (hostname, client IP, etc.).</p>
+</li>
+</ol>
+<h2 id="clean-up"><a class="header" href="#clean-up">Clean up</a></h2>
+<p>Now you can clean up the Kubernetes resources you created in your cluster:</p>
+<pre><code class="language-shell"># Stop the port-forwarding process (Ctrl+C in its terminal)
+
+# Delete the service
+kubectl delete service hello-node
+
+# Delete the deployment
+kubectl delete deployment hello-node
+</code></pre>
+<p>If you are finished using the kind cluster, you can delete it entirely:</p>
+<pre><code class="language-shell"># Delete the default kind cluster
+kind delete cluster
+</code></pre>
+<p>If you created a cluster with a specific name (e.g., <code>kind create cluster --name my-cluster</code>), delete it using that name:</p>
+<pre><code class="language-shell"># Optional: Delete a specifically named cluster
+# kind delete cluster --name my-cluster
+</code></pre>
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
+<p>This page covered the basic steps to get a <code>kind</code> cluster up and running and deploy a simple application to it. You learned how to create deployments and services, view logs, and access your application locally using port-forwarding. You are now ready to deploy more complex applications to your local kind cluster.</p>
+<h2 id="whats-next"><a class="header" href="#whats-next">What's Next?</a></h2>
+<ul>
+<li>Tutorial to <a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/"><em>deploy your first app on Kubernetes with kubectl</em></a> (The concepts apply universally).</li>
+<li>Learn more about <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment objects</a>.</li>
+<li>Learn more about <a href="https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/">Deploying applications</a>.</li>
+<li>Learn more about <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service objects</a>.</li>
+<li>Explore more advanced <code>kind</code> features like <a href="https://www.google.com/search?q=https://kind.sigs.k8s.io/docs/user/quick-start/%23creating-a-multi-node-cluster">multi-node clusters</a> or <a href="https://www.google.com/search?q=https://kind.sigs.k8s.io/docs/user/quick-start/%23loading-an-image-into-your-cluster">loading local images</a>.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-à-kubernetes"><a class="header" href="#introduction-à-kubernetes">Introduction à Kubernetes</a></h1>
+<h2 id="introduction-1"><a class="header" href="#introduction-1">Introduction</a></h2>
+<p>Dans Kubernetes, nous exécutons des conteneurs, mais nous ne gérons pas les conteneurs directement. Les conteneurs sont plutôt placés à l'intérieur de <code>pods</code>. Un <code>pod</code> <em>contient</em> des conteneurs.</p>
+<p>Les pods sont à leur tour gérés par des contrôleurs, le plus courant étant appelé un <code>deployment</code> (déploiement).</p>
+<p>Et afin de rendre l'application accessible depuis l'extérieur, nous utilisons un <code>service</code>. Ne t'inquiète pas si tu te sens un peu dépassé, nous les aborderons en détail plus tard dans le cours.</p>
+<p>Les ressources Kubernetes sont déclarées dans ce qu'on appelle des <code>manifests</code> (manifestes) qui utilisent un langage de balisage appelé <code>yaml</code> pour exprimer l'état désiré des ressources.</p>
+<h3 id="impératif-vs-déclaratif"><a class="header" href="#impératif-vs-déclaratif">Impératif vs Déclaratif</a></h3>
+<p>Vous pouvez utiliser la CLI Kubernetes pour créer, supprimer et modifier des ressources de deux manières : impérative et déclarative.</p>
+<p>De manière <strong>impérative</strong> signifie que vous <em>créez, supprimez et modifiez</em> activement les ressources. Et si par exemple vous exécutez une commande de création deux fois, vous vous retrouverez avec une ressource et un message d'erreur "échec de la création", car elle est déjà créée.</p>
+<p>De manière <strong>déclarative</strong> signifie que vous <em>déclarez ce que vous voulez</em>, et <em>non comment</em> Kubernetes devrait le faire. Si vous exécutez la même commande deux fois, vous vous retrouverez avec une seule ressource. C'est parce que Kubernetes satisfera votre état désiré, et s'il existe déjà, il ne le créera pas à nouveau.</p>
+<p>Faire les choses de manière <strong>impérative</strong> est acceptable pour <em>bidouiller</em> des choses, mais la plupart du temps, nous voulons travailler avec Kubernetes de manière <strong>déclarative</strong>.</p>
+<p>Par conséquent, nous préférons de loin faire les choses de manière <strong>déclarative</strong>.
+De manière déclarative signifie que nous <em>déclarons ce que nous voulons</em>, et <em>non comment</em> Kubernetes devrait le faire.</p>
+<p>Cette déclaration est ce que nous appelons notre <code>état désiré</code> (desired state).</p>
+<h3 id="interagir-avec-kubernetes-en-utilisant-kubectl"><a class="header" href="#interagir-avec-kubernetes-en-utilisant-kubectl">Interagir avec Kubernetes en utilisant kubectl</a></h3>
+<p>Nous allons interagir avec Kubernetes en utilisant la ligne de commande.</p>
+<p>La CLI Kubernetes s'appelle <code>kubectl</code>, et nous permet de gérer nos applications et Kubernetes lui-même.</p>
+<p>Pour l'utiliser, tapez <code>kubectl &lt;sous-commande&gt; &lt;options&gt;</code> dans un terminal.</p>
+<h2 id="État-désiré"><a class="header" href="#État-désiré">État Désiré</a></h2>
+<p>L'état désiré est l'un des concepts fondamentaux de Kubernetes. C'est l'état dans lequel vous voulez que votre cluster soit. C'est l'état que vous définissez dans vos manifestes Kubernetes. Cela signifie que le cluster essaiera continuellement de satisfaire votre état désiré, même s'il n'est jamais possible de l'atteindre.</p>
+<p>Dans cet exercice, vous appliquerez des manifestes Kubernetes à votre cluster et apprendrez comment Kubernetes satisfait votre état désiré.</p>
+<h3 id="contrôleurs"><a class="header" href="#contrôleurs">Contrôleurs</a></h3>
+<p>Les contrôleurs Kubernetes sont les composants qui satisfont votre état désiré. Comme exemple que nous utiliserons ici, un contrôleur de déploiement tentera de faire en sorte que le nombre de pods que vous avez défini dans votre manifeste soit toujours en cours d'exécution dans le cluster.</p>
+<h3 id="objectifs-dapprentissage"><a class="header" href="#objectifs-dapprentissage">Objectifs d'apprentissage</a></h3>
+<ul>
+<li>Appliquer des manifestes Kubernetes en utilisant <code>kubectl apply -f &lt;fichier&gt;</code>.</li>
+<li>Vérifier la promesse de Kubernetes de satisfaire votre état désiré.</li>
+</ul>
+<h2 id="exercice-1"><a class="header" href="#exercice-1">Exercice</a></h2>
+<h3 id="vue-densemble"><a class="header" href="#vue-densemble">Vue d'ensemble</a></h3>
+<ul>
+<li>Inspecter un manifeste Kubernetes existant pour un objet <code>deployment</code>.</li>
+<li>Appliquer le manifeste en utilisant la commande <code>kubectl apply</code>.</li>
+<li>Supprimer un pod géré par le contrôleur de déploiement.</li>
+<li>Observer qu'un nouveau pod est créé à sa place par le contrôleur.</li>
+</ul>
+<h3 id="instructions-étape-par-étape"><a class="header" href="#instructions-étape-par-étape">Instructions étape par étape</a></h3>
+<details>
+<summary>
+Étape par étape :
+</summary>
+<h2 id="inspecter-un-manifeste-kubernetes-existant-pour-un-objet-deployment"><a class="header" href="#inspecter-un-manifeste-kubernetes-existant-pour-un-objet-deployment">Inspecter un manifeste Kubernetes existant pour un objet <code>deployment</code></a></h2>
+<p>Ci-dessous se trouve le contenu du manifeste :</p>
+<pre><code class="language-yaml"># tout ce qui suit un `#` est un commentaire !
+apiVersion: apps/v1
+kind: Deployment # Type de ressource : Déploiement
+metadata:
+  name: nginx # nom de la ressource de déploiement, les pods exécutés dans le cadre du déploiement partageront ce nom.
+  labels:
+    app: nginx # étiquette de la ressource de déploiement
+spec:
+  replicas: 1 # nombre de pods à exécuter
+  selector:
+    matchLabels: # étiquettes que le replicaset recherche
+      app: nginx
+  template: # Modèle de pod
+    metadata:
+      labels:
+        app: nginx # étiquettes du pod qui doivent correspondre au sélecteur
+        version: latest # étiquette arbitraire sur laquelle nous pouvons faire correspondre ailleurs
+    spec:
+      containers:
+        - name: nginx # nom du conteneur exécuté à l'intérieur d'un pod, différent du nom du pod
+          image: nginx:latest # image du conteneur
+          ports:
+            - containerPort: 80 # port sur lequel le conteneur écoute
+</code></pre>
+<h2 id="appliquer-le-manifeste-en-utilisant-kubectl-apply"><a class="header" href="#appliquer-le-manifeste-en-utilisant-kubectl-apply">Appliquer le manifeste en utilisant <code>kubectl apply</code></a></h2>
+<p>Copiez le manifeste dans un fichier <code>nginx-deployment.yaml</code>.</p>
+<p>Utilisez la commande <code>kubectl apply -f &lt;fichier&gt;</code> pour envoyer le manifeste avec votre état désiré à Kubernetes :</p>
+<pre><code class="language-shell">kubectl apply -f nginx-deployment.yaml
+</code></pre>
+<p>Sortie attendue :</p>
+<pre><code class="language-text">deployment.apps/nginx applied
+</code></pre>
+<p>Vérifiez que le déploiement est créé :</p>
+<pre><code class="language-shell">kubectl get deployments
+</code></pre>
+<p>Sortie attendue :</p>
+<pre><code class="language-text">NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+nginx     1/1     1            1           36s
+</code></pre>
+<blockquote>
+<p>Attention, cette sortie peut prendre du temps a apparaitre
+(environ 91s sur ma machine)</p>
+</blockquote>
+<p>Vérifiez si les pods sont en cours d'exécution :</p>
+<pre><code class="language-shell">kubectl get pods
+</code></pre>
+<p>Sortie attendue (le nom exact du pod variera) :</p>
+<pre><code class="language-text">NAME                     READY   STATUS    RESTARTS   AGE
+nginx-431080787-9r0lx    1/1     Running   0          40s
+</code></pre>
+<p>Kubernetes fait maintenant tout son possible pour satisfaire notre état désiré d'exécuter notre serveur web nginx.</p>
+<p>Testons que Kubernetes tient réellement sa promesse de satisfaire l'état désiré.</p>
+<h2 id="tester-la-promesse-détat-désiré-de-kubernetes-en-supprimant-un-pod"><a class="header" href="#tester-la-promesse-détat-désiré-de-kubernetes-en-supprimant-un-pod">Tester la promesse d'état désiré de Kubernetes en supprimant un pod</a></h2>
+<p>Comme nous avons demandé à Kubernetes d'exécuter notre pod nginx en utilisant un <code>deployment</code>, le contrôleur de déploiement continuera de surveiller nos pods et s'assurera qu'un pod nginx reste en cours d'exécution.</p>
+<p>Voyons cela en action :</p>
+<p>Nous utiliserons la commande <code>kubectl delete &lt;type&gt; &lt;nom&gt;</code> pour supprimer notre pod nginx.</p>
+<p>Nous nous attendons ensuite à ce qu'un nouveau pod soit créé par le contrôleur de déploiement à sa place.</p>
+<p>Tout d'abord, trouvez le nom de votre pod en utilisant <code>kubectl get pods</code>, comme vous l'avez fait ci-dessus.</p>
+<p>Le nom sera quelque chose comme <code>nginx-431080787-9r0lx</code>. <strong>Le vôtre aura un nom différent, mais similaire</strong>.</p>
+<pre><code class="language-shell"># Remplacez le nom ci-dessous par le nom réel de VOTRE pod
+kubectl delete pod nginx-431080787-9r0lx
+</code></pre>
+<p>Sortie attendue :</p>
+<pre><code class="language-text">pod "nginx-431080787-9r0lx" deleted
+</code></pre>
+<p>L'état désiré que nous avons défini spécifie qu'exactement un pod nginx doit exister. Puisque nous avons maintenant supprimé le pod nginx, nous avons forcé notre <code>deployment</code> à s'éloigner de l'état désiré, car il y a maintenant zéro pod nginx.</p>
+<p>Par conséquent, Kubernetes doit apporter une modification à l'état du cluster pour satisfaire à nouveau notre état désiré. Kubernetes créera donc un nouveau pod nginx pour remplacer celui que nous avons supprimé.</p>
+<h2 id="observer-quun-nouveau-pod-est-créé-à-sa-place-par-le-contrôleur-de-déploiement"><a class="header" href="#observer-quun-nouveau-pod-est-créé-à-sa-place-par-le-contrôleur-de-déploiement">Observer qu'un nouveau pod est créé à sa place par le contrôleur de déploiement</a></h2>
+<p>Nous utilisons <code>kubectl get</code> pour vérifier qu'un <strong>nouveau</strong> pod nginx est créé (avec un nom différent) :</p>
+<pre><code class="language-shell">kubectl get pods
+</code></pre>
+<p>Sortie attendue (le nom exact du pod variera) :</p>
+<pre><code class="language-text">NAME                     READY   STATUS              RESTARTS   AGE
+nginx-431080787-tx5m7    0/1     ContainerCreating   0          5s
+</code></pre>
+<p>Et après quelques secondes de plus :</p>
+<pre><code class="language-shell">kubectl get pods
+</code></pre>
+<p>Sortie attendue (le nom exact du pod variera) :</p>
+<pre><code class="language-text">NAME                     READY   STATUS    RESTARTS   AGE
+nginx-431080787-tx5m7    1/1     Running   0          12s
+</code></pre>
+<p>Félicitations ! Vous avez maintenant créé un déploiement en utilisant un manifeste Kubernetes.</p>
+<p>Vous avez également vu que Kubernetes tient sa promesse de satisfaire votre état désiré, en créant un nouveau pod à la place du pod supprimé.</p>
+</details>
+<h3 id="nettoyage"><a class="header" href="#nettoyage">Nettoyage</a></h3>
+<p>Supprimez votre état désiré en utilisant la commande <code>kubectl delete -f &lt;fichier&gt;</code>.</p>
+<pre><code class="language-text">kubectl delete -f nginx-deployment.yaml
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="manifestes"><a class="header" href="#manifestes">Manifestes</a></h1>
+<h2 id="objectifs-dapprentissage-1"><a class="header" href="#objectifs-dapprentissage-1">Objectifs d'apprentissage</a></h2>
+<ul>
+<li>Écrire <strong>ton</strong> propre manifeste déclaratif pour exécuter une application web simple dans un pod.</li>
+</ul>
+<h2 id="introduction-2"><a class="header" href="#introduction-2">Introduction</a></h2>
+<h3 id="fichiers-manifestes"><a class="header" href="#fichiers-manifestes">Fichiers manifestes</a></h3>
+<p>Un <a href="https://kubernetes.io/docs/reference/glossary/?fundamental=true">manifeste</a>
+décrit l'<code>état désiré</code> d'un objet que <strong>tu</strong> veux que Kubernetes gère.</p>
+<p>Les manifestes sont décrits dans des fichiers <code>yaml</code> et ont la structure générale suivante :</p>
+<pre><code class="language-yaml">apiVersion: # Version de l'API
+kind: # Type de ressource
+metadata: # Metadonnees
+  labels: # Etiquettes
+spec: # Specification (etat desire)
+</code></pre>
+<details>
+<summary>:bulb: Extra : La structure générale d'un manifeste déclaratif</summary>
+<p>La structure générale d'un manifeste est la suivante. Ceci n'est pas seulement pour les pods, mais pour toutes les ressources Kubernetes.</p>
+<pre><code class="language-yaml">apiVersion: # Version de l'API utilisee pour ce type/ressource
+kind: # Le type/ressource ou "genre" de l'objet
+metadata: # Metadonnees sur l'objet
+  name: # Le nom de l'objet (doit etre unique pour ce type)
+  labels: # Etiquettes pour l'objet (utilisees pour grouper, paires cle-valeur)
+spec: # L'etat desire de l'objet
+  # La spec varie en fonction du type/ressource
+</code></pre>
+</details>
+<h2 id="exercice-2"><a class="header" href="#exercice-2">Exercice</a></h2>
+<h3 id="vue-densemble-1"><a class="header" href="#vue-densemble-1">Vue d'ensemble</a></h3>
+<ul>
+<li>Écrire <strong>ton</strong> propre manifeste de <code>pod</code>.</li>
+<li>Appliquer le manifeste de <code>pod</code>.</li>
+<li>Vérifier que le <code>pod</code> est créé correctement.</li>
+</ul>
+<details>
+<summary>
+Étape par étape :
+</summary>
+<h3 id="Écrire-ton-propre-manifeste-de-pod"><a class="header" href="#Écrire-ton-propre-manifeste-de-pod">Écrire ton propre manifeste de <code>pod</code></a></h3>
+<ul>
+<li><strong>Copie</strong> la structure de manifeste ci-dessous dans un fichier nommé <code>frontend-pod.yaml</code></li>
+<li><strong>Ouvre</strong> le fichier <code>frontend-pod.yaml</code> dans un éditeur de texte.</li>
+</ul>
+<p>Il ressemble à ceci :</p>
+<pre><code class="language-yaml">apiVersion:
+kind:
+metadata:
+  name:
+spec:
+  containers:
+    - name:
+      image:
+      ports:
+        - containerPort:
+</code></pre>
+<ul>
+<li><strong>Trouve</strong> la version de l'API pour la ressource <code>pod</code> dans la
+<a href="https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/">documentation de l'API Kubernetes</a>
+et <strong>remplis</strong> la section <code>apiVersion</code>.</li>
+</ul>
+<details>
+<summary>:bulb: Un coup de main !</summary>
+<p>La version de l'API pour la ressource <code>pod</code> est <code>v1</code>.</p>
+</details>
+<ul>
+<li>le <code>kind</code> (type) doit être <code>Pod</code></li>
+<li>le <code>name</code> (nom) doit être <code>frontend</code> à la fois dans <code>metadata</code> et dans le container (<code>spec.containers[0].name</code>)</li>
+<li>la section <code>containerPort</code> doit contenir <code>5000</code> (le port sur lequel le serveur écoute)</li>
+</ul>
+<p>Nous importerons l'image dans le pod en la convertissant d'abord en une archive tar avec
+<code>docker save &gt; archive.tar ton-image</code> puis en important cette
+archive dans le cluster avec <code>kind load image-archive archive.tar</code>.</p>
+<ol>
+<li>D'abord, créons un exemple d'application <code>flask</code> qui écoute sur le port <code>5000</code> et construisons son image en la taguant <code>server-image</code>.</li>
+<li>Ensuite, importons cette image dans le cluster Kubernetes.</li>
+</ol>
+<ul>
+<li>la section <code>image</code> doit contenir <code>server-image:latest</code></li>
+</ul>
+<details>
+<summary>:bulb: Un coup de main !</summary>
+<p>Le manifeste entier devrait ressembler à ceci :</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend # Nom du pod
+spec:
+  containers:
+    - name: frontend # Nom du conteneur dans le pod
+      image: server-image:latest # Notre image locale chargee
+      imagePullPolicy: Never # Necessaire car on utilise une image locale avec le tag latest
+      ports:
+        - containerPort: 5000 # Port expose par le conteneur
+</code></pre>
+</details>
+<h3 id="appliquer-le-manifeste-de-pod"><a class="header" href="#appliquer-le-manifeste-de-pod">Appliquer le manifeste de <code>pod</code></a></h3>
+<p><strong>Essaie</strong> d'appliquer le manifeste avec la commande <code>kubectl apply -f frontend-pod.yaml</code>.</p>
+<h3 id="vérifier-que-le-pod-est-créé-correctement"><a class="header" href="#vérifier-que-le-pod-est-créé-correctement">Vérifier que le <code>pod</code> est créé correctement</a></h3>
+<p><strong>Vérifie</strong> le statut du pod avec la commande <code>kubectl get pods</code>.</p>
+<p>Sortie attendue :</p>
+<pre><code class="language-bash">NAME       READY   STATUS    RESTARTS   AGE
+frontend   1/1     Running   0          1m
+</code></pre>
+<p>Félicitations ! <strong>Tu as</strong> maintenant appris comment créer un manifeste détaillant notre pod frontend, et <strong>tu</strong> l'as appliqué au cluster.</p>
+</details>
+<h3 id="nettoyage-1"><a class="header" href="#nettoyage-1">Nettoyage</a></h3>
+<p><strong>Supprime</strong> le pod avec la commande <code>kubectl delete pod frontend</code>.</p>
+<p>Félicitations ! <strong>Tu as</strong> maintenant appris comment créer un manifeste détaillant notre pod frontend.</p>
 
                     </main>
 
