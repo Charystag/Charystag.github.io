@@ -173,8 +173,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h3 id="fiche-dexercices-sur-les-github-actions"><a class="header" href="#fiche-dexercices-sur-les-github-actions">Fiche d'Exercices sur les GitHub Actions</a></h3>
-<hr />
+                        <h1 id="exercices-github-actions"><a class="header" href="#exercices-github-actions">Exercices GitHub Actions</a></h1>
 <h2 id="niveau-1--débutant"><a class="header" href="#niveau-1--débutant">Niveau 1 : Débutant</a></h2>
 <h3 id="exercice-1--créer-un-dépôt-et-configurer-github-actions"><a class="header" href="#exercice-1--créer-un-dépôt-et-configurer-github-actions">Exercice 1 : Créer un dépôt et configurer GitHub Actions</a></h3>
 <p><strong>Objectif :</strong> Apprendre à créer un dépôt GitHub et configurer GitHub Actions.</p>
@@ -182,7 +181,7 @@
 <li>Créez un dépôt sur GitHub.</li>
 <li>Clonez le dépôt localement.</li>
 <li>Dans le dépôt, créez un répertoire <code>.github/workflows</code>.</li>
-<li>Dans ce répertoire, créez un fichier <code>main.yml</code>.</li>
+<li>Dans ce répertoire, créez un fichier <code>main.yml</code> (ou <code>ci.yml</code>).</li>
 </ol>
 <p><strong>Intérêt :</strong>
 Configurer GitHub Actions dès le début vous permet d'automatiser les tâches dès que vous commencez à travailler sur votre projet. Cela vous aide à garantir que les tests sont exécutés, que le code est construit correctement, et éventuellement déployé automatiquement.</p>
@@ -191,23 +190,27 @@ Vous pouvez automatiser des tâches courantes telles que l'exécution de tests, 
 <h3 id="exercice-2--créer-une-action-simple"><a class="header" href="#exercice-2--créer-une-action-simple">Exercice 2 : Créer une action simple</a></h3>
 <p><strong>Objectif :</strong> Apprendre à créer une action GitHub simple qui s'exécute sur chaque push.</p>
 <ol>
-<li>Ajoutez le contenu suivant dans le fichier <code>main.yml</code> :</li>
-</ol>
-<pre><code class="language-yaml">    name: CI
+<li>
+<p>Ajoutez le contenu suivant dans le fichier <code>main.yml</code> :</p>
+<pre><code class="language-yaml">name: CI Simple
 
-    on: [push]
+on: [push]
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-        - uses: actions/checkout@v2
-        - name: Run a one-line script
-          run: echo Hello, world!
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+
+    - name: Run a one-line script
+      run: echo "Hello, world depuis GitHub Actions !"
 </code></pre>
-<ol start="2">
-<li>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement.</li>
+</li>
+<li>
+<p>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement dans l'onglet "Actions" de votre dépôt.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
 Comprendre comment déclencher une action simple vous donne les bases pour automatiser des processus plus complexes. Savoir utiliser les actions de base est essentiel pour la CI/CD.</p>
@@ -216,25 +219,30 @@ Vous pouvez utiliser cette connaissance pour automatiser des tâches simples, co
 <h3 id="exercice-3--exécuter-un-script-multi-lignes"><a class="header" href="#exercice-3--exécuter-un-script-multi-lignes">Exercice 3 : Exécuter un script multi-lignes</a></h3>
 <p><strong>Objectif :</strong> Apprendre à exécuter un script multi-lignes dans une action GitHub.</p>
 <ol>
-<li>Modifiez le fichier <code>main.yml</code> pour inclure un script multi-lignes :</li>
-</ol>
-<pre><code class="language-yaml">    name: CI
+<li>
+<p>Modifiez le fichier <code>main.yml</code> pour inclure un script multi-lignes :</p>
+<pre><code class="language-yaml">name: CI Multi-lignes
 
-    on: [push]
+on: [push]
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-        - uses: actions/checkout@v2
-        - name: Run a multi-line script
-          run: |
-            echo Add other actions to build,
-            echo test, and deploy your project.
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+
+    - name: Run a multi-line script
+      run: |
+        echo "Ceci est la première ligne du script."
+        echo "Et voici une deuxième ligne pour montrer que ça marche."
+        echo "On peut ajouter autant de commandes qu'on veut ici."
 </code></pre>
-<ol start="2">
-<li>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement.</li>
+</li>
+<li>
+<p>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
 Les scripts multi-lignes vous permettent d'effectuer des tâches plus complexes et plus longues dans vos workflows GitHub Actions.</p>
@@ -243,479 +251,672 @@ Automatiser l'installation d'un environnement de développement, exécuter des t
 <h3 id="exercice-4--utiliser-des-actions-de-la-marketplace"><a class="header" href="#exercice-4--utiliser-des-actions-de-la-marketplace">Exercice 4 : Utiliser des actions de la marketplace</a></h3>
 <p><strong>Objectif :</strong> Apprendre à utiliser une action de la GitHub Marketplace.</p>
 <ol>
-<li>Modifiez le fichier <code>main.yml</code> pour utiliser l'action <code>actions/setup-node</code> de la marketplace :</li>
-</ol>
-<pre><code class="language-yaml">    name: CI
+<li>
+<p>Modifiez le fichier <code>main.yml</code> pour utiliser l'action <code>actions/setup-node</code> de la marketplace :</p>
+<pre><code class="language-yaml">name: CI avec Setup Node
 
-    on: [push]
+on: [push]
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-        - uses: actions/checkout@v2
-        - name: Setup Node.js
-          uses: actions/setup-node@v2
-          with:
-            node-version: '14'
-        - name: Run a one-line script
-          run: node -v
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Utilisation d'une version LTS spécifique
+
+    - name: Vérifier la version de Node.js
+      run: node -v
 </code></pre>
-<ol start="2">
-<li>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement.</li>
+</li>
+<li>
+<p>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement et affiche la version de Node.js.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
 La GitHub Marketplace offre de nombreuses actions créées par la communauté, ce qui vous permet de ne pas réinventer la roue et de bénéficier de fonctionnalités déjà prêtes à l'emploi.</p>
 <p><strong>Application réelle :</strong>
-Vous pouvez utiliser des actions pour configurer automatiquement Node.js, déployer des applications sur AWS, ou envoyer des notifications Slack, sans avoir à écrire le code de ces actions vous-même.</p>
+Vous pouvez utiliser des actions pour configurer automatiquement Node.js (comme ici), Python, Java, déployer des applications sur AWS, ou envoyer des notifications Slack, sans avoir à écrire le code de ces actions vous-même.</p>
 <h3 id="exercice-5--ajouter-des-secrets"><a class="header" href="#exercice-5--ajouter-des-secrets">Exercice 5 : Ajouter des secrets</a></h3>
 <p><strong>Objectif :</strong> Apprendre à utiliser des secrets dans GitHub Actions.</p>
 <ol>
-<li>Ajoutez un secret nommé <code>MY_SECRET</code> dans les paramètres du dépôt GitHub.</li>
-<li>Modifiez le fichier <code>main.yml</code> pour utiliser le secret :</li>
-</ol>
-<pre><code class="language-yaml">    name: CI
+<li>
+<p>Dans les paramètres de votre dépôt GitHub (<code>Settings &gt; Secrets and variables &gt; Actions</code>), ajoutez un nouveau "repository secret" nommé <code>MY_SUPER_SECRET</code> avec une valeur bidon (ex: <code>CestTresSecret</code>).</p>
+</li>
+<li>
+<p>Modifiez le fichier <code>main.yml</code> pour utiliser le secret :</p>
+<pre><code class="language-yaml">name: CI avec Secrets
 
-    on: [push]
+on: [push]
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-        - uses: actions/checkout@v2
-        - name: Use a secret
-          run: echo ${{ secrets.MY_SECRET }}
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+
+    - name: Utiliser un secret (de manière sécurisée)
+      env:
+        MON_SECRET_UTILISE_EN_INTERNE: ${{ secrets.MY_SUPER_SECRET }}
+      run: |
+        echo "Le script va utiliser le secret mais ne l'affichera PAS directement."
+        # Pour la démo, on va juste prouver qu'il est là :
+        if [ -n "$MON_SECRET_UTILISE_EN_INTERNE" ]; then
+          echo "Le secret est bien passé en variable d'env !"
+        else
+          echo "Oops, le secret n'est pas là."
+          exit 1
+        fi
+        # ATTENTION : NE JAMAIS FAIRE 'echo ${{ secrets.MY_SUPER_SECRET }}' pour un vrai secret en production.
 </code></pre>
-<ol start="3">
-<li>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement.</li>
+</li>
+<li>
+<p>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute et que le log indique que le secret est bien passé.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
 Les secrets vous permettent de gérer en toute sécurité les informations sensibles comme les tokens d'API, les clés de chiffrement et autres données confidentielles.</p>
 <p><strong>Application réelle :</strong>
-Vous pouvez utiliser des secrets pour stocker les informations d'identification nécessaires pour déployer une application sur un serveur ou pour accéder à une API tierce de manière sécurisée.</p>
+Vous pouvez utiliser des secrets pour stocker les informations d'identification nécessaires pour déployer une application sur un serveur, vous connecter à un registry Docker, ou pour accéder à une API tierce de manière sécurisée.</p>
 <h3 id="exercice-6--utiliser-des-matrices-pour-tester-plusieurs-versions"><a class="header" href="#exercice-6--utiliser-des-matrices-pour-tester-plusieurs-versions">Exercice 6 : Utiliser des matrices pour tester plusieurs versions</a></h3>
 <p><strong>Objectif :</strong> Apprendre à utiliser des matrices pour tester plusieurs versions d'un langage.</p>
 <ol>
-<li>Modifiez le fichier <code>main.yml</code> pour utiliser une matrice avec différentes versions de Node.js :</li>
-</ol>
-<pre><code class="language-yaml">    name: CI
+<li>
+<p>Modifiez le fichier <code>main.yml</code> pour utiliser une matrice avec différentes versions de Node.js :</p>
+<pre><code class="language-yaml">name: CI avec Matrice Node.js
 
-    on: [push]
+on: [push]
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['18', '20'] # Versions LTS spécifiques
 
-        strategy:
-          matrix:
-            node-version: [10, 12, 14]
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
 
-        steps:
-        - uses: actions/checkout@v2
-        - name: Setup Node.js
-          uses: actions/setup-node@v2
-          with:
-            node-version: ${{ matrix.node-version }}
-        - name: Run a one-line script
-          run: node -v
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Afficher la version de Node.js
+      run: echo "Test avec Node.js $(node -v) sur ${{ runner.os }}"
 </code></pre>
-<ol start="2">
-<li>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement.</li>
+</li>
+<li>
+<p>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute en parallèle pour chaque version de Node.js spécifiée.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
-Les matrices permettent de tester votre code sur différentes versions d'un langage ou dans différents environnements, assurant ainsi une compatibilité et une robustesse maximales.</p>
+Les matrices permettent de tester votre code sur différentes versions d'un langage ou dans différents environnements (OS, etc.), assurant ainsi une compatibilité et une robustesse maximales.</p>
 <p><strong>Application réelle :</strong>
-Tester une application Node.js sur plusieurs versions de Node.js pour garantir qu'elle fonctionne correctement sur les versions que vos utilisateurs sont susceptibles d'utiliser.</p>
+Tester une application Node.js sur plusieurs versions de Node.js pour garantir qu'elle fonctionne correctement sur les versions que vos utilisateurs sont susceptibles d'utiliser. Idem pour Python, Java, etc.</p>
 <hr />
 <h2 id="niveau-2--intermédiaire"><a class="header" href="#niveau-2--intermédiaire">Niveau 2 : Intermédiaire</a></h2>
 <h3 id="exercice-7--exécuter-des-tests-unitaires"><a class="header" href="#exercice-7--exécuter-des-tests-unitaires">Exercice 7 : Exécuter des tests unitaires</a></h3>
 <p><strong>Objectif :</strong> Apprendre à exécuter des tests unitaires dans GitHub Actions.</p>
 <ol>
-<li>Créez un projet Node.js avec des tests unitaires.</li>
-<li>Modifiez le fichier <code>main.yml</code> pour exécuter les tests :</li>
-</ol>
-<pre><code class="language-yaml">    name: CI
+<li>
+<p>Créez un projet Node.js simple avec un <code>package.json</code> et des tests unitaires (par exemple avec Jest ou Mocha). Assurez-vous d'avoir un script de test dans <code>package.json</code> (ex: <code>"test": "jest"</code>).</p>
+</li>
+<li>
+<p>Modifiez le fichier <code>main.yml</code> pour exécuter les tests :</p>
+<pre><code class="language-yaml">name: CI avec Tests Unitaires
 
-    on: [push]
+on: [push]
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
 
-        steps:
-        - uses: actions/checkout@v2
-        - name: Setup Node.js
-          uses: actions/setup-node@v2
-          with:
-            node-version: '14'
-        - name: Install dependencies
-          run: npm install
-        - name: Run tests
-          run: npm test
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Installer les dépendances
+      run: npm ci
+
+    - name: Exécuter les tests
+      run: npm test
 </code></pre>
-<ol start="3">
-<li>Poussez les modifications sur GitHub et vérifiez que les tests s'exécutent correctement.</li>
+</li>
+<li>
+<p>Poussez les modifications sur GitHub et vérifiez que les tests s'exécutent correctement.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
 Automatiser les tests unitaires garantit que chaque modification de code est testée immédiatement, ce qui améliore la qualité du code et réduit les risques d'introduire des bugs.</p>
 <p><strong>Application réelle :</strong>
 À chaque push, les tests sont automatiquement exécutés, ce qui permet de détecter et de corriger rapidement les régressions.</p>
 <h3 id="exercice-8--déployer-sur-github-pages"><a class="header" href="#exercice-8--déployer-sur-github-pages">Exercice 8 : Déployer sur GitHub Pages</a></h3>
-<p><strong>Objectif :</strong> Apprendre à déployer un site sur GitHub Pages via GitHub Actions.</p>
+<p><strong>Objectif :</strong> Apprendre à déployer un site statique sur GitHub Pages via GitHub Actions.</p>
 <ol>
-<li>Créez un site statique dans le dépôt.</li>
-<li>Modifiez le fichier <code>main.yml</code> pour déployer le site sur GitHub Pages :</li>
-</ol>
-<pre><code class="language-yaml">    name: Deploy to GitHub Pages
+<li>
+<p>Créez un site statique simple dans votre dépôt. Si vous utilisez un framework (comme Angular, React, Vue), assurez-vous que la commande <code>npm run build</code> génère les fichiers statiques dans un dossier (souvent <code>dist</code> ou <code>build</code>).</p>
+</li>
+<li>
+<p>Modifiez le fichier <code>main.yml</code> pour déployer le site.</p>
+<pre><code class="language-yaml">name: Déploiement sur GitHub Pages
 
-    on:
-      push:
-        branches:
-          - main
+on:
+  push:
+    branches:
+      - main # Ou la branche que vous voulez déployer
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
+permissions:
+  contents: write # Nécessaire pour que l'action puisse pusher sur la branche gh-pages
 
-        steps:
-        - uses: actions/checkout@v2
-        - name: Build and deploy
-          run: |
-            npm install
-            npm run build
-            git config --global user.name 'github-actions[bot]'
-            git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-            git add -f build
-            git commit -m 'Deploy'
-            git push origin `git subtree split --prefix build main`:gh-pages --force
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      # Si c'est un projet Node.js qui nécessite un build (ex: Angular, React, Vue)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Installer les dépendances et Builder
+        run: |
+          npm ci
+          npm run build # Assurez-vous que ce script génère dans './build' ou './dist'
+
+      - name: Déployer sur GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3 # Action populaire et stable pour ça
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # Adaptez au dossier de sortie de votre build (ex: ./build, ./public)
 </code></pre>
-<ol start="3">
-<li>Poussez les modifications sur GitHub et vérifiez que le site est déployé sur GitHub Pages.</li>
+<p><strong>Note importante pour GitHub Pages :</strong> Allez dans les paramètres de votre dépôt (<code>Settings &gt; Pages</code>), et sous "Build and deployment", pour "Source", sélectionnez "GitHub Actions".</p>
+</li>
+<li>
+<p>Poussez les modifications sur GitHub et vérifiez que le site est déployé sur GitHub Pages.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
 Automatiser le déploiement d'un site sur GitHub Pages vous permet de mettre à jour votre site web automatiquement à chaque changement de code.</p>
 <p><strong>Application réelle :</strong>
-Déployer automatiquement un site de documentation ou un site web statique chaque fois que du nouveau contenu est ajouté ou modifié dans le dépôt.</p>
+Déployer automatiquement un site de documentation, un portfolio, ou un site web statique chaque fois que du nouveau contenu est ajouté ou modifié dans le dépôt.</p>
 <h3 id="exercice-9--utiliser-des-workflows-multi-jobs"><a class="header" href="#exercice-9--utiliser-des-workflows-multi-jobs">Exercice 9 : Utiliser des workflows multi-jobs</a></h3>
-<p><strong>Objectif :</strong> Apprendre à créer des workflows multi-jobs.</p>
+<p><strong>Objectif :</strong> Apprendre à créer des workflows multi-jobs qui peuvent dépendre les uns des autres.</p>
 <ol>
-<li>Modifiez le fichier <code>main.yml</code> pour inclure plusieurs jobs :</li>
-</ol>
-<pre><code class="language-yaml">    name: CI
+<li>
+<p>Modifiez le fichier <code>main.yml</code> pour inclure plusieurs jobs :</p>
+<pre><code class="language-yaml">name: CI Multi-Jobs
 
-    on: [push]
+on: [push]
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Build
-          run: echo Building...
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+    - name: Simuler un build
+      run: |
+        echo "Compilation du projet..."
+        mkdir -p output # Créer le dossier output
+        echo "Résultat du build" &gt; output/build_result.txt
+    - name: Uploader l'artefact du build
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-output
+        path: output/
 
-      test:
-        runs-on: ubuntu-latest
-        needs: build
-        steps:
-        - uses: actions/checkout@v2
-        - name: Test
-          run: echo Testing...
+  test:
+    runs-on: ubuntu-latest
+    needs: build # Dépend du job 'build'
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+    - name: Télécharger l'artefact du build
+      uses: actions/download-artifact@v4
+      with:
+        name: build-output
+        path: downloaded_build_output
+    - name: Simuler des tests
+      run: |
+        echo "Exécution des tests sur le résultat du build..."
+        cat downloaded_build_output/build_result.txt
+        echo "Tests terminés !"
 
-      deploy:
-        runs-on: ubuntu-latest
-        needs: test
-        steps:
-        - uses: actions/checkout@v2
-        - name: Deploy
-          run: echo Deploying...
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test # Dépend du job 'test'
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+    - name: Simuler un déploiement
+      run: echo "Déploiement du projet..."
 </code></pre>
-<ol start="2">
-<li>Poussez les modifications sur GitHub et vérifiez que les jobs s'exécutent dans le bon ordre.</li>
+</li>
+<li>
+<p>Poussez les modifications sur GitHub et vérifiez l'exécution séquentielle et conditionnelle des jobs.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
-Les workflows multi-jobs permettent de structurer les tâches en étapes distinctes, exécutées en parallèle ou séquentiellement, améliorant ainsi l'efficacité et la clarté des processus CI/CD.</p>
+Les workflows multi-jobs permettent de structurer les tâches en étapes distinctes, exécutées en parallèle ou séquentiellement (avec <code>needs</code>), améliorant ainsi l'efficacité et la clarté des processus CI/CD.</p>
 <p><strong>Application réelle :</strong>
-Exécuter des tests unitaires, effectuer des analyses de code statique et déployer l'application, chaque tâche étant gérée comme un job distinct dans le workflow.</p>
+Exécuter des tests unitaires, puis des tests d'intégration, et enfin déployer l'application, chaque tâche étant gérée comme un job distinct et dépendant du succès du précédent.</p>
 <h3 id="exercice-10--utiliser-des-artefacts"><a class="header" href="#exercice-10--utiliser-des-artefacts">Exercice 10 : Utiliser des artefacts</a></h3>
-<p><strong>Objectif :</strong> Apprendre à utiliser des artefacts pour stocker et partager des fichiers entre les jobs.</p>
+<p><strong>Objectif :</strong> Apprendre à utiliser des artefacts pour stocker et partager des fichiers entre les jobs. (Cet exercice est très similaire au précédent qui utilise déjà des artefacts).</p>
 <ol>
-<li>Modifiez le fichier <code>main.yml</code> pour sauvegarder et restaurer des artefacts :</li>
-</ol>
-<pre><code class="language-yaml">    name: CI
+<li>
+<p>Modifiez le fichier <code>main.yml</code> (ou créez-en un nouveau) :</p>
+<pre><code class="language-yaml">name: CI avec Artefacts
 
-    on: [push]
+on: [push]
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Build
-          run: echo "Hello, world!" &gt; artifact.txt
-        - name: Upload artifact
-          uses: actions/upload-artifact@v2
-          with:
-            name: example-artifact
-            path: artifact.txt
+jobs:
+  job1_produire_artefact:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
 
-      test:
-        runs-on: ubuntu-latest
-        needs: build
-        steps:
-        - uses: actions/checkout@v2
-        - name: Download artifact
-          uses: actions/download-artifact@v2
-          with:
-            name: example-artifact
-        - name: Use artifact
-          run: cat artifact.txt
+    - name: Créer un fichier artefact
+      run: echo "Contenu de mon artefact !" &gt; mon_artefact.txt
+
+    - name: Uploader l'artefact
+      uses: actions/upload-artifact@v4
+      with:
+        name: resultat-job1
+        path: mon_artefact.txt
+
+  job2_consommer_artefact:
+    runs-on: ubuntu-latest
+    needs: job1_produire_artefact
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+
+    - name: Télécharger l'artefact
+      uses: actions/download-artifact@v4
+      with:
+        name: resultat-job1
+        # path: ./destination_optionnelle # par défaut à la racine du workspace
+
+    - name: Utiliser l'artefact
+      run: cat mon_artefact.txt
 </code></pre>
-<ol start="2">
-<li>Poussez les modifications sur GitHub et vérifiez que les artefacts sont correctement sauvegardés et restaurés.</li>
+</li>
+<li>
+<p>Poussez les modifications sur GitHub.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
 Les artefacts permettent de sauvegarder des fichiers générés pendant l'exécution d'un job pour les utiliser dans des jobs suivants ou pour les télécharger ultérieurement.</p>
 <p><strong>Application réelle :</strong>
-Générer des rapports de test ou des builds de votre application dans un job et les utiliser pour déploiement ou analyse dans un autre job.</p>
+Générer des rapports de test, des binaires compilés, ou des archives de votre application dans un job et les utiliser pour déploiement ou analyse dans un autre job.</p>
 <hr />
 <h2 id="niveau-3--avancé"><a class="header" href="#niveau-3--avancé">Niveau 3 : Avancé</a></h2>
 <h3 id="exercice-11--créer-une-action-personnalisée"><a class="header" href="#exercice-11--créer-une-action-personnalisée">Exercice 11 : Créer une action personnalisée</a></h3>
-<p><strong>Objectif :</strong> Apprendre à créer une action GitHub personnalisée.</p>
+<p><strong>Objectif :</strong> Apprendre à créer une action GitHub personnalisée (en JavaScript/Node.js).</p>
 <ol>
-<li>Créez un répertoire <code>my-action</code> dans le dépôt.</li>
-<li>Dans ce répertoire, créez un fichier <code>action.yml</code> avec le contenu suivant :</li>
-</ol>
-<pre><code class="language-yaml">    name: "My Action"
-    description: "A custom GitHub Action"
-    inputs:
-      my-input:
-        description: "An input for the action"
-        required: true
-    runs:
-      using: "node12"
-      main: "index.js"
+<li>
+<p>Créez un répertoire <code>my-custom-action</code> à la racine de votre dépôt.</p>
+</li>
+<li>
+<p>Dans <code>my-custom-action</code>, créez <code>action.yml</code> :</p>
+<pre><code class="language-yaml">name: 'Mon Action Perso'
+description: 'Salue une personne et donne l heure.'
+inputs:
+  qui_saluer:
+    description: 'Qui saluer ?'
+    required: true
+    default: 'Monde'
+outputs:
+  temps:
+    description: 'L heure de la salutation.'
+runs:
+  using: 'node20' # Utiliser une version Node.js LTS
+  main: 'index.js'
 </code></pre>
-<ol start="3">
-<li>Créez un fichier <code>index.js</code> dans le répertoire <code>my-action</code> :</li>
-</ol>
-<pre><code class="language-js">    const core = require('@actions/core');
+</li>
+<li>
+<p>Dans <code>my-custom-action</code>, initialisez un projet Node (<code>npm init -y</code>) et installez les dépendances (<code>npm install @actions/core @actions/github</code>). Puis créez <code>index.js</code> :</p>
+<pre><code class="language-javascript">// my-custom-action/index.js
+const core = require('@actions/core');
+// const github = require('@actions/github'); // Pas utilisé dans cet exemple simple
 
-    async function run() {
-      try {
-        const myInput = core.getInput('my-input');
-        console.log(`My input is ${myInput}`);
-      } catch (error) {
-        core.setFailed(error.message);
-      }
-    }
+async function run() {
+  try {
+    const quiASaluer = core.getInput('qui_saluer');
+    console.log(`Bonjour, ${quiASaluer} !`);
 
-    run();
+    const time = (new Date()).toTimeString();
+    core.setOutput("temps", time);
+  } catch (error) {
+    core.setFailed(error.message);
+  }
+}
+
+run();
 </code></pre>
-<ol start="4">
-<li>Modifiez le fichier <code>main.yml</code> pour utiliser l</li>
-</ol>
-<p>'action personnalisée :</p>
-<pre><code class="language-yaml">    name: CI
+<p><strong>Note :</strong> Pour que cette action soit utilisable dans le workflow, vous devrez commiter <code>my-custom-action/index.js</code>, <code>my-custom-action/action.yml</code>, <code>my-custom-action/package.json</code>, <code>my-custom-action/package-lock.json</code> et le dossier <code>node_modules</code> de l'action, OU mieux, utiliser un bundler comme <code>@vercel/ncc</code> pour packager votre action en un seul fichier JS (plus avancé, mais meilleure pratique). Pour cet exo, le plus simple est de tout commiter ou de faire un <code>npm install</code> dans l'action elle-même (voir ci-dessous).</p>
+</li>
+<li>
+<p>Modifiez votre fichier de workflow principal pour utiliser cette action :</p>
+<pre><code class="language-yaml">name: CI avec Action Personnalisée
 
-    on: [push]
+on: [push]
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Run custom action
-          uses: ./my-action
-          with:
-            my-input: "Hello, custom action!"
+jobs:
+  build_avec_action_perso:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+
+    # Option 1: Si node_modules n'est pas commité avec l'action
+    - name: Installer les dépendances de l'action perso
+      run: npm install --prefix my-custom-action # Exécute npm install dans le dossier de l'action
+
+    - name: Exécuter mon action personnalisée
+      id: salutation
+      uses: ./my-custom-action # Chemin vers le dossier de l'action locale
+      with:
+        qui_saluer: 'les Participants à la Formation'
+
+    - name: Afficher l'output de l'action
+      run: echo "L'action a été exécutée à ${{ steps.salutation.outputs.temps }}"
 </code></pre>
-<ol start="5">
-<li>Poussez les modifications sur GitHub et vérifiez que l'action personnalisée s'exécute correctement.</li>
+</li>
+<li>
+<p>Poussez les modifications sur GitHub.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
-Créer vos propres actions vous permet de réutiliser du code dans plusieurs workflows et de partager des fonctionnalités spécifiques avec d'autres projets ou la communauté.</p>
+Créer vos propres actions vous permet de réutiliser du code logique complexe dans plusieurs workflows.</p>
 <p><strong>Application réelle :</strong>
-Développer une action qui envoie des notifications Slack formatées de manière spécifique à votre équipe à chaque déploiement.</p>
+Automatiser une tâche spécifique à votre entreprise.</p>
 <h3 id="exercice-12--utiliser-des-conditions-pour-contrôler-les-étapes"><a class="header" href="#exercice-12--utiliser-des-conditions-pour-contrôler-les-étapes">Exercice 12 : Utiliser des conditions pour contrôler les étapes</a></h3>
-<p><strong>Objectif :</strong> Apprendre à utiliser des conditions pour contrôler l'exécution des étapes dans un workflow.</p>
+<p><strong>Objectif :</strong> Apprendre à utiliser des expressions conditionnelles (<code>if:</code>) pour contrôler l'exécution.</p>
 <ol>
-<li>Modifiez le fichier <code>main.yml</code> pour ajouter des conditions :</li>
-</ol>
-<pre><code class="language-yaml">    name: CI
+<li>
+<p>Modifiez le fichier <code>main.yml</code> :</p>
+<pre><code class="language-yaml">name: CI avec Conditions
 
-    on: [push]
+on: [push]
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Conditional step
-          if: github.ref == 'refs/heads/main'
-          run: echo "This runs only on the main branch"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+
+    - name: Étape toujours exécutée
+      run: echo "Cette étape s'exécute toujours."
+
+    - name: Étape conditionnelle (branche main uniquement)
+      if: github.ref == 'refs/heads/main'
+      run: echo "Cette étape s'exécute SEULEMENT sur la branche main."
+
+    # Pour les événements de push, on accède au message du dernier commit (head_commit)
+    - name: Autre condition (pas si le commit contient '[skip ci]')
+      if: "!contains(github.event.head_commit.message, '[skip ci]')"
+      run: echo "Cette étape ne s'exécute PAS si le message de commit contient '[skip ci]'."
 </code></pre>
-<ol start="2">
-<li>Poussez les modifications sur GitHub et vérifiez que l'étape conditionnelle s'exécute correctement.</li>
+</li>
+<li>
+<p>Poussez les modifications et testez différents scénarios.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
-Les conditions vous permettent d'exécuter des étapes spécifiques seulement dans certaines situations, rendant vos workflows plus flexibles et optimisés.</p>
+Les conditions rendent vos workflows plus flexibles.</p>
 <p><strong>Application réelle :</strong>
-Exécuter des étapes de déploiement seulement si le commit est effectué sur la branche principale ou si certains tests réussissent.</p>
+Déployer seulement depuis <code>main</code>, sauter des tests sur des branches de dev.</p>
 <h3 id="exercice-13--utiliser-des-secrets-pour-déploiement-sécurisé"><a class="header" href="#exercice-13--utiliser-des-secrets-pour-déploiement-sécurisé">Exercice 13 : Utiliser des secrets pour déploiement sécurisé</a></h3>
-<p><strong>Objectif :</strong> Apprendre à utiliser des secrets pour sécuriser les déploiements.</p>
+<p><strong>Objectif :</strong> Utiliser des secrets GitHub pour des informations sensibles.</p>
 <ol>
-<li>Ajoutez des secrets nommés <code>AWS_ACCESS_KEY_ID</code> et <code>AWS_SECRET_ACCESS_KEY</code> dans les paramètres du dépôt GitHub.</li>
-<li>Modifiez le fichier <code>main.yml</code> pour utiliser les secrets lors du déploiement :</li>
-</ol>
-<pre><code class="language-yaml">    name: Deploy to AWS
+<li>
+<p>Ajoutez des secrets <code>AWS_ACCESS_KEY_ID</code> et <code>AWS_SECRET_ACCESS_KEY</code> dans les paramètres du dépôt.</p>
+</li>
+<li>
+<p>Modifiez <code>main.yml</code> :</p>
+<pre><code class="language-yaml">name: Déploiement sur AWS avec Secrets
 
-    on: [push]
+on:
+  push:
+    branches: [main]
 
-    jobs:
-      deploy:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Configure AWS credentials
-          uses: aws-actions/configure-aws-credentials@v1
-          with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: us-east-1
-        - name: Deploy
-          run: echo "Deploying to AWS"
+jobs:
+  deploy_to_aws:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+
+    - name: Configurer les identifiants AWS
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1 # Changez si besoin
+
+    - name: Simuler un déploiement sur AWS
+      run: |
+        echo "Tentative de déploiement sur AWS..."
+        # Exemple: aws s3 ls # Liste les buckets S3 pour prouver que la config AWS marche
+        echo "Déploiement (simulé) terminé."
 </code></pre>
-<ol start="3">
-<li>Poussez les modifications sur GitHub et vérifiez que le déploiement s'exécute correctement.</li>
+</li>
+<li>
+<p>Poussez les modifications.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
-Les secrets permettent de stocker des informations sensibles de manière sécurisée, réduisant les risques de compromission de sécurité lors des déploiements automatisés.</p>
+Sécuriser les informations sensibles.</p>
 <p><strong>Application réelle :</strong>
-Stocker des clés API et des informations d'identification pour déployer des applications sur des services cloud comme AWS ou Azure en toute sécurité.</p>
+Stocker clés API, tokens, mots de passe pour des déploiements sur des services cloud.</p>
 <h3 id="exercice-14--déclencher-des-workflows-manuellement"><a class="header" href="#exercice-14--déclencher-des-workflows-manuellement">Exercice 14 : Déclencher des workflows manuellement</a></h3>
-<p><strong>Objectif :</strong> Apprendre à déclencher des workflows manuellement via GitHub Actions.</p>
+<p><strong>Objectif :</strong> Apprendre à déclencher des workflows manuellement (<code>workflow_dispatch</code>).</p>
 <ol>
-<li>Modifiez le fichier <code>main.yml</code> pour ajouter un déclencheur manuel :</li>
-</ol>
-<pre><code class="language-yaml">    name: Manual Trigger
+<li>
+<p>Modifiez <code>main.yml</code> :</p>
+<pre><code class="language-yaml">name: Déclenchement Manuel
 
-    on:
-      workflow_dispatch:
+on:
+  workflow_dispatch: # Permet le déclenchement manuel
+    inputs: # Optionnel : définir des inputs pour le déclenchement manuel
+      logLevel:
+        description: 'Niveau de log'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+      tag:
+        description: 'Tag à utiliser'
+        required: false
+        type: string
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Run a one-line script
-          run: echo "This is a manually triggered workflow"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+    - name: Run a one-line script
+      run: |
+        echo "Workflow déclenché manuellement !"
+        echo "Niveau de log : ${{ github.event.inputs.logLevel }}"
+        echo "Tag : ${{ github.event.inputs.tag }}"
 </code></pre>
-<ol start="2">
-<li>Poussez les modifications sur GitHub.</li>
-<li>Allez dans l'onglet "Actions" de votre dépôt GitHub et déclenchez le workflow manuellement.</li>
+</li>
+<li>
+<p>Poussez. Allez dans l'onglet "Actions" de votre dépôt, sélectionnez ce workflow, et cliquez sur "Run workflow".</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
-Déclencher des workflows manuellement vous donne plus de contrôle sur l'exécution des actions, ce qui est utile pour des tâches comme les déploiements manuels ou les exécutions de maintenance.</p>
+Contrôle manuel pour des tâches comme des déploiements en production ou des scripts de maintenance.</p>
 <p><strong>Application réelle :</strong>
-Déclencher manuellement un workflow pour déployer une version spécifique de votre application après l'approbation de l'équipe QA.</p>
+Déclencher un déploiement vers la production après validation manuelle.</p>
 <h3 id="exercice-15--gérer-les-dépendances-entre-workflows"><a class="header" href="#exercice-15--gérer-les-dépendances-entre-workflows">Exercice 15 : Gérer les dépendances entre workflows</a></h3>
-<p><strong>Objectif :</strong> Apprendre à gérer les dépendances entre différents workflows.</p>
+<p><strong>Objectif :</strong> Déclencher un workflow après la complétion d'un autre (<code>workflow_run</code>).</p>
 <ol>
-<li>Créez deux fichiers de workflow : <code>build.yml</code> et <code>deploy.yml</code>.</li>
-<li>Dans <code>build.yml</code>, ajoutez le contenu suivant :</li>
-</ol>
-<pre><code class="language-yaml">    name: Build
+<li>
+<p>Créez deux fichiers de workflow : <code>build.yml</code> et <code>deploy.yml</code>.
+<code>build.yml</code> :</p>
+<pre><code class="language-yaml">name: Build Principal
 
-    on: [push]
+on:
+  push:
+    branches: [main]
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Build project
-          run: echo "Building project"
-        - name: Upload artifact
-          uses: actions/upload-artifact@v2
-          with:
-            name: build-artifact
-            path: ./build
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+    - name: Simuler un build et créer un artefact
+      run: |
+        echo "Building project..."
+        mkdir -p mon_build
+        echo "Contenu du build" &gt; mon_build/fichier_construit.txt
+    - name: Uploader l'artefact du build
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifact
+        path: mon_build/ # Uploader le dossier
 </code></pre>
-<ol start="3">
-<li>Dans <code>deploy.yml</code>, ajoutez le contenu suivant :</li>
-</ol>
-<pre><code class="language-yaml">    name: Deploy
+<p><code>deploy.yml</code> :</p>
+<pre><code class="language-yaml">name: Deploy Après Build
 
-    on:
-      workflow_run:
-        workflows: ["Build"]
-        types:
-          - completed
+on:
+  workflow_run:
+    workflows: ["Build Principal"] # Nom du workflow déclencheur
+    types:
+      - completed # Se déclenche quand "Build Principal" est terminé
 
-    jobs:
-      deploy:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Download artifact
-          uses: actions/download-artifact@v2
-          with:
-            name: build-artifact
-        - name: Deploy project
-          run: echo "Deploying project"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} # Condition: seulement si le build a réussi
+    steps:
+    - name: Checkout du code (nécessaire pour certains contextes ou scripts de déploiement)
+      uses: actions/checkout@v4
+    - name: Télécharger l'artefact du build
+      uses: actions/download-artifact@v4
+      with:
+        name: build-artifact # Doit correspondre au nom de l'artefact uploadé
+        # path: ./destination # Optionnel, sinon à la racine
+        # Spécifier le run_id est crucial si vous avez plusieurs actions/upload-artifact avec le même nom
+        # ou pour récupérer celui du workflow déclencheur.
+        # Pour workflow_run, GHA le gère implicitement pour les artefacts du workflow déclencheur.
+    - name: Simuler un déploiement
+      run: |
+        echo "Deploying project avec l'artefact..."
+        cat fichier_construit.txt # Vérifier que le fichier est là
 </code></pre>
-<ol start="4">
-<li>Poussez les modifications sur GitHub et vérifiez que le workflow de déploiement s'exécute après le workflow de build.</li>
+</li>
+<li>
+<p>Poussez les modifications. Un push sur <code>main</code> devrait lancer <code>Build Principal</code>, et si celui-ci réussit, <code>Deploy Après Build</code> devrait se lancer.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
-Gérer les dépendances entre workflows permet de structurer des processus complexes en étapes logiques, chaque étape étant déclenchée par l'achèvement d'une autre.</p>
+Structurer des processus CI/CD complexes en workflows plus petits et gérables.</p>
 <p><strong>Application réelle :</strong>
-Diviser un pipeline de CI/CD en plusieurs workflows où un workflow de build déclenche un workflow de test qui, s'il réussit, déclenche un workflow de déploiement.</p>
+Un workflow de build et test qui, en cas de succès, déclenche un workflow de déploiement sur un environnement de staging, puis potentiellement un autre pour la production.</p>
 <h3 id="exercice-16--utiliser-des-workflows-réutilisables"><a class="header" href="#exercice-16--utiliser-des-workflows-réutilisables">Exercice 16 : Utiliser des workflows réutilisables</a></h3>
-<p><strong>Objectif :</strong> Apprendre à créer et utiliser des workflows réutilisables.</p>
+<p><strong>Objectif :</strong> Créer un workflow qui peut être appelé par d'autres workflows (<code>workflow_call</code>).</p>
 <ol>
-<li>Créez un fichier <code>reusable.yml</code> dans le répertoire <code>.github/workflows</code> avec le contenu suivant :</li>
-</ol>
-<pre><code class="language-yaml">    name: Reusable Workflow
+<li>
+<p>Créez un fichier <code>workflow-reutilisable.yml</code> :</p>
+<pre><code class="language-yaml">name: Mon Workflow Réutilisable
 
-    on:
-      workflow_call:
-        inputs:
-          run-message:
-            required: true
-            type: string
+on:
+  workflow_call: # Définit ce workflow comme étant réutilisable
+    inputs:
+      message_perso:
+        description: 'Message à afficher'
+        required: true
+        type: string
+      executer_tests:
+        description: 'Faut-il exécuter les tests ?'
+        required: false
+        type: boolean
+        default: false
+    outputs: # Optionnel : définir des outputs
+      resultat_reutilisable:
+        description: 'Un résultat du workflow réutilisable'
+        value: ${{ jobs.tache_reutilisable.outputs.result_output }}
 
-    jobs:
-      run:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Run with input
-          run: echo ${{ inputs.run-message }}
+
+jobs:
+  tache_reutilisable:
+    runs-on: ubuntu-latest
+    outputs: # Définir les outputs du job
+      result_output: ${{ steps.etape_reutilisable.outputs.result }}
+    steps:
+      - id: etape_reutilisable
+        run: |
+          echo "Message reçu : ${{ inputs.message_perso }}"
+          if [ "${{ inputs.executer_tests }}" == "true" ]; then
+            echo "Exécution des tests demandée..."
+          else
+            echo "Pas de tests demandés."
+          fi
+          echo "result=SuccesDuReutilisable" &gt;&gt; $GITHUB_OUTPUT
 </code></pre>
-<ol start="2">
-<li>Créez un autre fichier <code>main.yml</code> pour appeler le workflow réutilisable :</li>
-</ol>
-<pre><code class="language-yaml">    name: Use Reusable Workflow
+</li>
+<li>
+<p>Créez un fichier <code>workflow-appelant.yml</code> pour appeler le workflow réutilisable :</p>
+<pre><code class="language-yaml">name: Workflow Appellant
 
-    on: [push]
+on: [push]
 
-    jobs:
-      call:
-        uses: ./.github/workflows/reusable.yml
-        with:
-          run-message: "Running reusable workflow"
+jobs:
+  appel_du_workflow:
+    # Important: Pour appeler un workflow réutilisable du même dépôt :
+    uses: ./.github/workflows/workflow-reutilisable.yml
+    # Pour un workflow dans un autre dépôt :
+    # uses: VOTRE_ORG/VOTRE_REPO/.github/workflows/workflow-reutilisable.yml@main_ou_tag_ou_sha
+    with:
+      message_perso: "Salut depuis le workflow appellant !"
+      executer_tests: true
+    # secrets: inherit # Pour passer les secrets, si besoin
+  
+  utiliser_output:
+    runs-on: ubuntu-latest
+    needs: appel_du_workflow # S'assurer qu'il tourne après
+    steps:
+      - run: echo "Résultat du workflow réutilisable : ${{ needs.appel_du_workflow.outputs.resultat_reutilisable }}"
 </code></pre>
-<ol start="3">
-<li>Poussez les modifications sur GitHub et vérifiez que le workflow réutilisable s'exécute correctement.</li>
+</li>
+<li>
+<p>Poussez les modifications.</p>
+</li>
 </ol>
 <p><strong>Intérêt :</strong>
-Les workflows réutilisables permettent de centraliser et de partager des configurations courantes entre plusieurs projets, réduisant ainsi la duplication de code et facilitant la maintenance.</p>
+Centraliser et partager des logiques de workflow communes, réduisant la duplication et facilitant la maintenance.</p>
 <p><strong>Application réelle :</strong>
-Créer un workflow de test standardisé que chaque dépôt de votre organisation peut utiliser, garantissant des pratiques de test cohérentes sur tous les projets.</p>
-<hr />
-<p>Ces exercices couvrent une gamme variée de compétences et de concepts nécessaires pour maîtriser les GitHub Actions, allant des bases pour les débutants à des défis avancés pour les utilisateurs plus expérimentés.</p>
+Créer un workflow de build ou de test standardisé que plusieurs dépôts de votre organisation peuvent appeler.</p>
 
                     </main>
 
