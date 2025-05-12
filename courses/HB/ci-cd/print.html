@@ -1,0 +1,884 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>CI-CD</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Day 1</li><li class="chapter-item expanded "><a href="day_1/Github-actions-guided.html"><strong aria-hidden="true">1.</strong> Github Actions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="day_1/Github-actions-non-guided.html"><strong aria-hidden="true">1.1.</strong> non guided</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">CI-CD</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h3 id="fiche-dexercices-sur-les-github-actions"><a class="header" href="#fiche-dexercices-sur-les-github-actions">Fiche d'Exercices sur les GitHub Actions</a></h3>
+<hr />
+<h2 id="niveau-1--débutant"><a class="header" href="#niveau-1--débutant">Niveau 1 : Débutant</a></h2>
+<h3 id="exercice-1--créer-un-dépôt-et-configurer-github-actions"><a class="header" href="#exercice-1--créer-un-dépôt-et-configurer-github-actions">Exercice 1 : Créer un dépôt et configurer GitHub Actions</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer un dépôt GitHub et configurer GitHub Actions.</p>
+<ol>
+<li>Créez un dépôt sur GitHub.</li>
+<li>Clonez le dépôt localement.</li>
+<li>Dans le dépôt, créez un répertoire <code>.github/workflows</code>.</li>
+<li>Dans ce répertoire, créez un fichier <code>main.yml</code>.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Configurer GitHub Actions dès le début vous permet d'automatiser les tâches dès que vous commencez à travailler sur votre projet. Cela vous aide à garantir que les tests sont exécutés, que le code est construit correctement, et éventuellement déployé automatiquement.</p>
+<p><strong>Application réelle :</strong>
+Vous pouvez automatiser des tâches courantes telles que l'exécution de tests, le linting du code, ou même le déploiement de votre application après chaque commit ou merge dans la branche principale.</p>
+<h3 id="exercice-2--créer-une-action-simple"><a class="header" href="#exercice-2--créer-une-action-simple">Exercice 2 : Créer une action simple</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer une action GitHub simple qui s'exécute sur chaque push.</p>
+<ol>
+<li>Ajoutez le contenu suivant dans le fichier <code>main.yml</code> :</li>
+</ol>
+<pre><code class="language-yaml">    name: CI
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v2
+        - name: Run a one-line script
+          run: echo Hello, world!
+</code></pre>
+<ol start="2">
+<li>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Comprendre comment déclencher une action simple vous donne les bases pour automatiser des processus plus complexes. Savoir utiliser les actions de base est essentiel pour la CI/CD.</p>
+<p><strong>Application réelle :</strong>
+Vous pouvez utiliser cette connaissance pour automatiser des tâches simples, comme envoyer un message de notification à une équipe via Slack chaque fois qu'un push est effectué.</p>
+<h3 id="exercice-3--exécuter-un-script-multi-lignes"><a class="header" href="#exercice-3--exécuter-un-script-multi-lignes">Exercice 3 : Exécuter un script multi-lignes</a></h3>
+<p><strong>Objectif :</strong> Apprendre à exécuter un script multi-lignes dans une action GitHub.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour inclure un script multi-lignes :</li>
+</ol>
+<pre><code class="language-yaml">    name: CI
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v2
+        - name: Run a multi-line script
+          run: |
+            echo Add other actions to build,
+            echo test, and deploy your project.
+</code></pre>
+<ol start="2">
+<li>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Les scripts multi-lignes vous permettent d'effectuer des tâches plus complexes et plus longues dans vos workflows GitHub Actions.</p>
+<p><strong>Application réelle :</strong>
+Automatiser l'installation d'un environnement de développement, exécuter des tests, et générer des rapports de test peuvent être réalisés en utilisant des scripts multi-lignes.</p>
+<h3 id="exercice-4--utiliser-des-actions-de-la-marketplace"><a class="header" href="#exercice-4--utiliser-des-actions-de-la-marketplace">Exercice 4 : Utiliser des actions de la marketplace</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser une action de la GitHub Marketplace.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser l'action <code>actions/setup-node</code> de la marketplace :</li>
+</ol>
+<pre><code class="language-yaml">    name: CI
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v2
+        - name: Setup Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: '14'
+        - name: Run a one-line script
+          run: node -v
+</code></pre>
+<ol start="2">
+<li>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+La GitHub Marketplace offre de nombreuses actions créées par la communauté, ce qui vous permet de ne pas réinventer la roue et de bénéficier de fonctionnalités déjà prêtes à l'emploi.</p>
+<p><strong>Application réelle :</strong>
+Vous pouvez utiliser des actions pour configurer automatiquement Node.js, déployer des applications sur AWS, ou envoyer des notifications Slack, sans avoir à écrire le code de ces actions vous-même.</p>
+<h3 id="exercice-5--ajouter-des-secrets"><a class="header" href="#exercice-5--ajouter-des-secrets">Exercice 5 : Ajouter des secrets</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des secrets dans GitHub Actions.</p>
+<ol>
+<li>Ajoutez un secret nommé <code>MY_SECRET</code> dans les paramètres du dépôt GitHub.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser le secret :</li>
+</ol>
+<pre><code class="language-yaml">    name: CI
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v2
+        - name: Use a secret
+          run: echo ${{ secrets.MY_SECRET }}
+</code></pre>
+<ol start="3">
+<li>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Les secrets vous permettent de gérer en toute sécurité les informations sensibles comme les tokens d'API, les clés de chiffrement et autres données confidentielles.</p>
+<p><strong>Application réelle :</strong>
+Vous pouvez utiliser des secrets pour stocker les informations d'identification nécessaires pour déployer une application sur un serveur ou pour accéder à une API tierce de manière sécurisée.</p>
+<h3 id="exercice-6--utiliser-des-matrices-pour-tester-plusieurs-versions"><a class="header" href="#exercice-6--utiliser-des-matrices-pour-tester-plusieurs-versions">Exercice 6 : Utiliser des matrices pour tester plusieurs versions</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des matrices pour tester plusieurs versions d'un langage.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser une matrice avec différentes versions de Node.js :</li>
+</ol>
+<pre><code class="language-yaml">    name: CI
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+
+        strategy:
+          matrix:
+            node-version: [10, 12, 14]
+
+        steps:
+        - uses: actions/checkout@v2
+        - name: Setup Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: ${{ matrix.node-version }}
+        - name: Run a one-line script
+          run: node -v
+</code></pre>
+<ol start="2">
+<li>Poussez les modifications sur GitHub et vérifiez que l'action s'exécute correctement.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Les matrices permettent de tester votre code sur différentes versions d'un langage ou dans différents environnements, assurant ainsi une compatibilité et une robustesse maximales.</p>
+<p><strong>Application réelle :</strong>
+Tester une application Node.js sur plusieurs versions de Node.js pour garantir qu'elle fonctionne correctement sur les versions que vos utilisateurs sont susceptibles d'utiliser.</p>
+<hr />
+<h2 id="niveau-2--intermédiaire"><a class="header" href="#niveau-2--intermédiaire">Niveau 2 : Intermédiaire</a></h2>
+<h3 id="exercice-7--exécuter-des-tests-unitaires"><a class="header" href="#exercice-7--exécuter-des-tests-unitaires">Exercice 7 : Exécuter des tests unitaires</a></h3>
+<p><strong>Objectif :</strong> Apprendre à exécuter des tests unitaires dans GitHub Actions.</p>
+<ol>
+<li>Créez un projet Node.js avec des tests unitaires.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour exécuter les tests :</li>
+</ol>
+<pre><code class="language-yaml">    name: CI
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v2
+        - name: Setup Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: '14'
+        - name: Install dependencies
+          run: npm install
+        - name: Run tests
+          run: npm test
+</code></pre>
+<ol start="3">
+<li>Poussez les modifications sur GitHub et vérifiez que les tests s'exécutent correctement.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Automatiser les tests unitaires garantit que chaque modification de code est testée immédiatement, ce qui améliore la qualité du code et réduit les risques d'introduire des bugs.</p>
+<p><strong>Application réelle :</strong>
+À chaque push, les tests sont automatiquement exécutés, ce qui permet de détecter et de corriger rapidement les régressions.</p>
+<h3 id="exercice-8--déployer-sur-github-pages"><a class="header" href="#exercice-8--déployer-sur-github-pages">Exercice 8 : Déployer sur GitHub Pages</a></h3>
+<p><strong>Objectif :</strong> Apprendre à déployer un site sur GitHub Pages via GitHub Actions.</p>
+<ol>
+<li>Créez un site statique dans le dépôt.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour déployer le site sur GitHub Pages :</li>
+</ol>
+<pre><code class="language-yaml">    name: Deploy to GitHub Pages
+
+    on:
+      push:
+        branches:
+          - main
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v2
+        - name: Build and deploy
+          run: |
+            npm install
+            npm run build
+            git config --global user.name 'github-actions[bot]'
+            git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+            git add -f build
+            git commit -m 'Deploy'
+            git push origin `git subtree split --prefix build main`:gh-pages --force
+</code></pre>
+<ol start="3">
+<li>Poussez les modifications sur GitHub et vérifiez que le site est déployé sur GitHub Pages.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Automatiser le déploiement d'un site sur GitHub Pages vous permet de mettre à jour votre site web automatiquement à chaque changement de code.</p>
+<p><strong>Application réelle :</strong>
+Déployer automatiquement un site de documentation ou un site web statique chaque fois que du nouveau contenu est ajouté ou modifié dans le dépôt.</p>
+<h3 id="exercice-9--utiliser-des-workflows-multi-jobs"><a class="header" href="#exercice-9--utiliser-des-workflows-multi-jobs">Exercice 9 : Utiliser des workflows multi-jobs</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer des workflows multi-jobs.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour inclure plusieurs jobs :</li>
+</ol>
+<pre><code class="language-yaml">    name: CI
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Build
+          run: echo Building...
+
+      test:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+        - uses: actions/checkout@v2
+        - name: Test
+          run: echo Testing...
+
+      deploy:
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+        - uses: actions/checkout@v2
+        - name: Deploy
+          run: echo Deploying...
+</code></pre>
+<ol start="2">
+<li>Poussez les modifications sur GitHub et vérifiez que les jobs s'exécutent dans le bon ordre.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Les workflows multi-jobs permettent de structurer les tâches en étapes distinctes, exécutées en parallèle ou séquentiellement, améliorant ainsi l'efficacité et la clarté des processus CI/CD.</p>
+<p><strong>Application réelle :</strong>
+Exécuter des tests unitaires, effectuer des analyses de code statique et déployer l'application, chaque tâche étant gérée comme un job distinct dans le workflow.</p>
+<h3 id="exercice-10--utiliser-des-artefacts"><a class="header" href="#exercice-10--utiliser-des-artefacts">Exercice 10 : Utiliser des artefacts</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des artefacts pour stocker et partager des fichiers entre les jobs.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour sauvegarder et restaurer des artefacts :</li>
+</ol>
+<pre><code class="language-yaml">    name: CI
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Build
+          run: echo "Hello, world!" &gt; artifact.txt
+        - name: Upload artifact
+          uses: actions/upload-artifact@v2
+          with:
+            name: example-artifact
+            path: artifact.txt
+
+      test:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+        - uses: actions/checkout@v2
+        - name: Download artifact
+          uses: actions/download-artifact@v2
+          with:
+            name: example-artifact
+        - name: Use artifact
+          run: cat artifact.txt
+</code></pre>
+<ol start="2">
+<li>Poussez les modifications sur GitHub et vérifiez que les artefacts sont correctement sauvegardés et restaurés.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Les artefacts permettent de sauvegarder des fichiers générés pendant l'exécution d'un job pour les utiliser dans des jobs suivants ou pour les télécharger ultérieurement.</p>
+<p><strong>Application réelle :</strong>
+Générer des rapports de test ou des builds de votre application dans un job et les utiliser pour déploiement ou analyse dans un autre job.</p>
+<hr />
+<h2 id="niveau-3--avancé"><a class="header" href="#niveau-3--avancé">Niveau 3 : Avancé</a></h2>
+<h3 id="exercice-11--créer-une-action-personnalisée"><a class="header" href="#exercice-11--créer-une-action-personnalisée">Exercice 11 : Créer une action personnalisée</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer une action GitHub personnalisée.</p>
+<ol>
+<li>Créez un répertoire <code>my-action</code> dans le dépôt.</li>
+<li>Dans ce répertoire, créez un fichier <code>action.yml</code> avec le contenu suivant :</li>
+</ol>
+<pre><code class="language-yaml">    name: "My Action"
+    description: "A custom GitHub Action"
+    inputs:
+      my-input:
+        description: "An input for the action"
+        required: true
+    runs:
+      using: "node12"
+      main: "index.js"
+</code></pre>
+<ol start="3">
+<li>Créez un fichier <code>index.js</code> dans le répertoire <code>my-action</code> :</li>
+</ol>
+<pre><code class="language-js">    const core = require('@actions/core');
+
+    async function run() {
+      try {
+        const myInput = core.getInput('my-input');
+        console.log(`My input is ${myInput}`);
+      } catch (error) {
+        core.setFailed(error.message);
+      }
+    }
+
+    run();
+</code></pre>
+<ol start="4">
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser l</li>
+</ol>
+<p>'action personnalisée :</p>
+<pre><code class="language-yaml">    name: CI
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Run custom action
+          uses: ./my-action
+          with:
+            my-input: "Hello, custom action!"
+</code></pre>
+<ol start="5">
+<li>Poussez les modifications sur GitHub et vérifiez que l'action personnalisée s'exécute correctement.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Créer vos propres actions vous permet de réutiliser du code dans plusieurs workflows et de partager des fonctionnalités spécifiques avec d'autres projets ou la communauté.</p>
+<p><strong>Application réelle :</strong>
+Développer une action qui envoie des notifications Slack formatées de manière spécifique à votre équipe à chaque déploiement.</p>
+<h3 id="exercice-12--utiliser-des-conditions-pour-contrôler-les-étapes"><a class="header" href="#exercice-12--utiliser-des-conditions-pour-contrôler-les-étapes">Exercice 12 : Utiliser des conditions pour contrôler les étapes</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des conditions pour contrôler l'exécution des étapes dans un workflow.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour ajouter des conditions :</li>
+</ol>
+<pre><code class="language-yaml">    name: CI
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Conditional step
+          if: github.ref == 'refs/heads/main'
+          run: echo "This runs only on the main branch"
+</code></pre>
+<ol start="2">
+<li>Poussez les modifications sur GitHub et vérifiez que l'étape conditionnelle s'exécute correctement.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Les conditions vous permettent d'exécuter des étapes spécifiques seulement dans certaines situations, rendant vos workflows plus flexibles et optimisés.</p>
+<p><strong>Application réelle :</strong>
+Exécuter des étapes de déploiement seulement si le commit est effectué sur la branche principale ou si certains tests réussissent.</p>
+<h3 id="exercice-13--utiliser-des-secrets-pour-déploiement-sécurisé"><a class="header" href="#exercice-13--utiliser-des-secrets-pour-déploiement-sécurisé">Exercice 13 : Utiliser des secrets pour déploiement sécurisé</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des secrets pour sécuriser les déploiements.</p>
+<ol>
+<li>Ajoutez des secrets nommés <code>AWS_ACCESS_KEY_ID</code> et <code>AWS_SECRET_ACCESS_KEY</code> dans les paramètres du dépôt GitHub.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser les secrets lors du déploiement :</li>
+</ol>
+<pre><code class="language-yaml">    name: Deploy to AWS
+
+    on: [push]
+
+    jobs:
+      deploy:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: us-east-1
+        - name: Deploy
+          run: echo "Deploying to AWS"
+</code></pre>
+<ol start="3">
+<li>Poussez les modifications sur GitHub et vérifiez que le déploiement s'exécute correctement.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Les secrets permettent de stocker des informations sensibles de manière sécurisée, réduisant les risques de compromission de sécurité lors des déploiements automatisés.</p>
+<p><strong>Application réelle :</strong>
+Stocker des clés API et des informations d'identification pour déployer des applications sur des services cloud comme AWS ou Azure en toute sécurité.</p>
+<h3 id="exercice-14--déclencher-des-workflows-manuellement"><a class="header" href="#exercice-14--déclencher-des-workflows-manuellement">Exercice 14 : Déclencher des workflows manuellement</a></h3>
+<p><strong>Objectif :</strong> Apprendre à déclencher des workflows manuellement via GitHub Actions.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour ajouter un déclencheur manuel :</li>
+</ol>
+<pre><code class="language-yaml">    name: Manual Trigger
+
+    on:
+      workflow_dispatch:
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Run a one-line script
+          run: echo "This is a manually triggered workflow"
+</code></pre>
+<ol start="2">
+<li>Poussez les modifications sur GitHub.</li>
+<li>Allez dans l'onglet "Actions" de votre dépôt GitHub et déclenchez le workflow manuellement.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Déclencher des workflows manuellement vous donne plus de contrôle sur l'exécution des actions, ce qui est utile pour des tâches comme les déploiements manuels ou les exécutions de maintenance.</p>
+<p><strong>Application réelle :</strong>
+Déclencher manuellement un workflow pour déployer une version spécifique de votre application après l'approbation de l'équipe QA.</p>
+<h3 id="exercice-15--gérer-les-dépendances-entre-workflows"><a class="header" href="#exercice-15--gérer-les-dépendances-entre-workflows">Exercice 15 : Gérer les dépendances entre workflows</a></h3>
+<p><strong>Objectif :</strong> Apprendre à gérer les dépendances entre différents workflows.</p>
+<ol>
+<li>Créez deux fichiers de workflow : <code>build.yml</code> et <code>deploy.yml</code>.</li>
+<li>Dans <code>build.yml</code>, ajoutez le contenu suivant :</li>
+</ol>
+<pre><code class="language-yaml">    name: Build
+
+    on: [push]
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Build project
+          run: echo "Building project"
+        - name: Upload artifact
+          uses: actions/upload-artifact@v2
+          with:
+            name: build-artifact
+            path: ./build
+</code></pre>
+<ol start="3">
+<li>Dans <code>deploy.yml</code>, ajoutez le contenu suivant :</li>
+</ol>
+<pre><code class="language-yaml">    name: Deploy
+
+    on:
+      workflow_run:
+        workflows: ["Build"]
+        types:
+          - completed
+
+    jobs:
+      deploy:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Download artifact
+          uses: actions/download-artifact@v2
+          with:
+            name: build-artifact
+        - name: Deploy project
+          run: echo "Deploying project"
+</code></pre>
+<ol start="4">
+<li>Poussez les modifications sur GitHub et vérifiez que le workflow de déploiement s'exécute après le workflow de build.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Gérer les dépendances entre workflows permet de structurer des processus complexes en étapes logiques, chaque étape étant déclenchée par l'achèvement d'une autre.</p>
+<p><strong>Application réelle :</strong>
+Diviser un pipeline de CI/CD en plusieurs workflows où un workflow de build déclenche un workflow de test qui, s'il réussit, déclenche un workflow de déploiement.</p>
+<h3 id="exercice-16--utiliser-des-workflows-réutilisables"><a class="header" href="#exercice-16--utiliser-des-workflows-réutilisables">Exercice 16 : Utiliser des workflows réutilisables</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer et utiliser des workflows réutilisables.</p>
+<ol>
+<li>Créez un fichier <code>reusable.yml</code> dans le répertoire <code>.github/workflows</code> avec le contenu suivant :</li>
+</ol>
+<pre><code class="language-yaml">    name: Reusable Workflow
+
+    on:
+      workflow_call:
+        inputs:
+          run-message:
+            required: true
+            type: string
+
+    jobs:
+      run:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Run with input
+          run: echo ${{ inputs.run-message }}
+</code></pre>
+<ol start="2">
+<li>Créez un autre fichier <code>main.yml</code> pour appeler le workflow réutilisable :</li>
+</ol>
+<pre><code class="language-yaml">    name: Use Reusable Workflow
+
+    on: [push]
+
+    jobs:
+      call:
+        uses: ./.github/workflows/reusable.yml
+        with:
+          run-message: "Running reusable workflow"
+</code></pre>
+<ol start="3">
+<li>Poussez les modifications sur GitHub et vérifiez que le workflow réutilisable s'exécute correctement.</li>
+</ol>
+<p><strong>Intérêt :</strong>
+Les workflows réutilisables permettent de centraliser et de partager des configurations courantes entre plusieurs projets, réduisant ainsi la duplication de code et facilitant la maintenance.</p>
+<p><strong>Application réelle :</strong>
+Créer un workflow de test standardisé que chaque dépôt de votre organisation peut utiliser, garantissant des pratiques de test cohérentes sur tous les projets.</p>
+<hr />
+<p>Ces exercices couvrent une gamme variée de compétences et de concepts nécessaires pour maîtriser les GitHub Actions, allant des bases pour les débutants à des défis avancés pour les utilisateurs plus expérimentés.</p>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="fiche-dexercices-non-guidés-sur-les-github-actions"><a class="header" href="#fiche-dexercices-non-guidés-sur-les-github-actions">Fiche d'Exercices Non-Guidés sur les GitHub Actions</a></h3>
+<hr />
+<h2 id="niveau-1--débutant-1"><a class="header" href="#niveau-1--débutant-1">Niveau 1 : Débutant</a></h2>
+<h3 id="exercice-1--créer-un-dépôt-et-configurer-github-actions-1"><a class="header" href="#exercice-1--créer-un-dépôt-et-configurer-github-actions-1">Exercice 1 : Créer un dépôt et configurer GitHub Actions</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer un dépôt GitHub et configurer GitHub Actions.</p>
+<ol>
+<li>Créez un dépôt sur GitHub.</li>
+<li>Clonez le dépôt localement.</li>
+<li>Dans le dépôt, créez un répertoire <code>.github/workflows</code>.</li>
+<li>Dans ce répertoire, créez un fichier <code>main.yml</code>.</li>
+</ol>
+<hr />
+<h3 id="exercice-2--créer-une-action-simple-1"><a class="header" href="#exercice-2--créer-une-action-simple-1">Exercice 2 : Créer une action simple</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer une action GitHub simple qui s'exécute sur chaque push.</p>
+<ol>
+<li>Créez une action GitHub simple qui s'exécute sur chaque push.</li>
+<li>Faites en sorte que cette action affiche "Hello, world!" dans les logs.</li>
+</ol>
+<hr />
+<h3 id="exercice-3--exécuter-un-script-multi-lignes-1"><a class="header" href="#exercice-3--exécuter-un-script-multi-lignes-1">Exercice 3 : Exécuter un script multi-lignes</a></h3>
+<p><strong>Objectif :</strong> Apprendre à exécuter un script multi-lignes dans une action GitHub.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour exécuter un script multi-lignes.</li>
+<li>Faites en sorte que le script affiche plusieurs lignes de texte dans les logs.</li>
+</ol>
+<hr />
+<h3 id="exercice-4--utiliser-des-actions-de-la-marketplace-1"><a class="header" href="#exercice-4--utiliser-des-actions-de-la-marketplace-1">Exercice 4 : Utiliser des actions de la marketplace</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser une action de la GitHub Marketplace.</p>
+<ol>
+<li>Choisissez une action dans la GitHub Marketplace.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser cette action.</li>
+</ol>
+<hr />
+<h3 id="exercice-5--ajouter-des-secrets-1"><a class="header" href="#exercice-5--ajouter-des-secrets-1">Exercice 5 : Ajouter des secrets</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des secrets dans GitHub Actions.</p>
+<ol>
+<li>Ajoutez un secret dans les paramètres de votre dépôt GitHub.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser ce secret dans une action.</li>
+</ol>
+<hr />
+<h3 id="exercice-6--utiliser-des-matrices-pour-tester-plusieurs-versions-1"><a class="header" href="#exercice-6--utiliser-des-matrices-pour-tester-plusieurs-versions-1">Exercice 6 : Utiliser des matrices pour tester plusieurs versions</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des matrices pour tester plusieurs versions d'un langage.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser une matrice avec différentes versions d'un langage (par exemple, Node.js, Python).</li>
+<li>Assurez-vous que votre action teste le code sur chaque version spécifiée dans la matrice.</li>
+</ol>
+<hr />
+<h2 id="niveau-2--intermédiaire-1"><a class="header" href="#niveau-2--intermédiaire-1">Niveau 2 : Intermédiaire</a></h2>
+<h3 id="exercice-7--exécuter-des-tests-unitaires-1"><a class="header" href="#exercice-7--exécuter-des-tests-unitaires-1">Exercice 7 : Exécuter des tests unitaires</a></h3>
+<p><strong>Objectif :</strong> Apprendre à exécuter des tests unitaires dans GitHub Actions.</p>
+<ol>
+<li>Créez un projet avec des tests unitaires.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour exécuter les tests unitaires à chaque push.</li>
+</ol>
+<hr />
+<h3 id="exercice-8--déployer-sur-github-pages-1"><a class="header" href="#exercice-8--déployer-sur-github-pages-1">Exercice 8 : Déployer sur GitHub Pages</a></h3>
+<p><strong>Objectif :</strong> Apprendre à déployer un site sur GitHub Pages via GitHub Actions.</p>
+<ol>
+<li>Créez un site statique dans votre dépôt.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour déployer ce site sur GitHub Pages à chaque push sur la branche principale.</li>
+</ol>
+<hr />
+<h3 id="exercice-9--utiliser-des-workflows-multi-jobs-1"><a class="header" href="#exercice-9--utiliser-des-workflows-multi-jobs-1">Exercice 9 : Utiliser des workflows multi-jobs</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer des workflows multi-jobs.</p>
+<ol>
+<li>Créez un workflow avec plusieurs jobs.</li>
+<li>Assurez-vous que les jobs s'exécutent dans l'ordre correct.</li>
+</ol>
+<hr />
+<h3 id="exercice-10--utiliser-des-artefacts-1"><a class="header" href="#exercice-10--utiliser-des-artefacts-1">Exercice 10 : Utiliser des artefacts</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des artefacts pour stocker et partager des fichiers entre les jobs.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour créer un artefact dans un job.</li>
+<li>Téléchargez cet artefact dans un autre job et utilisez-le.</li>
+</ol>
+<hr />
+<h2 id="niveau-3--avancé-1"><a class="header" href="#niveau-3--avancé-1">Niveau 3 : Avancé</a></h2>
+<h3 id="exercice-11--créer-une-action-personnalisée-1"><a class="header" href="#exercice-11--créer-une-action-personnalisée-1">Exercice 11 : Créer une action personnalisée</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer une action GitHub personnalisée.</p>
+<ol>
+<li>Créez un répertoire pour votre action personnalisée.</li>
+<li>Créez un fichier <code>action.yml</code> et un script associé pour cette action.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser cette action personnalisée.</li>
+</ol>
+<hr />
+<h3 id="exercice-12--utiliser-des-conditions-pour-contrôler-les-étapes-1"><a class="header" href="#exercice-12--utiliser-des-conditions-pour-contrôler-les-étapes-1">Exercice 12 : Utiliser des conditions pour contrôler les étapes</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des conditions pour contrôler l'exécution des étapes dans un workflow.</p>
+<ol>
+<li>Ajoutez des conditions à certaines étapes de votre workflow pour qu'elles ne s'exécutent que sous certaines conditions.</li>
+</ol>
+<hr />
+<h3 id="exercice-13--utiliser-des-secrets-pour-déploiement-sécurisé-1"><a class="header" href="#exercice-13--utiliser-des-secrets-pour-déploiement-sécurisé-1">Exercice 13 : Utiliser des secrets pour déploiement sécurisé</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des secrets pour sécuriser les déploiements.</p>
+<ol>
+<li>Ajoutez des secrets nécessaires pour le déploiement dans les paramètres du dépôt GitHub.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser ces secrets lors du déploiement.</li>
+</ol>
+<hr />
+<h3 id="exercice-14--déclencher-des-workflows-manuellement-1"><a class="header" href="#exercice-14--déclencher-des-workflows-manuellement-1">Exercice 14 : Déclencher des workflows manuellement</a></h3>
+<p><strong>Objectif :</strong> Apprendre à déclencher des workflows manuellement via GitHub Actions.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour ajouter un déclencheur manuel.</li>
+<li>Déclenchez le workflow manuellement depuis l'onglet "Actions" de votre dépôt GitHub.</li>
+</ol>
+<hr />
+<h3 id="exercice-15--gérer-les-dépendances-entre-workflows-1"><a class="header" href="#exercice-15--gérer-les-dépendances-entre-workflows-1">Exercice 15 : Gérer les dépendances entre workflows</a></h3>
+<p><strong>Objectif :</strong> Apprendre à gérer les dépendances entre différents workflows.</p>
+<ol>
+<li>Créez deux fichiers de workflow : un pour le build et un pour le déploiement.</li>
+<li>Configurez le workflow de déploiement pour qu'il soit déclenché à la fin du workflow de build.</li>
+</ol>
+<hr />
+<h3 id="exercice-16--utiliser-des-workflows-réutilisables-1"><a class="header" href="#exercice-16--utiliser-des-workflows-réutilisables-1">Exercice 16 : Utiliser des workflows réutilisables</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer et utiliser des workflows réutilisables.</p>
+<ol>
+<li>Créez un fichier de workflow réutilisable.</li>
+<li>Modifiez un autre workflow pour utiliser ce workflow réutilisable.</li>
+</ol>
+<hr />
+<p>Ces exercices couvrent une gamme variée de compétences et de concepts nécessaires pour maîtriser les GitHub Actions, allant des bases pour les débutants à des défis avancés pour les utilisateurs plus expérimentés. Chaque exercice est conçu pour vous fournir des compétences pratiques que vous pouvez appliquer directement à vos propres projets et workflows.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

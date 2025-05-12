@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>non guided - CI-CD</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Day 1</li><li class="chapter-item expanded "><a href="../day_1/Github-actions-guided.html"><strong aria-hidden="true">1.</strong> Github Actions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../day_1/Github-actions-non-guided.html" class="active"><strong aria-hidden="true">1.1.</strong> non guided</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">CI-CD</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h3 id="fiche-dexercices-non-guidés-sur-les-github-actions"><a class="header" href="#fiche-dexercices-non-guidés-sur-les-github-actions">Fiche d'Exercices Non-Guidés sur les GitHub Actions</a></h3>
+<hr />
+<h2 id="niveau-1--débutant"><a class="header" href="#niveau-1--débutant">Niveau 1 : Débutant</a></h2>
+<h3 id="exercice-1--créer-un-dépôt-et-configurer-github-actions"><a class="header" href="#exercice-1--créer-un-dépôt-et-configurer-github-actions">Exercice 1 : Créer un dépôt et configurer GitHub Actions</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer un dépôt GitHub et configurer GitHub Actions.</p>
+<ol>
+<li>Créez un dépôt sur GitHub.</li>
+<li>Clonez le dépôt localement.</li>
+<li>Dans le dépôt, créez un répertoire <code>.github/workflows</code>.</li>
+<li>Dans ce répertoire, créez un fichier <code>main.yml</code>.</li>
+</ol>
+<hr />
+<h3 id="exercice-2--créer-une-action-simple"><a class="header" href="#exercice-2--créer-une-action-simple">Exercice 2 : Créer une action simple</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer une action GitHub simple qui s'exécute sur chaque push.</p>
+<ol>
+<li>Créez une action GitHub simple qui s'exécute sur chaque push.</li>
+<li>Faites en sorte que cette action affiche "Hello, world!" dans les logs.</li>
+</ol>
+<hr />
+<h3 id="exercice-3--exécuter-un-script-multi-lignes"><a class="header" href="#exercice-3--exécuter-un-script-multi-lignes">Exercice 3 : Exécuter un script multi-lignes</a></h3>
+<p><strong>Objectif :</strong> Apprendre à exécuter un script multi-lignes dans une action GitHub.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour exécuter un script multi-lignes.</li>
+<li>Faites en sorte que le script affiche plusieurs lignes de texte dans les logs.</li>
+</ol>
+<hr />
+<h3 id="exercice-4--utiliser-des-actions-de-la-marketplace"><a class="header" href="#exercice-4--utiliser-des-actions-de-la-marketplace">Exercice 4 : Utiliser des actions de la marketplace</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser une action de la GitHub Marketplace.</p>
+<ol>
+<li>Choisissez une action dans la GitHub Marketplace.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser cette action.</li>
+</ol>
+<hr />
+<h3 id="exercice-5--ajouter-des-secrets"><a class="header" href="#exercice-5--ajouter-des-secrets">Exercice 5 : Ajouter des secrets</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des secrets dans GitHub Actions.</p>
+<ol>
+<li>Ajoutez un secret dans les paramètres de votre dépôt GitHub.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser ce secret dans une action.</li>
+</ol>
+<hr />
+<h3 id="exercice-6--utiliser-des-matrices-pour-tester-plusieurs-versions"><a class="header" href="#exercice-6--utiliser-des-matrices-pour-tester-plusieurs-versions">Exercice 6 : Utiliser des matrices pour tester plusieurs versions</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des matrices pour tester plusieurs versions d'un langage.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser une matrice avec différentes versions d'un langage (par exemple, Node.js, Python).</li>
+<li>Assurez-vous que votre action teste le code sur chaque version spécifiée dans la matrice.</li>
+</ol>
+<hr />
+<h2 id="niveau-2--intermédiaire"><a class="header" href="#niveau-2--intermédiaire">Niveau 2 : Intermédiaire</a></h2>
+<h3 id="exercice-7--exécuter-des-tests-unitaires"><a class="header" href="#exercice-7--exécuter-des-tests-unitaires">Exercice 7 : Exécuter des tests unitaires</a></h3>
+<p><strong>Objectif :</strong> Apprendre à exécuter des tests unitaires dans GitHub Actions.</p>
+<ol>
+<li>Créez un projet avec des tests unitaires.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour exécuter les tests unitaires à chaque push.</li>
+</ol>
+<hr />
+<h3 id="exercice-8--déployer-sur-github-pages"><a class="header" href="#exercice-8--déployer-sur-github-pages">Exercice 8 : Déployer sur GitHub Pages</a></h3>
+<p><strong>Objectif :</strong> Apprendre à déployer un site sur GitHub Pages via GitHub Actions.</p>
+<ol>
+<li>Créez un site statique dans votre dépôt.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour déployer ce site sur GitHub Pages à chaque push sur la branche principale.</li>
+</ol>
+<hr />
+<h3 id="exercice-9--utiliser-des-workflows-multi-jobs"><a class="header" href="#exercice-9--utiliser-des-workflows-multi-jobs">Exercice 9 : Utiliser des workflows multi-jobs</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer des workflows multi-jobs.</p>
+<ol>
+<li>Créez un workflow avec plusieurs jobs.</li>
+<li>Assurez-vous que les jobs s'exécutent dans l'ordre correct.</li>
+</ol>
+<hr />
+<h3 id="exercice-10--utiliser-des-artefacts"><a class="header" href="#exercice-10--utiliser-des-artefacts">Exercice 10 : Utiliser des artefacts</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des artefacts pour stocker et partager des fichiers entre les jobs.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour créer un artefact dans un job.</li>
+<li>Téléchargez cet artefact dans un autre job et utilisez-le.</li>
+</ol>
+<hr />
+<h2 id="niveau-3--avancé"><a class="header" href="#niveau-3--avancé">Niveau 3 : Avancé</a></h2>
+<h3 id="exercice-11--créer-une-action-personnalisée"><a class="header" href="#exercice-11--créer-une-action-personnalisée">Exercice 11 : Créer une action personnalisée</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer une action GitHub personnalisée.</p>
+<ol>
+<li>Créez un répertoire pour votre action personnalisée.</li>
+<li>Créez un fichier <code>action.yml</code> et un script associé pour cette action.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser cette action personnalisée.</li>
+</ol>
+<hr />
+<h3 id="exercice-12--utiliser-des-conditions-pour-contrôler-les-étapes"><a class="header" href="#exercice-12--utiliser-des-conditions-pour-contrôler-les-étapes">Exercice 12 : Utiliser des conditions pour contrôler les étapes</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des conditions pour contrôler l'exécution des étapes dans un workflow.</p>
+<ol>
+<li>Ajoutez des conditions à certaines étapes de votre workflow pour qu'elles ne s'exécutent que sous certaines conditions.</li>
+</ol>
+<hr />
+<h3 id="exercice-13--utiliser-des-secrets-pour-déploiement-sécurisé"><a class="header" href="#exercice-13--utiliser-des-secrets-pour-déploiement-sécurisé">Exercice 13 : Utiliser des secrets pour déploiement sécurisé</a></h3>
+<p><strong>Objectif :</strong> Apprendre à utiliser des secrets pour sécuriser les déploiements.</p>
+<ol>
+<li>Ajoutez des secrets nécessaires pour le déploiement dans les paramètres du dépôt GitHub.</li>
+<li>Modifiez le fichier <code>main.yml</code> pour utiliser ces secrets lors du déploiement.</li>
+</ol>
+<hr />
+<h3 id="exercice-14--déclencher-des-workflows-manuellement"><a class="header" href="#exercice-14--déclencher-des-workflows-manuellement">Exercice 14 : Déclencher des workflows manuellement</a></h3>
+<p><strong>Objectif :</strong> Apprendre à déclencher des workflows manuellement via GitHub Actions.</p>
+<ol>
+<li>Modifiez le fichier <code>main.yml</code> pour ajouter un déclencheur manuel.</li>
+<li>Déclenchez le workflow manuellement depuis l'onglet "Actions" de votre dépôt GitHub.</li>
+</ol>
+<hr />
+<h3 id="exercice-15--gérer-les-dépendances-entre-workflows"><a class="header" href="#exercice-15--gérer-les-dépendances-entre-workflows">Exercice 15 : Gérer les dépendances entre workflows</a></h3>
+<p><strong>Objectif :</strong> Apprendre à gérer les dépendances entre différents workflows.</p>
+<ol>
+<li>Créez deux fichiers de workflow : un pour le build et un pour le déploiement.</li>
+<li>Configurez le workflow de déploiement pour qu'il soit déclenché à la fin du workflow de build.</li>
+</ol>
+<hr />
+<h3 id="exercice-16--utiliser-des-workflows-réutilisables"><a class="header" href="#exercice-16--utiliser-des-workflows-réutilisables">Exercice 16 : Utiliser des workflows réutilisables</a></h3>
+<p><strong>Objectif :</strong> Apprendre à créer et utiliser des workflows réutilisables.</p>
+<ol>
+<li>Créez un fichier de workflow réutilisable.</li>
+<li>Modifiez un autre workflow pour utiliser ce workflow réutilisable.</li>
+</ol>
+<hr />
+<p>Ces exercices couvrent une gamme variée de compétences et de concepts nécessaires pour maîtriser les GitHub Actions, allant des bases pour les débutants à des défis avancés pour les utilisateurs plus expérimentés. Chaque exercice est conçu pour vous fournir des compétences pratiques que vous pouvez appliquer directement à vos propres projets et workflows.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../day_1/Github-actions-guided.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../day_1/Github-actions-guided.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
