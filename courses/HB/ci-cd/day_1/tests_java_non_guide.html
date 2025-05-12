@@ -1,0 +1,379 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>non guided - CI-CD</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Day 1</li><li class="chapter-item expanded "><a href="../day_1/Github-actions-guided.html"><strong aria-hidden="true">1.</strong> Github Actions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../day_1/Github-actions-non-guided.html"><strong aria-hidden="true">1.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><a href="../day_1/tests_java.html"><strong aria-hidden="true">2.</strong> Tests Java</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../day_1/tests_java_non_guide.html" class="active"><strong aria-hidden="true">2.1.</strong> non guided</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">CI-CD</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="tp-non-guidé--de-maven-local-à-lintégration-continue-avec-github-actions-java---challenge"><a class="header" href="#tp-non-guidé--de-maven-local-à-lintégration-continue-avec-github-actions-java---challenge">TP Non Guidé : De Maven Local à l'Intégration Continue avec GitHub Actions (Java - Challenge)</a></h1>
+<p><strong>Objectif Général :</strong>
+Ce TP est conçu pour être réalisé après avoir compris les bases de Maven et de GitHub Actions. Il vise à consolider votre compréhension du cycle de développement Java avec Maven et son automatisation via GitHub Actions en vous faisant appliquer les principes vus précédemment.</p>
+<ol>
+<li><strong>Exercice 1 :</strong> Développer une petite fonctionnalité en local en utilisant une approche TDD-light avec Maven.</li>
+<li><strong>Exercice 2 :</strong> Mettre en place une chaîne d'Intégration Continue pour valider votre travail avec GitHub Actions.</li>
+</ol>
+<p><strong>Ressource Utile :</strong></p>
+<ul>
+<li>Pour vous rafraîchir la mémoire sur les commandes Maven de base et la structure d'un projet : <a href="https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html">Maven in 5 Minutes</a></li>
+</ul>
+<p><strong>Prérequis :</strong></p>
+<ul>
+<li>Maîtrise des commandes Git de base et interaction avec un dépôt distant (GitHub).</li>
+<li>Connaissance de la commande <code>mvn archetype:generate</code> pour créer un projet Maven.</li>
+<li>Compréhension du cycle de vie Maven, notamment la phase <code>package</code>.</li>
+<li>Notions de base sur la syntaxe des workflows GitHub Actions.</li>
+<li>JDK (version 17 ou supérieure recommandée) et Apache Maven installés et configurés localement.</li>
+</ul>
+<hr />
+<h2 id="exercice-1--développement-local-dune-utility-string-avec-maven-approche-tdd-light"><a class="header" href="#exercice-1--développement-local-dune-utility-string-avec-maven-approche-tdd-light">Exercice 1 : Développement Local d'une Utility String avec Maven (Approche TDD-Light)</a></h2>
+<p><strong>Objectif :</strong> Mettre en place un projet Maven, y ajouter une nouvelle classe utilitaire pour les chaînes de caractères, et implémenter deux méthodes (<code>renverser</code> et <code>estPalindrome</code>) en suivant un cycle "test d'abord" pour chacune.</p>
+<h3 id="11-initialisation-du-projet"><a class="header" href="#11-initialisation-du-projet">1.1. Initialisation du Projet</a></h3>
+<ol>
+<li><strong>Créez un nouveau projet Maven</strong> en utilisant l'archétype <code>maven-archetype-quickstart</code>.
+<ul>
+<li><code>groupId</code>: <code>com.formation.stringutils</code></li>
+<li><code>artifactId</code>: <code>monStringUtilsApp</code></li>
+</ul>
+</li>
+<li>Assurez-vous que le projet généré compile et que les tests par défaut (s'il y en a, fournis par l'archétype) passent en utilisant la commande Maven appropriée pour builder et tester (typiquement <code>mvn package</code>).</li>
+<li>Configurez le <code>pom.xml</code> pour utiliser <strong>Java 17</strong> pour la compilation (C'est normalement la configuration par defaut)</li>
+</ol>
+<h3 id="12-cycle-tdd-pour-la-fonction-renverserstring-chaine"><a class="header" href="#12-cycle-tdd-pour-la-fonction-renverserstring-chaine">1.2. Cycle TDD pour la Fonction <code>renverser(String chaine)</code></a></h3>
+<p>Vous allez maintenant ajouter une classe <code>StringUtils</code> avec une méthode <code>public String renverser(String chaine)</code>.</p>
+<ol>
+<li><strong>Écrivez le Test d'Abord :</strong>
+<ul>
+<li>Créez une nouvelle classe de test <code>StringUtilsTest.java</code> dans le répertoire de test approprié.</li>
+<li>Dans cette classe, écrivez une méthode de test (en utilisant la syntaxe JUnit 4.x, généralement fournie par l'archétype <code>maven-archetype-quickstart:1.4</code>) qui vérifiera le bon fonctionnement de la future méthode <code>renverser</code>. Testez au moins deux cas (ex: <code>"radar"</code>, <code>"Java"</code>). Ce test doit initialement échouer.</li>
+</ul>
+</li>
+<li><strong>Créez la Classe et la Méthode (non implémentée) :</strong>
+<ul>
+<li>Créez la classe <code>StringUtils.java</code> dans le répertoire source principal approprié.</li>
+<li>Ajoutez la signature de la méthode <code>public String renverser(String chaine)</code>. Pour l'instant, faites en sorte qu'elle lève une <code>UnsupportedOperationException</code> ou qu'elle retourne <code>null</code> (ou une chaîne vide) pour que le test échoue.</li>
+</ul>
+</li>
+<li><strong>Vérification du Cycle Rouge :</strong>
+<ul>
+<li>Lancez la commande Maven pour builder et tester votre projet.</li>
+<li>Confirmez que le build échoue et que l'échec est bien dû à votre nouveau test pour <code>StringUtils.renverser()</code>.</li>
+</ul>
+</li>
+<li><strong>Implémentation de la Fonctionnalité :</strong>
+<ul>
+<li>Maintenant, modifiez la méthode <code>StringUtils.renverser()</code> pour qu'elle implémente correctement la logique de renversement de la chaîne de caractères.</li>
+</ul>
+</li>
+<li><strong>Vérification du Cycle Vert :</strong>
+<ul>
+<li>Relancez la commande Maven pour builder et tester.</li>
+<li>Assurez-vous que tous les tests (y compris celui pour <code>renverser</code>) passent et que le build est un succès.</li>
+</ul>
+</li>
+</ol>
+<h3 id="13-cycle-tdd-pour-la-fonction-estpalindromestring-chaine"><a class="header" href="#13-cycle-tdd-pour-la-fonction-estpalindromestring-chaine">1.3. Cycle TDD pour la Fonction <code>estPalindrome(String chaine)</code></a></h3>
+<p>Ajoutez une nouvelle méthode <code>public boolean estPalindrome(String chaine)</code> à votre classe <code>StringUtils</code>. Un palindrome est un mot qui se lit de la même manière dans les deux sens (ex: "radar", "kayak"). Pour cet exercice, considérez que la casse et les espaces ne comptent pas (ex: "Kayak" est un palindrome, "Engage le jeu que je le gagne" est un palindrome).</p>
+<ol>
+<li><strong>Écrivez le Test d'Abord (dans <code>StringUtilsTest.java</code>) :</strong>
+<ul>
+<li>Ajoutez une nouvelle méthode de test pour <code>estPalindrome(String chaine)</code>.</li>
+<li>Testez plusieurs cas : un palindrome simple, un non-palindrome, un palindrome avec casse différente, une chaîne vide (qui peut être considérée comme un palindrome), et un palindrome avec des espaces.</li>
+<li>Ce nouveau test doit faire échouer le build.</li>
+</ul>
+</li>
+<li><strong>Ajoutez la Signature de la Méthode (non implémentée) :</strong>
+<ul>
+<li>Ajoutez <code>public boolean estPalindrome(String chaine)</code> à <code>StringUtils.java</code>, la faisant lever une <code>UnsupportedOperationException</code> ou retourner <code>false</code> par défaut.</li>
+</ul>
+</li>
+<li><strong>Vérification du Cycle Rouge :</strong>
+<ul>
+<li>Lancez <code>mvn package</code>. Le build doit échouer à cause du test <code>estPalindrome()</code>.</li>
+</ul>
+</li>
+<li><strong>Implémentation de la Fonctionnalité :</strong>
+<ul>
+<li>Implémentez la logique de <code>StringUtils.estPalindrome()</code>.</li>
+</ul>
+</li>
+<li><strong>Vérification du Cycle Vert :</strong>
+<ul>
+<li>Relancez <code>mvn package</code>. Tous les tests doivent maintenant passer.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="exercice-2--automatisation-avec-github-actions-et-nouveau-cycle-tdd"><a class="header" href="#exercice-2--automatisation-avec-github-actions-et-nouveau-cycle-tdd">Exercice 2 : Automatisation avec GitHub Actions et Nouveau Cycle TDD</a></h2>
+<p><strong>Objectif :</strong> Mettre en place un workflow GitHub Actions pour votre projet. Puis, ajouter une nouvelle fonctionnalité (<code>compterVoyelles</code>) en suivant le cycle TDD directement avec le feedback de la CI.</p>
+<h3 id="21-préparation-du-dépôt-github-et-ci-initiale"><a class="header" href="#21-préparation-du-dépôt-github-et-ci-initiale">2.1. Préparation du Dépôt GitHub et CI Initiale</a></h3>
+<ol>
+<li>Assurez-vous que votre projet local <code>monStringUtilsApp</code> est un dépôt Git.</li>
+<li>Créez un fichier <code>.gitignore</code> adapté aux projets Maven.</li>
+<li>Commitez toutes vos modifications (le projet avec <code>StringUtils.renverser()</code> et <code>StringUtils.estPalindrome()</code> fonctionnels et testés).</li>
+<li>Créez un nouveau dépôt distant sur GitHub et poussez votre branche <code>main</code>.</li>
+<li><strong>Mettez en place un workflow GitHub Actions</strong> dans <code>.github/workflows/</code> qui :
+<ul>
+<li>Se déclenche sur chaque <code>push</code>.</li>
+<li>Fait un checkout du code.</li>
+<li>Configure l'environnement Java (JDK 17). Pensez à utiliser le cache Maven.</li>
+<li>Lance la commande Maven <code>mvn -B package</code>.</li>
+</ul>
+</li>
+<li>Poussez ce workflow. Vérifiez sur GitHub Actions que le pipeline s'exécute et passe au vert.</li>
+</ol>
+<h3 id="22-cycle-tdd-pour-une-nouvelle-fonctionnalité-comptervoyelles-avec-la-ci"><a class="header" href="#22-cycle-tdd-pour-une-nouvelle-fonctionnalité-comptervoyelles-avec-la-ci">2.2. Cycle TDD pour une Nouvelle Fonctionnalité (<code>compterVoyelles</code>) avec la CI</a></h3>
+<p>Vous allez ajouter une méthode <code>public int compterVoyelles(String chaine)</code> à <code>StringUtils</code>.</p>
+<ol>
+<li><strong>Écrivez le Nouveau Test Localement :</strong>
+<ul>
+<li>Dans <code>StringUtilsTest.java</code>, ajoutez une méthode de test pour <code>compterVoyelles(String chaine)</code>.</li>
+<li>Testez avec des chaînes contenant des voyelles (majuscules et minuscules, par exemple 'a', 'e', 'i', 'o', 'u'), et une chaîne sans voyelles.</li>
+</ul>
+</li>
+<li><strong>Ajoutez la Signature de la Méthode (non implémentée) dans <code>StringUtils.java</code> :</strong>
+<ul>
+<li>Faites-la lever une <code>UnsupportedOperationException</code> ou retourner <code>0</code>.</li>
+</ul>
+</li>
+<li><strong>Commit et Push (Cycle Rouge en CI) :</strong>
+<ul>
+<li>Commitez le nouveau test et la signature de la nouvelle méthode.</li>
+<li>Poussez sur GitHub.</li>
+<li>Allez sur GitHub Actions et <strong>observez l'échec du pipeline</strong>. Analysez les logs pour confirmer que c'est bien votre nouveau test <code>compterVoyelles</code> qui échoue.</li>
+</ul>
+</li>
+<li><strong>Implémentez la Fonctionnalité Localement :</strong>
+<ul>
+<li>Codez la logique de <code>StringUtils.compterVoyelles()</code>.</li>
+</ul>
+</li>
+<li><strong>Testez en Local :</strong>
+<ul>
+<li>Lancez <code>mvn package</code> localement pour vous assurer que tous les tests (y compris <code>compterVoyelles</code>) passent.</li>
+</ul>
+</li>
+<li><strong>Commit et Push la Correction (Cycle Vert en CI) :</strong>
+<ul>
+<li>Commitez l'implémentation de <code>compterVoyelles</code>.</li>
+<li>Poussez sur GitHub.</li>
+<li>Vérifiez sur GitHub Actions que le pipeline passe maintenant au vert.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<p><strong>Bravo !</strong>
+Vous avez appliqué les principes de TDD-light en local et mis en place une chaîne d'intégration continue robuste pour votre projet Java, en observant l'impact direct de vos modifications sur le statut du pipeline.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../day_1/tests_java.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../day_1/tests_java.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

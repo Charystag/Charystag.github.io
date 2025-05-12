@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Day 1</li><li class="chapter-item expanded "><a href="day_1/Github-actions-guided.html"><strong aria-hidden="true">1.</strong> Github Actions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="day_1/Github-actions-non-guided.html"><strong aria-hidden="true">1.1.</strong> non guided</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Day 1</li><li class="chapter-item expanded "><a href="day_1/Github-actions-guided.html"><strong aria-hidden="true">1.</strong> Github Actions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="day_1/Github-actions-non-guided.html"><strong aria-hidden="true">1.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><a href="day_1/tests_java.html"><strong aria-hidden="true">2.</strong> Tests Java</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="day_1/tests_java_non_guide.html"><strong aria-hidden="true">2.1.</strong> non guided</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -1038,6 +1038,398 @@ Créer un workflow de build ou de test standardisé que plusieurs dépôts de vo
 </ol>
 <hr />
 <p>Ces exercices couvrent une gamme variée de compétences et de concepts nécessaires pour maîtriser les GitHub Actions, allant des bases pour les débutants à des défis avancés pour les utilisateurs plus expérimentés. Chaque exercice est conçu pour vous fournir des compétences pratiques que vous pouvez appliquer directement à vos propres projets et workflows.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp-guidé--de-maven-local-à-lintégration-continue-avec-github-actions-java"><a class="header" href="#tp-guidé--de-maven-local-à-lintégration-continue-avec-github-actions-java">TP Guidé : De Maven Local à l'Intégration Continue avec GitHub Actions (Java)</a></h1>
+<p><strong>Objectif Général :</strong>
+Ce TP est divisé en deux grands exercices.</p>
+<ol>
+<li><strong>Exercice 1 :</strong> Maîtriser le cycle de développement et de test d'un projet Java avec Maven, entièrement en local, en appliquant une approche TDD-light.</li>
+<li><strong>Exercice 2 :</strong> Prendre le projet fonctionnel localement et mettre en place une chaîne d'Intégration Continue (CI) avec GitHub Actions pour automatiser les builds et les tests.</li>
+</ol>
+<p><strong>Prérequis :</strong></p>
+<ul>
+<li>Git installé et configuré.</li>
+<li>JDK (version 8 ou supérieure, compatible avec l'archétype ; 11+ est bien pour la CI) et Apache Maven installés.</li>
+<li>Un compte GitHub.</li>
+</ul>
+<hr />
+<h2 id="exercice-1--maîtriser-maven-en-local-avec-une-approche-tdd-light"><a class="header" href="#exercice-1--maîtriser-maven-en-local-avec-une-approche-tdd-light">Exercice 1 : Maîtriser Maven en Local avec une Approche TDD-Light</a></h2>
+<p><strong>Objectif :</strong> Créer un projet Java avec Maven, le compiler et tester avec <code>mvn package</code>, puis ajouter une nouvelle fonctionnalité en suivant un mini-cycle TDD (écrire un test qui échoue, écrire le code pour le faire passer).</p>
+<h3 id="11-générer-le-projet-maven"><a class="header" href="#11-générer-le-projet-maven">1.1. Générer le Projet Maven</a></h3>
+<ol>
+<li>
+<p><strong>Ouvre ton terminal</strong> et navigue vers le dossier où tu souhaites créer ton projet.</p>
+</li>
+<li>
+<p><strong>Génère le projet</strong> avec la commande standard de l'archétype <code>maven-archetype-quickstart</code>:</p>
+<pre><code class="language-bash">mvn archetype:generate -DgroupId=com.maventdd.app -DartifactId=maSuperAppJava -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+</code></pre>
+<ul>
+<li>Cela crée un dossier <code>maSuperAppJava</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Navigue dans le dossier du projet</strong> :</p>
+<pre><code class="language-bash">cd maSuperAppJava
+</code></pre>
+<p>Tu y trouveras la structure Maven classique avec un <code>pom.xml</code>, <code>src/main/java/com/maventdd/app/App.java</code> et <code>src/test/java/com/maventdd/app/AppTest.java</code>.
+L'archétype <code>maven-archetype-quickstart:1.4</code> utilise typiquement JUnit 4.x. Pour cet exercice, <strong>nous n'allons PAS modifier le <code>pom.xml</code> initialement</strong> pour les dépendances de test, on utilise ce qui est fourni.</p>
+<p><em>Optionnel (mais bonne pratique pour la suite et la CI) :</em> Tu peux juste t'assurer que ton <code>pom.xml</code> spécifie une version de Java pour le compilateur que tu utiliseras aussi dans GitHub Actions (par exemple Java 11). Si la section <code>&lt;properties&gt;</code> n'existe pas, ajoute-la. Si elle existe, ajoute ou modifie <code>maven.compiler.source</code> et <code>maven.compiler.target</code> :</p>
+<pre><code class="language-xml">&lt;properties&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
+&lt;/properties&gt;
+</code></pre>
+</li>
+</ol>
+<h3 id="12-premier-build-et-tests-locaux-cycle-vert-initial"><a class="header" href="#12-premier-build-et-tests-locaux-cycle-vert-initial">1.2. Premier Build et Tests Locaux (Cycle Vert Initial)</a></h3>
+<p>La commande <code>mvn package</code> va compiler ton code, exécuter les tests (ceux de <code>AppTest.java</code> qui sont fournis et qui doivent passer), et créer un fichier JAR.</p>
+<ol>
+<li><strong>Lance le build complet (compilation, tests, packaging) :</strong>
+<pre><code class="language-bash">mvn package
+</code></pre>
+Tu devrais voir des logs de compilation et de test, et à la fin : <code>[INFO] BUILD SUCCESS</code>. Les tests par défaut sont passés. Le JAR est dans le dossier <code>target/</code>.</li>
+</ol>
+<h3 id="13-préparation-pour-le-cycle-tdd-light--nouvelle-fonctionnalité"><a class="header" href="#13-préparation-pour-le-cycle-tdd-light--nouvelle-fonctionnalité">1.3. Préparation pour le Cycle TDD-Light : Nouvelle Fonctionnalité</a></h3>
+<p>Nous allons ajouter une classe <code>Calculatrice</code> avec une méthode <code>additionner</code>.</p>
+<ol>
+<li>
+<p><strong>Crée la classe <code>Calculatrice.java</code></strong> dans <code>src/main/java/com/maventdd/app/</code> (à côté de <code>App.java</code>) :</p>
+<pre><code class="language-java">package com.maventdd.app; // Assure-toi que le package est correct
+
+public class Calculatrice {
+    public int additionner(int a, int b) {
+        // Laisser "cassé" ou non implémenté pour l'instant
+        throw new UnsupportedOperationException("Méthode additionner() pas encore implémentée !");
+    }
+}
+</code></pre>
+</li>
+<li>
+<p><strong>Crée la classe de test <code>CalculatriceTest.java</code></strong> dans <code>src/test/java/com/maventdd/app/</code> (à côté de <code>AppTest.java</code>).
+Utilise la syntaxe JUnit 4 (comme dans <code>AppTest.java</code> généré) :</p>
+<pre><code class="language-java">package com.maventdd.app; // Assure-toi que le package est correct
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+public class CalculatriceTest {
+    @Test
+    public void testAdditionner() {
+        Calculatrice calc = new Calculatrice();
+        assertEquals(5, calc.additionner(2, 3));
+    }
+}
+</code></pre>
+</li>
+<li>
+<p><strong>Modifie <code>App.java</code></strong> pour instancier <code>Calculatrice</code> (juste pour s'assurer qu'elle est bien prise en compte par la compilation si besoin, bien que les tests devraient suffire) :</p>
+<pre><code class="language-java">package com.maventdd.app;
+
+public class App {
+    public static void main( String[] args ) {
+        System.out.println( "Hello World!" );
+        Calculatrice calc = new Calculatrice(); // Ajout pour que la classe soit "vue"
+    }
+}
+</code></pre>
+</li>
+</ol>
+<h3 id="14-deuxième-build-et-tests-locaux-cycle-rouge"><a class="header" href="#14-deuxième-build-et-tests-locaux-cycle-rouge">1.4. Deuxième Build et Tests Locaux (Cycle Rouge)</a></h3>
+<ol>
+<li><strong>Relance le build complet :</strong>
+<pre><code class="language-bash">mvn package
+</code></pre>
+Cette fois, tu devrais voir <code>[INFO] BUILD FAILURE</code>. Le nouveau test <code>CalculatriceTest.testAdditionner</code> échoue car la méthode <code>additionner</code> lève une exception (ou retourne une mauvaise valeur si tu as choisi cette option). C'est notre étape "rouge".</li>
+</ol>
+<h3 id="15-implémenter-la-fonctionnalité-cycle-vert"><a class="header" href="#15-implémenter-la-fonctionnalité-cycle-vert">1.5. Implémenter la Fonctionnalité (Cycle Vert)</a></h3>
+<ol>
+<li><strong>Modifie <code>Calculatrice.java</code></strong> pour implémenter correctement la méthode :
+<pre><code class="language-java">package com.maventdd.app;
+
+public class Calculatrice {
+    public int additionner(int a, int b) {
+        return a + b; // L'implémentation correcte !
+    }
+}
+</code></pre>
+</li>
+<li><strong>Relance le build complet :</strong>
+<pre><code class="language-bash">mvn package
+</code></pre>
+Maintenant, tu devrais revoir <code>[INFO] BUILD SUCCESS</code>. Tous les tests (ceux de <code>AppTest</code> et <code>CalculatriceTest</code>) passent.</li>
+</ol>
+<p><strong>Bravo pour cette première partie !</strong> Tu as vu comment Maven compile, teste, et package, et tu as fait un mini-cycle TDD en local.</p>
+<hr />
+<h2 id="exercice-2--intégration-continue-avec-github-actions"><a class="header" href="#exercice-2--intégration-continue-avec-github-actions">Exercice 2 : Intégration Continue avec GitHub Actions</a></h2>
+<p><strong>Objectif :</strong> Automatiser le processus de build et de test avec GitHub Actions à chaque fois que tu pousses du code.</p>
+<h3 id="21-versionner-le-projet-avec-git-et-pousser-sur-github"><a class="header" href="#21-versionner-le-projet-avec-git-et-pousser-sur-github">2.1. Versionner le Projet avec Git et Pousser sur GitHub</a></h3>
+<ol>
+<li>Si ce n'est pas déjà fait, <strong>initialise un dépôt Git</strong> à la racine de <code>maSuperAppJava</code> et fais ton premier commit avec le code fonctionnel :
+<pre><code class="language-bash">git init
+echo "target/" &gt; .gitignore
+echo ".idea/" &gt;&gt; .gitignore
+echo "*.iml" &gt;&gt; .gitignore
+echo ".vscode/" &gt;&gt; .gitignore
+echo ".DS_Store" &gt;&gt; .gitignore
+# (Si tu avais déjà un .git, fais juste les add/commit nécessaires)
+git add .
+git commit -m "Projet Java Maven avec Calculatrice fonctionnelle et tests OK"
+</code></pre>
+</li>
+<li><strong>Crée un dépôt distant</strong> sur GitHub (par exemple, nomme-le <code>maSuperAppJava-CI</code>).</li>
+<li><strong>Lie ton dépôt local au dépôt distant</strong> et <strong>pousse ton code</strong> :
+<pre><code class="language-bash">git remote add origin &lt;URL_DE_TON_DEPOT_GITHUB.git&gt;
+git branch -M main
+git push -u origin main
+</code></pre>
+</li>
+</ol>
+<h3 id="22-créer-le-workflow-github-actions"><a class="header" href="#22-créer-le-workflow-github-actions">2.2. Créer le Workflow GitHub Actions</a></h3>
+<ol>
+<li>
+<p>À la racine de ton projet <code>maSuperAppJava</code>, crée le dossier <code>.github/</code> s'il n'existe pas, puis dedans un dossier <code>workflows/</code>.</p>
+</li>
+<li>
+<p>Dans <code>.github/workflows/</code>, crée un fichier nommé <code>maven-ci.yml</code> (ou le nom que tu veux) avec le contenu suivant :</p>
+<pre><code class="language-yaml">name: Java CI with Maven
+
+on: [push] # Déclenche le workflow à chaque push sur n'importe quelle branche
+
+jobs:
+  build_and_test: # Nom du job
+    runs-on: ubuntu-latest # Utilise une machine virtuelle Ubuntu fournie par GitHub
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Action pour récupérer ton code du dépôt
+
+      - name: Set up JDK 17 # Ou la version que tu as configurée dans ton pom.xml
+        uses: actions/setup-java@v4 # Action pour configurer Java
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven' # Met en cache les dépendances Maven pour accélérer les builds suivants
+
+      - name: Build and test with Maven
+        working-directory: ./java/my-app # Attention a mettre le bon dossier
+        run: mvn -B package # -B pour batch mode. 'package' compile, teste, et package.
+</code></pre>
+</li>
+</ol>
+<h3 id="23-push-du-workflow-et-vérification-sur-github-actions"><a class="header" href="#23-push-du-workflow-et-vérification-sur-github-actions">2.3. Push du Workflow et Vérification sur GitHub Actions</a></h3>
+<ol>
+<li><strong>Commit et push</strong> ton nouveau fichier de workflow :
+<pre><code class="language-bash">git add .github/workflows/maven-ci.yml
+git commit -m "Ajout du workflow GitHub Actions pour build et test Maven"
+git push
+</code></pre>
+</li>
+<li>Va sur ton dépôt GitHub, dans l'onglet <strong>"Actions"</strong>.</li>
+<li>Tu devrais voir ton workflow (<code>Java CI with Maven</code>) s'exécuter. Clique dessus pour voir les détails des étapes (<code>steps</code>).</li>
+<li>Le workflow devrait <strong>réussir</strong> (passer au vert), car il exécute <code>mvn -B package</code>, qui inclut les tests, et tous tes tests locaux passaient.</li>
+</ol>
+<h3 id="24-simuler-un-Échec-cycle-rouge-en-ci"><a class="header" href="#24-simuler-un-Échec-cycle-rouge-en-ci">2.4. Simuler un Échec (Cycle Rouge en CI)</a></h3>
+<ol>
+<li>Retourne dans ton code local, dans <code>Calculatrice.java</code>. <strong>Introduis une erreur</strong> dans la méthode <code>additionner</code> :
+<pre><code class="language-java">// Dans Calculatrice.java
+public int additionner(int a, int b) {
+    return a + b + 1; // Oups, une erreur !
+}
+</code></pre>
+</li>
+<li><strong>Commit et push</strong> cette modification "cassée" :
+<pre><code class="language-bash">git add src/main/java/com/maventdd/app/Calculatrice.java
+git commit -m "Erreur intentionnelle dans Calculatrice.additionner"
+git push
+</code></pre>
+</li>
+<li>Retourne sur GitHub Actions. Le nouveau workflow lancé par ce push devrait <strong>échouer</strong> à l'étape "Build and test with Maven". Regarde les logs pour voir l'échec du test.</li>
+</ol>
+<h3 id="25-corriger-et-valider-cycle-vert-en-ci"><a class="header" href="#25-corriger-et-valider-cycle-vert-en-ci">2.5. Corriger et Valider (Cycle Vert en CI)</a></h3>
+<ol>
+<li>Dans ton code local, <strong>corrige l'erreur</strong> dans <code>Calculatrice.java</code> :
+<pre><code class="language-java">// Dans Calculatrice.java
+public int additionner(int a, int b) {
+    return a + b; // C'est corrigé !
+}
+</code></pre>
+</li>
+<li><strong>Commit et push</strong> la correction :
+<pre><code class="language-bash">git add src/main/java/com/maventdd/app/Calculatrice.java
+git commit -m "Correction de Calculatrice.additionner"
+git push
+</code></pre>
+</li>
+<li>Sur GitHub Actions, le dernier workflow devrait maintenant <strong>réussir</strong>.</li>
+</ol>
+<hr />
+<p><strong>Félicitations !</strong>
+Tu as maintenant :</p>
+<ul>
+<li>Créé et testé un projet Java avec Maven en local.</li>
+<li>Mis en place une Intégration Continue avec GitHub Actions qui build et teste ton projet à chaque push.</li>
+<li>Expérimenté le cycle "rouge/vert" directement dans ton pipeline CI.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tp-non-guidé--de-maven-local-à-lintégration-continue-avec-github-actions-java---challenge"><a class="header" href="#tp-non-guidé--de-maven-local-à-lintégration-continue-avec-github-actions-java---challenge">TP Non Guidé : De Maven Local à l'Intégration Continue avec GitHub Actions (Java - Challenge)</a></h1>
+<p><strong>Objectif Général :</strong>
+Ce TP est conçu pour être réalisé après avoir compris les bases de Maven et de GitHub Actions. Il vise à consolider votre compréhension du cycle de développement Java avec Maven et son automatisation via GitHub Actions en vous faisant appliquer les principes vus précédemment.</p>
+<ol>
+<li><strong>Exercice 1 :</strong> Développer une petite fonctionnalité en local en utilisant une approche TDD-light avec Maven.</li>
+<li><strong>Exercice 2 :</strong> Mettre en place une chaîne d'Intégration Continue pour valider votre travail avec GitHub Actions.</li>
+</ol>
+<p><strong>Ressource Utile :</strong></p>
+<ul>
+<li>Pour vous rafraîchir la mémoire sur les commandes Maven de base et la structure d'un projet : <a href="https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html">Maven in 5 Minutes</a></li>
+</ul>
+<p><strong>Prérequis :</strong></p>
+<ul>
+<li>Maîtrise des commandes Git de base et interaction avec un dépôt distant (GitHub).</li>
+<li>Connaissance de la commande <code>mvn archetype:generate</code> pour créer un projet Maven.</li>
+<li>Compréhension du cycle de vie Maven, notamment la phase <code>package</code>.</li>
+<li>Notions de base sur la syntaxe des workflows GitHub Actions.</li>
+<li>JDK (version 17 ou supérieure recommandée) et Apache Maven installés et configurés localement.</li>
+</ul>
+<hr />
+<h2 id="exercice-1--développement-local-dune-utility-string-avec-maven-approche-tdd-light"><a class="header" href="#exercice-1--développement-local-dune-utility-string-avec-maven-approche-tdd-light">Exercice 1 : Développement Local d'une Utility String avec Maven (Approche TDD-Light)</a></h2>
+<p><strong>Objectif :</strong> Mettre en place un projet Maven, y ajouter une nouvelle classe utilitaire pour les chaînes de caractères, et implémenter deux méthodes (<code>renverser</code> et <code>estPalindrome</code>) en suivant un cycle "test d'abord" pour chacune.</p>
+<h3 id="11-initialisation-du-projet"><a class="header" href="#11-initialisation-du-projet">1.1. Initialisation du Projet</a></h3>
+<ol>
+<li><strong>Créez un nouveau projet Maven</strong> en utilisant l'archétype <code>maven-archetype-quickstart</code>.
+<ul>
+<li><code>groupId</code>: <code>com.formation.stringutils</code></li>
+<li><code>artifactId</code>: <code>monStringUtilsApp</code></li>
+</ul>
+</li>
+<li>Assurez-vous que le projet généré compile et que les tests par défaut (s'il y en a, fournis par l'archétype) passent en utilisant la commande Maven appropriée pour builder et tester (typiquement <code>mvn package</code>).</li>
+<li>Configurez le <code>pom.xml</code> pour utiliser <strong>Java 17</strong> pour la compilation (C'est normalement la configuration par defaut)</li>
+</ol>
+<h3 id="12-cycle-tdd-pour-la-fonction-renverserstring-chaine"><a class="header" href="#12-cycle-tdd-pour-la-fonction-renverserstring-chaine">1.2. Cycle TDD pour la Fonction <code>renverser(String chaine)</code></a></h3>
+<p>Vous allez maintenant ajouter une classe <code>StringUtils</code> avec une méthode <code>public String renverser(String chaine)</code>.</p>
+<ol>
+<li><strong>Écrivez le Test d'Abord :</strong>
+<ul>
+<li>Créez une nouvelle classe de test <code>StringUtilsTest.java</code> dans le répertoire de test approprié.</li>
+<li>Dans cette classe, écrivez une méthode de test (en utilisant la syntaxe JUnit 4.x, généralement fournie par l'archétype <code>maven-archetype-quickstart:1.4</code>) qui vérifiera le bon fonctionnement de la future méthode <code>renverser</code>. Testez au moins deux cas (ex: <code>"radar"</code>, <code>"Java"</code>). Ce test doit initialement échouer.</li>
+</ul>
+</li>
+<li><strong>Créez la Classe et la Méthode (non implémentée) :</strong>
+<ul>
+<li>Créez la classe <code>StringUtils.java</code> dans le répertoire source principal approprié.</li>
+<li>Ajoutez la signature de la méthode <code>public String renverser(String chaine)</code>. Pour l'instant, faites en sorte qu'elle lève une <code>UnsupportedOperationException</code> ou qu'elle retourne <code>null</code> (ou une chaîne vide) pour que le test échoue.</li>
+</ul>
+</li>
+<li><strong>Vérification du Cycle Rouge :</strong>
+<ul>
+<li>Lancez la commande Maven pour builder et tester votre projet.</li>
+<li>Confirmez que le build échoue et que l'échec est bien dû à votre nouveau test pour <code>StringUtils.renverser()</code>.</li>
+</ul>
+</li>
+<li><strong>Implémentation de la Fonctionnalité :</strong>
+<ul>
+<li>Maintenant, modifiez la méthode <code>StringUtils.renverser()</code> pour qu'elle implémente correctement la logique de renversement de la chaîne de caractères.</li>
+</ul>
+</li>
+<li><strong>Vérification du Cycle Vert :</strong>
+<ul>
+<li>Relancez la commande Maven pour builder et tester.</li>
+<li>Assurez-vous que tous les tests (y compris celui pour <code>renverser</code>) passent et que le build est un succès.</li>
+</ul>
+</li>
+</ol>
+<h3 id="13-cycle-tdd-pour-la-fonction-estpalindromestring-chaine"><a class="header" href="#13-cycle-tdd-pour-la-fonction-estpalindromestring-chaine">1.3. Cycle TDD pour la Fonction <code>estPalindrome(String chaine)</code></a></h3>
+<p>Ajoutez une nouvelle méthode <code>public boolean estPalindrome(String chaine)</code> à votre classe <code>StringUtils</code>. Un palindrome est un mot qui se lit de la même manière dans les deux sens (ex: "radar", "kayak"). Pour cet exercice, considérez que la casse et les espaces ne comptent pas (ex: "Kayak" est un palindrome, "Engage le jeu que je le gagne" est un palindrome).</p>
+<ol>
+<li><strong>Écrivez le Test d'Abord (dans <code>StringUtilsTest.java</code>) :</strong>
+<ul>
+<li>Ajoutez une nouvelle méthode de test pour <code>estPalindrome(String chaine)</code>.</li>
+<li>Testez plusieurs cas : un palindrome simple, un non-palindrome, un palindrome avec casse différente, une chaîne vide (qui peut être considérée comme un palindrome), et un palindrome avec des espaces.</li>
+<li>Ce nouveau test doit faire échouer le build.</li>
+</ul>
+</li>
+<li><strong>Ajoutez la Signature de la Méthode (non implémentée) :</strong>
+<ul>
+<li>Ajoutez <code>public boolean estPalindrome(String chaine)</code> à <code>StringUtils.java</code>, la faisant lever une <code>UnsupportedOperationException</code> ou retourner <code>false</code> par défaut.</li>
+</ul>
+</li>
+<li><strong>Vérification du Cycle Rouge :</strong>
+<ul>
+<li>Lancez <code>mvn package</code>. Le build doit échouer à cause du test <code>estPalindrome()</code>.</li>
+</ul>
+</li>
+<li><strong>Implémentation de la Fonctionnalité :</strong>
+<ul>
+<li>Implémentez la logique de <code>StringUtils.estPalindrome()</code>.</li>
+</ul>
+</li>
+<li><strong>Vérification du Cycle Vert :</strong>
+<ul>
+<li>Relancez <code>mvn package</code>. Tous les tests doivent maintenant passer.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="exercice-2--automatisation-avec-github-actions-et-nouveau-cycle-tdd"><a class="header" href="#exercice-2--automatisation-avec-github-actions-et-nouveau-cycle-tdd">Exercice 2 : Automatisation avec GitHub Actions et Nouveau Cycle TDD</a></h2>
+<p><strong>Objectif :</strong> Mettre en place un workflow GitHub Actions pour votre projet. Puis, ajouter une nouvelle fonctionnalité (<code>compterVoyelles</code>) en suivant le cycle TDD directement avec le feedback de la CI.</p>
+<h3 id="21-préparation-du-dépôt-github-et-ci-initiale"><a class="header" href="#21-préparation-du-dépôt-github-et-ci-initiale">2.1. Préparation du Dépôt GitHub et CI Initiale</a></h3>
+<ol>
+<li>Assurez-vous que votre projet local <code>monStringUtilsApp</code> est un dépôt Git.</li>
+<li>Créez un fichier <code>.gitignore</code> adapté aux projets Maven.</li>
+<li>Commitez toutes vos modifications (le projet avec <code>StringUtils.renverser()</code> et <code>StringUtils.estPalindrome()</code> fonctionnels et testés).</li>
+<li>Créez un nouveau dépôt distant sur GitHub et poussez votre branche <code>main</code>.</li>
+<li><strong>Mettez en place un workflow GitHub Actions</strong> dans <code>.github/workflows/</code> qui :
+<ul>
+<li>Se déclenche sur chaque <code>push</code>.</li>
+<li>Fait un checkout du code.</li>
+<li>Configure l'environnement Java (JDK 17). Pensez à utiliser le cache Maven.</li>
+<li>Lance la commande Maven <code>mvn -B package</code>.</li>
+</ul>
+</li>
+<li>Poussez ce workflow. Vérifiez sur GitHub Actions que le pipeline s'exécute et passe au vert.</li>
+</ol>
+<h3 id="22-cycle-tdd-pour-une-nouvelle-fonctionnalité-comptervoyelles-avec-la-ci"><a class="header" href="#22-cycle-tdd-pour-une-nouvelle-fonctionnalité-comptervoyelles-avec-la-ci">2.2. Cycle TDD pour une Nouvelle Fonctionnalité (<code>compterVoyelles</code>) avec la CI</a></h3>
+<p>Vous allez ajouter une méthode <code>public int compterVoyelles(String chaine)</code> à <code>StringUtils</code>.</p>
+<ol>
+<li><strong>Écrivez le Nouveau Test Localement :</strong>
+<ul>
+<li>Dans <code>StringUtilsTest.java</code>, ajoutez une méthode de test pour <code>compterVoyelles(String chaine)</code>.</li>
+<li>Testez avec des chaînes contenant des voyelles (majuscules et minuscules, par exemple 'a', 'e', 'i', 'o', 'u'), et une chaîne sans voyelles.</li>
+</ul>
+</li>
+<li><strong>Ajoutez la Signature de la Méthode (non implémentée) dans <code>StringUtils.java</code> :</strong>
+<ul>
+<li>Faites-la lever une <code>UnsupportedOperationException</code> ou retourner <code>0</code>.</li>
+</ul>
+</li>
+<li><strong>Commit et Push (Cycle Rouge en CI) :</strong>
+<ul>
+<li>Commitez le nouveau test et la signature de la nouvelle méthode.</li>
+<li>Poussez sur GitHub.</li>
+<li>Allez sur GitHub Actions et <strong>observez l'échec du pipeline</strong>. Analysez les logs pour confirmer que c'est bien votre nouveau test <code>compterVoyelles</code> qui échoue.</li>
+</ul>
+</li>
+<li><strong>Implémentez la Fonctionnalité Localement :</strong>
+<ul>
+<li>Codez la logique de <code>StringUtils.compterVoyelles()</code>.</li>
+</ul>
+</li>
+<li><strong>Testez en Local :</strong>
+<ul>
+<li>Lancez <code>mvn package</code> localement pour vous assurer que tous les tests (y compris <code>compterVoyelles</code>) passent.</li>
+</ul>
+</li>
+<li><strong>Commit et Push la Correction (Cycle Vert en CI) :</strong>
+<ul>
+<li>Commitez l'implémentation de <code>compterVoyelles</code>.</li>
+<li>Poussez sur GitHub.</li>
+<li>Vérifiez sur GitHub Actions que le pipeline passe maintenant au vert.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<p><strong>Bravo !</strong>
+Vous avez appliqué les principes de TDD-light en local et mis en place une chaîne d'intégration continue robuste pour votre projet Java, en observant l'impact direct de vos modifications sur le statut du pipeline.</p>
 
                     </main>
 
