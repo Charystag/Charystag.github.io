@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Dockerisation Application Java - CI-CD</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Day 1</li><li class="chapter-item expanded "><a href="../day_1/Github-actions-guided.html"><strong aria-hidden="true">1.</strong> Github Actions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../day_1/Github-actions-non-guided.html"><strong aria-hidden="true">1.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Day 2</li><li class="chapter-item expanded "><a href="../day_2/tests_java.html"><strong aria-hidden="true">2.</strong> Tests Java</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../day_2/tests_java_non_guide.html"><strong aria-hidden="true">2.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><a href="../day_2/dockerize_java_app.html" class="active"><strong aria-hidden="true">3.</strong> Dockerisation Application Java</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">CI-CD</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="exercice-pratique--Évolution-et-conteneurisation-dune-application-java"><a class="header" href="#exercice-pratique--Évolution-et-conteneurisation-dune-application-java">Exercice Pratique : Évolution et Conteneurisation d'une Application Java</a></h1>
+<p><strong>Objectif Général :</strong>
+Cet exercice vise à modifier une application Java existante pour la rendre interactive et à la conteneuriser avec Docker. Vous appliquerez les bonnes pratiques pour la création d'une méthode principale fonctionnelle et la construction d'une image Docker.</p>
+<p><strong>Contexte :</strong>
+Vous repartirez du projet Java <code>maSuperAppJava</code> précédemment créé avec Maven. Ce projet inclut une classe <code>Calculatrice</code> avec une méthode <code>additionner(int a, int b)</code> fonctionnelle et testée. L'objectif est maintenant d'utiliser cette calculatrice dans la méthode <code>main</code> de l'application et de packager l'ensemble dans une image Docker.</p>
+<hr />
+<h2 id="partie-1--amélioration-de-la-classe-principale-appjava"><a class="header" href="#partie-1--amélioration-de-la-classe-principale-appjava">Partie 1 : Amélioration de la Classe Principale (<code>App.java</code>)</a></h2>
+<p>L'objectif de cette partie est de rendre la méthode <code>main</code> de la classe <code>com.maventdd.app.App</code> capable d'interagir avec l'utilisateur et d'utiliser la logique métier de la classe <code>Calculatrice</code>.</p>
+<p><strong>Instructions :</strong></p>
+<ol>
+<li>
+<p><strong>Modification de <code>App.java</code> :</strong></p>
+<ul>
+<li>Adaptez la méthode <code>main</code> pour qu'elle accepte deux arguments numériques (entiers) passés en ligne de commande lors de son exécution.</li>
+<li>Ces deux nombres devront être utilisés comme opérandes pour la méthode <code>additionner</code> de la classe <code>Calculatrice</code>.</li>
+<li>Le résultat de l'addition devra être affiché de manière claire et compréhensible sur la sortie standard (console).</li>
+<li>Implémentez une gestion des erreurs basique :
+<ul>
+<li>Si le nombre d'arguments fournis n'est pas correct (différent de deux), l'application devra afficher un message d'erreur explicite indiquant l'usage attendu et se terminer.</li>
+<li>Si les arguments fournis ne peuvent pas être interprétés comme des nombres entiers, un message d'erreur approprié devra également être affiché avant la terminaison du programme.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Compilation et Test Local :</strong></p>
+<ul>
+<li>Utilisez Maven pour compiler votre projet et générer l'artefact JAR (<code>mvn package</code>).</li>
+<li>Testez le bon fonctionnement de votre application en exécutant le JAR généré directement depuis votre terminal. Assurez-vous de tester les scénarios nominaux (avec des entrées valides) ainsi que les cas d'erreur que vous avez implémentés (nombre incorrect d'arguments, arguments non numériques).</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="partie-2--dockerisation-de-lapplication"><a class="header" href="#partie-2--dockerisation-de-lapplication">Partie 2 : Dockerisation de l'Application</a></h2>
+<p>L'objectif de cette partie est de créer une image Docker pour votre application Java, permettant de l'exécuter de manière isolée et reproductible.</p>
+<p><strong>Instructions :</strong></p>
+<ol>
+<li>
+<p><strong>Création du <code>Dockerfile</code> :</strong></p>
+<ul>
+<li>À la racine de votre projet <code>maSuperAppJava</code> (au même niveau que le fichier <code>pom.xml</code>), créez un fichier nommé <code>Dockerfile</code> (sans extension).</li>
+<li>Ce <code>Dockerfile</code> devra définir les étapes nécessaires pour construire l'image de votre application :
+<ul>
+<li><strong>Image de Base :</strong> Spécifiez une image de base Java (JRE) officielle et à jour (par exemple, une image basée sur Temurin ou OpenJDK, compatible avec la version de Java configurée dans votre <code>pom.xml</code>).</li>
+<li><strong>Copie de l'Artefact :</strong> Incluez les instructions pour copier l'artefact JAR de votre application (préalablement construit par Maven et se trouvant dans le répertoire <code>target/</code>) dans l'image Docker.</li>
+<li><strong>Point d'Entrée (<code>ENTRYPOINT</code>) ou Commande (<code>CMD</code>) :</strong> Définissez la commande qui sera exécutée au démarrage d'un conteneur basé sur votre image. Cette commande doit lancer votre application Java (via sa classe principale <code>com.maventdd.app.App</code>) et doit permettre de lui transmettre les deux arguments numériques attendus par la méthode <code>main</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Construction de l'Image Docker :</strong></p>
+<ul>
+<li>Assurez-vous que votre service Docker est en cours d'exécution.</li>
+<li>Depuis votre terminal, positionnez-vous à la racine de votre projet <code>maSuperAppJava</code>.</li>
+<li>Construisez l'image Docker en utilisant la commande <code>docker build</code>. Attribuez un nom (par exemple, <code>masuperappjava</code> ou <code>votre-nom/masuperappjava</code>) et un tag (par exemple, <code>1.0</code> ou <code>latest</code>) à votre image pour faciliter son identification.</li>
+</ul>
+</li>
+<li>
+<p><strong>Test de l'Image Docker :</strong></p>
+<ul>
+<li>Une fois l'image construite avec succès, exécutez un conteneur à partir de celle-ci en utilisant la commande <code>docker run</code>.</li>
+<li>Lors du lancement du conteneur, fournissez deux nombres entiers comme arguments.</li>
+<li>Vérifiez que la sortie affichée par le conteneur correspond au résultat attendu de l'addition des deux nombres fournis.</li>
+<li>Testez également le comportement en cas d'arguments incorrects (nombre, type) pour vous assurer que la gestion des erreurs de l'application fonctionne aussi dans l'environnement conteneurisé.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<p><strong>Livrables Attendus :</strong></p>
+<ul>
+<li>Le code source modifié du fichier <code>src/main/java/com/maventdd/app/App.java</code>.</li>
+<li>Le fichier <code>Dockerfile</code> créé à la racine de votre projet.</li>
+</ul>
+<p><strong>Critères de Validation :</strong></p>
+<ul>
+<li>La méthode <code>main</code> de <code>App.java</code> prend correctement en charge les arguments de la ligne de commande, utilise <code>Calculatrice.additionner()</code>, affiche le résultat et gère les erreurs d'arguments lors de l'exécution locale via <code>java -cp ...</code>.</li>
+<li>La commande <code>mvn package</code> s'exécute avec succès.</li>
+<li>L'image Docker est construite avec succès via <code>docker build .</code> sans erreurs.</li>
+<li>Un conteneur démarré à partir de l'image (<code>docker run &lt;nom_image&gt; &lt;arg1&gt; &lt;arg2&gt;</code>) exécute l'application, affiche le résultat correct de l'addition des arguments fournis et gère correctement les erreurs d'arguments.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../day_2/tests_java_non_guide.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../day_2/tests_java_non_guide.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

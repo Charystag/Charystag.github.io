@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Day 1</li><li class="chapter-item expanded "><a href="day_1/Github-actions-guided.html"><strong aria-hidden="true">1.</strong> Github Actions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="day_1/Github-actions-non-guided.html"><strong aria-hidden="true">1.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><a href="day_1/tests_java.html"><strong aria-hidden="true">2.</strong> Tests Java</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="day_1/tests_java_non_guide.html"><strong aria-hidden="true">2.1.</strong> non guided</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Day 1</li><li class="chapter-item expanded "><a href="day_1/Github-actions-guided.html"><strong aria-hidden="true">1.</strong> Github Actions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="day_1/Github-actions-non-guided.html"><strong aria-hidden="true">1.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Day 2</li><li class="chapter-item expanded "><a href="day_2/tests_java.html"><strong aria-hidden="true">2.</strong> Tests Java</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="day_2/tests_java_non_guide.html"><strong aria-hidden="true">2.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><a href="day_2/dockerize_java_app.html"><strong aria-hidden="true">3.</strong> Dockerisation Application Java</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -1430,6 +1430,87 @@ Ce TP est conçu pour être réalisé après avoir compris les bases de Maven et
 <hr />
 <p><strong>Bravo !</strong>
 Vous avez appliqué les principes de TDD-light en local et mis en place une chaîne d'intégration continue robuste pour votre projet Java, en observant l'impact direct de vos modifications sur le statut du pipeline.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exercice-pratique--Évolution-et-conteneurisation-dune-application-java"><a class="header" href="#exercice-pratique--Évolution-et-conteneurisation-dune-application-java">Exercice Pratique : Évolution et Conteneurisation d'une Application Java</a></h1>
+<p><strong>Objectif Général :</strong>
+Cet exercice vise à modifier une application Java existante pour la rendre interactive et à la conteneuriser avec Docker. Vous appliquerez les bonnes pratiques pour la création d'une méthode principale fonctionnelle et la construction d'une image Docker.</p>
+<p><strong>Contexte :</strong>
+Vous repartirez du projet Java <code>maSuperAppJava</code> précédemment créé avec Maven. Ce projet inclut une classe <code>Calculatrice</code> avec une méthode <code>additionner(int a, int b)</code> fonctionnelle et testée. L'objectif est maintenant d'utiliser cette calculatrice dans la méthode <code>main</code> de l'application et de packager l'ensemble dans une image Docker.</p>
+<hr />
+<h2 id="partie-1--amélioration-de-la-classe-principale-appjava"><a class="header" href="#partie-1--amélioration-de-la-classe-principale-appjava">Partie 1 : Amélioration de la Classe Principale (<code>App.java</code>)</a></h2>
+<p>L'objectif de cette partie est de rendre la méthode <code>main</code> de la classe <code>com.maventdd.app.App</code> capable d'interagir avec l'utilisateur et d'utiliser la logique métier de la classe <code>Calculatrice</code>.</p>
+<p><strong>Instructions :</strong></p>
+<ol>
+<li>
+<p><strong>Modification de <code>App.java</code> :</strong></p>
+<ul>
+<li>Adaptez la méthode <code>main</code> pour qu'elle accepte deux arguments numériques (entiers) passés en ligne de commande lors de son exécution.</li>
+<li>Ces deux nombres devront être utilisés comme opérandes pour la méthode <code>additionner</code> de la classe <code>Calculatrice</code>.</li>
+<li>Le résultat de l'addition devra être affiché de manière claire et compréhensible sur la sortie standard (console).</li>
+<li>Implémentez une gestion des erreurs basique :
+<ul>
+<li>Si le nombre d'arguments fournis n'est pas correct (différent de deux), l'application devra afficher un message d'erreur explicite indiquant l'usage attendu et se terminer.</li>
+<li>Si les arguments fournis ne peuvent pas être interprétés comme des nombres entiers, un message d'erreur approprié devra également être affiché avant la terminaison du programme.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Compilation et Test Local :</strong></p>
+<ul>
+<li>Utilisez Maven pour compiler votre projet et générer l'artefact JAR (<code>mvn package</code>).</li>
+<li>Testez le bon fonctionnement de votre application en exécutant le JAR généré directement depuis votre terminal. Assurez-vous de tester les scénarios nominaux (avec des entrées valides) ainsi que les cas d'erreur que vous avez implémentés (nombre incorrect d'arguments, arguments non numériques).</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="partie-2--dockerisation-de-lapplication"><a class="header" href="#partie-2--dockerisation-de-lapplication">Partie 2 : Dockerisation de l'Application</a></h2>
+<p>L'objectif de cette partie est de créer une image Docker pour votre application Java, permettant de l'exécuter de manière isolée et reproductible.</p>
+<p><strong>Instructions :</strong></p>
+<ol>
+<li>
+<p><strong>Création du <code>Dockerfile</code> :</strong></p>
+<ul>
+<li>À la racine de votre projet <code>maSuperAppJava</code> (au même niveau que le fichier <code>pom.xml</code>), créez un fichier nommé <code>Dockerfile</code> (sans extension).</li>
+<li>Ce <code>Dockerfile</code> devra définir les étapes nécessaires pour construire l'image de votre application :
+<ul>
+<li><strong>Image de Base :</strong> Spécifiez une image de base Java (JRE) officielle et à jour (par exemple, une image basée sur Temurin ou OpenJDK, compatible avec la version de Java configurée dans votre <code>pom.xml</code>).</li>
+<li><strong>Copie de l'Artefact :</strong> Incluez les instructions pour copier l'artefact JAR de votre application (préalablement construit par Maven et se trouvant dans le répertoire <code>target/</code>) dans l'image Docker.</li>
+<li><strong>Point d'Entrée (<code>ENTRYPOINT</code>) ou Commande (<code>CMD</code>) :</strong> Définissez la commande qui sera exécutée au démarrage d'un conteneur basé sur votre image. Cette commande doit lancer votre application Java (via sa classe principale <code>com.maventdd.app.App</code>) et doit permettre de lui transmettre les deux arguments numériques attendus par la méthode <code>main</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Construction de l'Image Docker :</strong></p>
+<ul>
+<li>Assurez-vous que votre service Docker est en cours d'exécution.</li>
+<li>Depuis votre terminal, positionnez-vous à la racine de votre projet <code>maSuperAppJava</code>.</li>
+<li>Construisez l'image Docker en utilisant la commande <code>docker build</code>. Attribuez un nom (par exemple, <code>masuperappjava</code> ou <code>votre-nom/masuperappjava</code>) et un tag (par exemple, <code>1.0</code> ou <code>latest</code>) à votre image pour faciliter son identification.</li>
+</ul>
+</li>
+<li>
+<p><strong>Test de l'Image Docker :</strong></p>
+<ul>
+<li>Une fois l'image construite avec succès, exécutez un conteneur à partir de celle-ci en utilisant la commande <code>docker run</code>.</li>
+<li>Lors du lancement du conteneur, fournissez deux nombres entiers comme arguments.</li>
+<li>Vérifiez que la sortie affichée par le conteneur correspond au résultat attendu de l'addition des deux nombres fournis.</li>
+<li>Testez également le comportement en cas d'arguments incorrects (nombre, type) pour vous assurer que la gestion des erreurs de l'application fonctionne aussi dans l'environnement conteneurisé.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<p><strong>Livrables Attendus :</strong></p>
+<ul>
+<li>Le code source modifié du fichier <code>src/main/java/com/maventdd/app/App.java</code>.</li>
+<li>Le fichier <code>Dockerfile</code> créé à la racine de votre projet.</li>
+</ul>
+<p><strong>Critères de Validation :</strong></p>
+<ul>
+<li>La méthode <code>main</code> de <code>App.java</code> prend correctement en charge les arguments de la ligne de commande, utilise <code>Calculatrice.additionner()</code>, affiche le résultat et gère les erreurs d'arguments lors de l'exécution locale via <code>java -cp ...</code>.</li>
+<li>La commande <code>mvn package</code> s'exécute avec succès.</li>
+<li>L'image Docker est construite avec succès via <code>docker build .</code> sans erreurs.</li>
+<li>Un conteneur démarré à partir de l'image (<code>docker run &lt;nom_image&gt; &lt;arg1&gt; &lt;arg2&gt;</code>) exécute l'application, affiche le résultat correct de l'addition des arguments fournis et gère correctement les erreurs d'arguments.</li>
+</ul>
 
                     </main>
 
