@@ -1,0 +1,522 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Documentation - CI-CD</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Day 1</li><li class="chapter-item expanded "><a href="../day_1/Github-actions-guided.html"><strong aria-hidden="true">1.</strong> Github Actions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../day_1/Github-actions-non-guided.html"><strong aria-hidden="true">1.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Day 2</li><li class="chapter-item expanded "><a href="../day_2/tests_java.html"><strong aria-hidden="true">2.</strong> Tests Java</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../day_2/tests_java_non_guide.html"><strong aria-hidden="true">2.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><a href="../day_2/tutoriels_docker.html"><strong aria-hidden="true">3.</strong> Tutoriels Docker</a></li><li class="chapter-item expanded affix "><li class="part-title">Day 3</li><li class="chapter-item expanded "><a href="../day_3/dockerize_java_app.html"><strong aria-hidden="true">4.</strong> Dockerisation Application Java</a></li><li class="chapter-item expanded "><a href="../day_3/tutoriel_github_actions.html"><strong aria-hidden="true">5.</strong> Tutoriel Github Actions</a></li><li class="chapter-item expanded "><a href="../day_3/publish_java_docker_image.html"><strong aria-hidden="true">6.</strong> Publication Image Java</a></li><li class="chapter-item expanded "><a href="../day_3/documentation_guided.html" class="active"><strong aria-hidden="true">7.</strong> Documentation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">CI-CD</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="travail-pratique--documenter-votre-projet-java-avec-doxygen"><a class="header" href="#travail-pratique--documenter-votre-projet-java-avec-doxygen">Travail Pratique : Documenter Votre Projet Java avec Doxygen</a></h1>
+<p><strong>Objectif Général :</strong>
+Ce travail pratique a pour objectif de vous initier à la génération de documentation professionnelle pour votre code Java en utilisant Doxygen. Vous apprendrez à commenter votre code efficacement, à configurer Doxygen, et à générer une documentation HTML navigable pour votre projet <code>maStringUtilsApp</code>.</p>
+<hr />
+<h2 id="introduction-à-doxygen"><a class="header" href="#introduction-à-doxygen">Introduction à Doxygen</a></h2>
+<p><strong>Qu'est-ce que Doxygen ?</strong>
+Doxygen est un outil extrêmement populaire et puissant utilisé pour générer de la documentation directement à partir du code source commenté. Il analyse vos fichiers de code, extrait les commentaires formatés d'une manière spécifique (pour Java, il comprend nativement les commentaires Javadoc <code>/** ... */</code>), ainsi que la structure de votre code (classes, méthodes, etc.), et produit une documentation complète dans divers formats (HTML, PDF, LaTeX, etc.).</p>
+<p><strong>Pourquoi utiliser Doxygen ?</strong></p>
+<ul>
+<li><strong>Documentation Synchronisée :</strong> La documentation est générée depuis le code, elle a donc plus de chances de rester à jour par rapport à une documentation écrite manuellement et séparément.</li>
+<li><strong>Compréhension du Code :</strong> Une bonne documentation aide les autres développeurs (et vous-même dans le futur !) à comprendre rapidement l'architecture, le fonctionnement des classes et des méthodes de votre projet.</li>
+<li><strong>Professionnalisme :</strong> Fournir une documentation claire et bien structurée est une marque de professionnalisme et facilite la maintenance et l'évolution du projet.</li>
+<li><strong>Automatisation :</strong> La génération de la documentation peut être intégrée dans des processus d'Intégration Continue (CI/CD).</li>
+</ul>
+<p><strong>Comment ça fonctionne (en bref) ?</strong></p>
+<ol>
+<li>Vous <strong>annotez votre code Java</strong> avec des commentaires de style Javadoc, en utilisant des balises spéciales Doxygen (comme <code>@param</code>, <code>@return</code>, <code>@brief</code>) pour décrire les éléments de votre code.</li>
+<li>Vous <strong>configurez Doxygen</strong> à l'aide d'un fichier de configuration (nommé <code>Doxyfile</code>) qui lui indique quels fichiers analyser, où sauvegarder la documentation, le nom du projet, et de nombreuses autres options.</li>
+<li>Vous <strong>exécutez Doxygen</strong>, qui lit votre code et le <code>Doxyfile</code> pour produire la documentation dans le format désiré.</li>
+</ol>
+<p><strong>Ressources Officielles (fortement recommandées) :</strong></p>
+<ul>
+<li><strong>Pour bien démarrer avec Doxygen :</strong> <a href="https://www.doxygen.nl/manual/starting.html">Manuel Officiel - Starting Point</a></li>
+<li><strong>Comment documenter le code pour Doxygen :</strong> <a href="https://www.doxygen.nl/manual/docblocks.html">Manuel Officiel - Documenting the code</a></li>
+</ul>
+<p><strong>Contexte de ce TP :</strong>
+Nous allons appliquer Doxygen au projet <code>maStringUtilsApp</code> (dont le <code>groupId</code> est <code>com.formation.stringutils</code> et l'<code>artifactId</code> est <code>maStringUtilsApp</code>, comme vu dans le TP "De Maven Local à l'Intégration Continue"). Vous documenterez la classe <code>StringUtils.java</code> et ses méthodes (<code>renverser</code>, <code>estPalindrome</code>, <code>compterVoyelles</code>) que vous avez développées. Nous supposerons donc que votre code se trouve dans le package <code>com.formation.stringutils</code>.</p>
+<p><strong>Prérequis :</strong></p>
+<ul>
+<li>Le projet <code>maStringUtilsApp</code> fonctionnel, avec la classe <code>StringUtils</code> dans le package <code>com.formation.stringutils</code>.</li>
+<li>Doxygen installé sur votre machine. (Si ce n'est pas fait, consultez le site officiel de Doxygen. Pour les diagrammes, Graphviz est aussi recommandé).</li>
+</ul>
+<hr />
+<h2 id="exercice-1--documentation-de-base-des-méthodes"><a class="header" href="#exercice-1--documentation-de-base-des-méthodes">Exercice 1 : Documentation de Base des Méthodes</a></h2>
+<p><strong>Objectif :</strong> Apprendre à ajouter des commentaires Doxygen/Javadoc essentiels aux méthodes de votre classe <code>StringUtils</code> et générer une première documentation.</p>
+<ol>
+<li>
+<p><strong>Commentez les méthodes de <code>StringUtils.java</code> :</strong>
+Ouvrez votre fichier <code>src/main/java/com/formation/stringutils/StringUtils.java</code> et ajoutez ou complétez les commentaires Javadoc pour chaque méthode (<code>renverser</code>, <code>estPalindrome</code>, <code>compterVoyelles</code>).</p>
+<pre><code class="language-java">// Fichier : src/main/java/com/formation/stringutils/StringUtils.java
+package com.formation.stringutils;
+
+public class StringUtils {
+
+    /**
+     * @brief Renverse une chaîne de caractères.
+     * Cette méthode prend une chaîne en entrée et retourne sa version inversée.
+     * Si la chaîne d'entrée est null, la méthode retourne null.
+     *
+     * @param chaine La chaîne de caractères à renverser.
+     * @return La chaîne renversée, ou null si la chaîne d'entrée est null.
+     */
+    public String renverser(String chaine) {
+        if (chaine == null) return null;
+        return new StringBuilder(chaine).reverse().toString();
+    }
+
+    /**
+     * @brief Vérifie si une chaîne est un palindrome.
+     * Un palindrome est un mot ou une phrase qui se lit de la même manière dans les deux sens.
+     * Cette méthode ignore la casse et les espaces lors de la vérification.
+     *
+     * @param chaine La chaîne à vérifier.
+     * @return true si la chaîne est un palindrome (en ignorant casse et espaces), false sinon. Retourne false pour une chaîne null.
+     */
+    public boolean estPalindrome(String chaine) {
+        if (chaine == null) return false;
+        String chaineNettoyee = chaine.replaceAll("\\s+", "").toLowerCase();
+        String chaineRenversee = new StringBuilder(chaineNettoyee).reverse().toString();
+        return chaineNettoyee.equals(chaineRenversee);
+    }
+
+    /**
+     * @brief Compte le nombre de voyelles dans une chaîne.
+     * Les voyelles prises en compte sont 'a', 'e', 'i', 'o', 'u', insensibles à la casse.
+     *
+     * @param chaine La chaîne dans laquelle compter les voyelles.
+     * @return Le nombre total de voyelles trouvées dans la chaîne. Retourne 0 si la chaîne est null ou vide.
+     */
+    public int compterVoyelles(String chaine) {
+        if (chaine == null || chaine.isEmpty()) {
+            return 0;
+        }
+        int count = 0;
+        String voyelles = "aeiouAEIOU";
+        for (char c : chaine.toCharArray()) {
+            if (voyelles.indexOf(c) != -1) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+</code></pre>
+<p><strong>Explication des balises Doxygen/Javadoc utilisées :</strong></p>
+<ul>
+<li><code>@brief &lt;description&gt;</code> : Fournit une description courte et concise de l'élément (ici, une méthode). Apparaît souvent en résumé.</li>
+<li><code>@param &lt;nom_param&gt; &lt;description&gt;</code> : Décrit un paramètre spécifique de la méthode, en précisant son nom et son rôle.</li>
+<li><code>@return &lt;description&gt;</code> : Explique ce que la méthode retourne.</li>
+<li><code>@throws &lt;TypeException&gt; &lt;description&gt;</code> (ou <code>@exception</code>) : Documente les exceptions qu'une méthode est susceptible de lever et dans quelles circonstances (non utilisé dans cet exemple simple de <code>StringUtils</code>, mais bon à savoir).</li>
+</ul>
+</li>
+<li>
+<p><strong>Génération du fichier de configuration <code>Doxyfile</code> :</strong></p>
+<ul>
+<li>Dans votre terminal, naviguez à la racine de votre projet <code>maStringUtilsApp</code>.</li>
+<li>Exécutez la commande :
+<pre><code class="language-bash">doxygen -g
+</code></pre>
+Cela crée un fichier de configuration nommé <code>Doxyfile</code>.
+<blockquote>
+<p>Vous pouvez également lancer la commande : <code>doxygen -g NomDeVotreDoxyfile</code> pour créer un fichier de configuration avec un nom que vous choisissez. Si le fichier <code>Doxyfile</code> ou <code>NomDeVotreDoxyfile</code> existe déjà, Doxygen le renommera en ajoutant <code>.bak</code> avant d'en créer un nouveau.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Configuration du <code>Doxyfile</code> :</strong>
+Ouvrez le fichier <code>Doxyfile</code> avec un éditeur de texte et modifiez (ou décommentez et modifiez) les options suivantes :</p>
+<ul>
+<li><code>PROJECT_NAME = "Documentation du Projet maStringUtilsApp"</code>
+<ul>
+<li><strong>Rôle :</strong> Définit le titre principal de votre documentation générée.</li>
+</ul>
+</li>
+<li><code>OUTPUT_DIRECTORY = docs_stringutils</code>
+<ul>
+<li><strong>Rôle :</strong> Spécifie le nom du répertoire où Doxygen placera les fichiers de documentation générés.</li>
+</ul>
+</li>
+<li><code>INPUT = ./src/main/java</code>
+<ul>
+<li><strong>Rôle :</strong> Indique à Doxygen le(s) dossier(s) ou fichier(s) contenant le code source à analyser. Ici, on pointe vers la racine des sources Java de Maven.</li>
+</ul>
+</li>
+<li><code>RECURSIVE = YES</code>
+<ul>
+<li><strong>Rôle :</strong> Si mis à <code>YES</code>, Doxygen explorera les sous-dossiers des chemins spécifiés dans <code>INPUT</code>. Essentiel pour les projets Java structurés en packages.</li>
+</ul>
+</li>
+<li><code>FILE_PATTERNS = *.java</code>
+<ul>
+<li><strong>Rôle :</strong> Permet de filtrer les types de fichiers à analyser. Ici, on se concentre sur les fichiers Java.</li>
+</ul>
+</li>
+<li><code>OPTIMIZE_OUTPUT_JAVA = YES</code>
+<ul>
+<li><strong>Rôle :</strong> Active des optimisations et des analyses spécifiques au langage Java, ce qui peut améliorer la pertinence et la présentation de la documentation pour les projets Java.</li>
+</ul>
+</li>
+<li><code>JAVADOC_AUTOBRIEF = YES</code>
+<ul>
+<li><strong>Rôle :</strong> Si <code>YES</code>, Doxygen considérera automatiquement la première phrase d'un commentaire Javadoc (avant le premier point suivi d'un espace, ou avant une ligne vide) comme une description brève (<code>@brief</code>), même si la balise <code>@brief</code> n'est pas explicitement présente.</li>
+</ul>
+</li>
+<li><code>EXTRACT_ALL = NO</code>
+<ul>
+<li><strong>Rôle :</strong> Si <code>NO</code>, Doxygen ne documentera que les éléments de code qui possèdent des commentaires Doxygen/Javadoc. <code>NO</code> est généralement préférable pour une documentation d'API ciblée.</li>
+</ul>
+</li>
+<li><code>EXTRACT_PRIVATE = NO</code>
+<ul>
+<li><strong>Rôle :</strong> Si <code>NO</code>, les membres privés des classes ne seront pas inclus dans la documentation.</li>
+</ul>
+</li>
+<li><code>EXTRACT_STATIC = YES</code>
+<ul>
+<li><strong>Rôle :</strong> Assure que les membres statiques sont inclus dans la documentation (important pour notre classe <code>StringUtils</code> si ses méthodes sont statiques, sinon adaptez).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Génération de la documentation :</strong></p>
+<ul>
+<li>Toujours dans votre terminal, à la racine du projet, exécutez :
+<pre><code class="language-bash">doxygen 
+</code></pre>
+<blockquote>
+<p>Si vous avez utilisé un nom personnalisé pour votre Doxyfile, lancez : <code>doxygen NomDeVotreDoxyfile</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Consultation de la documentation :</strong></p>
+<ul>
+<li>Ouvrez le fichier <code>docs_stringutils/html/index.html</code> (ou le chemin que vous avez défini dans <code>OUTPUT_DIRECTORY</code>) dans un navigateur web.</li>
+<li>Explorez la documentation : vous devriez trouver votre classe <code>StringUtils</code> et voir comment vos commentaires ont été transformés en une documentation structurée pour chaque méthode.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="exercice-2--documentation-de-la-classe-stringutils"><a class="header" href="#exercice-2--documentation-de-la-classe-stringutils">Exercice 2 : Documentation de la Classe <code>StringUtils</code></a></h2>
+<p><strong>Objectif :</strong> Ajouter une documentation au niveau de la classe <code>StringUtils</code> elle-même.</p>
+<ol>
+<li>
+<p><strong>Commentez la classe <code>StringUtils</code> :</strong>
+Ajoutez un commentaire Javadoc juste avant la déclaration de la classe <code>StringUtils</code> dans votre fichier <code>src/main/java/com/formation/stringutils/StringUtils.java</code>.</p>
+<pre><code class="language-java">// Fichier : src/main/java/com/formation/stringutils/StringUtils.java
+package com.formation.stringutils;
+
+/**
+ * @brief Fournit une collection de méthodes utilitaires pour la manipulation de chaînes de caractères.
+ *
+ * Cette classe offre diverses fonctionnalités (statiques ou non, selon votre implémentation) 
+ * pour des opérations courantes sur les chaînes, telles que le renversement, 
+ * la vérification de palindromes, et le comptage de voyelles.
+ *
+ * @author Votre Nom / Nom de l'Équipe
+ * @version 1.0
+ * @date 14 Mai 2025 
+ */
+public class StringUtils {
+    // ... (vos méthodes commentées de l'exercice 1) ...
+}
+</code></pre>
+<p><strong>Nouvelles balises (ou rappel de leur usage contextuel) :</strong></p>
+<ul>
+<li><code>@author &lt;nom&gt;</code> : Identifie l'auteur de la classe.</li>
+<li><code>@version &lt;texte_version&gt;</code> : Spécifie la version de la classe ou du module.</li>
+<li><code>@date &lt;date&gt;</code> : Indique une date pertinente (création, dernière modification).</li>
+</ul>
+</li>
+<li>
+<p><strong>Adaptez le <code>Doxyfile</code> (si nécessaire) :</strong>
+Normalement, les configurations de l'exercice 1 devraient suffire. Le <code>PROJECT_NAME</code> et <code>OUTPUT_DIRECTORY</code> peuvent rester les mêmes ou être adaptés si vous souhaitez des sorties séparées pour chaque étape d'apprentissage.</p>
+</li>
+<li>
+<p><strong>Régénérez la documentation :</strong></p>
+<pre><code class="language-bash">doxygen
+</code></pre>
+</li>
+<li>
+<p><strong>Vérifiez le résultat :</strong>
+Rafraîchissez <code>docs_stringutils/html/index.html</code> dans votre navigateur. En naviguant vers la classe <code>StringUtils</code> (via l'onglet "Classes" par exemple), vous devriez maintenant voir la description que vous avez ajoutée pour la classe elle-même.</p>
+</li>
+</ol>
+<hr />
+<h2 id="exercice-3--création-dune-page-daccueil-personnalisée"><a class="header" href="#exercice-3--création-dune-page-daccueil-personnalisée">Exercice 3 : Création d'une Page d'Accueil Personnalisée</a></h2>
+<p><strong>Objectif :</strong> Remplacer la page d'accueil par défaut de Doxygen par une page personnalisée écrite en Markdown, pour mieux présenter votre projet <code>maStringUtilsApp</code>.</p>
+<ol>
+<li>
+<p><strong>Créez un fichier <code>mainpage.md</code> :</strong>
+À la racine de votre projet <code>maStringUtilsApp</code>, créez un fichier nommé <code>mainpage.md</code>.</p>
+<pre><code class="language-markdown"># Documentation du Projet `maStringUtilsApp`
+
+Bienvenue sur la documentation officielle de `maStringUtilsApp` !
+
+Ce projet a été développé dans le cadre de la formation CI/CD et met en œuvre une classe utilitaire Java, `StringUtils`, pour diverses opérations sur les chaînes de caractères. Il illustre également l'utilisation de Maven, des tests unitaires avec JUnit, et la génération de cette documentation avec Doxygen.
+
+## Contenu Principal
+
+La fonctionnalité clé est fournie par la classe `com.formation.stringutils.StringUtils`. 
+Vous pouvez explorer :
+* La [Liste complète des Classes](./annotated.html) pour accéder directement à `StringUtils`.
+* La [Liste des Paquets](./namespaces.html) pour voir la structure du package.
+
+## Fonctionnalités Implémentées
+
+La classe `StringUtils` inclut les méthodes suivantes :
+-   `renverser(String)`
+-   `estPalindrome(String)`
+-   `compterVoyelles(String)`
+
+Consultez leur documentation détaillée pour plus d'informations.
+
+---
+*Cette documentation a été générée avec Doxygen.*
+</code></pre>
+</li>
+<li>
+<p><strong>Modifiez le <code>Doxyfile</code> :</strong></p>
+<ul>
+<li>Vous pouvez affiner <code>PROJECT_NAME</code> si vous le souhaitez : <code>PROJECT_NAME = "maStringUtilsApp - Documentation Officielle"</code></li>
+<li>Si vous voulez une sortie séparée pour cette version : <code>OUTPUT_DIRECTORY = docs_final_stringutils</code></li>
+<li>Ajoutez <code>mainpage.md</code> à la directive <code>INPUT</code>. Elle peut contenir plusieurs entrées séparées par des espaces. Assurez-vous que le chemin vers vos sources Java est toujours présent :
+<code>INPUT = ./src/main/java ./mainpage.md</code></li>
+<li>Indiquez à Doxygen d'utiliser ce fichier Markdown comme page principale :
+<code>USE_MDFILE_AS_MAINPAGE = mainpage.md</code>
+<ul>
+<li><strong>Rôle :</strong> Cette option cruciale dit à Doxygen de prendre le contenu du fichier Markdown spécifié et de l'utiliser comme contenu pour la page <code>index.html</code> générée.</li>
+</ul>
+</li>
+<li>Vérifiez que <code>MARKDOWN_SUPPORT = YES</code> (généralement activé par défaut).
+<ul>
+<li><strong>Rôle :</strong> Permet à Doxygen de parser et de convertir correctement la syntaxe Markdown en HTML.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Générez la documentation :</strong></p>
+<pre><code class="language-bash">doxygen
+</code></pre>
+</li>
+<li>
+<p><strong>Vérifiez le résultat :</strong>
+Ouvrez <code>docs_final_stringutils/html/index.html</code> (ou le dossier de sortie que vous avez configuré). Vous devriez être accueilli par votre page personnalisée !</p>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../day_3/publish_java_docker_image.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../day_3/publish_java_docker_image.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
