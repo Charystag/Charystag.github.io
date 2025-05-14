@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Documentation Automatique - CI-CD</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Day 1</li><li class="chapter-item expanded "><a href="../day_1/Github-actions-guided.html"><strong aria-hidden="true">1.</strong> Github Actions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../day_1/Github-actions-non-guided.html"><strong aria-hidden="true">1.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Day 2</li><li class="chapter-item expanded "><a href="../day_2/tests_java.html"><strong aria-hidden="true">2.</strong> Tests Java</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../day_2/tests_java_non_guide.html"><strong aria-hidden="true">2.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><a href="../day_2/tutoriels_docker.html"><strong aria-hidden="true">3.</strong> Tutoriels Docker</a></li><li class="chapter-item expanded affix "><li class="part-title">Day 3</li><li class="chapter-item expanded "><a href="../day_3/dockerize_java_app.html"><strong aria-hidden="true">4.</strong> Dockerisation Application Java</a></li><li class="chapter-item expanded "><a href="../day_3/tutoriel_github_actions.html"><strong aria-hidden="true">5.</strong> Tutoriel Github Actions</a></li><li class="chapter-item expanded "><a href="../day_3/publish_java_docker_image.html"><strong aria-hidden="true">6.</strong> Publication Image Java</a></li><li class="chapter-item expanded "><a href="../day_3/documentation_guided.html"><strong aria-hidden="true">7.</strong> Documentation</a></li><li class="chapter-item expanded "><a href="../day_3/auto_documentation.html" class="active"><strong aria-hidden="true">8.</strong> Documentation Automatique</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">CI-CD</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="travail-pratique--automatisation-de-la-génération-de-documentation-doxygen-avec-github-actions"><a class="header" href="#travail-pratique--automatisation-de-la-génération-de-documentation-doxygen-avec-github-actions">Travail Pratique : Automatisation de la Génération de Documentation Doxygen avec GitHub Actions</a></h1>
+<p><strong>Objectif Général :</strong>
+L'objectif de ce travail pratique est d'intégrer la génération de votre documentation Doxygen (créée pour le projet <code>maStringUtilsApp</code>) dans votre pipeline d'Intégration Continue existant avec GitHub Actions. La documentation générée sera ensuite archivée en tant qu'artefact de build, la rendant accessible après chaque exécution du workflow.</p>
+<p><strong>Contexte :</strong>
+Vous avez déjà configuré Doxygen pour votre projet Java <code>maStringUtilsApp</code> (basé sur le <code>groupId: com.formation.stringutils</code>), vous disposez d'un <code>Doxyfile</code> fonctionnel et votre code source est commenté. Vous avez également un workflow GitHub Actions qui compile et teste ce projet. Nous allons maintenant enrichir ce workflow.</p>
+<p><strong>Prérequis :</strong></p>
+<ul>
+<li>Les exercices précédents sur la configuration et la génération de documentation Doxygen pour <code>maStringUtilsApp</code> ont été complétés avec succès (un <code>Doxyfile</code> est présent et fonctionnel à la racine du projet).</li>
+<li>Votre projet <code>maStringUtilsApp</code> est hébergé sur un dépôt GitHub.</li>
+<li>Un workflow GitHub Actions fonctionnel existe déjà pour ce projet, capable de compiler le code Java et d'exécuter les tests (par exemple, avec Maven via <code>mvn package</code> ou <code>mvn test</code>).</li>
+<li>Familiarité avec la syntaxe des workflows GitHub Actions et l'utilisation de <code>actions/upload-artifact</code>.</li>
+</ul>
+<hr />
+<h2 id="instructions--intégration-de-doxygen-dans-le-workflow-ci"><a class="header" href="#instructions--intégration-de-doxygen-dans-le-workflow-ci">Instructions : Intégration de Doxygen dans le Workflow CI</a></h2>
+<p>Vous allez modifier votre workflow GitHub Actions existant pour y inclure les étapes de génération et d'archivage de la documentation Doxygen.</p>
+<ol>
+<li>
+<p><strong>Modification du Workflow Existant :</strong></p>
+<ul>
+<li>Ouvrez le fichier YAML de votre workflow CI actuel (celui qui s'occupe de la compilation et des tests de <code>maStringUtilsApp</code>, souvent dans <code>.github/workflows/</code>).</li>
+<li>Repérez le job qui effectue la compilation et les tests Java. La génération de la documentation Doxygen devrait logiquement s'effectuer <strong>après</strong> que ces étapes se soient terminées avec succès, pour s'assurer que la documentation est générée pour une version valide et testée du code.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ajout des Étapes pour Doxygen dans le Job Existant :</strong>
+Au sein du job identifié, après les étapes de compilation et de test, ajoutez les nouvelles étapes suivantes :</p>
+<ul>
+<li>
+<p><strong>Étape 1 : Installation de Doxygen (et Graphviz) sur le Runner</strong></p>
+<ul>
+<li>Ajoutez une commande <code>run</code> pour installer Doxygen et Graphviz. Graphviz est nécessaire si vous souhaitez que Doxygen génère des diagrammes (comme les graphes de classes, etc.).</li>
+<li>Sur les runners <code>ubuntu-latest</code> fournis par GitHub, vous pouvez généralement utiliser <code>apt-get</code> pour cela. Pensez à faire un <code>sudo apt-get update</code> avant.
+<em>Indice : <code>sudo apt-get update &amp;&amp; sudo apt-get install -y doxygen graphviz</code></em></li>
+</ul>
+</li>
+<li>
+<p><strong>Étape 2 : Génération de la Documentation Doxygen</strong></p>
+<ul>
+<li>Ajoutez une commande <code>run</code> pour exécuter Doxygen.</li>
+<li>Cette commande doit utiliser le <code>Doxyfile</code> que vous avez configuré à la racine de votre projet.</li>
+<li>Assurez-vous que cette commande est exécutée depuis le répertoire racine de votre projet (là où se trouve le <code>Doxyfile</code>). C'est généralement le cas par défaut après l'action <code>actions/checkout</code>.
+<em>Indice : la commande est simplement <code>doxygen Doxyfile</code> ou <code>doxygen</code> si le fichier s'appelle <code>Doxyfile</code>.</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Étape 3 : Archivage de la Documentation Générée</strong></p>
+<ul>
+<li>Utilisez l'action <code>actions/upload-artifact@v3</code> (ou une version plus récente si disponible) pour sauvegarder le répertoire contenant votre documentation HTML générée.</li>
+<li><strong><code>name</code> :</strong> Donnez un nom significatif à votre artefact (par exemple, <code>documentation-html-stringutils</code>).</li>
+<li><strong><code>path</code> :</strong> Spécifiez le chemin vers le répertoire où Doxygen a généré la documentation. Ce chemin doit correspondre à la valeur de <code>OUTPUT_DIRECTORY</code> que vous avez définie dans votre <code>Doxyfile</code> (par exemple, <code>docs_final_stringutils</code> ou <code>docs_stringutils</code> selon ce que vous aviez configuré dans les exercices Doxygen précédents).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Commit et Push des Modifications :</strong></p>
+<ul>
+<li>Sauvegardez les modifications apportées à votre fichier de workflow.</li>
+<li>Commitez et poussez ces changements sur votre dépôt GitHub.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="validation-"><a class="header" href="#validation-">Validation :</a></h2>
+<ol>
+<li>
+<p><strong>Surveillance de l'Exécution du Workflow :</strong></p>
+<ul>
+<li>Rendez-vous dans l'onglet "Actions" de votre dépôt GitHub.</li>
+<li>Observez l'exécution du workflow déclenchée par votre dernier push.</li>
+<li>Vérifiez que les nouvelles étapes (installation de Doxygen, génération de la documentation, archivage de l'artefact) s'exécutent sans erreur.</li>
+</ul>
+</li>
+<li>
+<p><strong>Vérification de l'Artefact :</strong></p>
+<ul>
+<li>Une fois le workflow terminé avec succès, accédez à la page de résumé de cette exécution.</li>
+<li>Dans la section "Artifacts", vous devriez trouver l'artefact que vous avez nommé (par exemple, <code>documentation-html-stringutils</code>).</li>
+<li>Téléchargez cet artefact.</li>
+</ul>
+</li>
+<li>
+<p><strong>Consultation de la Documentation Archivée :</strong></p>
+<ul>
+<li>Décompressez l'artefact téléchargé sur votre machine locale.</li>
+<li><strong>Astuce pour une meilleure visualisation :</strong> Ouvrez un terminal, naviguez avec <code>cd</code> jusqu'au répertoire racine de votre documentation HTML décompressée (celui qui contient <code>index.html</code>), puis lancez un serveur web local simple avec Python 3 :
+<pre><code class="language-bash">python3 -m http.server 8000
+</code></pre>
+Ouvrez ensuite <code>http://localhost:8000</code> dans votre navigateur. Pour arrêter le serveur, retournez au terminal et faites <code>Ctrl+C</code>.</li>
+<li>Sinon, ouvrez directement le fichier <code>index.html</code> (ou la page principale de votre documentation) dans un navigateur.</li>
+<li>Vérifiez que la documentation est complète et correspond à ce que vous attendiez.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="optionnel-défi-supplémentaire--déploiement-sur-github-pages"><a class="header" href="#optionnel-défi-supplémentaire--déploiement-sur-github-pages">(Optionnel) Défi Supplémentaire : Déploiement sur GitHub Pages</a></h2>
+<p>Si vous êtes à l'aise et que vous avez déjà travaillé avec le déploiement sur GitHub Pages</p>
+<ul>
+<li>Adaptez votre workflow pour qu'en plus de créer un artefact, il déploie le contenu du répertoire de documentation Doxygen sur la branche <code>gh-pages</code> de votre dépôt.</li>
+<li>Vous pourriez utiliser des actions populaires comme <code>peaceiris/actions-gh-pages@v3</code> ou une autre de votre choix.</li>
+<li>N'oubliez pas de configurer correctement votre dépôt GitHub pour servir les GitHub Pages depuis la branche <code>gh-pages</code>.</li>
+</ul>
+<blockquote>
+<p>Vous pouvez vous aider de la <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">documentation</a> de Github, pour realiser ces etapes</p>
+</blockquote>
+<hr />
+<p><strong>Livrables Attendus :</strong></p>
+<ul>
+<li>Le fichier YAML de votre workflow GitHub Actions modifié, incluant les étapes pour Doxygen.</li>
+</ul>
+<p><strong>Critères de Validation :</strong></p>
+<ul>
+<li>Le workflow GitHub Actions s'exécute avec succès après l'intégration des étapes Doxygen.</li>
+<li>Les logs du workflow confirment l'installation de Doxygen et l'exécution de la commande de génération sans erreur.</li>
+<li>Un artefact contenant la documentation HTML complète est créé et peut être téléchargé depuis la page de résumé du workflow.</li>
+<li>La documentation HTML contenue dans l'artefact est valide et consultable.</li>
+<li><strong>(Pour le défi optionnel)</strong> La documentation Doxygen est accessible en ligne via GitHub Pages en navigant vers <code>https://nomUtilisateur.github.io/nomRepo</code></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../day_3/documentation_guided.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../day_3/documentation_guided.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
