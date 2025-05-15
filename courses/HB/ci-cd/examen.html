@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Examen - CI-CD</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Day 1</li><li class="chapter-item expanded "><a href="day_1/Github-actions-guided.html"><strong aria-hidden="true">1.</strong> Github Actions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="day_1/Github-actions-non-guided.html"><strong aria-hidden="true">1.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Day 2</li><li class="chapter-item expanded "><a href="day_2/tests_java.html"><strong aria-hidden="true">2.</strong> Tests Java</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="day_2/tests_java_non_guide.html"><strong aria-hidden="true">2.1.</strong> non guided</a></li></ol></li><li class="chapter-item expanded "><a href="day_2/tutoriels_docker.html"><strong aria-hidden="true">3.</strong> Tutoriels Docker</a></li><li class="chapter-item expanded affix "><li class="part-title">Day 3</li><li class="chapter-item expanded "><a href="day_3/dockerize_java_app.html"><strong aria-hidden="true">4.</strong> Dockerisation Application Java</a></li><li class="chapter-item expanded "><a href="day_3/tutoriel_github_actions.html"><strong aria-hidden="true">5.</strong> Tutoriel Github Actions</a></li><li class="chapter-item expanded "><a href="day_3/publish_java_docker_image.html"><strong aria-hidden="true">6.</strong> Publication Image Java</a></li><li class="chapter-item expanded "><a href="day_3/documentation_guided.html"><strong aria-hidden="true">7.</strong> Documentation</a></li><li class="chapter-item expanded "><a href="day_3/auto_documentation.html"><strong aria-hidden="true">8.</strong> Documentation Automatique</a></li><li class="chapter-item expanded affix "><li class="part-title">Examen</li><li class="chapter-item expanded "><a href="examen.html" class="active"><strong aria-hidden="true">9.</strong> Examen</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">CI-CD</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="examen-final-certifiant--pipeline-cicd-from-scratch"><a class="header" href="#examen-final-certifiant--pipeline-cicd-from-scratch">Examen Final Certifiant : Pipeline CI/CD "From Scratch"</a></h1>
+<p><strong>Durée :</strong> 4 heures<br />
+<strong>Format :</strong> En équipe de 3 personnes<br />
+<strong>Objectif :</strong> Mettre en œuvre une chaîne d'intégration et de déploiement continu complète pour une nouvelle application Java.</p>
+<hr />
+<h2 id="instructions-générales"><a class="header" href="#instructions-générales">Instructions Générales</a></h2>
+<ul>
+<li><strong>Collaboration :</strong> Vous travaillerez en équipe de trois. La communication et la répartition des tâches au sein de l'équipe sont essentielles. Utilisez Git et GitHub pour collaborer efficacement.</li>
+<li><strong>Ressources Autorisées :</strong> Cet examen est à "livre ouvert". Vous pouvez consulter vos notes personnelles, les TPs précédents, la documentation officielle des outils (Java, Maven, Git, Docker, Doxygen, GitHub Actions), et des ressources en ligne (Stack Overflow, blogs techniques, etc.). <strong>L'utilisation d'IA génératives pour produire directement du code ou des configurations de workflow est interdite.</strong> L'objectif est d'évaluer votre capacité à appliquer les connaissances acquises.</li>
+<li><strong>Livrables Finaux :</strong>
+<ul>
+<li>Un dépôt GitHub contenant le projet fonctionnel, le <code>Dockerfile</code>, le <code>Doxyfile</code>, le workflow GitHub Actions,</li>
+<li>Une image Docker de l'application publiée sur GitHub Container Registry (GHCR).</li>
+<li>La documentation Doxygen devra être disponible en tant qu'artefact du workflow.</li>
+<li>Un <code>README.md</code> qui explique comment lancer la documentation</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="scénario--le-gestionnaire-de-micro-tâches-taskmaster-lite"><a class="header" href="#scénario--le-gestionnaire-de-micro-tâches-taskmaster-lite">Scénario : Le Gestionnaire de Micro-Tâches "TaskMaster Lite"</a></h2>
+<p>Votre équipe est chargée de développer "TaskMaster Lite", une application en ligne de commande ultra-simple pour gérer une liste de tâches personnelles. Pour cette première version, l'application devra permettre d'ajouter des tâches et de lister toutes les tâches enregistrées. Les tâches seront stockées en mémoire pour la durée de vie de l'application (pas de persistance de données requise pour cet examen).</p>
+<p><strong>Fonctionnalités minimales attendues pour l'application Java :</strong></p>
+<ol>
+<li><strong>Ajouter une tâche :</strong> L'utilisateur peut entrer une commande pour ajouter une description de tâche (ex: <code>add "Faire les courses"</code>).</li>
+<li><strong>Lister les tâches :</strong> L'utilisateur peut entrer une commande pour afficher toutes les tâches actuellement enregistrées, chacune avec un identifiant simple (ex: <code>list</code>).</li>
+</ol>
+<hr />
+<h2 id="tâches-à-réaliser"><a class="header" href="#tâches-à-réaliser">Tâches à Réaliser</a></h2>
+<p>Votre mission est de développer <code>TaskMaster Lite</code> et de mettre en place son pipeline CI/CD. Voici les grandes étapes :</p>
+<h3 id="phase-1--initialisation-conception-et-développement-local-focus--git-java-maven-tdd"><a class="header" href="#phase-1--initialisation-conception-et-développement-local-focus--git-java-maven-tdd">Phase 1 : Initialisation, Conception et Développement Local (Focus : Git, Java, Maven, TDD)</a></h3>
+<ol>
+<li>
+<p><strong>Coordination &amp; Dépôt GitHub (Responsable d'équipe désigné ou première personne à agir) :</strong></p>
+<ul>
+<li>Créez un <strong>nouveau dépôt GitHub public</strong> pour votre projet <code>TaskMasterLite-[NomEquipe]</code>.</li>
+<li>Ajoutez les deux autres membres de l'équipe comme collaborateurs sur le dépôt.</li>
+<li>Tous les membres doivent cloner le dépôt.</li>
+</ul>
+</li>
+<li>
+<p><strong>Stratégie de Branches &amp; <code>.gitignore</code> (En équipe) :</strong></p>
+<ul>
+<li>Mettez en place une branche <code>develop</code> à partir de <code>main</code>.</li>
+<li>Convenez d'une stratégie pour les branches de fonctionnalités (ex: <code>feature/add-task</code>, <code>feature/list-tasks</code>).</li>
+<li>Créez et configurez un fichier <code>.gitignore</code> adapté pour un projet Java Maven (ignorant les fichiers <code>target/</code>, logs, fichiers IDE, etc.). Commitez-le.</li>
+</ul>
+</li>
+<li>
+<p><strong>Mise en Place du Projet Java Maven (From Scratch) :</strong></p>
+<ul>
+<li>Initialisez votre projet en tant que projet Maven. Vous pouvez utiliser <code>mvn archetype:generate</code> (par exemple, avec <code>maven-archetype-quickstart</code> et l'adapter) ou créer la structure de dossiers (<code>src/main/java</code>, <code>src/test/java</code>) et le fichier <code>pom.xml</code> manuellement.</li>
+<li>Configurez le <code>pom.xml</code> pour :
+<ul>
+<li>Utiliser Java 17.</li>
+<li>Inclure la dépendance JUnit 5 (<code>junit-jupiter-api</code> et <code>junit-jupiter-engine</code>).</li>
+<li>Configurer le plugin Maven Surefire pour l'exécution des tests (s'il n'est pas déjà configuré par l'archétype).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Développement des Fonctionnalités avec TDD-Light :</strong></p>
+<ul>
+<li>Pour la fonctionnalité "Ajouter une tâche" :
+<ul>
+<li>Créez une classe de test (ex: <code>TaskManagerTest.java</code>).</li>
+<li>Écrivez une méthode de test qui vérifie l'ajout d'une tâche à une liste (par exemple, la taille de la liste augmente, la tâche ajoutée est retrouvable). Ce test doit échouer initialement.</li>
+<li>Créez la classe (ex: <code>TaskManager.java</code>) et la méthode nécessaire (ex: <code>void addTask(String description)</code>) avec une implémentation minimale pour que le test puisse compiler mais échouer.</li>
+<li>Implémentez la logique d'ajout de tâche pour que le test passe. Les tâches peuvent être stockées dans une <code>List&lt;String&gt;</code> ou une <code>List&lt;TaskObject&gt;</code> simple en mémoire.</li>
+</ul>
+</li>
+<li>Pour la fonctionnalité "Lister les tâches" :
+<ul>
+<li>Dans <code>TaskManagerTest.java</code>, écrivez une méthode de test qui vérifie que la liste des tâches retournée correspond à celles ajoutées.</li>
+<li>Ajoutez la méthode (ex: <code>List&lt;String&gt; getAllTasks()</code>) à <code>TaskManager.java</code> et implémentez-la.</li>
+</ul>
+</li>
+<li>Créez une classe principale <code>App.java</code> avec une méthode <code>main</code> qui permet d'interagir basiquement avec <code>TaskManager</code> via la console (lire les commandes "add" et "list" et appeler les méthodes correspondantes).</li>
+<li>Assurez-vous que <code>mvn clean package</code> (ou <code>mvn clean test</code>) s'exécute avec succès localement.</li>
+<li>Commitez régulièrement votre progression sur vos branches de fonctionnalités et fusionnez-les dans <code>develop</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="phase-2--documentation-conteneurisation--automatisation-focus--doxygen-docker-github-actions"><a class="header" href="#phase-2--documentation-conteneurisation--automatisation-focus--doxygen-docker-github-actions">Phase 2 : Documentation, Conteneurisation &amp; Automatisation (Focus : Doxygen, Docker, GitHub Actions)</a></h3>
+<ol start="5">
+<li>
+<p><strong>Documentation du Code avec Doxygen :</strong></p>
+<ul>
+<li>Ajoutez des commentaires Javadoc/Doxygen significatifs à vos classes (<code>TaskManager</code>, <code>App</code>, et toute autre classe de modèle que vous auriez créée) et à leurs méthodes publiques.</li>
+<li>Générez un fichier <code>Doxyfile</code> (<code>doxygen -g</code>).</li>
+<li>Configurez le <code>Doxyfile</code> a minima :
+<ul>
+<li><code>PROJECT_NAME</code></li>
+<li><code>INPUT</code> (pointant vers <code>src/main/java</code>)</li>
+<li><code>OUTPUT_DIRECTORY</code></li>
+<li><code>RECURSIVE = YES</code></li>
+<li><code>OPTIMIZE_OUTPUT_JAVA = YES</code></li>
+<li><code>JAVADOC_AUTOBRIEF = YES</code></li>
+</ul>
+</li>
+<li>Générez la documentation HTML localement et vérifiez son apparence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Conteneurisation avec Docker :</strong></p>
+<ul>
+<li>Créez un <code>Dockerfile</code> à la racine de votre projet.</li>
+<li>Ce <code>Dockerfile</code> doit :
+<ul>
+<li>Partir d'une image de base JRE appropriée (ex: <code>eclipse-temurin:17-jre-jammy</code>).</li>
+<li>Copier le fichier JAR de votre application (généré par <code>mvn package</code> dans le dossier <code>target/</code>) dans l'image.</li>
+<li>Définir la commande <code>ENTRYPOINT</code> (ou <code>CMD</code>) pour exécuter votre application <code>TaskMaster Lite</code> (la classe <code>App</code> avec sa méthode <code>main</code>).</li>
+</ul>
+</li>
+<li>Construisez votre image Docker localement et testez-la en lançant un conteneur pour vérifier que l'interaction en ligne de commande fonctionne.</li>
+</ul>
+</li>
+<li>
+<p><strong>Mise en Place du Pipeline GitHub Actions :</strong></p>
+<ul>
+<li>Créez un fichier de workflow</li>
+<li>Configurez-le pour se déclencher sur les <code>push</code> vers les branches <code>develop</code> et <code>master</code></li>
+<li>Définissez plusieurs jobs pour réaliser les tâches suivantes :
+<ul>
+<li><strong>Job <code>build-and-test</code> :</strong>
+<ul>
+<li>Checkout du code.</li>
+<li>Configuration de Java 17 et Maven (avec mise en cache des dépendances).</li>
+<li>Exécution de <code>mvn -B clean package</code> (pour compiler, tester, et créer le JAR).</li>
+</ul>
+</li>
+<li><strong>Job <code>dockerize-and-publish</code> (dépendant du succès de <code>build-and-test</code>) :</strong>
+<ul>
+<li>Checkout du code (nécessaire si c'est un job séparé).</li>
+<li>Télécharger l'artefact JAR du job précédent (si vous l'avez uploadé) OU s'assurer que le JAR est disponible (le rebuilder si besoin, mais moins optimal). Il est plus simple de builder le JAR dans ce job après un checkout.</li>
+<li>Se connecter à GitHub Container Registry (GHCR) en utilisant <code>docker/login-action</code> et le secret <code>GITHUB_TOKEN</code>.</li>
+<li>(Optionnel mais recommandé) Utiliser <code>docker/metadata-action</code> pour générer des tags pour votre image.</li>
+<li>Construire l'image Docker.</li>
+<li>Pousser l'image vers GHCR avec au moins un tag (ex: <code>latest</code> ou le SHA du commit). Le nom de l'image doit être du type <code>ghcr.io/VOTRE_NOM_UTILISATEUR_GITHUB/taskmasterlite-nomequipe:tag</code>.</li>
+</ul>
+</li>
+<li><strong>Job <code>document-and-archive</code> (dépendant du succès de <code>build-and-test</code>) :</strong>
+<ul>
+<li>Checkout du code.</li>
+<li>Installation de Doxygen et Graphviz.</li>
+<li>Génération de la documentation Doxygen en utilisant votre <code>Doxyfile</code>.</li>
+<li>Archivage du répertoire HTML de la documentation générée en tant qu'artefact de build (en utilisant <code>actions/upload-artifact</code>). Nommez l'artefact de manière explicite (ex: <code>taskmaster-lite-documentation</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Validation Finale :</strong></p>
+<ul>
+<li>Assurez-vous que votre workflow complet s'exécute avec succès sur GitHub Actions lors d'un push sur <code>develop</code> ou sur <code>master</code>.</li>
+<li>Vérifiez que l'image Docker est bien publiée sur GHCR.</li>
+<li>Téléchargez l'artefact de documentation et vérifiez son contenu localement (utilisez <code>python3 -m http.server</code> pour la visualiser correctement).</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="bonus-optionnel-déploiement-de-la-documentation-sur-github-pages"><a class="header" href="#bonus-optionnel-déploiement-de-la-documentation-sur-github-pages">(Bonus Optionnel) Déploiement de la Documentation sur GitHub Pages</a></h2>
+<ul>
+<li>Modifiez votre workflow pour déployer la documentation Doxygen (générée à l'étape <code>document-and-archive</code>) sur GitHub Pages pour le dépôt de votre projet d'examen.</li>
+<li>Utilisez l'action <code>peaceiris/actions-gh-pages</code> ou une méthode de votre choix (script Git).</li>
+<li>Configurez les paramètres de votre dépôt pour activer GitHub Pages depuis la branche <code>gh-pages</code> (ou la source que vous aurez choisie).</li>
+<li><strong>Critère Bonus :</strong> La documentation est accessible en ligne à l'URL <code>https://&lt;nomUtilisateurGitHub&gt;.github.io/&lt;NomDeVotreRepoExamen&gt;/</code>.</li>
+</ul>
+<hr />
+<h2 id="critères-dÉvaluation-principaux"><a class="header" href="#critères-dÉvaluation-principaux">Critères d'Évaluation Principaux</a></h2>
+<ul>
+<li><strong>Collaboration et Gestion de Version :</strong> Qualité et fréquence des commits, utilisation des branches, clarté de l'historique.</li>
+<li><strong>Application Java &amp; Maven :</strong> Projet Maven correctement structuré et configuré, fonctionnalités de <code>TaskMaster Lite</code> implémentées et fonctionnelles, tests unitaires pertinents et qui passent.</li>
+<li><strong>Dockerfile :</strong> Correction et efficacité du Dockerfile, image Docker qui se construit et exécute l'application.</li>
+<li><strong>Doxygen :</strong> Qualité des commentaires Javadoc/Doxygen, configuration du <code>Doxyfile</code>, documentation HTML générée et archivée.</li>
+<li><strong>Workflow GitHub Actions :</strong>
+<ul>
+<li>Déclenchement correct et exécution réussie de tous les jobs et étapes.</li>
+<li>Compilation, tests, création du JAR.</li>
+<li>Build et push de l'image Docker sur GHCR (nommage et tagging corrects).</li>
+<li>Génération et archivage de la documentation Doxygen.</li>
+</ul>
+</li>
+<li><strong>Respect des consignes et propreté générale du projet.</strong></li>
+</ul>
+<p>Bon courage à toute l'équipe ! Montrez-moi ce que vous avez appris !</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="day_3/auto_documentation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="day_3/auto_documentation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
